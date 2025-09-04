@@ -5,7 +5,6 @@
 - **DatePicker**: 날짜 범위 선택 기능이 포함된 달력 컴포넌트
 - **Pagination**: 페이지네이션 UI 컴포넌트
 - **PrivateRoute**: JWT 기반 인증이 필요한 라우트 보호
-- **Spinner**: 로딩 상태 표시 컴포넌트
 
 ### 기술 스택
 
