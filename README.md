@@ -28,13 +28,15 @@ src/
 │   │   ├── header.tsx
 │   │   ├── side-navigation.tsx
 │   │   └── top-navigation.tsx
-│   └── common/         # 공통 컴포넌트
+│   └── common/         # 공통 컴포넌트 (여러 페이지에서 공통으로 사용하는 경우!)
 │   └── ui/             # shadcn/ui 기반 컴포넌트
 ├── pages/              # 페이지 컴포넌트
 │   ├── delete-account/ # 회원탈퇴 페이지
 │   ├── home/          # 홈 페이지 (비로그인이어도 이용 가능)
+│   │   ├── components/ # 홈 페이지 전용 컴포넌트
 │   │   └── Home.tsx
 │   ├── login/         # 로그인 페이지
+│   │   ├── components/ # 로그인 페이지 전용 컴포넌트
 │   │   └── Login.tsx
 │   ├── plans/         # 여행 계획 관리 페이지
 │   ├── register/      # 회원가입 페이지
