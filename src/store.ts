@@ -1,13 +1,19 @@
 import { create } from 'zustand';
 
 interface UserStore {
-  email: string;
-  setEmail: (email: string) => void;
+  userId: string;
+  setUserId: (userId: string) => void;
+  token: string;
+  setToken: (token: string) => void;
+  removeToken: () => void;
 }
 
 const useUserStore = create<UserStore>((set) => ({
-  email: '',
-  setEmail: (email: string) => set({ email }),
+  userId: '',
+  setUserId: (userId: string) => set({ userId }),
+  token: '',
+  setToken: (token: string) => set({ token }),
+  removeToken: () => set({ token: '' }),
 }));
 
 export default useUserStore;
