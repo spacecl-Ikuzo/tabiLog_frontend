@@ -178,7 +178,14 @@ try {
 ```ts
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css'; //임포트 필요
-<Skeleton circle={true} height={80} width={80} />;
+
+const Home = () => {
+  return (
+    <>
+      <Skeleton count={1} height={100} width={100} />
+    </>
+  );
+};
 ```
 
 ## 📝 커스터마이징
