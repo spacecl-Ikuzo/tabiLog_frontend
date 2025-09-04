@@ -1,4 +1,3 @@
-
 ## 🚀 주요 기능
 
 ### 핵심 컴포넌트
@@ -58,16 +57,14 @@ src/
 ### 요구사항
 
 - Node.js 18+
-- Yarn 또는 npm
+- Yarn
+- settings.json 파일을 .vscode > settings.json 경로로 이동 필요 (자동 포맷팅 적용)
 
 ### 설치
 
-```bash
+````bash
 # 의존성 설치
 yarn install
-# 또는
-npm install
-```
 
 ### 환경 설정
 
@@ -77,17 +74,12 @@ npm install
 
 ```bash
 yarn dev
-# 또는
-npm run dev
-```
 
 ### 빌드
 
 ```bash
 yarn build
-# 또는
-npm run build
-```
+
 
 ## 🔧 주요 컴포넌트 사용법
 
@@ -105,7 +97,7 @@ const MyComponent = () => {
 
   return <DatePicker date={dateRange} setDate={setDateRange} />;
 };
-```
+````
 
 ### Pagination 컴포넌트
 
@@ -138,6 +130,7 @@ const MyComponent = () => {
 - **shadcn/ui**: 미리 구성된 컴포넌트 라이브러리
 
 ## 🔐 인증 시스템
+
 - JWT 토큰 기반 인증
 - Zustand를 통한 사용자 상태 관리
 
