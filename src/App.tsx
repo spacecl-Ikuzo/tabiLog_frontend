@@ -6,10 +6,13 @@ function App() {
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
+
+      <Route path="/" element={<Home />} />
+      {/* 비로그인 유저도 접근 가능한 페이지 */}
+
       <Route element={<PrivateRoute />}>
-        <Route path="/" element={<Home />}>
-          {/* 이곳에 추가 라우트를 작성하세요 */}
-        </Route>
+        {/* 로그인 유저만 접근 가능한 페이지들을 여기에 추가 */}
+        {/* 예시: <Route path="/profile" element={<Profile />} /> */}
       </Route>
     </Routes>
   );

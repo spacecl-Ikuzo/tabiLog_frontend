@@ -117,9 +117,8 @@ const MyComponent = () => {
 ```tsx
 // App.tsx에서 인증이 필요한 라우트를 보호
 <Route element={<PrivateRoute />}>
-  <Route path="/dashboard" element={<DashBoard />}>
-    {/* 보호된 하위 라우트들 */}
-  </Route>
+  {/* 로그인 유저만 접근 가능한 페이지들을 여기에 추가 */}
+  {/* 예시: <Route path="/profile" element={<Profile />} /> */}
 </Route>
 ```
 
