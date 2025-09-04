@@ -46,7 +46,7 @@ src/
 ├── datePicker.tsx      # 날짜 선택 컴포넌트
 ├── Pagination.tsx      # 페이지네이션 컴포넌트
 ├── PrivateRoute.tsx    # 인증 보호 라우트
-├── Spinner.tsx         # 로딩 스피너
+├── Spinner.tsx         # 로딩 스피너 (스켈레톤 UI를 사용할 예정이므로 적용안함)
 ├── store.ts           # Zustand 상태 관리
 ├── main.tsx           # 앱 진입점
 └── App.tsx            # 메인 라우터
@@ -133,6 +133,53 @@ const MyComponent = () => {
 
 - JWT 토큰 기반 인증
 - Zustand를 통한 사용자 상태 관리
+
+## ⭐ API 통신 요청시
+
+### API 통신 요청/응답 코드 예시
+
+```ts
+const requestBody = {
+  title: values.title,
+  content: '예시입니다.',
+  isPublished: true,
+};
+
+try {
+  await axiosInstance.post('/write', requestBody); //API 주소, 요청 데이터
+  toast.success('등록 성공하셨습니다.', { position: 'top-center' });
+} catch (error) {
+  toast.error('등록에 실패하셨습니다.', {
+    position: 'top-center',
+  });
+  console.error(error);
+} finally {
+  //finally가 필요할 경우 추가, 없으면 삭제
+}
+```
+
+### 로딩중일때는 스켈레톤 ui 사용
+
+- react-loading-skeleton 사용
+- API 사용시 적용
+- 응답 결과가 나오기 전, 데이터 표시되는 부분에 적용한다.
+- 사용법 (공식 문서를 참고한다)
+  | 옵션 | 설명 |
+  | ---------------- | ----------------------------------- |
+  | `width` | 스켈레톤 가로 길이 |
+  | `height` | 스켈레톤 세로 길이 |
+  | `count` | 반복할 스켈레톤 개수 (텍스트 줄 수 등) |
+  | `circle` | 원형 스켈레톤 생성 여부 |
+  | `baseColor` | 기본 색상 |
+  | `highlightColor` | 움직이는 하이라이트 색상 |
+
+- 예시 코드
+
+```ts
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css'; //임포트 필요
+<Skeleton circle={true} height={80} width={80} />;
+```
 
 ## 📝 커스터마이징
 
