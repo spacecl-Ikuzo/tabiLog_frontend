@@ -35,9 +35,9 @@ const schema = z.object({
   gender: z.enum(['male', 'female'], {
     required_error: '性別を選択してください',
   }),
-  terms: z.boolean().refine((val) => val === true, {
-    message: '利用規約に同意してください',
-  }),
+  // terms: z.boolean().refine((val) => val === true, {
+  //   message: '利用規約に同意してください',
+  // }),
 });
 
 type FormData = z.infer<typeof schema>;
@@ -55,7 +55,7 @@ const Register = () => {
       nickname: '',
       phoneNumber: '',
       gender: undefined,
-      terms: false,
+      // terms: false,
     },
     resolver: zodResolver(schema),
     mode: 'onChange', // 입력할 때마다 검사
@@ -290,8 +290,9 @@ const Register = () => {
                 </Button>
                 <Button
                   type="submit"
-                  className="py-3 w-32 text-white lg:w-50 bg-brand-orange hover:bg-brand-orange-600"
-                  disabled={!form.formState.isValid || !form.watch('terms')}
+                  className="py-3 w-32 text-white lg:w-50 bg-brand-orange hover:bg-brand-orange"
+                  disabled={!form.formState.isValid}
+                  // disabled={!form.formState.isValid || !form.watch('terms')}
                 >
                   次に進む
                 </Button>
