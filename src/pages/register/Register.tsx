@@ -87,17 +87,17 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="flex flex-col min-h-screen">
       {/* 헤더 */}
       <Header />
 
       {/* 메인 콘텐츠 */}
-      <main className="flex-1 flex items-center justify-center p-4 lg:p-6">
-        <div className="w-full max-w-2xl p-4 lg:p-8">
-          <h2 className="text-xl lg:text-2xl font-bold text-orange-500 mb-4 lg:mb-6 text-center">新規会員登録</h2>
-          <div className="mb-4 lg:mb-6 text-center">
-            <p className="text-xs lg:text-sm text-gray-600 mb-1">※「*」は必須項目となります。</p>
-            <p className="text-xs lg:text-sm text-gray-600">
+      <main className="flex flex-1 justify-center items-center p-4 lg:p-6">
+        <div className="p-4 w-full max-w-2xl lg:p-8">
+          <h2 className="mb-4 text-xl font-bold text-center lg:text-2xl text-brand-orange lg:mb-6">新規会員登録</h2>
+          <div className="mb-4 text-center lg:mb-6">
+            <p className="mb-1 text-xs text-gray-600 lg:text-sm">※「*」は必須項目となります。</p>
+            <p className="text-xs text-gray-600 lg:text-sm">
               ※個人情報保護方針は<span className="text-blue-600 underline cursor-pointer">こちら</span>
               をご確認ください。
             </p>
@@ -106,7 +106,7 @@ const Register = () => {
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 lg:space-y-6">
               <div className="space-y-4 lg:space-y-6">
-                <h3 className="text-base lg:text-lg font-semibold text-orange-500 border-orange-200 pb-2">
+                <h3 className="pb-2 text-base font-semibold border-orange-200 lg:text-lg text-brand-orange">
                   お客様情報登録
                 </h3>
 
@@ -118,7 +118,7 @@ const Register = () => {
                     <FormItem>
                       <FormLabel className="text-sm font-medium">ID</FormLabel>
                       <Input {...field} placeholder="ID" className="mt-1" />
-                      <p className="text-xs text-gray-500 mt-1">※半角英数字でご入力ください</p>
+                      <p className="mt-1 text-xs text-gray-500">※半角英数字でご入力ください</p>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -132,7 +132,7 @@ const Register = () => {
                     <FormItem>
                       <FormLabel className="text-sm font-medium">メールアドレス</FormLabel>
                       <div className="relative">
-                        <Input {...field} type="email" placeholder="メールアドレス" className="mt-1 pl-10" />
+                        <Input {...field} type="email" placeholder="メールアドレス" className="pl-10 mt-1" />
                         <div className="absolute left-3 top-1/2 transform -translate-y-1/2">
                           <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path
@@ -144,7 +144,7 @@ const Register = () => {
                           </svg>
                         </div>
                       </div>
-                      <p className="text-xs text-gray-500 mt-1">※半角英数字でご入力ください</p>
+                      <p className="mt-1 text-xs text-gray-500">※半角英数字でご入力ください</p>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -158,7 +158,7 @@ const Register = () => {
                     <FormItem>
                       <FormLabel className="text-sm font-medium">パスワード</FormLabel>
                       <div className="relative">
-                        <Input {...field} type="password" placeholder="パスワード" className="mt-1 pl-10" />
+                        <Input {...field} type="password" placeholder="パスワード" className="pl-10 mt-1" />
                         <div className="absolute left-3 top-1/2 transform -translate-y-1/2">
                           <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path
@@ -170,14 +170,14 @@ const Register = () => {
                           </svg>
                         </div>
                       </div>
-                      <p className="text-xs text-gray-500 mt-1">※半角英数字でご入力ください</p>
+                      <p className="mt-1 text-xs text-gray-500">※半角英数字でご入力ください</p>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
 
                 {/* 성명 필드 */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-4">
+                <div className="grid grid-cols-1 gap-3 lg:grid-cols-2 lg:gap-4">
                   <FormField
                     control={form.control}
                     name="lastName"
@@ -203,7 +203,7 @@ const Register = () => {
                 </div>
 
                 {/* 닉네임 필드 */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-4">
+                <div className="grid grid-cols-1 gap-3 lg:grid-cols-2 lg:gap-4">
                   <FormField
                     control={form.control}
                     name="nickname"
@@ -225,7 +225,7 @@ const Register = () => {
                     <FormItem>
                       <FormLabel className="text-sm font-medium">電話番号</FormLabel>
                       <div className="relative">
-                        <Input {...field} placeholder="電話番号" className="mt-1 pl-10" />
+                        <Input {...field} placeholder="電話番号" className="pl-10 mt-1" />
                         <div className="absolute left-3 top-1/2 transform -translate-y-1/2">
                           <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path
@@ -237,7 +237,7 @@ const Register = () => {
                           </svg>
                         </div>
                       </div>
-                      <p className="text-xs text-gray-500 mt-1">※半角英数字でご入力ください</p>
+                      <p className="mt-1 text-xs text-gray-500">※半角英数字でご入力ください</p>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -250,14 +250,14 @@ const Register = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="text-sm font-medium">性別</FormLabel>
-                      <div className="flex flex-col lg:flex-row lg:space-x-6 space-y-2 lg:space-y-0 mt-2">
+                      <div className="flex flex-col mt-2 space-y-2 lg:flex-row lg:space-x-6 lg:space-y-0">
                         <label className="flex items-center space-x-2 cursor-pointer">
                           <input
                             type="radio"
                             value="male"
                             checked={field.value === 'male'}
                             onChange={() => field.onChange('male')}
-                            className="w-4 h-4 text-orange-500 border-gray-300 focus:ring-orange-500"
+                            className="w-4 h-4 border-gray-300 text-brand-orange focus:ring-brand-orange"
                           />
                           <span className="text-sm">男性</span>
                         </label>
@@ -267,7 +267,7 @@ const Register = () => {
                             value="female"
                             checked={field.value === 'female'}
                             onChange={() => field.onChange('female')}
-                            className="w-4 h-4 text-orange-500 border-gray-300 focus:ring-orange-500"
+                            className="w-4 h-4 border-gray-300 text-brand-orange focus:ring-brand-orange"
                           />
                           <span className="text-sm">女性</span>
                         </label>
@@ -283,14 +283,14 @@ const Register = () => {
                 <Button
                   type="button"
                   variant="outline"
-                  className="w-32 lg:w-50 py-3 text-gray-600 border-gray-300 hover:bg-gray-50"
+                  className="py-3 w-32 text-gray-600 border-gray-300 lg:w-50 hover:bg-gray-50"
                   onClick={() => navigate(-1)}
                 >
                   戻る
                 </Button>
                 <Button
                   type="submit"
-                  className="w-32 lg:w-50 py-3 bg-orange-500 hover:bg-orange-600 text-white"
+                  className="py-3 w-32 text-white lg:w-50 bg-brand-orange hover:bg-brand-orange-600"
                   disabled={!form.formState.isValid || !form.watch('terms')}
                 >
                   次に進む
