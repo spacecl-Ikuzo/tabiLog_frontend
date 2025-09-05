@@ -1,15 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap');
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
 @import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
 
-@font-face {
+/* @font-face {
   font-family: 'Pretendard';
-  src: url('/fonts/Pretendard-Regular.woff2') format('woff2'), url('/fonts/Pretendard-Regular.woff') format('woff');
-  font-weight: var(--font-weight);
+  src: url('/fonts/PretendardVariable.woff2') format('woff2-variations');
+  font-weight: 100 900;
   font-style: normal;
-}
+} */
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
@@ -124,7 +125,8 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-family: 'Pretendard', sans-serif;
+    font-family: 'Noto Sans JP', sans-serif;
+    /* font-family: 'Pretendard', sans-serif; */
   }
 }
 
