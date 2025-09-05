@@ -1,0 +1,307 @@
+import { Button } from '../../components/ui/button';
+import { useForm } from 'react-hook-form';
+import { Form, FormField, FormItem, FormLabel, FormMessage } from '../../components/ui/form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import { Input } from '../../components/ui/input';
+import { axiosInstance } from '../../api/axios';
+import { AxiosError } from 'axios';
+import { toast } from 'sonner';
+import { useNavigate } from 'react-router-dom';
+import Header from '../../components/layout/header';
+
+// 유효성 검사 스키마 정의
+const schema = z.object({
+  id: z
+    .string()
+    .min(1, 'IDを入力してください')
+    .regex(/^[a-zA-Z0-9]+$/, '半角英数字で入力してください'),
+  email: z
+    .string()
+    .min(1, 'メールアドレスを入力してください')
+    .email('有効なメールアドレス形式ではありません')
+    .regex(/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}$/, '半角英数字で入力してください'),
+  password: z
+    .string()
+    .min(1, 'パスワードを入力してください')
+    .regex(/^[a-zA-Z0-9]+$/, '半角英数字で入力してください'),
+  lastName: z.string().min(1, '姓を入力してください'),
+  firstName: z.string().min(1, '名を入力してください'),
+  nickname: z.string().min(1, 'ハンドルネームを入力してください'),
+  phoneNumber: z
+    .string()
+    .min(1, '電話番号を入力してください')
+    .regex(/^[0-9-]+$/, '半角英数字で入力してください'),
+  gender: z.enum(['male', 'female'], {
+    required_error: '性別を選択してください',
+  }),
+  terms: z.boolean().refine((val) => val === true, {
+    message: '利用規約に同意してください',
+  }),
+});
+
+type FormData = z.infer<typeof schema>;
+
+const Register = () => {
+  const navigate = useNavigate();
+
+  const form = useForm<FormData>({
+    defaultValues: {
+      id: '',
+      email: '',
+      password: '',
+      lastName: '',
+      firstName: '',
+      nickname: '',
+      phoneNumber: '',
+      gender: undefined,
+      terms: false,
+    },
+    resolver: zodResolver(schema),
+    mode: 'onChange', // 입력할 때마다 검사
+    reValidateMode: 'onChange', // 값이 바뀔 때마다 다시 검사
+  });
+
+  const onSubmit = async (data: FormData) => {
+    try {
+      const formData = {
+        userId: data.id,
+        email: data.email,
+        password: data.password,
+        lastName: data.lastName,
+        firstName: data.firstName,
+        nickname: data.nickname,
+        phoneNumber: data.phoneNumber,
+        gender: data.gender,
+      };
+
+      await axiosInstance.post('/auth/register', formData);
+      form.reset();
+      toast.success('会員登録が完了しました');
+      navigate('/login');
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        toast.error(error.response?.data.message || '会員登録に失敗しました');
+      }
+    }
+  };
+
+  return (
+    <div className="min-h-screen flex flex-col">
+      {/* 헤더 */}
+      <Header />
+
+      {/* 메인 콘텐츠 */}
+      <main className="flex-1 flex items-center justify-center p-4 lg:p-6">
+        <div className="w-full max-w-2xl p-4 lg:p-8">
+          <h2 className="text-xl lg:text-2xl font-bold text-orange-500 mb-4 lg:mb-6 text-center">新規会員登録</h2>
+          <div className="mb-4 lg:mb-6 text-center">
+            <p className="text-xs lg:text-sm text-gray-600 mb-1">※「*」は必須項目となります。</p>
+            <p className="text-xs lg:text-sm text-gray-600">
+              ※個人情報保護方針は<span className="text-blue-600 underline cursor-pointer">こちら</span>
+              をご確認ください。
+            </p>
+          </div>
+
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 lg:space-y-6">
+              <div className="space-y-4 lg:space-y-6">
+                <h3 className="text-base lg:text-lg font-semibold text-orange-500 border-orange-200 pb-2">
+                  お客様情報登録
+                </h3>
+
+                {/* ID 필드 */}
+                <FormField
+                  control={form.control}
+                  name="id"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-sm font-medium">ID</FormLabel>
+                      <Input {...field} placeholder="ID" className="mt-1" />
+                      <p className="text-xs text-gray-500 mt-1">※半角英数字でご入力ください</p>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {/* 이메일 필드 */}
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-sm font-medium">メールアドレス</FormLabel>
+                      <div className="relative">
+                        <Input {...field} type="email" placeholder="メールアドレス" className="mt-1 pl-10" />
+                        <div className="absolute left-3 top-1/2 transform -translate-y-1/2">
+                          <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                      <p className="text-xs text-gray-500 mt-1">※半角英数字でご入力ください</p>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {/* 패스워드 필드 */}
+                <FormField
+                  control={form.control}
+                  name="password"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-sm font-medium">パスワード</FormLabel>
+                      <div className="relative">
+                        <Input {...field} type="password" placeholder="パスワード" className="mt-1 pl-10" />
+                        <div className="absolute left-3 top-1/2 transform -translate-y-1/2">
+                          <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                      <p className="text-xs text-gray-500 mt-1">※半角英数字でご入力ください</p>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {/* 성명 필드 */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-4">
+                  <FormField
+                    control={form.control}
+                    name="lastName"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-sm font-medium">姓</FormLabel>
+                        <Input {...field} placeholder="姓" className="mt-1" />
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="firstName"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-sm font-medium">名</FormLabel>
+                        <Input {...field} placeholder="名" className="mt-1" />
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
+                {/* 닉네임 필드 */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-4">
+                  <FormField
+                    control={form.control}
+                    name="nickname"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-sm font-medium">ハンドルネーム</FormLabel>
+                        <Input {...field} placeholder="ハンドルネーム" className="mt-1" />
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
+                {/* 전화번호 필드 */}
+                <FormField
+                  control={form.control}
+                  name="phoneNumber"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-sm font-medium">電話番号</FormLabel>
+                      <div className="relative">
+                        <Input {...field} placeholder="電話番号" className="mt-1 pl-10" />
+                        <div className="absolute left-3 top-1/2 transform -translate-y-1/2">
+                          <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                      <p className="text-xs text-gray-500 mt-1">※半角英数字でご入力ください</p>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {/* 성별 필드 */}
+                <FormField
+                  control={form.control}
+                  name="gender"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-sm font-medium">性別</FormLabel>
+                      <div className="flex flex-col lg:flex-row lg:space-x-6 space-y-2 lg:space-y-0 mt-2">
+                        <label className="flex items-center space-x-2 cursor-pointer">
+                          <input
+                            type="radio"
+                            value="male"
+                            checked={field.value === 'male'}
+                            onChange={() => field.onChange('male')}
+                            className="w-4 h-4 text-orange-500 border-gray-300 focus:ring-orange-500"
+                          />
+                          <span className="text-sm">男性</span>
+                        </label>
+                        <label className="flex items-center space-x-2 cursor-pointer">
+                          <input
+                            type="radio"
+                            value="female"
+                            checked={field.value === 'female'}
+                            onChange={() => field.onChange('female')}
+                            className="w-4 h-4 text-orange-500 border-gray-300 focus:ring-orange-500"
+                          />
+                          <span className="text-sm">女性</span>
+                        </label>
+                      </div>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              {/* 버튼 영역 */}
+              <div className="flex justify-evenly pt-4 lg:pt-6">
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="w-32 lg:w-50 py-3 text-gray-600 border-gray-300 hover:bg-gray-50"
+                  onClick={() => navigate(-1)}
+                >
+                  戻る
+                </Button>
+                <Button
+                  type="submit"
+                  className="w-32 lg:w-50 py-3 bg-orange-500 hover:bg-orange-600 text-white"
+                  disabled={!form.formState.isValid || !form.watch('terms')}
+                >
+                  次に進む
+                </Button>
+              </div>
+            </form>
+          </Form>
+        </div>
+      </main>
+    </div>
+  );
+};
+
+export default Register;
