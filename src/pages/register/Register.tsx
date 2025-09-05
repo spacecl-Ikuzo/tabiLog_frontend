@@ -35,9 +35,10 @@ const schema = z.object({
   gender: z.enum(['male', 'female'], {
     required_error: '性別を選択してください',
   }),
-  // terms: z.boolean().refine((val) => val === true, {
-  //   message: '利用規約に同意してください',
-  // }),
+  privacyPolicy: z.boolean().refine((val) => val === true, {
+    message: 'プライバシーポリシーに同意してください',
+  }),
+  travelDataCollection: z.boolean().optional(),
 });
 
 type FormData = z.infer<typeof schema>;
@@ -55,7 +56,8 @@ const Register = () => {
       nickname: '',
       phoneNumber: '',
       gender: undefined,
-      // terms: false,
+      privacyPolicy: false,
+      travelDataCollection: false,
     },
     resolver: zodResolver(schema),
     mode: 'onChange', // 입력할 때마다 검사
@@ -64,7 +66,7 @@ const Register = () => {
 
   const onSubmit = async (data: FormData) => {
     try {
-      const formData = {
+      const requestBody = {
         userId: data.id,
         email: data.email,
         password: data.password,
@@ -73,9 +75,11 @@ const Register = () => {
         nickname: data.nickname,
         phoneNumber: data.phoneNumber,
         gender: data.gender,
+        privacyPolicy: data.privacyPolicy,
+        travelDataCollection: data.travelDataCollection,
       };
 
-      await axiosInstance.post('/auth/register', formData);
+      await axiosInstance.post('/auth/register', requestBody);
       form.reset();
       toast.success('会員登録が完了しました');
       navigate('/login');
@@ -276,6 +280,71 @@ const Register = () => {
                     </FormItem>
                   )}
                 />
+
+                {/* 약관 동의 체크박스 */}
+                <div className="pt-4 space-y-4 border-t border-gray-200 lg:pt-6">
+                  <h3 className="text-base font-semibold text-brand-orange lg:text-lg">約款同意</h3>
+
+                  {/* 개인정보처리방침 동의 */}
+                  <FormField
+                    control={form.control}
+                    name="privacyPolicy"
+                    render={({ field }) => (
+                      <FormItem>
+                        <div className="flex items-start space-x-3">
+                          <div className="flex items-center h-5">
+                            <input
+                              type="checkbox"
+                              checked={field.value}
+                              onChange={field.onChange}
+                              className="w-4 h-4 rounded border-gray-300 text-brand-orange focus:ring-brand-orange"
+                            />
+                          </div>
+                          <div className="text-sm">
+                            <label className="font-medium text-gray-700">
+                              <span className="text-red-500">*</span>プライバシーポリシーに同意します（必須）
+                            </label>
+                            <p className="mt-1 text-xs text-gray-500">
+                              <span className="text-blue-600 underline cursor-pointer">プライバシーポリシー</span>
+                              の内容をご確認の上、同意いただける場合はチェックしてください。
+                            </p>
+                          </div>
+                        </div>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  {/* 여행 계획 수집 동의 (선택사항) */}
+                  <FormField
+                    control={form.control}
+                    name="travelDataCollection"
+                    render={({ field }) => (
+                      <FormItem>
+                        <div className="flex items-start space-x-3">
+                          <div className="flex items-center h-5">
+                            <input
+                              type="checkbox"
+                              checked={field.value}
+                              onChange={field.onChange}
+                              className="w-4 h-4 rounded border-gray-300 text-brand-orange focus:ring-brand-orange"
+                            />
+                          </div>
+                          <div className="text-sm">
+                            <label className="font-medium text-gray-700">
+                              登録した旅行計画の収集に同意します（任意）
+                            </label>
+                            <p className="mt-1 text-xs text-gray-500">
+                              より良いサービス提供のため、お客様が登録された旅行計画を匿名化して活用させていただく場合があります。
+                              同意いただける場合はチェックしてください。
+                            </p>
+                          </div>
+                        </div>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
               </div>
 
               {/* 버튼 영역 */}
@@ -292,7 +361,6 @@ const Register = () => {
                   type="submit"
                   className="py-3 w-32 text-white lg:w-50 bg-brand-orange hover:bg-brand-orange"
                   disabled={!form.formState.isValid}
-                  // disabled={!form.formState.isValid || !form.watch('terms')}
                 >
                   次に進む
                 </Button>
