@@ -1,6 +1,9 @@
 import { Button } from '../ui/button';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
+  const navigate = useNavigate();
+
   return (
     <header className="px-4 py-3 bg-white text-brand-orange lg:bg-brand-orange lg:text-white lg:px-6 lg:py-4">
       <div className="flex justify-between items-center mx-auto max-w-6xl">
@@ -9,7 +12,7 @@ const Header = () => {
 
         {/* 데스크톱 메뉴 */}
         <div className="hidden items-center space-x-6 lg:flex">
-          <span className="cursor-pointer hover:text-orange-200">観光スポット紹介</span>
+          <span className="cursor-pointer hover:text-orange-200" onClick={() => navigate('/spots')}>観光スポット紹介</span>
           <span className="cursor-pointer hover:text-orange-200">マイトリップ</span>
           <Button
             variant="outline"
