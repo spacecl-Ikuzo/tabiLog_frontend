@@ -3,6 +3,7 @@ import Login from './pages/login/Login';
 import PrivateRoute from './PrivateRoute';
 import Home from './pages/home/Home';
 import Register from './pages/register/Register';
+import SpotsPage from './pages/spots/SpotsPage';
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/" element={<Home />} />
+      <Route path="/spots" element={<SpotsPage />} />
       {/* 비로그인 유저도 접근 가능한 페이지 */}
 
       <Route element={<PrivateRoute />}>
