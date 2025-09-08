@@ -4,6 +4,7 @@ import PrivateRoute from './PrivateRoute';
 import Home from './pages/home/Home';
 import Register from './pages/register/Register';
 import SpotsPage from './pages/spots/SpotsPage';
+import DetailPage from './pages/detail/DetailPage';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Route path="/register" element={<Register />} />
       <Route path="/" element={<Home />} />
       <Route path="/spots" element={<SpotsPage />} />
+      <Route path="/detail/:id" element={<DetailPage />} />
       {/* 비로그인 유저도 접근 가능한 페이지 */}
 
       <Route element={<PrivateRoute />}>
