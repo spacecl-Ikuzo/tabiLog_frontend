@@ -1,48 +1,54 @@
-import { Link, useLocation } from 'react-router-dom';
-import { useMemo } from 'react';
+//마이페이지 사이드바
+import { User, PlaneTakeoff, BarChart3 } from 'lucide-react';
+import { useState } from 'react';
 
 export default function SideNavigation() {
-  const { pathname } = useLocation();
-
-  const menuGroups = useMemo(
-    () => [
-      {
-        groupName: '유저',
-        items: [{ name: '유저 관리', path: '/user' }],
-      },
-    ],
-    [],
-  );
-
+  const [activeMenu, setActiveMenu] = useState('profile');
   return (
-    <div className="flex flex-col w-full h-full">
-      <button className="flex items-center justify-center h-[108px]">
-        <Link to="/dashboard">
-        </Link>
-      </button>
-
-      <div className="p-4 flex flex-col gap-1">
-        {menuGroups.map((group) => (
-          <div key={group.groupName}>
-            <h4 className="text-lg font-semibold mb-2 text-gray-800">{group.groupName}</h4>
-            <div className="space-y-1">
-              {group.items.map((item) => {
-                const isActive = pathname.startsWith(`/dashboard${item.path}`);
-                return (
-                  <Link to={`/dashboard${item.path}`} key={item.name}>
-                    <button
-                      className={`w-full flex justify-start items-center px-4 py-3 rounded-lg transition-all duration-300 cursor-pointer hover:text-rose-700
-                        ${isActive ? 'bg-white text-rose-700' : 'bg-white text-gray-700'}`}
-                    >
-                      {item.name}
-                    </button>
-                  </Link>
-                );
-              })}
+    <>
+      {/* 사이드바 네비게이션 (데스크톱만) */}
+      <div className="hidden lg:block w-70 bg-white shadow-sm min-h-screen">
+        <div className="px-6 py-15">
+          {/* 프로필 섹션 */}
+          <div className="flex items-center gap-3 bg-gray-100 rounded-3xl p-4 mb-8`">
+            <div className="w-14 h-14 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center text-white font-bold">
+              オ
             </div>
+            <span className="font-bold text-gray-800 text-lg">オンビャク</span>
           </div>
-        ))}
+
+          {/* 메뉴 */}
+          <nav className="space-y-1 py-8">
+            <div
+              className={`flex items-center gap-3 px-3 py-4 hover:bg-gray-50 rounded-lg cursor-pointer ${
+                activeMenu === 'profile' ? 'text-black' : 'text-gray-600'
+              }`}
+              onClick={() => setActiveMenu('profile')}
+            >
+              <User className="w-5 h-5" />
+              <span className="text-[16px] font-semibold">プロフィール管理</span>
+            </div>
+            <div
+              className={`flex items-center gap-3 px-3 py-4 hover:bg-gray-50 rounded-lg cursor-pointer ${
+                activeMenu === 'createPlan' ? 'text-black' : 'text-gray-600'
+              }`}
+              onClick={() => setActiveMenu('createPlan')}
+            >
+              <PlaneTakeoff className="w-5 h-5" />
+              <span className="text-[16px] font-semibold">旅行計画を立てる</span>
+            </div>
+            <div
+              className={`flex items-center gap-3 px-3 py-4 hover:bg-gray-50 rounded-lg cursor-pointer ${
+                activeMenu === 'plans' ? 'text-black' : 'text-gray-600'
+              }`}
+              onClick={() => setActiveMenu('plans')}
+            >
+              <BarChart3 className="w-5 h-5" />
+              <span className="text-[16px] font-semibold">旅行計画管理</span>
+            </div>
+          </nav>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
