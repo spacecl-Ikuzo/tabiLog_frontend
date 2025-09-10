@@ -35,10 +35,10 @@ const schema = z.object({
   gender: z.enum(['male', 'female'], {
     required_error: '性別を選択してください',
   }),
-  privacyPolicy: z.boolean().refine((val) => val === true, {
+  privacyAgreement: z.boolean().refine((val) => val === true, {
     message: 'プライバシーポリシーに同意してください',
   }),
-  travelDataCollection: z.boolean().optional(),
+  publicAgreement: z.boolean().optional(),
 });
 
 type FormData = z.infer<typeof schema>;
@@ -56,8 +56,8 @@ const Register = () => {
       nickname: '',
       phoneNumber: '',
       gender: undefined,
-      privacyPolicy: false,
-      travelDataCollection: false,
+      privacyAgreement: false,
+      publicAgreement: false,
     },
     resolver: zodResolver(schema),
     mode: 'onChange', // 입력할 때마다 검사
@@ -75,8 +75,8 @@ const Register = () => {
         nickname: data.nickname,
         phoneNumber: data.phoneNumber,
         gender: data.gender,
-        privacyPolicy: data.privacyPolicy,
-        travelDataCollection: data.travelDataCollection,
+        privacyAgreement: data.privacyAgreement,
+        publicAgreement: data.publicAgreement,
       };
 
       await axiosInstance.post('/auth/register', requestBody);
@@ -288,14 +288,14 @@ const Register = () => {
                   {/* 개인정보처리방침 동의 */}
                   <FormField
                     control={form.control}
-                    name="privacyPolicy"
+                    name="privacyAgreement"
                     render={({ field }) => (
                       <FormItem>
                         <div className="flex items-start space-x-3">
                           <div className="flex items-center h-5">
                             <input
                               type="checkbox"
-                              checked={field.value}
+                              checked={field.value as boolean}
                               onChange={field.onChange}
                               className="w-4 h-4 rounded border-gray-300 text-brand-orange focus:ring-brand-orange"
                             />
@@ -318,14 +318,14 @@ const Register = () => {
                   {/* 여행 계획 수집 동의 (선택사항) */}
                   <FormField
                     control={form.control}
-                    name="travelDataCollection"
+                    name="publicAgreement"
                     render={({ field }) => (
                       <FormItem>
                         <div className="flex items-start space-x-3">
                           <div className="flex items-center h-5">
                             <input
                               type="checkbox"
-                              checked={field.value}
+                              checked={field.value as boolean}
                               onChange={field.onChange}
                               className="w-4 h-4 rounded border-gray-300 text-brand-orange focus:ring-brand-orange"
                             />
