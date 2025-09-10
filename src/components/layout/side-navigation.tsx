@@ -1,9 +1,28 @@
 //마이페이지 사이드바
 import { User, PlaneTakeoff, BarChart3 } from 'lucide-react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-export default function SideNavigation() {
-  const [activeMenu, setActiveMenu] = useState('profile');
+export default function SideNavigation({ selectedNav }: { selectedNav: string }) {
+  const navigate = useNavigate();
+
+  const [activeMenu, setActiveMenu] = useState(selectedNav);
+
+  const handleMenuClick = (menu: string) => {
+    setActiveMenu(menu);
+
+    const pathName = location.pathname.split('/')[1];
+    if (pathName !== menu) {
+      //현재 경로와 메뉴의 value가 같으면 동작 X
+      if (menu === 'plans') {
+        navigate(`/plans`);
+      } else {
+        //TODO: 마이페이지 추가 시 수정
+        navigate(`/`);
+      }
+    }
+  };
+
   return (
     <>
       {/* 사이드바 네비게이션 (데스크톱만) */}
@@ -23,7 +42,7 @@ export default function SideNavigation() {
               className={`flex items-center gap-3 px-3 py-4 hover:bg-gray-50 rounded-lg cursor-pointer ${
                 activeMenu === 'profile' ? 'text-black' : 'text-gray-600'
               }`}
-              onClick={() => setActiveMenu('profile')}
+              onClick={() => handleMenuClick('profile')}
             >
               <User className="w-5 h-5" />
               <span className="text-[16px] font-semibold">プロフィール管理</span>
@@ -32,7 +51,7 @@ export default function SideNavigation() {
               className={`flex items-center gap-3 px-3 py-4 hover:bg-gray-50 rounded-lg cursor-pointer ${
                 activeMenu === 'createPlan' ? 'text-black' : 'text-gray-600'
               }`}
-              onClick={() => setActiveMenu('createPlan')}
+              onClick={() => handleMenuClick('createPlan')}
             >
               <PlaneTakeoff className="w-5 h-5" />
               <span className="text-[16px] font-semibold">旅行計画を立てる</span>
@@ -41,7 +60,7 @@ export default function SideNavigation() {
               className={`flex items-center gap-3 px-3 py-4 hover:bg-gray-50 rounded-lg cursor-pointer ${
                 activeMenu === 'plans' ? 'text-black' : 'text-gray-600'
               }`}
-              onClick={() => setActiveMenu('plans')}
+              onClick={() => handleMenuClick('plans')}
             >
               <BarChart3 className="w-5 h-5" />
               <span className="text-[16px] font-semibold">旅行計画管理</span>
