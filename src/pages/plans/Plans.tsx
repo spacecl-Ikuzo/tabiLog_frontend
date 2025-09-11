@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState, useCallback, useMemo } from 'react';
 import { Button } from '../../components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../components/ui/select';
 import { Card, CardContent, CardTitle } from '../../components/ui/card';
@@ -10,92 +10,151 @@ import SideNavigation from '../../components/layout/side-navigation';
 import { MoreVertical, Calendar as CalendarIcon, User, MapPin } from 'lucide-react';
 import CustomPagination from '../../Pagination';
 import CategoryTabs from '../../components/common/CategoryTabs';
+import { axiosInstance } from '../../api/axios';
+import { toast } from 'sonner';
+import { Plan } from '../../lib/type';
+import dayjs from 'dayjs';
 
 export default function Plans() {
+  //페이징 프론트 단에서 처리
   const [page, setPage] = useState(1);
-  const [totalPages] = useState(15);
+  const [totalPages, setTotalPages] = useState(1);
+  const itemsPerPage = 4; // 페이지당 아이템 수
 
   // 캘린더 상태 관리
   const [currentDate, setCurrentDate] = useState(new Date(2026, 1)); // 2026년 2월
 
-  // 더미 데이터 - 여행 계획 목록
-  const [travelPlans] = useState([
-    {
-      id: 1,
-      title: '東京最前線！渋谷・新宿アートとカルチャーの旅',
-      subtitle: '東京最前線！渋谷・新宿アートとカルチャーの旅',
-      author: 'オンビャク',
-      days: '3days',
-      image: '/public/images/user.png',
-      category: '東京',
-    },
-    {
-      id: 2,
-      title: '雪とグルメの祭典！冬の札幌満喫プラン',
-      subtitle: '東京最前線！',
-      author: 'オンビャク',
-      days: '6days',
-      image: '/public/images/user.png',
-      category: '西日本',
-    },
-    {
-      id: 3,
-      title: '古都の趣を巡る、京都・嵐山の週末',
-      subtitle: '渋谷・新宿アートとカルチャーの旅',
-      author: 'オンビャク',
-      days: '3days',
-      image: '/public/images/user.png',
-      category: '東日本',
-    },
-    {
-      id: 4,
-      title: '博多の夜は眠らない！中洲屋台グルメツアー',
-      subtitle: '旅',
-      author: 'オンビャク',
-      days: '5days',
-      image: '/public/images/user.png',
-      category: '北日本',
-    },
-  ]);
+  // 여행 계획 목록
+  const [allPlanList, setAllPlanList] = useState<Plan[]>([]); // 전체 리스트
+  const [planList, setPlanList] = useState<Plan[]>([]); // 현재 페이지에 표시할 리스트
 
   // 현재 선택된 카테고리
   const [selectedCategory, setSelectedCategory] = useState('すべて');
 
   // 선택된 지역과 계획 상태
-  const [selectedRegion, setSelectedRegion] = useState('すべて');
-  const [selectedStatus, setSelectedStatus] = useState('計画中の旅行');
+  const [selectedPrefecture, setSelectedPrefecture] = useState('');
+  const [selectedStatus, setSelectedStatus] = useState('');
 
   // 선택된 여행 계획 ID (오른쪽 사이드바 표시용)
   const [selectedPlanId, setSelectedPlanId] = useState<number | null>(null);
 
   //선택된 여행 리스트의 계획 상태 조회 용도 (진행중, 완료)
-  const viewStatus = ['進行中', '完了'];
-  const [selectedViewStatus, setSelectedViewStatus] = useState('進行中');
+  const [selectedViewStatus, setSelectedViewStatus] = useState('');
 
   // 카테고리 목록
   const categories = ['すべて', '東日本', '南日本', '西日本', '北日本'];
 
   // 카테고리별 지역 목록
-  const regionsByCategory = {
-    すべて: ['すべて', '関東', '関西', '九州', '沖縄'],
-    北日本: ['すべて', '札幌', '小樽', '函館', '青森', '仙台'],
-    南日本: ['すべて', '福岡', '長崎', '熊本', '鹿児島', '沖縄'],
-    東日本: ['すべて', '東京', '横浜', '鎌倉', '長野', '日光'],
-    西日本: ['すべて', '大阪', '京都', '神戸', '奈良', '広島', '松山'],
+  const [regionsByCategory, setRegionsByCategory] = useState<string[]>([]);
+
+  const ChangeCategory = useCallback(async () => {
+    try {
+      let url = '';
+      if (selectedCategory === 'すべて') {
+        url = '/api/categories/regions';
+      } else {
+        url = `/api/categories/regions?region=${selectedCategory}`;
+      }
+
+      const response = await axiosInstance.get(url);
+      setRegionsByCategory(response.data.data);
+
+      // 응답받은 데이터의 첫 번째 항목을 자동 선택
+      // if (response.data.data && response.data.data.length > 0) {
+      //   setSelectedPrefecture(response.data.data[0]);
+      // }
+    } catch (error) {
+      console.error(error);
+      toast.error('카테고리 변경에 실패하셨습니다.', { position: 'top-center' });
+    }
+  }, [selectedCategory]);
+
+  useEffect(() => {
+    ChangeCategory();
+  }, [ChangeCategory]);
+
+  useEffect(() => {
+    fetchPlanList(selectedPrefecture, selectedStatus);
+  }, [selectedPrefecture, selectedStatus]);
+
+  // 페이지 변경 시 현재 페이지 리스트 업데이트
+  useEffect(() => {
+    updateCurrentPageList();
+  }, [page, allPlanList]);
+
+  // 현재 페이지에 표시할 리스트 업데이트
+  const updateCurrentPageList = () => {
+    const startIndex = (page - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const currentPageItems = allPlanList.slice(startIndex, endIndex);
+    setPlanList(currentPageItems);
+
+    // 총 페이지 수 계산
+    const totalPagesCount = Math.ceil(allPlanList.length / itemsPerPage);
+    setTotalPages(totalPagesCount || 1);
   };
 
-  // 현재 선택된 카테고리에 따른 지역 목록
-  const availableRegions =
-    regionsByCategory[selectedCategory as keyof typeof regionsByCategory] || regionsByCategory['すべて'];
+  // 여행 계획 목록 조회
+  const fetchPlanList = async (selectedPrefecture: string, selectedStatus: string) => {
+    let response;
+    try {
+      if (selectedPrefecture === '' && selectedStatus === '') {
+        response = await axiosInstance.get('/api/plans');
+      } else {
+        response = await axiosInstance.get(
+          `/api/plans/search?prefecture=${selectedPrefecture}&status=${selectedStatus}`,
+        );
+      }
+      setAllPlanList(response.data.data);
+      setPage(1); // 새로운 데이터 로드 시 첫 페이지로 이동
+      toast.success('여행 계획 조회 성공하셨습니다.', { position: 'top-center' });
+    } catch (error) {
+      toast.error('여행 계획 조회에 실패하셨습니다.', {
+        position: 'top-center',
+      });
+      console.error(error);
+    } finally {
+      //finally가 필요할 경우 추가, 없으면 삭제
+    }
+  };
 
-  // 여행 멤버 더미 데이터
-  const travelMembers = [
-    { id: 1, avatar: '🌟', color: 'bg-green-400' },
-    { id: 2, avatar: '👨', color: 'bg-orange-400' },
-    { id: 3, avatar: '👧', color: 'bg-purple-400' },
-    { id: 4, avatar: '👦', color: 'bg-red-400' },
-    { id: 5, avatar: '👶', color: 'bg-yellow-400' },
+  // 여행 멤버 컬러 옵션 (임시)
+  const colorOptions = [
+    'bg-green-400',
+    'bg-orange-400',
+    'bg-purple-400',
+    'bg-red-400',
+    'bg-yellow-400',
+    'bg-blue-400',
+    'bg-pink-400',
   ];
+
+  // 랜덤 컬러를 가진 멤버 데이터 생성
+  const travelMembers = useMemo(() => {
+    const members = planList.find((plan) => plan.id === selectedPlanId)?.members;
+    if (!members) return [];
+
+    return members.map((member, index) => ({
+      ...member,
+      color: colorOptions[index % colorOptions.length],
+    }));
+  }, [selectedPlanId]);
+
+  // 선택된 plan의 status에 따라 viewStatus 설정
+  useEffect(() => {
+    if (selectedPlanId) {
+      const selectedPlan = allPlanList.find((plan) => plan.id === selectedPlanId);
+      if (selectedPlan) {
+        if (selectedPlan.status === 'PLANNING') {
+          setSelectedViewStatus('進行中');
+        } else if (selectedPlan.status === 'COMPLETED') {
+          setSelectedViewStatus('完了');
+        }
+      }
+    } else {
+      setSelectedViewStatus(''); // 선택된 plan이 없으면 빈 문자열
+    }
+  }, [selectedPlanId, allPlanList]);
 
   return (
     <div className="min-h-screen">
@@ -117,17 +176,28 @@ export default function Plans() {
               categories={categories}
               selectedCategory={selectedCategory}
               onCategoryChange={setSelectedCategory}
-              onCategorySelect={() => setSelectedRegion('すべて')} // 카테고리 변경 시 지역 선택 초기화
+              onCategorySelect={() => {
+                setSelectedPrefecture(''); // 카테고리 변경 시 지역 선택 초기화
+                setPage(1); // 첫 페이지로 이동
+                setSelectedPlanId(null); // 선택된 계획 초기화
+              }}
             />
 
             {/* 지역 선택 */}
             <div className="flex gap-4 mb-8">
-              <Select value={selectedRegion} onValueChange={setSelectedRegion}>
+              <Select
+                value={selectedPrefecture}
+                onValueChange={(value) => {
+                  setSelectedPrefecture(value);
+                  setPage(1); // 첫 페이지로 이동
+                  setSelectedPlanId(null); // 선택된 계획 초기화
+                }}
+              >
                 <SelectTrigger className="w-40 px-4 py-3 border border-gray-200 rounded-xl text-gray-700 bg-[#FCFAF6] text-sm">
-                  <SelectValue placeholder="지역 선택" />
+                  <SelectValue placeholder="地域を選択" />
                 </SelectTrigger>
                 <SelectContent>
-                  {availableRegions.map((region) => (
+                  {regionsByCategory.map((region: string) => (
                     <SelectItem key={region} value={region}>
                       {region}
                     </SelectItem>
@@ -135,81 +205,109 @@ export default function Plans() {
                 </SelectContent>
               </Select>
 
-              <Select value={selectedStatus} onValueChange={setSelectedStatus}>
+              <Select
+                value={selectedStatus}
+                onValueChange={(value) => {
+                  setSelectedStatus(value);
+                  setPage(1); // 첫 페이지로 이동
+                  setSelectedPlanId(null); // 선택된 계획 초기화
+                }}
+              >
                 <SelectTrigger className="w-48 px-4 py-3 border border-gray-200 rounded-xl text-gray-700 bg-[#FCFAF6] text-sm">
-                  <SelectValue placeholder="상태 선택" />
+                  <SelectValue placeholder="状態を選択" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="計画中の旅行">計画中の旅行</SelectItem>
-                  <SelectItem value="完了した旅行">完了した旅行</SelectItem>
+                  <SelectItem value="PLANNING">計画中の旅行</SelectItem>
+                  <SelectItem value="COMPLETED">完了した旅行</SelectItem>
                 </SelectContent>
               </Select>
             </div>
 
             {/* 여행 계획 목록 */}
             <div className="space-y-4">
-              {travelPlans.map((plan, index) => {
-                const cardImages = [
-                  'bg-gradient-to-br from-pink-400 via-purple-500 to-blue-600',
-                  'bg-gradient-to-br from-purple-500 via-pink-500 to-purple-700',
-                  'bg-gradient-to-br from-green-400 via-blue-500 to-purple-600',
-                  'bg-gradient-to-br from-orange-400 via-red-500 to-pink-600',
-                ];
-
-                return (
-                  <Card
-                    key={plan.id}
-                    onClick={() => setSelectedPlanId(plan.id)}
-                    className={`bg-[#FFF7F0] hover:shadow-lg transition-al cursor-pointer border-2 ${
-                      selectedPlanId === plan.id
-                        ? 'ring-2 ring-orange-500 ring-offset-2 border-orange-200 bg-orange-200'
-                        : 'border-gray-100 hover:border-gray-200'
-                    }`}
-                  >
-                    <CardContent className="p-5">
-                      <div className="flex gap-10">
-                        <div className={`w-20 h-20 ${cardImages[index]} rounded-xl flex-shrink-0`}></div>
-                        <div className="flex-1">
-                          <div className="flex items-start justify-between mb-3">
-                            <div className="flex-1">
-                              <Badge variant="secondary" className="w-fit bg-gray-200 flex items-center gap-1">
-                                <MapPin className="w-3 h-3" />
-                                {plan.category}
-                              </Badge>
-                              <CardTitle className="text-lg mb-2 mt-5">{plan.title}</CardTitle>
-                              <div className="flex justify-between mt-5">
-                                <Badge variant="secondary" className="flex items-center gap-1 bg-gray-200">
-                                  <User className="w-3 h-3" />
-                                  {plan.author}
+              {allPlanList.length === 0 ? (
+                <div className="text-center py-8">
+                  <p className="text-gray-500 text-lg mb-2">여행 계획이 없습니다.</p>
+                  <p className="text-gray-400 text-sm">새로운 여행 계획을 만들어보세요!</p>
+                </div>
+              ) : (
+                planList.map((plan) => {
+                  return (
+                    <Card
+                      key={plan.id}
+                      onClick={() => setSelectedPlanId(plan.id)}
+                      className={`bg-[#FFF7F0] hover:shadow-lg transition-al cursor-pointer border-2 ${
+                        selectedPlanId === plan.id
+                          ? 'ring-2 ring-orange-500 ring-offset-2 border-orange-200 bg-orange-200'
+                          : 'border-gray-100 hover:border-gray-200'
+                      }`}
+                    >
+                      <CardContent className="p-5">
+                        <div className="flex gap-10">
+                          <img
+                            src={import.meta.env.VITE_API_URL + plan.prefectureImageUrl}
+                            alt={plan.prefecture}
+                            className="w-30 h-30 object-cover object-center rounded-xl flex-shrink-0"
+                          />
+                          <div className="flex-1">
+                            <div className="flex items-start justify-between mb-3">
+                              <div className="flex-1">
+                                <Badge variant="secondary" className="w-fit bg-gray-200 flex items-center gap-1">
+                                  <MapPin className="w-3 h-3" />
+                                  {plan.prefecture}
                                 </Badge>
-                                <Badge variant="outline" className="flex items-center gap-1 bg-gray-200">
-                                  <CalendarIcon className="w-3 h-3" />
-                                  {plan.days}
-                                </Badge>
+                                <CardTitle className="text-lg mb-2 mt-5">{plan.title}</CardTitle>
+                                <div className="flex justify-between mt-5">
+                                  <Badge variant="secondary" className="flex items-center gap-1 bg-gray-200">
+                                    <User className="w-3 h-3" />
+                                    {plan?.members?.filter((member) => member?.role === 'OWNER')[0]?.userNickname}
+                                  </Badge>
+                                  <Badge variant="outline" className="flex items-center gap-1 bg-gray-200">
+                                    <CalendarIcon className="w-3 h-3" />
+                                    {dayjs(plan.endDate).diff(dayjs(plan.startDate), 'day') + 1} Days
+                                  </Badge>
+                                </div>
                               </div>
+                              <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
+                                <MoreVertical className="h-4 w-4" />
+                              </Button>
                             </div>
-                            <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
-                              <MoreVertical className="h-4 w-4" />
-                            </Button>
                           </div>
                         </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                );
-              })}
+                      </CardContent>
+                    </Card>
+                  );
+                })
+              )}
             </div>
 
             {/* 페이지네이션 */}
-            <div className="flex justify-center mt-6">
-              <CustomPagination currentPage={page} totalPages={totalPages} onPageChange={(p: number) => setPage(p)} />
-            </div>
+            {totalPages > 1 && (
+              <div className="flex justify-center mt-6">
+                <CustomPagination
+                  currentPage={page}
+                  totalPages={totalPages}
+                  onPageChange={(newPage: number) => {
+                    setPage(newPage);
+                    setSelectedPlanId(null); // 페이지 변경 시 선택된 계획 초기화
+                  }}
+                />
+              </div>
+            )}
+
+            {/* 리스트 정보 표시 */}
+            {/* {allPlanList.length > 0 && (
+              <div className="text-center mt-4 text-sm text-gray-500">
+                전체 {allPlanList.length}개 중 {Math.min((page - 1) * itemsPerPage + 1, allPlanList.length)}-
+                {Math.min(page * itemsPerPage, allPlanList.length)}개 표시
+              </div>
+            )} */}
           </div>
 
           {/* 오른쪽 사이드바 (데스크톱만, 선택된 계획이 있을 때만) */}
           {selectedPlanId &&
             (() => {
-              const selectedPlan = travelPlans.find((plan) => plan.id === selectedPlanId);
+              const selectedPlan = planList.find((plan) => plan.id === selectedPlanId);
               if (!selectedPlan) return null;
 
               return (
@@ -226,12 +324,14 @@ export default function Plans() {
 
                   {/* 진행상태 탭 */}
                   <div className="flex justify-between">
-                    <CategoryTabs
-                      categories={viewStatus}
-                      selectedCategory={selectedViewStatus}
-                      onCategoryChange={setSelectedViewStatus}
-                      onCategorySelect={() => setSelectedViewStatus('進行中')} // 카테고리 변경 시 지역 선택 초기화
-                    />
+                    <div className="pointer-events-none">
+                      <CategoryTabs
+                        categories={['進行中', '完了']}
+                        selectedCategory={selectedViewStatus}
+                        onCategoryChange={() => {}} // 클릭 비활성화
+                        onCategorySelect={() => {}} // 클릭 비활성화
+                      />
+                    </div>
                     <Button className="bg-brand-orange text-white px-4 py-2 rounded-lg text-sm font-medium">
                       詳細を見る
                     </Button>
@@ -239,8 +339,14 @@ export default function Plans() {
 
                   {/* 여행 이미지 카드 */}
                   <div className="relative mb-8 rounded-2xl overflow-hidden">
-                    <div className="w-full h-60 bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-600 flex items-center justify-center text-white relative">
-                      <div className="text-center z-10">
+                    <div
+                      className="w-full h-60 bg-cover bg-center bg-no-repeat flex items-center justify-center text-white relative"
+                      style={{
+                        backgroundImage:
+                          'url("' + import.meta.env.VITE_API_URL + selectedPlan.prefectureImageUrl + '")',
+                      }}
+                    >
+                      <div className="text-center z-10 bg-black/60">
                         <h3 className="text-3xl font-bold mb-2">{selectedPlan.title}</h3>
                       </div>
                     </div>
@@ -250,21 +356,25 @@ export default function Plans() {
                   <div className="mb-8">
                     <h3 className="font-bold text-gray-900 mb-4">旅行メンバー</h3>
                     <div className="flex gap-5">
-                      {travelMembers.map((member) => (
+                      {travelMembers.slice(0, 5).map((member) => (
                         <Avatar key={member.id} className="w-18 h-18">
-                          <AvatarFallback className={`${member.color} text-white text-xl`}>
-                            {member.avatar}
+                          <AvatarFallback className={`${member.color} text-white text-sm font-medium`}>
+                            {member.userNickname?.slice(0, 2) || '??'}
                           </AvatarFallback>
                         </Avatar>
                       ))}
-                      <Avatar className="w-18 h-18">
-                        <AvatarFallback className="bg-gray-700 text-white text-sm font-bold">5+</AvatarFallback>
-                      </Avatar>
+                      {travelMembers.length > 5 && (
+                        <Avatar className="w-18 h-18">
+                          <AvatarFallback className="bg-gray-700 text-white text-sm font-bold">
+                            {travelMembers.length - 5}+
+                          </AvatarFallback>
+                        </Avatar>
+                      )}
                     </div>
                   </div>
 
                   {/* 여행 기간 */}
-                  <div>
+                  {/* <div>
                     <h3 className="font-bold text-gray-900 mb-4">旅行期間</h3>
                     <Card className="border border-gray-200 rounded-2xl bg-white">
                       <CardContent className="p-4">
@@ -331,7 +441,7 @@ export default function Plans() {
                         />
                       </CardContent>
                     </Card>
-                  </div>
+                  </div> */}
                 </div>
               );
             })()}
