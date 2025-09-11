@@ -22,7 +22,7 @@ export default function CategoryTabs({
         <button
           key={category}
           onClick={() => handleCategoryClick(category)}
-          className={`p-3 lg:px-4 lg:py-2 text-[12px] lg:text-sm font-bold ${
+          className={`p-3 lg:px-4 lg:py-2 text-[12px] lg:text-sm font-bold cursor-pointer ${
             selectedCategory === category
               ? 'border-b-2 border-brand-category-selected'
               : 'text-gray-600 hover:text-gray-800'
