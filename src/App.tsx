@@ -5,7 +5,7 @@ import Home from './pages/home/Home';
 import Register from './pages/register/Register';
 import Plans from './pages/plans/Plans';
 import PlanMobile from './pages/plans/PlanMobile';
-import NewPlanCheckDate from './pages/plans/NewPlanCheckDate';
+import NewPlanCheckDate from './pages/new-plan/NewPlanCheckDate';
 
 function App() {
   return (
