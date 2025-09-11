@@ -6,7 +6,7 @@ import { toast } from 'sonner';
 let isTokenExpiredHandling = false;
 
 export const axiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8080',
   withCredentials: false,
   headers: {
     'Content-Type': 'application/json',

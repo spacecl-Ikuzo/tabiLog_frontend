@@ -1,50 +1,56 @@
-import React from 'react';
-import Tokyotrip from '../../assets/Tokyotrip.jpg';
-import OsakaGuriko from '../../assets/OsakaGuriko.jpg';
-import KyotoSakura from '../../assets/KyotoSakura.jpg';
-import fukuokahutami from '../../assets/fukuokahutami.jpg';
-import SapporoTower from '../../assets/SapporoTower.jpg';
-import OkinawaResort from '../../assets/OkinawaResort.jpg';
+import React, { useEffect, useState } from 'react';
+import { axiosInstance } from '../../api/axios';
+
+// APIから取得する旅行プランのデータ構造を定義します
+// API 응답에 더 많은 속성이 포함되어 있다면 여기에 추가하세요
+interface Plan {
+  id: number;
+  title: string;
+  description: string;
+  // 'tags'와 같은 다른 속성도 여기에 추가할 수 있습니다
+}
 
 const TravelPlansSection = () => {
-  const plans = [
-    {
-      title: '食い倒れ東京！2泊3日グルメ旅',
-      description: '東京の名店を巡るグルメ旅。築地市場から高級レストランまで。',
-      tags: ['グルメ', 'ショッピング'],
-      image: Tokyotrip
-    },
-    {
-      title: '大阪の下町を満喫！1泊2日',
-      description: '道頓堀、通天閣など大阪の名所を巡る旅。',
-      tags: ['グルメ', '観光'],
-      image: OsakaGuriko
-    },
-    {
-      title: '京都の桜と寺社巡り',
-      description: '春の京都で桜と伝統的な寺社を巡る旅。',
-      tags: ['観光', '自然'],
-      image: KyotoSakura
-    },
-    {
-      title: '福岡の博多を満喫！',
-      description: '博多ラーメンと福岡の名所を巡る旅。',
-      tags: ['グルメ', '観光'],
-      image: fukuokahutami
-    },
-    {
-      title: '札幌の雪まつり体験',
-      description: '冬の札幌で雪まつりとスキーを楽しむ旅。',
-      tags: ['イベント', 'アクティビティ'],
-      image: SapporoTower
-    },
-    {
-      title: '沖縄のリゾート滞在',
-      description: '美しいビーチとリゾートホテルでのんびり過ごす旅。',
-      tags: ['リゾート', 'ビーチ'],
-      image: OkinawaResort
-    }
-  ];
+  // `useState`에 `Plan[]` 타입을 명시하여, plans가 Plan 객체의 배열임을 TypeScript에 알려줍니다
+  const [plans, setPlans] = useState<Plan[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchPlans = async () => {
+      try {
+        const response = await axiosInstance.get('/api/plans/public');
+        setPlans(response.data.data); // ApiResponse 구조에 맞게 수정
+      } catch (e: unknown) {
+        // 'e'가 'unknown' 타입이므로, 'instanceof Error'를 사용하여 타입을 안전하게絞り込みます
+        if (e instanceof Error) {
+          setError(e.message);
+        } else {
+          setError('不明なエラーが発生しました');
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPlans();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="py-16 px-6 bg-gray-50 text-center">
+        <p className="text-gray-600">プランを読み込み中...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="py-16 px-6 bg-gray-50 text-center">
+        <p className="text-red-500">データ取得中にエラーが発生しました: {error}</p>
+      </div>
+    );
+  }
 
   return (
     <section className="py-16 px-6 bg-gray-50">
@@ -57,35 +63,36 @@ const TravelPlansSection = () => {
             タビログがおすすめするモデルプランで新しいインスピレーションを見つけよう。
           </p>
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {plans.map((plan, index) => (
-            <div 
-              key={index}
-              className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
-            >
-              <div className="h-48 bg-cover bg-center bg-no-repeat" style={{backgroundImage: `url(${plan.image})`}}>
-              </div>
-              <div className="p-6">
-                <h3 className="font-bold text-gray-900 mb-2 line-clamp-2">
-                  {plan.title}
-                </h3>
-                <p className="text-gray-600 text-sm mb-4 line-clamp-2">
-                  {plan.description}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {plan.tags.map((tag, tagIndex) => (
-                    <span 
-                      key={tagIndex}
-                      className="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded"
-                    >
-                      {tag}
-                    </span>
-                  ))}
+          {plans.length > 0 ? (
+            plans.map((plan) => (
+              <div 
+                key={plan.id}
+                className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+              >
+                <div 
+                  className="h-48 bg-cover bg-center bg-no-repeat" 
+                  style={{
+                    backgroundImage: `url(https://placehold.co/600x400/FFF/000?text=${plan.title})`
+                  }}
+                >
+                </div>
+                <div className="p-6">
+                  <h3 className="font-bold text-gray-900 mb-2 line-clamp-2">
+                    {plan.title}
+                  </h3>
+                  <p className="text-gray-600 text-sm mb-4 line-clamp-2">
+                    {plan.description}
+                  </p>
                 </div>
               </div>
+            ))
+          ) : (
+            <div className="col-span-3 text-center text-gray-500">
+              <p>旅行プランが見つかりませんでした。</p>
             </div>
-          ))}
+          )}
         </div>
       </div>
     </section>
