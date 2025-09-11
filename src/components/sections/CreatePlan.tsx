@@ -1,6 +1,15 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const CreatePlan = () => {
+  const navigate = useNavigate();
+
+  const handleCreatePlan = () => {
+    // TODO: 로그인 상태 확인 로직 추가
+    // 현재는 임시로 로그인 페이지로 이동
+    navigate('/login');
+  };
+
   return (
     <section className="py-20 px-6 bg-white">
       <div className="max-w-7xl mx-auto">
@@ -10,19 +19,19 @@ const CreatePlan = () => {
             <div className="flex items-center justify-center">
               {/* 첫 번째 이미지 */}
               <div className="relative z-10 w-64 h-80 bg-gray-200 rounded-lg shadow-lg transform rotate-3">
-                <div className="w-full h-full bg-cover bg-center bg-no-repeat rounded-lg" style={{backgroundImage: 'url(/placeholder-pagoda.jpg)'}}>
+                <div className="w-full h-full bg-cover bg-center bg-no-repeat rounded-lg" style={{backgroundImage: 'url(/src/assets/Kinkakuji.jpg)'}}>
                 </div>
               </div>
               
               {/* 두 번째 이미지 (중앙, 가장 크게) */}
               <div className="relative z-20 w-72 h-96 bg-gray-200 rounded-lg shadow-xl transform -translate-x-4 -translate-y-2">
-                <div className="w-full h-full bg-cover bg-center bg-no-repeat rounded-lg" style={{backgroundImage: 'url(/placeholder-street.jpg)'}}>
+                <div className="w-full h-full bg-cover bg-center bg-no-repeat rounded-lg" style={{backgroundImage: 'url(/src/assets/Tokyo.jpg)'}}>
                 </div>
               </div>
               
               {/* 세 번째 이미지 */}
               <div className="relative z-10 w-64 h-80 bg-gray-200 rounded-lg shadow-lg transform -rotate-3 -translate-x-8">
-                <div className="w-full h-full bg-cover bg-center bg-no-repeat rounded-lg" style={{backgroundImage: 'url(/placeholder-alley.jpg)'}}>
+                <div className="w-full h-full bg-cover bg-center bg-no-repeat rounded-lg" style={{backgroundImage: 'url(/src/assets/OsakaCastle.jpg)'}}>
                 </div>
               </div>
             </div>
@@ -40,7 +49,10 @@ const CreatePlan = () => {
               <p className="text-gray-600 text-lg leading-relaxed mb-8">
                 複雑な旅行計画も、タビログなら驚くほどかんたん。あなたの「好き」を詰め込んで、忘れられない旅を今すぐ作り始めましょう。
               </p>
-              <button className="bg-orange-500 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-orange-600 transition-colors shadow-lg">
+              <button 
+                className="bg-orange-500 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-orange-600 transition-colors shadow-lg"
+                onClick={handleCreatePlan}
+              >
                 自分だけのプランを作成する
               </button>
             </div>

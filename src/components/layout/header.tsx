@@ -8,7 +8,11 @@ const Header = () => {
     <header className="px-4 py-3 bg-white text-brand-orange lg:bg-brand-orange lg:text-white lg:px-6 lg:py-4">
       <div className="flex justify-between items-center mx-auto max-w-6xl">
         <h1 
-        className="text-xl font-bold text-brand-orange lg:text-2xl lg:text-white">タビログ</h1>
+          className="text-xl font-bold text-brand-orange lg:text-2xl lg:text-white cursor-pointer hover:opacity-80 transition-opacity"
+          onClick={() => navigate('/')}
+        >
+          タビログ
+        </h1>
 
         {/* 데스크톱 메뉴 */}
         <div className="hidden items-center space-x-6 lg:flex">
@@ -17,8 +21,8 @@ const Header = () => {
           <Button
             variant="outline"
             className="text-white border-white hover:bg-white hover:text-brand-orange"
-            // onClick={() => navigate('/login')}
-          >
+            onClick={() => navigate('/login')}
+         >
             ログイン
           </Button>
         </div>

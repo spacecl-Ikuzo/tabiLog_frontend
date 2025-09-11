@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import Header from '../../components/layout/header';
 import MainBackGround from '../../assets/MainBackGround.jpg';
 import Tokyo from '../../assets/Tokyo.jpg';
@@ -13,7 +13,29 @@ import OkinawaResort from '../../assets/OkinawaResort.jpg';
 const SpotsPage = () => {
   const [selectedCity, setSelectedCity] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  const destScrollRef = useRef<HTMLDivElement>(null);
+
+  const scrollDestLeft = () => {
+    if (destScrollRef.current) {
+      destScrollRef.current.scrollBy({ left: -300, behavior: 'smooth' });
+    }
+  };
+
+  const scrollDestRight = () => {
+    if (destScrollRef.current) {
+      destScrollRef.current.scrollBy({ left: 300, behavior: 'smooth' });
+    }
+  };
+
+  // URL 쿼리 파라미터에서 도시 정보 읽기
+  useEffect(() => {
+    const cityFromUrl = searchParams.get('city');
+    if (cityFromUrl) {
+      setSelectedCity(cityFromUrl);
+    }
+  }, [searchParams]);
 
   const destinations = [
     {
@@ -43,17 +65,69 @@ const SpotsPage = () => {
       image: Sapporo,
       description: '北海道の中心都市。冬の雪まつりや美味しいラーメンで知られる場所。',
       tags: ['祭り', 'スキー場']
+    },
+    {
+      id: 'fukuoka',
+      name: '福岡',
+      image: fukuokahutami,
+      description: '九州の玄関口。屋台やグルメが楽しめる街。',
+      tags: ['グルメ・食べ歩き', '文化・歴史']
+    },
+    {
+      id: 'okinawa',
+      name: '沖縄',
+      image: OkinawaResort,
+      description: '青い海と白い砂浜。リゾート気分を満喫できる島。',
+      tags: ['ビーチ', 'リゾート']
+    },
+    {
+      id: 'nagoya',
+      name: '名古屋',
+      image: 'https://placehold.co/600x400/FFF/000?text=名古屋',
+      description: '中部地方の中心都市。歴史と産業の街。',
+      tags: ['文化・歴史']
+    },
+    {
+      id: 'hiroshima',
+      name: '広島',
+      image: 'https://placehold.co/600x400/FFF/000?text=広島',
+      description: '平和を象徴する街。世界遺産と美景の島々。',
+      tags: ['文化・歴史', '世界遺産']
+    },
+    {
+      id: 'kanazawa',
+      name: '金沢',
+      image: 'https://placehold.co/600x400/FFF/000?text=金沢',
+      description: '伝統工芸と美しい庭園が魅力の城下町。',
+      tags: ['文化・歴史', '庭園']
     }
   ];
 
   const spots = [
-    { id: 1, name: '都市別観光地1', description: '昼も夜も美しい街の景色を楽しめるスポット', tags: ['文化・歴史', '祭り'] },
-    { id: 2, name: '都市別観光地2', description: '昼も夜も美しい街の景色を楽しめるスポット', tags: ['文化・歴史', '祭り'] },
-    { id: 3, name: '都市別観光地3', description: '昼も夜も美しい街の景色を楽しめるスポット', tags: ['文化・歴史', '祭り'] },
-    { id: 4, name: '都市別観光地4', description: '昼も夜も美しい街の景色を楽しめるスポット', tags: ['文化・歴史', '祭り'] },
-    { id: 5, name: '都市別観光地5', description: '昼も夜も美しい街の景色を楽しめるスポット', tags: ['文化・歴史', '祭り'] },
-    { id: 6, name: '都市別観光地6', description: '昼も夜も美しい街の景色を楽しめるスポット', tags: ['文化・歴史', '祭り'] }
+    { id: 1, name: '東京タワー', description: '東京のシンボルタワー。夜景が美しい観光スポット', tags: ['文化・歴史', '夜景・展望'], city: '東京' },
+    { id: 2, name: '浅草寺', description: '東京で最も古い寺院。雷門で有名な観光地', tags: ['文化・歴史', '祭り'], city: '東京' },
+    { id: 3, name: '大阪城', description: '豊臣秀吉が築いた名城。歴史と美しさを兼ね備えた城', tags: ['文化・歴史', '祭り'], city: '大阪' },
+    { id: 4, name: '道頓堀', description: '大阪の食文化を体験できる繁華街', tags: ['グルメ・食べ歩き', '文化・歴史'], city: '大阪' },
+    { id: 5, name: '金閣寺', description: '京都の代表的な寺院。金色に輝く美しい建物', tags: ['文化・歴史', '祭り'], city: '京都' },
+    { id: 6, name: '清水寺', description: '京都で最も有名な寺院。舞台からの景色が絶景', tags: ['文化・歴史', '祭り'], city: '京都' },
+    { id: 7, name: '札幌時計台', description: '札幌のシンボル。歴史ある時計台', tags: ['文化・歴史', '祭り'], city: '札幌' },
+    { id: 8, name: '大通公園', description: '札幌の中心にある美しい公園', tags: ['文化・歴史', '祭り'], city: '札幌' },
+    { id: 9, name: '福岡城跡', description: '福岡の歴史を感じられる城跡', tags: ['文化・歴史', '祭り'], city: '福岡' },
+    { id: 10, name: '博多駅', description: '福岡の玄関口。グルメとショッピングの中心地', tags: ['グルメ・食べ歩き', 'ショッピング'], city: '福岡' },
+    { id: 11, name: '首里城', description: '沖縄の歴史と文化を感じられる城', tags: ['文化・歴史', '祭り'], city: '沖縄' },
+    { id: 12, name: '美ら海水族館', description: '世界最大級の水族館。ジンベエザメが人気', tags: ['文化・歴史', '祭り'], city: '沖縄' },
+    { id: 13, name: '名古屋城', description: '名古屋のシンボル。金の鯱で有名な城', tags: ['文化・歴史', '祭り'], city: '名古屋' },
+    { id: 14, name: '熱田神宮', description: '名古屋で最も重要な神社', tags: ['文化・歴史', '祭り'], city: '名古屋' },
+    { id: 15, name: '原爆ドーム', description: '広島の平和の象徴。世界遺産', tags: ['文化・歴史', '祭り'], city: '広島' },
+    { id: 16, name: '宮島', description: '厳島神社で有名な美しい島', tags: ['文化・歴史', '祭り'], city: '広島' },
+    { id: 17, name: '兼六園', description: '金沢の代表的な庭園。日本三名園の一つ', tags: ['文化・歴史', '祭り'], city: '金沢' },
+    { id: 18, name: '金沢城公園', description: '金沢の歴史を感じられる城跡公園', tags: ['文化・歴史', '祭り'], city: '金沢' }
   ];
+
+  // 선택된 도시에 따라 스팟 필터링
+  const filteredSpots = selectedCity 
+    ? spots.filter(spot => spot.city === selectedCity)
+    : spots;
 
   const travelPlans = [
     {
@@ -99,27 +173,27 @@ const SpotsPage = () => {
           
           <div className="relative">
             {/* 왼쪽 화살표 */}
-            <button className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white shadow-lg rounded-full w-12 h-12 flex items-center justify-center z-10 hover:bg-gray-50 transition-colors">
+            <button onClick={scrollDestLeft} className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white shadow-lg rounded-full w-12 h-12 flex items-center justify-center z-10 hover:bg-gray-50 transition-colors">
               <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
               </svg>
             </button>
             
             {/* 오른쪽 화살표 */}
-            <button className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white shadow-lg rounded-full w-12 h-12 flex items-center justify-center z-10 hover:bg-gray-50 transition-colors">
+            <button onClick={scrollDestRight} className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white shadow-lg rounded-full w-12 h-12 flex items-center justify-center z-10 hover:bg-gray-50 transition-colors">
               <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
             </button>
             
-            <div className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide px-16">
+            <div ref={destScrollRef} className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide px-16">
               {destinations.map((destination) => (
                 <div 
                   key={destination.id}
                   className={`flex-shrink-0 w-80 bg-white rounded-lg shadow-md overflow-hidden cursor-pointer transition-all duration-200 hover:scale-105 ${
-                    selectedCity === destination.id ? 'ring-4 ring-orange-500 ring-offset-2' : ''
+                    selectedCity === destination.name ? 'ring-4 ring-orange-500 ring-offset-2' : ''
                   }`}
-                  onClick={() => setSelectedCity(destination.id)}
+                  onClick={() => setSelectedCity(destination.name)}
                 >
                   <div className="h-48 bg-cover bg-center bg-no-repeat" style={{backgroundImage: `url(${destination.image})`}}>
                   </div>
@@ -145,10 +219,15 @@ const SpotsPage = () => {
       {selectedCity && (
         <section className="py-16 px-6 bg-gray-50">
           <div className="max-w-7xl mx-auto">
-            <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">観光スポット</h2>
+            <h2 className="text-3xl font-bold text-gray-900 text-center mb-4">
+              観光スポット
+            </h2>
+            <p className="text-gray-600 text-center mb-12">
+              {selectedCity ? `${selectedCity}で人気の観光スポットをご紹介します` : '人気の観光スポットをご紹介します'}
+            </p>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {spots.map((spot) => (
+              {filteredSpots.map((spot) => (
                 <div key={spot.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
                   <div className="h-48 bg-gray-200 flex items-center justify-center">
                     <span className="text-gray-500">이미지 영역</span>

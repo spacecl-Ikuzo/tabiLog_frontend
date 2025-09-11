@@ -25,16 +25,23 @@ const Login = () => {
 
   const onSubmit = async (req: z.infer<typeof schema>) => {
     const formData = {
-      email: req.mbrId,
-      password: req.password,
+      username: req.mbrId.trim(), // backend expects 'username' field
+      password: req.password.trim(), // trim whitespace
     };
 
+    console.log('=== FRONTEND LOGIN DEBUG ===');
+    console.log('Username:', formData.username);
+    console.log('Password length:', formData.password.length);
+    console.log('Password (first 5 chars):', formData.password.substring(0, 5));
+
     try {
-      await axiosInstance.post('/auth/login', formData);
+      const response = await axiosInstance.post('/api/auth/signin', formData); // backend endpoint is '/api/auth/signin'
+      console.log('Login response:', response.data);
       form.reset();
       toast.success('로그인 성공');
-      navigate('/dashboard');
+      navigate('/');
     } catch (error) {
+      console.error('Login error:', error);
       if (error instanceof AxiosError) {
         form.setError('mbrId', { type: 'manual' });
         form.setError('password', { type: 'manual', message: error.response?.data.message });
