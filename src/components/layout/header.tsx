@@ -11,7 +11,9 @@ const Header = () => {
         {/* 데스크톱 메뉴 */}
         <div className="hidden items-center space-x-6 lg:flex">
           <span className="cursor-pointer hover:text-orange-200">観光スポット紹介</span>
-          <span className="cursor-pointer hover:text-orange-200">マイトリップ</span>
+          <span className="cursor-pointer hover:text-orange-200" onClick={() => navigate('/plans')}>
+            マイトリップ
+          </span>
           <Button
             variant="outline"
             className="border-white bg-white text-brand-orange cursor-pointer"
