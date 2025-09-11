@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback, useMemo } from 'react';
+import { useEffect, useState, useCallback, useMemo, useRef } from 'react';
 import { Button } from '../../components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../components/ui/select';
 import { Card, CardContent, CardTitle } from '../../components/ui/card';
@@ -10,6 +10,8 @@ import SideNavigation from '../../components/layout/side-navigation';
 import { MoreVertical, Calendar as CalendarIcon, User, MapPin } from 'lucide-react';
 import CustomPagination from '../../Pagination';
 import CategoryTabs from '../../components/common/CategoryTabs';
+import SkeletonCard from './components/SkeletonCard';
+import TravelCalendar from './components/TravelCalendar';
 import { axiosInstance } from '../../api/axios';
 import { toast } from 'sonner';
 import { Plan } from '../../lib/type';
@@ -27,6 +29,7 @@ export default function Plans() {
   // 여행 계획 목록
   const [allPlanList, setAllPlanList] = useState<Plan[]>([]); // 전체 리스트
   const [planList, setPlanList] = useState<Plan[]>([]); // 현재 페이지에 표시할 리스트
+  const [isLoading, setIsLoading] = useState(false); // 로딩 상태
 
   // 현재 선택된 카테고리
   const [selectedCategory, setSelectedCategory] = useState('すべて');
@@ -46,41 +49,8 @@ export default function Plans() {
 
   // 카테고리별 지역 목록
   const [regionsByCategory, setRegionsByCategory] = useState<string[]>([]);
-
-  const ChangeCategory = useCallback(async () => {
-    try {
-      let url = '';
-      if (selectedCategory === 'すべて') {
-        url = '/api/categories/regions';
-      } else {
-        url = `/api/categories/regions?region=${selectedCategory}`;
-      }
-
-      const response = await axiosInstance.get(url);
-      setRegionsByCategory(response.data.data);
-
-      // 응답받은 데이터의 첫 번째 항목을 자동 선택
-      // if (response.data.data && response.data.data.length > 0) {
-      //   setSelectedPrefecture(response.data.data[0]);
-      // }
-    } catch (error) {
-      console.error(error);
-      toast.error('카테고리 변경에 실패하셨습니다.', { position: 'top-center' });
-    }
-  }, [selectedCategory]);
-
-  useEffect(() => {
-    ChangeCategory();
-  }, [ChangeCategory]);
-
-  useEffect(() => {
-    fetchPlanList(selectedPrefecture, selectedStatus);
-  }, [selectedPrefecture, selectedStatus]);
-
-  // 페이지 변경 시 현재 페이지 리스트 업데이트
-  useEffect(() => {
-    updateCurrentPageList();
-  }, [page, allPlanList]);
+  const regionsByCategoryRef = useRef<string[]>([]);
+  const isChangingCategoryRef = useRef(false);
 
   // 현재 페이지에 표시할 리스트 업데이트
   const updateCurrentPageList = () => {
@@ -95,28 +65,104 @@ export default function Plans() {
   };
 
   // 여행 계획 목록 조회
-  const fetchPlanList = async (selectedPrefecture: string, selectedStatus: string) => {
-    let response;
-    try {
-      if (selectedPrefecture === '' && selectedStatus === '') {
-        response = await axiosInstance.get('/api/plans');
-      } else {
-        response = await axiosInstance.get(
-          `/api/plans/search?prefecture=${selectedPrefecture}&status=${selectedStatus}`,
-        );
+  const fetchPlanList = useCallback(
+    async (selectedPrefecture: string, selectedStatus: string, currentRegions?: string[]) => {
+      let response;
+      setIsLoading(true);
+      try {
+        // URL 파라미터 구성
+        const params = new URLSearchParams();
+
+        // currentRegions가 전달되면 사용하고, 아니면 현재 regionsByCategory 사용
+        const regionsToUse = currentRegions || regionsByCategoryRef.current;
+
+        // 카테고리가 '전체'가 아닐 때는 해당 카테고리의 지역들을 포함
+        if (selectedCategory !== 'すべて' && regionsToUse.length > 0) {
+          if (selectedPrefecture) {
+            // 특정 지역이 선택된 경우, 그 지역만 사용
+            params.append('prefecture', selectedPrefecture);
+          } else {
+            // 지역이 선택되지 않은 경우, 카테고리의 모든 지역들 사용
+            const regionsParam = regionsToUse.join(',');
+            params.append('prefectures', regionsParam);
+          }
+        } else if (selectedPrefecture) {
+          // 전체 카테고리이면서 특정 지역이 선택된 경우
+          params.append('prefecture', selectedPrefecture);
+        }
+
+        // 상태 파라미터 추가
+        if (selectedStatus) {
+          params.append('status', selectedStatus);
+        }
+
+        // API 요청
+        if (params.toString()) {
+          response = await axiosInstance.get(`/api/plans/search?${params.toString()}`);
+        } else {
+          response = await axiosInstance.get('/api/plans');
+        }
+
+        setAllPlanList(response.data.data);
+        setPage(1); // 새로운 데이터 로드 시 첫 페이지로 이동
+      } catch (error) {
+        toast.error('여행 계획 조회에 실패하셨습니다.', {
+          position: 'top-center',
+        });
+        console.error(error);
+      } finally {
+        setIsLoading(false);
       }
-      setAllPlanList(response.data.data);
-      setPage(1); // 새로운 데이터 로드 시 첫 페이지로 이동
-      toast.success('여행 계획 조회 성공하셨습니다.', { position: 'top-center' });
+    },
+    [selectedCategory],
+  );
+
+  const ChangeCategory = useCallback(async () => {
+    try {
+      isChangingCategoryRef.current = true;
+      let url = '';
+      if (selectedCategory === 'すべて') {
+        url = '/api/categories/regions';
+      } else {
+        url = `/api/categories/regions?region=${selectedCategory}`;
+      }
+
+      const response = await axiosInstance.get(url);
+      setRegionsByCategory(response.data.data);
+      regionsByCategoryRef.current = response.data.data;
+
+      // 지역 목록을 받아온 후 바로 여행 계획 조회
+      await fetchPlanList('', '', response.data.data);
+      isChangingCategoryRef.current = false;
     } catch (error) {
-      toast.error('여행 계획 조회에 실패하셨습니다.', {
-        position: 'top-center',
-      });
       console.error(error);
-    } finally {
-      //finally가 필요할 경우 추가, 없으면 삭제
+      toast.error('카테고리 변경에 실패하셨습니다.', { position: 'top-center' });
+      isChangingCategoryRef.current = false;
     }
-  };
+  }, [selectedCategory, fetchPlanList]);
+
+  useEffect(() => {
+    ChangeCategory();
+  }, [ChangeCategory]);
+
+  useEffect(() => {
+    //여행 리스트 조회 (카테고리 변경 중이 아닐 때만)
+    if (!isChangingCategoryRef.current) {
+      fetchPlanList(selectedPrefecture, selectedStatus);
+    }
+  }, [selectedPrefecture, selectedStatus, fetchPlanList]);
+
+  useEffect(() => {
+    //카테고리 변경 시 지역, 상태 초기화
+    console.log('카테고리 변경 시 지역, 상태 초기화');
+    setSelectedPrefecture('');
+    setSelectedStatus('');
+  }, [selectedCategory]);
+
+  // 페이지 변경 시 현재 페이지 리스트 업데이트
+  useEffect(() => {
+    updateCurrentPageList();
+  }, [page, allPlanList]);
 
   // 여행 멤버 컬러 옵션 (임시)
   const colorOptions = [
@@ -225,7 +271,10 @@ export default function Plans() {
 
             {/* 여행 계획 목록 */}
             <div className="space-y-4">
-              {allPlanList.length === 0 ? (
+              {isLoading ? (
+                // 로딩 중일 때 스켈레톤 카드들 표시
+                Array.from({ length: itemsPerPage }).map((_, index) => <SkeletonCard key={index} />)
+              ) : allPlanList.length === 0 ? (
                 <div className="text-center py-8">
                   <p className="text-gray-500 text-lg mb-2">여행 계획이 없습니다.</p>
                   <p className="text-gray-400 text-sm">새로운 여행 계획을 만들어보세요!</p>
@@ -373,75 +422,11 @@ export default function Plans() {
                     </div>
                   </div>
 
-                  {/* 여행 기간 */}
-                  {/* <div>
+                  {/* 여행 기간 캘린더 */}
+                  <div className="mb-8">
                     <h3 className="font-bold text-gray-900 mb-4">旅行期間</h3>
-                    <Card className="border border-gray-200 rounded-2xl bg-white">
-                      <CardContent className="p-4">
-                        <Calendar
-                          mode="range"
-                          month={currentDate}
-                          onMonthChange={setCurrentDate}
-                          selected={{
-                            from: new Date(2026, 1, 4),
-                            to: new Date(2026, 1, 6),
-                          }}
-                          disabled={() => true}
-                          className="rounded-md border-0 w-full"
-                          formatters={{
-                            formatCaption: (date) => {
-                              const months = [
-                                'January',
-                                'February',
-                                'March',
-                                'April',
-                                'May',
-                                'June',
-                                'July',
-                                'August',
-                                'September',
-                                'October',
-                                'November',
-                                'December',
-                              ];
-                              return `${date.getFullYear()} ${months[date.getMonth()]}`;
-                            },
-                            formatWeekdayName: (date) => {
-                              const weekdays = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
-                              return weekdays[date.getDay()];
-                            },
-                          }}
-                          classNames={{
-                            months: 'w-full',
-                            month: 'w-full space-y-3',
-                            caption: 'flex justify-center items-center pt-2 relative mb-6 px-0',
-                            caption_label: 'text-lg font-semibold text-gray-900 mx-8',
-                            nav: 'space-x-1 flex items-center absolute inset-0 justify-between',
-                            nav_button:
-                              'inline-flex items-center justify-center rounded-md text-sm font-medium h-8 w-8 p-0 text-gray-500 hover:text-gray-700 hover:bg-gray-100 transition-colors border-0',
-                            nav_button_previous: '',
-                            nav_button_next: '',
-                            table: 'w-full border-collapse',
-                            head_row: 'flex w-full mb-3',
-                            head_cell: 'text-gray-500 font-medium text-sm flex-1 text-center py-1',
-                            row: 'flex w-full',
-                            cell: 'flex-1 text-center text-sm py-1 relative',
-                            day: 'h-10 w-full p-0 font-normal cursor-default flex items-center justify-center text-gray-800 text-sm transition-colors relative z-10',
-                            day_range_start:
-                              'text-white font-medium bg-orange-300 rounded-l-2xl relative after:absolute after:content-[""] after:top-0 after:bottom-0 after:right-0 after:w-4 after:bg-orange-300 after:z-[-1]',
-                            day_range_end:
-                              'text-white font-medium bg-orange-300 rounded-r-2xl relative before:absolute before:content-[""] before:top-0 before:bottom-0 before:left-0 before:w-4 before:bg-orange-300 before:z-[-1]',
-                            day_range_middle:
-                              'text-white font-medium bg-orange-300 relative before:absolute before:content-[""] before:top-0 before:bottom-0 before:left-0 before:w-4 before:bg-orange-300 before:z-[-1] after:absolute after:content-[""] after:top-0 after:bottom-0 after:right-0 after:w-4 after:bg-orange-300 after:z-[-1]',
-                            day_selected: 'text-white font-medium bg-orange-300',
-                            day_today: 'font-semibold text-gray-900',
-                            day_outside: 'text-gray-300',
-                            day_disabled: 'text-gray-300 cursor-default',
-                          }}
-                        />
-                      </CardContent>
-                    </Card>
-                  </div> */}
+                    <TravelCalendar startDate={selectedPlan.startDate} endDate={selectedPlan.endDate} />
+                  </div>
                 </div>
               );
             })()}
