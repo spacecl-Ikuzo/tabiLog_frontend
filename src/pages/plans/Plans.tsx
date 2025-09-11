@@ -4,7 +4,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { Card, CardContent, CardTitle } from '../../components/ui/card';
 import { Avatar, AvatarFallback } from '../../components/ui/avatar';
 import { Badge } from '../../components/ui/badge';
-import { Calendar } from '../../components/ui/calendar';
 import Header from '../../components/layout/header';
 import SideNavigation from '../../components/layout/side-navigation';
 import { MoreVertical, Calendar as CalendarIcon, User, MapPin } from 'lucide-react';
@@ -22,9 +21,6 @@ export default function Plans() {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const itemsPerPage = 4; // 페이지당 아이템 수
-
-  // 캘린더 상태 관리
-  const [currentDate, setCurrentDate] = useState(new Date(2026, 1)); // 2026년 2월
 
   // 여행 계획 목록
   const [allPlanList, setAllPlanList] = useState<Plan[]>([]); // 전체 리스트

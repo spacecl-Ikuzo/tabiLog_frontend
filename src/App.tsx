@@ -5,6 +5,7 @@ import Home from './pages/home/Home';
 import Register from './pages/register/Register';
 import Plans from './pages/plans/Plans';
 import PlanMobile from './pages/plans/PlanMobile';
+import NewPlanCheckDate from './pages/plans/NewPlanCheckDate';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         {/* 예시: <Route path="/profile" element={<Profile />} /> */}
         <Route path="/plans" element={<Plans />} />
         <Route path="/plans/:id" element={<PlanMobile />} />
+        <Route path="/newPlan" element={<NewPlanCheckDate />} />
       </Route>
     </Routes>
   );

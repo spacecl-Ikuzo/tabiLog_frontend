@@ -16,6 +16,8 @@ export default function SideNavigation({ selectedNav }: { selectedNav: string })
       //현재 경로와 메뉴의 value가 같으면 동작 X
       if (menu === 'plans') {
         navigate(`/plans`);
+      } else if (menu === 'newPlan') {
+        navigate(`/newPlan`);
       } else {
         //TODO: 마이페이지 추가 시 수정
         navigate(`/`);
@@ -49,9 +51,9 @@ export default function SideNavigation({ selectedNav }: { selectedNav: string })
             </div>
             <div
               className={`flex items-center gap-3 px-3 py-4 hover:bg-gray-50 rounded-lg cursor-pointer ${
-                activeMenu === 'createPlan' ? 'text-black' : 'text-gray-600'
+                activeMenu === 'newPlan' ? 'text-black' : 'text-gray-600'
               }`}
-              onClick={() => handleMenuClick('createPlan')}
+              onClick={() => handleMenuClick('newPlan')}
             >
               <PlaneTakeoff className="w-5 h-5" />
               <span className="text-[16px] font-semibold">旅行計画を立てる</span>
