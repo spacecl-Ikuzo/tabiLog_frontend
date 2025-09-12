@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const navigate = useNavigate();
-
   return (
     <header className="px-4 py-3 bg-white text-brand-orange lg:bg-brand-orange lg:text-white lg:px-6 lg:py-4">
       <div className="flex justify-between items-center mx-auto max-w-6xl">
@@ -24,7 +23,7 @@ const Header = () => {
           </span>
           <Button
             variant="outline"
-            className="text-white border-white hover:bg-white hover:text-brand-orange"
+            className="border-white bg-white text-brand-orange cursor-pointer"
             onClick={() => navigate('/login')}
           >
             ログイン
