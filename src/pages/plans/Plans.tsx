@@ -11,6 +11,7 @@ import CustomPagination from '../../Pagination';
 import CategoryTabs from '../../components/common/CategoryTabs';
 import MemberDetailPopup from './components/MemberDetailPopup';
 import InviteMemberPopup from './components/InviteMemberPopup';
+import WarikanPopup from './components/WarikanPopup';
 import SkeletonCard from './components/SkeletonCard';
 import TravelCalendar from './components/TravelCalendar';
 import { axiosInstance } from '../../api/axios';
@@ -47,6 +48,9 @@ export default function Plans() {
 
   // 친구 초대 팝업 상태
   const [isInvitePopupOpen, setIsInvitePopupOpen] = useState(false);
+
+  // 와리깡 팝업 상태
+  const [isWarikanPopupOpen, setIsWarikanPopupOpen] = useState(false);
 
   // 카테고리 목록
   const categories = ['すべて', '東日本', '南日本', '西日本', '北日本'];
@@ -437,6 +441,43 @@ export default function Plans() {
                     </div>
                   </div>
 
+                  {/* 총 지불 금액 */}
+                  <div className="mb-8">
+                    <div className="flex justify-between items-center mb-4">
+                      <h3 className="font-bold text-gray-900">総支払金額</h3>
+                      <div className="flex gap-2">
+                        <button
+                          onClick={() => setIsWarikanPopupOpen(true)}
+                          className="bg-brand-orange text-white px-4 py-2 rounded-lg text-sm font-medium cursor-pointer"
+                        >
+                          メンバーと割り勘
+                        </button>
+                      </div>
+                    </div>
+                    <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-3">
+                          <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                            <span className="text-green-600 font-bold text-lg">¥</span>
+                          </div>
+                          <div>
+                            <p className="text-sm text-gray-600">現在の総額</p>
+                            <p className="text-2xl font-bold text-gray-900">¥{(0).toLocaleString('ja-JP')}</p>
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <p className="text-xs text-gray-500">メンバー当たり</p>
+                          <p className="text-lg font-semibold text-gray-700">
+                            ¥
+                            {travelMembers.length > 0
+                              ? Math.ceil(0 / travelMembers.length).toLocaleString('ja-JP')
+                              : '0'}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
                   {/* 여행 기간 캘린더 */}
                   <div className="mb-8">
                     <h3 className="font-bold text-gray-900 mb-4">旅行期間</h3>
@@ -495,6 +536,24 @@ export default function Plans() {
         }}
         onCancel={() => {
           console.log('招待がキャンセルされました。');
+        }}
+      />
+
+      {/* 와리깡 팝업 */}
+      <WarikanPopup
+        open={isWarikanPopupOpen}
+        onOpenChange={setIsWarikanPopupOpen}
+        members={travelMembers}
+        totalAmount={20500} // 임시 금액
+        onConfirm={(amounts) => {
+          console.log('割り勘 結果:', amounts);
+          const totalCalculated = Object.values(amounts).reduce((sum, amount) => sum + amount, 0);
+          toast.success(`割り勘が完了しました。総額: ¥${totalCalculated.toLocaleString('ja-JP')}`, {
+            position: 'top-center',
+          });
+        }}
+        onCancel={() => {
+          console.log('割り勘がキャンセルされました。');
         }}
       />
     </div>
