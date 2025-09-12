@@ -4,8 +4,6 @@ import {
   PaginationEllipsis,
   PaginationItem,
   PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
 } from './components/ui/pagination';
 
 type PaginationStyleProps = {
@@ -20,47 +18,21 @@ export default function CustomPagination({ currentPage, totalPages, onPageChange
 
   const getPages = () => {
     const pages = [];
-    const maxPagesToShow = 5; // 중앙에 표시할 페이지 수
-    const sidePages = 2; // 양쪽에 표시할 페이지 수
+    const maxPagesToShow = 5; // 한 번에 보여줄 페이지 수
 
     if (totalPages <= maxPagesToShow) {
-      // 페이지가 적으면 전부 표시
       for (let i = 1; i <= totalPages; i++) {
         pages.push(i);
       }
     } else {
-      // 현재 페이지 근처에 표시할 페이지 결정
-      let startPage = Math.max(2, currentPage - sidePages);
-      let endPage = Math.min(totalPages - 1, currentPage + sidePages);
-
-      if (currentPage <= sidePages) {
-        // 첫 번째 페이지들이 가까울 경우
-        endPage = maxPagesToShow;
-      }
-
-      if (currentPage >= totalPages - sidePages) {
-        // 마지막 페이지들이 가까울 경우
-        startPage = totalPages - sidePages * 2;
-      }
-
-      pages.push(1); // 첫 번째 페이지
-      if (startPage > 2) {
-        // 두 번째 페이지부터 시작되면 생략 기호 추가
-        pages.push('...');
-      }
-
+      // 5페이지 단위로 그룹핑
+      const currentGroup = Math.floor((currentPage - 1) / maxPagesToShow);
+      const startPage = currentGroup * maxPagesToShow + 1;
+      const endPage = Math.min(startPage + maxPagesToShow - 1, totalPages);
       for (let i = startPage; i <= endPage; i++) {
         pages.push(i);
       }
-
-      if (endPage < totalPages - 1) {
-        // 마지막 전 페이지에서 생략 기호 추가
-        pages.push('...');
-      }
-
-      pages.push(totalPages); // 마지막 페이지
     }
-
     return pages;
   };
 
@@ -76,29 +48,57 @@ export default function CustomPagination({ currentPage, totalPages, onPageChange
     }
   };
 
+  const handlePreviousGroup = () => {
+    // 현재 페이지가 속한 그룹의 첫 페이지로 이동
+    const currentGroup = Math.floor((currentPage - 1) / 5);
+    const groupStartPage = currentGroup * 5 + 1;
+    onPageChange(groupStartPage);
+  };
+
+  const handleNextGroup = () => {
+    // 현재 페이지가 속한 그룹의 마지막 페이지로 이동
+    const currentGroup = Math.floor((currentPage - 1) / 5);
+    const groupEndPage = Math.min((currentGroup + 1) * 5, totalPages);
+    onPageChange(groupEndPage);
+  };
+
   return (
-    <Pagination className="w-[300px] mx-auto">
-      <PaginationContent>
-        <PaginationItem>
-          <PaginationPrevious onClick={handlePrevious} />
-        </PaginationItem>
-
-        {getPages().map((page, index) => (
-          <PaginationItem key={index}>
-            {typeof page === 'number' ? (
-              <PaginationLink isActive={page === currentPage} onClick={() => onPageChange(Math.floor(page))}>
-                {page}
-              </PaginationLink>
-            ) : (
-              <PaginationEllipsis />
-            )}
-          </PaginationItem>
-        ))}
-
-        <PaginationItem>
-          <PaginationNext onClick={handleNext} />
-        </PaginationItem>
-      </PaginationContent>
-    </Pagination>
+    <div className="relative w-[400px] mx-auto">
+      {/* 왼쪽 그룹 이동 버튼 */}
+      <div className="absolute left-0 top-0 h-full flex items-center z-10 hover:cursor-pointer">
+        <PaginationLink onClick={handlePreviousGroup}>&lt;&lt;</PaginationLink>
+      </div>
+      {/* 왼쪽 화살표 */}
+      <div className="absolute left-8 top-0 h-full flex items-center z-10 hover:cursor-pointer">
+        <PaginationLink onClick={handlePrevious}>&lt;</PaginationLink>
+      </div>
+      <Pagination>
+        <PaginationContent className="justify-center">
+          {getPages().map((page, index) => (
+            <PaginationItem key={index}>
+              {typeof page === 'number' ? (
+                <PaginationLink
+                  isActive={page === currentPage}
+                  onClick={() => onPageChange(Math.floor(page))}
+                  className="hover:cursor-pointer"
+                >
+                  {page}
+                </PaginationLink>
+              ) : (
+                <PaginationEllipsis />
+              )}
+            </PaginationItem>
+          ))}
+        </PaginationContent>
+      </Pagination>
+      {/* 오른쪽 화살표 */}
+      <div className="absolute right-8 top-0 h-full flex items-center z-10 hover:cursor-pointer">
+        <PaginationLink onClick={handleNext}>&gt;</PaginationLink>
+      </div>
+      {/* 오른쪽 그룹 이동 버튼 */}
+      <div className="absolute right-0 top-0 h-full flex items-center z-10 hover:cursor-pointer">
+        <PaginationLink onClick={handleNextGroup}>&gt;&gt;</PaginationLink>
+      </div>
+    </div>
   );
 }

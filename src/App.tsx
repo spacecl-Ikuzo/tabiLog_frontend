@@ -3,9 +3,15 @@ import Login from './pages/login/Login';
 import PrivateRoute from './PrivateRoute';
 import Home from './pages/home/Home';
 import Register from './pages/register/Register';
+<<<<<<< HEAD
 import SpotsPage from './pages/spots/SpotsPage';
 import DetailPage from './pages/detail/DetailPage';
 import SpotDetailPage from './pages/detail/SpotDetailPage';
+=======
+import Plans from './pages/plans/Plans';
+import PlanMobile from './pages/plans/PlanMobile';
+import NewPlanCheckDate from './pages/new-plan/NewPlanCheckDate';
+>>>>>>> 6dd9063db397946cdb7165fcedeeb8e7863fe210
 
 function App() {
   return (
@@ -21,6 +27,9 @@ function App() {
       <Route element={<PrivateRoute />}>
         {/* 로그인 유저만 접근 가능한 페이지들을 여기에 추가 */}
         {/* 예시: <Route path="/profile" element={<Profile />} /> */}
+        <Route path="/plans" element={<Plans />} />
+        <Route path="/plans/:id" element={<PlanMobile />} />
+        <Route path="/newPlan" element={<NewPlanCheckDate />} />
       </Route>
     </Routes>
   );
