@@ -339,14 +339,6 @@ export default function Plans() {
                 />
               </div>
             )}
-
-            {/* 리스트 정보 표시 */}
-            {/* {allPlanList.length > 0 && (
-              <div className="text-center mt-4 text-sm text-gray-500">
-                전체 {allPlanList.length}개 중 {Math.min((page - 1) * itemsPerPage + 1, allPlanList.length)}-
-                {Math.min(page * itemsPerPage, allPlanList.length)}개 표시
-              </div>
-            )} */}
           </div>
 
           {/* 오른쪽 사이드바 (데스크톱만, 선택된 계획이 있을 때만) */}
