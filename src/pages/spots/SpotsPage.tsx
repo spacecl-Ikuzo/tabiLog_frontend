@@ -424,8 +424,8 @@ const SpotsPage = () => {
               ))}
             </div>
 
-            {/* Spots Pagination */}
-            {totalSpotPages > 1 && (
+            {/* Spots Pagination (always show, even if single page) */}
+            {totalSpotPages >= 1 && (
               <div className="flex justify-center items-center gap-2 mt-8">
                 <button
                   className={`px-3 py-2 rounded ${safeSpotPage === 1 ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-gray-200 text-gray-600 hover:bg-gray-300'}`}
