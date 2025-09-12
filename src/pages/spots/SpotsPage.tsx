@@ -33,13 +33,12 @@ import TokyoDome from '../../assets/TokyoDome.jpg';
 const SpotsPage = () => {
   const [selectedCity, setSelectedCity] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [plansPerPage, setPlansPerPage] = useState(6);
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const destScrollRef = useRef<HTMLDivElement>(null);
   const destItemRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const destinationSectionRef = useRef<HTMLDivElement>(null);
   const [spotPage, setSpotPage] = useState(1);
-  const [spotsPerPage, setSpotsPerPage] = useState(6);
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(true);
 
@@ -69,6 +68,15 @@ const SpotsPage = () => {
     const cityFromUrl = searchParams.get('city');
     if (cityFromUrl) {
       setSelectedCity(cityFromUrl);
+      // 도시가 선택되었을 때 "旅行先選択" 섹션으로 스크롤
+      setTimeout(() => {
+        if (destinationSectionRef.current) {
+          destinationSectionRef.current.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start',
+          });
+        }
+      }, 100);
     }
   }, [searchParams]);
 
@@ -78,10 +86,10 @@ const SpotsPage = () => {
     if (scrollElement) {
       // 초기 상태 확인
       checkScrollPosition();
-      
+
       // 스크롤 이벤트 리스너 등록
       scrollElement.addEventListener('scroll', checkScrollPosition);
-      
+
       // 컴포넌트 언마운트 시 이벤트 리스너 제거
       return () => {
         scrollElement.removeEventListener('scroll', checkScrollPosition);
@@ -104,116 +112,259 @@ const SpotsPage = () => {
       name: '東京',
       image: Tokyo,
       description: '日本の首都。伝統と現代が融合した魅力的な都市。',
-      tags: ['ショッピング', '夜景・展望']
+      tags: ['ショッピング', '夜景・展望'],
     },
     {
       id: 'osaka',
       name: '大阪',
       image: OsakaCastle,
       description: '日本のグルメ都市。活気あふれるエネルギッシュな街。',
-      tags: ['グルメ・食べ歩き', '文化・歴史']
+      tags: ['グルメ・食べ歩き', '文化・歴史'],
     },
     {
       id: 'kyoto',
       name: '京都',
       image: Kinkakuji,
       description: '千年の古都。歴史と自然が息づく街。',
-      tags: ['ショッピング', '夜景・展望']
+      tags: ['ショッピング', '夜景・展望'],
     },
     {
       id: 'sapporo',
       name: '札幌',
       image: Sapporo,
       description: '北海道の中心都市。冬の雪まつりや美味しいラーメンで知られる場所。',
-      tags: ['祭り', 'スキー場']
+      tags: ['祭り', 'スキー場'],
     },
     {
       id: 'fukuoka',
       name: '福岡',
       image: fukuokahutami,
       description: '九州の玄関口。屋台やグルメが楽しめる街。',
-      tags: ['グルメ・食べ歩き', '文化・歴史']
+      tags: ['グルメ・食べ歩き', '文化・歴史'],
     },
     {
       id: 'okinawa',
       name: '沖縄',
       image: OkinawaResort,
       description: '青い海と白い砂浜。リゾート気分を満喫できる島。',
-      tags: ['ビーチ', 'リゾート']
+      tags: ['ビーチ', 'リゾート'],
     },
     {
       id: 'nagoya',
       name: '名古屋',
       image: Nagoya,
       description: '中部地方の中心都市。歴史と産業の街。',
-      tags: ['文化・歴史']
+      tags: ['文化・歴史'],
     },
     {
       id: 'hiroshima',
       name: '広島',
       image: HiroShima,
       description: '平和を象徴する街。世界遺産と美景の島々。',
-      tags: ['文化・歴史', '世界遺産']
+      tags: ['文化・歴史', '世界遺産'],
     },
     {
       id: 'kanazawa',
       name: '金沢',
       image: Kanazawa,
       description: '伝統工芸と美しい庭園が魅力の城下町。',
-      tags: ['文化・歴史', '庭園']
-    }
+      tags: ['文化・歴史', '庭園'],
+    },
   ];
 
   const spots = [
-    { id: 1, name: '東京タワー', description: '東京のシンボルタワー。夜景が美しい観光スポット', tags: ['文化・歴史', '夜景・展望'], city: '東京', image: TokyoTower },
-    { id: 2, name: '浅草寺', description: '東京で最も古い寺院。雷門で有名な観光地', tags: ['文化・歴史', '祭り'], city: '東京', image: AsaKusa },
-    { id: 19, name: '東京ドーム', description: '東京を代表する多目的ドーム。イベントや野球観戦で人気', tags: ['文化・歴史', 'エンタメ'], city: '東京', image: TokyoDome },
-    { id: 3, name: '大阪城', description: '豊臣秀吉が築いた名城。歴史と美しさを兼ね備えた城', tags: ['文化・歴史', '祭り'], city: '大阪', image: OsakaCastle },
-    { id: 4, name: '道頓堀', description: '大阪の食文化を体験できる繁華街', tags: ['グルメ・食べ歩き', '文化・歴史'], city: '大阪', image: OsakaGuriko },
-    { id: 20, name: 'ユニバーサル・スタジオ・ジャパン', description: '大阪の大人気テーマパーク。映画の世界を体験', tags: ['エンタメ', '家族'], city: '大阪', image: USJ },
-    { id: 5, name: '金閣寺', description: '京都の代表的な寺院。金色に輝く美しい建物', tags: ['文化・歴史', '祭り'], city: '京都', image: Kinkakuji },
-    { id: 6, name: '清水寺', description: '京都で最も有名な寺院。舞台からの景色が絶景', tags: ['文化・歴史', '祭り'], city: '京都', image: KiyoMizuTera },
-    { id: 7, name: '札幌時計台', description: '札幌のシンボル。歴史ある時計台', tags: ['文化・歴史', '祭り'], city: '札幌', image: SapporoTime },
-    { id: 8, name: '大通公園', description: '札幌の中心にある美しい公園', tags: ['文化・歴史', '祭り'], city: '札幌', image: SapporoTower },
-    { id: 9, name: '福岡城跡', description: '福岡の歴史を感じられる城跡', tags: ['文化・歴史', '祭り'], city: '福岡', image: FukuokaCastle },
-    { id: 10, name: '博多駅', description: '福岡の玄関口。グルメとショッピングの中心地', tags: ['グルメ・食べ歩き', 'ショッピング'], city: '福岡', image: HakataCity },
-    { id: 11, name: '首里城', description: '沖縄の歴史と文化を感じられる城', tags: ['文化・歴史', '祭り'], city: '沖縄', image: Shurijo },
-    { id: 12, name: '美ら海水族館', description: '世界最大級の水族館。ジンベエザメが人気', tags: ['文化・歴史', '祭り'], city: '沖縄', image: OkiAquarium },
-    { id: 13, name: '名古屋城', description: '名古屋のシンボル。金の鯱で有名な城', tags: ['文化・歴史', '祭り'], city: '名古屋', image: NagoyaCastle },
-    { id: 14, name: '熱田神宮', description: '名古屋で最も重要な神社', tags: ['文化・歴史', '祭り'], city: '名古屋', image: Atsutasinkyu },
-    { id: 15, name: '原爆ドーム', description: '広島の平和の象徴。世界遺産', tags: ['文化・歴史', '祭り'], city: '広島', image: GenbakuDome },
-    { id: 16, name: '宮島', description: '厳島神社で有名な美しい島', tags: ['文化・歴史', '祭り'], city: '広島', image: miyajima },
-    { id: 17, name: '兼六園', description: '金沢の代表的な庭園。日本三名園の一つ', tags: ['文化・歴史', '祭り'], city: '金沢', image: Kenrokuen },
-    { id: 18, name: '金沢城公園', description: '金沢の歴史を感じられる城跡公園', tags: ['文化・歴史', '祭り'], city: '金沢', image: KanazawaCastle }
+    {
+      id: 1,
+      name: '東京タワー',
+      description: '東京のシンボルタワー。夜景が美しい観光スポット',
+      tags: ['文化・歴史', '夜景・展望'],
+      city: '東京',
+      image: TokyoTower,
+    },
+    {
+      id: 2,
+      name: '浅草寺',
+      description: '東京で最も古い寺院。雷門で有名な観光地',
+      tags: ['文化・歴史', '祭り'],
+      city: '東京',
+      image: AsaKusa,
+    },
+    {
+      id: 19,
+      name: '東京ドーム',
+      description: '東京を代表する多目的ドーム。イベントや野球観戦で人気',
+      tags: ['文化・歴史', 'エンタメ'],
+      city: '東京',
+      image: TokyoDome,
+    },
+    {
+      id: 3,
+      name: '大阪城',
+      description: '豊臣秀吉が築いた名城。歴史と美しさを兼ね備えた城',
+      tags: ['文化・歴史', '祭り'],
+      city: '大阪',
+      image: OsakaCastle,
+    },
+    {
+      id: 4,
+      name: '道頓堀',
+      description: '大阪の食文化を体験できる繁華街',
+      tags: ['グルメ・食べ歩き', '文化・歴史'],
+      city: '大阪',
+      image: OsakaGuriko,
+    },
+    {
+      id: 20,
+      name: 'ユニバーサル・スタジオ・ジャパン',
+      description: '大阪の大人気テーマパーク。映画の世界を体験',
+      tags: ['エンタメ', '家族'],
+      city: '大阪',
+      image: USJ,
+    },
+    {
+      id: 5,
+      name: '金閣寺',
+      description: '京都の代表的な寺院。金色に輝く美しい建物',
+      tags: ['文化・歴史', '祭り'],
+      city: '京都',
+      image: Kinkakuji,
+    },
+    {
+      id: 6,
+      name: '清水寺',
+      description: '京都で最も有名な寺院。舞台からの景色が絶景',
+      tags: ['文化・歴史', '祭り'],
+      city: '京都',
+      image: KiyoMizuTera,
+    },
+    {
+      id: 7,
+      name: '札幌時計台',
+      description: '札幌のシンボル。歴史ある時計台',
+      tags: ['文化・歴史', '祭り'],
+      city: '札幌',
+      image: SapporoTime,
+    },
+    {
+      id: 8,
+      name: '大通公園',
+      description: '札幌の中心にある美しい公園',
+      tags: ['文化・歴史', '祭り'],
+      city: '札幌',
+      image: SapporoTower,
+    },
+    {
+      id: 9,
+      name: '福岡城跡',
+      description: '福岡の歴史を感じられる城跡',
+      tags: ['文化・歴史', '祭り'],
+      city: '福岡',
+      image: FukuokaCastle,
+    },
+    {
+      id: 10,
+      name: '博多駅',
+      description: '福岡の玄関口。グルメとショッピングの中心地',
+      tags: ['グルメ・食べ歩き', 'ショッピング'],
+      city: '福岡',
+      image: HakataCity,
+    },
+    {
+      id: 11,
+      name: '首里城',
+      description: '沖縄の歴史と文化を感じられる城',
+      tags: ['文化・歴史', '祭り'],
+      city: '沖縄',
+      image: Shurijo,
+    },
+    {
+      id: 12,
+      name: '美ら海水族館',
+      description: '世界最大級の水族館。ジンベエザメが人気',
+      tags: ['文化・歴史', '祭り'],
+      city: '沖縄',
+      image: OkiAquarium,
+    },
+    {
+      id: 13,
+      name: '名古屋城',
+      description: '名古屋のシンボル。金の鯱で有名な城',
+      tags: ['文化・歴史', '祭り'],
+      city: '名古屋',
+      image: NagoyaCastle,
+    },
+    {
+      id: 14,
+      name: '熱田神宮',
+      description: '名古屋で最も重要な神社',
+      tags: ['文化・歴史', '祭り'],
+      city: '名古屋',
+      image: Atsutasinkyu,
+    },
+    {
+      id: 15,
+      name: '原爆ドーム',
+      description: '広島の平和の象徴。世界遺産',
+      tags: ['文化・歴史', '祭り'],
+      city: '広島',
+      image: GenbakuDome,
+    },
+    {
+      id: 16,
+      name: '宮島',
+      description: '厳島神社で有名な美しい島',
+      tags: ['文化・歴史', '祭り'],
+      city: '広島',
+      image: miyajima,
+    },
+    {
+      id: 17,
+      name: '兼六園',
+      description: '金沢の代表的な庭園。日本三名園の一つ',
+      tags: ['文化・歴史', '祭り'],
+      city: '金沢',
+      image: Kenrokuen,
+    },
+    {
+      id: 18,
+      name: '金沢城公園',
+      description: '金沢の歴史を感じられる城跡公園',
+      tags: ['文化・歴史', '祭り'],
+      city: '金沢',
+      image: KanazawaCastle,
+    },
   ];
 
   const travelPlans = [
     {
       id: 1,
       title: '食い倒れ東京! 2泊3日グルメ旅',
-      description: '築地市場の新鮮な海の幸から、新宿の深夜ラーメンまで。東京の「うまい!」をすべて味わい尽くす、食いしん坊のためのプランです。',
+      description:
+        '築地市場の新鮮な海の幸から、新宿の深夜ラーメンまで。東京の「うまい!」をすべて味わい尽くす、食いしん坊のためのプランです。',
       image: Tokyo,
       author: 'ソヒョン',
       type: '一人旅',
-      city: '東京'
+      city: '東京',
     },
     {
       id: 2,
       title: '大阪満喫!ショッピングとエンタメの旅',
-      description: '道頓堀のきらびやかな夜景、USJのスリル満点のアトラクション。眠らない街・大阪の魅力を丸ごと楽しむプラン。',
+      description:
+        '道頓堀のきらびやかな夜景、USJのスリル満点のアトラクション。眠らない街・大阪の魅力を丸ごと楽しむプラン。',
       image: OsakaCastle,
       author: 'ドフン',
       type: '二人旅',
-      city: '大阪'
+      city: '大阪',
     },
     {
       id: 3,
       title: '心安らぐ京都、癒やしの週末',
-      description: '嵐山の竹林を散策し、静かな旅館で温泉に浸かる。古都の美しい景色の中で、心と体をリフレッシュする週末旅行。',
+      description:
+        '嵐山の竹林を散策し、静かな旅館で温泉に浸かる。古都の美しい景色の中で、心と体をリフレッシュする週末旅行。',
       image: Kinkakuji,
       author: 'セヒョン',
       type: '一人旅',
-      city: '京都'
+      city: '京都',
     },
     {
       id: 4,
@@ -222,7 +373,7 @@ const SpotsPage = () => {
       image: fukuokahutami,
       author: 'オンピック',
       type: '二人旅',
-      city: '福岡'
+      city: '福岡',
     },
     {
       id: 5,
@@ -231,7 +382,7 @@ const SpotsPage = () => {
       image: SapporoTower,
       author: 'ドアン',
       type: '二人旅',
-      city: '札幌'
+      city: '札幌',
     },
     {
       id: 6,
@@ -240,7 +391,7 @@ const SpotsPage = () => {
       image: OkinawaResort,
       author: 'ソヒョン',
       type: '二人旅',
-      city: '沖縄'
+      city: '沖縄',
     },
     {
       id: 7,
@@ -249,7 +400,7 @@ const SpotsPage = () => {
       image: Nagoya,
       author: 'タロウ',
       type: '一人旅',
-      city: '名古屋'
+      city: '名古屋',
     },
     {
       id: 8,
@@ -258,7 +409,7 @@ const SpotsPage = () => {
       image: HiroShima,
       author: 'ハナコ',
       type: '一人旅',
-      city: '広島'
+      city: '広島',
     },
     {
       id: 9,
@@ -267,22 +418,18 @@ const SpotsPage = () => {
       image: Kanazawa,
       author: 'ケンジ',
       type: '一人旅',
-      city: '金沢'
-    }
+      city: '金沢',
+    },
   ];
 
   // 선택된 도시에 따라 스팟 필터링
-  const filteredSpots = selectedCity 
-    ? spots.filter(spot => spot.city === selectedCity)
-    : spots;
+  const filteredSpots = selectedCity ? spots.filter((spot) => spot.city === selectedCity) : spots;
 
-  // 스팟 페이지네이션 계산
+  // 스팟 페이지네이션 계산 (고정 6개씩 표시)
+  const spotsPerPage = 6;
   const totalSpotPages = Math.max(1, Math.ceil(filteredSpots.length / spotsPerPage));
   const safeSpotPage = Math.min(spotPage, totalSpotPages);
-  const displayedSpots = filteredSpots.slice(
-    (safeSpotPage - 1) * spotsPerPage,
-    safeSpotPage * spotsPerPage
-  );
+  const displayedSpots = filteredSpots.slice((safeSpotPage - 1) * spotsPerPage, safeSpotPage * spotsPerPage);
 
   // 도시 변경 시 스팟 페이지 초기화
   useEffect(() => {
@@ -290,66 +437,77 @@ const SpotsPage = () => {
   }, [selectedCity]);
 
   // 선택된 도시에 따라 여행 계획 필터링
-  const filteredTravelPlans = selectedCity 
-    ? travelPlans.filter(plan => plan.city === selectedCity)
-    : travelPlans;
+  const filteredTravelPlans = selectedCity ? travelPlans.filter((plan) => plan.city === selectedCity) : travelPlans;
 
-  // 플랜 페이지네이션 계산
+  // 플랜 페이지네이션 계산 (고정 6개씩 표시)
+  const plansPerPage = 6;
   const totalPlanPages = Math.max(1, Math.ceil(filteredTravelPlans.length / plansPerPage));
   const [planPage, setPlanPage] = useState(1);
-  useEffect(() => { setPlanPage(1); }, [selectedCity, plansPerPage]);
+  useEffect(() => {
+    setPlanPage(1);
+  }, [selectedCity]);
   const safePlanPage = Math.min(planPage, totalPlanPages);
-  const displayedPlans = filteredTravelPlans.slice(
-    (safePlanPage - 1) * plansPerPage,
-    safePlanPage * plansPerPage
-  );
+  const displayedPlans = filteredTravelPlans.slice((safePlanPage - 1) * plansPerPage, safePlanPage * plansPerPage);
 
   return (
     <div className="min-h-screen">
       <Header />
-      
+
       {/* Hero Section */}
-      <section className="relative h-96 bg-cover bg-center bg-no-repeat flex items-center justify-center" style={{backgroundImage: `url(${MainBackGround})`}}>
+      <section
+        className="relative h-96 bg-cover bg-center bg-no-repeat flex items-center justify-center"
+        style={{ backgroundImage: `url(${MainBackGround})` }}
+      >
         <div className="absolute inset-0 "></div>
         <h1 className="relative z-10 text-white text-4xl font-bold">観光スポット紹介</h1>
       </section>
 
       {/* Travel Destination Selection */}
-      <section className="py-16 px-6">
+      <section ref={destinationSectionRef} className="py-16 px-6">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">旅行先選択</h2>
-          
+
           <div className="relative">
             {/* 왼쪽 화살표 */}
             {showLeftArrow && (
-              <button onClick={scrollDestLeft} className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white shadow-lg rounded-full w-12 h-12 flex items-center justify-center z-10 hover:bg-gray-50 transition-colors">
+              <button
+                onClick={scrollDestLeft}
+                className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white shadow-lg rounded-full w-12 h-12 flex items-center justify-center z-10 hover:bg-gray-50 transition-colors"
+              >
                 <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                 </svg>
               </button>
             )}
-            
+
             {/* 오른쪽 화살표 */}
             {showRightArrow && (
-              <button onClick={scrollDestRight} className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white shadow-lg rounded-full w-12 h-12 flex items-center justify-center z-10 hover:bg-gray-50 transition-colors">
+              <button
+                onClick={scrollDestRight}
+                className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white shadow-lg rounded-full w-12 h-12 flex items-center justify-center z-10 hover:bg-gray-50 transition-colors"
+              >
                 <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
               </button>
             )}
-            
+
             <div ref={destScrollRef} className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide px-16 py-4">
               {destinations.map((destination) => (
-                <div 
+                <div
                   key={destination.id}
                   className={`flex-shrink-0 w-80 bg-white rounded-lg shadow-md overflow-hidden cursor-pointer transition-all duration-200 hover:scale-105 ${
                     selectedCity === destination.name ? 'ring-4 ring-orange-500 ring-offset-4' : ''
                   }`}
-                  ref={(el) => { destItemRefs.current[destination.name] = el; }}
+                  ref={(el) => {
+                    destItemRefs.current[destination.name] = el;
+                  }}
                   onClick={() => setSelectedCity(destination.name)}
                 >
-                  <div className="h-48 bg-cover bg-center bg-no-repeat" style={{backgroundImage: `url(${destination.image})`}}>
-                  </div>
+                  <div
+                    className="h-48 bg-cover bg-center bg-no-repeat"
+                    style={{ backgroundImage: `url(${destination.image})` }}
+                  ></div>
                   <div className="p-6">
                     <h3 className="text-xl font-bold text-gray-900 mb-2">{destination.name}</h3>
                     <p className="text-gray-600 mb-4">{destination.description}</p>
@@ -372,35 +530,23 @@ const SpotsPage = () => {
       {selectedCity && (
         <section className="py-16 px-6 bg-gray-50">
           <div className="max-w-7xl mx-auto">
-            <h2 className="text-3xl font-bold text-gray-900 text-center mb-4">
-              観光スポット
-            </h2>
+            <h2 className="text-3xl font-bold text-gray-900 text-center mb-4">観光スポット</h2>
             <p className="text-gray-600 text-center mb-12">
               {selectedCity ? `${selectedCity}で人気の観光スポットをご紹介します` : '人気の観光スポットをご紹介します'}
             </p>
-            
-            {/* Controls */}
-            <div className="flex items-center justify-end mb-4">
-              <label className="text-sm text-gray-600 mr-2">表示件数:</label>
-              <select
-                className="border border-gray-300 rounded px-2 py-1 text-sm"
-                value={spotsPerPage}
-                onChange={(e) => { setSpotsPerPage(Number(e.target.value)); setSpotPage(1); }}
-              >
-                <option value={6}>6</option>
-                <option value={9}>9</option>
-                <option value={12}>12</option>
-              </select>
-            </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {displayedSpots.map((spot) => (
-                <div key={spot.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow cursor-pointer" onClick={() => navigate(`/spot/${spot.city}/${spot.id}`)}>
-                  <div 
-                    className="h-48 bg-cover bg-center bg-no-repeat" 
+                <div
+                  key={spot.id}
+                  className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                  onClick={() => navigate(`/spot/${spot.city}/${spot.id}`)}
+                >
+                  <div
+                    className="h-48 bg-cover bg-center bg-no-repeat"
                     style={{
                       backgroundImage: spot.image ? `url(${spot.image})` : 'none',
-                      backgroundColor: spot.image ? 'transparent' : '#f3f4f6'
+                      backgroundColor: spot.image ? 'transparent' : '#f3f4f6',
                     }}
                   >
                     {!spot.image && (
@@ -428,7 +574,11 @@ const SpotsPage = () => {
             {totalSpotPages >= 1 && (
               <div className="flex justify-center items-center gap-2 mt-8">
                 <button
-                  className={`px-3 py-2 rounded ${safeSpotPage === 1 ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-gray-200 text-gray-600 hover:bg-gray-300'}`}
+                  className={`px-3 py-2 rounded ${
+                    safeSpotPage === 1
+                      ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                      : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
+                  }`}
                   onClick={() => safeSpotPage > 1 && setSpotPage(safeSpotPage - 1)}
                   disabled={safeSpotPage === 1}
                 >
@@ -437,14 +587,20 @@ const SpotsPage = () => {
                 {Array.from({ length: totalSpotPages }, (_, i) => i + 1).map((p) => (
                   <button
                     key={p}
-                    className={`px-3 py-2 rounded ${safeSpotPage === p ? 'bg-orange-500 text-white' : 'bg-gray-200 text-gray-600 hover:bg-gray-300'}`}
+                    className={`px-3 py-2 rounded ${
+                      safeSpotPage === p ? 'bg-orange-500 text-white' : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
+                    }`}
                     onClick={() => setSpotPage(p)}
                   >
                     {p}
                   </button>
                 ))}
                 <button
-                  className={`px-3 py-2 rounded ${safeSpotPage === totalSpotPages ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-gray-200 text-gray-600 hover:bg-gray-300'}`}
+                  className={`px-3 py-2 rounded ${
+                    safeSpotPage === totalSpotPages
+                      ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                      : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
+                  }`}
                   onClick={() => safeSpotPage < totalSpotPages && setSpotPage(safeSpotPage + 1)}
                   disabled={safeSpotPage === totalSpotPages}
                 >
@@ -462,32 +618,21 @@ const SpotsPage = () => {
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">みんなの旅行プラン</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              {selectedCity 
+              {selectedCity
                 ? `${selectedCity}で人気の旅行プランをご紹介します。新しい旅のインスピレーションを見つけよう。`
-                : 'タビログが提案するモデルプランで、新しい旅のインスピレーションを見つけよう。'
-              }
+                : 'タビログが提案するモデルプランで、新しい旅のインスピレーションを見つけよう。'}
             </p>
-          </div>
-          
-          {/* Plans controls */}
-          <div className="flex items-center justify-end mb-4">
-            <label className="text-sm text-gray-600 mr-2">表示件数:</label>
-            <select
-              className="border border-gray-300 rounded px-2 py-1 text-sm"
-              value={plansPerPage}
-              onChange={(e) => setPlansPerPage(Number(e.target.value))}
-            >
-              <option value={6}>6</option>
-              <option value={9}>9</option>
-              <option value={12}>12</option>
-            </select>
           </div>
 
           {/* Plans pagination numbers placed between sections */}
           {totalPlanPages > 1 && (
             <div className="flex justify-center items-center gap-2 mb-6">
-              <button 
-                className={`px-3 py-2 rounded ${safePlanPage === 1 ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-gray-200 text-gray-600 hover:bg-gray-300'}`}
+              <button
+                className={`px-3 py-2 rounded ${
+                  safePlanPage === 1
+                    ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                    : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
+                }`}
                 onClick={() => safePlanPage > 1 && setPlanPage(safePlanPage - 1)}
                 disabled={safePlanPage === 1}
               >
@@ -496,14 +641,20 @@ const SpotsPage = () => {
               {Array.from({ length: totalPlanPages }, (_, i) => i + 1).map((p) => (
                 <button
                   key={p}
-                  className={`px-3 py-2 rounded ${safePlanPage === p ? 'bg-orange-500 text-white' : 'bg-gray-200 text-gray-600 hover:bg-gray-300'}`}
+                  className={`px-3 py-2 rounded ${
+                    safePlanPage === p ? 'bg-orange-500 text-white' : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
+                  }`}
                   onClick={() => setPlanPage(p)}
                 >
                   {p}
                 </button>
               ))}
-              <button 
-                className={`px-3 py-2 rounded ${safePlanPage === totalPlanPages ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-gray-200 text-gray-600 hover:bg-gray-300'}`}
+              <button
+                className={`px-3 py-2 rounded ${
+                  safePlanPage === totalPlanPages
+                    ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                    : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
+                }`}
                 onClick={() => safePlanPage < totalPlanPages && setPlanPage(safePlanPage + 1)}
                 disabled={safePlanPage === totalPlanPages}
               >
@@ -515,13 +666,15 @@ const SpotsPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
             {displayedPlans.length > 0 ? (
               displayedPlans.map((plan) => (
-                <div 
-                  key={plan.id} 
+                <div
+                  key={plan.id}
                   className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
                   onClick={() => navigate(`/detail/${plan.id}`)}
                 >
-                  <div className="h-48 bg-cover bg-center bg-no-repeat" style={{backgroundImage: `url(${plan.image})`}}>
-                  </div>
+                  <div
+                    className="h-48 bg-cover bg-center bg-no-repeat"
+                    style={{ backgroundImage: `url(${plan.image})` }}
+                  ></div>
                   <div className="p-6">
                     <h3 className="font-bold text-gray-900 mb-2 text-lg">{plan.title}</h3>
                     <p className="text-gray-600 text-sm mb-4">{plan.description}</p>
@@ -534,35 +687,26 @@ const SpotsPage = () => {
               ))
             ) : (
               <div className="col-span-3 text-center text-gray-500 py-12">
-                <p>{selectedCity ? `${selectedCity}の旅行プランが見つかりませんでした。` : '旅行プランが見つかりませんでした。'}</p>
+                <p>
+                  {selectedCity
+                    ? `${selectedCity}の旅行プランが見つかりませんでした。`
+                    : '旅行プランが見つかりませんでした。'}
+                </p>
               </div>
             )}
           </div>
 
           {/* Moved pagination above grid as requested */}
-          
+
           {/* Pagination */}
           <div className="flex justify-center items-center gap-2">
-            <button 
-              className={`px-3 py-2 rounded ${currentPage === 1 ? 'bg-orange-500 text-white' : 'bg-gray-200 text-gray-600 hover:bg-gray-300'}`}
+            <button
+              className={`px-3 py-2 rounded ${
+                currentPage === 1 ? 'bg-orange-500 text-white' : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
+              }`}
               onClick={() => setCurrentPage(1)}
             >
               1
-            </button>
-            <button 
-              className={`px-3 py-2 rounded ${currentPage === 2 ? 'bg-orange-500 text-white' : 'bg-gray-200 text-gray-600 hover:bg-gray-300'}`}
-              onClick={() => setCurrentPage(2)}
-            >
-              2
-            </button>
-            <button 
-              className={`px-3 py-2 rounded ${currentPage === 3 ? 'bg-orange-500 text-white' : 'bg-gray-200 text-gray-600 hover:bg-gray-300'}`}
-              onClick={() => setCurrentPage(3)}
-            >
-              3
-            </button>
-            <button className="px-3 py-2 rounded bg-gray-200 text-gray-600 hover:bg-gray-300">
-              &gt;
             </button>
           </div>
         </div>
@@ -572,4 +716,3 @@ const SpotsPage = () => {
 };
 
 export default SpotsPage;
-
