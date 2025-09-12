@@ -9,6 +9,8 @@ import SideNavigation from '../../components/layout/side-navigation';
 import { MoreVertical, Calendar as CalendarIcon, User, MapPin } from 'lucide-react';
 import CustomPagination from '../../Pagination';
 import CategoryTabs from '../../components/common/CategoryTabs';
+import MemberDetailPopup from './components/MemberDetailPopup';
+import InviteMemberPopup from './components/InviteMemberPopup';
 import SkeletonCard from './components/SkeletonCard';
 import TravelCalendar from './components/TravelCalendar';
 import { axiosInstance } from '../../api/axios';
@@ -40,6 +42,12 @@ export default function Plans() {
   //선택된 여행 리스트의 계획 상태 조회 용도 (진행중, 완료)
   const [selectedViewStatus, setSelectedViewStatus] = useState('');
 
+  // 멤버 수정 팝업 상태
+  const [isMemberEditPopupOpen, setIsMemberEditPopupOpen] = useState(false);
+
+  // 친구 초대 팝업 상태
+  const [isInvitePopupOpen, setIsInvitePopupOpen] = useState(false);
+
   // 카테고리 목록
   const categories = ['すべて', '東日本', '南日本', '西日本', '北日本'];
 
@@ -49,7 +57,7 @@ export default function Plans() {
   const isChangingCategoryRef = useRef(false);
 
   // 현재 페이지에 표시할 리스트 업데이트
-  const updateCurrentPageList = () => {
+  const updateCurrentPageList = useCallback(() => {
     const startIndex = (page - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
     const currentPageItems = allPlanList.slice(startIndex, endIndex);
@@ -58,7 +66,7 @@ export default function Plans() {
     // 총 페이지 수 계산
     const totalPagesCount = Math.ceil(allPlanList.length / itemsPerPage);
     setTotalPages(totalPagesCount || 1);
-  };
+  }, [page, allPlanList, itemsPerPage]);
 
   // 여행 계획 목록 조회
   const fetchPlanList = useCallback(
@@ -158,18 +166,21 @@ export default function Plans() {
   // 페이지 변경 시 현재 페이지 리스트 업데이트
   useEffect(() => {
     updateCurrentPageList();
-  }, [page, allPlanList]);
+  }, [updateCurrentPageList]);
 
   // 여행 멤버 컬러 옵션 (임시)
-  const colorOptions = [
-    'bg-green-400',
-    'bg-orange-400',
-    'bg-purple-400',
-    'bg-red-400',
-    'bg-yellow-400',
-    'bg-blue-400',
-    'bg-pink-400',
-  ];
+  const colorOptions = useMemo(
+    () => [
+      'bg-green-400',
+      'bg-orange-400',
+      'bg-purple-400',
+      'bg-red-400',
+      'bg-yellow-400',
+      'bg-blue-400',
+      'bg-pink-400',
+    ],
+    [],
+  );
 
   // 랜덤 컬러를 가진 멤버 데이터 생성
   const travelMembers = useMemo(() => {
@@ -180,7 +191,7 @@ export default function Plans() {
       ...member,
       color: colorOptions[index % colorOptions.length],
     }));
-  }, [selectedPlanId]);
+  }, [selectedPlanId, planList, colorOptions]);
 
   // 선택된 plan의 status에 따라 viewStatus 설정
   useEffect(() => {
@@ -391,7 +402,23 @@ export default function Plans() {
 
                   {/* 여행 멤버 */}
                   <div className="mb-8">
-                    <h3 className="font-bold text-gray-900 mb-4">旅行メンバー</h3>
+                    <div className="flex justify-between items-center mb-4">
+                      <h3 className="font-bold text-gray-900">旅行メンバー</h3>
+                      <div className="flex gap-2">
+                        <button
+                          onClick={() => setIsMemberEditPopupOpen(true)}
+                          className="bg-amber-600 text-white px-4 py-2 rounded-lg text-sm font-medium cursor-pointer"
+                        >
+                          メンバー修正
+                        </button>
+                        <button
+                          onClick={() => setIsInvitePopupOpen(true)}
+                          className="bg-brand-orange text-white px-4 py-2 rounded-lg text-sm font-medium cursor-pointer"
+                        >
+                          メンバー追加
+                        </button>
+                      </div>
+                    </div>
                     <div className="flex gap-5">
                       {travelMembers.slice(0, 5).map((member) => (
                         <Avatar key={member.id} className="w-18 h-18">
@@ -420,6 +447,56 @@ export default function Plans() {
             })()}
         </div>
       </div>
+
+      {/* 멤버 수정 팝업 */}
+      <MemberDetailPopup
+        open={isMemberEditPopupOpen}
+        onOpenChange={setIsMemberEditPopupOpen}
+        members={travelMembers}
+        onConfirm={(memberId, role) => {
+          console.log('修正されたメンバー ID:', memberId, '役割:', role);
+          const memberName = travelMembers.find((m) => m.id === memberId)?.userNickname || 'メンバー';
+
+          // DB role을 UI role로 변환해서 토스트에 표시
+          const roleDisplayMap: { [key: string]: string } = {
+            OWNER: '管理者',
+            EDITOR: '編集者',
+            VIEWER: 'ビューア',
+          };
+          const displayRole = roleDisplayMap[role] || role;
+
+          toast.success(`${memberName}の役割が${displayRole}に修正されました。`, {
+            position: 'top-center',
+          });
+        }}
+        onCancel={() => {
+          console.log('メンバー修正がキャンセルされました。');
+        }}
+      />
+
+      {/* 멤버 초대 팝업 */}
+      <InviteMemberPopup
+        open={isInvitePopupOpen}
+        onOpenChange={setIsInvitePopupOpen}
+        onConfirm={(email, role) => {
+          console.log('招待メール:', email, '役割:', role);
+
+          // DB role을 UI role로 변환해서 토스트에 표시
+          const roleDisplayMap: { [key: string]: string } = {
+            OWNER: '管理者',
+            EDITOR: '編集者',
+            VIEWER: 'ビューア',
+          };
+          const displayRole = roleDisplayMap[role] || role;
+
+          toast.success(`${email}に${displayRole}として招待を送信しました。`, {
+            position: 'top-center',
+          });
+        }}
+        onCancel={() => {
+          console.log('招待がキャンセルされました。');
+        }}
+      />
     </div>
   );
 }
