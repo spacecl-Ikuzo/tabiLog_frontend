@@ -7,128 +7,109 @@ import { Form, FormField, FormItem, FormLabel, FormMessage } from '@/components/
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { axiosInstance } from '@/api/axios';
-import { Menu } from 'lucide-react';
-import { toast } from 'sonner';
-import { AxiosError } from 'axios';
+import useUserStore from '@/store';
 
 const schema = z.object({
-  mbrId: z.string().email(),
-  password: z.string().min(1),
+  id: z.string().min(1, 'IDを入力してください'),
+  password: z.string().min(1, 'パスワードを入力してください'),
 });
 type LoginReq = z.infer<typeof schema>;
 
 export default function Login() {
   const navigate = useNavigate();
+  const { setUserId, setNickname, setToken } = useUserStore();
+
   const form = useForm<LoginReq>({
-    defaultValues: { mbrId: '', password: '' },
+    defaultValues: { id: '', password: '' },
     resolver: zodResolver(schema),
     mode: 'onChange',
   });
 
-  const onSubmit = async (req: z.infer<typeof schema>) => {
-    const formData = {
-      username: req.mbrId.trim(), // backend expects 'username' field
-      password: req.password.trim(), // trim whitespace
-    };
+  const onSubmit = async (req: LoginReq) => {
+    const response = await axiosInstance.post('/auth/login', req);
+    const data = response.data.data;
 
-    console.log('=== FRONTEND LOGIN DEBUG ===');
-    console.log('Username:', formData.username);
-    console.log('Password length:', formData.password.length);
-    console.log('Password (first 5 chars):', formData.password.substring(0, 5));
+    // zustand 스토어에 유저 정보 저장
+    setUserId(data.id);
+    setNickname(data?.nickname ?? '');
+    setToken(data?.accessToken ?? '');
 
-    try {
-      const response = await axiosInstance.post('/api/auth/signin', formData); // backend endpoint is '/api/auth/signin'
-      console.log('Login response:', response.data);
-      form.reset();
-      toast.success('로그인 성공');
-      navigate('/');
-    } catch (error) {
-      console.error('Login error:', error);
-      if (error instanceof AxiosError) {
-        form.setError('mbrId', { type: 'manual' });
-        form.setError('password', { type: 'manual', message: error.response?.data.message });
-      }
-    }
+    navigate('/');
   };
 
   return (
-    <div className="min-h-screen w-full bg-white flex flex-col">
-      {/* 모바일 전용 헤더 */}
-      <header className="flex items-center justify-between px-6 py-4 lg:hidden">
-        <span className="text-brand font-bold text-lg">タビログ</span>
-        <Menu className="h-6 w-6 text-neutral-800" />
-      </header>
+    <div className="min-h-screen w-full bg-white flex items-center justify-center p-4 lg:p-0">
+      <div className="w-full max-w-md">
+        {/* 타이틀 */}
+        <h1 className="text-center text-2xl lg:text-3xl font-bold text-orange-500 mb-8 lg:mb-12">ログイン</h1>
 
-      {/* 본문: 데스크탑은 수직/수평 중앙, 모바일은 상단 여백 후 카드 */}
-      <main className="flex-1 flex items-start lg:items-center justify-center">
-        <div className="w-full max-w-[460px] px-6">
-          {/* 타이틀: 모바일/데스크탑 크기 차등 */}
-          <h1 className="text-center text-2xl lg:text-3xl font-bold text-brand mt-8 lg:mt-0 mb-8">ログイン</h1>
+        {/* 로그인 폼 카드 */}
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 lg:p-8">
+          <p className="text-sm text-gray-600 mb-6">メールアドレスでログインしてください</p>
 
-          <div className="rounded-lg border border-neutral-200/70 shadow-sm p-6">
-            <p className="text-sm text-neutral-600 mb-5">メールアドレスでログインしてください</p>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+              <FormField
+                control={form.control}
+                name="id"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-gray-800 font-medium">ID</FormLabel>
+                    <Input
+                      {...field}
+                      type="id"
+                      placeholder=""
+                      className="h-12 bg-white border-gray-300 focus:border-orange-500 focus:ring-orange-500"
+                    />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-            <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-                <FormField
-                  control={form.control}
-                  name="mbrId"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-neutral-800">Email</FormLabel>
-                      <Input
-                        {...field}
-                        type="email"
-                        placeholder="me@example.com"
-                        autoComplete="username"
-                        className="focus-visible:ring-2 focus-visible:ring-brand/40"
-                      />
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <div className="flex items-center justify-between">
+                      <FormLabel className="text-gray-800 font-medium">Password</FormLabel>
+                      <Link
+                        to="/forgot-password"
+                        className="text-xs text-gray-500 hover:text-orange-500 transition-colors"
+                      >
+                        パスワードをお忘れですか？
+                      </Link>
+                    </div>
+                    <Input
+                      {...field}
+                      type="password"
+                      placeholder=""
+                      autoComplete="current-password"
+                      className="h-12 bg-white border-gray-300 focus:border-orange-500 focus:ring-orange-500"
+                    />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-                <FormField
-                  control={form.control}
-                  name="password"
-                  render={({ field }) => (
-                    <FormItem>
-                      <div className="flex items-center justify-between">
-                        <FormLabel className="text-neutral-800">Password</FormLabel>
-                        <Link to="/forgot-password" className="text-xs text-brand hover:underline">
-                          パスワードをお忘れですか？
-                        </Link>
-                      </div>
-                      <Input
-                        {...field}
-                        type="password"
-                        autoComplete="current-password"
-                        className="focus-visible:ring-2 focus-visible:ring-brand/40"
-                      />
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+              <Button
+                type="submit"
+                disabled={!form.formState.isValid || form.formState.isSubmitting}
+                className="w-full h-12 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-lg transition-colors mt-6"
+              >
+                ログイン
+              </Button>
+            </form>
+          </Form>
 
-                <Button
-                  type="submit"
-                  disabled={!form.formState.isValid || form.formState.isSubmitting}
-                  className="w-full bg-brand hover:bg-brand/90 text-white font-semibold"
-                >
-                  ログイン
-                </Button>
-              </form>
-            </Form>
-
-            <div className="text-xs text-neutral-600 mt-4 text-center">
-              アカウントをお持ちでないですか？{' '}
-              <Link to="/register" className="text-brand hover:underline">
-                新規登録
-              </Link>
-            </div>
+          <div className="text-sm text-gray-600 mt-6 text-center">
+            アカウントをお持ちでないですか？{' '}
+            <Link to="/register" className="text-orange-500 hover:text-orange-600 font-medium transition-colors">
+              新規登録
+            </Link>
           </div>
         </div>
-      </main>
+      </div>
     </div>
   );
 }
