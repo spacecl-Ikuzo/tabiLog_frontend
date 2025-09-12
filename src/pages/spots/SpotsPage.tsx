@@ -38,9 +38,11 @@ const SpotsPage = () => {
   const destScrollRef = useRef<HTMLDivElement>(null);
   const destItemRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const destinationSectionRef = useRef<HTMLDivElement>(null);
+  const searchSectionRef = useRef<HTMLDivElement>(null);
   const [spotPage, setSpotPage] = useState(1);
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(true);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const scrollDestLeft = () => {
     if (destScrollRef.current) {
@@ -63,9 +65,11 @@ const SpotsPage = () => {
     }
   };
 
-  // URL 쿼리 파라미터에서 도시 정보 읽기
+  // URL 쿼리 파라미터에서 도시 정보와 검색어 읽기
   useEffect(() => {
     const cityFromUrl = searchParams.get('city');
+    const searchFromUrl = searchParams.get('search');
+
     if (cityFromUrl) {
       setSelectedCity(cityFromUrl);
       // 도시가 선택되었을 때 "旅行先選択" 섹션으로 스크롤
@@ -77,6 +81,28 @@ const SpotsPage = () => {
           });
         }
       }, 100);
+    }
+
+    if (searchFromUrl) {
+      setSearchQuery(searchFromUrl);
+
+      // 검색어가 도시명과 일치하면 해당 도시를 자동 선택
+      const matchingCity = destinations.find(
+        (dest) => dest.name === searchFromUrl || dest.name.includes(searchFromUrl) || searchFromUrl.includes(dest.name),
+      );
+
+      if (matchingCity) {
+        setSelectedCity(matchingCity.name);
+        // 도시가 자동 선택되었을 때 검색 섹션으로 스크롤
+        setTimeout(() => {
+          if (searchSectionRef.current) {
+            searchSectionRef.current.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start',
+            });
+          }
+        }, 100);
+      }
     }
   }, [searchParams]);
 
@@ -422,8 +448,26 @@ const SpotsPage = () => {
     },
   ];
 
-  // 선택된 도시에 따라 스팟 필터링
-  const filteredSpots = selectedCity ? spots.filter((spot) => spot.city === selectedCity) : spots;
+  // 검색어와 선택된 도시에 따라 스팟 필터링
+  const filteredSpots = spots.filter((spot) => {
+    // 도시가 선택된 경우 해당 도시의 아이템만 표시
+    if (selectedCity) {
+      return spot.city === selectedCity;
+    }
+
+    // 도시가 선택되지 않은 경우 검색어로 필터링
+    if (searchQuery) {
+      return (
+        spot.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        spot.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        spot.tags.some((tag) => tag.toLowerCase().includes(searchQuery.toLowerCase())) ||
+        spot.city.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+
+    // 도시도 선택되지 않고 검색어도 없는 경우 모든 아이템 표시
+    return true;
+  });
 
   // 스팟 페이지네이션 계산 (고정 6개씩 표시)
   const spotsPerPage = 6;
@@ -436,8 +480,32 @@ const SpotsPage = () => {
     setSpotPage(1);
   }, [selectedCity]);
 
-  // 선택된 도시에 따라 여행 계획 필터링
-  const filteredTravelPlans = selectedCity ? travelPlans.filter((plan) => plan.city === selectedCity) : travelPlans;
+  // 검색어 변경 시 페이지 초기화
+  useEffect(() => {
+    setSpotPage(1);
+    setPlanPage(1);
+  }, [searchQuery]);
+
+  // 검색어와 선택된 도시에 따라 여행 계획 필터링
+  const filteredTravelPlans = travelPlans.filter((plan) => {
+    // 도시가 선택된 경우 해당 도시의 아이템만 표시
+    if (selectedCity) {
+      return plan.city === selectedCity;
+    }
+
+    // 도시가 선택되지 않은 경우 검색어로 필터링
+    if (searchQuery) {
+      return (
+        plan.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        plan.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        plan.type.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        plan.city.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+
+    // 도시도 선택되지 않고 검색어도 없는 경우 모든 아이템 표시
+    return true;
+  });
 
   // 플랜 페이지네이션 계산 (고정 6개씩 표시)
   const plansPerPage = 6;
@@ -460,6 +528,59 @@ const SpotsPage = () => {
       >
         <div className="absolute inset-0 "></div>
         <h1 className="relative z-10 text-white text-4xl font-bold">観光スポット紹介</h1>
+      </section>
+
+      {/* Search Section */}
+      <section ref={searchSectionRef} className="py-8 px-6 bg-white">
+        <div className="max-w-4xl mx-auto">
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="観光地、タグ、都市名で検索..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyPress={(e) => {
+                if (e.key === 'Enter') {
+                  // URL 업데이트하여 검색어 반영
+                  const newSearchParams = new URLSearchParams(searchParams);
+                  if (searchQuery.trim()) {
+                    newSearchParams.set('search', searchQuery.trim());
+                  } else {
+                    newSearchParams.delete('search');
+                  }
+                  navigate(`/spots?${newSearchParams.toString()}`);
+                }
+              }}
+              className="w-full px-4 py-3 pl-10 pr-4 text-gray-700 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+            />
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
+              </svg>
+            </div>
+            {searchQuery && (
+              <button
+                onClick={() => {
+                  setSearchQuery('');
+                  // URL에서 검색어 제거
+                  const newSearchParams = new URLSearchParams(searchParams);
+                  newSearchParams.delete('search');
+                  navigate(`/spots?${newSearchParams.toString()}`);
+                }}
+                className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600"
+              >
+                <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            )}
+          </div>
+        </div>
       </section>
 
       {/* Travel Destination Selection */}
@@ -502,7 +623,13 @@ const SpotsPage = () => {
                   ref={(el) => {
                     destItemRefs.current[destination.name] = el;
                   }}
-                  onClick={() => setSelectedCity(destination.name)}
+                  onClick={() => {
+                    if (selectedCity === destination.name) {
+                      setSelectedCity(null);
+                    } else {
+                      setSelectedCity(destination.name);
+                    }
+                  }}
                 >
                   <div
                     className="h-48 bg-cover bg-center bg-no-repeat"
@@ -536,38 +663,44 @@ const SpotsPage = () => {
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {displayedSpots.map((spot) => (
-                <div
-                  key={spot.id}
-                  className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
-                  onClick={() => navigate(`/spot/${spot.city}/${spot.id}`)}
-                >
+              {displayedSpots.length > 0 ? (
+                displayedSpots.map((spot) => (
                   <div
-                    className="h-48 bg-cover bg-center bg-no-repeat"
-                    style={{
-                      backgroundImage: spot.image ? `url(${spot.image})` : 'none',
-                      backgroundColor: spot.image ? 'transparent' : '#f3f4f6',
-                    }}
+                    key={spot.id}
+                    className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                    onClick={() => navigate(`/spot/${spot.city}/${spot.id}`)}
                   >
-                    {!spot.image && (
-                      <div className="h-full flex items-center justify-center">
-                        <span className="text-gray-500">이미지 영역</span>
+                    <div
+                      className="h-48 bg-cover bg-center bg-no-repeat"
+                      style={{
+                        backgroundImage: spot.image ? `url(${spot.image})` : 'none',
+                        backgroundColor: spot.image ? 'transparent' : '#f3f4f6',
+                      }}
+                    >
+                      {!spot.image && (
+                        <div className="h-full flex items-center justify-center">
+                          <span className="text-gray-500">이미지 영역</span>
+                        </div>
+                      )}
+                    </div>
+                    <div className="p-6">
+                      <h3 className="font-bold text-gray-900 mb-2">{spot.name}</h3>
+                      <p className="text-gray-600 text-sm mb-4">{spot.description}</p>
+                      <div className="flex flex-wrap gap-2">
+                        {spot.tags.map((tag, index) => (
+                          <span key={index} className="px-2 py-1 bg-gray-800 text-white text-xs rounded">
+                            {tag}
+                          </span>
+                        ))}
                       </div>
-                    )}
-                  </div>
-                  <div className="p-6">
-                    <h3 className="font-bold text-gray-900 mb-2">{spot.name}</h3>
-                    <p className="text-gray-600 text-sm mb-4">{spot.description}</p>
-                    <div className="flex flex-wrap gap-2">
-                      {spot.tags.map((tag, index) => (
-                        <span key={index} className="px-2 py-1 bg-gray-800 text-white text-xs rounded">
-                          {tag}
-                        </span>
-                      ))}
                     </div>
                   </div>
+                ))
+              ) : (
+                <div className="col-span-3 text-center text-gray-500 py-12">
+                  <p>検索結果が見つかりませんでした。</p>
                 </div>
-              ))}
+              )}
             </div>
 
             {/* Spots Pagination (always show, even if single page) */}
@@ -625,7 +758,7 @@ const SpotsPage = () => {
           </div>
 
           {/* Plans pagination numbers placed between sections */}
-          {totalPlanPages > 1 && (
+          {selectedCity && totalPlanPages > 1 && (
             <div className="flex justify-center items-center gap-2 mb-6">
               <button
                 className={`px-3 py-2 rounded ${
@@ -698,17 +831,19 @@ const SpotsPage = () => {
 
           {/* Moved pagination above grid as requested */}
 
-          {/* Pagination */}
-          <div className="flex justify-center items-center gap-2">
-            <button
-              className={`px-3 py-2 rounded ${
-                currentPage === 1 ? 'bg-orange-500 text-white' : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
-              }`}
-              onClick={() => setCurrentPage(1)}
-            >
-              1
-            </button>
-          </div>
+          {/* Pagination - only show when city is selected */}
+          {selectedCity && (
+            <div className="flex justify-center items-center gap-2">
+              <button
+                className={`px-3 py-2 rounded ${
+                  currentPage === 1 ? 'bg-orange-500 text-white' : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
+                }`}
+                onClick={() => setCurrentPage(1)}
+              >
+                1
+              </button>
+            </div>
+          )}
         </div>
       </section>
     </div>
