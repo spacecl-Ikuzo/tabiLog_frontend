@@ -1,13 +1,15 @@
 // src/pages/login/Login.tsx
-import { Link, useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Form, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { axiosInstance } from "@/api/axios";
-import { Menu } from "lucide-react";
+import { Link, useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Form, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { axiosInstance } from '@/api/axios';
+import { Menu } from 'lucide-react';
+import { toast } from 'sonner';
+import { AxiosError } from 'axios';
 
 const schema = z.object({
   mbrId: z.string().email(),
@@ -18,12 +20,11 @@ type LoginReq = z.infer<typeof schema>;
 export default function Login() {
   const navigate = useNavigate();
   const form = useForm<LoginReq>({
-    defaultValues: { mbrId: "", password: "" },
+    defaultValues: { mbrId: '', password: '' },
     resolver: zodResolver(schema),
-    mode: "onChange",
+    mode: 'onChange',
   });
 
-<<<<<<< HEAD
   const onSubmit = async (req: z.infer<typeof schema>) => {
     const formData = {
       username: req.mbrId.trim(), // backend expects 'username' field
@@ -48,12 +49,6 @@ export default function Login() {
         form.setError('password', { type: 'manual', message: error.response?.data.message });
       }
     }
-=======
-  const onSubmit = async (req: LoginReq) => {
-    const { data } = await axiosInstance.post("/auth/login", req);
-    localStorage.setItem("accessToken", data?.accessToken ?? "");
-    navigate("/");
->>>>>>> 6dd9063db397946cdb7165fcedeeb8e7863fe210
   };
 
   return (
@@ -68,9 +63,7 @@ export default function Login() {
       <main className="flex-1 flex items-start lg:items-center justify-center">
         <div className="w-full max-w-[460px] px-6">
           {/* 타이틀: 모바일/데스크탑 크기 차등 */}
-          <h1 className="text-center text-2xl lg:text-3xl font-bold text-brand mt-8 lg:mt-0 mb-8">
-            ログイン
-          </h1>
+          <h1 className="text-center text-2xl lg:text-3xl font-bold text-brand mt-8 lg:mt-0 mb-8">ログイン</h1>
 
           <div className="rounded-lg border border-neutral-200/70 shadow-sm p-6">
             <p className="text-sm text-neutral-600 mb-5">メールアドレスでログインしてください</p>
@@ -128,7 +121,7 @@ export default function Login() {
             </Form>
 
             <div className="text-xs text-neutral-600 mt-4 text-center">
-              アカウントをお持ちでないですか？{" "}
+              アカウントをお持ちでないですか？{' '}
               <Link to="/register" className="text-brand hover:underline">
                 新規登録
               </Link>

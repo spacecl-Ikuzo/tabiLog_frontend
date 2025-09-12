@@ -3,14 +3,11 @@ import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const navigate = useNavigate();
-<<<<<<< HEAD
 
-=======
->>>>>>> 6dd9063db397946cdb7165fcedeeb8e7863fe210
   return (
     <header className="px-4 py-3 bg-white text-brand-orange lg:bg-brand-orange lg:text-white lg:px-6 lg:py-4">
       <div className="flex justify-between items-center mx-auto max-w-6xl">
-        <h1 
+        <h1
           className="text-xl font-bold text-brand-orange lg:text-2xl lg:text-white cursor-pointer hover:opacity-80 transition-opacity"
           onClick={() => navigate('/')}
         >
@@ -19,25 +16,17 @@ const Header = () => {
 
         {/* 데스크톱 메뉴 */}
         <div className="hidden items-center space-x-6 lg:flex">
-<<<<<<< HEAD
-          <span className="cursor-pointer hover:text-orange-200" onClick={() => navigate('/spots')}>観光スポット紹介</span>
-          <span className="cursor-pointer hover:text-orange-200">マイトリップ</span>
-          <Button
-            variant="outline"
-            className="text-white border-white hover:bg-white hover:text-brand-orange"
-            onClick={() => navigate('/login')}
-         >
-=======
-          <span className="cursor-pointer hover:text-orange-200">観光スポット紹介</span>
+          <span className="cursor-pointer hover:text-orange-200" onClick={() => navigate('/spots')}>
+            観光スポット紹介
+          </span>
           <span className="cursor-pointer hover:text-orange-200" onClick={() => navigate('/plans')}>
             マイトリップ
           </span>
           <Button
             variant="outline"
-            className="border-white bg-white text-brand-orange cursor-pointer"
+            className="text-white border-white hover:bg-white hover:text-brand-orange"
             onClick={() => navigate('/login')}
           >
->>>>>>> 6dd9063db397946cdb7165fcedeeb8e7863fe210
             ログイン
           </Button>
         </div>
