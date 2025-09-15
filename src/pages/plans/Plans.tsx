@@ -519,6 +519,7 @@ export default function Plans() {
       <InviteMemberPopup
         open={isInvitePopupOpen}
         onOpenChange={setIsInvitePopupOpen}
+        planId={selectedPlanId || 0}
         onConfirm={(email, role) => {
           console.log('招待メール:', email, '役割:', role);
 

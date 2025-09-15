@@ -1,17 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Input } from '../../../components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../../components/ui/select';
 import { Mail } from 'lucide-react';
 import CommonPopup from '../../../components/common/CommonPopup';
+import { axiosInstance } from '@/api/axios';
+import { toast } from 'sonner';
 
 interface InviteMemberPopupProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   onConfirm?: (email: string, role: string) => void;
   onCancel?: () => void;
+  planId: number;
 }
 
-export default function InviteMemberPopup({ open, onOpenChange, onConfirm, onCancel }: InviteMemberPopupProps) {
+export default function InviteMemberPopup({ open, onOpenChange, onConfirm, onCancel, planId }: InviteMemberPopupProps) {
   const [email, setEmail] = React.useState<string>('');
   const [selectedRole, setSelectedRole] = React.useState<string>('編集者');
 
@@ -28,11 +31,16 @@ export default function InviteMemberPopup({ open, onOpenChange, onConfirm, onCan
         return 'EDITOR';
     }
   };
+  useEffect(() => {
+    console.log('planId', planId);
+  }, [open]);
 
-  const handleConfirm = () => {
+  const handleConfirm = async () => {
     if (email.trim()) {
+      inviteMember(planId, email, mapUiRoleToDbRole(selectedRole));
       onConfirm?.(email, mapUiRoleToDbRole(selectedRole));
       // 성공적으로 초대가 보내진 후 입력값 초기화
+      toast.success('メンバーを招待しました');
       setEmail('');
       setSelectedRole('編集者');
     }
@@ -46,6 +54,16 @@ export default function InviteMemberPopup({ open, onOpenChange, onConfirm, onCan
   };
 
   const isEmailValid = email.trim() !== '' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+  //* 멤버 초대하기
+  const inviteMember = async (planId: number, email: string, role: string) => {
+    ///api/plans/{planId}/invitations
+    const response = await axiosInstance.post(`/api/plans/${planId}/invitations`, {
+      inviteeEmail: email,
+      role: role,
+    });
+    return response.data;
+  };
 
   return (
     <CommonPopup
