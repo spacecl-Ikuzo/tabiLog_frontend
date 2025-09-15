@@ -12,7 +12,7 @@ import Header from '../../components/layout/header';
 
 // 유효성 검사 스키마 정의
 const schema = z.object({
-  id: z
+  userId: z
     .string()
     .min(1, 'IDを入力してください')
     .regex(/^[a-zA-Z0-9]+$/, '半角英数字で入力してください'),
@@ -48,7 +48,7 @@ const Register = () => {
 
   const form = useForm<FormData>({
     defaultValues: {
-      id: '',
+      userId: '',
       email: '',
       password: '',
       lastName: '',
@@ -67,6 +67,7 @@ const Register = () => {
   const onSubmit = async (data: FormData) => {
     try {
       const requestBody = {
+        userId: data.userId,
         email: data.email,
         password: data.password,
         lastName: data.lastName,
@@ -116,7 +117,7 @@ const Register = () => {
                 {/* ID 필드 */}
                 <FormField
                   control={form.control}
-                  name="id"
+                  name="userId"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="text-sm font-medium">ID</FormLabel>
