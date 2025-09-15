@@ -67,7 +67,6 @@ const Register = () => {
   const onSubmit = async (data: FormData) => {
     try {
       const requestBody = {
-        userId: data.id,
         email: data.email,
         password: data.password,
         lastName: data.lastName,
@@ -79,7 +78,7 @@ const Register = () => {
         publicAgreement: data.publicAgreement,
       };
 
-      await axiosInstance.post('/auth/register', requestBody);
+      await axiosInstance.post('/api/auth/signup', requestBody);
       form.reset();
       toast.success('会員登録が完了しました');
       navigate('/login');
