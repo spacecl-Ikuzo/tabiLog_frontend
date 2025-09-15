@@ -24,11 +24,28 @@ import KanazawaCastle from '../../assets/KanazawaCastle.jpg';
 import Kenrokuen from '../../assets/Kenrokuen.jpg';
 import miyajima from '../../assets/miyajima.jpg';
 import NagoyaCastle from '../../assets/NagoyaCastle.jpg';
+import osushotenkai from '../../assets/osushotenkai.jpg';
+import akihabara from '../../assets/akihabara.jpg';
+import Nagoyalinear from '../../assets/Nagoyalinear.jpg';
+import NagoyaScience from '../../assets/NagoyaScience.jpg';
+import nagoyawcs1 from '../../assets/nagoyawcs1.jpg';
+import nagoyawcspng from '../../assets/nagoyawcspng.png';
+import nagoyawcs2 from '../../assets/nagoyawcs2.jpg';
 import OkiAquarium from '../../assets/OkiAquarium.jpg';
 import Shurijo from '../../assets/Shurijo.jpg';
 import FukuokaCastle from '../../assets/FukuokaCastle.jpg';
 import USJ from '../../assets/USJ.jpg';
 import TokyoDome from '../../assets/TokyoDome.jpg';
+import TokyoDisneyland from '../../assets/tokyodisneyland.jpg';
+import Tsukiji from '../../assets/Tsukiji.jpg';
+import NikkoToshogu from '../../assets/nikkotoshogu.jpg';
+import Kamakura from '../../assets/kamakura.jpg';
+import HakoneOnsen from '../../assets/hakoneonsen.jpg';
+import ShibuyaMomstouch from '../../assets/ShibuyaMomstouch.jpg';
+import ShibuyaScramble from '../../assets/ShibuyaScramble.jpg';
+import Meijisinku from '../../assets/meijisinku.jpg';
+import Swallows from '../../assets/Swallows.jpg';
+import ShibuyaBape from '../../assets/ShibuyaBape.jpg';
 
 const SpotsPage = () => {
   const [selectedCity, setSelectedCity] = useState<string | null>(null);
@@ -138,72 +155,85 @@ const SpotsPage = () => {
       name: '東京',
       image: Tokyo,
       description: '日本の首都。伝統と現代が融合した魅力的な都市。',
-      tags: ['ショッピング', '夜景・展望'],
+      tags: ['ショッピング', '夜景・展望', 'エンタメ', '東日本'],
     },
     {
       id: 'osaka',
       name: '大阪',
       image: OsakaCastle,
       description: '日本のグルメ都市。活気あふれるエネルギッシュな街。',
-      tags: ['グルメ・食べ歩き', '文化・歴史'],
+      tags: ['グルメ・食べ歩き', '文化・歴史', 'エンタメ', '西日本'],
     },
     {
       id: 'kyoto',
       name: '京都',
       image: Kinkakuji,
       description: '千年の古都。歴史と自然が息づく街。',
-      tags: ['ショッピング', '夜景・展望'],
+      tags: ['ショッピング', '夜景・展望', '文化・歴史', '西日本'],
     },
     {
       id: 'sapporo',
       name: '札幌',
       image: Sapporo,
       description: '北海道の中心都市。冬の雪まつりや美味しいラーメンで知られる場所。',
-      tags: ['祭り', 'スキー場'],
+      tags: ['祭り', 'スキー場', 'グルメ・食べ歩き', '北日本'],
     },
     {
       id: 'fukuoka',
       name: '福岡',
       image: fukuokahutami,
       description: '九州の玄関口。屋台やグルメが楽しめる街。',
-      tags: ['グルメ・食べ歩き', '文化・歴史'],
+      tags: ['グルメ・食べ歩き', '文化・歴史', 'ショッピング', '南日本'],
     },
     {
       id: 'okinawa',
       name: '沖縄',
       image: OkinawaResort,
       description: '青い海と白い砂浜。リゾート気分を満喫できる島。',
-      tags: ['ビーチ', 'リゾート'],
+      tags: ['ビーチ', 'リゾート', 'エンタメ', '南日本'],
     },
     {
       id: 'nagoya',
       name: '名古屋',
       image: Nagoya,
       description: '中部地方の中心都市。歴史と産業の街。',
-      tags: ['文化・歴史'],
+      tags: ['文化・歴史', 'ショッピング', '東日本'],
     },
     {
       id: 'hiroshima',
       name: '広島',
       image: HiroShima,
       description: '平和を象徴する街。世界遺産と美景の島々。',
-      tags: ['文化・歴史', '世界遺産'],
+      tags: ['文化・歴史', '世界遺産', '西日本'],
     },
     {
       id: 'kanazawa',
       name: '金沢',
       image: Kanazawa,
       description: '伝統工芸と美しい庭園が魅力の城下町。',
-      tags: ['文化・歴史', '庭園'],
+      tags: ['文化・歴史', '庭園', '東日本'],
     },
   ];
+
+  // 검색어에 따라 도시 필터링
+  const filteredDestinations = destinations.filter((destination) => {
+    if (searchQuery) {
+      const query = searchQuery.toLowerCase().trim();
+      return (
+        destination.name.toLowerCase().includes(query) ||
+        destination.description.toLowerCase().includes(query) ||
+        destination.tags.some((tag) => tag.toLowerCase().includes(query))
+      );
+    }
+    return true;
+  });
 
   const spots = [
     {
       id: 1,
       name: '東京タワー',
       description: '東京のシンボルタワー。夜景が美しい観光スポット',
-      tags: ['文化・歴史', '夜景・展望'],
+      tags: ['文化・歴史', '夜景・展望', '東日本', '港区'],
       city: '東京',
       image: TokyoTower,
     },
@@ -211,7 +241,7 @@ const SpotsPage = () => {
       id: 2,
       name: '浅草寺',
       description: '東京で最も古い寺院。雷門で有名な観光地',
-      tags: ['文化・歴史', '祭り'],
+      tags: ['文化・歴史', '祭り', '東日本', '台東区'],
       city: '東京',
       image: AsaKusa,
     },
@@ -219,7 +249,7 @@ const SpotsPage = () => {
       id: 19,
       name: '東京ドーム',
       description: '東京を代表する多目的ドーム。イベントや野球観戦で人気',
-      tags: ['文化・歴史', 'エンタメ'],
+      tags: ['文化・歴史', 'エンタメ', '東日本', '文京区'],
       city: '東京',
       image: TokyoDome,
     },
@@ -227,7 +257,7 @@ const SpotsPage = () => {
       id: 3,
       name: '大阪城',
       description: '豊臣秀吉が築いた名城。歴史と美しさを兼ね備えた城',
-      tags: ['文化・歴史', '祭り'],
+      tags: ['文化・歴史', '祭り', '西日本'],
       city: '大阪',
       image: OsakaCastle,
     },
@@ -235,7 +265,7 @@ const SpotsPage = () => {
       id: 4,
       name: '道頓堀',
       description: '大阪の食文化を体験できる繁華街',
-      tags: ['グルメ・食べ歩き', '文化・歴史'],
+      tags: ['グルメ・食べ歩き', '文化・歴史', '西日本'],
       city: '大阪',
       image: OsakaGuriko,
     },
@@ -243,7 +273,7 @@ const SpotsPage = () => {
       id: 20,
       name: 'ユニバーサル・スタジオ・ジャパン',
       description: '大阪の大人気テーマパーク。映画の世界を体験',
-      tags: ['エンタメ', '家族'],
+      tags: ['エンタメ', '家族', '西日本'],
       city: '大阪',
       image: USJ,
     },
@@ -251,7 +281,7 @@ const SpotsPage = () => {
       id: 5,
       name: '金閣寺',
       description: '京都の代表的な寺院。金色に輝く美しい建物',
-      tags: ['文化・歴史', '祭り'],
+      tags: ['文化・歴史', '祭り', '西日本'],
       city: '京都',
       image: Kinkakuji,
     },
@@ -259,7 +289,7 @@ const SpotsPage = () => {
       id: 6,
       name: '清水寺',
       description: '京都で最も有名な寺院。舞台からの景色が絶景',
-      tags: ['文化・歴史', '祭り'],
+      tags: ['文化・歴史', '祭り', '西日本'],
       city: '京都',
       image: KiyoMizuTera,
     },
@@ -267,7 +297,7 @@ const SpotsPage = () => {
       id: 7,
       name: '札幌時計台',
       description: '札幌のシンボル。歴史ある時計台',
-      tags: ['文化・歴史', '祭り'],
+      tags: ['文化・歴史', '祭り', '北日本'],
       city: '札幌',
       image: SapporoTime,
     },
@@ -275,7 +305,7 @@ const SpotsPage = () => {
       id: 8,
       name: '大通公園',
       description: '札幌の中心にある美しい公園',
-      tags: ['文化・歴史', '祭り'],
+      tags: ['文化・歴史', '祭り', '北日本'],
       city: '札幌',
       image: SapporoTower,
     },
@@ -283,7 +313,7 @@ const SpotsPage = () => {
       id: 9,
       name: '福岡城跡',
       description: '福岡の歴史を感じられる城跡',
-      tags: ['文化・歴史', '祭り'],
+      tags: ['文化・歴史', '祭り', '南日本'],
       city: '福岡',
       image: FukuokaCastle,
     },
@@ -291,7 +321,7 @@ const SpotsPage = () => {
       id: 10,
       name: '博多駅',
       description: '福岡の玄関口。グルメとショッピングの中心地',
-      tags: ['グルメ・食べ歩き', 'ショッピング'],
+      tags: ['グルメ・食べ歩き', 'ショッピング', '南日本'],
       city: '福岡',
       image: HakataCity,
     },
@@ -299,7 +329,7 @@ const SpotsPage = () => {
       id: 11,
       name: '首里城',
       description: '沖縄の歴史と文化を感じられる城',
-      tags: ['文化・歴史', '祭り'],
+      tags: ['文化・歴史', '祭り', '南日本'],
       city: '沖縄',
       image: Shurijo,
     },
@@ -307,31 +337,15 @@ const SpotsPage = () => {
       id: 12,
       name: '美ら海水族館',
       description: '世界最大級の水族館。ジンベエザメが人気',
-      tags: ['文化・歴史', '祭り'],
+      tags: ['エンタメ', '家族', '南日本'],
       city: '沖縄',
       image: OkiAquarium,
-    },
-    {
-      id: 13,
-      name: '名古屋城',
-      description: '名古屋のシンボル。金の鯱で有名な城',
-      tags: ['文化・歴史', '祭り'],
-      city: '名古屋',
-      image: NagoyaCastle,
-    },
-    {
-      id: 14,
-      name: '熱田神宮',
-      description: '名古屋で最も重要な神社',
-      tags: ['文化・歴史', '祭り'],
-      city: '名古屋',
-      image: Atsutasinkyu,
     },
     {
       id: 15,
       name: '原爆ドーム',
       description: '広島の平和の象徴。世界遺産',
-      tags: ['文化・歴史', '祭り'],
+      tags: ['文化・歴史', '祭り', '西日本'],
       city: '広島',
       image: GenbakuDome,
     },
@@ -339,7 +353,7 @@ const SpotsPage = () => {
       id: 16,
       name: '宮島',
       description: '厳島神社で有名な美しい島',
-      tags: ['文化・歴史', '祭り'],
+      tags: ['文化・歴史', '祭り', '西日本'],
       city: '広島',
       image: miyajima,
     },
@@ -347,7 +361,7 @@ const SpotsPage = () => {
       id: 17,
       name: '兼六園',
       description: '金沢の代表的な庭園。日本三名園の一つ',
-      tags: ['文化・歴史', '祭り'],
+      tags: ['文化・歴史', '祭り', '東日本'],
       city: '金沢',
       image: Kenrokuen,
     },
@@ -355,9 +369,105 @@ const SpotsPage = () => {
       id: 18,
       name: '金沢城公園',
       description: '金沢の歴史を感じられる城跡公園',
-      tags: ['文化・歴史', '祭り'],
+      tags: ['文化・歴史', '祭り', '東日本'],
       city: '金沢',
       image: KanazawaCastle,
+    },
+    {
+      id: 21,
+      name: '東京ディズニーランド',
+      description: '世界で最も人気のテーマパーク。夢の国で楽しい時間を過ごそう',
+      tags: ['エンタメ', '家族', '東日本', '観光地', '浦安市'],
+      city: '東京',
+      image: TokyoDisneyland,
+    },
+    {
+      id: 22,
+      name: '日光東照宮',
+      description: '徳川家康を祀る世界遺産の神社。豪華絢爛な建築が美しい',
+      tags: ['文化・歴史', '世界遺産', '東日本', '観光地', '日光市'],
+      city: '東京',
+      image: NikkoToshogu,
+    },
+    {
+      id: 23,
+      name: '鎌倉',
+      description: '歴史と文化が息づく古都。大仏とアニメの聖地',
+      tags: ['文化・歴史', '東日本', '観光地', '鎌倉市'],
+      city: '神奈川',
+      image: Kamakura,
+    },
+    {
+      id: 24,
+      name: '箱根温泉',
+      description: '富士山を望む名湯。リラックスできる温泉地',
+      tags: ['温泉', 'リゾート', '東日本', '観光地', '箱根町'],
+      city: '神奈川',
+      image: HakoneOnsen,
+    },
+    {
+      id: 25,
+      name: '渋谷',
+      description: '若者の街として有名。スクランブル交差点とハチ公がシンボル',
+      tags: ['ショッピング', 'エンタメ', '東日本', '観光地', '渋谷区'],
+      city: '東京',
+      image: ShibuyaScramble,
+    },
+    {
+      id: 27,
+      name: '名古屋城',
+      description: '徳川家康が築いた城。金色のシャチホコが有名',
+      tags: ['文化・歴史', '城', '中部日本', '観光地', '名古屋市'],
+      city: '名古屋',
+      image: NagoyaCastle,
+    },
+    {
+      id: 28,
+      name: '大須商店街',
+      description: '漫画・アニメグッズ、電子機器、食べ物まで揃う商店街',
+      tags: ['ショッピング', 'エンタメ', '中部日本', '観光地', '名古屋市'],
+      city: '名古屋',
+      image: osushotenkai,
+    },
+    {
+      id: 29,
+      name: '熱田神宮',
+      description: '日本三大神剣の一つ、草薙剣を祀る神宮',
+      tags: ['文化・歴史', '神社', '中部日本', '観光地', '名古屋市'],
+      city: '名古屋',
+      image: Atsutasinkyu,
+    },
+    {
+      id: 30,
+      name: 'SCMAGLEV and Railway Park',
+      description: 'JR東海運営。新幹線、リニア展示。鉄道ファンの聖地',
+      tags: ['文化・歴史', '科学・技術', '中部日本', '観光地', '名古屋市'],
+      city: '名古屋',
+      image: Nagoyalinear,
+    },
+    {
+      id: 31,
+      name: '名古屋市科学館',
+      description: '世界最大級のプラネタリウム。科学愛好家に人気',
+      tags: ['科学・技術', '教育', '中部日本', '観光地', '名古屋市'],
+      city: '名古屋',
+      image: NagoyaScience,
+    },
+    {
+      id: 32,
+      name: '名古屋港水族館',
+      description: 'シャチ、ベルーガ、イルカショーで有名。家族連れに人気',
+      tags: ['エンタメ', '家族', '中部日本', '観光地', '名古屋市'],
+      city: '名古屋',
+      image: OkiAquarium,
+    },
+    {
+      id: 33,
+      name: '秋葉原',
+      description: 'アニメ・ゲーム・電子機器の聖地。オタク文化の中心地',
+      tags: ['エンタメ', 'ショッピング', '東日本', '観光地', '千代田区'],
+      city: '東京',
+      image: akihabara,
     },
   ];
 
@@ -367,7 +477,7 @@ const SpotsPage = () => {
       title: '食い倒れ東京! 2泊3日グルメ旅',
       description:
         '築地市場の新鮮な海の幸から、新宿の深夜ラーメンまで。東京の「うまい!」をすべて味わい尽くす、食いしん坊のためのプランです。',
-      image: Tokyo,
+      image: Tsukiji,
       author: 'ソヒョン',
       type: '一人旅',
       city: '東京',
@@ -430,6 +540,15 @@ const SpotsPage = () => {
     },
     {
       id: 8,
+      title: 'ワールドコスプレサミット',
+      description: '毎年夏に名古屋で開催される世界規模のコスプレイベント。',
+      image: nagoyawcs2,
+      author: 'コスプレファン',
+      type: 'グループ旅',
+      city: '名古屋',
+    },
+    {
+      id: 9,
       title: '広島平和記念と宮島の旅',
       description: '原爆ドームと厳島神社を巡る平和と歴史の旅。',
       image: HiroShima,
@@ -446,6 +565,46 @@ const SpotsPage = () => {
       type: '一人旅',
       city: '金沢',
     },
+    {
+      id: 10,
+      title: '君の名は。聖地巡礼！東京・新宿の名所めぐり',
+      description:
+        '新海誠監督の名作「君の名は。」の聖地を巡る旅。新宿御苑、須賀神社、代々木ビルなど、映画の舞台となった場所を実際に歩いてみよう。',
+      image: Tokyo,
+      author: 'アニメファン',
+      type: '一人旅',
+      city: '東京',
+    },
+    {
+      id: 11,
+      title: '天気の子聖地巡礼！東京スカイツリーと台場',
+      description:
+        '「天気の子」の舞台となった東京の名所を巡る。スカイツリー、台場、新宿など、映画に登場した場所で主人公たちの気持ちを感じてみよう。',
+      image: TokyoTower,
+      author: '映画好き',
+      type: '二人旅',
+      city: '東京',
+    },
+    {
+      id: 12,
+      title: 'デジモンアドベンチャー聖地巡礼！お台場と光が丘',
+      description:
+        'デジモンアドベンチャーの聖地を巡る旅。お台場のフジテレビ、光が丘公園、新宿駅など、アニメファンなら一度は訪れたい場所をめぐろう。',
+      image: TokyoDome,
+      author: 'デジモンファン',
+      type: '一人旅',
+      city: '東京',
+    },
+    {
+      id: 13,
+      title: '東京温泉巡り！箱根と日光でリラックス',
+      description:
+        '東京近郊の名湯を巡る旅。箱根温泉で富士山を眺めながら、日光温泉で歴史を感じながら、心も体もリフレッシュしよう。',
+      image: OkinawaResort,
+      author: '温泉好き',
+      type: '二人旅',
+      city: '東京',
+    },
   ];
 
   // 검색어와 선택된 도시에 따라 스팟 필터링
@@ -457,11 +616,12 @@ const SpotsPage = () => {
 
     // 도시가 선택되지 않은 경우 검색어로 필터링
     if (searchQuery) {
+      const query = searchQuery.toLowerCase().trim();
       return (
-        spot.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        spot.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        spot.tags.some((tag) => tag.toLowerCase().includes(searchQuery.toLowerCase())) ||
-        spot.city.toLowerCase().includes(searchQuery.toLowerCase())
+        spot.name.toLowerCase().includes(query) ||
+        spot.description.toLowerCase().includes(query) ||
+        spot.tags.some((tag) => tag.toLowerCase().includes(query)) ||
+        spot.city.toLowerCase().includes(query)
       );
     }
 
@@ -495,11 +655,12 @@ const SpotsPage = () => {
 
     // 도시가 선택되지 않은 경우 검색어로 필터링
     if (searchQuery) {
+      const query = searchQuery.toLowerCase().trim();
       return (
-        plan.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        plan.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        plan.type.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        plan.city.toLowerCase().includes(searchQuery.toLowerCase())
+        plan.title.toLowerCase().includes(query) ||
+        plan.description.toLowerCase().includes(query) ||
+        plan.type.toLowerCase().includes(query) ||
+        plan.city.toLowerCase().includes(query)
       );
     }
 
@@ -551,7 +712,7 @@ const SpotsPage = () => {
                   navigate(`/spots?${newSearchParams.toString()}`);
                 }
               }}
-              className="w-full px-4 py-3 pl-10 pr-4 text-gray-700 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+              className="w-full px-4 py-3 pl-10 pr-12 text-gray-700 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
             />
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -563,22 +724,21 @@ const SpotsPage = () => {
                 />
               </svg>
             </div>
-            {searchQuery && (
-              <button
-                onClick={() => {
-                  setSearchQuery('');
-                  // URL에서 검색어 제거
-                  const newSearchParams = new URLSearchParams(searchParams);
+            <button
+              onClick={() => {
+                // URL 업데이트하여 검색어 반영
+                const newSearchParams = new URLSearchParams(searchParams);
+                if (searchQuery.trim()) {
+                  newSearchParams.set('search', searchQuery.trim());
+                } else {
                   newSearchParams.delete('search');
-                  navigate(`/spots?${newSearchParams.toString()}`);
-                }}
-                className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600"
-              >
-                <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-            )}
+                }
+                navigate(`/spots?${newSearchParams.toString()}`);
+              }}
+              className="absolute inset-y-0 right-0 px-4 flex items-center text-white bg-orange-500 hover:bg-orange-600 rounded-r-lg transition-colors"
+            >
+              検索
+            </button>
           </div>
         </div>
       </section>
@@ -586,7 +746,9 @@ const SpotsPage = () => {
       {/* Travel Destination Selection */}
       <section ref={destinationSectionRef} className="py-16 px-6">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">旅行先選択</h2>
+          <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">
+            {searchQuery ? `「${searchQuery}」に関連する旅行先` : '旅行先選択'}
+          </h2>
 
           <div className="relative">
             {/* 왼쪽 화살표 */}
@@ -614,52 +776,62 @@ const SpotsPage = () => {
             )}
 
             <div ref={destScrollRef} className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide px-16 py-4">
-              {destinations.map((destination) => (
-                <div
-                  key={destination.id}
-                  className={`flex-shrink-0 w-80 bg-white rounded-lg shadow-md overflow-hidden cursor-pointer transition-all duration-200 hover:scale-105 ${
-                    selectedCity === destination.name ? 'ring-4 ring-orange-500 ring-offset-4' : ''
-                  }`}
-                  ref={(el) => {
-                    destItemRefs.current[destination.name] = el;
-                  }}
-                  onClick={() => {
-                    if (selectedCity === destination.name) {
-                      setSelectedCity(null);
-                    } else {
-                      setSelectedCity(destination.name);
-                    }
-                  }}
-                >
+              {filteredDestinations.length > 0 ? (
+                filteredDestinations.map((destination) => (
                   <div
-                    className="h-48 bg-cover bg-center bg-no-repeat"
-                    style={{ backgroundImage: `url(${destination.image})` }}
-                  ></div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">{destination.name}</h3>
-                    <p className="text-gray-600 mb-4">{destination.description}</p>
-                    <div className="flex flex-wrap gap-2">
-                      {destination.tags.map((tag, index) => (
-                        <span key={index} className="px-3 py-1 bg-gray-800 text-white text-sm rounded-full">
-                          {tag}
-                        </span>
-                      ))}
+                    key={destination.id}
+                    className={`flex-shrink-0 w-80 bg-white rounded-lg shadow-md overflow-hidden cursor-pointer transition-all duration-200 hover:scale-105 ${
+                      selectedCity === destination.name ? 'ring-4 ring-orange-500 ring-offset-4' : ''
+                    }`}
+                    ref={(el) => {
+                      destItemRefs.current[destination.name] = el;
+                    }}
+                    onClick={() => {
+                      if (selectedCity === destination.name) {
+                        setSelectedCity(null);
+                      } else {
+                        setSelectedCity(destination.name);
+                      }
+                    }}
+                  >
+                    <div
+                      className="h-48 bg-cover bg-center bg-no-repeat"
+                      style={{ backgroundImage: `url(${destination.image})` }}
+                    ></div>
+                    <div className="p-6">
+                      <h3 className="text-xl font-bold text-gray-900 mb-2">{destination.name}</h3>
+                      <p className="text-gray-600 mb-4">{destination.description}</p>
+                      <div className="flex flex-wrap gap-2">
+                        {destination.tags.map((tag, index) => (
+                          <span key={index} className="px-3 py-1 bg-gray-800 text-white text-sm rounded-full">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </div>
+                ))
+              ) : (
+                <div className="w-full text-center text-gray-500 py-12">
+                  <p>検索条件に一致する旅行先が見つかりませんでした。</p>
                 </div>
-              ))}
+              )}
             </div>
           </div>
         </div>
       </section>
 
       {/* Tourist Spots Grid */}
-      {selectedCity && (
+      {(selectedCity || searchQuery) && (
         <section className="py-16 px-6 bg-gray-50">
           <div className="max-w-7xl mx-auto">
             <h2 className="text-3xl font-bold text-gray-900 text-center mb-4">観光スポット</h2>
             <p className="text-gray-600 text-center mb-12">
-              {selectedCity ? `${selectedCity}で人気の観光スポットをご紹介します` : '人気の観光スポットをご紹介します'}
+              {selectedCity
+                ? `${selectedCity}で人気の観光スポットをご紹介します`
+                : searchQuery
+                ? `「${searchQuery}」の検索結果`
+                : '人気の観光スポットをご紹介します'}
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -753,6 +925,8 @@ const SpotsPage = () => {
             <p className="text-gray-600 max-w-2xl mx-auto">
               {selectedCity
                 ? `${selectedCity}で人気の旅行プランをご紹介します。新しい旅のインスピレーションを見つけよう。`
+                : searchQuery
+                ? `「${searchQuery}」に関連する旅行プランをご紹介します。新しい旅のインスピレーションを見つけよう。`
                 : 'タビログが提案するモデルプランで、新しい旅のインスピレーションを見つけよう。'}
             </p>
           </div>
