@@ -26,7 +26,7 @@ export default function Login() {
   });
 
   const onSubmit = async (req: LoginReq) => {
-    const response = await axiosInstance.post('/auth/login', req);
+    const response = await axiosInstance.post('/api/auth/signin', req);
     const data = response.data.data;
 
     // zustand 스토어에 유저 정보 저장
