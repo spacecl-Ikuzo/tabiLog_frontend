@@ -5,9 +5,11 @@ interface UserStore {
   setUserId: (userId: string) => void;
   nickname: string;
   setNickname: (nickname: string) => void;
+  email: string;
+  setEmail: (email: string) => void;
   token: string;
   setToken: (token: string) => void;
-  removeToken: () => void;
+  removeUserData: () => void;
 }
 
 const useUserStore = create<UserStore>((set) => ({
@@ -15,9 +17,11 @@ const useUserStore = create<UserStore>((set) => ({
   setUserId: (userId: string) => set({ userId }),
   nickname: '',
   setNickname: (nickname: string) => set({ nickname }),
+  email: '',
+  setEmail: (email: string) => set({ email }),
   token: '',
   setToken: (token: string) => set({ token }),
-  removeToken: () => set({ token: '', userId: '', nickname: '' }),
+  removeUserData: () => set({ userId: '', nickname: '', email: '', token: '' }),
 }));
 
 export default useUserStore;
