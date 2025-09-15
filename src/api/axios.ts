@@ -26,12 +26,21 @@ axiosInstance.interceptors.request.use((config) => {
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
+    // 개발 단계에서는 401 오류 시 자동 로그인 리다이렉트 비활성화
     // 토큰 만료 에러 처리 (로그인 API는 제외)
     const isLoginRequest = error.config?.url?.includes('/auth/signin');
+    const isExpenseRequest = error.config?.url?.includes('/api/expenses');
+    
+    // Expense API 요청의 경우 401 오류를 무시하고 모킹 데이터 사용
+    if (isExpenseRequest && error.response?.status === 401) {
+      console.log('Expense API 401 오류 - 모킹 데이터로 처리');
+      return Promise.reject(error);
+    }
     
     if ((error.response?.status === 401 || error.response?.data?.error === 'TokenExpired') && 
         !isTokenExpiredHandling && 
-        !isLoginRequest) {
+        !isLoginRequest &&
+        !isExpenseRequest) {
       isTokenExpiredHandling = true;
       // 토큰 삭제
       // useUserStore.getState().removeToken();

@@ -32,7 +32,7 @@ const Header = () => {
 
   return (
     <header className="px-4 py-3 bg-white text-brand-orange lg:bg-brand-orange lg:text-white lg:px-6 lg:py-4">
-      <div className="flex justify-between items-center mx-auto max-w-6xl">
+      <div className="flex justify-between items-center mx-auto max-w-7xl">
         <h1 className="text-xl font-bold text-brand-orange lg:text-2xl lg:text-white">タビログ</h1>
 
         {/* 데스크톱 메뉴 */}
@@ -45,14 +45,14 @@ const Header = () => {
               <span className="text-sm">안녕하세요, {userEmail}님</span>
               <Button
                 variant="outline"
-                className="text-white border-white hover:bg-white hover:text-brand-orange"
+                className="text-white border-white hover:bg-white hover:text-orange-500 bg-transparent"
                 onClick={() => navigate('/mypage')}
               >
                 마이페이지
               </Button>
               <Button
                 variant="outline"
-                className="text-white border-white hover:bg-white hover:text-brand-orange"
+                className="text-white border-white hover:bg-white hover:text-orange-500 bg-transparent"
                 onClick={handleLogout}
               >
                 로그아웃
@@ -61,7 +61,7 @@ const Header = () => {
           ) : (
             <Button
               variant="outline"
-              className="text-white border-white hover:bg-white hover:text-brand-orange"
+              className="text-white border-white hover:bg-white hover:text-orange-500 bg-transparent"
               onClick={() => navigate('/login')}
             >
               ログイン
