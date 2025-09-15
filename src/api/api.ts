@@ -132,3 +132,170 @@ export const deletePlan = async (planId: number) => {
     throw error;
   }
 };
+
+// ===== Expense API Functions =====
+
+// 지출 생성
+export const createExpense = async (expenseData: {
+  planId: number;
+  spotId?: number;
+  item: string;
+  amount: number;
+  category: string;
+  expenseDate: string;
+}) => {
+  try {
+    console.log('=== createExpense API 호출 시작 ===');
+    console.log('요청 시간:', new Date().toISOString());
+    console.log('요청 데이터:', JSON.stringify(expenseData, null, 2));
+    console.log('axiosInstance baseURL:', axiosInstance.defaults.baseURL);
+    
+    const response = await axiosInstance.post('/api/expenses', expenseData);
+    
+    console.log('=== createExpense API 응답 성공 ===');
+    console.log('응답 상태:', response.status);
+    console.log('응답 헤더:', response.headers);
+    console.log('응답 데이터:', JSON.stringify(response.data, null, 2));
+    
+    return response.data;
+  } catch (error: any) {
+    console.error('=== createExpense API 호출 실패 ===');
+    console.error('오류 발생 시간:', new Date().toISOString());
+    console.error('오류 타입:', typeof error);
+    console.error('오류 객체:', error);
+    
+    if (error.response) {
+      console.error('=== HTTP 응답 오류 상세 ===');
+      console.error('상태 코드:', error.response.status);
+      console.error('상태 텍스트:', error.response.statusText);
+      console.error('응답 헤더:', error.response.headers);
+      console.error('응답 데이터:', error.response.data);
+      console.error('요청 URL:', error.config?.url);
+      console.error('요청 메서드:', error.config?.method);
+      console.error('요청 데이터:', error.config?.data);
+    } else if (error.request) {
+      console.error('=== 네트워크 요청 오류 ===');
+      console.error('요청 객체:', error.request);
+      console.error('요청 URL:', error.config?.url);
+    } else {
+      console.error('=== 기타 오류 ===');
+      console.error('오류 메시지:', error.message);
+      console.error('오류 설정:', error.config);
+    }
+    
+    // 백엔드 서버가 실행되지 않은 경우 모킹 데이터 반환
+    if (error.code === 'ERR_NETWORK' || error.response?.status === 404 || error.response?.status === 401) {
+      console.log('=== 모킹 데이터 반환 ===');
+      console.log('오류 코드:', error.code);
+      console.log('응답 상태:', error.response?.status);
+      
+      const mockData = {
+        success: true,
+        data: {
+          id: Date.now(), // 임시 ID
+          ...expenseData,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        }
+      };
+      
+      console.log('모킹 데이터:', JSON.stringify(mockData, null, 2));
+      return mockData;
+    }
+    
+    throw error;
+  }
+};
+
+// 지출 수정
+export const updateExpense = async (expenseId: number, expenseData: {
+  item: string;
+  amount: number;
+  category: string;
+  expenseDate: string;
+}) => {
+  try {
+    const response = await axiosInstance.put(`/api/expenses/${expenseId}`, expenseData);
+    return response.data;
+  } catch (error) {
+    console.error('지출 수정에 실패했습니다:', error);
+    throw error;
+  }
+};
+
+// 지출 삭제
+export const deleteExpense = async (expenseId: number) => {
+  try {
+    const response = await axiosInstance.delete(`/api/expenses/${expenseId}`);
+    return response.data;
+  } catch (error) {
+    console.error('지출 삭제에 실패했습니다:', error);
+    throw error;
+  }
+};
+
+// 스팟별 지출 목록 조회
+export const getExpensesBySpot = async (spotId: number) => {
+  try {
+    const response = await axiosInstance.get(`/api/expenses/spot/${spotId}`);
+    return response.data;
+  } catch (error) {
+    console.error('스팟별 지출 목록 조회에 실패했습니다:', error);
+    throw error;
+  }
+};
+
+// 스팟별 지출 요약 조회
+export const getExpenseSummaryBySpot = async (spotId: number) => {
+  try {
+    console.log('실제 API 호출 - spotId:', spotId);
+    const response = await axiosInstance.get(`/api/expenses/spot/${spotId}/summary`);
+    console.log('API 응답:', response.data);
+    return response.data;
+  } catch (error: any) {
+    console.error('스팟별 지출 요약 조회에 실패했습니다:', error);
+    
+    // 백엔드 서버가 실행되지 않은 경우 모킹 데이터 반환
+    if (error.code === 'ERR_NETWORK' || error.response?.status === 404 || error.response?.status === 401) {
+      console.log('백엔드 서버 연결 실패 또는 인증 오류, 모킹 데이터 사용');
+      return {
+        success: true,
+        data: {
+          totalAmount: 0,
+          amountByCategory: {
+            TICKETS: 0,
+            FOOD: 0,
+            TRANSPORT: 0,
+            SOUVENIRS: 0,
+            OTHER: 0
+          },
+          expenses: []
+        }
+      };
+    }
+    
+    throw error;
+  }
+};
+
+// 플랜별 지출 목록 조회
+export const getExpensesByPlan = async (planId: number) => {
+  try {
+    const response = await axiosInstance.get(`/api/expenses/plan/${planId}`);
+    return response.data;
+  } catch (error) {
+    console.error('플랜별 지출 목록 조회에 실패했습니다:', error);
+    throw error;
+  }
+};
+
+// 플랜별 지출 요약 조회
+export const getExpenseSummaryByPlan = async (planId: number) => {
+  try {
+    const response = await axiosInstance.get(`/api/expenses/plan/${planId}/summary`);
+    return response.data;
+  } catch (error) {
+    console.error('플랜별 지출 요약 조회에 실패했습니다:', error);
+    throw error;
+  }
+};

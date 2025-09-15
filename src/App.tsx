@@ -3,7 +3,7 @@ import Login from './pages/login/Login';
 import PrivateRoute from './PrivateRoute';
 import Home from './pages/home/Home';
 import Register from './pages/register/Register';
-import TripPlannerPage from './pages/TripPlannerPage';
+import TripPlannerPage from './pages/home/plan/TripPlannerPage';
 import MyPage from './pages/MyPage';
 import DashBoard from './components/layout/DashBoard';
 
