@@ -9,6 +9,9 @@ import SpotDetailPage from './pages/detail/SpotDetailPage';
 import Plans from './pages/plans/Plans';
 import PlanMobile from './pages/plans/PlanMobile';
 import NewPlanCheckDate from './pages/new-plan/NewPlanCheckDate';
+import TripPlannerPage from './pages/home/plan/TripPlannerPage';
+import MyPage from './pages/MyPage';
+import DashBoard from './components/layout/DashBoard';
 
 function App() {
   return (
@@ -19,6 +22,7 @@ function App() {
       <Route path="/spots" element={<SpotsPage />} />
       <Route path="/detail/:id" element={<DetailPage />} />
       <Route path="/spot/:city/:id" element={<SpotDetailPage />} />
+      <Route path="/trip-planner" element={<TripPlannerPage />} />
       {/* 비로그인 유저도 접근 가능한 페이지 */}
 
       <Route element={<PrivateRoute />}>
@@ -27,6 +31,10 @@ function App() {
         <Route path="/plans" element={<Plans />} />
         <Route path="/plans/:id" element={<PlanMobile />} />
         <Route path="/newPlan" element={<NewPlanCheckDate />} />
+        <Route path="/dashboard" element={<DashBoard />}>
+          <Route index element={<MyPage />} />
+          <Route path="mypage" element={<MyPage />} />
+        </Route>
       </Route>
     </Routes>
   );
