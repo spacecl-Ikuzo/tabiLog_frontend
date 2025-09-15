@@ -31,7 +31,7 @@ export default function Login() {
 
     // zustand 스토어에 유저 정보 저장
     if (data) {
-      setUserId(data.id);
+      setUserId(data.userId);
       setEmail(data.email);
       setNickname(data.nickname);
       setToken(data.accessToken);
