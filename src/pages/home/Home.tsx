@@ -1,34 +1,61 @@
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
+import { useNavigate } from 'react-router-dom';
+import { Button } from '../../components/ui/button';
 
 const Home = () => {
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    navigate('/login');
+  };
+
   return (
-    <>
-      <Skeleton count={1} height={100} width={100} />
-      <div className="flex flex-col gap-4">
-        <div>이곳은 메인페이지입니다.</div>
-        <div className="m-auto flex h-full max-w-[900px] flex-col items-center justify-center gap-[20px]">
-          <div className="mt-[200px] flex h-[200px] w-[200px] items-center justify-center rounded-full bg-bg02">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="h-[100px] w-[100px] animate-pulse text-b02 duration-5000"
+    <div className="min-h-screen bg-gray-50">
+      {/* 헤더 */}
+      <header className="bg-orange-500 text-white px-6 py-4">
+        <div className="flex justify-between items-center">
+          <h1 className="text-xl font-bold">タビログ</h1>
+          <nav className="flex items-center space-x-6">
+            <a href="#" className="hover:text-orange-200 transition-colors">観光スポット紹介</a>
+            <a href="#" className="hover:text-orange-200 transition-colors">マイトリップ</a>
+            <Button 
+              onClick={handleLogin}
+              className="border border-orange-300 text-orange-300 px-4 py-2 rounded hover:bg-orange-300 hover:text-orange-500 transition-colors bg-transparent"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M11.42 15.17 17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 1 1-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 0 0 4.486-6.336l-3.276 3.277a3.004 3.004 0 0 1-2.25-2.25l3.276-3.276a4.5 4.5 0 0 0-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437 1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008Z"
-              />
-            </svg>
+              ログイン
+            </Button>
+          </nav>
+        </div>
+      </header>
+
+      {/* 메인 콘텐츠 */}
+      <div className="flex flex-col items-center justify-center min-h-[calc(100vh-80px)] px-6">
+        <div className="text-center max-w-2xl">
+          <div className="mb-8">
+            <h2 className="text-4xl font-bold text-gray-800 mb-4">일본 여행을 계획하세요</h2>
+            <p className="text-lg text-gray-600 mb-8">
+              AI 기반 여행 계획 서비스로 완벽한 일본 여행을 만들어보세요
+            </p>
           </div>
-          <p className="text-[24px] font-[700] text-b01">개발이 진행 중입니다</p>
-          <p className="text-[16px] font-[400] text-b04">더 나은 서비스를 위해 기다려 주시기 바랍니다.</p>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button 
+              onClick={handleLogin}
+              className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 text-lg"
+            >
+              로그인하고 시작하기
+            </Button>
+            <Button 
+              onClick={() => navigate('/register')}
+              className="border border-orange-500 text-orange-500 hover:bg-orange-50 px-8 py-3 text-lg bg-transparent"
+            >
+              회원가입
+            </Button>
+          </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
