@@ -17,7 +17,7 @@ type LoginReq = z.infer<typeof schema>;
 
 export default function Login() {
   const navigate = useNavigate();
-  const { setUserId, setNickname, setToken } = useUserStore();
+  const { setUserId, setNickname, setToken, setEmail } = useUserStore();
 
   const form = useForm<LoginReq>({
     defaultValues: { id: '', password: '' },
@@ -27,14 +27,17 @@ export default function Login() {
 
   const onSubmit = async (req: LoginReq) => {
     const response = await axiosInstance.post('/api/auth/signin', req);
-    const data = response.data.data;
+    const data = response.data;
 
     // zustand 스토어에 유저 정보 저장
-    setUserId(data.id);
-    setNickname(data?.nickname ?? '');
-    setToken(data?.accessToken ?? '');
+    if (data) {
+      setUserId(data.id);
+      setEmail(data.email);
+      setNickname(data.nickname);
+      setToken(data.accessToken);
 
-    navigate('/');
+      navigate('/spots'); //메인으로 이동
+    }
   };
 
   return (
