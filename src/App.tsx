@@ -9,7 +9,7 @@ import SpotDetailPage from './pages/detail/SpotDetailPage';
 import Plans from './pages/plans/Plans';
 import PlanMobile from './pages/plans/PlanMobile';
 import NewPlanCheckDate from './pages/new-plan/NewPlanCheckDate';
-import TripPlannerPage from './pages/home/plan/TripPlannerPage';
+import TripPlannerPage from './pages/new-plan/TripPlannerPage';
 import MyPage from './pages/MyPage';
 import DashBoard from './components/layout/DashBoard';
 
