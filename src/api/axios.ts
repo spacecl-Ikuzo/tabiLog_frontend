@@ -6,11 +6,10 @@ import { toast } from 'sonner';
 let isTokenExpiredHandling = false;
 
 export const axiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8080',
   withCredentials: false,
   headers: {
     'Content-Type': 'application/json',
-    'Cache-Control': 'no-cache',
   },
 });
 
@@ -27,8 +26,12 @@ axiosInstance.interceptors.request.use((config) => {
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
-    // 토큰 만료 에러 처리
-    if ((error.response?.status === 401 || error.response?.data?.error === 'TokenExpired') && !isTokenExpiredHandling) {
+    // 토큰 만료 에러 처리 (로그인 API는 제외)
+    const isLoginRequest = error.config?.url?.includes('/auth/signin');
+    
+    if ((error.response?.status === 401 || error.response?.data?.error === 'TokenExpired') && 
+        !isTokenExpiredHandling && 
+        !isLoginRequest) {
       isTokenExpiredHandling = true;
       // 토큰 삭제
       // useUserStore.getState().removeToken();

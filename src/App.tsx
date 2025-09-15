@@ -3,7 +3,9 @@ import Login from './pages/login/Login';
 import PrivateRoute from './PrivateRoute';
 import Home from './pages/home/Home';
 import Register from './pages/register/Register';
-import TripPlannerPage from './pages/home/plan/TripPlannerPage';
+import TripPlannerPage from './pages/TripPlannerPage';
+import MyPage from './pages/MyPage';
+import DashBoard from './components/layout/DashBoard';
 
 function App() {
   return (
@@ -16,7 +18,10 @@ function App() {
 
       <Route element={<PrivateRoute />}>
         {/* 로그인 유저만 접근 가능한 페이지들을 여기에 추가 */}
-        {/* 예시: <Route path="/profile" element={<Profile />} /> */}
+        <Route path="/dashboard" element={<DashBoard />}>
+          <Route index element={<MyPage />} />
+          <Route path="mypage" element={<MyPage />} />
+        </Route>
       </Route>
     </Routes>
   );
