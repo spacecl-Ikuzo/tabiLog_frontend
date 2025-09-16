@@ -10,7 +10,8 @@ import { toast } from 'sonner';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../components/layout/header';
 
-// 유효성 검사 스키마 정의
+// 유효성 검사 스키마 정의 (디자인은 유지, 규칙만 조금 보강)
+// 서버에서 비번 8자 요구가 올 수 있으니 min(8)로 맞춰둠 (서버 메세지는 그대로 매핑)
 const schema = z.object({
   userId: z
     .string()
@@ -23,7 +24,7 @@ const schema = z.object({
     .regex(/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}$/, '半角英数字で入力してください'),
   password: z
     .string()
-    .min(1, 'パスワードを入力してください')
+    .min(8, 'パスワードは8文字以上で入力してください') // 프론트 검증도 8자 이상
     .regex(/^[a-zA-Z0-9]+$/, '半角英数字で入力してください'),
   lastName: z.string().min(1, '姓を入力してください'),
   firstName: z.string().min(1, '名を入力してください'),
@@ -60,8 +61,8 @@ const Register = () => {
       publicAgreement: false,
     },
     resolver: zodResolver(schema),
-    mode: 'onChange', // 입력할 때마다 검사
-    reValidateMode: 'onChange', // 값이 바뀔 때마다 다시 검사
+    mode: 'onChange',
+    reValidateMode: 'onChange',
   });
 
   const onSubmit = async (data: FormData) => {
@@ -84,8 +85,37 @@ const Register = () => {
       toast.success('会員登録が完了しました');
       navigate('/login');
     } catch (error) {
+      // 팝업은 고정 문구
+      toast.error('会員登録に失敗しました');
+
       if (error instanceof AxiosError) {
-        toast.error(error.response?.data.message || '会員登録に失敗しました');
+        const status = error.response?.status;
+        const details = (error.response?.data as any)?.details;
+
+        // 서버 검증 에러 매핑 (400 VALIDATION_ERROR)
+        if (status === 400 && details) {
+          // 서버 필드명이 username/email/nickname/password 등일 수 있음 → 폼 필드로 매핑
+          if (details.username) form.setError('userId', { message: String(details.username) });
+          if (details.email) form.setError('email', { message: String(details.email) });
+          if (details.password) form.setError('password', { message: String(details.password) });
+          if (details.nickname) form.setError('nickname', { message: String(details.nickname) });
+          if (details.lastName) form.setError('lastName', { message: String(details.lastName) });
+          if (details.firstName) form.setError('firstName', { message: String(details.firstName) });
+          if (details.phoneNumber) form.setError('phoneNumber', { message: String(details.phoneNumber) });
+          if (details.gender) form.setError('gender', { message: String(details.gender) });
+          if (details.privacyAgreement)
+            form.setError('privacyAgreement', { message: String(details.privacyAgreement) });
+        }
+        // 중복(409 DUPLICATE) → 이메일/아이디에 표시
+        else if (status === 409) {
+          const msg = (error.response?.data as any)?.message;
+          // 서버에서 어떤 필드가 중복인지 내려줄 때 details.email / details.username 케이스
+          if (details?.email || /メール|이메일/i.test(String(msg))) {
+            form.setError('email', { message: String(details?.email || '既に使用されているメールです。') });
+          } else if (details?.username || /ID|아이디|username/i.test(String(msg))) {
+            form.setError('userId', { message: String(details?.username || '既に使用されているIDです。') });
+          }
+        }
       }
     }
   };
