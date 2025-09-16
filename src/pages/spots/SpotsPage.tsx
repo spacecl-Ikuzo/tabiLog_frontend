@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import Header from '../../components/layout/header';
 import MainBackGround from '../../assets/MainBackGround.jpg';
@@ -26,10 +26,11 @@ import miyajima from '../../assets/miyajima.jpg';
 import NagoyaCastle from '../../assets/NagoyaCastle.jpg';
 import osushotenkai from '../../assets/osushotenkai.jpg';
 import akihabara from '../../assets/akihabara.jpg';
+import fujiq1 from '../../assets/fujiq1.jpg';
+import KiminoNamaewa from '../../assets/KiminoNamaewa.jpg';
+import tenkinoko from '../../assets/tenkinoko.jpg';
 import Nagoyalinear from '../../assets/Nagoyalinear.jpg';
 import NagoyaScience from '../../assets/NagoyaScience.jpg';
-import nagoyawcs1 from '../../assets/nagoyawcs1.jpg';
-import nagoyawcspng from '../../assets/nagoyawcspng.png';
 import nagoyawcs2 from '../../assets/nagoyawcs2.jpg';
 import OkiAquarium from '../../assets/OkiAquarium.jpg';
 import Shurijo from '../../assets/Shurijo.jpg';
@@ -41,11 +42,7 @@ import Tsukiji from '../../assets/Tsukiji.jpg';
 import NikkoToshogu from '../../assets/nikkotoshogu.jpg';
 import Kamakura from '../../assets/kamakura.jpg';
 import HakoneOnsen from '../../assets/hakoneonsen.jpg';
-import ShibuyaMomstouch from '../../assets/ShibuyaMomstouch.jpg';
 import ShibuyaScramble from '../../assets/ShibuyaScramble.jpg';
-import Meijisinku from '../../assets/meijisinku.jpg';
-import Swallows from '../../assets/Swallows.jpg';
-import ShibuyaBape from '../../assets/ShibuyaBape.jpg';
 
 const SpotsPage = () => {
   const [selectedCity, setSelectedCity] = useState<string | null>(null);
@@ -469,6 +466,14 @@ const SpotsPage = () => {
       city: '東京',
       image: akihabara,
     },
+    {
+      id: 34,
+      name: '富士急ハイランド',
+      description: '絶叫マシンで有名なテーマパーク。富士山を背景にした絶景アトラクション',
+      tags: ['エンタメ', 'アトラクション', '東日本', '観光地', '富士吉田市'],
+      city: '東京',
+      image: fujiq1,
+    },
   ];
 
   const travelPlans = [
@@ -566,21 +571,11 @@ const SpotsPage = () => {
       city: '金沢',
     },
     {
-      id: 10,
-      title: '君の名は。聖地巡礼！東京・新宿の名所めぐり',
-      description:
-        '新海誠監督の名作「君の名は。」の聖地を巡る旅。新宿御苑、須賀神社、代々木ビルなど、映画の舞台となった場所を実際に歩いてみよう。',
-      image: Tokyo,
-      author: 'アニメファン',
-      type: '一人旅',
-      city: '東京',
-    },
-    {
       id: 11,
       title: '天気の子聖地巡礼！東京スカイツリーと台場',
       description:
         '「天気の子」の舞台となった東京の名所を巡る。スカイツリー、台場、新宿など、映画に登場した場所で主人公たちの気持ちを感じてみよう。',
-      image: TokyoTower,
+      image: tenkinoko,
       author: '映画好き',
       type: '二人旅',
       city: '東京',
@@ -602,6 +597,16 @@ const SpotsPage = () => {
         '東京近郊の名湯を巡る旅。箱根温泉で富士山を眺めながら、日光温泉で歴史を感じながら、心も体もリフレッシュしよう。',
       image: OkinawaResort,
       author: '温泉好き',
+      type: '二人旅',
+      city: '東京',
+    },
+    {
+      id: 14,
+      title: '君の名は。聖地巡礼！渋谷と代々木',
+      description:
+        '「君の名は。」の舞台となった東京の名所を巡る。渋谷のスクランブル交差点、代々木の神社、新宿御苑など、映画に登場した場所で主人公たちの気持ちを感じてみよう。',
+      image: KiminoNamaewa,
+      author: 'アニメファン',
       type: '二人旅',
       city: '東京',
     },

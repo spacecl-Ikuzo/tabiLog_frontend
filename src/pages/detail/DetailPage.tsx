@@ -2,7 +2,6 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import Header from '../../components/layout/header';
 import fukuokahutami from '../../assets/fukuokahutami.jpg';
-import Tokyo from '../../assets/Tokyo.jpg';
 import Kinkakuji from '../../assets/Kinkakuji.jpg';
 import OsakaCastle from '../../assets/OsakaCastle.jpg';
 import Sapporo from '../../assets/Sapporo.jpg';
@@ -10,7 +9,6 @@ import OkinawaResort from '../../assets/OkinawaResort.jpg';
 import RamenJiro from '../../assets/RamenJiro.jpg';
 import JiroSushi from '../../assets/JiroSushi.jpg';
 import Tsukiji from '../../assets/Tsukiji.jpg';
-import Marugamejemen from '../../assets/Marugamejemen.jpg';
 import Marugamejemen2 from '../../assets/Marugamejemen2.jpg';
 import USJ from '../../assets/USJ.jpg';
 import OsakaGuriko from '../../assets/OsakaGuriko.jpg';
@@ -23,11 +21,16 @@ import Shurijo from '../../assets/Shurijo.jpg';
 import OkiAquarium from '../../assets/OkiAquarium.jpg';
 import Nagoya from '../../assets/Nagoya.jpg';
 import NagoyaCastle from '../../assets/NagoyaCastle.jpg';
-import Atsutasinkyu from '../../assets/Atsutasinkyu.jpg';
-import osushotenkai from '../../assets/osushotenkai.jpg';
 import nagoyawcs1 from '../../assets/nagoyawcs1.jpg';
 import nagoyawcs2 from '../../assets/nagoyawcs2.jpg';
-import nagoyawcspng from '../../assets/nagoyawcspng.png';
+import KiminoNamaewa from '../../assets/KiminoNamaewa.jpg';
+import KiminoNamaewaSuga from '../../assets/KiminoNamaewaSuga.jpg';
+import Shibakoen from '../../assets/Shibakoen.jpg';
+import ShinjukuPolice from '../../assets/ShinjukuPolice.jpg';
+import Aogashima from '../../assets/Aogashima.jpg';
+import tenkinoko from '../../assets/tenkinoko.jpg';
+import denkiseibumc from '../../assets/denkiseibumc.jpg';
+import odaiba from '../../assets/odaiba.jpg';
 
 const DetailPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -137,6 +140,32 @@ const DetailPage = () => {
       content:
         '毎年夏に名古屋で開催される世界規模のコスプレイベント。大須商店街と名古屋市街が舞台となる国際的なコスプレ祭典です。<br><br>【2.1 大須商店街】<br>コスプレイベントのメイン会場。世界各国から集まったコスプレイヤーたちが街を練り歩き、独特な文化の交流が生まれます。<br><br>【2.2 名古屋市街】<br>市内各所でコスプレイベントが開催され、名古屋の街全体がコスプレの祭典会場となります。観光客も参加できるイベントが多数あります。<br><br>【2.3 コスプレコンテスト】<br>世界各国の代表コスプレイヤーが参加する国際コンテスト。技術力と表現力の高さを競い合い、観客を魅了します。<br><br>【2.4 国際交流】<br>コスプレを通じた国際文化交流の場。世界各国のファンが集まり、アニメ・漫画文化を共有する貴重な機会となります。',
     },
+    14: {
+      title: '君の名は。聖地巡礼！渋谷と代々木',
+      description:
+        '「君の名は。」の舞台となった東京の名所を巡る。渋谷のスクランブル交差点、代々木の神社、新宿御苑など、映画に登場した場所で主人公たちの気持ちを感じてみよう。',
+      author: 'アニメファン',
+      image: KiminoNamaewa,
+      heroImage: KiminoNamaewaSuga,
+      breadcrumb: ['東京', '渋谷', '代々木', '君の名は。聖地巡礼'],
+      contentTitle: '君の名は。聖地巡礼の基本情報',
+      spots: ['君の名は。映画紹介', '代々木八幡宮', '新宿警察署', '青ヶ島'],
+      content:
+        '「君の名は。」の舞台となった東京の名所を巡る聖地巡礼プランです。映画に登場した場所を実際に訪れ、主人公たちの気持ちを感じてみましょう。<br><br>【2.1 君の名は。映画紹介】<br>新海誠監督の代表作「君の名は。」は2016年に公開されたアニメーション映画です。田舎の少女三葉と東京の少年瀧が体を入れ替わるファンタジーロマンスで、時間と空間を超える感動的なストーリーが特徴です。世界中で大きな人気を博し、日本アニメーションの新しい転換点を築いた作品として評価されています。<br><br>【2.2 代々木八幡宮】<br>映画に登場する神社のモデルとなった場所。静寂な境内で、主人公たちの祈りの気持ちを感じることができます。神社の雰囲気と映画の世界観が重なり合う特別な体験ができます。新海誠監督が実際に訪れてインスピレーションを得た場所としても知られています。<br><br>【2.3 新宿警察署】<br>映画の重要なシーンで登場する新宿警察署周辺。主人公たちが東京で過ごした時間の象徴的な場所として描かれています。実際の警察署前で、映画の世界観を感じながら街の雰囲気を楽しめます。新宿の街並みと映画の記憶が重なり合う特別なスポットです。<br><br>【2.4 青ヶ島】<br>映画「君の名は。」の重要な舞台となった青ヶ島。東京都の離島で、主人公三葉の故郷として描かれた神秘的な島です。火山島特有の美しい自然と静寂な雰囲気が、映画の世界観を体現しています。実際に訪れることで、主人公たちの故郷への想いを感じることができる特別な場所です。',
+    },
+    11: {
+      title: '天気の子聖地巡礼！東京スカイツリーと台場',
+      description:
+        '「天気の子」の舞台となった東京の名所を巡る。スカイツリー、台場、新宿など、映画に登場した場所で主人公たちの気持ちを感じてみよう。',
+      author: '映画好き',
+      image: tenkinoko,
+      heroImage: tenkinoko,
+      breadcrumb: ['東京', 'スカイツリー', '台場', '天気の子聖地巡礼'],
+      contentTitle: '天気の子聖地巡礼の基本情報',
+      spots: ['天気の子映画紹介', '東京スカイツリー', 'お台場', 'マクドナルド'],
+      content:
+        '新海誠監督の2019年公開作品「天気の子」の舞台となった東京の名所を巡る聖地巡礼プランです。映画に登場した場所を実際に訪れ、主人公たちの気持ちを感じてみましょう。<br><br>【2.1 天気の子映画紹介】<br>新海誠監督の2019年公開作品「天気の子」は、天気を操る能力を持つ少女ひなこと、彼女と出会った少年帆高の物語です。東京を舞台にした美しい映像と、現代社会の課題を描いた感動的なストーリーが特徴です。天気と人間の関係性をテーマにした深いメッセージが込められた作品として高い評価を受けています。<br><br>【2.2 東京スカイツリー】<br>映画の重要なシーンで登場する東京スカイツリー。主人公たちが東京の象徴的な場所として訪れる場所です。634mの高さを誇る電波塔からは東京の街並みを一望でき、映画の世界観を体感できます。天気の子の感動的なシーンを思い浮かべながら、東京の美しい景色を楽しめます。<br><br>【2.3 お台場】<br>映画のクライマックスシーンで重要な役割を果たすお台場。美しい海辺の風景と都市の景観が印象的に描かれています。実際にお台場を訪れることで、映画で描かれた風景の美しさと主人公たちの心情を深く理解することができます。お台場の夜景は特に映画ファンにとって特別な体験を提供します。<br><br>【2.4 マクドナルド】<br>映画「天気の子」で主人公帆高がアルバイトをしていたマクドナルド。新宿の街中にあるこの店舗は、主人公の東京での生活の象徴的な場所として描かれています。実際に訪れることで、映画で描かれた主人公の心境と東京での生活を感じることができます。映画ファンにとって特別な意味を持つ場所として、多くの人が聖地巡礼に訪れています。',
+    },
   };
 
   const planId = id ? parseInt(id) : 1;
@@ -232,6 +261,8 @@ const DetailPage = () => {
                       ? SapporoTime
                       : planId === 6
                       ? OkiAquarium
+                      : planId === 14
+                      ? KiminoNamaewa
                       : plan.image
                   })`,
                 }}
@@ -254,6 +285,10 @@ const DetailPage = () => {
                       ? SapporoTower
                       : planId === 6
                       ? Shurijo
+                      : planId === 14
+                      ? KiminoNamaewaSuga
+                      : planId === 11
+                      ? odaiba
                       : plan.heroImage
                   })`,
                 }}
@@ -274,6 +309,42 @@ const DetailPage = () => {
                 <div
                   className="h-64 bg-cover bg-center bg-no-repeat"
                   style={{ backgroundImage: `url(${RamenJiro})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+
+          {/* Extra Images for Kimi no Na wa Plan */}
+          {planId === 14 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${ShinjukuPolice})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${Aogashima})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+
+          {/* Extra Images for Tenki no Ko Plan */}
+          {planId === 11 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${Shibakoen})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${denkiseibumc})` }}
                 ></div>
               </div>
             </div>
