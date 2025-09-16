@@ -9,6 +9,7 @@ import SpotDetailPage from './pages/detail/SpotDetailPage';
 import Plans from './pages/plans/Plans';
 import PlanMobile from './pages/plans/PlanMobile';
 import NewPlanCheckDate from './pages/new-plan/NewPlanCheckDate';
+import NewPlanDetail from './pages/new-plan/NewPlanDetail';
 import TripPlannerPage from './pages/new-plan/TripPlannerPage';
 import MyPage from './pages/MyPage';
 import DashBoard from './components/layout/DashBoard';
@@ -31,6 +32,7 @@ function App() {
         <Route path="/plans" element={<Plans />} />
         <Route path="/plans/:id" element={<PlanMobile />} />
         <Route path="/newPlan" element={<NewPlanCheckDate />} />
+        <Route path="/newPlan/detail" element={<NewPlanDetail />} />
         <Route path="/dashboard" element={<DashBoard />}>
           <Route index element={<MyPage />} />
           <Route path="mypage" element={<MyPage />} />
