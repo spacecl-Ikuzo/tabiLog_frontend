@@ -299,3 +299,108 @@ export const getExpenseSummaryByPlan = async (planId: number) => {
     throw error;
   }
 };
+
+// ===== MyPage API Functions =====
+
+// 마이페이지 정보 조회
+export const getMyPageInfo = async () => {
+  try {
+    const response = await axiosInstance.get('/api/mypage');
+    return response.data;
+  } catch (error: any) {
+    console.error('마이페이지 정보 조회에 실패했습니다:', error);
+    
+    // 백엔드 서버가 실행되지 않은 경우 모킹 데이터 반환
+    if (error.code === 'ERR_NETWORK' || error.response?.status === 404 || error.response?.status === 401) {
+      console.log('백엔드 서버 연결 실패 또는 인증 오류, 모킹 데이터 사용');
+      return {
+        id: 1,
+        email: "user@example.com",
+        userId: "user123",
+        firstName: "홍",
+        lastName: "길동",
+        gender: "MALE",
+        phoneNumber: "010-1234-5678",
+        nickname: "홍길동",
+        createdAt: "2024-01-01T00:00:00",
+        updatedAt: "2024-01-01T00:00:00",
+        participatingPlanCount: 3,
+        ownedPlanCount: 1
+      };
+    }
+    
+    throw error;
+  }
+};
+
+// ===== File Upload API Functions =====
+
+// 이미지 파일 업로드
+export const uploadImage = async (file: File) => {
+  try {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    const response = await axiosInstance.post('/api/upload/image', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+
+    return response.data;
+  } catch (error: any) {
+    console.error('이미지 업로드 실패:', error);
+    throw error;
+  }
+};
+
+// ===== Region API Functions =====
+
+// 지역별 현 목록 조회
+export const getRegions = async () => {
+  try {
+    const response = await axiosInstance.get('/api/categories/regions');
+    return response.data;
+  } catch (error: any) {
+    console.error('지역 정보 조회에 실패했습니다:', error);
+    
+    // 백엔드 서버가 실행되지 않은 경우 모킹 데이터 반환
+    if (error.code === 'ERR_NETWORK' || error.response?.status === 404) {
+      console.log('백엔드 서버 연결 실패, 모킹 데이터 사용');
+      return {
+        success: true,
+        data: ['北海道', '青森県', '岩手県', '宮城県', '秋田県', '山形県', '福島県', '東京都', '神奈川県', '埼玉県', '千葉県', '茨城県', '栃木県', '群馬県', '山梨県', '長野県', '新潟県', '富山県', '石川県', '福井県', '静岡県', '愛知県', '大阪府', '京都府', '兵庫県', '奈良県', '三重県', '滋賀県', '和歌山県', '広島県', '岡山県', '鳥取県', '島根県', '山口県', '福岡県', '熊本県', '長崎県', '佐賀県', '大分県', '宮崎県', '鹿児島県', '沖縄県']
+      };
+    }
+    
+    throw error;
+  }
+};
+
+// 특정 지역의 현 목록 조회
+export const getPrefecturesByRegion = async (region: string) => {
+  try {
+    const response = await axiosInstance.get(`/api/categories/regions?region=${region}`);
+    return response.data;
+  } catch (error: any) {
+    console.error(`${region} 지역의 현 정보 조회에 실패했습니다:`, error);
+    
+    // 백엔드 서버가 실행되지 않은 경우 모킹 데이터 반환
+    if (error.code === 'ERR_NETWORK' || error.response?.status === 404) {
+      console.log('백엔드 서버 연결 실패, 모킹 데이터 사용');
+      const mockData: { [key: string]: string[] } = {
+        '北日本': ['北海道', '青森県', '岩手県', '宮城県', '秋田県', '山形県', '福島県'],
+        '東日本': ['東京都', '神奈川県', '埼玉県', '千葉県', '茨城県', '栃木県', '群馬県', '山梨県', '長野県', '新潟県', '富山県', '石川県', '福井県', '静岡県', '愛知県'],
+        '西日本': ['大阪府', '京都府', '兵庫県', '奈良県', '三重県', '滋賀県', '和歌山県', '広島県', '岡山県', '鳥取県', '島根県', '山口県'],
+        '南日本': ['福岡県', '熊本県', '長崎県', '佐賀県', '大分県', '宮崎県', '鹿児島県', '沖縄県'],
+      };
+      
+      return {
+        success: true,
+        data: mockData[region] || []
+      };
+    }
+    
+    throw error;
+  }
+};
