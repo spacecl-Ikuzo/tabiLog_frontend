@@ -28,7 +28,7 @@ const Header = () => {
           <span className="cursor-pointer hover:text-orange-200" onClick={() => navigate('/spots')}>
             観光スポット紹介
           </span>
-          <span className="cursor-pointer hover:text-orange-200" onClick={() => navigate('/plans')}>
+          <span className="cursor-pointer hover:text-orange-200" onClick={() => navigate('/profile')}>
             マイトリップ
           </span>
 

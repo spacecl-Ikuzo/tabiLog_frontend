@@ -32,6 +32,9 @@ export default function Login() {
       const response = await axiosInstance.post('/api/auth/signin', req);
       const data = response.data;
 
+      console.log('=== 로그인 응답 데이터 ===');
+      console.log('응답 데이터:', data);
+
       // zustand 스토어에 유저 정보 저장
       if (data) {
         setUserId(data.userId);
@@ -40,9 +43,17 @@ export default function Login() {
         setToken(data.accessToken);
         if (data.expiresAt) setTokenExp(data.expiresAt); // ★ 만료시각 저장
 
+        console.log('=== 토큰 저장 확인 ===');
+        console.log('저장된 토큰:', data.accessToken ? `${data.accessToken.substring(0, 20)}...` : '토큰 없음');
+        console.log('저장된 사용자 ID:', data.userId);
+        console.log('저장된 이메일:', data.email);
+        console.log('저장된 닉네임:', data.nickname);
+
         navigate('/spots'); // 메인으로 이동
       }
     } catch (error) {
+      console.error('로그인 실패:', error);
+
       // 팝업은 고정 문구
       toast.error('ログインに失敗しました');
 

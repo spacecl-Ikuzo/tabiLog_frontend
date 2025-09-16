@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../components/ui/button';
+import { getMyPageInfo } from '../api/api';
 
 // 아이콘 컴포넌트들
 const UserIcon = () => (
@@ -40,8 +41,40 @@ const LogoutIcon = () => (
   </svg>
 );
 
+interface MyPageInfo {
+  id: number;
+  email: string;
+  userId: string;
+  firstName: string;
+  lastName: string;
+  gender: string;
+  phoneNumber: string;
+  nickname: string;
+  createdAt: string;
+  updatedAt: string;
+  participatingPlanCount: number;
+  ownedPlanCount: number;
+}
+
 const MyPage = () => {
   const navigate = useNavigate();
+  const [userInfo, setUserInfo] = useState<MyPageInfo | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      try {
+        const data = await getMyPageInfo();
+        setUserInfo(data);
+      } catch (error) {
+        console.error('사용자 정보를 가져오는데 실패했습니다:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUserInfo();
+  }, []);
 
   const handleLogout = () => {
     // 로그아웃 로직
@@ -79,9 +112,37 @@ const MyPage = () => {
               <UserIcon />
             </div>
             <div>
-              <h2 className="text-2xl font-bold text-gray-800">최은혁님</h2>
-              <p className="text-gray-600">traveler@example.com</p>
-              <p className="text-sm text-gray-500">회원가입일: 2024년 1월</p>
+              {loading ? (
+                <div>
+                  <h2 className="text-2xl font-bold text-gray-800">로딩 중...</h2>
+                  <p className="text-gray-600">사용자 정보를 불러오는 중입니다</p>
+                </div>
+              ) : userInfo ? (
+                <div>
+                  <h2 className="text-2xl font-bold text-gray-800">{userInfo.nickname}님</h2>
+                  <p className="text-gray-600">{userInfo.email}</p>
+                  <p className="text-sm text-gray-500">
+                    회원가입일: {new Date(userInfo.createdAt).toLocaleDateString('ko-KR', { 
+                      year: 'numeric', 
+                      month: 'long' 
+                    })}
+                  </p>
+                  <div className="flex gap-4 mt-2">
+                    <span className="text-sm text-blue-600">
+                      참여 플랜: {userInfo.participatingPlanCount}개
+                    </span>
+                    <span className="text-sm text-green-600">
+                      소유 플랜: {userInfo.ownedPlanCount}개
+                    </span>
+                  </div>
+                </div>
+              ) : (
+                <div>
+                  <h2 className="text-2xl font-bold text-gray-800">최은혁님</h2>
+                  <p className="text-gray-600">traveler@example.com</p>
+                  <p className="text-sm text-gray-500">회원가입일: 2024년 1월</p>
+                </div>
+              )}
             </div>
           </div>
         </div>
