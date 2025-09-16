@@ -26,19 +26,48 @@ export default function Login() {
   });
 
   const onSubmit = async (req: LoginReq) => {
-    const response = await axiosInstance.post('/api/auth/signin', req);
-    const data = response.data;
+    try {
+      const response = await axiosInstance.post('/api/auth/signin', req);
+      const data = response.data;
 
-    // zustand 스토어에 유저 정보 저장
-    if (data) {
-      setUserId(data.userId);
-      setEmail(data.email);
-      setNickname(data.nickname);
-      setToken(data.accessToken);
+      console.log('=== 로그인 응답 데이터 ===');
+      console.log('응답 데이터:', data);
 
-      navigate('/spots'); //메인으로 이동
+      // zustand 스토어에 유저 정보 저장
+      if (data) {
+        setUserId(data.userId);
+        setEmail(data.email);
+        setNickname(data.nickname);
+        setToken(data.accessToken);
+
+        console.log('=== 토큰 저장 확인 ===');
+        console.log('저장된 토큰:', data.accessToken ? `${data.accessToken.substring(0, 20)}...` : '토큰 없음');
+        console.log('저장된 사용자 ID:', data.userId);
+        console.log('저장된 이메일:', data.email);
+        console.log('저장된 닉네임:', data.nickname);
+
+        navigate('/spots'); //메인으로 이동
+      }
+    } catch (error: any) {
+      console.error('로그인 실패:', error);
+      
+      // 에러 타입별로 구분하여 메시지 표시
+      if (error.response?.status === 401) {
+        if (error.response?.data?.error === 'INVALID_CREDENTIALS') {
+          alert('이메일 또는 비밀번호가 올바르지 않습니다.');
+        } else {
+          alert('인증에 실패했습니다. 다시 로그인해주세요.');
+        }
+      } else if (error.response?.status === 404) {
+        alert('사용자를 찾을 수 없습니다. 이메일을 확인해주세요.');
+      } else if (error.code === 'ERR_NETWORK') {
+        alert('서버에 연결할 수 없습니다. 네트워크를 확인해주세요.');
+      } else {
+        alert('로그인에 실패했습니다. 다시 시도해주세요.');
+      }
     }
   };
+
 
   return (
     <div className="min-h-screen w-full bg-white flex items-center justify-center p-4 lg:p-0">
