@@ -64,7 +64,7 @@ export default function SideNavigation({ selectedNav }: { selectedNav: string })
   return (
     <>
       {/* 사이드바 네비게이션 (데스크톱만) */}
-      <div className="hidden lg:block w-70 bg-white shadow-sm min-h-screen">
+      <div className="hidden lg:block w-60 bg-white shadow-sm min-h-screen">
         <div className="px-6 py-15">
           {/* 프로필 섹션 */}
           <div className="flex items-center gap-3 bg-gray-100 rounded-3xl p-4 mb-8">
