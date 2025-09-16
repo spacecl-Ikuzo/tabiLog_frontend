@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Header from '../../components/layout/header';
 import HeroSection from '../../components/sections/HeroSection';
 import PopularSpotsSection from '../../components/sections/PopularSpotsSection';
 import TravelPlansSection from '../../components/sections/TravelPlansSection';
@@ -24,7 +23,6 @@ const Home = () => {
 
   return (
     <div className="min-h-screen">
-      <Header />
       <HeroSection />
 
       {/* Search Section */}

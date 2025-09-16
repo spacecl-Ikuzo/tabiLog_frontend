@@ -29,31 +29,22 @@ export default function Login() {
 
   const onSubmit = async (req: LoginReq) => {
     try {
-      const response = await axiosInstance.post('/api/auth/signin', req);
+      // 백엔드가 요구하는 키는 id/password
+      const payload = { id: req.id.trim(), password: req.password };
+      const response = await axiosInstance.post('/api/auth/signin', payload);
       const data = response.data;
 
-      console.log('=== 로그인 응답 데이터 ===');
-      console.log('응답 데이터:', data);
-
-      // zustand 스토어에 유저 정보 저장
+      // 서버 응답(JwtResponse): accessToken, email, userId, nickname, expiresAt
       if (data) {
-        setUserId(data.userId);
-        setEmail(data.email);
-        setNickname(data.nickname);
-        setToken(data.accessToken);
-        if (data.expiresAt) setTokenExp(data.expiresAt); // ★ 만료시각 저장
+        setUserId(data.userId || '');
+        setEmail(data.email || '');
+        setNickname(data.nickname || '');
+        setToken(data.accessToken || '');
+        if (data.expiresAt) setTokenExp(data.expiresAt);
 
-        console.log('=== 토큰 저장 확인 ===');
-        console.log('저장된 토큰:', data.accessToken ? `${data.accessToken.substring(0, 20)}...` : '토큰 없음');
-        console.log('저장된 사용자 ID:', data.userId);
-        console.log('저장된 이메일:', data.email);
-        console.log('저장된 닉네임:', data.nickname);
-
-        navigate('/spots'); // 메인으로 이동
+        navigate('/spots'); // 성공 시 이동
       }
     } catch (error) {
-      console.error('로그인 실패:', error);
-
       // 팝업은 고정 문구
       toast.error('ログインに失敗しました');
 
@@ -62,16 +53,21 @@ export default function Login() {
         const code = (error.response?.data as any)?.error;
         const details = (error.response?.data as any)?.details;
 
-        // 401 AUTH_ERROR -> 비밀번호 밑에 빨간 글씨
-        if (status === 401 && code === 'AUTH_ERROR') {
+        // 401 → 비밀번호 밑에 에러 표시 (AUTH_ERROR/INVALID_CREDENTIALS 모두 대응)
+        if (status === 401 && (code === 'AUTH_ERROR' || code === 'INVALID_CREDENTIALS')) {
           form.setError('password', { message: 'アイディまたはパスワードが正しくありません。' });
+          return;
         }
-        // 400 VALIDATION_ERROR -> 해당 필드에 매핑
-        else if (status === 400 && details) {
+
+        // 400 VALIDATION_ERROR → details 맵핑
+        if (status === 400 && details) {
+          if (details.id) form.setError('id', { message: String(details.id) });
           if (details.username) form.setError('id', { message: String(details.username) });
           if (details.password) form.setError('password', { message: String(details.password) });
+          return;
         }
       }
+      // 나머지는 팝업만 (위에서 이미 토스트 출력)
     }
   };
 
@@ -87,39 +83,42 @@ export default function Login() {
 
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+              {/* ID */}
               <FormField
                 control={form.control}
                 name="id"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-gray-800 font-medium">ID</FormLabel>
+                    <div className="flex items-center justify-between">
+                      <FormLabel className="text-gray-800 font-medium">ID</FormLabel>
+                      <Link
+                        to="/forgot-password"
+                        className="text-xs text-gray-500 hover:text-orange-500 transition-colors"
+                        tabIndex={-1} // 링크는 탭에서 제외
+                      >
+                        パスワードをお忘れですか？
+                      </Link>
+                    </div>
                     <Input
                       {...field}
-                      type="id"
+                      type="text"
+                      autoComplete="username"
                       placeholder=""
                       className="h-12 bg-white border-gray-300 focus:border-orange-500 focus:ring-orange-500"
-                      tabIndex={1} // Tab 순서: 1) ID
+                      tabIndex={1} // 1) ID
                     />
                     <FormMessage />
                   </FormItem>
                 )}
               />
 
+              {/* Password */}
               <FormField
                 control={form.control}
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <div className="flex items-center justify-between">
-                      <FormLabel className="text-gray-800 font-medium">Password</FormLabel>
-                      <Link
-                        to="/forgot-password"
-                        className="text-xs text-gray-500 hover:text-orange-500 transition-colors"
-                        tabIndex={4} // Tab 순서상 버튼 다음으로
-                      >
-                        パスワードをお忘れですか？
-                      </Link>
-                    </div>
+                    <FormLabel className="text-gray-800 font-medium">Password</FormLabel>
                     <Input
                       {...field}
                       type="password"
@@ -128,7 +127,6 @@ export default function Login() {
                       className="h-12 bg-white border-gray-300 focus:border-orange-500 focus:ring-orange-500"
                       tabIndex={2} // 2) PW
                       onKeyDown={(e) => {
-                        // Enter로 제출 UX 강화 (기본 submit도 되지만 확실히)
                         if (e.key === 'Enter') {
                           e.preventDefault();
                           form.handleSubmit(onSubmit)();
@@ -140,6 +138,7 @@ export default function Login() {
                 )}
               />
 
+              {/* Submit */}
               <Button
                 type="submit"
                 disabled={!form.formState.isValid || form.formState.isSubmitting}
@@ -156,7 +155,7 @@ export default function Login() {
             <Link
               to="/register"
               className="text-orange-500 hover:text-orange-600 font-medium transition-colors"
-              tabIndex={5}
+              tabIndex={-1} // 링크는 탭에서 제외
             >
               新規登録
             </Link>

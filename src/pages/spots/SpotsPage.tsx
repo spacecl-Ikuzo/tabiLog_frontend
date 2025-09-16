@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import Header from '../../components/layout/header';
 import MainBackGround from '../../assets/MainBackGround.jpg';
 import Tokyo from '../../assets/Tokyo.jpg';
 import OsakaCastle from '../../assets/OsakaCastle.jpg';
@@ -680,8 +679,6 @@ const SpotsPage = () => {
 
   return (
     <div className="min-h-screen">
-      <Header />
-
       {/* Hero Section */}
       <section
         className="relative h-96 bg-cover bg-center bg-no-repeat flex items-center justify-center"
