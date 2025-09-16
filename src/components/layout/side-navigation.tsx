@@ -53,8 +53,9 @@ export default function SideNavigation({ selectedNav }: { selectedNav: string })
         navigate(`/plans`);
       } else if (menu === 'newPlan') {
         navigate(`/newPlan`);
+      } else if (menu === 'profile') {
+        navigate(`/profile`);
       } else {
-        //TODO: 마이페이지 추가 시 수정
         navigate(`/`);
       }
     }
