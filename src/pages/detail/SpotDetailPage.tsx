@@ -18,7 +18,10 @@ import SapporoTime from '../../assets/SapporoTime.jpg';
 import SapporoTower from '../../assets/SapporoTower.jpg';
 import FukuokaHero from '../../assets/fukuokahutami.jpg';
 import FukuokaCastle from '../../assets/FukuokaCastle.jpg';
+import FukuokaCastle2 from '../../assets/FukuokaCastle2.jpg';
 import HakataCity from '../../assets/HakataCity.jpg';
+import hakatadepartbelow from '../../assets/hakatadepartbelow.jpg';
+import hakataIlumi from '../../assets/hakataIlumi.jpg';
 import OkinawaHero from '../../assets/OkinawaResort.jpg';
 import Shurijo from '../../assets/Shurijo.jpg';
 import OkiAquarium from '../../assets/OkiAquarium.jpg';
@@ -29,12 +32,16 @@ import Osunatumaturi from '../../assets/Osunatumaturi.jpg';
 import OsuIce from '../../assets/OsuIce.jpg';
 import osushotenkai from '../../assets/osushotenkai.jpg';
 import akihabara from '../../assets/akihabara.jpg';
+import akibaanimate from '../../assets/akibaanimate.jpg';
+import jetairyouiki from '../../assets/jetairyouiki.jpg';
+import fujiq1 from '../../assets/fujiq1.jpg';
+import fujiq2 from '../../assets/fujiq2.jpg';
+import fujiq3 from '../../assets/fujiq3.jpg';
 import Atsutamori from '../../assets/Atsutamori.jpg';
 import Atsutatakara from '../../assets/Atsutatakara.jpg';
 import Atsutaken from '../../assets/Atsutaken.jpg';
 import Atsutahontou from '../../assets/Atsutahontou.jpg';
 import NagoyaShinkansen from '../../assets/NagoyaShinkansen.jpg';
-import Nagoyalinear from '../../assets/Nagoyalinear.jpg';
 import nagoyasimul from '../../assets/nagoyasimul.jpg';
 import NagoyaScience from '../../assets/NagoyaScience.jpg';
 import nagoyaplanet from '../../assets/nagoyaplanet.jpg';
@@ -69,7 +76,6 @@ import NikkoSaru from '../../assets/NikkoSaru.jpg';
 import YangMeimon from '../../assets/YangMeimon.jpg';
 import DomeAttraction from '../../assets/DomeAttraction.jpg';
 import Sensoujimap from '../../assets/sensoujimap.jpg';
-import ShibuyaMomstouch from '../../assets/ShibuyaMomstouch.jpg';
 import ShibuyaScramble from '../../assets/ShibuyaScramble.jpg';
 import Meijisinku from '../../assets/meijisinku.jpg';
 import Swallows from '../../assets/Swallows.jpg';
@@ -78,6 +84,34 @@ import NagoyaHonmaru from '../../assets/NagoyaHonmaru.jpg';
 import NagoyaKingyo from '../../assets/NagoyaKingyo.jpg';
 import NagoyaNijimaru from '../../assets/NagoyaNijimaru.jpg';
 import Nagoya from '../../assets/Nagoya.jpg';
+import FukuCastleSakura from '../../assets/FukuCastleSakura.jpg';
+import nakasumap from '../../assets/nakasumap.jpg';
+import nakasukawa from '../../assets/nakasukawa.jpg';
+import NakasuNight from '../../assets/NakasuNight.jpeg';
+import nakasuramen from '../../assets/nakasuramen.jpg';
+import dazaifutenmangu from '../../assets/dazaifutenmangu.jpg';
+import dazaihu from '../../assets/dazaihu.jpg';
+import tobiume from '../../assets/tobiume.jpg';
+import umegaemochi from '../../assets/umegaemochi.jpg';
+import goshingyu from '../../assets/goshingyu.jpg';
+import jiburimori from '../../assets/jiburimori.jpg';
+import jiburi4 from '../../assets/jiburi4.jpg';
+import LegoTaiken from '../../assets/LegoTaiken.jpg';
+import LegoBoat from '../../assets/LegoBoat.jpg';
+import kushidashrine from '../../assets/kushidashrine.jpg';
+import gushidatori from '../../assets/gushidatori.jpg';
+import gushidamatsuri from '../../assets/gushidamatsuri.jpg';
+import gushidazinza from '../../assets/gushidazinza.jpg';
+import kushidatorie from '../../assets/kushidatorie.jpg';
+import paypaydome from '../../assets/paypaydome.jpg';
+import paypaymap from '../../assets/paypaymap.jpg';
+import softbankleedaeho from '../../assets/softbankleedaeho.jpg';
+import paypaygourmet from '../../assets/paypaygourmet.jpg';
+import paypayjapanseries from '../../assets/paypayjapanseries.png';
+import marineworld from '../../assets/marineworld.jpg';
+import marineaqua from '../../assets/marineaqua.jpg';
+import asikashow from '../../assets/asikashow.jpg';
+import marinehamabe from '../../assets/marinehamabe.jpg';
 
 type SpotDetail = {
   title: string;
@@ -192,11 +226,11 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
       heroImage: ShibuyaScramble,
       breadcrumb: ['東京', '渋谷区', '渋谷'],
       contentTitle: '渋谷の基本情報',
-      spots: ['マムスタッチ', '原宿ファッション街', '明治神宮', '東京ヤクルトスワローズ'],
-      imageLeft: ShibuyaMomstouch,
+      spots: ['スクランブル交差点', '原宿ファッション街', '明治神宮', '東京ヤクルトスワローズ'],
+      imageLeft: ShibuyaScramble,
       imageRight: ShibuyaBape,
       content:
-        '渋谷は東京を代表する若者の街として世界的に知られています。スクランブル交差点の大勢の人々が交差する光景は、東京の象徴的な風景の一つです。ファッション、エンターテイメント、グルメなど、様々な文化が集まる活気あふれる街です。<br><br>【2.1 マムスタッチ】<br>渋谷の新しいランドマーク「マムスタッチ」は、2020年にオープンした複合商業施設です。地上47階建ての高層ビルで、ショッピング、レストラン、オフィス、ホテルが入っています。最上階からの眺望は絶景で、渋谷の街並みを一望できます。また、マムスタッチ内には様々なブランドショップやレストラン、カフェが入っており、ショッピングとグルメを同時に楽しめる総合エンターテイメント施設として人気を集めています。<br><br>【2.2 原宿ファッション街】<br>渋谷から徒歩圏内の原宿は、日本のファッション文化の発信地として知られています。竹下通りには若者向けのショップが並び、カワイイ文化やストリートファッションの中心地となっています。週末には多くのファッション好きの若者が集まり、独特の文化を形成しています。また、原宿にはヒューマンメイドやベイプなどの高級ストリートブランドが集まっており、ファッション愛好家たちの聖地としても知られています。これらのブランドは日本のストリートファッション文化を世界に発信する重要な役割を担っています。<br><br>【2.3 明治神宮】<br>渋谷から徒歩圏内にある明治神宮は、明治天皇と昭憲皇太后を祀る神社です。都心にありながら70万平方メートルもの広大な森に囲まれた、東京のオアシスとして親しまれています。初詣の参拝者数は日本一を誇り、年間を通じて多くの参拝者が訪れます。高さ12m、幅17mの巨大な木造鳥居や、秋の銀杏並木で有名な神宮外苑も見どころです。<br><br>【2.4 東京ヤクルトスワローズ】<br>東京ヤクルトスワローズは渋谷を本拠地とするプロ野球チームです。渋谷の街の活気과 젊은 에너지를 상징하는 팀으로서 지구 팬들에게 사랑받고 있습니다. 경기 관람은 물론, 팀 굿즈 구매나 선수와의 교류 이벤트 등 야구 팬들에게 특별한 체험을 제공합니다. 또한 스왈로즈는 일본 프로야구의 대표적인 팀 중 하나로, 국내외 야구 팬들에게 널리 알려져 있습니다. 팀의 마스코트인 츠바메군과 함께 다양한 이벤트와 팬 서비스를 제공하여 가족 단위 관람객들에게도 인기가 높습니다.',
+        '渋谷は東京を代表する若者の街として世界的に知られています。スクランブル交差点の大勢の人々が交差する光景は、東京の象徴的な風景の一つです。ファッション、エンターテイメント、グルメなど、様々な文化が集まる活気あふれる街です。<br><br>【2.1 スクランブル交差点】<br>渋谷の象徴であるスクランブル交差点は、世界で最も有名な交差点の一つです。1回の青信号で約3000人が交差し、1日あたり約50万人が利用する世界最大級の交差点として知られています。5つの道路が交差する複雑な構造で、周囲には巨大なビジョンや広告看板が立ち並び、東京の活気を象徴する光景を演出しています。特に夕方のラッシュアワーには、多くの人々が一斉に交差点を渡る様子は圧巻で、観光客にとって必見のスポットとなっています。<br><br>【2.2 原宿ファッション街】<br>渋谷から徒歩圏内の原宿は、日本のファッション文化の発信地として知られています。竹下通りには若者向けのショップが並び、カワイイ文化やストリートファッションの中心地となっています。週末には多くのファッション好きの若者が集まり、独特の文化を形成しています。また、原宿にはヒューマンメイドやベイプなどの高級ストリートブランドが集まっており、ファッション愛好家たちの聖地としても知られています。これらのブランドは日本のストリートファッション文化を世界に発信する重要な役割を担っています。<br><br>【2.3 明治神宮】<br>渋谷から徒歩圏内にある明治神宮は、明治天皇と昭憲皇太后を祀る神社です。都心にありながら70万平方メートルもの広大な森に囲まれた、東京のオアシスとして親しまれています。初詣の参拝者数は日本一を誇り、年間を通じて多くの参拝者が訪れます。高さ12m、幅17mの巨大な木造鳥居や、秋の銀杏並木で有名な神宮外苑も見どころです。<br><br>【2.4 東京ヤクルトスワローズ】<br>東京ヤクルトスワローズは渋谷を本拠地とするプロ野球チームです。渋谷の街の活気과 젊은 에너지를 상징하는 팀으로서 지구 팬들에게 사랑받고 있습니다. 경기 관람은 물론, 팀 굿즈 구매나 선수와의 교류 이벤트 등 야구 팬들에게 특별한 체험을 제공합니다. 또한 스왈로즈는 일본 프로야구의 대표적인 팀 중 하나로, 국내외 야구 팬들에게 널리 알려져 있습니다. 팀의 마스코트인 츠바메군과 함께 다양한 이벤트와 팬 서비스를 제공하여 가족 단위 관람객들에게도 인기가 높습니다.',
     },
     '33': {
       title: '秋葉原',
@@ -205,11 +239,24 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
       heroImage: akihabara,
       breadcrumb: ['東京', '千代田区', '秋葉原'],
       contentTitle: '秋葉原の基本情報',
-      spots: ['アニメグッズ店', 'ゲームセンター', '電子機器店', 'メイドカフェ'],
-      imageLeft: akihabara,
-      imageRight: akihabara,
+      spots: ['アニメイト', 'アキバ絶対領域（メイドカフェ）'],
+      imageLeft: akibaanimate,
+      imageRight: jetairyouiki,
       content:
-        '秋葉原はアニメ・ゲーム・電子機器の聖地として世界的に知られる街です。オタク文化の中心地として発展し、最新のテクノロジーとサブカルチャーが融合した独特な雰囲気が魅力です。一日中楽しめる観光スポットとして、国内外から多くの観光客が訪れます。<br><br>【2.1 アニメグッズ店】<br>秋葉原には数多くのアニメ・漫画グッズ専門店が立ち並んでいます。最新のフィギュアやコスプレ衣装、同人誌など、オタク文化の最先端を体験できます。特に大型店舗では限定商品や新作グッズが豊富に揃っており、コレクターにとっては宝の山です。週末には多くのアニメファンが集まり、活気あふれる雰囲気を楽しめます。<br><br>【2.2 ゲームセンター】<br>秋葉原のゲームセンターは最新のアーケードゲームからレトロゲームまで、幅広いジャンルのゲームを楽しめます。特に音楽ゲームや格闘ゲームの大会が頻繁に開催され、プロゲーマーやゲーム愛好家が集まる聖地となっています。また、プライズゲームで景品を狙うのも秋葉原の楽しみの一つです。<br><br>【2.3 電子機器店】<br>秋葉原は日本の秋葉原とも呼ばれ、様々な電子機器店が集まっています。最新のガジェットから中古品まで、幅広い商品を扱っており、テクノロジー愛好家にとっては宝の山です。特にパソコンパーツやスマートフォンアクセサリーの品揃えは豊富で、最新技術をいち早く体験できます。<br><br>【2.4 メイドカフェ】<br>秋葉原発祥のメイドカフェは、現在では世界的に知られる日本独自の文化です。メイド服を着たスタッフがお客様をおもてなしし、独特の体験を提供します。コスプレ文化と融合したこのサービスは、秋葉原のサブカルチャーを代表する存在として人気を集めています。',
+        '秋葉原はアニメ・ゲーム・電子機器の聖地として世界的に知られる街です。オタク文化の中心地として発展し、最新のテクノロジーとサブカルチャーが融合した独特な雰囲気が魅力です。一日中楽しめる観光スポットとして、国内外から多くの観光客が訪れます。<br><br>【2.1 アニメイト】<br>アニメイトは日本最大級のアニメ・漫画グッズ専門チェーン店です。秋葉原店は特に大型店舗として知られ、最新のフィギュア、コスプレ衣装、同人誌、CD、DVDなど、アニメファンにとって必要なものが全て揃っています。限定商品や新作グッズの先行販売も多く、コレクターにとっては必見のスポットです。店内にはアニメの世界観を再現したコーナーもあり、ファンにとって特別な体験を提供します。<br><br>【2.2 アキバ絶対領域（メイドカフェ）】<br>秋葉原発祥のメイドカフェは、現在では世界的に知られる日本独自の文化です。「アキバ絶対領域」は秋葉原のメイドカフェ文化を象徴する言葉で、メイド服を着たスタッフがお客様を「ご主人様」「お嬢様」と呼んでおもてなしします。独特の接客スタイルとコスプレ文化が融合したこのサービスは、秋葉原のサブカルチャーを代表する存在として人気を集めています。店内では写真撮影やゲーム、歌の披露など、様々なエンターテイメントを楽しむことができます。',
+    },
+    '34': {
+      title: '富士急ハイランド',
+      description: '絶叫マシンで有名なテーマパーク。富士山を背景にした絶景アトラクション',
+      author: 'タビログ編集部',
+      heroImage: fujiq1,
+      breadcrumb: ['東京', '富士吉田市', '富士急ハイランド'],
+      contentTitle: '富士急ハイランドの基本情報',
+      spots: ['絶叫マシン', '富士山ビュー', 'アトラクション'],
+      imageLeft: fujiq2,
+      imageRight: fujiq3,
+      content:
+        '富士急ハイランドは富士山を背景にした絶叫マシンで有名なテーマパークです。世界記録を持つアトラクションや富士山の絶景を楽しめるアトラクションなど、スリルと絶景を同時に楽しめる日本屈指のテーマパークとして人気を集めています。<br><br>【2.1 絶叫マシン】<br>富士急ハイランドは世界記録を持つ絶叫マシンで有名です。「ド・ドドンパ」は世界最速のジェットコースターとして知られ、最高時速180kmで走行します。「ええじゃないか」は世界最大の振り子角度を持つアトラクションで、最大角度121度まで振り子が揺れます。これらの絶叫マシンは世界中のスリル好きな観光客を引き寄せています。<br><br>【2.2 富士山ビュー】<br>富士急ハイランドの最大の魅力は富士山を背景にした絶景です。多くのアトラクションから富士山の美しい姿を眺めることができ、特に「富士飛行社」や「大観覧車」からは富士山の全景を楽しめます。天気の良い日には富士山の雄大な姿とアトラクションのスリルを同時に体験できる特別な感動を味わえます。<br><br>【2.3 アトラクション】<br>富士急ハイランドには絶叫マシン以外にも様々なアトラクションがあります。「トーマスランド」は小さな子供向けのエリアで、トーマス・ザ・タンクエンジンの世界観を楽しめます。「ナガシマスカイ」は富士山を背景にした大観覧車で、ゆっくりと富士山の絶景を楽しめます。家族連れから絶叫マシン好きまで、幅広い年齢層が楽しめるテーマパークです。',
     },
   },
   名古屋: {
@@ -290,6 +337,58 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
       imageRight: NagoyaBelluga,
       content:
         '名古屋港水族館はシャチ、ベルーガ、イルカショーで有名な水族館で、家族連れに人気の観光スポットです。日本海と太平洋の海洋生物を中心に、多様な海の生き物を観察できます。<br><br>【2.1 シャチショー】<br>名古屋港水族館のシャチショーは日本でも数少ない貴重なショーです。シャチの迫力あるパフォーマンスは圧巻で、その知能の高さと美しさを間近で体験できます。ショーは1日数回開催され、多くの観客で賑わいます。<br><br>【2.2 ベルーガ展示】<br>白いクジラとして知られるベルーガの展示は、水族館の目玉の一つです。ベルーガの優雅な泳ぎと愛らしい表情は、見る人の心を和ませます。また、ベルーガの生態について詳しく学ぶことができる展示も充実しています。<br><br>【2.3 イルカショー】<br>イルカショーでは、イルカの高い知能と優れた運動能力を活かしたパフォーマンスを楽しめます。ジャンプやフリップなどの華麗な技は、観客を魅了します。ショー後にはイルカとの触れ合い体験も可能です。<br><br>【2.4 深海生物展示】<br>水族館には深海に生息する神秘的な生物の展示もあります。光の届かない深海の環境を再現した展示では、普段見ることのできない珍しい生物を観察できます。深海の生態系について学ぶ貴重な機会となります。',
+    },
+    '40': {
+      title: '中洲屋台',
+      description: '福岡の夜を彩る屋台街。博多グルメを堪能できる名所',
+      author: 'タビログ編集部',
+      heroImage: nakasukawa,
+      breadcrumb: ['福岡', '中洲', '中洲屋台'],
+      contentTitle: '中洲屋台の基本情報',
+      spots: ['屋台グルメ', '屋台の雰囲気', '川沿いナイトビュー'],
+      imageLeft: NakasuNight,
+      imageRight: nakasuramen,
+      content:
+        '中洲屋台は福岡の夜を象徴するグルメスポット。博多ラーメン、焼きラーメン、もつ煮、明太子料理など、地元ならではの味を気軽に楽しめます。観光客と地元客が肩を並べて食事を楽しむ活気ある雰囲気が魅力です。<br><br>【2.1 屋台グルメ】<br>定番の博多ラーメンから、焼きラーメン、天ぷら、焼き鳥、明太子を使った創作料理まで、屋台ごとに個性豊かなメニューが揃います。少量ずつ食べ歩きしながらお気に入りの一品を見つけるのがおすすめ。<br><br>【2.2 屋台の雰囲気】<br>屋台は店主との距離が近く、会話も楽しめるカウンタースタイル。旅の情報交換や地元のおすすめを教えてもらえるのも醍醐味です。混雑時は相席になることもあり、一期一会の出会いが生まれます。<br><br>【2.3 川沿いナイトビュー】<br>中洲の川沿いはネオンが水面に映り込むフォトジェニックな夜景スポット。食後に川沿いを散策すれば、屋台の明かりと夜景が織りなす福岡ならではのロマンチックな時間を過ごせます。',
+    },
+    '41': {
+      title: '太宰府天満宮',
+      description: '学問の神様・菅原道真公を祀る全国天満宮の総本宮のひとつ',
+      author: 'タビログ編集部',
+      heroImage: dazaifutenmangu,
+      breadcrumb: ['福岡', '太宰府', '太宰府天満宮'],
+      contentTitle: '太宰府天満宮の基本情報',
+      spots: ['本殿・御神牛', '梅苑・飛梅', '参道と御朱印'],
+      imageLeft: goshingyu,
+      imageRight: dazaifutenmangu,
+      content:
+        '太宰府天満宮は学問の神様として知られる菅原道真公を祀る神社。境内には心字池や太鼓橋、楼門、本殿など見どころが点在し、四季折々の美しさが楽しめます。受験合格祈願や厄除けに訪れる参拝客で年間を通じて賑わいます。<br><br>【2.1 本殿・御神牛】<br>荘厳な本殿は参拝の中心。境内に点在する「御神牛」の像は頭を撫でると知恵が授かるといわれ、受験生をはじめ多くの参拝者に親しまれています。楼門から本殿へ続く参道は写真スポットとしても人気です。<br><br>【2.2 梅苑・飛梅】<br>境内は梅の名所として有名で、早春には約200種・6,000本ともいわれる梅が咲き誇ります。道真公の伝説にまつわる「飛梅」は天満宮の象徴的存在。梅の香りとともに太宰府らしい風景を楽しめます。<br><br>【2.3 参道と御朱印】<br>表参道には梅ヶ枝餅の老舗が並び、食べ歩きも醍醐味。授与所では御朱印をいただくことができ、旅の記念として人気です。土日や受験シーズンは混雑するため、朝の時間帯の参拝がおすすめです。',
+    },
+    '42': {
+      title: '櫛田神社',
+      description: '博多祇園山笠で知られる博多総鎮守。商売繁盛・不老長寿の御利益で有名',
+      author: 'タビログ編集部',
+      heroImage: gushidazinza,
+      breadcrumb: ['福岡', '博多区', '櫛田神社'],
+      contentTitle: '櫛田神社の基本情報',
+      spots: ['楼門と飾り山', '霊泉鶴の井戸', '博多べいと御朱印'],
+      imageLeft: gushidamatsuri,
+      imageRight: gushidatori,
+      content:
+        '櫛田神社は博多の総鎮守として「お櫛田さん」の愛称で親しまれる古社。毎年7月の博多祇園山笠で有名で、境内や楼門には祭りの飾り山が常設展示され、博多文化の象徴的な存在です。商売繁盛・不老長寿の御利益があるとされ、地元の人々や観光客で一年中賑わいます。<br><br>【2.1 楼門と飾り山】<br>豪壮な楼門をくぐると迫力ある「飾り山」が出迎えます。山笠の歴史や見送り・表の意匠を間近で鑑賞でき、祭り期間外でも博多の祭文化に触れられるのが魅力。写真スポットとしても人気です。<br><br>【2.2 霊泉鶴の井戸】<br>境内の「霊泉鶴の井戸」は不老長寿の霊泉として知られ、口をすすぐと健康長寿の御利益があると伝えられています。清冽な湧水と静謐な空気に心が洗われるスポットです。<br><br>【2.3 博多べいと御朱印】<br>櫛田神社周辺には「博多べい（博多塀）」と呼ばれる歴史的な土塀が残り、古き良き街並みの情緒を感じられます。授与所では季節限定デザインの御朱印をいただけることもあり、参拝の記念に人気です。参道の飴屋・菓子店を巡る食べ歩きもおすすめ。',
+    },
+    '45': {
+      title: '福岡PayPayドーム（ソフトバンクホークス）',
+      description: 'ホークス本拠地の多目的ドーム。野球観戦とエンタメが集約',
+      author: 'タビログ編集部',
+      heroImage: paypaydome,
+      breadcrumb: ['福岡', '中央区', '福岡PayPayドーム'],
+      contentTitle: '福岡PayPayドームの基本情報',
+      spots: ['球場ツアー', '李大浩（イ・デホ）選手の活躍', '周辺施設とグルメ'],
+      imageLeft: paypaymap,
+      imageRight: softbankleedaeho,
+      content:
+        '福岡PayPayドームは福岡ソフトバンクホークスの本拠地として知られる多目的ドーム。全天候型の快適な観戦環境に加え、最新演出やイベントも魅力で、野球ファンはもちろん家族連れや観光客にも人気のスポットです。隣接の商業施設や海辺の散策と合わせて一日楽しめます。<br><br>【2.1 球場ツアー】<br>普段は入れないベンチやブルペン、記者会見室などを巡るガイド付きツアーを実施。球場運営の裏側や歴史展示を見学でき、ホークスファンにはたまらない体験。優勝トロフィーや名場面のパネルも必見です。<br><br>【2.2 李大浩（イ・デホ）選手の活躍】<br>2014年から2シーズン在籍した李大浩（イ・デホ）選手は、ホークスの日本一に大きく貢献した強打者。クラッチヒッターとしてポストシーズンでも勝負強さを発揮し、福岡のファンに強烈なインパクトを残しました。豪快な本塁打と勝負所での適時打は、今もドームの名場面として語り継がれています。背番号や応援歌にまつわるエピソードも多く、球場内の展示やグッズでその功績を辿ることができます。<br><br>【2.3 周辺施設とグルメ】<br>ドーム隣接の商業施設や海沿いエリアでは、ショッピングやカフェ、展望スポットを満喫できます。試合前後には博多名物のグルメもおすすめ。家族や友人と過ごす休日のお出かけ先としても最適です。',
     },
   },
   大阪: {
@@ -394,27 +493,92 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
       title: '福岡城跡',
       description: '福岡の歴史を感じられる城跡',
       author: 'タビログ編集部',
-      heroImage: FukuokaHero,
+      heroImage: FukuokaCastle2,
       breadcrumb: ['福岡', '中央区', '福岡城跡'],
       contentTitle: '福岡城跡の基本情報',
       spots: ['天守台跡', '花見スポット', '舞鶴公園'],
       imageLeft: FukuokaCastle,
-      imageRight: FukuokaHero,
+      imageRight: FukuCastleSakura,
       content:
-        '福岡城跡（舞鶴公園）は石垣や堀の遺構が良好に残る歴史公園。春は桜の名所として知られ、ライトアップ時は幻想的な雰囲気に包まれます。天守台跡からは市街地を一望でき、歴史散策と自然鑑賞を同時に楽しめます。',
+        '福岡城跡（舞鶴公園）は石垣や堀の遺構が良好に残る歴史公園。春は桜の名所として知られ、ライトアップ時は幻想的な雰囲気に包まれます。天守台跡からは市街地を一望でき、歴史散策と自然鑑賞を同時に楽しめます。<br><br>【2.1 天守台跡】<br>福岡城の中心部に位置する天守台跡は、城下町・福岡の街並みを高台から一望できる絶景スポット。当時の天守は現存しないものの、堅固な石垣が往時の威容を物語ります。夕刻には街の灯りと桜のライトアップが重なり、歴史と夜景の美しさを同時に楽しめます。<br><br>【2.2 花見スポット】<br>舞鶴公園一帯は福岡屈指の桜名所。ソメイヨシノを中心に多様な品種が植えられ、満開の時期には園内がピンク色に染まります。お堀沿いの桜並木や石垣と桜のコントラストは写真映え抜群。屋台や期間限定のライトアップも行われ、昼夜を問わず多くの花見客で賑わいます。<br><br>【2.3 舞鶴公園】<br>広大な芝生広場、池、遊歩道が整備された市民の憩いの場。四季の花々に彩られ、春は桜、初夏は新緑、秋には紅葉が楽しめます。城跡の史跡巡りと合わせて、のんびり散策やピクニックにも最適。園内の案内板や資料館では城の歴史も学べ、学びと癒やしが両立するスポットです。',
     },
     '10': {
       title: '博多駅',
       description: '福岡の玄関口。グルメとショッピングの中心地',
       author: 'タビログ編集部',
-      heroImage: FukuokaHero,
+      heroImage: HakataCity,
       breadcrumb: ['福岡', '博多区', '博多駅'],
       contentTitle: '博多駅の基本情報',
       spots: ['駅ビル', 'デパ地下', 'イルミネーション'],
-      imageLeft: HakataCity,
-      imageRight: FukuokaHero,
+      imageLeft: hakatadepartbelow,
+      imageRight: hakataIlumi,
       content:
         '博多駅は九州の玄関口。駅ビルには名物の明太子や豚骨ラーメン、銘菓など福岡グルメが集結し、ショッピングも充実。イルミネーションやイベントも多く、旅行初日・最終日の滞在でも満足度の高い時間を過ごせます。空港や地下鉄とのアクセスも至便です。',
+    },
+    '40': {
+      title: '中洲屋台',
+      description: '福岡の夜を彩る屋台街。博多グルメを堪能できる名所',
+      author: 'タビログ編集部',
+      heroImage: nakasukawa,
+      breadcrumb: ['福岡', '中洲', '中洲屋台'],
+      contentTitle: '中洲屋台の基本情報',
+      spots: ['屋台グルメ', '屋台の雰囲気', '川沿いナイトビュー'],
+      imageLeft: NakasuNight,
+      imageRight: nakasuramen,
+      content:
+        '中洲屋台は福岡の夜を象徴するグルメスポット。博多ラーメン、焼きラーメン、もつ煮、明太子料理など、地元ならではの味を気軽に楽しめます。観光客と地元客が肩を並べて食事を楽しむ活気ある雰囲気が魅力です。<br><br>【2.1 屋台グルメ】<br>定番の博多ラーメンから、焼きラーメン、天ぷら、焼き鳥、明太子を使った創作料理まで、屋台ごとに個性豊かなメニューが揃います。少量ずつ食べ歩きしながらお気に入りの一品を見つけるのがおすすめ。<br><br>【2.2 屋台の雰囲気】<br>屋台は店主との距離が近く、会話も楽しめるカウンタースタイル。旅の情報交換や地元のおすすめを教えてもらえるのも醍醐味です。混雑時は相席になることもあり、一期一会の出会いが生まれます。<br><br>【2.3 川沿いナイトビュー】<br>中洲の川沿いはネオンが水面に映り込むフォトジェニックな夜景スポット。食後に川沿いを散策すれば、屋台の明かりと夜景が織りなす福岡ならではのロマンチックな時間を過ごせます。',
+    },
+    '41': {
+      title: '太宰府天満宮',
+      description: '学問の神様・菅原道真公を祀る全国天満宮の総本宮のひとつ',
+      author: 'タビログ編集部',
+      heroImage: dazaifutenmangu,
+      breadcrumb: ['福岡', '太宰府', '太宰府天満宮'],
+      contentTitle: '太宰府天満宮の基本情報',
+      spots: ['本殿・御神牛', '梅苑・飛梅', '参道と御朱印'],
+      imageLeft: goshingyu,
+      imageRight: dazaifutenmangu,
+      content:
+        '太宰府天満宮は学問の神様として知られる菅原道真公を祀る神社。境内には心字池や太鼓橋、楼門、本殿など見どころが点在し、四季折々の美しさが楽しめます。受験合格祈願や厄除けに訪れる参拝客で年間を通じて賑わいます。<br><br>【2.1 本殿・御神牛】<br>荘厳な本殿は参拝の中心。境内に点在する「御神牛」の像は頭を撫でると知恵が授かるといわれ、受験生をはじめ多くの参拝者に親しまれています。楼門から本殿へ続く参道は写真スポットとしても人気です。<br><br>【2.2 梅苑・飛梅】<br>境内は梅の名所として有名で、早春には約200種・6,000本ともいわれる梅が咲き誇ります。道真公の伝説にまつわる「飛梅」は天満宮の象徴的存在。梅の香りとともに太宰府らしい風景を楽しめます。<br><br>【2.3 参道と御朱印】<br>表参道には梅ヶ枝餅の老舗が並び、食べ歩きも醍醐味。授与所では御朱印をいただくことができ、旅の記念として人気です。土日や受験シーズンは混雑するため、朝の時間帯の参拝がおすすめです。',
+    },
+    '42': {
+      title: '櫛田神社',
+      description: '博多祇園山笠で知られる博多総鎮守。商売繁盛・不老長寿の御利益で有名',
+      author: 'タビログ編集部',
+      heroImage: gushidazinza,
+      breadcrumb: ['福岡', '博多区', '櫛田神社'],
+      contentTitle: '櫛田神社の基本情報',
+      spots: ['楼門と飾り山', '霊泉鶴の井戸', '博多べいと御朱印'],
+      imageLeft: gushidamatsuri,
+      imageRight: gushidatori,
+      content:
+        '櫛田神社は博多の総鎮守として「お櫛田さん」の愛称で親しまれる古社。毎年7月の博多祇園山笠で有名で、境内や楼門には祭りの飾り山が常設展示され、博多文化の象徴的な存在です。商売繁盛・不老長寿の御利益があるとされ、地元の人々や観光客で一年中賑わいます。<br><br>【2.1 楼門と飾り山】<br>豪壮な楼門をくぐると迫力ある「飾り山」が出迎えます。山笠の歴史や見送り・表の意匠を間近で鑑賞でき、祭り期間外でも博多の祭文化に触れられるのが魅力。写真スポットとしても人気です。<br><br>【2.2 霊泉鶴の井戸】<br>境内の「霊泉鶴の井戸」は不老長寿の霊泉として知られ、口をすすぐと健康長寿の御利益があると伝えられています。清冽な湧水と静謐な空気に心が洗われるスポットです。<br><br>【2.3 博多べいと御朱印】<br>櫛田神社周辺には「博多べい（博多塀）」と呼ばれる歴史的な土塀が残り、古き良き街並みの情緒を感じられます。授与所では季節限定デザインの御朱印をいただけることもあり、参拝の記念に人気です。参道の飴屋・菓子店を巡る食べ歩きもおすすめ。',
+    },
+    '43': {
+      title: 'マリンワールド海の中道',
+      description: '九州の海をテーマにした水族館。大水槽とイルカショーが人気',
+      author: 'タビログ編集部',
+      heroImage: marineworld,
+      breadcrumb: ['福岡', '東区', 'マリンワールド海の中道'],
+      contentTitle: 'マリンワールド海の中道の基本情報',
+      spots: ['九州の海 大水槽', 'イルカ・アシカショー', '展望デッキと海辺散策'],
+      imageLeft: marineworld,
+      imageRight: marineaqua,
+      content:
+        'マリンワールド海の中道は「九州の海」をテーマにした水族館。玄界灘や有明海など地域の海を再現した展示が特徴で、家族連れやカップルに人気です。館内の動線は海辺散策のように心地よく、屋外エリアから望む博多湾の景色も見どころ。<br><br>【2.1 九州の海 大水槽】<br>高さ・幅ともに迫力のある大水槽では、イワシの群泳やサメ、エイが織りなすダイナミックな世界を体感できます。時間帯によっては解説付きの給餌タイムが実施され、海の生態について楽しく学べます。<br><br>【2.2 イルカ・アシカショー】<br>屋外スタジアムでは、イルカとアシカのパフォーマンスを上演。ジャンプや連携技が繰り出されるショーは臨場感たっぷりで、海風を感じながら観覧できるのも魅力です。季節限定のナイトショーや演出も要チェック。<br><br>【2.3 展望デッキと海辺散策】<br>館外の展望デッキからは博多湾や志賀島方面の眺望が広がります。帰り道は海の中道の遊歩道を散策し、海辺の風景や芝生広場でのんびり過ごすのもおすすめ。館内外で一日ゆっくり楽しめるスポットです。',
+    },
+    '45': {
+      title: '福岡PayPayドーム（ソフトバンクホークス）',
+      description: 'ホークス本拠地の多目的ドーム。野球観戦とエンタメが集約',
+      author: 'タビログ編集部',
+      heroImage: paypaydome,
+      breadcrumb: ['福岡', '中央区', '福岡PayPayドーム'],
+      contentTitle: '福岡PayPayドームの基本情報',
+      spots: ['球場ツアー', '李大浩（イ・デホ）選手の活躍', '周辺施設とグルメ'],
+      imageLeft: paypaymap,
+      imageRight: softbankleedaeho,
+      content:
+        '福岡PayPayドームは福岡ソフトバンクホークスの本拠地として知られる多目的ドーム。全天候型の快適な観戦環境に加え、最新演出やイベントも魅力で、野球ファンはもちろん家族連れや観光客にも人気のスポットです。隣接の商業施設や海辺の散策と合わせて一日楽しめます。<br><br>【2.1 球場ツアー】<br>普段は入れないベンチやブルペン、記者会見室などを巡るガイド付きツアーを実施。球場運営の裏側や歴史展示を見学でき、ホークスファンにはたまらない体験。優勝トロフィーや名場面のパネルも必見です。<br><br>【2.2 李大浩（イ・デホ）選手の活躍】<br>2014年から2シーズン在籍した李大浩（イ・デホ）選手は、ホークスの日本一に大きく貢献した強打者。クラッチヒッターとしてポストシーズンでも勝負強さを発揮し、福岡のファンに強烈なインパクトを残しました。豪快な本塁打と勝負所での適時打は、今もドームの名場面として語り継がれています。背番号や応援歌にまつわるエピソードも多く、球場内の展示やグッズでその功績を辿ることができます。<br><br>【2.3 周辺施設とグルメ】<br>ドーム隣接の商業施設や海沿いエリアでは、ショッピングやカフェ、展望スポットを満喫できます。試合前後には博多名物のグルメもおすすめ。家族や友人と過ごす休日のお出かけ先としても最適です。',
     },
   },
   沖縄: {
@@ -506,8 +670,23 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
 const SpotDetailPage = () => {
   const { city, id } = useParams<{ city: string; id: string }>();
 
-  const cityKey = city || '東京';
-  const idKey = id || '1';
+  const cityAliasMap: Record<string, string> = {
+    // Korean -> Japanese city name normalization
+    도쿄: '東京',
+    오사카: '大阪',
+    교토: '京都',
+    삿포로: '札幌',
+    후쿠오카: '福岡',
+    나고야: '名古屋',
+    오키나와: '沖縄',
+    히로시마: '広島',
+    카나자와: '金沢',
+  };
+
+  const rawCity = city ? decodeURIComponent(city).trim() : '東京';
+  const normalizedCity = cityAliasMap[rawCity] || rawCity || '東京';
+  const cityKey = normalizedCity;
+  const idKey = (id || '1').trim();
 
   const detail: SpotDetail | undefined = SPOT_DETAILS[cityKey]?.[idKey];
 
@@ -611,6 +790,42 @@ const SpotDetailPage = () => {
                 <div
                   className="h-64 bg-cover bg-center bg-no-repeat"
                   style={{ backgroundImage: `url(${DomeAttraction})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+
+          {/* Extra Images for PayPay Dome (Fukuoka 45) */}
+          {cityKey === '福岡' && idKey === '45' && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${paypaygourmet})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${paypayjapanseries})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+
+          {/* Extra Images for Marine World (Fukuoka 43) */}
+          {cityKey === '福岡' && idKey === '43' && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${asikashow})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${marinehamabe})` }}
                 ></div>
               </div>
             </div>
@@ -773,6 +988,42 @@ const SpotDetailPage = () => {
                 <div
                   className="h-64 bg-cover bg-center bg-no-repeat"
                   style={{ backgroundImage: `url(${NikkoSaru})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+
+          {/* Extra Images for Dazaifu Tenmangu */}
+          {cityKey === '福岡' && idKey === '41' && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${umegaemochi})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${tobiume})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+
+          {/* Extra Images for Kushida Shrine */}
+          {cityKey === '福岡' && idKey === '42' && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${kushidashrine})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${kushidatorie})` }}
                 ></div>
               </div>
             </div>
