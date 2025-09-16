@@ -2,18 +2,12 @@ import React from 'react';
 import { Avatar, AvatarImage, AvatarFallback } from '../../../components/ui/avatar';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../../components/ui/select';
 import CommonPopup from '../../../components/common/CommonPopup';
-
-interface Member {
-  id: number;
-  userNickname: string;
-  avatar?: string;
-  role?: string;
-}
+import { PlanMember } from '../../../lib/type';
 
 interface MemberDetailPopupProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  members?: Member[];
+  members?: PlanMember[];
   onConfirm?: (memberId: number, role: string) => void;
   onCancel?: () => void;
 }
@@ -57,7 +51,7 @@ export default function MemberDetailPopup({
   };
 
   // 선택된 멤버 정보 가져오기
-  const selectedMember = members.find((member) => member.id === selectedMemberId);
+  const selectedMember = members.find((member) => member.userId === selectedMemberId);
 
   // 첫 번째 멤버를 기본 선택으로 설정 (팝업이 열릴 때)
   React.useEffect(() => {
@@ -136,7 +130,7 @@ export default function MemberDetailPopup({
           </SelectTrigger>
           <SelectContent>
             {members.map((member) => (
-              <SelectItem key={member.id} value={member.id.toString()}>
+              <SelectItem key={member.userId} value={member.userId.toString()}>
                 {member.userNickname}
               </SelectItem>
             ))}

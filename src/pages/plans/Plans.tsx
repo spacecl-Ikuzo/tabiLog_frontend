@@ -425,7 +425,7 @@ export default function Plans() {
                     </div>
                     <div className="flex gap-5">
                       {travelMembers.slice(0, 5).map((member) => (
-                        <Avatar key={member.id} className="w-18 h-18">
+                        <Avatar key={member.userId} className="w-18 h-18">
                           <AvatarFallback className={`${member.color} text-white text-sm font-medium`}>
                             {member.userNickname?.slice(0, 2) || '??'}
                           </AvatarFallback>
@@ -519,6 +519,7 @@ export default function Plans() {
       <InviteMemberPopup
         open={isInvitePopupOpen}
         onOpenChange={setIsInvitePopupOpen}
+        planId={selectedPlanId || 0}
         onConfirm={(email, role) => {
           console.log('招待メール:', email, '役割:', role);
 

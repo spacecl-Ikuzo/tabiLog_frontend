@@ -5,6 +5,7 @@ import CommonPopup from '../../../components/common/CommonPopup';
 
 interface Member {
   id: number;
+  userId: number;
   userNickname: string;
   color: string;
   avatar?: string;
@@ -35,7 +36,7 @@ export default function WarikanPopup({
       const equalAmount = Math.ceil(totalAmount / members.length);
       const initialAmounts: { [memberId: number]: number } = {};
       members.forEach((member) => {
-        initialAmounts[member.id] = equalAmount;
+        initialAmounts[member.userId] = equalAmount;
       });
       setMemberAmounts(initialAmounts);
     }
@@ -82,7 +83,7 @@ export default function WarikanPopup({
 
         <div className="space-y-4">
           {members.map((member) => (
-            <div key={member.id} className="flex items-center gap-3">
+            <div key={member.userId} className="flex items-center gap-3">
               <Avatar className="w-14 h-14 flex-shrink-0">
                 <AvatarFallback className={`${member.color} text-white text-base font-medium`}>
                   {member.userNickname?.slice(0, 2) || '??'}
@@ -92,8 +93,8 @@ export default function WarikanPopup({
               <div className="flex-1 pl-10">
                 <Input
                   type="text"
-                  value={memberAmounts[member.id]?.toLocaleString('ja-JP') || '0'}
-                  onChange={(e) => handleAmountChange(member.id, e.target.value)}
+                  value={memberAmounts[member.userId]?.toLocaleString('ja-JP') || '0'}
+                  onChange={(e) => handleAmountChange(member.userId, e.target.value)}
                   className="text-center px-4 py-3 text-base font-medium border-gray-300 rounded-lg bg-gray-50"
                   placeholder="0"
                 />
