@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '../../components/ui/button';
 import { Card, CardContent } from '../../components/ui/card';
 import { Input } from '../../components/ui/input';
@@ -10,6 +11,7 @@ import { format, parse, isValid, differenceInDays } from 'date-fns';
 import { ja } from 'date-fns/locale';
 
 export default function NewPlanCheckDate() {
+  const navigate = useNavigate();
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [errors, setErrors] = useState({ startDate: '', endDate: '' });
@@ -69,8 +71,8 @@ export default function NewPlanCheckDate() {
 
   const handleNextStep = () => {
     if (validateDateRange() && isDateSelected) {
-      // TODO: 다음 단계로 이동하는 로직 구현
-      console.log('선택된 날짜:', { startDate, endDate });
+      // 다음 단계로 이동 (상세 설정 페이지)
+      navigate(`/newPlan/detail?startDate=${startDate}&endDate=${endDate}`);
     }
   };
 
