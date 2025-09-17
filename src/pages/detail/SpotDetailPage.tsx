@@ -23,7 +23,22 @@ import hakatadepartbelow from '../../assets/hakatadepartbelow.jpg';
 import hakataIlumi from '../../assets/hakataIlumi.jpg';
 import OkinawaHero from '../../assets/OkinawaResort.jpg';
 import Shurijo from '../../assets/Shurijo.jpg';
+import seidenrekisi from '../../assets/seidenrekisi.jpg';
+import Shurijokaji from '../../assets/Shurijokaji.jpg';
+import sonokoutaki from '../../assets/sonokoutaki.jpg';
+import syureinomon from '../../assets/syureinomon.jpg';
 import OkiAquarium from '../../assets/OkiAquarium.jpg';
+import okinawazinbe from '../../assets/okinawazinbe.jpg';
+import okisangou from '../../assets/okisangou.jpg';
+import tsuraumiiruka from '../../assets/tsuraumiiruka.jpg';
+import tsuraumimap from '../../assets/tsuraumimap.jpg';
+import tsuraumisuizokukan from '../../assets/tsuraumisuizokukan.jpg';
+import Kokusaidori from '../../assets/Kokusaidori.jpg';
+import okimahoroba from '../../assets/okimahoroba.jpg';
+import okinawaliquor from '../../assets/okinawaliquor.jpg';
+import steakhouseoki from '../../assets/steakhouseoki.jpg';
+import okisteakhouse from '../../assets/okisteakhouse.jpg';
+import OkinawaResort from '../../assets/OkinawaResort.jpg';
 import NagoyaCastle from '../../assets/NagoyaCastle.jpg';
 import Atsutasinkyu from '../../assets/Atsutasinkyu.jpg';
 import OsuHistory from '../../assets/OsuHistory.jpg';
@@ -591,27 +606,40 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
       title: '首里城',
       description: '沖縄の歴史と文化を感じられる城',
       author: 'タビログ編集部',
-      heroImage: OkinawaHero,
+      heroImage: Shurijo,
       breadcrumb: ['沖縄', '那覇市', '首里城'],
       contentTitle: '首里城の基本情報',
-      spots: ['正殿', '守礼門', '園比屋武御嶽石門'],
+      spots: ['正殿', '守礼門', '園比屋武御嶽石門', '首里城火災と復旧'],
       imageLeft: Shurijo,
       imageRight: OkinawaHero,
       content:
-        '首里城は琉球王国の王宮で、朱色の正殿や城郭遺構が沖縄独自の歴史文化を物語ります。復元・保存が進む城内では琉球王国の政治や祭祀の一端に触れられます。那覇市街からのアクセスも良く、首里金城町石畳道の散策と合わせるのもおすすめです。',
+        '首里城は琉球王国の王宮で、朱色の正殿や城郭遺構が沖縄独自の歴史文化を物語ります。復元・保存が進む城内では琉球王国の政治や祭祀の一端に触れられます。那覇市街からのアクセスも良く、首里金城町石畳道の散策と合わせるのもおすすめです。<br><br>【2.1 正殿】<br>首里城の中心となる正殿は、琉球王国の政治の中心地として機能していました。朱色の美しい建物は沖縄独自の建築様式を表しており、中国と日本の建築文化が融合した独特の造形美を見せています。内部には王座や儀式の間が復元されており、琉球王国の栄華を偲ぶことができます。<br><br>【2.2 守礼門】<br>首里城の正門である守礼門は、琉球王国の威厳を象徴する美しい門です。「守礼之邦」の扁額が掲げられ、琉球王国が礼節を重んじる国であることを示しています。この門は首里城のシンボルとして多くの観光客に愛され、沖縄の歴史を象徴する重要な建造物です。<br><br>【2.3 園比屋武御嶽石門】<br>園比屋武御嶽石門は、琉球王国の宗教的聖地として重要な役割を果たしていた石門です。琉球の古い信仰である御嶽信仰の中心地として、王族や神女たちが祭祀を行った神聖な場所です。石造りの門は沖縄の自然と調和した美しい造形で、琉球の精神文化を今に伝えています。<br><br>【2.4 首里城火災と復旧】<br>2019年10月31日未明、首里城で大規模火災が発生し、正殿をはじめとする主要建物が焼失しました。この火災は沖縄県民のみならず、日本全国に大きな衝撃を与えました。火災後、沖縄県や那覇市、そして全国からの支援により復旧作業が進められています。2026年の復元完成を目指し、伝統的な工法と現代技術を組み合わせた復元が進んでいます。焼失した建物の詳細な記録や写真、図面を基に、琉球王国時代の姿を忠実に再現する作業が続けられており、首里城の完全復活への期待が高まっています。',
     },
     '12': {
       title: '美ら海水族館',
       description: '世界最大級の水族館。ジンベエザメが人気',
       author: 'タビログ編集部',
-      heroImage: OkinawaHero,
+      heroImage: OkiAquarium,
       breadcrumb: ['沖縄', '本部町', '美ら海水族館'],
       contentTitle: '美ら海水族館の基本情報',
-      spots: ['黒潮の海', 'サンゴの海', 'イルカショー'],
+      spots: ['黒潮の海', 'サンゴの海', 'イルカショー', '那覇から本部町への交通手段'],
       imageLeft: OkiAquarium,
       imageRight: OkinawaHero,
       content:
-        '美ら海水族館は世界最大級の水槽「黒潮の海」で泳ぐジンベエザメが圧巻。サンゴ礁の生態展示やイルカショー、研究バックヤードの取り組みも見応えがあります。周辺の海洋博公園やビーチと併せて一日満喫できます。',
+        '美ら海水族館は世界最大級の水槽「黒潮の海」で泳ぐジンベエザメが圧巻。サンゴ礁の生態展示やイルカショー、研究バックヤードの取り組みも見応えがあります。周辺の海洋博公園やビーチと併せて一日満喫できます。<br><br>【2.1 黒潮の海】<br>美ら海水族館の最大の見どころである「黒潮の海」は、世界最大級の水槽として知られています。幅35メートル、奥行き27メートル、深さ10メートルの巨大水槽で、ジンベエザメやマンタをはじめとする大型海洋生物が悠々と泳ぐ姿を観察できます。特にジンベエザメの優雅な泳ぎは圧巻で、多くの観光客を魅了しています。<br><br>【2.2 サンゴの海】<br>「サンゴの海」では、沖縄の美しいサンゴ礁の生態系を再現した展示を見ることができます。色とりどりのサンゴとそこに住む熱帯魚たちの共生関係を観察でき、沖縄の海の豊かさを実感できます。サンゴの成長過程や保護活動についても学ぶことができ、環境教育の場としても重要な役割を果たしています。<br><br>【2.3 イルカショー】<br>美ら海水族館では、オキゴンドウやバンドウイルカによる迫力満点のイルカショーを楽しむことができます。イルカたちの知能の高さと美しい演技は、家族連れに大人気です。ショーではイルカの生態や行動についても解説され、楽しく学べるエデュテインメントとしても評価されています。<br><br>【2.4 那覇から本部町への交通手段】<br>那覇から美ら海水族館がある本部町までは、車で約1時間30分、高速バスで約2時間の距離です。最も便利なのはレンタカーでのアクセスで、沖縄自動車道を利用すれば快適に移動できます。公共交通機関では、那覇バスターミナルから本部循環線（111番）に乗り、海洋博記念公園前で下車する方法があります。バスは約2時間で、料金は片道1,500円程度です。また、高速バス「やんばる急行バス」を利用すれば、那覇空港から直接美ら海水族館まで行くことができ、観光客には特に便利です。',
+    },
+    '46': {
+      title: '国際通り',
+      description: '那覇の中心街。沖縄のグルメとお土産が楽しめる',
+      author: 'タビログ編集部',
+      heroImage: Kokusaidori,
+      breadcrumb: ['沖縄', '那覇市', '国際通り'],
+      contentTitle: '国際通りの基本情報',
+      spots: ['沖縄グルメ', 'お土産ショッピング', '伝統工芸品'],
+      imageLeft: Kokusaidori,
+      imageRight: Kokusaidori,
+      content:
+        '国際通りは那覇市の中心部に位置する沖縄を代表する繁華街です。約1.6キロメートルの通りには、沖縄の伝統料理を味わえるレストラン、お土産店、伝統工芸品店などが軒を連ね、観光客に人気のスポットです。昼間はショッピングを楽しみ、夜は沖縄料理と泡盛で賑やかな雰囲気を味わえます。<br><br>【2.1 沖縄グルメ】<br>国際通りには沖縄を代表するグルメスポットが集まっています。ステーキハウス88は沖縄発祥のステーキレストランで、手頃な価格で本格的なステーキを楽しめることで人気です。沖縄牛を使ったステーキは柔らかく、ジューシーで、観光客にも地元の人々にも愛されています。また、マホロバは沖縄の伝統的な居酒屋で、泡盛と沖縄料理の組み合わせが絶品です。ゴーヤチャンプルー、ラフテー、ソーキそばなど、沖縄の郷土料理を本格的な味で楽しむことができ、沖縄の食文化を深く体験できる場所です。<br><br>【2.2 お土産ショッピング】<br>国際通りにはCalbee PLUS Okinawaという人気のお土産店があります。この店の最大の特徴は、注文と同時にポテトチップスを揚げてくれることです。沖縄限定の紫芋味やシークワーサー味など、沖縄ならではのフレーバーを楽しむことができ、できたてのサクサクとした食感は格別です。店内では揚げる工程を見学することもでき、お土産として持ち帰るだけでなく、その場で味わうこともできます。沖縄の特産品を使ったオリジナル商品も豊富で、沖縄旅行の思い出にぴったりのお土産を見つけることができます。<br><br>【2.3 伝統工芸品】<br>国際通りには琉球ショップという伝統工芸品専門店があります。琉球ガラス、紅型、琉球漆器、三線などの沖縄の伝統的な工芸品を扱っており、職人による手作りの美しい作品を実際に見て、触って、購入することができます。琉球ガラスの美しい色彩と独特の形状は、沖縄の自然と文化を表現しており、お土産としても人気です。また、工芸品の制作過程を見学できる店舗もあり、沖縄の伝統技術を学ぶ貴重な体験ができます。職人との交流を通じて、沖縄の文化と歴史をより深く理解することができます。',
     },
   },
   広島: {
@@ -781,20 +809,24 @@ const SpotDetailPage = () => {
           <h2 className="text-3xl font-bold text-gray-900 mb-8">{detail?.contentTitle || `${safeTitle} の基本情報`}</h2>
 
           {/* Images */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-            <div className="bg-white rounded-lg overflow-hidden shadow-md">
-              <div
-                className="h-64 bg-cover bg-center bg-no-repeat"
-                style={{ backgroundImage: `url(${detail?.imageLeft || hero})` }}
-              ></div>
-            </div>
-            <div className="bg-white rounded-lg overflow-hidden shadow-md">
-              <div
-                className="h-64 bg-cover bg-center bg-no-repeat"
-                style={{ backgroundImage: `url(${detail?.imageRight || hero})` }}
-              ></div>
-            </div>
-          </div>
+          {!(cityKey === '沖縄' && idKey === '11') &&
+            !(cityKey === '沖縄' && idKey === '12') &&
+            !(cityKey === '沖縄' && idKey === '46') && (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                  <div
+                    className="h-64 bg-cover bg-center bg-no-repeat"
+                    style={{ backgroundImage: `url(${detail?.imageLeft || hero})` }}
+                  ></div>
+                </div>
+                <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                  <div
+                    className="h-64 bg-cover bg-center bg-no-repeat"
+                    style={{ backgroundImage: `url(${detail?.imageRight || hero})` }}
+                  ></div>
+                </div>
+              </div>
+            )}
 
           {/* Extra Images for Tokyo Dome */}
           {cityKey === '東京' && idKey === '19' && (
@@ -1079,6 +1111,96 @@ const SpotDetailPage = () => {
                 <div
                   className="h-64 bg-cover bg-center bg-no-repeat"
                   style={{ backgroundImage: `url(${ohori})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+
+          {/* Extra Images for Shuri Castle */}
+          {cityKey === '沖縄' && idKey === '11' && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${Shurijo})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${Shurijokaji})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${sonokoutaki})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${syureinomon})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+
+          {/* Extra Images for Okinawa Churaumi Aquarium */}
+          {cityKey === '沖縄' && idKey === '12' && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${okinawazinbe})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${okisangou})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${tsuraumiiruka})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${tsuraumimap})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+
+          {/* Extra Images for Kokusai Street */}
+          {cityKey === '沖縄' && idKey === '46' && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${okimahoroba})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${okinawaliquor})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${steakhouseoki})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${okisteakhouse})` }}
                 ></div>
               </div>
             </div>
