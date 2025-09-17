@@ -13,7 +13,13 @@ import suzume from '../../assets/suzume.jpg';
 import SapporoTower from '../../assets/SapporoTower.jpg';
 import OkinawaResort from '../../assets/OkinawaResort.jpg';
 import Kokusaidori from '../../assets/Kokusaidori.jpg';
+import manzwamo from '../../assets/manzwamo.jpg';
+import kouribridge from '../../assets/kouribridge.jpg';
+import theritzcarlton from '../../assets/theritzcarlton.jpg';
 import TokyoTower from '../../assets/TokyoTower.jpg';
+import boolseal from '../../assets/boolseal.jpg';
+import okinawaeisamatsuri from '../../assets/okinawaeisamatsuri.jpg';
+import marineaqua from '../../assets/marineaqua.jpg';
 import AsaKusa from '../../assets/AsaKusa.jpg';
 import OsakaGuriko from '../../assets/OsakaGuriko.jpg';
 import KiyoMizuTera from '../../assets/KiyoMizuTera.jpg';
@@ -417,7 +423,7 @@ const SpotsPage = () => {
       description: '沖縄を代表する絶景スポット。象の鼻のような岩が有名',
       tags: ['自然', '絶景', '南日本'],
       city: '沖縄',
-      image: OkinawaResort,
+      image: manzwamo,
     },
     {
       id: 48,
@@ -425,15 +431,7 @@ const SpotsPage = () => {
       description: '沖縄本島北部の美しい島。透明度の高い海が魅力',
       tags: ['ビーチ', '自然', '南日本'],
       city: '沖縄',
-      image: OkinawaResort,
-    },
-    {
-      id: 50,
-      name: '首里城公園',
-      description: '琉球王国の歴史を感じる世界遺産。復元された城が美しい',
-      tags: ['文化・歴史', '世界遺産', '南日本'],
-      city: '沖縄',
-      image: Shurijo,
+      image: kouribridge,
     },
     {
       id: 15,
@@ -626,7 +624,7 @@ const SpotsPage = () => {
       id: 6,
       title: '絶景ビーチリゾート！沖縄でのんびり休暇',
       description: 'エメラルドグリーンの海でシュノーケリングと夕日鑑賞。',
-      image: OkinawaResort,
+      image: theritzcarlton,
       author: 'ソヒョン',
       type: '二人旅',
       city: '沖縄',
@@ -635,26 +633,26 @@ const SpotsPage = () => {
       id: 21,
       title: '沖縄グルメ満喫！国際通りと首里城の歴史旅',
       description: '沖縄の伝統料理と歴史を楽しむ旅。国際通りのグルメと首里城の文化を満喫。',
-      image: OkinawaResort,
+      image: boolseal,
       author: 'グルメ好き',
       type: '一人旅',
       city: '沖縄',
     },
     {
-      id: 22,
-      title: '家族で楽しむ沖縄！美ら海水族館とビーチ',
-      description: '美ら海水族館でジンベエザメを見て、美しいビーチで家族の思い出を作る旅。',
-      image: OkiAquarium,
-      author: 'ファミリー',
-      type: '家族旅',
+      id: 24,
+      title: '那覇まつり！エイサーと大綱挽の熱気',
+      description: 'エイサー演舞と那覇大綱挽で沖縄の祭り文化を体感する1日。',
+      image: okinawaeisamatsuri,
+      author: '祭り好き',
+      type: '祭り',
       city: '沖縄',
     },
     {
-      id: 23,
-      title: '沖縄絶景ドライブ！万座毛と古宇利島',
-      description: '沖縄本島をドライブしながら、万座毛の絶景と古宇利島の美しい海を楽しむ旅。',
-      image: OkinawaResort,
-      author: 'ドライブ好き',
+      id: 25,
+      title: '沖縄ヨットツアー！無人島クルーズとサンセット',
+      description: '珊瑚の海をクルージング、無人島上陸と夕日鑑賞を楽しむ大人の旅。',
+      image: marineaqua,
+      author: 'マリン派',
       type: '二人旅',
       city: '沖縄',
     },
