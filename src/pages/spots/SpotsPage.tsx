@@ -7,6 +7,9 @@ import OsakaCastle from '../../assets/OsakaCastle.jpg';
 import Kinkakuji from '../../assets/Kinkakuji.jpg';
 import Sapporo from '../../assets/Sapporo.jpg';
 import fukuokahutami from '../../assets/fukuokahutami.jpg';
+import fukugourmet from '../../assets/fukugourmet.jpg';
+import fukuanimate from '../../assets/fukuanimate.jpg';
+import suzume from '../../assets/suzume.jpg';
 import SapporoTower from '../../assets/SapporoTower.jpg';
 import OkinawaResort from '../../assets/OkinawaResort.jpg';
 import TokyoTower from '../../assets/TokyoTower.jpg';
@@ -50,6 +53,7 @@ import ShibuyaScramble from '../../assets/ShibuyaScramble.jpg';
 import nakasumap from '../../assets/nakasumap.jpg';
 import kushidashrine from '../../assets/kushidashrine.jpg';
 import marineworld from '../../assets/marineworld.jpg';
+import paypaydome from '../../assets/paypaydome.jpg';
 
 const SpotsPage = () => {
   const [selectedCity, setSelectedCity] = useState<string | null>(null);
@@ -102,6 +106,9 @@ const SpotsPage = () => {
           });
         }
       }, 100);
+    } else {
+      // URL에 도시 정보가 없으면 선택된 도시 초기화
+      setSelectedCity(null);
     }
 
     if (searchFromUrl) {
@@ -375,7 +382,7 @@ const SpotsPage = () => {
       description: '福岡ソフトバンクホークスの本拠地。試合観戦が人気',
       tags: ['スポーツ', '野球', '南日本'],
       city: '福岡',
-      image: FukuokaCastle,
+      image: paypaydome,
     },
     {
       id: 11,
@@ -566,7 +573,7 @@ const SpotsPage = () => {
       id: 4,
       title: '福岡屋台めぐり！博多グルメ紀行',
       description: 'とんこつラーメンと福岡の名所を巡る旅。',
-      image: fukuokahutami,
+      image: fukugourmet,
       author: 'オンピック',
       type: '二人旅',
       city: '福岡',
@@ -669,20 +676,20 @@ const SpotsPage = () => {
     },
     {
       id: 18,
-      title: '太宰府と博多旧市街をめぐる歴史散策',
-      description: '太宰府天満宮で参拝し、櫛田神社や川端通り商店街を歩く歴史旅。',
-      image: FukuokaCastle,
-      author: '歴史好き',
+      title: '天神で楽しむ福岡のオタク文化とショッピング',
+      description: '天神の地下街から地上まで、オタク文化とショッピングを満喫する旅。',
+      image: fukuanimate,
+      author: 'オタク好き',
       type: '一人旅',
       city: '福岡',
     },
     {
       id: 19,
-      title: '家族で楽しむ福岡！マリンワールドと大濠公園',
-      description: '水族館と公園でのんびり過ごす福岡ファミリー旅。',
-      image: fukuokahutami,
-      author: 'ファミリー',
-      type: '家族旅',
+      title: 'すずめの戸締まり聖地巡礼！福岡の神秘的な旅',
+      description: 'アニメ「すずめの戸締まり」の舞台となった福岡の聖地を巡る旅。',
+      image: suzume,
+      author: 'アニメファン',
+      type: '一人旅',
       city: '福岡',
     },
     {
@@ -878,8 +885,16 @@ const SpotsPage = () => {
                     onClick={() => {
                       if (selectedCity === destination.name) {
                         setSelectedCity(null);
+                        // URL에서 도시 파라미터 제거
+                        const newSearchParams = new URLSearchParams(searchParams);
+                        newSearchParams.delete('city');
+                        navigate(`/spots?${newSearchParams.toString()}`, { replace: true });
                       } else {
                         setSelectedCity(destination.name);
+                        // URL에 도시 파라미터 추가
+                        const newSearchParams = new URLSearchParams(searchParams);
+                        newSearchParams.set('city', destination.name);
+                        navigate(`/spots?${newSearchParams.toString()}`, { replace: true });
                       }
                     }}
                   >
@@ -930,7 +945,11 @@ const SpotsPage = () => {
                     key={spot.id}
                     className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
                     onClick={() => {
-                      navigate(`/spot/${spot.city}/${spot.id}`);
+                      // 현재 URL 정보를 state로 전달하여 뒤로가기 시 도시 정보 유지
+                      const currentUrl = `/spots?${searchParams.toString()}`;
+                      navigate(`/spot/${spot.city}/${spot.id}`, {
+                        state: { from: currentUrl },
+                      });
                       window.scrollTo({ top: 0, behavior: 'smooth' });
                     }}
                   >
@@ -1069,7 +1088,11 @@ const SpotsPage = () => {
                   key={plan.id}
                   className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
                   onClick={() => {
-                    navigate(`/detail/${plan.id}`);
+                    // 현재 URL 정보를 state로 전달하여 뒤로가기 시 도시 정보 유지
+                    const currentUrl = `/spots?${searchParams.toString()}`;
+                    navigate(`/detail/${plan.id}`, {
+                      state: { from: currentUrl },
+                    });
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
                 >

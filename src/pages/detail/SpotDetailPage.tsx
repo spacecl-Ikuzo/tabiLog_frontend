@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import Header from '../../components/layout/header';
 
 // Assets
@@ -16,7 +16,6 @@ import KiyoMizuTera from '../../assets/KiyoMizuTera.jpg';
 import SapporoHero from '../../assets/Sapporo.jpg';
 import SapporoTime from '../../assets/SapporoTime.jpg';
 import SapporoTower from '../../assets/SapporoTower.jpg';
-import FukuokaHero from '../../assets/fukuokahutami.jpg';
 import FukuokaCastle from '../../assets/FukuokaCastle.jpg';
 import FukuokaCastle2 from '../../assets/FukuokaCastle2.jpg';
 import HakataCity from '../../assets/HakataCity.jpg';
@@ -89,6 +88,8 @@ import nakasumap from '../../assets/nakasumap.jpg';
 import nakasukawa from '../../assets/nakasukawa.jpg';
 import NakasuNight from '../../assets/NakasuNight.jpeg';
 import nakasuramen from '../../assets/nakasuramen.jpg';
+import ryuunogotoku from '../../assets/ryuunogotoku.jpg';
+import nakasuryuu from '../../assets/nakasuryuu.jpg';
 import dazaifutenmangu from '../../assets/dazaifutenmangu.jpg';
 import dazaihu from '../../assets/dazaihu.jpg';
 import tobiume from '../../assets/tobiume.jpg';
@@ -112,6 +113,10 @@ import marineworld from '../../assets/marineworld.jpg';
 import marineaqua from '../../assets/marineaqua.jpg';
 import asikashow from '../../assets/asikashow.jpg';
 import marinehamabe from '../../assets/marinehamabe.jpg';
+import ohori from '../../assets/ohori.jpg';
+import ohoriboat from '../../assets/ohoriboat.jpg';
+import ohorigarden from '../../assets/ohorigarden.jpg';
+import ohoriori from '../../assets/ohoriori.jpg';
 
 type SpotDetail = {
   title: string;
@@ -338,19 +343,6 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
       content:
         '名古屋港水族館はシャチ、ベルーガ、イルカショーで有名な水族館で、家族連れに人気の観光スポットです。日本海と太平洋の海洋生物を中心に、多様な海の生き物を観察できます。<br><br>【2.1 シャチショー】<br>名古屋港水族館のシャチショーは日本でも数少ない貴重なショーです。シャチの迫力あるパフォーマンスは圧巻で、その知能の高さと美しさを間近で体験できます。ショーは1日数回開催され、多くの観客で賑わいます。<br><br>【2.2 ベルーガ展示】<br>白いクジラとして知られるベルーガの展示は、水族館の目玉の一つです。ベルーガの優雅な泳ぎと愛らしい表情は、見る人の心を和ませます。また、ベルーガの生態について詳しく学ぶことができる展示も充実しています。<br><br>【2.3 イルカショー】<br>イルカショーでは、イルカの高い知能と優れた運動能力を活かしたパフォーマンスを楽しめます。ジャンプやフリップなどの華麗な技は、観客を魅了します。ショー後にはイルカとの触れ合い体験も可能です。<br><br>【2.4 深海生物展示】<br>水族館には深海に生息する神秘的な生物の展示もあります。光の届かない深海の環境を再現した展示では、普段見ることのできない珍しい生物を観察できます。深海の生態系について学ぶ貴重な機会となります。',
     },
-    '40': {
-      title: '中洲屋台',
-      description: '福岡の夜を彩る屋台街。博多グルメを堪能できる名所',
-      author: 'タビログ編集部',
-      heroImage: nakasukawa,
-      breadcrumb: ['福岡', '中洲', '中洲屋台'],
-      contentTitle: '中洲屋台の基本情報',
-      spots: ['屋台グルメ', '屋台の雰囲気', '川沿いナイトビュー'],
-      imageLeft: NakasuNight,
-      imageRight: nakasuramen,
-      content:
-        '中洲屋台は福岡の夜を象徴するグルメスポット。博多ラーメン、焼きラーメン、もつ煮、明太子料理など、地元ならではの味を気軽に楽しめます。観光客と地元客が肩を並べて食事を楽しむ活気ある雰囲気が魅力です。<br><br>【2.1 屋台グルメ】<br>定番の博多ラーメンから、焼きラーメン、天ぷら、焼き鳥、明太子を使った創作料理まで、屋台ごとに個性豊かなメニューが揃います。少量ずつ食べ歩きしながらお気に入りの一品を見つけるのがおすすめ。<br><br>【2.2 屋台の雰囲気】<br>屋台は店主との距離が近く、会話も楽しめるカウンタースタイル。旅の情報交換や地元のおすすめを教えてもらえるのも醍醐味です。混雑時は相席になることもあり、一期一会の出会いが生まれます。<br><br>【2.3 川沿いナイトビュー】<br>中洲の川沿いはネオンが水面に映り込むフォトジェニックな夜景スポット。食後に川沿いを散策すれば、屋台の明かりと夜景が織りなす福岡ならではのロマンチックな時間を過ごせます。',
-    },
     '41': {
       title: '太宰府天満宮',
       description: '学問の神様・菅原道真公を祀る全国天満宮の総本宮のひとつ',
@@ -522,11 +514,11 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
       heroImage: nakasukawa,
       breadcrumb: ['福岡', '中洲', '中洲屋台'],
       contentTitle: '中洲屋台の基本情報',
-      spots: ['屋台グルメ', '屋台の雰囲気', '川沿いナイトビュー'],
-      imageLeft: NakasuNight,
-      imageRight: nakasuramen,
+      spots: ['龍が如く5の舞台', '中洲の龍', '屋台グルメ', '川沿いナイトビュー'],
+      imageLeft: ryuunogotoku,
+      imageRight: nakasuryuu,
       content:
-        '中洲屋台は福岡の夜を象徴するグルメスポット。博多ラーメン、焼きラーメン、もつ煮、明太子料理など、地元ならではの味を気軽に楽しめます。観光客と地元客が肩を並べて食事を楽しむ活気ある雰囲気が魅力です。<br><br>【2.1 屋台グルメ】<br>定番の博多ラーメンから、焼きラーメン、天ぷら、焼き鳥、明太子を使った創作料理まで、屋台ごとに個性豊かなメニューが揃います。少量ずつ食べ歩きしながらお気に入りの一品を見つけるのがおすすめ。<br><br>【2.2 屋台の雰囲気】<br>屋台は店主との距離が近く、会話も楽しめるカウンタースタイル。旅の情報交換や地元のおすすめを教えてもらえるのも醍醐味です。混雑時は相席になることもあり、一期一会の出会いが生まれます。<br><br>【2.3 川沿いナイトビュー】<br>中洲の川沿いはネオンが水面に映り込むフォトジェニックな夜景スポット。食後に川沿いを散策すれば、屋台の明かりと夜景が織りなす福岡ならではのロマンチックな時間を過ごせます。',
+        '中洲屋台は福岡の夜を象徴するグルメスポット。博多ラーメン、焼きラーメン、もつ煮、明太子料理など、地元ならではの味を気軽に楽しめます。観光客と地元客が肩を並べて食事を楽しむ活気ある雰囲気が魅力です。<br><br>【2.1 龍が如く5の舞台】<br>中洲は人気ゲーム「龍が如く5」の重要な舞台として登場し、多くのゲームファンが聖地巡礼に訪れています。ゲーム内で再現された中洲の街並みと実際の風景を比較しながら楽しむことができ、龍が如くシリーズのファンにとって特別な場所となっています。<br><br>【2.2 中洲の龍】<br>龍が如く5では中洲が「龍の街」として描かれており、ゲーム内の主人公たちが活躍する舞台として重要な役割を果たしています。実際の中洲を訪れることで、ゲームの世界観と現実の福岡の魅力を同時に体験できます。<br><br>【2.3 屋台グルメ】<br>定番の博多ラーメンから、焼きラーメン、天ぷら、焼き鳥、明太子を使った創作料理まで、屋台ごとに個性豊かなメニューが揃います。少量ずつ食べ歩きしながらお気に入りの一品を見つけるのがおすすめ。<br><br>【2.4 川沿いナイトビュー】<br>中洲の川沿いはネオンが水面に映り込むフォトジェニックな夜景スポット。食後に川沿いを散策すれば、屋台の明かりと夜景が織りなす福岡ならではのロマンチックな時間を過ごせます。',
     },
     '41': {
       title: '太宰府天満宮',
@@ -566,6 +558,19 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
       imageRight: marineaqua,
       content:
         'マリンワールド海の中道は「九州の海」をテーマにした水族館。玄界灘や有明海など地域の海を再現した展示が特徴で、家族連れやカップルに人気です。館内の動線は海辺散策のように心地よく、屋外エリアから望む博多湾の景色も見どころ。<br><br>【2.1 九州の海 大水槽】<br>高さ・幅ともに迫力のある大水槽では、イワシの群泳やサメ、エイが織りなすダイナミックな世界を体感できます。時間帯によっては解説付きの給餌タイムが実施され、海の生態について楽しく学べます。<br><br>【2.2 イルカ・アシカショー】<br>屋外スタジアムでは、イルカとアシカのパフォーマンスを上演。ジャンプや連携技が繰り出されるショーは臨場感たっぷりで、海風を感じながら観覧できるのも魅力です。季節限定のナイトショーや演出も要チェック。<br><br>【2.3 展望デッキと海辺散策】<br>館外の展望デッキからは博多湾や志賀島方面の眺望が広がります。帰り道は海の中道の遊歩道を散策し、海辺の風景や芝生広場でのんびり過ごすのもおすすめ。館内外で一日ゆっくり楽しめるスポットです。',
+    },
+    '44': {
+      title: '大濠公園',
+      description: '福岡の中心部にある美しい公園。湖と緑に囲まれた憩いの場',
+      author: 'タビログ編集部',
+      heroImage: ohori,
+      breadcrumb: ['福岡', '中央区', '大濠公園'],
+      contentTitle: '大濠公園の基本情報',
+      spots: ['大濠池', '日本庭園', 'ボート乗り場'],
+      imageLeft: ohoriboat,
+      imageRight: ohorigarden,
+      content:
+        '大濠公園は福岡市中央区にある総面積約40ヘクタールの都市公園。中心にある大濠池を囲むように整備された公園で、市民の憩いの場として親しまれています。春の桜、夏の新緑、秋の紅葉、冬の静寂と四季折々の美しさを楽しめる福岡の代表的な公園です。<br><br>【2.1 大濠池】<br>公園の中心を占める大濠池は、周囲約2kmの美しい池。池の周りには遊歩道が整備されており、散策やジョギングを楽しむ人々で賑わいます。池にはボート乗り場もあり、スワンボートや手漕ぎボートで池の上を散策することもできます。夕暮れ時には池面に映る夕日が美しく、カップルや家族連れに人気のロマンチックスポットです。<br><br>【2.2 日本庭園】<br>公園内には伝統的な日本庭園が設けられており、池泉回遊式の庭園として設計されています。石灯籠や橋、滝などが配置され、四季の花々とともに日本の美意識を感じられる空間です。特に春の桜と秋の紅葉の時期は、庭園の美しさが一層際立ちます。<br><br>【2.3 ボート乗り場】<br>大濠池ではスワンボートや手漕ぎボートの貸し出しを行っています。家族連れやカップルが池の上でゆっくりと時間を過ごすことができ、陸上とは違った視点から公園の美しさを楽しめます。ボートから見る福岡の街並みや池の周りの自然は、日常とは違った特別な体験を提供してくれます。',
     },
     '45': {
       title: '福岡PayPayドーム（ソフトバンクホークス）',
@@ -669,6 +674,8 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
 
 const SpotDetailPage = () => {
   const { city, id } = useParams<{ city: string; id: string }>();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const cityAliasMap: Record<string, string> = {
     // Korean -> Japanese city name normalization
@@ -693,6 +700,18 @@ const SpotDetailPage = () => {
   const safeTitle = detail?.title || `${cityKey} のスポット詳細`;
   const safeDesc = detail?.description || 'このスポットの詳細情報です。準備中のコンテンツを表示しています。';
   const hero = detail?.heroImage || (cityKey === '東京' ? TokyoHero : OsakaHero);
+
+  // 뒤로가기 시 도시 정보 유지
+  const handleBackClick = () => {
+    const state = location.state as { from?: string } | null;
+    const fromPath = state?.from;
+
+    if (fromPath && fromPath.includes('city=')) {
+      navigate(fromPath);
+    } else {
+      navigate('/spots');
+    }
+  };
 
   return (
     <div className="min-h-screen">
@@ -1024,6 +1043,42 @@ const SpotDetailPage = () => {
                 <div
                   className="h-64 bg-cover bg-center bg-no-repeat"
                   style={{ backgroundImage: `url(${kushidatorie})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+
+          {/* Extra Images for Nakasu Yatai */}
+          {cityKey === '福岡' && idKey === '40' && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${NakasuNight})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${nakasuramen})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+
+          {/* Extra Images for Ohori Park */}
+          {cityKey === '福岡' && idKey === '44' && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${ohoriori})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${ohori})` }}
                 ></div>
               </div>
             </div>
