@@ -1,10 +1,14 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import Header from '../../components/layout/header';
+import Header from '../../components/layout/Header';
 import Kinkakuji from '../../assets/Kinkakuji.jpg';
 import OsakaCastle from '../../assets/OsakaCastle.jpg';
 import Sapporo from '../../assets/Sapporo.jpg';
 import OkinawaResort from '../../assets/OkinawaResort.jpg';
+import theritzcarlton from '../../assets/theritzcarlton.jpg';
+import hotelaribia from '../../assets/hotelaribia.jpg';
+import anaintercontinental from '../../assets/anaintercontinental.jpg';
+import aribiabikini from '../../assets/aribiabikini.jpg';
 import RamenJiro from '../../assets/RamenJiro.jpg';
 import JiroSushi from '../../assets/JiroSushi.jpg';
 import Tsukiji from '../../assets/Tsukiji.jpg';
@@ -14,14 +18,11 @@ import OsakaGuriko from '../../assets/OsakaGuriko.jpg';
 import KiyoMizuTera from '../../assets/KiyoMizuTera.jpg';
 import SapporoTime from '../../assets/SapporoTime.jpg';
 import SapporoTower from '../../assets/SapporoTower.jpg';
-import FukuokaCastle from '../../assets/FukuokaCastle.jpg';
 import HakataCity from '../../assets/HakataCity.jpg';
 import fukushimono from '../../assets/fukushimono.jpg';
 import gokuracastle from '../../assets/gokuracastle.jpg';
 import mojikoretro from '../../assets/mojikoretro.jpg';
 import shimonoseki from '../../assets/shimonoseki.jpg';
-import Shurijo from '../../assets/Shurijo.jpg';
-import OkiAquarium from '../../assets/OkiAquarium.jpg';
 import nagoyawcs1 from '../../assets/nagoyawcs1.jpg';
 import nagoyawcs2 from '../../assets/nagoyawcs2.jpg';
 import KiminoNamaewa from '../../assets/KiminoNamaewa.jpg';
@@ -30,7 +31,6 @@ import Shibakoen from '../../assets/Shibakoen.jpg';
 import ShinjukuPolice from '../../assets/ShinjukuPolice.jpg';
 import Aogashima from '../../assets/Aogashima.jpg';
 import fukugourmet from '../../assets/fukugourmet.jpg';
-import fukuokahutami from '../../assets/fukuokahutami.jpg';
 import fukuanimate from '../../assets/fukuanimate.jpg';
 import fukuanimatemap from '../../assets/fukuanimatemap.jpg';
 import fukumandafigure from '../../assets/fukumandafigure.jpg';
@@ -60,11 +60,23 @@ import NagoyaLego from '../../assets/NagoyaLego.jpg';
 import LegoAttraction from '../../assets/LegoAttraction.jpg';
 import LegoTaiken from '../../assets/LegoTaiken.jpg';
 import LegoBoat from '../../assets/LegoBoat.jpg';
+import houkistar from '../../assets/houkistar.jpg';
+import hukugiya from '../../assets/hukugiya.jpg';
+import boolseal from '../../assets/boolseal.jpg';
+import sennichi from '../../assets/sennichi.jpg';
+import okinawasangyomatsuri from '../../assets/okinawasangyomatsuri.jpg';
+import nahahari from '../../assets/nahahari.jpg';
+import nahaotsunahiki from '../../assets/nahaotsunahiki.jpg';
+import okinawaeisamatsuri from '../../assets/okinawaeisamatsuri.jpg';
+import okinawacruising from '../../assets/okinawacruising.jpg';
+import okinawanohumanisland from '../../assets/okinawanohumanisland.jpg';
+import okinawasnokling from '../../assets/okinawasnokling.jpg';
+import okinawasailing from '../../assets/okinawasailing.jpg';
 
 const DetailPage = () => {
   const { id } = useParams<{ id: string }>();
 
-  // 여행 계획 상세 정보 데이터
+  // 旅行計画の詳細データ
   const planDetails = {
     1: {
       title: '食い倒れ東京! 2泊3日グルメ旅',
@@ -134,15 +146,15 @@ const DetailPage = () => {
     6: {
       title: '絶景ビーチリゾート!沖縄でのんびり休暇',
       description:
-        'エメラルドグリーンの海でシュノーケリングを楽しんだり、美しいサンセットを眺めたり。南国リゾートで過ごす、最高の贅沢。',
+        '沖縄の有名なリゾートホテルで過ごす贅沢な休暇。エメラルドグリーンの海と白い砂浜で、最高のリラクゼーションを体験。',
       author: 'ソヒョン',
       image: OkinawaResort,
       heroImage: OkinawaResort,
-      breadcrumb: ['沖縄', '美ら海水族館', '首里城'],
+      breadcrumb: ['沖縄', 'リゾートホテル', 'プライベートビーチ'],
       contentTitle: '沖縄リゾートの基本情報',
-      spots: ['美ら海水族館', '首里城', '国際通り'],
+      spots: ['ザ・リッツ・カールトン沖縄', 'ホテル日航アリビラ', 'ANAインターコンチネンタル万座ビーチ'],
       content:
-        '沖縄は日本唯一の亜熱帯気候の地域です。エメラルドグリーンの海ではシュノーケリングやダイビングを楽しめ、美ら海水族館では世界最大級の水族館を体験できます。首里城では琉球王国の歴史を感じられます。',
+        '沖縄の有名なリゾートホテルで過ごす贅沢な休暇プラン。世界レベルの高級リゾートから、沖縄の自然を満喫できるリゾートまで、様々な選択肢があります。エメラルドグリーンの海と白い砂浜で、心と体を完全にリフレッシュできます。<br><br>【2.1 ザ・リッツ・カールトン沖縄】<br>沖縄本島中部の恩納村にある最高級リゾートホテル。プライベートビーチ「オーシャンビュー」を有し、エメラルドグリーンの美しい海を独占的に楽しめます。客室はすべてオーシャンビューで、朝は美しい日の出を、夜は満天の星空を楽しめます。ホテル内には7つのレストランがあり、沖縄の新鮮な海の幸や琉球料理、フレンチ、イタリアンなど多様な料理を味わえます。スパ「ザ・リッツ・カールトン・スパ」では、沖縄の自然素材を使ったトリートメントを体験できます。また、ゴルフ場も完備されており、美しい海を眺めながらゴルフを楽しめます。<br><br>💰 料金：1泊2食付き 80,000円〜（2名1室）<br>⭐ 評価：4.8/5.0（Booking.com）<br>🌐 公式サイト：https://www.ritzcarlton.com/ja/hotels/japan/okinawa<br><br>【2.2 ホテル日航アリビラ】<br>沖縄本島中部の読谷村にある人気リゾートホテル。プライベートビーチ「アリビラビーチ」は、透明度の高い海と白い砂浜が魅力です。客室からは美しいエメラルドグリーンの海が一望でき、特に夕日の時間帯は幻想的な景色を楽しめます。ホテル内には複数のレストランがあり、沖縄の郷土料理やフレンチ、中華料理など豊富な選択肢があります。スパ「アリビラスパ」では、沖縄の海藻やシークワーサーを使ったボディトリートメントを体験できます。また、プールサイドバーでは沖縄の泡盛やトロピカルカクテルを楽しみながら、リラックスした時間を過ごせます。<br><br>💰 料金：1泊2食付き 45,000円〜（2名1室）<br>⭐ 評価：4.5/5.0（Booking.com）<br>🌐 公式サイト：https://www.nikkoyomitan.com/<br><br>【2.3 ANAインターコンチネンタル万座ビーチ】<br>沖縄本島中部の恩納村にある高級リゾートホテル。万座毛の近くに位置し、美しいエメラルドグリーンの海と白い砂浜を有しています。客室はすべてオーシャンビューで、朝は美しい日の出を、夜は満天の星空を楽しめます。ホテル内には6つのレストランがあり、沖縄の新鮮な海の幸や琉球料理、フレンチ、イタリアンなど多様な料理を味わえます。スパ「ANAインターコンチネンタル・スパ」では、沖縄の自然素材を使ったトリートメントを体験できます。また、プールサイドバーやラウンジでは、沖縄の泡盛やトロピカルカクテルを楽しみながら、リラックスした時間を過ごせます。<br><br>💰 料金：1泊2食付き 65,000円〜（2名1室）<br>⭐ 評価：4.6/5.0（Booking.com）<br>🌐 公式サイト：https://www.anaintercontinental-manza.jp/',
     },
     8: {
       title: 'ワールドコスプレサミット',
@@ -271,7 +283,48 @@ const DetailPage = () => {
       contentTitle: '福岡・小倉・門司・下関の歴史旅の基本情報',
       spots: ['小倉城と歴史', '門司港レトロ', '下関と関門海峡', '福岡から下関への交通手段'],
       content:
-        '福岡から小倉、門司港、下関を巡る歴史とグルメの旅は、九州と本州を結ぶ関門海峡の魅力を満喫できる特別なプランです。小倉の歴史、門司港のレトロな雰囲気、そして下関の海鮮料理まで、各地の特色を楽しみながら歴史を感じる旅ができます。<br><br>【2.1 小倉城と歴史】<br>小倉は江戸時代から重要な商業都市として栄えた歴史ある街です。小倉城は細川忠興によって築かれた名城で、現在は復元された天守閣が美しい姿を見せています。城下町の雰囲気を残す街並みを散策しながら、小倉の歴史と文化を感じることができます。小倉祇園太鼓や小倉織など、伝統的な文化も体験でき、歴史好きにはたまらない魅力があります。<br><br>【2.2 門司港レトロ】<br>門司港は明治時代から大正時代にかけて国際貿易港として栄えた歴史ある港町です。レトロな建物が並ぶ門司港レトロ地区では、大正ロマンの雰囲気を感じながら散策を楽しめます。門司港駅の赤レンガ駅舎や旧門司税関など、歴史的な建物が美しく保存されており、タイムスリップしたような感覚を味わえます。門司港名物の焼きカレーも必食です。<br><br>【2.3 下関と関門海峡】<br>下関は本州の最西端に位置し、関門海峡を挟んで九州と向かい合う歴史的な街です。壇ノ浦の戦いで知られる歴史の舞台であり、関門海峡の美しい景色を楽しめます。下関名物のふぐ料理を味わいながら、海峡を渡る船の往来を見ていると、本州と九州を結ぶ重要な交通路としての歴史を感じることができます。関門トンネル人道を歩いて海峡を渡る体験も、この旅の特別な思い出になります。<br><br>【2.4 福岡から下関への交通手段】<br>福岡から下関까지는「ふくふく号」高速バスが最も便利な交通手段です。西鉄グループが運営하는このバスは、ハカタバスターミナル(3층 31번 승강장)과 니시테츠 텐진 고속버스 터미널(3층 1번 승강장)에서 출발합니다。편도 요금은 1,700엔이며 예약이 불필요하고, 하루 12번 왕복(총 24편) 운행됩니다. 소요시간은 약 1시간 40분으로 빠르고 편리합니다. SUNQ 패스(전큐슈권, 북큐슈권) 사용도 가능하여 경제적인 여행이 가능합니다. 이 버스를 이용하면 후쿠오카의 도시적 매력에서 시모노세키의 역사적 분위기까지 매끄럽게 연결되는 여행을 즐길 수 있습니다.',
+        '福岡から小倉、門司港、下関を巡る歴史とグルメの旅は、九州と本州を結ぶ関門海峡の魅力を満喫できる特別なプランです。小倉の歴史、門司港のレトロな雰囲気、そして下関の海鮮料理まで、各地の特色を楽しみながら歴史を感じる旅ができます。<br><br>【2.1 小倉城と歴史】<br>小倉は江戸時代から重要な商業都市として栄えた歴史ある街です。小倉城は細川忠興によって築かれた名城で、現在は復元された天守閣が美しい姿を見せています。城下町の雰囲気を残す街並みを散策しながら、小倉の歴史と文化を感じることができます。小倉祇園太鼓や小倉織など、伝統的な文化も体験でき、歴史好きにはたまらない魅力があります。<br><br>【2.2 門司港レトロ】<br>門司港は明治時代から大正時代にかけて国際貿易港として栄えた歴史ある港町です。レトロな建物が並ぶ門司港レトロ地区では、大正ロマンの雰囲気を感じながら散策を楽しめます。門司港駅の赤レンガ駅舎や旧門司税関など、歴史的な建物が美しく保存されており、タイムスリップしたような感覚を味わえます。門司港名物の焼きカレーも必食です。<br><br>【2.3 下関と関門海峡】<br>下関は本州の最西端に位置し、関門海峡を挟んで九州と向かい合う歴史的な街です。壇ノ浦の戦いで知られる歴史の舞台であり、関門海峡の美しい景色を楽しめます。下関名物のふぐ料理を味わいながら、海峡を渡る船の往来を見ていると、本州と九州を結ぶ重要な交通路としての歴史を感じることができます。関門トンネル人道を歩いて海峡を渡る体験も、この旅の特別な思い出になります。<br><br>【2.4 福岡から下関への交通手段】<br>福岡から下関までは「ふくふく号」高速バスが最も便利な交通手段です。西鉄グループが運営するこのバスは、博多バスターミナル（3階31番）と西鉄天神高速バスターミナル（3階1番）から出発。片道1,700円、予約不要で、1日12往復（計24便）。所要約1時間40分、SUNQパスも利用可能で経済的です。',
+    },
+    21: {
+      title: '沖縄グルメ満喫！国際通りスイーツ＆冷菓めぐり',
+      description: '国際通りを中心に沖縄の人気スイーツを食べ歩き。ほうき星、ふくぎや、ブルーシールを楽しむ甘い旅。',
+      author: 'グルメ好き',
+      image: boolseal,
+      heroImage: boolseal,
+      breadcrumb: ['沖縄', '那覇', '国際通り', 'スイーツ'],
+      contentTitle: '沖縄グルメ（スイーツ）の基本情報',
+      spots: [
+        'ほうき星（黒糖カヌレ）',
+        'ふくぎや（バウムクーヘン）',
+        'ブルーシール（アイスクリーム）',
+        '千日（氷ぜんざい・かき氷）',
+      ],
+      content:
+        '沖縄には黒糖や南国フルーツを活かした絶品スイーツが数多くあります。那覇・国際通り周辺には、食べ歩きにぴったりの人気店が集まっています。<br><br>【2.1 ほうき星（黒糖カヌレ）】<br>沖縄の黒糖を使ったしっとり濃厚なカヌレが看板商品。外はカリッ、中はむっちりの理想的な食感で、コーヒーとの相性も抜群。見た目も可愛らしく、差し入れにも最適です。<br><br>【2.2 ふくぎや（バウムクーヘン）】<br>沖縄の素材にこだわったしっとり系バウム。層ごとの焼き色が美しく、カットすると広がる香りがたまりません。手土産の定番として地元でも愛されています。<br><br>【2.3 ブルーシール（アイスクリーム）】<br>1948年創業の沖縄アイスブランド。塩ちんすこう、紅いも、シークヮーサーなど沖縄らしいフレーバーが充実。散策のクールダウンにもおすすめ。<br><br>【2.4 千日（氷ぜんざい・かき氷）】<br>那覇・旭橋駅から徒歩圏、久米大通り沿いに佇む老舗の甘味処。名物は金時豆のぜんざいにふわふわの氷を山盛りにした「氷ぜんざい」。きめ細やかに削られた氷は口どけが驚くほど軽く、黒糖の自然な甘みと金時豆の風味が優しく広がります。昔ながらの涼やかな暖簾がかかる店内はどこか懐かしく、夏はもちろん通年で地元客と観光客に愛される一杯です。暑い沖縄散策のクールダウンに最適。<br>出典：<a href="https://tabelog.com/matome/25376/" target="_blank" rel="noreferrer">食べログまとめ 沖縄県の絶品スイーツ</a>',
+    },
+    24: {
+      title: '那覇まつり！エイサーと大綱挽の熱気',
+      description: '那覇大綱挽やエイサー演舞で、沖縄の祭り文化を全身で体感する1日プラン。',
+      author: '祭り好き',
+      image: okinawaeisamatsuri,
+      heroImage: okinawaeisamatsuri,
+      breadcrumb: ['沖縄', '那覇', '祭り', '那覇まつり'],
+      contentTitle: '那覇の三大イベントの基本情報',
+      spots: ['那覇ハーリー', '那覇大綱挽', '沖縄の産業まつり', 'エイサーまつり'],
+      content:
+        '那覇では、海・街・産業を象徴する大規模イベントが毎年開催されます。迫力ある海上競技から世界最大級の大綱挽、県内最大の産業展まで、一年を通して那覇の活気を感じられます。<br><br>【2.1 那覇ハーリー】<br>沖縄県内最大規模の行事の一つ。ハーリー（ハーリー舟競漕）は、アジアのドラゴンボートに似た伝統的な海の競技で、大漁や航海安全を祈って古くから行われてきました。毎年ゴールデンウィークに那覇港で開催され、地元テレビ局が生中継するほどの人気。競漕以外にもライブや各種イベントが行われ、港一帯が祝祭ムードに包まれます。<br><br>【2.2 那覇大綱挽】<br>世界最大規模の綱引きとして知られる那覇大綱挽は、長さ約200m、重さ約40トンの巨大な綱を東西に分かれて引き合う壮大な祭りです。かつては17世紀から那覇の各集落が東西に分かれて行っていた行事で、戦前の中断（1935年）を経て1971年に復活。会場は国道58号の久茂地交差点周辺で、前日には道路中央に巨大な綱が据えられ、その太さは軽自動車一台ほどにも匹敵します。見物客は極めて多く露店も並びますが、希望すれば実際に綱を引いて参加することも可能です（翌日の筋肉痛にはご注意を）。<br><br>【2.3 沖縄の産業まつり】<br>県内最大規模の総合産業展。毎年10月に3日間、奥武山（おうのやま）公園で開催され、農水産物、工芸、食品、IT、観光など沖縄を支える幅広い産業が一堂に会します。試食・実演・販売ブースが充実しており、最新の県産品や技術に触れられるほか、ステージイベントや体験コーナーも豊富。家族連れにもおすすめの那覇秋の恒例イベントです。<br><br>【2.4 エイサーまつり】<br>太鼓・三線・掛け声が一体となる沖縄の伝統芸能「エイサー」を大規模に楽しめる祭り。勇壮な青年会の演舞や合同演舞、パレードが行われ、夏の夜を熱気で包みます。地域色豊かな衣装と振付、ダイナミックな太鼓の響きは必見。那覇市内各所で開催され、家族連れから旅行者まで幅広く楽しめます。',
+    },
+    25: {
+      title: '沖縄ヨットツアー！無人島クルーズとサンセット',
+      description: 'ヨットで珊瑚の海をクルーズし、無人島に上陸。最後はサンセットで締める海時間のご褒美旅。',
+      author: 'マリン派',
+      image: okinawasailing,
+      heroImage: okinawasailing,
+      breadcrumb: ['沖縄', '那覇', 'ヨットツアー'],
+      contentTitle: 'ヨットツアーの基本情報',
+      spots: ['クルージング', '無人島上陸', 'スノーケリング', 'サンセットセーリング'],
+      content:
+        '碧い珊瑚の海をヨットで滑るように進む非日常の時間。風を感じながら甲板で寛ぎ、透明度の高い海域では錨泊して海遊び。<br><br>【2.1 クルージング】<br>出発は那覇マリーナ／北谷（ちゃたん）マリーナ発が一般的。半日（3〜4時間）／1日（6〜7時間）プランがあり、チャータープランならプライベート空間でコースの融通が利きます。<br>・参考価格：<br>— 乗合（半日）8,000〜15,000円/人（季節・艇種により変動）<br>— チャーター（半日）60,000〜120,000円/艇、（1日）120,000〜200,000円/艇 目安<br>・主なオプション：ドローン撮影、軽食・ドリンク手配、写真サービス ほか<br>・主な運営：那覇／北谷のマリン事業者（出航地・料金・装備は事業者により異なります）<br><br>【2.2 無人島上陸】<br>潮位・風向き・当日のコンディションが良ければ、近海の砂洲や無人島（サンドバー）へ上陸。白砂とコバルトブルーのコントラストは圧巻です。上陸中は貝拾い・ビーチフォト・浜辺チルなど自由に。<br>・装備：ビーチサンダル、帽子、ラッシュガード推奨／リーフは素足厳禁<br>・注意：自然保護のためゴミは必ず持ち帰り、動植物の持ち出し不可<br><br>【2.3 スノーケリング】<br>サンゴ礁のポイントで停泊し、熱帯魚と触れ合う時間。インストラクター同行の安全ブリーフィング後にエントリーします。泳ぎが苦手な方にはフロートやライフジャケットを提供。<br>・参考価格：器材レンタル込の乗合プランが一般的（追加2,000〜4,000円/人の事業者もあり）<br>・装備：マスク／シュノーケル／フィン／ライフジャケット（事業者レンタルあり）<br>・安全：気象急変時はコース変更・中止あり。アルコール摂取直後の遊泳は不可<br><br>【2.4 サンセットセーリング】<br>復路は水平線に沈む夕日を追いかけるようにクルーズ。マジックアワーの空色と海面のグラデーションは格別です。軽食をつまみながらの"ちょい贅沢"な時間。<br>・参考価格：サンセットのみのショートクルーズ4,000〜8,000円/人 目安<br>・アルコール持込：多くの事業者で「適量の持込可（缶・樹脂容器推奨／ガラス瓶NG）」が一般的。船長・クルーは飲酒不可／遊泳前後の過度な飲酒は安全上禁止<br>・音量マナー：他船・マリーナ規約により大音量スピーカーは不可の場合あり（静かな海を楽しむ趣旨が基本）<br><br>【予約・参加のコツ】<br>・繁忙期（GW／夏休み／連休）は満席になりやすいため早めの予約推奨。<br>・集合場所（那覇／北谷）までの移動はタクシー／レンタカーが便利。<br>・酔い止め、日焼け止め、羽織り物（船上は風で体感温度が下がります）を準備すると快適です。',
     },
   };
 
@@ -350,68 +403,74 @@ const DetailPage = () => {
           <h2 className="text-3xl font-bold text-gray-900 mb-8">{plan.contentTitle}</h2>
 
           {/* Images */}
-          {planId !== 4 && planId !== 19 && planId !== 20 && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-              <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                <div
-                  className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{
-                    backgroundImage: `url(${
-                      planId === 1
-                        ? Tsukiji
-                        : planId === 2
-                        ? USJ
-                        : planId === 3
-                        ? KiyoMizuTera
-                        : planId === 5
-                        ? SapporoTime
-                        : planId === 6
-                        ? OkiAquarium
-                        : planId === 14
-                        ? KiminoNamaewa
-                        : planId === 18
-                        ? fukuanimate
-                        : plan.image
-                    })`,
-                  }}
-                ></div>
+          {planId !== 4 &&
+            planId !== 6 &&
+            planId !== 19 &&
+            planId !== 20 &&
+            planId !== 21 &&
+            planId !== 24 &&
+            planId !== 25 && (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                  <div
+                    className="h-64 bg-cover bg-center bg-no-repeat"
+                    style={{
+                      backgroundImage: `url(${
+                        planId === 1
+                          ? Tsukiji
+                          : planId === 2
+                          ? USJ
+                          : planId === 3
+                          ? KiyoMizuTera
+                          : planId === 5
+                          ? SapporoTime
+                          : planId === 6
+                          ? OkinawaResort
+                          : planId === 14
+                          ? KiminoNamaewa
+                          : planId === 18
+                          ? fukuanimate
+                          : plan.image
+                      })`,
+                    }}
+                  ></div>
+                </div>
+                <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                  <div
+                    className="h-64 bg-cover bg-center bg-no-repeat"
+                    style={{
+                      backgroundImage: `url(${
+                        planId === 1
+                          ? Marugamejemen2
+                          : planId === 2
+                          ? OsakaGuriko
+                          : planId === 3
+                          ? Kinkakuji
+                          : planId === 5
+                          ? SapporoTower
+                          : planId === 6
+                          ? OkinawaResort
+                          : planId === 14
+                          ? KiminoNamaewaSuga
+                          : planId === 11
+                          ? odaiba
+                          : planId === 12
+                          ? OdaibaDigimon
+                          : planId === 13
+                          ? nikkoonsen
+                          : planId === 17
+                          ? jiburimap
+                          : planId === 16
+                          ? LegoAttraction
+                          : planId === 18
+                          ? fukumandarake
+                          : plan.heroImage
+                      })`,
+                    }}
+                  ></div>
+                </div>
               </div>
-              <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                <div
-                  className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{
-                    backgroundImage: `url(${
-                      planId === 1
-                        ? Marugamejemen2
-                        : planId === 2
-                        ? OsakaGuriko
-                        : planId === 3
-                        ? Kinkakuji
-                        : planId === 5
-                        ? SapporoTower
-                        : planId === 6
-                        ? Shurijo
-                        : planId === 14
-                        ? KiminoNamaewaSuga
-                        : planId === 11
-                        ? odaiba
-                        : planId === 12
-                        ? OdaibaDigimon
-                        : planId === 13
-                        ? nikkoonsen
-                        : planId === 17
-                        ? jiburimap
-                        : planId === 16
-                        ? LegoAttraction
-                        : planId === 18
-                        ? fukumandarake
-                        : plan.heroImage
-                    })`,
-                  }}
-                ></div>
-              </div>
-            </div>
-          )}
+            )}
 
           {/* Extra Images for Tokyo Plan */}
           {planId === 1 && (
@@ -629,21 +688,129 @@ const DetailPage = () => {
             </div>
           )}
 
-          {/* Text Content */}
-          <div className="bg-white rounded-lg p-8 shadow-md">
-            <div className="prose prose-lg max-w-none">
-              <p className="text-gray-700 leading-relaxed mb-4" dangerouslySetInnerHTML={{ __html: plan.content }}></p>
-              <p className="text-gray-700 leading-relaxed mb-4">
-                このプランは{plan.author}
-                さんが実際に体験した内容を基に作成されました。現地での貴重な体験とおすすめスポットを詳しくご紹介しています。
-              </p>
-              <p className="text-gray-700 leading-relaxed mb-4">
-                旅行の準備や現地での移動方法、おすすめの時期など、実用的な情報も含まれていますので、ぜひ参考にしてください。
-              </p>
-              <p className="text-gray-700 leading-relaxed">
-                皆さんも素敵な旅の思い出を作って、タビログでシェアしてくださいね！
-              </p>
+          {/* Extra Images for Okinawa Resort */}
+          {planId === 6 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${theritzcarlton})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${hotelaribia})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${anaintercontinental})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${aribiabikini})` }}
+                ></div>
+              </div>
             </div>
+          )}
+
+          {/* Extra Images for Okinawa Gourmet (Sweets) */}
+          {planId === 21 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${houkistar})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${hukugiya})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${boolseal})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${sennichi})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+
+          {/* Extra Images for Naha Festivals */}
+          {planId === 24 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${okinawasangyomatsuri})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${nahahari})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${nahaotsunahiki})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${okinawaeisamatsuri})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+
+          {/* Extra Images for Okinawa Yacht Tour */}
+          {planId === 25 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${okinawacruising})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${okinawanohumanisland})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${okinawasnokling})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${okinawasailing})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+
+          {/* Plan Rich Content */}
+          <div className="bg-white rounded-lg shadow-md p-6 mb-8">
+            <div className="text-gray-800 leading-7" dangerouslySetInnerHTML={{ __html: plan.content }} />
           </div>
         </div>
       </section>

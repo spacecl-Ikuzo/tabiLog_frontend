@@ -1,0 +1,80 @@
+[33m50844d5[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m 오키나와 달리는중중
+[33mcdc6487[m Resolve merge conflict in SpotsPage.tsx
+[33m33aaa01[m 후쿠오카 관광스폿 클리어
+[33maa2cdea[m 마이페이지 사이드바 로딩중일때 프로필 섹션 스켈레톤 처리
+[33m9908389[m id 찾기, 비밀번호 찾기 퍼블리싱만 (서버 완료 후 이벤트 처리 예정)
+[33mbbc58a4[m 회원탈퇴 페이지 디자인만
+[33m21867e3[m - 로그인/회원가입 페이지에서 헤더 숨김 설정 개선
+[33m37f8925[m 헤더 중복 수정. App.tsx 파일에서는 라우트 정의만
+[33m87c0489[m Merge remote changes
+[33me7916fe[m fix: 헤더 중복 제거 및 닉네임 표시 형식 수정 - Home.tsx와 SpotsPage.tsx에서 중복 헤더 제거 - 헤더 닉네임 표시를 '닉네임様' 형태로 변경 - 로그인/회원가입 페이지에서 헤더 숨김 설정 개선
+[33m8702518[m 후쿠오카 관광스폿 大濠公園 빼고 클리어 페이페이돔까지
+[33m845f4a0[m Merge branch 'main' of https://github.com/spacecl-Ikuzo/tabiLog_frontend
+[33m12f2ccd[m Merge remote changes and resolve conflicts in Login.tsx
+[33mf090b76[m 여행 계획 리스트 조회 - 콘텐츠 화면 비율 5:4
+[33ma0f57db[m 아키바, 날씨의아이, 너의이름은 추가가
+[33m564c098[m 헤더에서 마이페이지 누르면 프로필 관리로 먼저 이동
+[33m1fec3dc[m 마이페이지 - 프로필 관리
+[33m8854104[m Merge remote-tracking branch 'origin/main'
+[33m884cbb1[m 마이페이지에서 사이드 네비게이션에서 유저 정보가 나올 수 있도록, 플랜 만들기에서 상세설정 구축, 플랜보기 페이지에서 작성한 플랜이 보이도록
+[33mbab5a2f[m feat(frontend): header에 닉네임 표시 및 로그아웃 버튼 토글 추가 - Zustand store 상태(token/nickname) 기반으로 헤더 우측 UI 토글 - 로그아웃 시 removeUserData() 호출 + /login 이동
+[33m061284f[m yarn 명령어로 통일
+[33m2edadb6[m 멤버 초대하기 하는중
+[33mb6ed0fc[m 동일본 - 도쿄도 관광스폿 완료, 아키바 추가필요 みんなの旅行プラン 컨텐츠 필요, 나고야 관광스폿 완료, みんなの旅行プラン 추가필요
+[33m30d1e00[m 여행 참여 멤버쪽 변경
+[33m518e0f0[m store  토큰을 가지고 오게 변경
+[33mdefeec5[m store 저장 정보 수정 후 확인
+[33md3ebdb4[m 로그인 user_id도 store에 저장되게 수정, 이동 페이지 변경
+[33m359d63c[m 유저 테이블에 user_id 컬럼 추가 (로그인은 user_id로만 가능), 로그인/회원가입 안되는 문제 수정
+[33m2fd1aa8[m 마이페이지 사이드바 이미 있어서 삭제
+[33m578bedb[m 여행 계획 세우기 관련 페이지 new-plan으로 폴더 옮김. 임포트 오류 수정
+[33ma87d68f[m Merge remote-tracking branch 'origin/EunHyuk'
+[33m57816d0[m[33m ([m[1;31morigin/EunHyuk[m[33m)[m 세부 여행 페이지 수정까지 완료
+[33mb506034[m 세부 여행 계획 페이지 완료
+[33m4238877[m 검색기능 에러 수정정
+[33m2cd1ad8[m 검색기능 추가
+[33m5fe11fc[m 로그인 화면 수정
+[33ma06d874[m 절대경로 설정
+[33m44f3c23[m 플랜 멤버 더치페이 팝업
+[33mf58f6c3[m Merge branch 'main' of https://github.com/spacecl-Ikuzo/tabiLog_frontend
+[33mdbd8700[m 헤더 소스 원복
+[33md50a6cb[m 갯수표시카운트제거, 페이지네이션버그 수정, 여행지선택 포커싱 수정
+[33m3d0d465[m 공통 팝업 컴포넌트 생성, 플랜 참여 멤버 수정/초대 팝업 추가
+[33mbd966d7[m[33m ([m[1;32mtabilog-main[m[33m)[m LDH0912
+[33mf199664[m 관광스폿페이지 수정정
+[33m2eabde9[m Merge branch 'main' of https://github.com/spacecl-Ikuzo/tabiLog_frontend into tabilog-main
+[33m6dd9063[m 카테고리 탭 수정
+[33mec154af[m 헤더 수정
+[33m3138775[m 새 계획 페이지 경로 수정. 폴더 추가
+[33m37fd6f1[m 새 여행 계획 세우기 - 날짜 선택 페이지 추가
+[33m6a4f1ac[m 여행 리스트 수정, 스켈레톤, 캘린더 추가
+[33m4e65b1c[m 여행 계획 리스트 페이징 처리
+[33m40ee1b9[m  관광스폿부분 개선, PopularSpotsSection 좌/우 화살표 동작 개선 유지, 관광스폿세부페이지 신설, Detail/SpotDetail 콘텐츠 보강, 이미지 매핑 정리
+[33m92dac59[m feat: 로그인 페이지 수정 및 패키지 업데이트
+[33mb9b2fa1[m 프론트엔드 API 연동 오류 해결, 헤더 리다이렉트 기능, 컴포넌트 시각적 개선, 지역별 스팟 섹션 양방향 스크롤 기능, 동적 관광 스팟 페이지 구현
+[33m40d8b9b[m 여행 계획 리스트 반응형 적용 (모바일 여행 개요 페이지 추가 필요)
+[33ma4131ec[m 사이드바 수정 (마이페이지 메뉴에 있는 페이지 완성 후 수정 필요)
+[33md96fa3e[m 카테고리 Tab 컴포넌트 생성
+[33m1674dd8[m 페이지네이션 공통 컴포넌트 수정
+[33m077ac7d[m 컴포넌트 라이브러리 추가 아바타, 뱃지, 카드
+[33m2b95b60[m 데스크톱 사이드바 공통 컴포넌트 생성
+[33md4ff208[m 회원가입 약관 필드명 변경
+[33m426c18c[m 상세페이지 구현 프론트 구현
+[33m33852f2[m Add Trip Planner page route to App component
+[33m2a36d79[m 관광상세페이지 구현
+[33m68baf79[m 메인화면 구축
+[33m4b90490[m 회원가입 하던거까지. 약관 2개 추가 (개인정보동의(필수), 여행계획 수집 동의(선택))
+[33m9d49ca3[m 일단 약관동의 빼고 회원가입 폼 구현
+[33m011966c[m 커스텀 색상으로 바꿈
+[33m5255ec3[m 회원가입 페이지 추가
+[33maf3a659[m 일본어 폰트로 변경, checkbox ui 파일 수정
+[33m1a3c8a6[m readme 수정
+[33mc4a536c[m ip로도 확인가능
+[33m11beb69[m 라우터 수정
+[33m50475c1[m 설명 추가
+[33m2f6a5b8[m 스켈레톤과 설명 추가
+[33me4c2cc9[m api 통신, store 부분 수정
+[33m5713253[m 자동 포맷팅 파일 추가
+[33m67234bb[m readme 설명 추가
+[33m04f4993[m 초기 세팅
+[33m849453e[m Initial commit
