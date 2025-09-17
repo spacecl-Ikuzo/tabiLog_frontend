@@ -15,6 +15,7 @@ import TripPlannerPage from './pages/new-plan/TripPlannerPage';
 import MyPage from './pages/MyPage';
 import DashBoard from './components/layout/DashBoard';
 import Profile from './pages/profile/Profile';
+import DeleteAccount from './pages/delete-account/DeleteAccount';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
 
         {/* 로그인 필요 */}
         <Route element={<PrivateRoute />}>
+          <Route path="/delete-account" element={<DeleteAccount />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/plans" element={<Plans />} />
           <Route path="/plans/:id" element={<PlanMobile />} />
