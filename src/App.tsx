@@ -16,6 +16,9 @@ import MyPage from './pages/MyPage';
 import DashBoard from './components/layout/DashBoard';
 import Profile from './pages/profile/Profile';
 import DeleteAccount from './pages/delete-account/DeleteAccount';
+import FindAccount from './pages/find-account/FindAccount';
+import FindID from './pages/find-account/FindID';
+import FindPassword from './pages/find-account/FindPassword';
 
 function App() {
   return (
@@ -24,6 +27,9 @@ function App() {
         {/* 비로그인 접근 가능 */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/find-account" element={<FindAccount />} />
+        <Route path="/find-account/find-id" element={<FindID />} />
+        <Route path="/find-account/find-password" element={<FindPassword />} />
         <Route path="/" element={<Home />} />
         <Route path="/spots" element={<SpotsPage />} />
         <Route path="/detail/:id" element={<DetailPage />} />

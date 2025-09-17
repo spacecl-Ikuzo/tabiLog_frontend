@@ -91,13 +91,6 @@ export default function Login() {
                   <FormItem>
                     <div className="flex items-center justify-between">
                       <FormLabel className="text-gray-800 font-medium">ID</FormLabel>
-                      <Link
-                        to="/forgot-password"
-                        className="text-xs text-gray-500 hover:text-orange-500 transition-colors"
-                        tabIndex={-1} // 링크는 탭에서 제외
-                      >
-                        パスワードをお忘れですか？
-                      </Link>
                     </div>
                     <Input
                       {...field}
@@ -137,6 +130,13 @@ export default function Login() {
                   </FormItem>
                 )}
               />
+              <Link
+                to="/find-account"
+                className="flex justify-end text-xs mb-0 text-gray-500 hover:text-orange-500 transition-colors"
+                tabIndex={-1} // 링크는 탭에서 제외
+              >
+                ID/パスワードをお忘れですか？
+              </Link>
 
               {/* Submit */}
               <Button
