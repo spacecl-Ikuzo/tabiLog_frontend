@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Header from '../../components/layout/header';
 import HeroSection from '../../components/sections/HeroSection';
 import PopularSpotsSection from '../../components/sections/PopularSpotsSection';
 import TravelPlansSection from '../../components/sections/TravelPlansSection';
 import CreatePlan from '../../components/sections/CreatePlan';
+import Header from '@/components/layout/Header';
 
 const Home = () => {
   const [searchQuery, setSearchQuery] = useState('');
