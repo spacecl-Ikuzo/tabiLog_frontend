@@ -8,9 +8,11 @@ import Sapporo from '../../assets/Sapporo.jpg';
 import fukuokahutami from '../../assets/fukuokahutami.jpg';
 import fukugourmet from '../../assets/fukugourmet.jpg';
 import fukuanimate from '../../assets/fukuanimate.jpg';
+import fukushimono from '../../assets/fukushimono.jpg';
 import suzume from '../../assets/suzume.jpg';
 import SapporoTower from '../../assets/SapporoTower.jpg';
 import OkinawaResort from '../../assets/OkinawaResort.jpg';
+import Kokusaidori from '../../assets/Kokusaidori.jpg';
 import TokyoTower from '../../assets/TokyoTower.jpg';
 import AsaKusa from '../../assets/AsaKusa.jpg';
 import OsakaGuriko from '../../assets/OsakaGuriko.jpg';
@@ -40,6 +42,7 @@ import NagoyaScience from '../../assets/NagoyaScience.jpg';
 import nagoyawcs2 from '../../assets/nagoyawcs2.jpg';
 import OkiAquarium from '../../assets/OkiAquarium.jpg';
 import Shurijo from '../../assets/Shurijo.jpg';
+import syureinomon from '../../assets/syureinomon.jpg';
 import FukuokaCastle from '../../assets/FukuokaCastle.jpg';
 import USJ from '../../assets/USJ.jpg';
 import TokyoDome from '../../assets/TokyoDome.jpg';
@@ -390,7 +393,7 @@ const SpotsPage = () => {
       description: '沖縄の歴史と文化を感じられる城',
       tags: ['文化・歴史', '祭り', '南日本'],
       city: '沖縄',
-      image: Shurijo,
+      image: syureinomon,
     },
     {
       id: 12,
@@ -399,6 +402,38 @@ const SpotsPage = () => {
       tags: ['エンタメ', '家族', '南日本'],
       city: '沖縄',
       image: OkiAquarium,
+    },
+    {
+      id: 46,
+      name: '国際通り',
+      description: '那覇の中心街。沖縄のグルメとお土産が楽しめる',
+      tags: ['グルメ・食べ歩き', 'ショッピング', '南日本'],
+      city: '沖縄',
+      image: Kokusaidori,
+    },
+    {
+      id: 47,
+      name: '万座毛',
+      description: '沖縄を代表する絶景スポット。象の鼻のような岩が有名',
+      tags: ['自然', '絶景', '南日本'],
+      city: '沖縄',
+      image: OkinawaResort,
+    },
+    {
+      id: 48,
+      name: '古宇利島',
+      description: '沖縄本島北部の美しい島。透明度の高い海が魅力',
+      tags: ['ビーチ', '自然', '南日本'],
+      city: '沖縄',
+      image: OkinawaResort,
+    },
+    {
+      id: 50,
+      name: '首里城公園',
+      description: '琉球王国の歴史を感じる世界遺産。復元された城が美しい',
+      tags: ['文化・歴史', '世界遺産', '南日本'],
+      city: '沖縄',
+      image: Shurijo,
     },
     {
       id: 15,
@@ -597,6 +632,33 @@ const SpotsPage = () => {
       city: '沖縄',
     },
     {
+      id: 21,
+      title: '沖縄グルメ満喫！国際通りと首里城の歴史旅',
+      description: '沖縄の伝統料理と歴史を楽しむ旅。国際通りのグルメと首里城の文化を満喫。',
+      image: OkinawaResort,
+      author: 'グルメ好き',
+      type: '一人旅',
+      city: '沖縄',
+    },
+    {
+      id: 22,
+      title: '家族で楽しむ沖縄！美ら海水族館とビーチ',
+      description: '美ら海水族館でジンベエザメを見て、美しいビーチで家族の思い出を作る旅。',
+      image: OkiAquarium,
+      author: 'ファミリー',
+      type: '家族旅',
+      city: '沖縄',
+    },
+    {
+      id: 23,
+      title: '沖縄絶景ドライブ！万座毛と古宇利島',
+      description: '沖縄本島をドライブしながら、万座毛の絶景と古宇利島の美しい海を楽しむ旅。',
+      image: OkinawaResort,
+      author: 'ドライブ好き',
+      type: '二人旅',
+      city: '沖縄',
+    },
+    {
       id: 8,
       title: 'ワールドコスプレサミット',
       description: '毎年夏に名古屋で開催される世界規模のコスプレイベント。',
@@ -694,10 +756,10 @@ const SpotsPage = () => {
     },
     {
       id: 20,
-      title: 'ホークス観戦と屋台グルメの夜',
-      description: 'PayPayドームで野球観戦後、中洲屋台で博多グルメを満喫。',
-      image: HakataCity,
-      author: 'スポーツ好き',
+      title: '九州から本州へ！福岡・小倉・門司・下関の歴史旅',
+      description: '福岡から小倉、門司港、下関を巡る歴史とグルメの旅。関門海峡を越えて本州と九州を結ぶ特別な体験を。',
+      image: fukushimono,
+      author: '歴史好き',
       type: '二人旅',
       city: '福岡',
     },

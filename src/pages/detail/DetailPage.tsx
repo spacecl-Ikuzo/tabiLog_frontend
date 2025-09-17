@@ -15,6 +15,11 @@ import KiyoMizuTera from '../../assets/KiyoMizuTera.jpg';
 import SapporoTime from '../../assets/SapporoTime.jpg';
 import SapporoTower from '../../assets/SapporoTower.jpg';
 import FukuokaCastle from '../../assets/FukuokaCastle.jpg';
+import HakataCity from '../../assets/HakataCity.jpg';
+import fukushimono from '../../assets/fukushimono.jpg';
+import gokuracastle from '../../assets/gokuracastle.jpg';
+import mojikoretro from '../../assets/mojikoretro.jpg';
+import shimonoseki from '../../assets/shimonoseki.jpg';
 import Shurijo from '../../assets/Shurijo.jpg';
 import OkiAquarium from '../../assets/OkiAquarium.jpg';
 import nagoyawcs1 from '../../assets/nagoyawcs1.jpg';
@@ -254,6 +259,20 @@ const DetailPage = () => {
       content:
         '2022年に公開された新海誠監督のアニメーション映画「すずめの戸締まり」は、福岡を舞台にした壮大なファンタジー作品です。主人公の岩戸すずめが日本各地の「後門」を閉じる旅を通じて、災害と向き合いながら成長していく物語が描かれています。福岡は物語の重要な舞台として登場し、多くのファンが聖地巡礼に訪れています。<br><br>【2.1 すずめの戸締まり紹介】<br>「すずめの戸締まり」は新海誠監督が手がけた最新作で、東日本大震災をテーマにした感動的な作品です。主人公の岩戸すずめは、九州の小さな町に住む17歳の女子高校生で、ある日不思議な猫の「だいじん」と出会い、日本各地の「後門」を閉じる旅に出ることになります。福岡は物語の重要な舞台として登場し、すずめの成長と旅の出発点として描かれています。アニメの美しい映像と福岡の実在の風景が融合した、特別な魅力を持つ作品です。<br><br>【2.2 アニメの世界観】<br>「すずめの戸締まり」は災害と向き合うことの大切さをテーマにした作品で、新海誠監督らしい美しい映像と感動的なストーリーが特徴です。福岡を舞台とした部分では、日常の美しさと災害の恐ろしさが対比的に描かれており、観る者に深い印象を与えます。アニメの中で描かれた福岡の風景を実際に訪れることで、作品の世界観をより深く体験することができます。特に福岡の自然と街並みの美しさは、アニメの世界観を体現する特別な魅力を持っています。<br><br>【2.3 豊後森駅】<br>豊後森駅は「すずめの戸締まり」の重要な舞台として登場する大分県の駅です。アニメの中で印象的に描かれた豊後森駅は、すずめの旅の重要な通過点として描かれており、多くのファンが聖地巡礼に訪れています。実際の豊後森駅を訪れることで、アニメの中で描かれた美しい風景と現実の駅の雰囲気を比較しながら楽しむことができます。豊後森駅周辺の自然豊かな風景もアニメの世界観を体現しており、聖地巡礼の魅力をより深く感じることができる特別な場所です。',
     },
+    20: {
+      title: '九州から本州へ！福岡・小倉・門司・下関の歴史旅',
+      description: '福岡から小倉、門司港、下関を巡る歴史とグルメの旅。関門海峡を越えて本州と九州を結ぶ特別な体験を。',
+      author: '歴史好き',
+      type: '二人旅',
+      city: '福岡',
+      image: HakataCity,
+      heroImage: HakataCity,
+      breadcrumb: ['福岡', '小倉', '門司港', '下関', '歴史旅'],
+      contentTitle: '福岡・小倉・門司・下関の歴史旅の基本情報',
+      spots: ['小倉城と歴史', '門司港レトロ', '下関と関門海峡', '福岡から下関への交通手段'],
+      content:
+        '福岡から小倉、門司港、下関を巡る歴史とグルメの旅は、九州と本州を結ぶ関門海峡の魅力を満喫できる特別なプランです。小倉の歴史、門司港のレトロな雰囲気、そして下関の海鮮料理まで、各地の特色を楽しみながら歴史を感じる旅ができます。<br><br>【2.1 小倉城と歴史】<br>小倉は江戸時代から重要な商業都市として栄えた歴史ある街です。小倉城は細川忠興によって築かれた名城で、現在は復元された天守閣が美しい姿を見せています。城下町の雰囲気を残す街並みを散策しながら、小倉の歴史と文化を感じることができます。小倉祇園太鼓や小倉織など、伝統的な文化も体験でき、歴史好きにはたまらない魅力があります。<br><br>【2.2 門司港レトロ】<br>門司港は明治時代から大正時代にかけて国際貿易港として栄えた歴史ある港町です。レトロな建物が並ぶ門司港レトロ地区では、大正ロマンの雰囲気を感じながら散策を楽しめます。門司港駅の赤レンガ駅舎や旧門司税関など、歴史的な建物が美しく保存されており、タイムスリップしたような感覚を味わえます。門司港名物の焼きカレーも必食です。<br><br>【2.3 下関と関門海峡】<br>下関は本州の最西端に位置し、関門海峡を挟んで九州と向かい合う歴史的な街です。壇ノ浦の戦いで知られる歴史の舞台であり、関門海峡の美しい景色を楽しめます。下関名物のふぐ料理を味わいながら、海峡を渡る船の往来を見ていると、本州と九州を結ぶ重要な交通路としての歴史を感じることができます。関門トンネル人道を歩いて海峡を渡る体験も、この旅の特別な思い出になります。<br><br>【2.4 福岡から下関への交通手段】<br>福岡から下関까지는「ふくふく号」高速バスが最も便利な交通手段です。西鉄グループが運営하는このバスは、ハカタバスターミナル(3층 31번 승강장)과 니시테츠 텐진 고속버스 터미널(3층 1번 승강장)에서 출발합니다。편도 요금은 1,700엔이며 예약이 불필요하고, 하루 12번 왕복(총 24편) 운행됩니다. 소요시간은 약 1시간 40분으로 빠르고 편리합니다. SUNQ 패스(전큐슈권, 북큐슈권) 사용도 가능하여 경제적인 여행이 가능합니다. 이 버스를 이용하면 후쿠오카의 도시적 매력에서 시모노세키의 역사적 분위기까지 매끄럽게 연결되는 여행을 즐길 수 있습니다.',
+    },
   };
 
   const planId = id ? parseInt(id) : 1;
@@ -331,7 +350,7 @@ const DetailPage = () => {
           <h2 className="text-3xl font-bold text-gray-900 mb-8">{plan.contentTitle}</h2>
 
           {/* Images */}
-          {planId !== 4 && planId !== 19 && (
+          {planId !== 4 && planId !== 19 && planId !== 20 && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <div className="bg-white rounded-lg overflow-hidden shadow-md">
                 <div
@@ -575,6 +594,36 @@ const DetailPage = () => {
                 <div
                   className="h-64 bg-cover bg-center bg-no-repeat"
                   style={{ backgroundImage: `url(${suzumegoods})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+
+          {/* Extra Images for Fukuoka-Kokura-Moji-Shimonoseki History Tour */}
+          {planId === 20 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${fukushimono})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${gokuracastle})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${mojikoretro})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${shimonoseki})` }}
                 ></div>
               </div>
             </div>
