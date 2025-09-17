@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
 interface UserStore {
   userId: string; // 사용자 ID
@@ -16,27 +17,42 @@ interface UserStore {
   removeUserData: () => void; // 로그아웃/만료 시 호출
 }
 
-const useUserStore = create<UserStore>((set) => ({
-  userId: '',
-  nickname: '',
-  email: '',
-  token: '',
-  tokenExp: 0,
-
-  setUserId: (userId) => set({ userId }),
-  setNickname: (nickname) => set({ nickname }),
-  setEmail: (email) => set({ email }),
-  setToken: (token) => set({ token }),
-  setTokenExp: (tokenExp) => set({ tokenExp }),
-
-  removeUserData: () =>
-    set({
+const useUserStore = create<UserStore>()(
+  persist(
+    (set) => ({
       userId: '',
       nickname: '',
       email: '',
       token: '',
       tokenExp: 0,
+
+      setUserId: (userId) => set({ userId }),
+      setNickname: (nickname) => set({ nickname }),
+      setEmail: (email) => set({ email }),
+      setToken: (token) => set({ token }),
+      setTokenExp: (tokenExp) => set({ tokenExp }),
+
+      removeUserData: () =>
+        set({
+          userId: '',
+          nickname: '',
+          email: '',
+          token: '',
+          tokenExp: 0,
+        }),
     }),
-}));
+    {
+      name: 'user-storage', // localStorage 키 이름
+      // 민감한 정보는 제외하고 필요한 정보만 저장
+      partialize: (state) => ({
+        userId: state.userId,
+        nickname: state.nickname,
+        email: state.email,
+        token: state.token,
+        tokenExp: state.tokenExp,
+      }),
+    }
+  )
+);
 
 export default useUserStore;
