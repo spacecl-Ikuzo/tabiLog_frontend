@@ -18,12 +18,14 @@ import DeleteAccount from './pages/delete-account/DeleteAccount';
 import FindAccount from './pages/find-account/FindAccount';
 import FindID from './pages/find-account/FindID';
 import FindPassword from './pages/find-account/FindPassword';
+import Invitation from './pages/Invitation/Invitation';
 
 function App() {
   return (
     <>
       <Routes>
         {/* 비로그인 접근 가능 */}
+        <Route path="/invitation/:token" element={<Invitation />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/find-account" element={<FindAccount />} />
