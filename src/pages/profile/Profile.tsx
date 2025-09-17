@@ -6,8 +6,9 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Form, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { User, Mail, Phone, Key, Eye, EyeOff, Edit3 } from 'lucide-react';
-import Header from '@/components/layout/header';
+import Header from '@/components/layout/Header';
 import SideNavigation from '@/components/layout/side-navigation';
+import { useNavigate } from 'react-router-dom';
 
 // Zod 스키마 정의
 const profileSchema = z
@@ -37,6 +38,8 @@ const profileSchema = z
 type ProfileFormData = z.infer<typeof profileSchema>;
 
 export default function Profile() {
+  const navigate = useNavigate();
+
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -297,7 +300,11 @@ export default function Profile() {
                   />
                 </div>
                 <div className="flex justify-end pt-5">
-                  <button type="button" className="text-sm text-gray-400 hover:text-gray-600 cursor-pointer">
+                  <button
+                    type="button"
+                    className="text-sm text-gray-400 hover:text-gray-600 cursor-pointer"
+                    onClick={() => navigate('/delete-account')}
+                  >
                     退会する
                   </button>
                 </div>

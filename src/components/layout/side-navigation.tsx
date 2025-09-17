@@ -3,6 +3,8 @@ import { User, PlaneTakeoff, BarChart3 } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getMyPageInfo } from '../../api/api';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 interface MyPageInfo {
   id: number;
@@ -68,12 +70,19 @@ export default function SideNavigation({ selectedNav }: { selectedNav: string })
         <div className="px-6 py-15">
           {/* 프로필 섹션 */}
           <div className="flex items-center gap-3 bg-gray-100 rounded-3xl p-4 mb-8">
-            <div className="w-14 h-14 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center text-white font-bold">
-              {loading ? '...' : userInfo ? userInfo.nickname.charAt(0) : 'オ'}
-            </div>
-            <span className="font-bold text-gray-800 text-lg">
-              {loading ? '로딩 중...' : userInfo ? userInfo.nickname : 'オンビャク'}
-            </span>
+            {loading ? (
+              <>
+                <Skeleton circle height={56} width={56} />
+                <Skeleton height={20} width={100} />
+              </>
+            ) : (
+              <>
+                <div className="w-14 h-14 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center text-white font-bold">
+                  {userInfo ? userInfo.nickname.charAt(0) : 'オ'}
+                </div>
+                <span className="font-bold text-gray-800 text-lg">{userInfo ? userInfo.nickname : 'オンビャク'}</span>
+              </>
+            )}
           </div>
 
           {/* 메뉴 */}
