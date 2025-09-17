@@ -1,14 +1,18 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import Header from '../../components/layout/header';
 import MainBackGround from '../../assets/MainBackGround.jpg';
 import Tokyo from '../../assets/Tokyo.jpg';
 import OsakaCastle from '../../assets/OsakaCastle.jpg';
 import Kinkakuji from '../../assets/Kinkakuji.jpg';
 import Sapporo from '../../assets/Sapporo.jpg';
 import fukuokahutami from '../../assets/fukuokahutami.jpg';
+import fukugourmet from '../../assets/fukugourmet.jpg';
+import fukuanimate from '../../assets/fukuanimate.jpg';
+import fukushimono from '../../assets/fukushimono.jpg';
+import suzume from '../../assets/suzume.jpg';
 import SapporoTower from '../../assets/SapporoTower.jpg';
 import OkinawaResort from '../../assets/OkinawaResort.jpg';
+import Kokusaidori from '../../assets/Kokusaidori.jpg';
 import TokyoTower from '../../assets/TokyoTower.jpg';
 import AsaKusa from '../../assets/AsaKusa.jpg';
 import OsakaGuriko from '../../assets/OsakaGuriko.jpg';
@@ -26,13 +30,19 @@ import miyajima from '../../assets/miyajima.jpg';
 import NagoyaCastle from '../../assets/NagoyaCastle.jpg';
 import osushotenkai from '../../assets/osushotenkai.jpg';
 import akihabara from '../../assets/akihabara.jpg';
+import fujiq1 from '../../assets/fujiq1.jpg';
+import KiminoNamaewa from '../../assets/KiminoNamaewa.jpg';
+import tenkinoko from '../../assets/tenkinoko.jpg';
+import Digimon4 from '../../assets/Digimon4.jpg';
+import hakoneonsen from '../../assets/hakoneonsen.jpg';
+import jiburiPost from '../../assets/jiburiPost.jpg';
+import NagoyaLego from '../../assets/NagoyaLego.jpg';
 import Nagoyalinear from '../../assets/Nagoyalinear.jpg';
 import NagoyaScience from '../../assets/NagoyaScience.jpg';
-import nagoyawcs1 from '../../assets/nagoyawcs1.jpg';
-import nagoyawcspng from '../../assets/nagoyawcspng.png';
 import nagoyawcs2 from '../../assets/nagoyawcs2.jpg';
 import OkiAquarium from '../../assets/OkiAquarium.jpg';
 import Shurijo from '../../assets/Shurijo.jpg';
+import syureinomon from '../../assets/syureinomon.jpg';
 import FukuokaCastle from '../../assets/FukuokaCastle.jpg';
 import USJ from '../../assets/USJ.jpg';
 import TokyoDome from '../../assets/TokyoDome.jpg';
@@ -41,11 +51,12 @@ import Tsukiji from '../../assets/Tsukiji.jpg';
 import NikkoToshogu from '../../assets/nikkotoshogu.jpg';
 import Kamakura from '../../assets/kamakura.jpg';
 import HakoneOnsen from '../../assets/hakoneonsen.jpg';
-import ShibuyaMomstouch from '../../assets/ShibuyaMomstouch.jpg';
 import ShibuyaScramble from '../../assets/ShibuyaScramble.jpg';
-import Meijisinku from '../../assets/meijisinku.jpg';
-import Swallows from '../../assets/Swallows.jpg';
-import ShibuyaBape from '../../assets/ShibuyaBape.jpg';
+import nakasumap from '../../assets/nakasumap.jpg';
+import kushidashrine from '../../assets/kushidashrine.jpg';
+import marineworld from '../../assets/marineworld.jpg';
+import paypaydome from '../../assets/paypaydome.jpg';
+import Header from '@/components/layout/Header';
 
 const SpotsPage = () => {
   const [selectedCity, setSelectedCity] = useState<string | null>(null);
@@ -98,6 +109,9 @@ const SpotsPage = () => {
           });
         }
       }, 100);
+    } else {
+      // URL에 도시 정보가 없으면 선택된 도시 초기화
+      setSelectedCity(null);
     }
 
     if (searchFromUrl) {
@@ -211,7 +225,7 @@ const SpotsPage = () => {
       name: '金沢',
       image: Kanazawa,
       description: '伝統工芸と美しい庭園が魅力の城下町。',
-      tags: ['文化・歴史', '庭園', '東日本'],
+      tags: ['文化・歴史', '庭園', '西日本'],
     },
   ];
 
@@ -326,12 +340,60 @@ const SpotsPage = () => {
       image: HakataCity,
     },
     {
+      id: 40,
+      name: '中洲屋台',
+      description: '福岡の夜を彩る屋台街。博多グルメを堪能できる名所',
+      tags: ['グルメ・食べ歩き', '夜景', '南日本'],
+      city: '福岡',
+      image: nakasumap,
+    },
+    {
+      id: 41,
+      name: '太宰府天満宮',
+      description: '学問の神様を祀る神社。梅の名所としても有名',
+      tags: ['文化・歴史', '神社', '南日本'],
+      city: '福岡',
+      image: FukuokaCastle,
+    },
+    {
+      id: 42,
+      name: '櫛田神社',
+      description: '博多祇園山笠で知られる博多総鎮守',
+      tags: ['文化・歴史', '神社', '南日本'],
+      city: '福岡',
+      image: kushidashrine,
+    },
+    {
+      id: 43,
+      name: 'マリンワールド海の中道',
+      description: '九州の海をテーマにした水族館。家族連れに人気',
+      tags: ['エンタメ', '家族', '南日本'],
+      city: '福岡',
+      image: marineworld,
+    },
+    {
+      id: 44,
+      name: '大濠公園',
+      description: '市民の憩いの場。湖畔の散策とボートが楽しめる',
+      tags: ['自然', '散策', '南日本'],
+      city: '福岡',
+      image: FukuokaCastle,
+    },
+    {
+      id: 45,
+      name: '福岡PayPayドーム（ソフトバンクホークス）',
+      description: '福岡ソフトバンクホークスの本拠地。試合観戦が人気',
+      tags: ['スポーツ', '野球', '南日本'],
+      city: '福岡',
+      image: paypaydome,
+    },
+    {
       id: 11,
       name: '首里城',
       description: '沖縄の歴史と文化を感じられる城',
       tags: ['文化・歴史', '祭り', '南日本'],
       city: '沖縄',
-      image: Shurijo,
+      image: syureinomon,
     },
     {
       id: 12,
@@ -340,6 +402,38 @@ const SpotsPage = () => {
       tags: ['エンタメ', '家族', '南日本'],
       city: '沖縄',
       image: OkiAquarium,
+    },
+    {
+      id: 46,
+      name: '国際通り',
+      description: '那覇の中心街。沖縄のグルメとお土産が楽しめる',
+      tags: ['グルメ・食べ歩き', 'ショッピング', '南日本'],
+      city: '沖縄',
+      image: Kokusaidori,
+    },
+    {
+      id: 47,
+      name: '万座毛',
+      description: '沖縄を代表する絶景スポット。象の鼻のような岩が有名',
+      tags: ['自然', '絶景', '南日本'],
+      city: '沖縄',
+      image: OkinawaResort,
+    },
+    {
+      id: 48,
+      name: '古宇利島',
+      description: '沖縄本島北部の美しい島。透明度の高い海が魅力',
+      tags: ['ビーチ', '自然', '南日本'],
+      city: '沖縄',
+      image: OkinawaResort,
+    },
+    {
+      id: 50,
+      name: '首里城公園',
+      description: '琉球王国の歴史を感じる世界遺産。復元された城が美しい',
+      tags: ['文化・歴史', '世界遺産', '南日本'],
+      city: '沖縄',
+      image: Shurijo,
     },
     {
       id: 15,
@@ -361,7 +455,7 @@ const SpotsPage = () => {
       id: 17,
       name: '兼六園',
       description: '金沢の代表的な庭園。日本三名園の一つ',
-      tags: ['文化・歴史', '祭り', '東日本'],
+      tags: ['文化・歴史', '祭り', '西日本'],
       city: '金沢',
       image: Kenrokuen,
     },
@@ -369,7 +463,7 @@ const SpotsPage = () => {
       id: 18,
       name: '金沢城公園',
       description: '金沢の歴史を感じられる城跡公園',
-      tags: ['文化・歴史', '祭り', '東日本'],
+      tags: ['文化・歴史', '祭り', '西日本'],
       city: '金沢',
       image: KanazawaCastle,
     },
@@ -469,6 +563,14 @@ const SpotsPage = () => {
       city: '東京',
       image: akihabara,
     },
+    {
+      id: 34,
+      name: '富士急ハイランド',
+      description: '絶叫マシンで有名なテーマパーク。富士山を背景にした絶景アトラクション',
+      tags: ['エンタメ', 'アトラクション', '東日本', '観光地', '富士吉田市'],
+      city: '東京',
+      image: fujiq1,
+    },
   ];
 
   const travelPlans = [
@@ -506,7 +608,7 @@ const SpotsPage = () => {
       id: 4,
       title: '福岡屋台めぐり！博多グルメ紀行',
       description: 'とんこつラーメンと福岡の名所を巡る旅。',
-      image: fukuokahutami,
+      image: fukugourmet,
       author: 'オンピック',
       type: '二人旅',
       city: '福岡',
@@ -530,13 +632,31 @@ const SpotsPage = () => {
       city: '沖縄',
     },
     {
-      id: 7,
-      title: '名古屋城と熱田神宮めぐり',
-      description: '名古屋の歴史と文化を感じる旅。',
-      image: Nagoya,
-      author: 'タロウ',
+      id: 21,
+      title: '沖縄グルメ満喫！国際通りと首里城の歴史旅',
+      description: '沖縄の伝統料理と歴史を楽しむ旅。国際通りのグルメと首里城の文化を満喫。',
+      image: OkinawaResort,
+      author: 'グルメ好き',
       type: '一人旅',
-      city: '名古屋',
+      city: '沖縄',
+    },
+    {
+      id: 22,
+      title: '家族で楽しむ沖縄！美ら海水族館とビーチ',
+      description: '美ら海水族館でジンベエザメを見て、美しいビーチで家族の思い出を作る旅。',
+      image: OkiAquarium,
+      author: 'ファミリー',
+      type: '家族旅',
+      city: '沖縄',
+    },
+    {
+      id: 23,
+      title: '沖縄絶景ドライブ！万座毛と古宇利島',
+      description: '沖縄本島をドライブしながら、万座毛の絶景と古宇利島の美しい海を楽しむ旅。',
+      image: OkinawaResort,
+      author: 'ドライブ好き',
+      type: '二人旅',
+      city: '沖縄',
     },
     {
       id: 8,
@@ -557,30 +677,11 @@ const SpotsPage = () => {
       city: '広島',
     },
     {
-      id: 9,
-      title: '金沢の伝統工芸と庭園めぐり',
-      description: '兼六園と金沢城公園で伝統文化を体験。',
-      image: Kanazawa,
-      author: 'ケンジ',
-      type: '一人旅',
-      city: '金沢',
-    },
-    {
-      id: 10,
-      title: '君の名は。聖地巡礼！東京・新宿の名所めぐり',
-      description:
-        '新海誠監督の名作「君の名は。」の聖地を巡る旅。新宿御苑、須賀神社、代々木ビルなど、映画の舞台となった場所を実際に歩いてみよう。',
-      image: Tokyo,
-      author: 'アニメファン',
-      type: '一人旅',
-      city: '東京',
-    },
-    {
       id: 11,
       title: '天気の子聖地巡礼！東京スカイツリーと台場',
       description:
         '「天気の子」の舞台となった東京の名所を巡る。スカイツリー、台場、新宿など、映画に登場した場所で主人公たちの気持ちを感じてみよう。',
-      image: TokyoTower,
+      image: tenkinoko,
       author: '映画好き',
       type: '二人旅',
       city: '東京',
@@ -590,7 +691,7 @@ const SpotsPage = () => {
       title: 'デジモンアドベンチャー聖地巡礼！お台場と光が丘',
       description:
         'デジモンアドベンチャーの聖地を巡る旅。お台場のフジテレビ、光が丘公園、新宿駅など、アニメファンなら一度は訪れたい場所をめぐろう。',
-      image: TokyoDome,
+      image: Digimon4,
       author: 'デジモンファン',
       type: '一人旅',
       city: '東京',
@@ -600,10 +701,67 @@ const SpotsPage = () => {
       title: '東京温泉巡り！箱根と日光でリラックス',
       description:
         '東京近郊の名湯を巡る旅。箱根温泉で富士山を眺めながら、日光温泉で歴史を感じながら、心も体もリフレッシュしよう。',
-      image: OkinawaResort,
+      image: hakoneonsen,
       author: '温泉好き',
       type: '二人旅',
       city: '東京',
+    },
+    {
+      id: 14,
+      title: '君の名は。聖地巡礼！渋谷と代々木',
+      description:
+        '「君の名は。」の舞台となった東京の名所を巡る。渋谷のスクランブル交差点、代々木の神社、新宿御苑など、映画に登場した場所で主人公たちの気持ちを感じてみよう。',
+      image: KiminoNamaewa,
+      author: 'アニメファン',
+      type: '二人旅',
+      city: '東京',
+    },
+    {
+      id: 16,
+      title: 'レゴランド・ジャパン！家族で楽しむテーマパーク',
+      description:
+        '名古屋のレゴランド・ジャパンで、レゴブロックの世界を体験しよう。子供から大人まで楽しめるアトラクションとレゴの魅力を満喫。',
+      image: NagoyaLego,
+      author: 'ファミリー',
+      type: '家族旅',
+      city: '名古屋',
+    },
+    {
+      id: 17,
+      title: 'ジブリパーク！スタジオジブリの世界へ',
+      description:
+        '愛知県長久手市のジブリパークで、宮崎駿監督のアニメの世界を体験。トトロの森、魔女の宅急便の世界など、ジブリファン必見。',
+      image: jiburiPost,
+      author: 'ジブリファン',
+      type: '一人旅',
+      city: '名古屋',
+    },
+    {
+      id: 18,
+      title: '天神で楽しむ福岡のオタク文化とショッピング',
+      description: '天神の地下街から地上まで、オタク文化とショッピングを満喫する旅。',
+      image: fukuanimate,
+      author: 'オタク好き',
+      type: '一人旅',
+      city: '福岡',
+    },
+    {
+      id: 19,
+      title: 'すずめの戸締まり聖地巡礼！福岡の神秘的な旅',
+      description: 'アニメ「すずめの戸締まり」の舞台となった福岡の聖地を巡る旅。',
+      image: suzume,
+      author: 'アニメファン',
+      type: '一人旅',
+      city: '福岡',
+    },
+    {
+      id: 20,
+      title: '九州から本州へ！福岡・小倉・門司・下関の歴史旅',
+      description: '福岡から小倉、門司港、下関を巡る歴史とグルメの旅。関門海峡を越えて本州と九州を結ぶ特別な体験を。',
+      image: fukushimono,
+      author: '歴史好き',
+      type: '二人旅',
+      city: '福岡',
     },
   ];
 
@@ -681,7 +839,6 @@ const SpotsPage = () => {
   return (
     <div className="min-h-screen">
       <Header />
-
       {/* Hero Section */}
       <section
         className="relative h-96 bg-cover bg-center bg-no-repeat flex items-center justify-center"
@@ -789,8 +946,16 @@ const SpotsPage = () => {
                     onClick={() => {
                       if (selectedCity === destination.name) {
                         setSelectedCity(null);
+                        // URL에서 도시 파라미터 제거
+                        const newSearchParams = new URLSearchParams(searchParams);
+                        newSearchParams.delete('city');
+                        navigate(`/spots?${newSearchParams.toString()}`, { replace: true });
                       } else {
                         setSelectedCity(destination.name);
+                        // URL에 도시 파라미터 추가
+                        const newSearchParams = new URLSearchParams(searchParams);
+                        newSearchParams.set('city', destination.name);
+                        navigate(`/spots?${newSearchParams.toString()}`, { replace: true });
                       }
                     }}
                   >
@@ -840,7 +1005,14 @@ const SpotsPage = () => {
                   <div
                     key={spot.id}
                     className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
-                    onClick={() => navigate(`/spot/${spot.city}/${spot.id}`)}
+                    onClick={() => {
+                      // 현재 URL 정보를 state로 전달하여 뒤로가기 시 도시 정보 유지
+                      const currentUrl = `/spots?${searchParams.toString()}`;
+                      navigate(`/spot/${spot.city}/${spot.id}`, {
+                        state: { from: currentUrl },
+                      });
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }}
                   >
                     <div
                       className="h-48 bg-cover bg-center bg-no-repeat"
@@ -976,7 +1148,14 @@ const SpotsPage = () => {
                 <div
                   key={plan.id}
                   className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
-                  onClick={() => navigate(`/detail/${plan.id}`)}
+                  onClick={() => {
+                    // 현재 URL 정보를 state로 전달하여 뒤로가기 시 도시 정보 유지
+                    const currentUrl = `/spots?${searchParams.toString()}`;
+                    navigate(`/detail/${plan.id}`, {
+                      state: { from: currentUrl },
+                    });
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
                 >
                   <div
                     className="h-48 bg-cover bg-center bg-no-repeat"

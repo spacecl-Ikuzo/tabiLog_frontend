@@ -8,7 +8,6 @@ import { axiosInstance } from '../../api/axios';
 import { AxiosError } from 'axios';
 import { toast } from 'sonner';
 import { useNavigate } from 'react-router-dom';
-import Header from '../../components/layout/header';
 
 // 유효성 검사 스키마 정의 (디자인은 유지, 규칙만 조금 보강)
 // 서버에서 비번 8자 요구가 올 수 있으니 min(8)로 맞춰둠 (서버 메세지는 그대로 매핑)
@@ -122,9 +121,6 @@ const Register = () => {
 
   return (
     <div className="flex flex-col min-h-screen">
-      {/* 헤더 */}
-      <Header />
-
       {/* 메인 콘텐츠 */}
       <main className="flex flex-1 justify-center items-center p-4 lg:p-6">
         <div className="p-4 w-full max-w-2xl lg:p-8">

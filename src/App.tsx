@@ -1,3 +1,4 @@
+// src/App.tsx
 import { Route, Routes } from 'react-router-dom';
 import Login from './pages/login/Login';
 import PrivateRoute from './PrivateRoute';
@@ -13,31 +14,39 @@ import NewPlanDetail from './pages/new-plan/NewPlanDetail';
 import TripPlannerPage from './pages/new-plan/TripPlannerPage';
 import DashBoard from './components/layout/DashBoard';
 import Profile from './pages/profile/Profile';
+import DeleteAccount from './pages/delete-account/DeleteAccount';
+import FindAccount from './pages/find-account/FindAccount';
+import FindID from './pages/find-account/FindID';
+import FindPassword from './pages/find-account/FindPassword';
 
 function App() {
   return (
-    <Routes>
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="/" element={<Home />} />
-      <Route path="/spots" element={<SpotsPage />} />
-      <Route path="/detail/:id" element={<DetailPage />} />
-      <Route path="/spot/:city/:id" element={<SpotDetailPage />} />
-      {/* 비로그인 유저도 접근 가능한 페이지 */}
-
-      <Route element={<PrivateRoute />}>
-        {/* 로그인 유저만 접근 가능한 페이지들을 여기에 추가 */}
-        {/* 예시: <Route path="/profile" element={<Profile />} /> */}
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/plans" element={<Plans />} />
-        <Route path="/plans/:id" element={<PlanMobile />} />
-        <Route path="/newPlan" element={<NewPlanCheckDate />} />
-        <Route path="/newPlan/detail" element={<NewPlanDetail />} />
+    <>
+      <Routes>
+        {/* 비로그인 접근 가능 */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/find-account" element={<FindAccount />} />
+        <Route path="/find-account/find-id" element={<FindID />} />
+        <Route path="/find-account/find-password" element={<FindPassword />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/spots" element={<SpotsPage />} />
+        <Route path="/detail/:id" element={<DetailPage />} />
+        <Route path="/spot/:city/:id" element={<SpotDetailPage />} />
         <Route path="/trip-planner" element={<TripPlannerPage />} />
-        <Route path="/dashboard" element={<DashBoard />}>
+
+        {/* 로그인 필요 */}
+        <Route element={<PrivateRoute />}>
+          <Route path="/delete-account" element={<DeleteAccount />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/plans" element={<Plans />} />
+          <Route path="/plans/:id" element={<PlanMobile />} />
+          <Route path="/newPlan" element={<NewPlanCheckDate />} />
+          <Route path="/newPlan/detail" element={<NewPlanDetail />} />
+          <Route path="/dashboard" element={<DashBoard />} />
         </Route>
-      </Route>
-    </Routes>
+      </Routes>
+    </>
   );
 }
 
