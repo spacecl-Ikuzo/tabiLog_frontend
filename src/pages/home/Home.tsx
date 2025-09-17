@@ -4,6 +4,7 @@ import HeroSection from '../../components/sections/HeroSection';
 import PopularSpotsSection from '../../components/sections/PopularSpotsSection';
 import TravelPlansSection from '../../components/sections/TravelPlansSection';
 import CreatePlan from '../../components/sections/CreatePlan';
+import Header from '@/components/layout/Header';
 
 const Home = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -23,6 +24,7 @@ const Home = () => {
 
   return (
     <div className="min-h-screen">
+      <Header />
       <HeroSection />
 
       {/* Search Section */}
