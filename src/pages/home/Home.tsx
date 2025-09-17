@@ -4,7 +4,7 @@ import HeroSection from '../../components/sections/HeroSection';
 import PopularSpotsSection from '../../components/sections/PopularSpotsSection';
 import TravelPlansSection from '../../components/sections/TravelPlansSection';
 import CreatePlan from '../../components/sections/CreatePlan';
-import Header from '@/components/layout/Header';
+import Header from '@/components/layout/header';
 
 const Home = () => {
   const [searchQuery, setSearchQuery] = useState('');

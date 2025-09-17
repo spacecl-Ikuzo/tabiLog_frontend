@@ -12,7 +12,6 @@ import PlanMobile from './pages/plans/PlanMobile';
 import NewPlanCheckDate from './pages/new-plan/NewPlanCheckDate';
 import NewPlanDetail from './pages/new-plan/NewPlanDetail';
 import TripPlannerPage from './pages/new-plan/TripPlannerPage';
-import MyPage from './pages/MyPage';
 import DashBoard from './components/layout/DashBoard';
 import Profile from './pages/profile/Profile';
 import DeleteAccount from './pages/delete-account/DeleteAccount';
@@ -44,10 +43,7 @@ function App() {
           <Route path="/plans/:id" element={<PlanMobile />} />
           <Route path="/newPlan" element={<NewPlanCheckDate />} />
           <Route path="/newPlan/detail" element={<NewPlanDetail />} />
-          <Route path="/dashboard" element={<DashBoard />}>
-            <Route index element={<MyPage />} />
-            <Route path="mypage" element={<MyPage />} />
-          </Route>
+          <Route path="/dashboard" element={<DashBoard />} />
         </Route>
       </Routes>
     </>
