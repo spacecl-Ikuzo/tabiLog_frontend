@@ -1,4 +1,5 @@
 import { useEffect, useState, useCallback, useMemo, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '../../components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../components/ui/select';
 import { Card, CardContent, CardTitle } from '../../components/ui/card';
@@ -20,6 +21,8 @@ import { Plan } from '../../lib/type';
 import dayjs from 'dayjs';
 
 export default function Plans() {
+  const navigate = useNavigate();
+  
   //페이징 프론트 단에서 처리
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -225,7 +228,7 @@ export default function Plans() {
         {/* 메인 컨텐츠 */}
         <div className="flex-1 lg:flex">
           {/* 왼쪽 메인 영역 */}
-          <div className="p-6 lg:py-10 lg:px-30 flex-[5]">
+          <div className="flex-1 p-6 lg:py-10 lg:px-30">
             <h1 className="text-3xl font-bold text-gray-900 mb-8">私の旅行計画</h1>
 
             {/* 카테고리 탭 */}
@@ -363,7 +366,7 @@ export default function Plans() {
               if (!selectedPlan) return null;
 
               return (
-                <div className="hidden lg:block p-20 bg-white border-l border-gray-200 flex-[4]">
+                <div className="hidden lg:block w-180 p-20 bg-white border-l border-gray-200">
                   <div className="flex items-center justify-between mb-8">
                     <h2 className="text-2xl font-bold text-gray-900">旅行プラン概要</h2>
                     <button
@@ -384,7 +387,10 @@ export default function Plans() {
                         onCategorySelect={() => {}} // 클릭 비활성화
                       />
                     </div>
-                    <Button className="bg-brand-orange text-white px-4 py-2 rounded-lg text-sm font-medium">
+                    <Button 
+                      className="bg-brand-orange text-white px-4 py-2 rounded-lg text-sm font-medium"
+                      onClick={() => navigate(`/trip-planner?planId=${selectedPlanId}`)}
+                    >
                       詳細を見る
                     </Button>
                   </div>
@@ -425,7 +431,7 @@ export default function Plans() {
                     </div>
                     <div className="flex gap-5">
                       {travelMembers.slice(0, 5).map((member) => (
-                        <Avatar key={member.userId} className="w-18 h-18">
+                        <Avatar key={member.id} className="w-18 h-18">
                           <AvatarFallback className={`${member.color} text-white text-sm font-medium`}>
                             {member.userNickname?.slice(0, 2) || '??'}
                           </AvatarFallback>
@@ -519,7 +525,6 @@ export default function Plans() {
       <InviteMemberPopup
         open={isInvitePopupOpen}
         onOpenChange={setIsInvitePopupOpen}
-        planId={selectedPlanId || 0}
         onConfirm={(email, role) => {
           console.log('招待メール:', email, '役割:', role);
 

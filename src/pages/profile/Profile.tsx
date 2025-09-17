@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Form, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { User, Mail, Phone, Key, Eye, EyeOff, Edit3 } from 'lucide-react';
-import Header from '@/components/layout/Header';
+import Header from '@/components/layout/header';
 import SideNavigation from '@/components/layout/side-navigation';
 import { useNavigate } from 'react-router-dom';
 
