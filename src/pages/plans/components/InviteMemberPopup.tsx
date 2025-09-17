@@ -33,7 +33,7 @@ export default function InviteMemberPopup({ open, onOpenChange, onConfirm, onCan
   };
   useEffect(() => {
     console.log('planId', planId);
-  }, [open]);
+  }, [open, planId]);
 
   const handleConfirm = async () => {
     if (email.trim()) {

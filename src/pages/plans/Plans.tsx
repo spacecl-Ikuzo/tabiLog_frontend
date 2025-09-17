@@ -22,7 +22,7 @@ import dayjs from 'dayjs';
 
 export default function Plans() {
   const navigate = useNavigate();
-  
+
   //페이징 프론트 단에서 처리
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -387,7 +387,7 @@ export default function Plans() {
                         onCategorySelect={() => {}} // 클릭 비활성화
                       />
                     </div>
-                    <Button 
+                    <Button
                       className="bg-brand-orange text-white px-4 py-2 rounded-lg text-sm font-medium"
                       onClick={() => navigate(`/trip-planner?planId=${selectedPlanId}`)}
                     >
@@ -422,7 +422,13 @@ export default function Plans() {
                           メンバー修正
                         </button>
                         <button
-                          onClick={() => setIsInvitePopupOpen(true)}
+                          onClick={() => {
+                            if (!selectedPlanId) {
+                              toast.error('先に旅行計画を選択してください。', { position: 'top-center' });
+                              return;
+                            }
+                            setIsInvitePopupOpen(true);
+                          }}
                           className="bg-brand-orange text-white px-4 py-2 rounded-lg text-sm font-medium cursor-pointer"
                         >
                           メンバー追加
@@ -525,6 +531,7 @@ export default function Plans() {
       <InviteMemberPopup
         open={isInvitePopupOpen}
         onOpenChange={setIsInvitePopupOpen}
+        planId={selectedPlanId as number}
         onConfirm={(email, role) => {
           console.log('招待メール:', email, '役割:', role);
 
