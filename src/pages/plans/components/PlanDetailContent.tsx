@@ -90,7 +90,7 @@ export default function PlanDetailContent({
       if (role === 'DELETE') {
         //플랜 작성자는 제외 X
         if (userId === plan.userId) {
-          toast.error('自分自身除外できません。', { position: 'top-center' });
+          toast.error('プラン作成者は除外できません。', { position: 'top-center' });
           return;
         }
 
