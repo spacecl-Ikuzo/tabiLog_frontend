@@ -29,6 +29,14 @@ import KiyoMizuTera from '../../assets/KiyoMizuTera.jpg';
 import SapporoHero from '../../assets/Sapporo.jpg';
 import SapporoTime from '../../assets/SapporoTime.jpg';
 import SapporoTower from '../../assets/SapporoTower.jpg';
+import sapporowintertokei from '../../assets/sapporowintertokei.jpg';
+import sapporoflower from '../../assets/sapporoflower.jpg';
+import sapporofountain from '../../assets/sapporofountain.jpg';
+import sapporotelevi from '../../assets/sapporotelevi.jpg';
+import GenghisKhan from '../../assets/GenghisKhan.jpg';
+import GenghisKhanBeefBeer from '../../assets/GenghisKhanBeefBeer.jpg';
+import SapporoBeerMuseum from '../../assets/SapporoBeerMuseum.jpg';
+import SapporoBeerTaste from '../../assets/SapporoBeerTaste.jpg';
 import FukuokaCastle from '../../assets/FukuokaCastle.jpg';
 import FukuokaCastle2 from '../../assets/FukuokaCastle2.jpg';
 import HakataCity from '../../assets/HakataCity.jpg';
@@ -514,14 +522,23 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
       title: '大通公園',
       description: '札幌の中心にある美しい公園',
       author: 'タビログ編集部',
-      heroImage: SapporoHero,
+      heroImage: sapporofountain,
       breadcrumb: ['札幌', '中央区', '大通公園'],
       contentTitle: '大通公園の基本情報',
       spots: ['噴水', '花壇', 'テレビ塔ビュー'],
-      imageLeft: SapporoTower,
-      imageRight: SapporoTime,
       content:
-        '大通公園は札幌の中心を東西に貫く緑の帯。季節の花壇や噴水、イベントが魅力で、夏のビアガーデンや冬の雪まつりなど市民に親しまれる催しが多数開催されます。周辺にはカフェや百貨店が揃い、観光の合間の休憩にも便利です。',
+        '大通公園は札幌の中心を東西に貫く緑の帯。季節の花壇や噴水、イベントが魅力で、夏のビアガーデンや冬の雪まつりなど市民に親しまれる催しが多数開催されます。周辺にはカフェや百貨店が揃い、観光の合間の休憩にも便利です。<br><br>【2.1 噴水】<br>大通公園の噴水は、公園の美しい景観を演出する重要な要素です。特に夏の時期には、涼しげな水しぶきが訪れる人々に安らぎを与えます。噴水の周りにはベンチが設置されており、水の音を聞きながらゆっくりと過ごすことができます。夜間にはライトアップされ、幻想的な雰囲気を演出します。札幌の夏の暑さを和らげるオアシスとして、地元の人々にも観光客にも愛されています。<br><br>【2.2 花壇】<br>大通公園の花壇は、四季折々の美しい花々で彩られています。春にはチューリップやパンジー、夏にはマリーゴールドやサルビア、秋にはコスモスやキクなど、季節に応じた花々が植えられています。特に春と夏の花壇は圧巻で、多くの人が写真撮影に訪れます。花壇のデザインは毎年変わり、新しい発見があるのも魅力の一つです。花の香りと美しい色彩が、公園を訪れる人々の心を和ませてくれます。<br><br>【2.3 テレビ塔ビュー】<br>大通公園から見る札幌テレビ塔の景色は、札幌を代表する絶景スポットの一つです。公園の緑とテレビ塔の赤い塔身のコントラストが美しく、特に夕暮れ時には格別の美しさを楽しめます。テレビ塔の展望台からは大通公園を一望でき、逆に公園からはテレビ塔の威容を間近で感じることができます。夜になるとテレビ塔がライトアップされ、公園の夜景と合わせてロマンチックな雰囲気を演出します。札幌観光の定番フォトスポットとして、多くの観光客が訪れています。',
+    },
+    '26': {
+      title: 'サッポロビール博物館',
+      description: '北海道の代表的なビール工場。歴史と製造工程を学べる',
+      author: 'タビログ編集部',
+      heroImage: GenghisKhan,
+      breadcrumb: ['札幌', '東区', 'サッポロビール博物館'],
+      contentTitle: 'サッポロビール博物館の基本情報',
+      spots: ['ジンギスカン', '見学案内', '試飲コーナー'],
+      content:
+        'サッポロビール博物館は北海道のビール文化を学べる貴重な施設。明治時代から続くビール製造の歴史と技術を展示で紹介し、実際の製造工程も見学できます。試飲コーナーでは新鮮なビールを味わえ、北海道の食文化を深く理解できるスポットです。<br><br>【2.1 ジンギスカン】<br>サッポロビール博物館では、ビール製造の全工程を詳しく学ぶことができます。特に注目すべきは、札幌の名物「ジンギスカン」とビールの深い関係です。ジンギスカンは北海道の代表的な郷土料理で、羊肉を鉄板で焼いて食べる料理です。このジンギスカンとビールの組み合わせは、札幌の食文化の象徴的な存在となっています。博物館では、ビールの製造過程で使用される麦芽の種類や発酵の仕組み、そしてジンギスカンと相性の良いビールの特徴について詳しく解説されています。ジンギスカンの脂っこさをビールの爽やかな苦味が中和し、完璧な味のハーモニーを生み出す秘密も学べます。<br><br>■ジンギスカン料理と価格（税込）：<br>・ジンギスカン定食：1,200円～1,800円<br>・ジンギスカン単品：800円～1,200円<br>・ラム肉ジンギスカン：1,000円～1,500円<br>・ジンギスカン＋ビールセット：1,500円～2,200円<br>・野菜盛り合わせ：400円～600円<br>・ご飯・ライス：200円～300円<br>・ジンギスカン汁物：300円～500円<br><br>■ジンギスカンの食べ方とコツ：<br>・羊肉を鉄板で焼く際は、中火でじっくりと焼くのがポイント<br>・野菜は羊肉の脂で炒めることで、より美味しく仕上がります<br>・タレは甘辛い醤油ベースで、羊肉の臭みを消す効果があります<br>・ビールとの相性が抜群で、特にサッポロビールとの組み合わせが人気<br>・一人前の目安は羊肉150g～200g程度です<br><br>【2.2 見学案内】<br>サッポロビール博物館では、プレミアムツアー（有料）と自由見学（無料）の2つの見学コースをご用意しています。<br><br>■プレミアムツアー（有料・要予約）<br>・所要時間：約50分（テイスティング含む）<br>・実施日：月曜日を除く営業日（月曜日が祝日の場合は実施し、翌火曜日が休止）<br>・実施時間：初回11:30スタート（以降の実施時間・回数は日によって異なります）<br>・受付時間：各回スタート10分前まで<br>・定員：20名様<br>・参加費：大人1,000円、中学生～20歳未満500円、小学生以下無料<br>・内容：ブランドコミュニケーターによるガイド付きツアー、プレミアムシアターでの歴史物語視聴、館内展示見学、創業当時の味「復刻札幌製麦酒」と現代の生ビール「黒ラベル」の飲み比べ<br><br>■自由見学（無料）<br>・営業時間：11:00～18:30（ラストオーダー18:00）<br>・順路：3階→2階→1階の一方通行ルート<br>・多言語対応：英語・韓国語・中国語（簡体字）の翻訳版を2次元バーコードで提供<br><br>【2.3 試飲コーナー】<br>スターホール（テイスティング）では、サッポロビール北海道工場、札幌開拓使麦酒醸造所直送のできたてビールを味わえます。<br><br>■営業時間：11:00～18:30（ラストオーダー18:00）<br>■利用時間：30分まで<br>■試飲できる銘柄と価格（税込）：<br>・サッポロ生ビール黒ラベル：450円<br>・北海道限定クラシック：450円<br>・開拓使麦酒：550円<br>・3種飲み比べセット：1,200円<br>・ノンアルコールビールテイスト飲料：200円<br>・ソフトドリンク：200円<br><br>■注意事項：<br>・館内順路は一方通行のため、スターホールのみの利用はお控えください<br>・満席時はお待ちいただく場合があります<br>・ラストオーダー以降は試飲待機列にお並びいただけません<br>・12月31日は休業日です',
     },
   },
   福岡: {
@@ -1157,6 +1174,173 @@ const SpotDetailPage = () => {
             </div>
           )}
 
+          {/* Extra Images for Shuri Castle */}
+          {cityKey === '沖縄' && idKey === '11' && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${Shurijo})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${Shurijokaji})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${sonokoutaki})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${syureinomon})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+
+          {/* Extra Images for Okinawa Churaumi Aquarium */}
+          {cityKey === '沖縄' && idKey === '12' && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${okinawazinbe})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${okisangou})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${tsuraumiiruka})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${tsuraumimap})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+
+          {/* Extra Images for Sapporo Clock Tower */}
+          {cityKey === '札幌' && idKey === '7' && (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${SapporoTime})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${SapporoTime})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${sapporowintertokei})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+
+          {/* Extra Images for Odori Park */}
+          {cityKey === '札幌' && idKey === '8' && (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${sapporofountain})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${sapporoflower})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${sapporotelevi})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+
+          {/* Extra Images for Sapporo Beer Museum */}
+          {cityKey === '札幌' && idKey === '26' && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${GenghisKhan})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${GenghisKhanBeefBeer})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${SapporoBeerMuseum})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${SapporoBeerTaste})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+
+          {/* Extra Images for Kokusai Street */}
+          {cityKey === '沖縄' && idKey === '46' && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${okimahoroba})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${okinawaliquor})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${steakhouseoki})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${okisteakhouse})` }}
+                ></div>
+              </div>
+            </div>
+          )}
           {/* Text */}
           <div className="bg-white rounded-lg p-8 shadow-md">
             <div className="prose prose-lg max-w-none">

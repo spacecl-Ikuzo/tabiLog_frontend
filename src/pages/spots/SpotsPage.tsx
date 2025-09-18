@@ -12,6 +12,13 @@ import suzume from '../../assets/suzume.jpg';
 import SapporoTower from '../../assets/SapporoTower.jpg';
 import OkinawaResort from '../../assets/OkinawaResort.jpg';
 import TokyoTower from '../../assets/TokyoTower.jpg';
+import boolseal from '../../assets/boolseal.jpg';
+import okinawaeisamatsuri from '../../assets/okinawaeisamatsuri.jpg';
+import okinawacruising from '../../assets/okinawacruising.jpg';
+import marineaqua from '../../assets/marineaqua.jpg';
+import Otaru_Canal_Winter from '../../assets/Otaru_Canal_Winter.jpg';
+import Sapporo_SusukinoNight from '../../assets/Sapporo_SusukinoNight.jpg';
+import theritzcarlton from '../../assets/theritzcarlton.jpg';
 import AsaKusa from '../../assets/AsaKusa.jpg';
 import OsakaGuriko from '../../assets/OsakaGuriko.jpg';
 import KiyoMizuTera from '../../assets/KiyoMizuTera.jpg';
@@ -71,6 +78,8 @@ import KobePortTower from '../../assets/KobePortTower.jpg';
 import Kanazawa_HigashiChaya from '../../assets/Kanazawa_HigashiChaya.jpg';
 import Kanazawa_YuwakuOnsen from '../../assets/Kanazawa_YuwakuOnsen.jpg';
 import Kyoto_Byodoin from '../../assets/Kyoto_Byodoin.jpg';
+import GenghisKhan from '../../assets/GenghisKhan.jpg';
+import SapporoBeerTaste from '../../assets/SapporoBeerTaste.jpg';
 
 const SpotsPage = () => {
   const [selectedCity, setSelectedCity] = useState<string | null>(null);
@@ -368,6 +377,22 @@ const SpotsPage = () => {
       tags: ['文化・歴史', '祭り', '北日本'],
       city: '札幌',
       image: SapporoTower,
+    },
+    {
+      id: 38,
+      name: '小樽運河',
+      description: '冬のイルミネーションが美しい運河。ロマンチックな街並み',
+      tags: ['文化・歴史', '夜景', '北日本', '北海道'],
+      city: '札幌',
+      image: Otaru_Canal_Winter,
+    },
+    {
+      id: 39,
+      name: 'すすきの',
+      description: '札幌の繁華街。夜のネオンが美しい',
+      tags: ['エンタメ', '夜景', '北日本', '北海道'],
+      city: '札幌',
+      image: Sapporo_SusukinoNight,
     },
     {
       id: 38,
