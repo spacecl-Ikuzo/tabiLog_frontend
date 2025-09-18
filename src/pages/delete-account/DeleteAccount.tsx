@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Trash2, ArrowLeft, Eye, EyeOff, Key } from 'lucide-react';
-import useUserStore from '@/store';
+import { useUserStore } from '@/store';
 
 // Zod 스키마 정의
 const deleteAccountSchema = z

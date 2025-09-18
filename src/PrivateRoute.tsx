@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
-import useUserStore from './store';
+import { useUserStore } from '@/store';
 
 const PrivateRoute = () => {
   const { token, tokenExp, removeUserData } = useUserStore();

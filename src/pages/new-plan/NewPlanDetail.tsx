@@ -5,7 +5,6 @@ import { Card, CardContent } from '../../components/ui/card';
 import { Input } from '../../components/ui/input';
 import { Label } from '../../components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../components/ui/select';
-import Header from '../../components/layout/header';
 import SideNavigation from '../../components/layout/side-navigation';
 import { ArrowLeft, ArrowRight, Upload, Image as ImageIcon, MapPin } from 'lucide-react';
 import { axiosInstance } from '../../api/axios';
@@ -26,7 +25,7 @@ interface PlanDetailData {
 export default function NewPlanDetail() {
   const navigate = useNavigate();
   const location = useLocation();
-  
+
   // URL에서 날짜 정보 가져오기
   const searchParams = new URLSearchParams(location.search);
   const startDate = searchParams.get('startDate') || '';
@@ -54,10 +53,39 @@ export default function NewPlanDetail() {
   useEffect(() => {
     // 일단 하드코딩된 데이터로 시작 (백엔드 연결 문제 해결 후 API 호출로 변경)
     const regionData: RegionData = {
-      '北日本': ['北海道', '青森県', '岩手県', '宮城県', '秋田県', '山形県', '福島県'],
-      '東日本': ['東京都', '神奈川県', '埼玉県', '千葉県', '茨城県', '栃木県', '群馬県', '山梨県', '長野県', '新潟県', '富山県', '石川県', '福井県', '静岡県', '愛知県'],
-      '西日本': ['大阪府', '京都府', '兵庫県', '奈良県', '三重県', '滋賀県', '和歌山県', '広島県', '岡山県', '鳥取県', '島根県', '山口県'],
-      '南日本': ['福岡県', '熊本県', '長崎県', '佐賀県', '大分県', '宮崎県', '鹿児島県', '沖縄県'],
+      北日本: ['北海道', '青森県', '岩手県', '宮城県', '秋田県', '山形県', '福島県'],
+      東日本: [
+        '東京都',
+        '神奈川県',
+        '埼玉県',
+        '千葉県',
+        '茨城県',
+        '栃木県',
+        '群馬県',
+        '山梨県',
+        '長野県',
+        '新潟県',
+        '富山県',
+        '石川県',
+        '福井県',
+        '静岡県',
+        '愛知県',
+      ],
+      西日本: [
+        '大阪府',
+        '京都府',
+        '兵庫県',
+        '奈良県',
+        '三重県',
+        '滋賀県',
+        '和歌山県',
+        '広島県',
+        '岡山県',
+        '鳥取県',
+        '島根県',
+        '山口県',
+      ],
+      南日本: ['福岡県', '熊本県', '長崎県', '佐賀県', '大分県', '宮崎県', '鹿児島県', '沖縄県'],
     };
 
     console.log('지역 데이터 설정:', regionData);
@@ -67,10 +95,10 @@ export default function NewPlanDetail() {
     const fetchRegionsFromAPI = async () => {
       try {
         const regionData: RegionData = {
-          '北日本': [],
-          '東日本': [],
-          '西日本': [],
-          '南日本': [],
+          北日本: [],
+          東日本: [],
+          西日本: [],
+          南日本: [],
         };
 
         // 각 지역별로 현 목록 가져오기
@@ -88,7 +116,7 @@ export default function NewPlanDetail() {
 
         console.log('API에서 가져온 지역 데이터:', regionData);
         // API 데이터가 있으면 업데이트
-        const hasData = Object.values(regionData).some(prefectures => prefectures.length > 0);
+        const hasData = Object.values(regionData).some((prefectures) => prefectures.length > 0);
         if (hasData) {
           setRegions(regionData);
         }
@@ -106,7 +134,7 @@ export default function NewPlanDetail() {
     if (planData.region && regions[planData.region]) {
       setPrefectures(regions[planData.region]);
       // 지역이 변경되면 현 선택 초기화
-      setPlanData(prev => ({ ...prev, prefecture: '' }));
+      setPlanData((prev) => ({ ...prev, prefecture: '' }));
     } else {
       setPrefectures([]);
     }
@@ -141,22 +169,22 @@ export default function NewPlanDetail() {
     if (file) {
       // 파일 크기 체크 (5MB 제한)
       if (file.size > 5 * 1024 * 1024) {
-        setErrors(prev => ({ ...prev, image: '画像ファイルは5MB以下にしてください' }));
+        setErrors((prev) => ({ ...prev, image: '画像ファイルは5MB以下にしてください' }));
         return;
       }
 
       // 파일 타입 체크
       if (!file.type.startsWith('image/')) {
-        setErrors(prev => ({ ...prev, image: '画像ファイルを選択してください' }));
+        setErrors((prev) => ({ ...prev, image: '画像ファイルを選択してください' }));
         return;
       }
 
-      setPlanData(prev => ({
+      setPlanData((prev) => ({
         ...prev,
         image: file,
         imagePreview: URL.createObjectURL(file),
       }));
-      setErrors(prev => ({ ...prev, image: '' }));
+      setErrors((prev) => ({ ...prev, image: '' }));
     }
   };
 
@@ -168,7 +196,7 @@ export default function NewPlanDetail() {
     setIsLoading(true);
     try {
       let imageUrl = null;
-      
+
       // 이미지가 있으면 먼저 업로드
       if (planData.image) {
         console.log('이미지 업로드 시작...');
@@ -200,7 +228,7 @@ export default function NewPlanDetail() {
       navigate('/plans');
     } catch (error: any) {
       console.error('플랜 생성 실패:', error);
-      
+
       if (error.response?.status === 401) {
         alert('로그인이 필요합니다. 다시 로그인해주세요.');
         navigate('/login');
@@ -225,7 +253,6 @@ export default function NewPlanDetail() {
   return (
     <div className="min-h-screen">
       {/* 헤더 */}
-      <Header />
 
       <div className="flex">
         {/* 사이드바 네비게이션 (데스크톱만) */}
@@ -264,27 +291,23 @@ export default function NewPlanDetail() {
                   </div>
                   <h3 className="text-lg font-semibold text-green-800 mb-2">選択された日程</h3>
                   <p className="text-green-700">
-                    {startDate && endDate ? (
-                      startDate === endDate ? (
-                        `${new Date(startDate).toLocaleDateString('ja-JP', { 
-                          year: 'numeric', 
-                          month: 'long', 
-                          day: 'numeric' 
-                        })} (日帰り)`
-                      ) : (
-                        `${new Date(startDate).toLocaleDateString('ja-JP', { 
-                          year: 'numeric', 
-                          month: 'long', 
-                          day: 'numeric' 
-                        })} ～ ${new Date(endDate).toLocaleDateString('ja-JP', { 
-                          year: 'numeric', 
-                          month: 'long', 
-                          day: 'numeric' 
-                        })}`
-                      )
-                    ) : (
-                      '日程が選択されていません'
-                    )}
+                    {startDate && endDate
+                      ? startDate === endDate
+                        ? `${new Date(startDate).toLocaleDateString('ja-JP', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric',
+                          })} (日帰り)`
+                        : `${new Date(startDate).toLocaleDateString('ja-JP', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric',
+                          })} ～ ${new Date(endDate).toLocaleDateString('ja-JP', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric',
+                          })}`
+                      : '日程が選択されていません'}
                   </p>
                 </div>
               </CardContent>
@@ -304,8 +327,8 @@ export default function NewPlanDetail() {
                       type="text"
                       value={planData.title}
                       onChange={(e) => {
-                        setPlanData(prev => ({ ...prev, title: e.target.value }));
-                        setErrors(prev => ({ ...prev, title: '' }));
+                        setPlanData((prev) => ({ ...prev, title: e.target.value }));
+                        setErrors((prev) => ({ ...prev, title: '' }));
                       }}
                       placeholder="例: 東京2泊3日旅"
                       className="h-12 border-2 border-gray-200 focus:border-orange-400 focus:ring-orange-200"
@@ -321,8 +344,8 @@ export default function NewPlanDetail() {
                     <Select
                       value={planData.region}
                       onValueChange={(value) => {
-                        setPlanData(prev => ({ ...prev, region: value }));
-                        setErrors(prev => ({ ...prev, region: '' }));
+                        setPlanData((prev) => ({ ...prev, region: value }));
+                        setErrors((prev) => ({ ...prev, region: '' }));
                       }}
                     >
                       <SelectTrigger className="h-12 border-2 border-gray-200 focus:border-orange-400 focus:ring-orange-200">
@@ -350,13 +373,15 @@ export default function NewPlanDetail() {
                     <Select
                       value={planData.prefecture}
                       onValueChange={(value) => {
-                        setPlanData(prev => ({ ...prev, prefecture: value }));
-                        setErrors(prev => ({ ...prev, prefecture: '' }));
+                        setPlanData((prev) => ({ ...prev, prefecture: value }));
+                        setErrors((prev) => ({ ...prev, prefecture: '' }));
                       }}
                       disabled={!planData.region}
                     >
                       <SelectTrigger className="h-12 border-2 border-gray-200 focus:border-orange-400 focus:ring-orange-200">
-                        <SelectValue placeholder={planData.region ? "県を選択してください" : "まず地域を選択してください"} />
+                        <SelectValue
+                          placeholder={planData.region ? '県を選択してください' : 'まず地域を選択してください'}
+                        />
                       </SelectTrigger>
                       <SelectContent>
                         {prefectures.map((prefecture) => (
@@ -371,9 +396,7 @@ export default function NewPlanDetail() {
 
                   {/* 이미지 업로드 */}
                   <div className="space-y-2">
-                    <Label className="text-sm font-medium text-gray-700">
-                      プラン画像
-                    </Label>
+                    <Label className="text-sm font-medium text-gray-700">プラン画像</Label>
                     <div className="space-y-4">
                       {/* 이미지 미리보기 */}
                       {planData.imagePreview ? (
@@ -385,8 +408,8 @@ export default function NewPlanDetail() {
                           />
                           <button
                             onClick={() => {
-                              setPlanData(prev => ({ ...prev, image: null, imagePreview: null }));
-                              setErrors(prev => ({ ...prev, image: '' }));
+                              setPlanData((prev) => ({ ...prev, image: null, imagePreview: null }));
+                              setErrors((prev) => ({ ...prev, image: '' }));
                             }}
                             className="absolute top-2 right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 transition-colors"
                           >
