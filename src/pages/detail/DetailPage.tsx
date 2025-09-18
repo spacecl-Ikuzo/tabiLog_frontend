@@ -1,276 +1,515 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
-import Kinkakuji from '../../assets/Kinkakuji.jpg';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import MainBackGround from '../../assets/MainBackGround.jpg';
+import Tokyo from '../../assets/Tokyo.jpg';
 import OsakaCastle from '../../assets/OsakaCastle.jpg';
+import Kinkakuji from '../../assets/Kinkakuji.jpg';
 import Sapporo from '../../assets/Sapporo.jpg';
+import fukuokahutami from '../../assets/fukuokahutami.jpg';
 import OkinawaResort from '../../assets/OkinawaResort.jpg';
-import RamenJiro from '../../assets/RamenJiro.jpg';
-import JiroSushi from '../../assets/JiroSushi.jpg';
-import Tsukiji from '../../assets/Tsukiji.jpg';
-import Marugamejemen2 from '../../assets/Marugamejemen2.jpg';
-import USJ from '../../assets/USJ.jpg';
+import TokyoTower from '../../assets/TokyoTower.jpg';
+import AsaKusa from '../../assets/AsaKusa.jpg';
 import OsakaGuriko from '../../assets/OsakaGuriko.jpg';
 import KiyoMizuTera from '../../assets/KiyoMizuTera.jpg';
 import SapporoTime from '../../assets/SapporoTime.jpg';
-import SapporoTower from '../../assets/SapporoTower.jpg';
-import FukuokaCastle from '../../assets/FukuokaCastle.jpg';
+import HakataCity from '../../assets/HakataCity.jpg';
 import Shurijo from '../../assets/Shurijo.jpg';
 import OkiAquarium from '../../assets/OkiAquarium.jpg';
-import nagoyawcs1 from '../../assets/nagoyawcs1.jpg';
-import nagoyawcs2 from '../../assets/nagoyawcs2.jpg';
+import HiroShima from '../../assets/HiroShima.jpg';
+import GenbakuDome from '../../assets/GenbakuDome.jpg';
+import miyajima from '../../assets/miyajima.jpg';
+import Kenrokuen from '../../assets/Kenrokuen.jpg';
+import KanazawaCastle from '../../assets/KanazawaCastle.jpg';
+import Nagoya from '../../assets/Nagoya.jpg';
+import NagoyaCastle from '../../assets/NagoyaCastle.jpg';
+import osushotenkai from '../../assets/osushotenkai.jpg';
+import Atsutasinkyu from '../../assets/Atsutasinkyu.jpg';
+import Nagoyalinear from '../../assets/Nagoyalinear.jpg';
+import NagoyaScience from '../../assets/NagoyaScience.jpg';
+import akihabara from '../../assets/akihabara.jpg';
+import fujiq1 from '../../assets/fujiq1.jpg';
 import KiminoNamaewa from '../../assets/KiminoNamaewa.jpg';
-import KiminoNamaewaSuga from '../../assets/KiminoNamaewaSuga.jpg';
-import Shibakoen from '../../assets/Shibakoen.jpg';
-import ShinjukuPolice from '../../assets/ShinjukuPolice.jpg';
-import Aogashima from '../../assets/Aogashima.jpg';
-import fukugourmet from '../../assets/fukugourmet.jpg';
-import fukuokahutami from '../../assets/fukuokahutami.jpg';
-import fukuanimate from '../../assets/fukuanimate.jpg';
-import fukuanimatemap from '../../assets/fukuanimatemap.jpg';
-import fukumandafigure from '../../assets/fukumandafigure.jpg';
-import HakataCity from '../../assets/HakataCity.jpg';
-import boolseal from '../../assets/boolseal.jpg';
-import okinawaeisamatsuri from '../../assets/okinawaeisamatsuri.jpg';
-import okinawasailing from '../../assets/okinawasailing.jpg';
-import okinawasnokling from '../../assets/okinawasnokling.jpg';
-import fukumandarake from '../../assets/fukumandarake.jpg';
-import fukutenshin from '../../assets/fukutenshin.jpg';
-import fukubungomori from '../../assets/fukubungomori.jpg';
-import suzume from '../../assets/suzume.jpg';
-import suzumetobira from '../../assets/suzumetobira.jpg';
-import suzumegoods from '../../assets/suzumegoods.jpg';
-import fukuichiran from '../../assets/fukuichiran.jpg';
-import fukumizutaki from '../../assets/fukumizutaki.jpg';
-import fukutourimon from '../../assets/fukutourimon.jpg';
 import tenkinoko from '../../assets/tenkinoko.jpg';
-import denkiseibumc from '../../assets/denkiseibumc.jpg';
-import odaiba from '../../assets/odaiba.jpg';
 import Digimon4 from '../../assets/Digimon4.jpg';
-import OdaibaDigimon from '../../assets/OdaibaDigimon.jpg';
-import Digimon2 from '../../assets/Digimon2.jpg';
-import HikarigaokaDigimon from '../../assets/HikarigaokaDigimon.jpg';
+import hakoneonsen from '../../assets/hakoneonsen.jpg';
 import jiburiPost from '../../assets/jiburiPost.jpg';
-import jiburimap from '../../assets/jiburimap.jpg';
-import jiburimori from '../../assets/jiburimori.jpg';
-import jiburi4 from '../../assets/jiburi4.jpg';
+import NagoyaLego from '../../assets/NagoyaLego.jpg';
+import HakoneOnsen from '../../assets/hakoneonsen.jpg';
+import ShibuyaScramble from '../../assets/ShibuyaScramble.jpg';
+import TokyoDisneyland from '../../assets/tokyodisneyland.jpg';
+import NikkoToshogu from '../../assets/nikkotoshogu.jpg';
+import Kamakura from '../../assets/kamakura.jpg';
+import Tsukiji from '../../assets/Tsukiji.jpg';
+import TokyoDome from '../../assets/TokyoDome.jpg';
+import UniversalStudiosJapan3 from '../../assets/universal_studios_japan3.jpg';
+import OsakaAquarium1 from '../../assets/Osaka_aquarium1.jpg';
 import OsakaArchitecture5 from '../../assets/OsakaArchitecture5.png';
 import OsakaArchitecture2 from '../../assets/OsakaArchitecture2.png';
 import OsakaArchitecture3 from '../../assets/OsakaArchitecture3.png';
-import hakoneonsen from '../../assets/hakoneonsen.jpg';
-import nikkoonsen from '../../assets/nikkoonsen.jpg';
-import NagoyaLego from '../../assets/NagoyaLego.jpg';
-import LegoAttraction from '../../assets/LegoAttraction.jpg';
-import LegoTaiken from '../../assets/LegoTaiken.jpg';
-import LegoBoat from '../../assets/LegoBoat.jpg';
+import OsakaArchitecture4 from '../../assets/OsakaArchitecture4.png';
+import Kyoto_FushimiInari1 from '../../assets/Kyoto_FushimiInari1.jpg';
+import Kyoto_UjiBridge1 from '../../assets/Kyoto_UjiBridge1.jpg';
+import Miyajima_Itsukushima_Torii from '../../assets/Miyajima_Itsukushima_Torii.jpg';
+import Tomonoura_Harbor from '../../assets/Tomonoura_Harbor.jpg';
+import KobeFerris from '../../assets/KobeFerris.jpg';
+import KobeSkyline from '../../assets/KobeSkyline.jpg';
+import KobeBeKobe from '../../assets/KobeBeKobe.jpg';
+import KobeHarborland from '../../assets/KobeHarborland.jpg';
+import KobePortTowerNight from '../../assets/KobePortTowerNight.jpg';
+import KobePortTower from '../../assets/KobePortTower.jpg';
+import Kanazawa_HigashiChaya from '../../assets/Kanazawa_HigashiChaya.jpg';
+import Kanazawa_YuwakuOnsen from '../../assets/Kanazawa_YuwakuOnsen.jpg';
+import Kyoto_Byodoin from '../../assets/Kyoto_Byodoin.jpg';
+import Otaru_Canal_Winter from '../../assets/Otaru_Canal_Winter.jpg';
+import Sapporo_SusukinoNight from '../../assets/Sapporo_SusukinoNight.jpg';
+import theritzcarlton from '../../assets/theritzcarlton.jpg';
+import okinawacruising from '../../assets/okinawacruising.jpg';
+import nagoyawcs2 from '../../assets/nagoyawcs2.jpg';
+import fukugourmet from '../../assets/fukugourmet.jpg';
+import fukuanimate from '../../assets/fukuanimate.jpg';
+import suzume from '../../assets/suzume.jpg';
+import SapporoTower from '../../assets/SapporoTower.jpg';
+import nakasumap from '../../assets/nakasumap.jpg';
+import kushidashrine from '../../assets/kushidashrine.jpg';
+import marineworld from '../../assets/marineworld.jpg';
+import paypaydome from '../../assets/paypaydome.jpg';
 
 const DetailPage = () => {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  // 여행 계획 상세 정보 데이터
-  const planDetails = {
+  const planDetails: Record<number, any> = {
     1: {
-      title: '🏛 中之島公会堂 × 黒執事 聖地巡礼',
-      description: '中之島公会堂 聖地巡礼！黒執事の世界を体感',
-      author: 'アニメ巡礼編集部',
-      image: OsakaArchitecture5,
-      heroImage: OsakaArchitecture5,
-      breadcrumb: ['大阪', '北区', '中之島公会堂'],
-      contentTitle: '中之島公会堂と黒執事の関係',
-      spots: ['外観（ヴィクトリア建築）', '大ホール', 'ステンドグラス'],
-      content:
-        '中之島公会堂は1918年に建てられた大阪を代表するネオ・ルネッサンス様式の建築物です。アニメ『黒執事』の舞台となるヴィクトリア時代のロンドンを彷彿とさせる重厚な外観から、ファンの間では聖地の一つとして親しまれています。作品の公式ロケ地ではありませんが、その雰囲気が「黒執事」の世界観と重なるため、多くのファンが訪れています。<br><br>【2.1 外観（ヴィクトリア建築）】<br>赤レンガと白い石材を組み合わせた外観は、ヴィクトリア時代のロンドンを思わせます。ファンにとっては写真撮影の定番スポットです。<br><br>【2.2 大ホール】<br>公会堂の中心に位置する大ホールは、豪華な装飾とクラシックな雰囲気が特徴。『黒執事』の舞踏会シーンを連想させます。<br><br>【2.3 ステンドグラス】<br>天井や窓に施されたステンドグラスは必見。色鮮やかな光が差し込み、まるでアニメのワンシーンのような幻想的な空間を作り出します。',
-    },
-    2: {
-      title: '大阪満喫!ショッピングとエンタメの旅',
+      title: '食い倒れ東京! 2泊3日グルメ旅',
       description:
-        '道頓堀のきらびやかな夜景、USJのスリル満点のアトラクション。眠らない街・大阪の魅力を丸ごと楽しむプラン。',
-      author: 'ドフン',
-      image: OsakaCastle,
-      heroImage: OsakaCastle,
-      breadcrumb: ['大阪', '道頓堀', 'USJ'],
-      contentTitle: '大阪エンタメの基本情報',
-      spots: ['道頓堀', 'ユニバーサルスタジオジャパン', '大阪城'],
+        '築地市場の新鮮な海の幸から、新宿の深夜ラーメンまで。東京の「うまい!」をすべて味わい尽くす、食いしん坊のためのプランです。',
+      author: 'ソヒョン',
+      type: '一人旅',
+      city: '東京',
+      image: Tsukiji,
+      heroImage: Tsukiji,
+      breadcrumb: ['東京', '築地市場', 'グルメ', '食い倒れ'],
+      contentTitle: '東京グルメ旅の基本情報',
+      spots: ['築地市場', '新宿ラーメン', '浅草グルメ'],
       content:
-        '大阪は関西のエンターテイメントの中心地です。道頓堀のネオンサインが美しい夜景を演出し、USJでは世界レベルのアトラクションを楽しめます。大阪城では歴史を感じながら散策できます。',
+        '東京は日本最大のグルメ都市。築地市場の新鮮な海の幸から、新宿の深夜ラーメンまで、東京の「うまい!」をすべて味わい尽くす、食いしん坊のためのプランです。',
     },
     3: {
       title: '心安らぐ京都、癒やしの週末',
       description:
         '嵐山の竹林を散策し、静かな旅館で温泉に浸かる。古都の美しい景色の中で、心と体をリフレッシュする週末旅行。',
       author: 'セヒョン',
+      type: '一人旅',
+      city: '京都',
       image: Kinkakuji,
       heroImage: Kinkakuji,
-      breadcrumb: ['京都', '嵐山', '金閣寺'],
-      contentTitle: '京都癒やしの基本情報',
+      breadcrumb: ['京都', '嵐山', '竹林', '癒やし'],
+      contentTitle: '京都癒やし旅の基本情報',
       spots: ['嵐山竹林', '金閣寺', '清水寺'],
       content:
-        '京都は千年の古都として、心を癒やす美しい景色がたくさんあります。嵐山の竹林では自然の音に包まれ、金閣寺では金色に輝く建物の美しさを堪能できます。静かな旅館での温泉も最高です。',
+        '嵐山の竹林を散策し、静かな旅館で温泉に浸かる。古都の美しい景色の中で、心と体をリフレッシュする週末旅行。',
     },
     4: {
-      title: '福岡屋台めぐり!博多グルメ紀行',
-      description:
-        '中洲の屋台で味わう絶品とんこつラーメンから、天神の最新ショッピングスポットまで。コンパクトシティ福岡の魅力を凝縮。',
-      author: 'オンヒャク',
+      title: '福岡屋台めぐり！博多グルメ紀行',
+      description: 'とんこつラーメンと福岡の名所を巡る旅。',
+      author: 'オンピック',
+      type: '二人旅',
+      city: '福岡',
       image: fukugourmet,
       heroImage: fukugourmet,
-      breadcrumb: ['福岡', '中洲屋台', '天神'],
-      contentTitle: '福岡グルメの基本情報',
-      spots: ['博多とんこつラーメン', '水炊き', '博多通りもん'],
-      content:
-        '福岡は日本を代表するグルメの聖地です。博多とんこつラーメン、水炊き、博多通りもんなど、九州の豊かな食文化を堪能できます。中洲の屋台では本場の味を、天神では最新のショッピングを楽しめます。コンパクトな街なので徒歩で回れるのも魅力です。<br><br>【2.1 博多とんこつラーメン】<br>福岡の代名詞ともいえる博多とんこつラーメン。豚骨を長時間煮込んで作る濃厚なスープと細麺が特徴で、日本全国で愛される味です。一風堂（中央区大名）や一蘭（博多区中洲）など、日本最大のラーメンチェーンの本店も福岡にあります。中洲の屋台では本場の味を気軽に楽しめ、飲酒後のシメとしても人気です。麺の硬さやスープの濃さを選べる「替え玉」文化も博多ラーメンの魅力の一つです。おすすめ店舗：一蘭本店（博多区中洲）、一風堂本店（中央区大名）、元祖長浜らーめん（博多区長浜）。<br><br>【2.2 水炊き】<br>福岡の伝統的な鍋料理で、鶏の白いスープで野菜や鶏肉を煮込んだ料理です。あっさりとした味わいで、家族連れにも人気です。最後にご飯を入れて雑炊にしたり、うどんを入れて食べるのが一般的です。博多の老舗料亭や専門店で本格的な水炊きを楽しめます。おすすめ店舗：水炊き専門店「博多水炊き 博多華味鳥」（中央区大名）、「博多水炊き 博多華味鳥 本店」（博多区中洲）、「博多水炊き 博多華味鳥 天神店」（中央区天神）。<br><br>【2.3 博多通りもん】<br>福岡を代表する和菓子で、福岡空港でも販売されている人気のお土産です。ふわふわのスポンジケーキにクリームが入った洋風和菓子で、福岡の味として親しまれています。観光客にも人気で、福岡の思い出として持ち帰る方も多いです。おすすめ店舗：博多通りもん本店（博多区博多駅前）、福岡空港店、天神地下街店、博多駅構内店などで購入可能です。',
+      breadcrumb: ['福岡', '屋台', 'グルメ', '博多'],
+      contentTitle: '福岡グルメ旅の基本情報',
+      spots: ['屋台グルメ', 'とんこつラーメン', '博多名所'],
+      content: 'とんこつラーメンと福岡の名所を巡る旅。福岡の屋台文化を体験し、地元の美味しい料理を堪能できます。',
     },
     5: {
-      title: '大自然を満喫!夏の北海道・札幌ドライブ',
-      description:
-        'ラベンダー畑が広がる富良野への日帰りドライブや、新鮮な海の幸を味わう市場めぐり。広大な北海道の自然を体感するプラン。',
-      author: 'ドフン',
-      image: Sapporo,
-      heroImage: Sapporo,
-      breadcrumb: ['北海道', '富良野', '札幌'],
-      contentTitle: '北海道自然の基本情報',
-      spots: ['富良野ラベンダー畑', '札幌時計台', '大通公園'],
+      title: '大自然を満喫！夏の北海道・札幌ドライブ',
+      description: '富良野のラベンダー畑と海鮮を味わう旅。',
+      author: 'ドアン',
+      type: '二人旅',
+      city: '札幌',
+      image: SapporoTower,
+      heroImage: SapporoTower,
+      breadcrumb: ['札幌', '富良野', 'ラベンダー', 'ドライブ'],
+      contentTitle: '北海道ドライブ旅の基本情報',
+      spots: ['富良野ラベンダー', '札幌海鮮', '大自然ドライブ'],
       content:
-        '北海道は日本最大の自然を誇る地域です。夏の富良野では紫色のラベンダー畑が美しく、札幌では新鮮な海の幸と美味しいビールを楽しめます。広大な自然の中でリフレッシュできます。',
+        '富良野のラベンダー畑と海鮮を味わう旅。北海道の大自然をドライブで満喫し、美しい景色と美味しい料理を楽しめます。',
     },
     6: {
-      title: '絶景ビーチリゾート!沖縄でのんびり休暇',
-      description:
-        'エメラルドグリーンの海でシュノーケリングを楽しんだり、美しいサンセットを眺めたり。南国リゾートで過ごす、最高の贅沢。',
+      title: '絶景ビーチリゾート！沖縄でのんびり休暇',
+      description: 'エメラルドグリーンの海でシュノーケリングと夕日鑑賞。',
       author: 'ソヒョン',
+      type: '二人旅',
+      city: '沖縄',
       image: OkinawaResort,
       heroImage: OkinawaResort,
-      breadcrumb: ['沖縄', '美ら海水族館', '首里城'],
-      contentTitle: '沖縄リゾートの基本情報',
-      spots: ['美ら海水族館', '首里城', '国際通り'],
+      breadcrumb: ['沖縄', 'ビーチ', 'リゾート', 'シュノーケリング'],
+      contentTitle: '沖縄リゾート旅の基本情報',
+      spots: ['ビーチリゾート', 'シュノーケリング', '夕日鑑賞'],
       content:
-        '沖縄は日本唯一の亜熱帯気候の地域です。エメラルドグリーンの海ではシュノーケリングやダイビングを楽しめ、美ら海水族館では世界最大級の水族館を体験できます。首里城では琉球王国の歴史を感じられます。',
+        'エメラルドグリーンの海でシュノーケリングと夕日鑑賞。沖縄の美しいビーチでリラックスした時間を過ごせます。',
     },
     8: {
       title: 'ワールドコスプレサミット',
-      description:
-        '毎年夏に名古屋で開催される世界規模のコスプレイベント。大須商店街と名古屋市街が舞台となる国際的なコスプレ祭典。',
+      description: '毎年夏に名古屋で開催される世界規模のコスプレイベント。',
       author: 'コスプレファン',
+      type: 'グループ旅',
+      city: '名古屋',
       image: nagoyawcs2,
-      heroImage: nagoyawcs1,
-      breadcrumb: ['名古屋', '大須商店街', 'ワールドコスプレサミット'],
+      heroImage: nagoyawcs2,
+      breadcrumb: ['名古屋', 'コスプレ', 'イベント', 'ワールドサミット'],
       contentTitle: 'ワールドコスプレサミットの基本情報',
-      spots: ['大須商店街', '名古屋市街', 'コスプレコンテスト', '国際交流'],
+      spots: ['コスプレイベント', '名古屋観光', 'アニメ文化'],
       content:
-        '毎年夏に名古屋で開催される世界規模のコスプレイベント。大須商店街と名古屋市街が舞台となる国際的なコスプレ祭典です。<br><br>【2.1 大須商店街】<br>コスプレイベントのメイン会場。世界各国から集まったコスプレイヤーたちが街を練り歩き、独特な文化の交流が生まれます。<br><br>【2.2 名古屋市街】<br>市内各所でコスプレイベントが開催され、名古屋の街全体がコスプレの祭典会場となります。観光客も参加できるイベントが多数あります。<br><br>【2.3 コスプレコンテスト】<br>世界各国の代表コスプレイヤーが参加する国際コンテスト。技術力と表現力の高さを競い合い、観客を魅了します。<br><br>【2.4 国際交流】<br>コスプレを通じた国際文化交流の場。世界各国のファンが集まり、アニメ・漫画文化を共有する貴重な機会となります。',
+        '毎年夏に名古屋で開催される世界規模のコスプレイベント。世界中のコスプレイヤーが集まる大きなイベントです。',
     },
-    14: {
-      title: '君の名は。聖地巡礼！渋谷と代々木',
-      description:
-        '「君の名は。」の舞台となった東京の名所を巡る。渋谷のスクランブル交差点、代々木の神社、新宿御苑など、映画に登場した場所で主人公たちの気持ちを感じてみよう。',
-      author: 'アニメファン',
-      image: KiminoNamaewa,
-      heroImage: KiminoNamaewaSuga,
-      breadcrumb: ['東京', '渋谷', '代々木', '君の名は。聖地巡礼'],
-      contentTitle: '君の名は。聖地巡礼の基本情報',
-      spots: ['君の名は。映画紹介', '代々木八幡宮', '新宿警察署', '青ヶ島'],
-      content:
-        '「君の名は。」の舞台となった東京の名所を巡る聖地巡礼プランです。映画に登場した場所を実際に訪れ、主人公たちの気持ちを感じてみましょう。<br><br>【2.1 君の名は。映画紹介】<br>新海誠監督の代表作「君の名は。」は2016年に公開されたアニメーション映画です。田舎の少女三葉と東京の少年瀧が体を入れ替わるファンタジーロマンスで、時間と空間を超える感動的なストーリーが特徴です。世界中で大きな人気を博し、日本アニメーションの新しい転換点を築いた作品として評価されています。<br><br>【2.2 代々木八幡宮】<br>映画に登場する神社のモデルとなった場所。静寂な境内で、主人公たちの祈りの気持ちを感じることができます。神社の雰囲気と映画の世界観が重なり合う特別な体験ができます。新海誠監督が実際に訪れてインスピレーションを得た場所としても知られています。<br><br>【2.3 新宿警察署】<br>映画の重要なシーンで登場する新宿警察署周辺。主人公たちが東京で過ごした時間の象徴的な場所として描かれています。実際の警察署前で、映画の世界観を感じながら街の雰囲気を楽しめます。新宿の街並みと映画の記憶が重なり合う特別なスポットです。<br><br>【2.4 青ヶ島】<br>映画「君の名は。」の重要な舞台となった青ヶ島。東京都の離島で、主人公三葉の故郷として描かれた神秘的な島です。火山島特有の美しい自然と静寂な雰囲気が、映画の世界観を体現しています。実際に訪れることで、主人公たちの故郷への想いを感じることができる特別な場所です。',
+    9: {
+      title: '広島平和記念と宮島の旅',
+      description: '原爆ドームと厳島神社を巡る平和と歴史の旅。',
+      author: 'ハナコ',
+      type: '一人旅',
+      city: '広島',
+      image: HiroShima,
+      heroImage: HiroShima,
+      breadcrumb: ['広島', '平和記念', '宮島', '歴史'],
+      contentTitle: '広島平和記念旅の基本情報',
+      spots: ['原爆ドーム', '厳島神社', '平和記念公園'],
+      content: '原爆ドームと厳島神社を巡る平和と歴史の旅。広島の歴史を学び、平和の大切さを感じることができます。',
     },
     11: {
       title: '天気の子聖地巡礼！東京スカイツリーと台場',
       description:
         '「天気の子」の舞台となった東京の名所を巡る。スカイツリー、台場、新宿など、映画に登場した場所で主人公たちの気持ちを感じてみよう。',
       author: '映画好き',
+      type: '二人旅',
+      city: '東京',
       image: tenkinoko,
       heroImage: tenkinoko,
-      breadcrumb: ['東京', 'スカイツリー', '台場', '天気の子聖地巡礼'],
+      breadcrumb: ['東京', '天気の子', '聖地巡礼', 'スカイツリー'],
       contentTitle: '天気の子聖地巡礼の基本情報',
-      spots: ['天気の子映画紹介', '東京スカイツリー', 'お台場', 'マクドナルド'],
+      spots: ['スカイツリー', '台場', '新宿'],
       content:
-        '新海誠監督の2019年公開作品「天気の子」の舞台となった東京の名所を巡る聖地巡礼プランです。映画に登場した場所を実際に訪れ、主人公たちの気持ちを感じてみましょう。<br><br>【2.1 天気の子映画紹介】<br>新海誠監督の2019年公開作品「天気の子」は、天気を操る能力を持つ少女ひなこと、彼女と出会った少年帆高の物語です。東京を舞台にした美しい映像と、現代社会の課題を描いた感動的なストーリーが特徴です。天気と人間の関係性をテーマにした深いメッセージが込められた作品として高い評価を受けています。<br><br>【2.2 東京スカイツリー】<br>映画の重要なシーンで登場する東京スカイツリー。主人公たちが東京の象徴的な場所として訪れる場所です。634mの高さを誇る電波塔からは東京の街並みを一望でき、映画の世界観を体感できます。天気の子の感動的なシーンを思い浮かべながら、東京の美しい景色を楽しめます。<br><br>【2.3 お台場】<br>映画のクライマックスシーンで重要な役割を果たすお台場。美しい海辺の風景と都市の景観が印象的に描かれています。実際にお台場を訪れることで、映画で描かれた風景の美しさと主人公たちの心情を深く理解することができます。お台場の夜景は特に映画ファンにとって特別な体験を提供します。<br><br>【2.4 マクドナルド】<br>映画「天気の子」で主人公帆高がアルバイトをしていたマクドナルド。新宿の街中にあるこの店舗は、主人公の東京での生活の象徴的な場所として描かれています。実際に訪れることで、映画で描かれた主人公の心境と東京での生活を感じることができます。映画ファンにとって特別な意味を持つ場所として、多くの人が聖地巡礼に訪れています。',
+        '「天気の子」の舞台となった東京の名所を巡る。スカイツリー、台場、新宿など、映画に登場した場所で主人公たちの気持ちを感じてみよう。',
     },
     12: {
       title: 'デジモンアドベンチャー聖地巡礼！お台場と光が丘',
       description:
         'デジモンアドベンチャーの聖地を巡る旅。お台場のフジテレビ、光が丘公園、新宿駅など、アニメファンなら一度は訪れたい場所をめぐろう。',
       author: 'デジモンファン',
+      type: '一人旅',
+      city: '東京',
       image: Digimon4,
       heroImage: Digimon4,
-      breadcrumb: ['東京', 'お台場', '光が丘', 'デジモンアドベンチャー聖地巡礼'],
-      contentTitle: 'デジモンアドベンチャー聖地巡礼の基本情報',
-      spots: ['デジモンアドベンチャー紹介', 'お台場フジテレビ', '光が丘公園', '新宿駅'],
+      breadcrumb: ['東京', 'デジモン', '聖地巡礼', 'お台場'],
+      contentTitle: 'デジモン聖地巡礼の基本情報',
+      spots: ['お台場', '光が丘公園', '新宿駅'],
       content:
-        '1999年に放送開始された「デジモンアドベンチャー」の舞台となった東京の名所を巡る聖地巡礼プランです。アニメに登場した場所を実際に訪れ、選ばれし子どもたちの冒険を追体験してみましょう。<br><br>【2.1 デジモンアドベンチャー紹介】<br>「デジモンアドベンチャー」は1999年に放送開始されたテレビアニメで、デジタルワールドでデジモンと出会った選ばれし子どもたちの冒険を描いた作品です。太一、アグモン、ヤマト、ガブモンなど、個性豊かなキャラクターたちが繰り広げる感動的なストーリーは、多くのアニメファンに愛され続けています。東京を舞台にしたリアルな背景描写も作品の魅力の一つです。<br><br>【2.2 お台場フジテレビ】<br>アニメの重要な舞台として登場するお台場のフジテレビ。選ばれし子どもたちがデジタルワールドから戻ってきた場所として描かれています。実際にフジテレビ前を訪れることで、アニメの世界観と現実の東京の風景が重なり合う特別な体験ができます。お台場の美しい夜景とフジテレビの球体展望台は、デジモンファンにとって特別な意味を持つ場所です。<br><br>【2.3 光が丘公園】<br>アニメの冒頭で重要な役割を果たす光が丘公園。選ばれし子どもたちが最初にデジタルワールドに送られた場所として描かれています。実際の公園を訪れることで、アニメで描かれた神秘的な雰囲気と現実の自然の美しさを同時に感じることができます。光が丘公園の広大な緑地は、デジモンの世界観を体現する特別な場所です。<br><br>【2.4 新宿駅】<br>アニメの重要な舞台として登場する新宿駅。選ばれし子どもたちが東京での生活を送る場所として描かれています。実際の新宿駅を訪れることで、アニメの世界観と現実の東京の活気を同時に感じることができます。新宿駅の複雑な構造と人々の行き交う様子は、デジモンのテーマである現実とデジタルワールドの境界を象徴する特別な場所です。',
+        'デジモンアドベンチャーの聖地を巡る旅。お台場のフジテレビ、光が丘公園、新宿駅など、アニメファンなら一度は訪れたい場所をめぐろう。',
     },
     13: {
       title: '東京温泉巡り！箱根と日光でリラックス',
       description:
         '東京近郊の名湯を巡る旅。箱根温泉で富士山を眺めながら、日光温泉で歴史を感じながら、心も体もリフレッシュしよう。',
       author: '温泉好き',
+      type: '二人旅',
+      city: '東京',
       image: hakoneonsen,
       heroImage: hakoneonsen,
-      breadcrumb: ['東京', '箱根', '日光', '温泉巡り'],
+      breadcrumb: ['東京', '温泉', '箱根', '日光'],
       contentTitle: '東京温泉巡りの基本情報',
-      spots: ['温泉巡り紹介', '箱根温泉', '日光温泉', '温泉の楽しみ方'],
+      spots: ['箱根温泉', '日光温泉', '富士山'],
       content:
-        '東京から日帰りで楽しめる人気の温泉地を巡る旅プランです。箱根と日光の名湯で、心も体もリフレッシュしながら日本の温泉文化を体験してみましょう。<br><br>【2.1 温泉巡り紹介】<br>日本は世界有数の温泉大国で、全国各地に数多くの温泉地があります。東京からも電車で1-2時間程度でアクセスできる箱根や日光は、特に人気の高い温泉地です。温泉には様々な効能があり、疲労回復、美肌効果、リラックス効果などが期待できます。日本の温泉文化を体験しながら、日常の疲れを癒やしてみましょう。<br><br>【2.2 箱根温泉】<br>富士山を望む箱根は、東京から最もアクセスしやすい人気の温泉地です。箱根温泉郷には様々な泉質の温泉があり、強羅温泉、芦ノ湖温泉、湯本温泉など、それぞれ異なる特徴があります。富士山の美しい景色を眺めながら入る温泉は格別で、特に秋の紅葉シーズンは絶景です。箱根ロープウェイや芦ノ湖遊覧船など、温泉以外の観光も楽しめます。<br><br>【2.3 日光温泉】<br>世界遺産の日光東照宮で有名な日光は、歴史と自然が調和した温泉地です。日光温泉は山間部の静寂な環境で、都会の喧騒を忘れてゆっくりと過ごすことができます。日光東照宮や華厳の滝などの観光スポットと組み合わせて楽しめるのも魅力です。特に冬の雪景色と温泉の組み合わせは、日本の美しい四季を感じられる特別な体験です。<br><br>【2.4 温泉の楽しみ方】<br>日本の温泉を楽しむためには、基本的なマナーを理解することが重要です。入浴前には必ず体を洗い、タオルを湯船に入れない、長い髪は結ぶなどのルールがあります。また、温泉の効能を最大限に活かすためには、適度な時間をかけてゆっくりと入浴し、入浴後は十分な水分補給を心がけましょう。温泉地の地元料理や温泉卵なども、温泉旅の楽しみの一つです。',
+        '東京近郊の名湯を巡る旅。箱根温泉で富士山を眺めながら、日光温泉で歴史を感じながら、心も体もリフレッシュしよう。',
+    },
+    14: {
+      title: '君の名は。聖地巡礼！渋谷と代々木',
+      description:
+        '「君の名は。」の舞台となった東京の名所を巡る。渋谷のスクランブル交差点、代々木の神社、新宿御苑など、映画に登場した場所で主人公たちの気持ちを感じてみよう。',
+      author: 'アニメファン',
+      type: '二人旅',
+      city: '東京',
+      image: KiminoNamaewa,
+      heroImage: KiminoNamaewa,
+      breadcrumb: ['東京', '君の名は', '聖地巡礼', '渋谷'],
+      contentTitle: '君の名は聖地巡礼の基本情報',
+      spots: ['渋谷', '代々木', '新宿御苑'],
+      content:
+        '「君の名は。」の舞台となった東京の名所を巡る。渋谷のスクランブル交差点、代々木の神社、新宿御苑など、映画に登場した場所で主人公たちの気持ちを感じてみよう。',
     },
     16: {
       title: 'レゴランド・ジャパン！家族で楽しむテーマパーク',
       description:
         '名古屋のレゴランド・ジャパンで、レゴブロックの世界を体験しよう。子供から大人まで楽しめるアトラクションとレゴの魅力を満喫。',
       author: 'ファミリー',
+      type: '家族旅',
+      city: '名古屋',
       image: NagoyaLego,
       heroImage: NagoyaLego,
-      breadcrumb: ['名古屋', 'レゴランド', 'テーマパーク', '家族旅行'],
+      breadcrumb: ['名古屋', 'レゴランド', 'テーマパーク', '家族'],
       contentTitle: 'レゴランド・ジャパンの基本情報',
-      spots: ['レゴランド紹介', 'アトラクション', 'レゴブロック体験', 'ボートライド'],
+      spots: ['レゴアトラクション', '家族向け施設', '名古屋観光'],
       content:
-        '名古屋港に位置するレゴランド・ジャパンは、世界で8番目のレゴランドとして2017年にオープンしました。レゴブロックの世界観をテーマにしたテーマパークで、家族連れに大人気のスポットです。<br><br>【2.1 レゴランド紹介】<br>レゴランド・ジャパンは、デンマークのレゴ社が運営するテーマパークです。2歳から12歳の子供をメインターゲットにしていますが、大人も十分楽しめる内容になっています。レゴブロックで作られたミニランドでは、日本の有名な観光地が精巧に再現されており、レゴの技術力の高さを実感できます。パーク内は7つのエリアに分かれており、それぞれが異なるテーマで構成されています。<br><br>【2.2 アトラクション】<br>レゴランドには様々なアトラクションがあります。レゴニンジャゴーは忍者をテーマにした4Dアトラクションで、迫力のある映像とエフェクトが楽しめます。ドラゴンアトラクションは中世の城をテーマにしたコースターで、適度なスリルを味わえます。また、レゴシティでは子供たちが消防士や警察官になって体験できるアトラクションもあり、職業体験の楽しさも味わえます。<br><br>【2.3 レゴブロック体験】<br>パーク内にはレゴブロックで自由に遊べるエリアが多数あります。レゴクリエイティブワークショップでは、スタッフの指導のもとでレゴ作品を作ることができます。また、レゴショップでは限定商品やパークオリジナルのレゴセットを購入できます。レゴブロックの組み立て体験を通じて、創造力と集中力を養うことができます。<br><br>【2.4 ボートライド】<br>レゴランド・ジャパンの人気アトラクションの一つ、ボートライド。レゴブロックで作られた美しい風景の中をボートで巡る体験型アトラクションです。家族みんなでボートに乗り、レゴの世界観を楽しみながら水辺の景色を満喫できます。特に子供たちにとっては、レゴの世界に実際に入り込んだような特別な体験ができる人気のアトラクションです。',
+        '名古屋のレゴランド・ジャパンで、レゴブロックの世界を体験しよう。子供から大人まで楽しめるアトラクションとレゴの魅力を満喫。',
     },
     17: {
       title: 'ジブリパーク！スタジオジブリの世界へ',
       description:
         '愛知県長久手市のジブリパークで、宮崎駿監督のアニメの世界を体験。トトロの森、魔女の宅急便の世界など、ジブリファン必見。',
       author: 'ジブリファン',
+      type: '一人旅',
+      city: '名古屋',
       image: jiburiPost,
       heroImage: jiburiPost,
-      breadcrumb: ['愛知', '長久手', 'ジブリパーク', 'アニメの世界'],
+      breadcrumb: ['名古屋', 'ジブリパーク', 'アニメ', '宮崎駿'],
       contentTitle: 'ジブリパークの基本情報',
-      spots: ['ジブリパーク紹介', 'トトロの森', '魔女の宅急便', 'ジブリの世界観'],
+      spots: ['トトロの森', '魔女の宅急便', 'ジブリの世界'],
       content:
-        '2022年11月にオープンしたジブリパークは、愛知県長久手市の愛・地球博記念公園内に位置するテーマパークです。スタジオジブリのアニメーション作品の世界観を再現した、ジブリファンにとって夢のような場所です。<br><br>【2.1 ジブリパーク紹介】<br>ジブリパークは宮崎駿監督の「テーマパークは作らない」という方針に基づいて、従来のテーマパークとは異なるコンセプトで作られています。アトラクションではなく、作品の世界観を体験できる「場」として設計されており、訪れる人々が自然と作品の世界に没入できるようになっています。パーク内は5つのエリアに分かれており、それぞれが異なるジブリ作品の世界を表現しています。<br><br>【2.2 トトロの森】<br>「となりのトトロ」の世界を再現したエリアです。サツキとメイの家が忠実に再現されており、実際に中に入って生活感を感じることができます。家の周りにはトトロが住む森が広がり、自然の美しさと神秘的な雰囲気を体験できます。トトロのバス停も再現されており、作品の世界観に完全に没入できる特別な空間です。<br><br>【2.3 魔女の宅急便】<br>「魔女の宅急便」の世界を再現したエリアでは、キキが住む街の雰囲気を体験できます。ヨーロッパ風の街並みと建物が美しく再現されており、キキの生活を追体験できる空間になっています。パン屋や雑貨店など、作品に登場するお店も再現されており、魔女の宅急便の世界観を存分に楽しめます。<br><br>【2.4 ジブリの世界観】<br>ジブリパーク全体を通じて、スタジオジブリが大切にしてきた「自然との調和」「人間の温かさ」「夢と希望」といったテーマを感じることができます。パーク内の自然環境も作品の世界観に合わせて設計されており、訪れる人々が自然と作品の主人公になったような気持ちを味わえます。ジブリの世界観を体感できる、他では味わえない特別な体験ができる場所です。',
+        '愛知県長久手市のジブリパークで、宮崎駿監督のアニメの世界を体験。トトロの森、魔女の宅急便の世界など、ジブリファン必見。',
     },
     18: {
       title: '天神で楽しむ福岡のオタク文化とショッピング',
       description: '天神の地下街から地上まで、オタク文化とショッピングを満喫する旅。',
       author: 'オタク好き',
-      image: fukutenshin,
-      heroImage: fukutenshin,
+      type: '一人旅',
+      city: '福岡',
+      image: fukuanimate,
+      heroImage: fukuanimate,
       breadcrumb: ['福岡', '天神', 'オタク文化', 'ショッピング'],
-      contentTitle: '天神オタク文化の基本情報',
-      spots: ['天神の基本情報', 'オタクショップ巡り', 'アニメイト巡り', 'マンダラケの魅力'],
-      content:
-        '天神は福岡最大の繁華街で、ハカタと並ぶ福岡の二大中心地です。西鉄の本社がある天神は、西鉄が力を入れて育てた商業地区で、鉄道駅とバスターミナル、ショッピングモール、百貨店などが集まる複合商業施設の規模が非常に大きく、その下の地下街も非常に広大です。夏の福岡は文字通り地獄のような暑さなので、天神を歩くときは地下を利用するのがおすすめです。<br><br>【2.1 天神の基本情報】<br>天神は福岡の中心部に位置し、西鉄天神大牟田線の天神駅を中心とした商業地区です。西鉄の本社があることからも分かるように、西鉄が長年かけて育て上げた商業地区で、西鉄のテリトリーと言っても過言ではありません。天神からは太宰府や柳川などの近郊観光地へのアクセスも良く、観光の拠点としても重要な役割を果たしています。天神の商業施設は地上と地下の両方に広がっており、特に地下街は非常に広大で、夏の暑い時期には地下を利用して移動するのが一般的です。<br><br>【2.2 オタクショップ巡り】<br>天神には福岡のオタク関連ショップがほぼ全て集まっており、マンダラケやアニメイトが代表的な店舗です。特にアニメイトは非常に変わった場所に位置しているため注意が必要です。その他にもラシンバン、メロンブックスなど、すべて天神にあります。北九州のアルアルシティのように一箇所に集まっているわけではなく、すべて散らばっているため、すべて回ろうとすると半日はかかります。また、変わったメイド関連の店舗もあり、明太子パルフェを売る店やマッサージをしてくれる店などがカルト的に有名です。その他にもメイドカフェが存在し、天神にあります。福岡でオタク旅行をする場合は天神で行うことが多いですが、北九州の小倉駅周辺でもできるので、オタク旅行をする際に不足があれば北九州でも楽しめます。<br><br>【2.3 アニメイト巡り】<br>天神のアニメイトは福岡のオタク文化の中心地として、多くのアニメファンが訪れる人気スポットです。アニメイト天神店は非常に変わった場所に位置しており、初めて訪れる際は注意が必要です。店内には最新のアニメグッズ、フィギュア、CD、DVD、漫画、小説などが豊富に揃っており、アニメファンにとってはまさにパラダイスです。限定商品やイベントグッズも多数取り扱っており、アニメイトでしか手に入らない商品も多くあります。店内は常に最新のアニメ情報で溢れており、アニメファン同士の交流の場としても機能しています。<br><br>【2.4 マンダラケの魅力】<br>天神のマンダラケは中古フィギュアとアニメグッズの専門店として、全国のオタクから愛される名店です。マンダラケ天神店では、希少なフィギュアや限定版グッズ、中古品まで幅広く取り扱っており、コレクターにとっては宝の山のような存在です。特に中古フィギュアの品揃えは圧倒的で、長年探していた商品が見つかることも珍しくありません。マンダラケの魅力は、その豊富な品揃えと専門的な知識を持つスタッフにあります。フィギュアの状態や価値について詳しく説明してくれるため、初心者でも安心して購入できます。また、マンダラケは全国チェーン店なので、天神店で見つからなかった商品も他の店舗から取り寄せることが可能です。',
+      contentTitle: '福岡オタク文化旅の基本情報',
+      spots: ['天神地下街', 'オタク文化', 'ショッピング'],
+      content: '天神の地下街から地上まで、オタク文化とショッピングを満喫する旅。福岡のオタク文化を体験できます。',
     },
     19: {
       title: 'すずめの戸締まり聖地巡礼！福岡の神秘的な旅',
       description: 'アニメ「すずめの戸締まり」の舞台となった福岡の聖地を巡る旅。',
       author: 'アニメファン',
-      image: suzumetobira,
-      heroImage: suzumetobira,
+      type: '一人旅',
+      city: '福岡',
+      image: suzume,
+      heroImage: suzume,
       breadcrumb: ['福岡', 'すずめの戸締まり', '聖地巡礼', 'アニメの世界'],
       contentTitle: 'すずめの戸締まり聖地巡礼の基本情報',
       spots: ['すずめの戸締まり紹介', 'アニメの世界観', '豊後森駅'],
       content:
-        '2022年に公開された新海誠監督のアニメーション映画「すずめの戸締まり」は、福岡を舞台にした壮大なファンタジー作品です。主人公の岩戸すずめが日本各地の「後門」を閉じる旅を通じて、災害と向き合いながら成長していく物語が描かれています。福岡は物語の重要な舞台として登場し、多くのファンが聖地巡礼に訪れています。<br><br>【2.1 すずめの戸締まり紹介】<br>「すずめの戸締まり」は新海誠監督が手がけた最新作で、東日本大震災をテーマにした感動的な作品です。主人公の岩戸すずめは、九州の小さな町に住む17歳の女子高校生で、ある日不思議な猫の「だいじん」と出会い、日本各地の「後門」を閉じる旅に出ることになります。福岡は物語の重要な舞台として登場し、すずめの成長と旅の出発点として描かれています。アニメの美しい映像と福岡の実在の風景が融合した、特別な魅力を持つ作品です。<br><br>【2.2 アニメの世界観】<br>「すずめの戸締まり」は災害と向き合うことの大切さをテーマにした作品で、新海誠監督らしい美しい映像と感動的なストーリーが特徴です。福岡を舞台とした部分では、日常の美しさと災害の恐ろしさが対比的に描かれており、観る者に深い印象を与えます。アニメの中で描かれた福岡の風景を実際に訪れることで、作品の世界観をより深く体験することができます。特に福岡の自然と街並みの美しさは、アニメの世界観を体現する特別な魅力を持っています。<br><br>【2.3 豊後森駅】<br>豊後森駅は「すずめの戸締まり」の重要な舞台として登場する大分県の駅です。アニメの中で印象的に描かれた豊後森駅は、すずめの旅の重要な通過点として描かれており、多くのファンが聖地巡礼に訪れています。実際の豊後森駅を訪れることで、アニメの中で描かれた美しい風景と現実の駅の雰囲気を比較しながら楽しむことができます。豊後森駅周辺の自然豊かな風景もアニメの世界観を体現しており、聖地巡礼の魅力をより深く感じることができる特別な場所です。',
+        '2022年に公開された新海誠監督のアニメーション映画「すずめの戸締まり」は、福岡を舞台にした壮大なファンタジー作品です。主人公の岩戸すずめが日本各地の「後門」を閉じる旅を通じて、災害と向き合いながら成長していく物語が描かれています。福岡は物語の重要な舞台として登場し、多くのファンが聖地巡礼に訪れています。',
+    },
+    20: {
+      title: 'ホークス観戦と屋台グルメの夜',
+      description: 'PayPayドームで野球観戦後、中洲屋台で博多グルメを満喫。',
+      author: 'スポーツ好き',
+      type: '二人旅',
+      city: '福岡',
+      image: HakataCity,
+      heroImage: HakataCity,
+      breadcrumb: ['福岡', 'ホークス', '野球観戦', '屋台グルメ'],
+      contentTitle: '福岡スポーツ＆グルメ旅の基本情報',
+      spots: ['PayPayドーム', '中洲屋台', '博多グルメ'],
+      content: 'PayPayドームで野球観戦後、中洲屋台で博多グルメを満喫。福岡のスポーツとグルメを同時に楽しめる旅です。',
+    },
+    21: {
+      title: '東京ディズニーランド',
+      description: '世界で最も人気のテーマパーク。夢の国で楽しい時間を過ごそう',
+      author: 'ディズニーファン',
+      type: '家族旅',
+      city: '東京',
+      image: TokyoDisneyland,
+      heroImage: TokyoDisneyland,
+      breadcrumb: ['東京', 'ディズニーランド', 'テーマパーク', '家族'],
+      contentTitle: '東京ディズニーランドの基本情報',
+      spots: ['アトラクション', 'パレード', 'ショー'],
+      content:
+        '世界で最も人気のテーマパーク。夢の国で楽しい時間を過ごそう。東京ディズニーランドで魔法のような体験を楽しめます。',
+    },
+    22: {
+      title: '日光東照宮',
+      description: '徳川家康を祀る世界遺産の神社。豪華絢爛な建築が美しい',
+      author: '歴史好き',
+      type: '一人旅',
+      city: '東京',
+      image: NikkoToshogu,
+      heroImage: NikkoToshogu,
+      breadcrumb: ['東京', '日光', '東照宮', '世界遺産'],
+      contentTitle: '日光東照宮の基本情報',
+      spots: ['東照宮', '陽明門', '眠り猫'],
+      content:
+        '徳川家康を祀る世界遺産の神社。豪華絢爛な建築が美しい日光東照宮で日本の歴史と文化を感じることができます。',
+    },
+    23: {
+      title: '鎌倉',
+      description: '歴史と文化が息づく古都。大仏とアニメの聖地',
+      author: '歴史好き',
+      type: '一人旅',
+      city: '神奈川',
+      image: Kamakura,
+      heroImage: Kamakura,
+      breadcrumb: ['神奈川', '鎌倉', '大仏', '歴史'],
+      contentTitle: '鎌倉観光の基本情報',
+      spots: ['鎌倉大仏', '鶴岡八幡宮', '小町通り'],
+      content: '歴史と文化が息づく古都。大仏とアニメの聖地としても知られる鎌倉で、日本の伝統文化を体験できます。',
     },
     24: {
-      title: '🏛 中之島公会堂 × 黒執事 聖地巡礼',
-      description: '中之島公会堂 聖地巡礼！黒執事の世界を体感',
-      author: 'アニメ巡礼編集部',
-      image: OsakaArchitecture5,
-      heroImage: OsakaArchitecture5,
-      breadcrumb: ['大阪', '北区', '中之島公会堂'],
-      contentTitle: '中之島公会堂と黒執事の関係',
-      spots: ['外観（ヴィクトリア建築）', '大ホール', 'ステンドグラス'],
+      title: '箱根温泉',
+      description: '富士山を望む名湯。リラックスできる温泉地',
+      author: '温泉好き',
+      type: '二人旅',
+      city: '神奈川',
+      image: HakoneOnsen,
+      heroImage: HakoneOnsen,
+      breadcrumb: ['神奈川', '箱根', '温泉', '富士山'],
+      contentTitle: '箱根温泉の基本情報',
+      spots: ['強羅温泉', '芦ノ湖', '箱根神社'],
       content:
-        '中之島公会堂は1918年に建てられた大阪を代表するネオ・ルネッサンス様式の建築物です。アニメ『黒執事』の舞台となるヴィクトリア時代のロンドンを彷彿とさせる重厚な外観から、ファンの間では聖地の一つとして親しまれています。作品の公式ロケ地ではありませんが、その雰囲気が「黒執事」の世界観と重なるため、多くのファンが訪れています。<br><br>【2.1 外観（ヴィクトリア建築）】<br>赤レンガと白い石材を組み合わせた外観は、ヴィクトリア時代のロンドンを思わせます。ファンにとっては写真撮影の定番スポットです。<br><br>【2.2 大ホール】<br>公会堂の中心に位置する大ホールは、豪華な装飾とクラシックな雰囲気が特徴。『黒執事』の舞踏会シーンを連想させます。<br><br>【2.3 ステンドグラス】<br>天井や窓に施されたステンドグラスは必見。色鮮やかな光が差し込み、まるでアニメのワンシーンのような幻想的な空間を作り出します。',
+        '箱根温泉は富士山を望む人気の温泉地。豊富な泉質の温泉と美しい自然景観が魅力で、日帰り温泉から高級旅館まで様々な宿泊施設があります。芦ノ湖でのクルーズや箱根神社の参拝、美術館巡りなど、温泉以外の楽しみも豊富です。',
+    },
+    25: {
+      title: '渋谷',
+      description: '若者の街として有名。スクランブル交差点とハチ公がシンボル',
+      author: '若者文化好き',
+      type: '一人旅',
+      city: '東京',
+      image: ShibuyaScramble,
+      heroImage: ShibuyaScramble,
+      breadcrumb: ['東京', '渋谷', 'スクランブル交差点', 'ハチ公'],
+      contentTitle: '渋谷観光の基本情報',
+      spots: ['スクランブル交差点', 'ハチ公像', '渋谷109'],
+      content:
+        '若者の街として有名。スクランブル交差点とハチ公がシンボルとして知られる渋谷で、日本の若者文化を体験できます。',
+    },
+    26: {
+      title: '名古屋城',
+      description: '徳川家康が築いた城。金色のシャチホコが有名',
+      author: '歴史好き',
+      type: '一人旅',
+      city: '名古屋',
+      image: NagoyaCastle,
+      heroImage: NagoyaCastle,
+      breadcrumb: ['名古屋', '名古屋城', '徳川家康', '歴史'],
+      contentTitle: '名古屋城の基本情報',
+      spots: ['天守閣', '本丸御殿', 'シャチホコ'],
+      content: '徳川家康が築いた城。金色のシャチホコが有名な名古屋城で、江戸時代の歴史と文化を学ぶことができます。',
+    },
+    27: {
+      title: '大須商店街',
+      description: '漫画・アニメグッズ、電子機器、食べ物まで揃う商店街',
+      author: 'オタク好き',
+      type: '一人旅',
+      city: '名古屋',
+      image: osushotenkai,
+      heroImage: osushotenkai,
+      breadcrumb: ['名古屋', '大須商店街', 'オタク文化', 'ショッピング'],
+      contentTitle: '大須商店街の基本情報',
+      spots: ['アニメグッズ', '電子機器', 'グルメ'],
+      content:
+        '漫画・アニメグッズ、電子機器、食べ物まで揃う商店街。名古屋の大須商店街でオタク文化とショッピングを楽しめます。',
+    },
+    28: {
+      title: '熱田神宮',
+      description: '日本三大神剣の一つ、草薙剣を祀る神宮',
+      author: '歴史好き',
+      type: '一人旅',
+      city: '名古屋',
+      image: Atsutasinkyu,
+      heroImage: Atsutasinkyu,
+      breadcrumb: ['名古屋', '熱田神宮', '草薙剣', '神社'],
+      contentTitle: '熱田神宮の基本情報',
+      spots: ['本宮', '草薙剣', '宝物館'],
+      content: '日本三大神剣の一つ、草薙剣を祀る神宮。名古屋の熱田神宮で日本の神話と歴史を感じることができます。',
+    },
+    29: {
+      title: 'SCMAGLEV and Railway Park',
+      description: 'JR東海運営。新幹線、リニア展示。鉄道ファンの聖地',
+      author: '鉄道ファン',
+      type: '一人旅',
+      city: '名古屋',
+      image: Nagoyalinear,
+      heroImage: Nagoyalinear,
+      breadcrumb: ['名古屋', '鉄道博物館', '新幹線', 'リニア'],
+      contentTitle: 'SCMAGLEV and Railway Parkの基本情報',
+      spots: ['新幹線展示', 'リニア展示', '鉄道歴史'],
+      content:
+        'JR東海運営。新幹線、リニア展示。鉄道ファンの聖地として知られるSCMAGLEV and Railway Parkで、日本の鉄道技術を学ぶことができます。',
+    },
+    30: {
+      title: '名古屋市科学館',
+      description: '世界最大級のプラネタリウム。科学愛好家に人気',
+      author: '科学好き',
+      type: '家族旅',
+      city: '名古屋',
+      image: NagoyaScience,
+      heroImage: NagoyaScience,
+      breadcrumb: ['名古屋', '科学館', 'プラネタリウム', '科学'],
+      contentTitle: '名古屋市科学館の基本情報',
+      spots: ['プラネタリウム', '科学展示', '体験コーナー'],
+      content: '世界最大級のプラネタリウム。科学愛好家に人気の名古屋市科学館で、科学の不思議を体験できます。',
+    },
+    31: {
+      title: '名古屋港水族館',
+      description: 'シャチ、ベルーガ、イルカショーで有名。家族連れに人気',
+      author: 'ファミリー',
+      type: '家族旅',
+      city: '名古屋',
+      image: OkiAquarium,
+      heroImage: OkiAquarium,
+      breadcrumb: ['名古屋', '水族館', 'シャチ', 'イルカショー'],
+      contentTitle: '名古屋港水族館の基本情報',
+      spots: ['シャチショー', 'ベルーガ', 'イルカショー'],
+      content: 'シャチ、ベルーガ、イルカショーで有名。家族連れに人気の名古屋港水族館で、海の生き物たちと触れ合えます。',
+    },
+    32: {
+      title: '秋葉原',
+      description: 'アニメ・ゲーム・電子機器の聖地。オタク文化の中心地',
+      author: 'オタク好き',
+      type: '一人旅',
+      city: '東京',
+      image: akihabara,
+      heroImage: akihabara,
+      breadcrumb: ['東京', '秋葉原', 'オタク文化', 'アニメ'],
+      contentTitle: '秋葉原観光の基本情報',
+      spots: ['アニメショップ', 'ゲームセンター', '電子機器'],
+      content:
+        'アニメ・ゲーム・電子機器の聖地。オタク文化の中心地として知られる秋葉原で、日本のポップカルチャーを体験できます。',
+    },
+    33: {
+      title: '富士急ハイランド',
+      description: '絶叫マシンで有名なテーマパーク。富士山を背景にした絶景アトラクション',
+      author: '絶叫好き',
+      type: '一人旅',
+      city: '東京',
+      image: fujiq1,
+      heroImage: fujiq1,
+      breadcrumb: ['東京', '富士急ハイランド', '絶叫マシン', '富士山'],
+      contentTitle: '富士急ハイランドの基本情報',
+      spots: ['絶叫マシン', '富士山ビュー', 'アトラクション'],
+      content:
+        '絶叫マシンで有名なテーマパーク。富士山を背景にした絶景アトラクションを楽しめる富士急ハイランドで、スリルと絶景を同時に体験できます。',
+    },
+    34: {
+      title: '金沢の伝統文化体験！東茶屋街散策',
+      description: '江戸時代の茶屋街・東茶屋街を散策し、金沢の伝統工芸を体験。加賀友禅や金箔細工の美しさを堪能する旅。',
+      author: '伝統文化好き',
+      type: '一人旅',
+      city: '金沢',
+      image: Kanazawa_HigashiChaya,
+      heroImage: Kanazawa_HigashiChaya,
+      breadcrumb: ['金沢', '東茶屋街', '伝統工芸', '加賀友禅'],
+      contentTitle: '金沢伝統文化体験の基本情報',
+      spots: ['東茶屋街', '加賀友禅', '金箔細工'],
+      content: '江戸時代の茶屋街・東茶屋街を散策し、金沢の伝統工芸を体験。加賀友禅や金箔細工の美しさを堪能する旅。',
+    },
+    35: {
+      title: '金沢の奥座敷！湯涌温泉で癒やしの旅',
+      description: '金沢の奥座敷・湯涌温泉で自然に囲まれた静かな時間を過ごす。兼六園散策と合わせて金沢の魅力を満喫。',
+      author: '温泉好き',
+      type: '二人旅',
+      city: '金沢',
+      image: Kanazawa_YuwakuOnsen,
+      heroImage: Kanazawa_YuwakuOnsen,
+      breadcrumb: ['金沢', '湯涌温泉', '奥座敷', '癒やし'],
+      contentTitle: '金沢湯涌温泉の基本情報',
+      spots: ['湯涌温泉', '兼六園', '自然散策'],
+      content: '金沢の奥座敷・湯涌温泉で自然に囲まれた静かな時間を過ごす。兼六園散策と合わせて金沢の魅力を満喫。',
     },
   };
 
@@ -286,7 +525,7 @@ const DetailPage = () => {
       >
         {/* Custom gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60"></div>
-        
+
         {/* Breadcrumb Navigation - positioned absolutely */}
         <nav className="absolute top-4 left-6 z-10">
           <div className="flex items-center space-x-2 text-sm">
@@ -301,315 +540,70 @@ const DetailPage = () => {
           </div>
         </nav>
 
-        {/* Hero Content */}
-        <div className="absolute bottom-0 left-0 right-0 z-10 px-6 pb-8">
-          <div className="max-w-7xl mx-auto">
-            <h1 className="text-white text-4xl md:text-5xl font-bold mb-4 drop-shadow-lg">{plan.title}</h1>
-            <p className="text-white text-lg mb-4 drop-shadow-md">{plan.description}</p>
-            <div className="flex items-center space-x-4 text-white text-sm drop-shadow-md">
-              <span>PLAN | SHARE | LOG</span>
-              <span>16K views</span>
-              <span>by {plan.author}</span>
-            </div>
-          </div>
+        {/* Back Button - positioned absolutely */}
+        <button
+          onClick={() => {
+            if (location.state?.from) {
+              navigate(location.state.from);
+            } else {
+              navigate('/spots');
+            }
+          }}
+          className="absolute top-4 right-6 z-10 px-4 py-2 bg-white/20 rounded-lg text-gray-800 font-semibold hover:bg-white/30 transition-colors"
+        >
+          ← 戻る
+        </button>
+
+        {/* Title and Description - positioned absolutely at bottom */}
+        <div className="absolute bottom-6 left-6 right-6 z-10">
+          <h1 className="text-4xl font-bold text-white mb-4">{plan.title}</h1>
+          <p className="text-lg text-white/90 max-w-3xl">{plan.description}</p>
         </div>
       </section>
 
-      {/* Table of Contents */}
-      <section className="py-8 px-6 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">内容リスト</h2>
-          <ol className="space-y-3">
-            <li className="flex items-start">
-              <span className="text-gray-600 mr-3">1.</span>
-              <span className="text-orange-500">{plan.contentTitle}</span>
-            </li>
-            <li className="flex items-start">
-              <span className="text-gray-600 mr-3">2.</span>
-              <div>
-                <span className="text-orange-500 font-medium">おすすめ観光スポット</span>
-                <ul className="ml-6 mt-2 space-y-1">
-                  {plan.spots.map((spot, index) => (
-                    <li key={index} className="text-orange-500">
-                      <span className="text-gray-900">2.{index + 1}</span> {spot}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </li>
-          </ol>
-        </div>
-      </section>
-
-      {/* Main Content */}
+      {/* Content Section */}
       <section className="py-12 px-6 bg-gray-50">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8">{plan.contentTitle}</h2>
-          
-          {/* Images */}
-          {planId !== 4 && planId !== 19 && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-              <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                <div
-                  className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{
-                    backgroundImage: `url(${
-                      planId === 1
-                        ? Tsukiji
-                        : planId === 2
-                        ? USJ
-                        : planId === 3
-                        ? KiyoMizuTera
-                        : planId === 5
-                        ? SapporoTime
-                        : planId === 6
-                        ? OkiAquarium
-                        : planId === 14
-                        ? KiminoNamaewa
-                        : planId === 18
-                        ? fukuanimate
-                        : plan.image
-                    })`,
-                  }}
-                ></div>
-              </div>
-              <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                <div
-                  className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{
-                    backgroundImage: `url(${
-                      planId === 1
-                        ? Marugamejemen2
-                        : planId === 2
-                        ? OsakaGuriko
-                        : planId === 3
-                        ? Kinkakuji
-                        : planId === 5
-                        ? SapporoTower
-                        : planId === 6
-                        ? Shurijo
-                        : planId === 14
-                        ? KiminoNamaewaSuga
-                        : planId === 11
-                        ? odaiba
-                        : planId === 12
-                        ? OdaibaDigimon
-                        : planId === 13
-                        ? nikkoonsen
-                        : planId === 17
-                        ? jiburimap
-                        : planId === 16
-                        ? LegoAttraction
-                        : planId === 18
-                        ? fukumandarake
-                        : plan.heroImage
-                    })`,
-                  }}
-                ></div>
-              </div>
-            </div>
-          )}
-
-          {/* Extra Images for Tokyo Plan */}
-          {planId === 1 && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-              <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                <div
-                  className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${JiroSushi})` }}
-                ></div>
-              </div>
-              <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                <div
-                  className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${RamenJiro})` }}
-                ></div>
-              </div>
-            </div>
-          )}
-
-          {/* Extra Images for Kimi no Na wa Plan */}
-          {planId === 14 && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-              <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                <div
-                  className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${ShinjukuPolice})` }}
-                ></div>
-              </div>
-              <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                <div
-                  className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${Aogashima})` }}
-                ></div>
-              </div>
-            </div>
-          )}
-
-          {/* Extra Images for Tenki no Ko Plan */}
-          {planId === 11 && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-              <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                <div
-                  className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${Shibakoen})` }}
-                ></div>
-              </div>
-              <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                <div
-                  className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${denkiseibumc})` }}
-                ></div>
-              </div>
-            </div>
-          )}
-
-          {/* Extra Images for Digimon Adventure Plan */}
-          {planId === 12 && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-              <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                <div
-                  className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${HikarigaokaDigimon})` }}
-                ></div>
-              </div>
-              <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                <div
-                  className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${Digimon2})` }}
-                ></div>
-              </div>
-            </div>
-          )}
-
-          {/* Extra Images for Ghibli Park Plan */}
-          {planId === 17 && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-              <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                <div
-                  className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${jiburimori})` }}
-                ></div>
-              </div>
-              <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                <div
-                  className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${jiburi4})` }}
-                ></div>
-              </div>
-            </div>
-          )}
-
-          {/* Extra Images for Legoland Japan Plan */}
-          {planId === 16 && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-              <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                <div
-                  className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${LegoTaiken})` }}
-                ></div>
-              </div>
-              <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                <div
-                  className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${LegoBoat})` }}
-                ></div>
-              </div>
-            </div>
-          )}
-
-          {/* Extra Images for Fukuoka Gourmet Tour */}
-          {planId === 4 && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-            <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                <div
-                  className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${fukuichiran})` }}
-                ></div>
-              </div>
-              <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                <div
-                  className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${fukumizutaki})` }}
-                ></div>
-              </div>
-              <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                <div
-                  className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${fukutourimon})` }}
-                ></div>
-              </div>
-              <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                <div
-                  className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${fukugourmet})` }}
-                ></div>
-              </div>
-            </div>
-          )}
-
-          {/* Extra Images for Tenjin Otaku Culture */}
-          {planId === 18 && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-              <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                <div
-                  className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${fukuanimatemap})` }}
-                ></div>
-            </div>
-            <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                <div
-                  className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${fukumandafigure})` }}
-                ></div>
-              </div>
-            </div>
-          )}
-
-          {/* Extra Images for Suzume no Tojimari */}
-          {planId === 19 && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-              <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                <div
-                  className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${suzume})` }}
-                ></div>
-              </div>
-              <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                <div
-                  className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${suzumetobira})` }}
-                ></div>
-              </div>
-              <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                <div
-                  className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${fukubungomori})` }}
-                ></div>
-              </div>
-              <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                <div
-                  className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${suzumegoods})` }}
-                ></div>
-            </div>
-          </div>
-          )}
-
-          {/* Text Content */}
+        <div className="max-w-4xl mx-auto">
           <div className="bg-white rounded-lg p-8 shadow-md">
-            <div className="prose prose-lg max-w-none">
-              <p className="text-gray-700 leading-relaxed mb-4" dangerouslySetInnerHTML={{ __html: plan.content }}></p>
-              <p className="text-gray-700 leading-relaxed mb-4">
-                このプランは{plan.author}
-                さんが実際に体験した内容を基に作成されました。現地での貴重な体験とおすすめスポットを詳しくご紹介しています。
-              </p>
-              <p className="text-gray-700 leading-relaxed mb-4">
-                旅行の準備や現地での移動方法、おすすめの時期など、実用的な情報も含まれていますので、ぜひ参考にしてください。
-              </p>
-              <p className="text-gray-700 leading-relaxed">
-                皆さんも素敵な旅の思い出を作って、タビログでシェアしてくださいね！
-              </p>
+            <div className="mb-8">
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">{plan.contentTitle}</h2>
+              <p className="text-gray-700 leading-relaxed">{plan.content}</p>
+            </div>
+
+            <div className="border-t pt-8">
+              <div className="flex justify-between items-center mb-6">
+                <div>
+                  <span className="text-orange-500 font-medium">おすすめ観光スポット</span>
+                  <ul className="ml-6 mt-2 space-y-1">
+                    {plan.spots.map((spot, index) => (
+                      <li key={index} className="text-orange-500">
+                        <span className="text-gray-900">2.{index + 1}</span> {spot}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="text-right">
+                  <div className="text-sm text-gray-500 mb-2">
+                    <span className="font-medium">作成者:</span> {plan.author}
+                  </div>
+                  <div className="text-sm text-gray-500">
+                    <span className="font-medium">旅行タイプ:</span> {plan.type}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="border-t pt-8 mt-8">
+              <div className="text-center">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">このプランを参考に旅を計画しよう！</h3>
+                <p className="text-gray-700 leading-relaxed mb-6">
+                  タビログのプランを参考に、あなただけのオリジナル旅行プランを作成してみてください。
+                  各地の観光スポットやグルメ情報を参考に、思い出に残る旅を楽しんでくださいね！
+                </p>
+                <p className="text-gray-700 leading-relaxed">
+                  皆さんも素敵な旅の思い出を作って、タビログでシェアしてくださいね！
+                </p>
+              </div>
             </div>
           </div>
         </div>
