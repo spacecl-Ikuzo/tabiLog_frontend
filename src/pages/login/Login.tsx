@@ -7,7 +7,7 @@ import { Form, FormField, FormItem, FormLabel, FormMessage } from '@/components/
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { axiosInstance } from '@/api/axios';
-import { useUserStore } from '@/store';
+import { useUserStore, useInvitationStore } from '@/store';
 import { AxiosError } from 'axios';
 import { toast } from 'sonner';
 
@@ -20,6 +20,7 @@ type LoginReq = z.infer<typeof schema>;
 export default function Login() {
   const navigate = useNavigate();
   const { setUserId, setNickname, setToken, setEmail, setTokenExp } = useUserStore();
+  const { invitationInfo } = useInvitationStore();
 
   const form = useForm<LoginReq>({
     defaultValues: { id: '', password: '' },
@@ -42,7 +43,12 @@ export default function Login() {
         setToken(data.accessToken || '');
         if (data.expiresAt) setTokenExp(data.expiresAt);
 
-        navigate('/spots'); // 성공 시 이동
+        // 초대 정보가 있으면 여행 플랜으로, 없으면 기본 페이지로 이동
+        if (invitationInfo && invitationInfo.inviteeEmail === data.email) {
+          navigate('/plans');
+        } else {
+          navigate('/spots');
+        }
       }
     } catch (error) {
       // 팝업은 고정 문구
@@ -50,8 +56,8 @@ export default function Login() {
 
       if (error instanceof AxiosError) {
         const status = error.response?.status;
-        const code = (error.response?.data as any)?.error;
-        const details = (error.response?.data as any)?.details;
+        const code = (error.response?.data as { error?: string })?.error;
+        const details = (error.response?.data as { details?: Record<string, string> })?.details;
 
         // 401 → 비밀번호 밑에 에러 표시 (AUTH_ERROR/INVALID_CREDENTIALS 모두 대응)
         if (status === 401 && (code === 'AUTH_ERROR' || code === 'INVALID_CREDENTIALS')) {

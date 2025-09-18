@@ -49,14 +49,10 @@ const Register = () => {
   const navigate = useNavigate();
   const { invitationInfo } = useInvitationStore();
 
-  useEffect(() => {
-    console.log('invitationInfo', invitationInfo);
-  }, [invitationInfo]);
-
   const form = useForm<FormData>({
     defaultValues: {
       userId: '',
-      email: '',
+      email: invitationInfo?.inviteeEmail || '',
       password: '',
       lastName: '',
       firstName: '',
@@ -71,7 +67,23 @@ const Register = () => {
     reValidateMode: 'onChange',
   });
 
+  useEffect(() => {
+    if (invitationInfo) {
+      console.log(form.getValues());
+      form.setValue('email', invitationInfo.inviteeEmail);
+    }
+    console.log('invitationInfo', invitationInfo);
+  }, [invitationInfo, form]);
+
   const onSubmit = async (data: FormData) => {
+    //초대 링크로 들어온 이메일과 회원가입 이메일과 동일해야함
+    if (invitationInfo && data.email !== invitationInfo.inviteeEmail) {
+      form.setError('email', {
+        message: '招待されたメールアドレスと一致しません。',
+      });
+      return;
+    }
+
     try {
       const requestBody = {
         userId: data.userId,
@@ -96,7 +108,7 @@ const Register = () => {
 
       if (error instanceof AxiosError) {
         const status = error.response?.status;
-        const details = (error.response?.data as any)?.details;
+        const details = (error.response?.data as { details?: Record<string, string> })?.details;
 
         // 서버 검증 에러 매핑 (400 VALIDATION_ERROR)
         if (status === 400 && details) {
@@ -114,7 +126,7 @@ const Register = () => {
         }
         // 중복(409 DUPLICATE) → 이메일/아이디에 표시
         else if (status === 409) {
-          const msg = (error.response?.data as any)?.message;
+          const msg = (error.response?.data as { message?: string })?.message;
           // 서버에서 어떤 필드가 중복인지 내려줄 때 details.email / details.username 케이스
           if (details?.email || /メール|이메일/i.test(String(msg))) {
             form.setError('email', { message: String(details?.email || '既に使用されているメールです。') });

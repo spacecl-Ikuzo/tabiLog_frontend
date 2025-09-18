@@ -65,8 +65,8 @@ const InvitationPage = () => {
 
   const checkInvitation = async (token: string) => {
     try {
-      const response = await axiosInstance.get(`/api/plans/invitations/${token}`);
-      return response.data;
+      const response = await axiosInstance.get(`/api/plans/invitations/${token}/check`);
+      return response.data?.data;
     } catch (error) {
       console.error('초대 확인 API 오류:', error);
       return null;
