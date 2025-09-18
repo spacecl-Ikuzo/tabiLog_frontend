@@ -5,6 +5,7 @@ import Tokyo from '../../assets/Tokyo.jpg';
 import OsakaCastle from '../../assets/OsakaCastle.jpg';
 import Kinkakuji from '../../assets/Kinkakuji.jpg';
 import Sapporo from '../../assets/Sapporo.jpg';
+import maruyamapolarbear from '../../assets/maruyamapolarbear.jpg';
 import fukuokahutami from '../../assets/fukuokahutami.jpg';
 import fukugourmet from '../../assets/fukugourmet.jpg';
 import fukuanimate from '../../assets/fukuanimate.jpg';
@@ -83,6 +84,8 @@ import Kanazawa_YuwakuOnsen from '../../assets/Kanazawa_YuwakuOnsen.jpg';
 import Kyoto_Byodoin from '../../assets/Kyoto_Byodoin.jpg';
 import GenghisKhan from '../../assets/GenghisKhan.jpg';
 import SapporoBeerTaste from '../../assets/SapporoBeerTaste.jpg';
+import hokudaipopula from '../../assets/hokudaipopula.jpg';
+import tanukiya from '../../assets/tanukiya.jpg';
 
 const SpotsPage = () => {
   const [selectedCity, setSelectedCity] = useState<string | null>(null);
@@ -93,6 +96,7 @@ const SpotsPage = () => {
   const destItemRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const destinationSectionRef = useRef<HTMLDivElement>(null);
   const searchSectionRef = useRef<HTMLDivElement>(null);
+  const spotsSectionRef = useRef<HTMLDivElement>(null);
   const [spotPage, setSpotPage] = useState(1);
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(true);
@@ -395,7 +399,7 @@ const SpotsPage = () => {
       description: '北海道を代表する動物園。ホッキョクグマやレッサーパンダが人気',
       tags: ['観光地', '家族', '北日本'],
       city: '札幌',
-      image: Sapporo,
+      image: maruyamapolarbear,
     },
     {
       id: 28,
@@ -403,7 +407,7 @@ const SpotsPage = () => {
       description: '日本最北の国立大学。美しいキャンパスが人気',
       tags: ['文化・歴史', '教育', '北日本'],
       city: '札幌',
-      image: Sapporo,
+      image: hokudaipopula,
     },
     {
       id: 29,
@@ -411,7 +415,7 @@ const SpotsPage = () => {
       description: '札幌最大の商店街。グルメとショッピングが楽しめる',
       tags: ['グルメ・食べ歩き', 'ショッピング', '北日本'],
       city: '札幌',
-      image: Sapporo,
+      image: tanukiya,
     },
     {
       id: 38,
@@ -420,14 +424,6 @@ const SpotsPage = () => {
       tags: ['文化・歴史', '夜景', '北日本', '北海道'],
       city: '札幌',
       image: Otaru_Canal_Winter,
-    },
-    {
-      id: 39,
-      name: 'すすきの',
-      description: '札幌の繁華街。夜のネオンが美しい',
-      tags: ['エンタメ', '夜景', '北日本', '北海道'],
-      city: '札幌',
-      image: Sapporo_SusukinoNight,
     },
     {
       id: 9,
@@ -752,30 +748,12 @@ const SpotsPage = () => {
       city: '福岡',
     },
     {
-      id: 5,
-      title: '札幌・小樽雪あかりの路！ロマンチックな冬祭り',
-      description: '小樽運河の雪あかりと札幌雪まつりを楽しむ冬の北海道旅。',
-      image: SapporoTower,
-      author: 'ロマンチスト',
-      type: '二人旅',
-      city: '札幌',
-    },
-    {
       id: 30,
       title: '札幌グルメ巡り！ラーメンと海鮮',
       description: '札幌ラーメンと新鮮な海鮮を堪能するグルメ旅。',
       image: Sapporo,
       author: 'グルメ好き',
       type: 'グルメ',
-      city: '札幌',
-    },
-    {
-      id: 31,
-      title: '札幌歴史散策！時計台と大学キャンパス',
-      description: '札幌の歴史と文化を感じる街歩きプラン。',
-      image: SapporoTime,
-      author: '歴史好き',
-      type: '文化',
       city: '札幌',
     },
     {
@@ -806,20 +784,21 @@ const SpotsPage = () => {
       city: '沖縄',
     },
     {
-      id: 24,
-      title: '那覇まつり！エイサーと大綱挽の熱気',
-      description: 'エイサー演舞と那覇大綱挽で沖縄の祭り文化を体感。',
-      image: okinawaeisamatsuri,
-      author: '祭り好き',
-      type: '祭り',
-      city: '沖縄',
+      id: 33,
+      title: '北海道スキー場TOP3！ニセコ・ルスツ・富良野',
+      description: '世界が惚れ込むパウダースノー。札幌から行ける人気スキー3大エリアを1枚で理解。',
+      image: Sapporo,
+      author: 'スノー派',
+      type: 'ウィンター',
+      city: '札幌',
     },
     {
       id: 24,
-      title: '札幌の夜を楽しむ！すすきのグルメツアー',
-      description: '札幌の繁華街・すすきので地元グルメを堪能。ラーメン横丁から居酒屋まで、札幌の夜を満喫。',
-      image: Sapporo_SusukinoNight,
-      author: 'グルメ好き',
+      title: 'オホーツク流氷体験！札幌→網走 1〜2日旅',
+      description:
+        '札幌から特急で網走へ。流氷砕氷船クルーズ、季節列車で北浜駅へ、オホーツク海の絶景を楽しむ冬のモデルコース。',
+      image: Otaru_Canal_Winter,
+      author: '旅ログ編集部',
       type: '一人旅',
       city: '札幌',
     },
@@ -876,16 +855,6 @@ const SpotsPage = () => {
       image: tenkinoko,
       author: '映画好き',
       type: '二人旅',
-      city: '東京',
-    },
-    {
-      id: 12,
-      title: 'デジモンアドベンチャー聖地巡礼！お台場と光が丘',
-      description:
-        'デジモンアドベンチャーの聖地を巡る旅。お台場のフジテレビ、光が丘公園、新宿駅など、アニメファンなら一度は訪れたい場所をめぐろう。',
-      image: Digimon4,
-      author: 'デジモンファン',
-      type: '一人旅',
       city: '東京',
     },
     {
@@ -1016,6 +985,13 @@ const SpotsPage = () => {
   useEffect(() => {
     setSpotPage(1);
   }, [selectedCity]);
+
+  // 페이지 이동 시 관광 스팟 섹션 상단으로 스크롤 포커싱
+  useEffect(() => {
+    if (spotsSectionRef.current) {
+      spotsSectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [spotPage]);
 
   // 검색어 변경 시 페이지 초기화
   useEffect(() => {
@@ -1206,7 +1182,7 @@ const SpotsPage = () => {
 
       {/* Tourist Spots Grid */}
       {(selectedCity || searchQuery) && (
-        <section className="py-16 px-6 bg-gray-50">
+        <section ref={spotsSectionRef} className="py-16 px-6 bg-gray-50">
           <div className="max-w-7xl mx-auto">
             <h2 className="text-3xl font-bold text-gray-900 text-center mb-4">
               {selectedCity === '東京'
