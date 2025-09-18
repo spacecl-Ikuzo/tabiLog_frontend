@@ -39,7 +39,7 @@ export default function Login() {
       const response = await axiosInstance.post('/api/auth/signin', payload);
       const data = response.data;
 
-      // 서버 응답(JwtResponse): accessToken, email, userId, nickname, expiresAt
+      // 서버 응답(JwtResponse): accessToken, email, userId, nickname, expiresAt, redirectUrl
       if (data) {
         setUserId(data.userId || '');
         setEmail(data.email || '');
@@ -47,10 +47,14 @@ export default function Login() {
         setToken(data.accessToken || '');
         if (data.expiresAt) setTokenExp(data.expiresAt);
 
-        // 초대 정보가 있으면 여행 플랜으로, 없으면 기본 페이지로 이동
-        if (invitationInfo && invitationInfo.inviteeEmail === data.email) {
-          navigate('/plans');
-        } else {
+        // redirectUrl이 있으면 해당 URL로 이동, 없으면 기본 로직
+        if (data.redirectUrl) {
+          navigate(data.redirectUrl);
+        }
+        // else if (invitationInfo && invitationInfo.inviteeEmail === data.email) {
+        //   navigate('/plans');
+        // }
+        else {
           navigate('/spots');
         }
       }
