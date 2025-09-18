@@ -41,10 +41,10 @@ const InvitationPage = () => {
       return;
     }
 
+    setInvitationToken(token); //초대 토큰 저장
+
     // 사용자 상태에 따라 자동 리다이렉트
     if (invitationData.userExists) {
-      setInvitationToken(token);
-
       if (useUserStore.getState().token) {
         navigate(`/plans`);
       } else {
