@@ -8,18 +8,10 @@ import Sapporo from '../../assets/Sapporo.jpg';
 import fukuokahutami from '../../assets/fukuokahutami.jpg';
 import fukugourmet from '../../assets/fukugourmet.jpg';
 import fukuanimate from '../../assets/fukuanimate.jpg';
-import fukushimono from '../../assets/fukushimono.jpg';
 import suzume from '../../assets/suzume.jpg';
 import SapporoTower from '../../assets/SapporoTower.jpg';
 import OkinawaResort from '../../assets/OkinawaResort.jpg';
-import Kokusaidori from '../../assets/Kokusaidori.jpg';
-import manzwamo from '../../assets/manzwamo.jpg';
-import kouribridge from '../../assets/kouribridge.jpg';
-import theritzcarlton from '../../assets/theritzcarlton.jpg';
 import TokyoTower from '../../assets/TokyoTower.jpg';
-import boolseal from '../../assets/boolseal.jpg';
-import okinawaeisamatsuri from '../../assets/okinawaeisamatsuri.jpg';
-import marineaqua from '../../assets/marineaqua.jpg';
 import AsaKusa from '../../assets/AsaKusa.jpg';
 import OsakaGuriko from '../../assets/OsakaGuriko.jpg';
 import KiyoMizuTera from '../../assets/KiyoMizuTera.jpg';
@@ -48,9 +40,11 @@ import NagoyaScience from '../../assets/NagoyaScience.jpg';
 import nagoyawcs2 from '../../assets/nagoyawcs2.jpg';
 import OkiAquarium from '../../assets/OkiAquarium.jpg';
 import Shurijo from '../../assets/Shurijo.jpg';
-import syureinomon from '../../assets/syureinomon.jpg';
 import FukuokaCastle from '../../assets/FukuokaCastle.jpg';
 import USJ from '../../assets/USJ.jpg';
+import UniversalStudiosJapan3 from '../../assets/universal_studios_japan3.jpg';
+import OsakaAquarium1 from '../../assets/Osaka_aquarium1.jpg';
+import OsakaArchitecture5 from '../../assets/OsakaArchitecture5.png';
 import TokyoDome from '../../assets/TokyoDome.jpg';
 import TokyoDisneyland from '../../assets/tokyodisneyland.jpg';
 import Tsukiji from '../../assets/Tsukiji.jpg';
@@ -62,7 +56,21 @@ import nakasumap from '../../assets/nakasumap.jpg';
 import kushidashrine from '../../assets/kushidashrine.jpg';
 import marineworld from '../../assets/marineworld.jpg';
 import paypaydome from '../../assets/paypaydome.jpg';
-import Header from '@/components/layout/header';
+import Kyoto_FushimiInari1 from '../../assets/Kyoto_FushimiInari1.jpg';
+import Kyoto_UjiBridge1 from '../../assets/Kyoto_UjiBridge1.jpg';
+import Miyajima_Itsukushima_Torii from '../../assets/Miyajima_Itsukushima_Torii.jpg';
+import Otaru_Canal_Winter from '../../assets/Otaru_Canal_Winter.jpg';
+import Sapporo_SusukinoNight from '../../assets/Sapporo_SusukinoNight.jpg';
+import Tomonoura_Harbor from '../../assets/Tomonoura_Harbor.jpg';
+import KobeFerris from '../../assets/KobeFerris.jpg';
+import KobeSkyline from '../../assets/KobeSkyline.jpg';
+import KobeBeKobe from '../../assets/KobeBeKobe.jpg';
+import KobeHarborland from '../../assets/KobeHarborland.jpg';
+import KobePortTowerNight from '../../assets/KobePortTowerNight.jpg';
+import KobePortTower from '../../assets/KobePortTower.jpg';
+import Kanazawa_HigashiChaya from '../../assets/Kanazawa_HigashiChaya.jpg';
+import Kanazawa_YuwakuOnsen from '../../assets/Kanazawa_YuwakuOnsen.jpg';
+import Kyoto_Byodoin from '../../assets/Kyoto_Byodoin.jpg';
 
 const SpotsPage = () => {
   const [selectedCity, setSelectedCity] = useState<string | null>(null);
@@ -295,7 +303,15 @@ const SpotsPage = () => {
       description: '大阪の大人気テーマパーク。映画の世界を体験',
       tags: ['エンタメ', '家族', '西日本'],
       city: '大阪',
-      image: USJ,
+      image: UniversalStudiosJapan3,
+    },
+    {
+      id: 21,
+      name: '海遊館',
+      description: '世界最大級の水族館。ジンベエザメに会える人気スポット。',
+      tags: ['エンタメ', '家族', '西日本'],
+      city: '大阪',
+      image: OsakaAquarium1,
     },
     {
       id: 5,
@@ -314,6 +330,30 @@ const SpotsPage = () => {
       image: KiyoMizuTera,
     },
     {
+      id: 35,
+      name: '伏見稲荷大社',
+      description: '千本鳥居で有名な京都の神社。朱色の鳥居が美しい',
+      tags: ['文化・歴史', '神社', '西日本', '京都'],
+      city: '京都',
+      image: Kyoto_FushimiInari1,
+    },
+    {
+      id: 36,
+      name: '宇治橋',
+      description: '宇治川に架かる歴史ある橋。源氏物語の舞台',
+      tags: ['文化・歴史', '西日本', '京都'],
+      city: '京都',
+      image: Kyoto_UjiBridge1,
+    },
+    {
+      id: 37,
+      name: '平等院鳳凰堂',
+      description: '世界遺産の寺院。10円硬貨のデザインで有名',
+      tags: ['文化・歴史', '世界遺産', '西日本', '京都'],
+      city: '京都',
+      image: Kyoto_Byodoin,
+    },
+    {
       id: 7,
       name: '札幌時計台',
       description: '札幌のシンボル。歴史ある時計台',
@@ -328,6 +368,22 @@ const SpotsPage = () => {
       tags: ['文化・歴史', '祭り', '北日本'],
       city: '札幌',
       image: SapporoTower,
+    },
+    {
+      id: 38,
+      name: '小樽運河',
+      description: '冬のイルミネーションが美しい運河。ロマンチックな街並み',
+      tags: ['文化・歴史', '夜景', '北日本', '北海道'],
+      city: '札幌',
+      image: Otaru_Canal_Winter,
+    },
+    {
+      id: 39,
+      name: 'すすきの',
+      description: '札幌の繁華街。夜のネオンが美しい',
+      tags: ['エンタメ', '夜景', '北日本', '北海道'],
+      city: '札幌',
+      image: Sapporo_SusukinoNight,
     },
     {
       id: 9,
@@ -399,7 +455,7 @@ const SpotsPage = () => {
       description: '沖縄の歴史と文化を感じられる城',
       tags: ['文化・歴史', '祭り', '南日本'],
       city: '沖縄',
-      image: syureinomon,
+      image: Shurijo,
     },
     {
       id: 12,
@@ -408,30 +464,6 @@ const SpotsPage = () => {
       tags: ['エンタメ', '家族', '南日本'],
       city: '沖縄',
       image: OkiAquarium,
-    },
-    {
-      id: 46,
-      name: '国際通り',
-      description: '那覇の中心街。沖縄のグルメとお土産が楽しめる',
-      tags: ['グルメ・食べ歩き', 'ショッピング', '南日本'],
-      city: '沖縄',
-      image: Kokusaidori,
-    },
-    {
-      id: 47,
-      name: '万座毛',
-      description: '沖縄を代表する絶景スポット。象の鼻のような岩が有名',
-      tags: ['自然', '絶景', '南日本'],
-      city: '沖縄',
-      image: manzwamo,
-    },
-    {
-      id: 48,
-      name: '古宇利島',
-      description: '沖縄本島北部の美しい島。透明度の高い海が魅力',
-      tags: ['ビーチ', '自然', '南日本'],
-      city: '沖縄',
-      image: kouribridge,
     },
     {
       id: 15,
@@ -450,6 +482,22 @@ const SpotsPage = () => {
       image: miyajima,
     },
     {
+      id: 40,
+      name: '厳島神社',
+      description: '海に浮かぶ朱色の大鳥居で有名な世界遺産',
+      tags: ['文化・歴史', '世界遺産', '西日本', '広島'],
+      city: '広島',
+      image: Miyajima_Itsukushima_Torii,
+    },
+    {
+      id: 41,
+      name: '鞆の浦',
+      description: '江戸時代の港町の面影を残す美しい港',
+      tags: ['文化・歴史', '西日本', '広島'],
+      city: '広島',
+      image: Tomonoura_Harbor,
+    },
+    {
       id: 17,
       name: '兼六園',
       description: '金沢の代表的な庭園。日本三名園の一つ',
@@ -464,6 +512,22 @@ const SpotsPage = () => {
       tags: ['文化・歴史', '祭り', '西日本'],
       city: '金沢',
       image: KanazawaCastle,
+    },
+    {
+      id: 42,
+      name: '東茶屋街',
+      description: '江戸時代の茶屋街。金沢の伝統文化を感じられる',
+      tags: ['文化・歴史', '西日本', '金沢'],
+      city: '金沢',
+      image: Kanazawa_HigashiChaya,
+    },
+    {
+      id: 43,
+      name: '湯涌温泉',
+      description: '金沢の奥座敷。自然に囲まれた静かな温泉地',
+      tags: ['温泉', '西日本', '金沢'],
+      city: '金沢',
+      image: Kanazawa_YuwakuOnsen,
     },
     {
       id: 21,
@@ -583,22 +647,30 @@ const SpotsPage = () => {
       city: '東京',
     },
     {
-      id: 2,
-      title: '大阪満喫!ショッピングとエンタメの旅',
-      description:
-        '道頓堀のきらびやかな夜景、USJのスリル満点のアトラクション。眠らない街・大阪の魅力を丸ごと楽しむプラン。',
-      image: OsakaCastle,
-      author: 'ドフン',
-      type: '二人旅',
-      city: '大阪',
-    },
-    {
       id: 3,
       title: '心安らぐ京都、癒やしの週末',
       description:
         '嵐山の竹林を散策し、静かな旅館で温泉に浸かる。古都の美しい景色の中で、心と体をリフレッシュする週末旅行。',
       image: Kinkakuji,
       author: 'セヒョン',
+      type: '一人旅',
+      city: '京都',
+    },
+    {
+      id: 21,
+      title: '京都の世界遺産巡り！伏見稲荷と宇治の旅',
+      description: '伏見稲荷大社の千本鳥居から宇治の平等院まで。京都の世界遺産を巡る歴史と文化の旅。',
+      image: Kyoto_FushimiInari1,
+      author: '歴史好き',
+      type: '二人旅',
+      city: '京都',
+    },
+    {
+      id: 22,
+      title: '源氏物語の舞台！宇治で文学散歩',
+      description: '源氏物語の舞台となった宇治を巡る。宇治橋から平等院まで、平安時代のロマンを感じる旅。',
+      image: Kyoto_UjiBridge1,
+      author: '文学好き',
       type: '一人旅',
       city: '京都',
     },
@@ -621,38 +693,29 @@ const SpotsPage = () => {
       city: '札幌',
     },
     {
-      id: 6,
-      title: '絶景ビーチリゾート！沖縄でのんびり休暇',
-      description: 'エメラルドグリーンの海でシュノーケリングと夕日鑑賞。',
-      image: theritzcarlton,
-      author: 'ソヒョン',
+      id: 23,
+      title: '小樽運河の冬物語！雪景色とイルミネーション',
+      description: '小樽運河の美しい冬景色とイルミネーションを楽しむ。ロマンチックな雪の街を散策する旅。',
+      image: Otaru_Canal_Winter,
+      author: '冬好き',
       type: '二人旅',
-      city: '沖縄',
-    },
-    {
-      id: 21,
-      title: '沖縄グルメ満喫！国際通りと首里城の歴史旅',
-      description: '沖縄の伝統料理と歴史を楽しむ旅。国際通りのグルメと首里城の文化を満喫。',
-      image: boolseal,
-      author: 'グルメ好き',
-      type: '一人旅',
-      city: '沖縄',
+      city: '札幌',
     },
     {
       id: 24,
-      title: '那覇まつり！エイサーと大綱挽の熱気',
-      description: 'エイサー演舞と那覇大綱挽で沖縄の祭り文化を体感する1日。',
-      image: okinawaeisamatsuri,
-      author: '祭り好き',
-      type: '祭り',
-      city: '沖縄',
+      title: '札幌の夜を楽しむ！すすきのグルメツアー',
+      description: '札幌の繁華街・すすきので地元グルメを堪能。ラーメン横丁から居酒屋まで、札幌の夜を満喫。',
+      image: Sapporo_SusukinoNight,
+      author: 'グルメ好き',
+      type: '一人旅',
+      city: '札幌',
     },
     {
-      id: 25,
-      title: '沖縄ヨットツアー！無人島クルーズとサンセット',
-      description: '珊瑚の海をクルージング、無人島上陸と夕日鑑賞を楽しむ大人の旅。',
-      image: marineaqua,
-      author: 'マリン派',
+      id: 6,
+      title: '絶景ビーチリゾート！沖縄でのんびり休暇',
+      description: 'エメラルドグリーンの海でシュノーケリングと夕日鑑賞。',
+      image: OkinawaResort,
+      author: 'ソヒョン',
       type: '二人旅',
       city: '沖縄',
     },
@@ -671,6 +734,24 @@ const SpotsPage = () => {
       description: '原爆ドームと厳島神社を巡る平和と歴史の旅。',
       image: HiroShima,
       author: 'ハナコ',
+      type: '一人旅',
+      city: '広島',
+    },
+    {
+      id: 25,
+      title: '厳島神社の神秘！海に浮かぶ大鳥居',
+      description: '世界遺産・厳島神社の朱色の大鳥居を間近で見学。潮の満ち引きによって変わる神秘的な景色を楽しむ。',
+      image: Miyajima_Itsukushima_Torii,
+      author: '世界遺産好き',
+      type: '二人旅',
+      city: '広島',
+    },
+    {
+      id: 26,
+      title: '鞆の浦で江戸時代にタイムスリップ！',
+      description: '江戸時代の港町の面影を残す鞆の浦を散策。歴史ある街並みと美しい海の景色を楽しむ旅。',
+      image: Tomonoura_Harbor,
+      author: '歴史好き',
       type: '一人旅',
       city: '広島',
     },
@@ -754,12 +835,39 @@ const SpotsPage = () => {
     },
     {
       id: 20,
-      title: '九州から本州へ！福岡・小倉・門司・下関の歴史旅',
-      description: '福岡から小倉、門司港、下関を巡る歴史とグルメの旅。関門海峡を越えて本州と九州を結ぶ特別な体験を。',
-      image: fukushimono,
-      author: '歴史好き',
+      title: 'ホークス観戦と屋台グルメの夜',
+      description: 'PayPayドームで野球観戦後、中洲屋台で博多グルメを満喫。',
+      image: HakataCity,
+      author: 'スポーツ好き',
       type: '二人旅',
       city: '福岡',
+    },
+    {
+      id: 27,
+      title: '金沢の伝統文化体験！東茶屋街散策',
+      description: '江戸時代の茶屋街・東茶屋街を散策し、金沢の伝統工芸を体験。加賀友禅や金箔細工の美しさを堪能する旅。',
+      image: Kanazawa_HigashiChaya,
+      author: '伝統文化好き',
+      type: '一人旅',
+      city: '金沢',
+    },
+    {
+      id: 28,
+      title: '金沢の奥座敷！湯涌温泉で癒やしの旅',
+      description: '金沢の奥座敷・湯涌温泉で自然に囲まれた静かな時間を過ごす。兼六園散策と合わせて金沢の魅力を満喫。',
+      image: Kanazawa_YuwakuOnsen,
+      author: '温泉好き',
+      type: '二人旅',
+      city: '金沢',
+    },
+    {
+      id: 24,
+      title: '🏛 中之島公会堂 × 黒執事 聖地巡礼',
+      description: '中之島公会堂 聖地巡礼！黒執事の世界を体感',
+      image: OsakaArchitecture5,
+      author: 'アニメ巡礼編集部',
+      type: '一人旅',
+      city: '大阪',
     },
   ];
 
@@ -836,7 +944,6 @@ const SpotsPage = () => {
 
   return (
     <div className="min-h-screen">
-      <Header />
       {/* Hero Section */}
       <section
         className="relative h-96 bg-cover bg-center bg-no-repeat flex items-center justify-center"
@@ -988,9 +1095,47 @@ const SpotsPage = () => {
       {(selectedCity || searchQuery) && (
         <section className="py-16 px-6 bg-gray-50">
           <div className="max-w-7xl mx-auto">
-            <h2 className="text-3xl font-bold text-gray-900 text-center mb-4">観光スポット</h2>
+            <h2 className="text-3xl font-bold text-gray-900 text-center mb-4">
+              {selectedCity === '東京'
+                ? '🗼 観光スポット'
+                : selectedCity === '大阪'
+                ? '🏯 観光スポット'
+                : selectedCity === '京都'
+                ? '🎎 観光スポット'
+                : selectedCity === '札幌'
+                ? '❄️ 観光スポット'
+                : selectedCity === '福岡'
+                ? '🌸 観光スポット'
+                : selectedCity === '沖縄'
+                ? '🌴 観光スポット'
+                : selectedCity === '名古屋'
+                ? '🏙 観光スポット'
+                : selectedCity === '広島'
+                ? '⚓ 観光スポット'
+                : selectedCity === '金沢'
+                ? '🖼 観光スポット'
+                : '観光スポット'}
+            </h2>
             <p className="text-gray-600 text-center mb-12">
-              {selectedCity
+              {selectedCity === '東京'
+                ? '世界が憧れる大都市・東京で特別な体験を。'
+                : selectedCity === '大阪'
+                ? '伝統から最新スポットまで、大阪の魅力を体感しよう。'
+                : selectedCity === '京都'
+                ? '千年の都・京都で歴史と文化に触れる旅へ。'
+                : selectedCity === '札幌'
+                ? '雪と光が彩る街・札幌の魅力を体感しよう。'
+                : selectedCity === '福岡'
+                ? '九州の玄関口・福岡で味わう食と文化。'
+                : selectedCity === '沖縄'
+                ? '青い海と豊かな文化、沖縄の魅力を巡る旅。'
+                : selectedCity === '名古屋'
+                ? '歴史とモダンが融合する名古屋を散策。'
+                : selectedCity === '広島'
+                ? '世界遺産と美しい景観を楽しむ広島スポット。'
+                : selectedCity === '金沢'
+                ? '伝統工芸と美しい街並み、金沢の魅力を発見。'
+                : selectedCity
                 ? `${selectedCity}で人気の観光スポットをご紹介します`
                 : searchQuery
                 ? `「${searchQuery}」の検索結果`
@@ -1091,10 +1236,10 @@ const SpotsPage = () => {
       <section className="py-16 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">みんなの旅行プラン</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">聖地巡礼スポット</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
               {selectedCity
-                ? `${selectedCity}で人気の旅行プランをご紹介します。新しい旅のインスピレーションを見つけよう。`
+                ? '人気作品のロケ地や聖地を訪れ、登場人物の気分を味わおう。'
                 : searchQuery
                 ? `「${searchQuery}」に関連する旅行プランをご紹介します。新しい旅のインスピレーションを見つけよう。`
                 : 'タビログが提案するモデルプランで、新しい旅のインスピレーションを見つけよう。'}
@@ -1156,8 +1301,11 @@ const SpotsPage = () => {
                   }}
                 >
                   <div
-                    className="h-48 bg-cover bg-center bg-no-repeat"
-                    style={{ backgroundImage: `url(${plan.image})` }}
+                    className="h-48 bg-cover bg-no-repeat"
+                    style={{
+                      backgroundImage: `url(${plan.image})`,
+                      backgroundPosition: 'center 30%',
+                    }}
                   ></div>
                   <div className="p-6">
                     <h3 className="font-bold text-gray-900 mb-2 text-lg">{plan.title}</h3>

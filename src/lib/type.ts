@@ -26,13 +26,3 @@ export type PlanMember = {
   userEmail: string;
   role: string;
 };
-
-/* 여행 초대 정보 (메일로 초대 받은 후 링크를 통해 접속시) */
-export type InvitationInfo = {
-  planId: number;
-  planTitle: string;
-  inviterName: string;
-  role: string;
-  inviteeEmail: string;
-  userExists: boolean;
-};
