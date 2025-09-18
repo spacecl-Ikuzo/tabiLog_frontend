@@ -47,7 +47,7 @@ type FormData = z.infer<typeof schema>;
 
 const Register = () => {
   const navigate = useNavigate();
-  const { invitationInfo } = useInvitationStore();
+  const { invitationInfo, invitationToken } = useInvitationStore();
 
   const form = useForm<FormData>({
     defaultValues: {
@@ -96,6 +96,7 @@ const Register = () => {
         gender: data.gender,
         privacyAgreement: data.privacyAgreement,
         publicAgreement: data.publicAgreement,
+        invitationToken: invitationToken || '',
       };
 
       await axiosInstance.post('/api/auth/signup', requestBody);
