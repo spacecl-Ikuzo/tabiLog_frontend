@@ -19,6 +19,7 @@ import theritzcarlton from '../../assets/theritzcarlton.jpg';
 import TokyoTower from '../../assets/TokyoTower.jpg';
 import boolseal from '../../assets/boolseal.jpg';
 import okinawaeisamatsuri from '../../assets/okinawaeisamatsuri.jpg';
+import okinawacruising from '../../assets/okinawacruising.jpg';
 import marineaqua from '../../assets/marineaqua.jpg';
 import AsaKusa from '../../assets/AsaKusa.jpg';
 import OsakaGuriko from '../../assets/OsakaGuriko.jpg';
@@ -330,6 +331,38 @@ const SpotsPage = () => {
       image: SapporoTower,
     },
     {
+      id: 26,
+      name: 'サッポロビール博物館',
+      description: '北海道の代表的なビール工場。歴史と製造工程を学べる',
+      tags: ['グルメ・食べ歩き', '工場見学', '北日本'],
+      city: '札幌',
+      image: Sapporo,
+    },
+    {
+      id: 27,
+      name: '札幌テレビ塔',
+      description: '大通公園のシンボル。展望台から札幌市街を一望',
+      tags: ['観光地', '展望台', '北日本'],
+      city: '札幌',
+      image: SapporoTower,
+    },
+    {
+      id: 28,
+      name: '北海道大学',
+      description: '日本最北の国立大学。美しいキャンパスが人気',
+      tags: ['文化・歴史', '教育', '北日本'],
+      city: '札幌',
+      image: Sapporo,
+    },
+    {
+      id: 29,
+      name: '狸小路商店街',
+      description: '札幌最大の商店街。グルメとショッピングが楽しめる',
+      tags: ['グルメ・食べ歩き', 'ショッピング', '北日本'],
+      city: '札幌',
+      image: Sapporo,
+    },
+    {
       id: 9,
       name: '福岡城跡',
       description: '福岡の歴史を感じられる城跡',
@@ -613,11 +646,38 @@ const SpotsPage = () => {
     },
     {
       id: 5,
-      title: '大自然を満喫！夏の北海道・札幌ドライブ',
-      description: '富良野のラベンダー畑と海鮮を味わう旅。',
+      title: '札幌・小樽雪あかりの路！ロマンチックな冬祭り',
+      description: '小樽運河の雪あかりと札幌雪まつりを楽しむ冬の北海道旅。',
       image: SapporoTower,
-      author: 'ドアン',
+      author: 'ロマンチスト',
       type: '二人旅',
+      city: '札幌',
+    },
+    {
+      id: 30,
+      title: '札幌グルメ巡り！ラーメンと海鮮',
+      description: '札幌ラーメンと新鮮な海鮮を堪能するグルメ旅。',
+      image: Sapporo,
+      author: 'グルメ好き',
+      type: 'グルメ',
+      city: '札幌',
+    },
+    {
+      id: 31,
+      title: '札幌歴史散策！時計台と大学キャンパス',
+      description: '札幌の歴史と文化を感じる街歩きプラン。',
+      image: SapporoTime,
+      author: '歴史好き',
+      type: '文化',
+      city: '札幌',
+    },
+    {
+      id: 32,
+      title: '札幌夜景と温泉！リラックス旅',
+      description: '札幌テレビ塔からの夜景と近郊温泉で癒しの時間。',
+      image: SapporoTower,
+      author: '癒し派',
+      type: 'リラックス',
       city: '札幌',
     },
     {
@@ -651,7 +711,7 @@ const SpotsPage = () => {
       id: 25,
       title: '沖縄ヨットツアー！無人島クルーズとサンセット',
       description: '珊瑚の海をクルージング、無人島上陸と夕日鑑賞を楽しむ大人の旅。',
-      image: marineaqua,
+      image: okinawacruising,
       author: 'マリン派',
       type: '二人旅',
       city: '沖縄',
