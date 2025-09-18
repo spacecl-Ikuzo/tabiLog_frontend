@@ -18,7 +18,6 @@ import okinawacruising from '../../assets/okinawacruising.jpg';
 import marineaqua from '../../assets/marineaqua.jpg';
 import Otaru_Canal_Winter from '../../assets/Otaru_Canal_Winter.jpg';
 import Sapporo_SusukinoNight from '../../assets/Sapporo_SusukinoNight.jpg';
-import theritzcarlton from '../../assets/theritzcarlton.jpg';
 import AsaKusa from '../../assets/AsaKusa.jpg';
 import OsakaGuriko from '../../assets/OsakaGuriko.jpg';
 import KiyoMizuTera from '../../assets/KiyoMizuTera.jpg';
@@ -66,8 +65,6 @@ import paypaydome from '../../assets/paypaydome.jpg';
 import Kyoto_FushimiInari1 from '../../assets/Kyoto_FushimiInari1.jpg';
 import Kyoto_UjiBridge1 from '../../assets/Kyoto_UjiBridge1.jpg';
 import Miyajima_Itsukushima_Torii from '../../assets/Miyajima_Itsukushima_Torii.jpg';
-import Otaru_Canal_Winter from '../../assets/Otaru_Canal_Winter.jpg';
-import Sapporo_SusukinoNight from '../../assets/Sapporo_SusukinoNight.jpg';
 import Tomonoura_Harbor from '../../assets/Tomonoura_Harbor.jpg';
 import KobeFerris from '../../assets/KobeFerris.jpg';
 import KobeSkyline from '../../assets/KobeSkyline.jpg';
@@ -379,20 +376,36 @@ const SpotsPage = () => {
       image: SapporoTower,
     },
     {
-      id: 38,
-      name: '小樽運河',
-      description: '冬のイルミネーションが美しい運河。ロマンチックな街並み',
-      tags: ['文化・歴史', '夜景', '北日本', '北海道'],
+      id: 26,
+      name: 'サッポロビール博物館',
+      description: '北海道の代表的なビール工場。歴史と製造工程を学べる',
+      tags: ['グルメ・食べ歩き', '工場見学', '北日本'],
       city: '札幌',
-      image: Otaru_Canal_Winter,
+      image: Sapporo,
     },
     {
-      id: 39,
-      name: 'すすきの',
-      description: '札幌の繁華街。夜のネオンが美しい',
-      tags: ['エンタメ', '夜景', '北日本', '北海道'],
+      id: 27,
+      name: '札幌テレビ塔',
+      description: '大通公園のシンボル。展望台から札幌市街を一望',
+      tags: ['観光地', '展望台', '北日本'],
       city: '札幌',
-      image: Sapporo_SusukinoNight,
+      image: SapporoTower,
+    },
+    {
+      id: 28,
+      name: '北海道大学',
+      description: '日本最北の国立大学。美しいキャンパスが人気',
+      tags: ['文化・歴史', '教育', '北日本'],
+      city: '札幌',
+      image: Sapporo,
+    },
+    {
+      id: 29,
+      name: '狸小路商店街',
+      description: '札幌最大の商店街。グルメとショッピングが楽しめる',
+      tags: ['グルメ・食べ歩き', 'ショッピング', '北日本'],
+      city: '札幌',
+      image: Sapporo,
     },
     {
       id: 38,
@@ -710,19 +723,46 @@ const SpotsPage = () => {
     },
     {
       id: 5,
-      title: '大自然を満喫！夏の北海道・札幌ドライブ',
-      description: '富良野のラベンダー畑と海鮮を味わう旅。',
+      title: '札幌・小樽雪あかりの路！ロマンチックな冬祭り',
+      description: '小樽運河の雪あかりと札幌雪まつりを楽しむ冬の北海道旅。',
       image: SapporoTower,
-      author: 'ドアン',
+      author: 'ロマンチスト',
       type: '二人旅',
       city: '札幌',
     },
     {
-      id: 23,
-      title: '小樽運河の冬物語！雪景色とイルミネーション',
-      description: '小樽運河の美しい冬景色とイルミネーションを楽しむ。ロマンチックな雪の街を散策する旅。',
-      image: Otaru_Canal_Winter,
-      author: '冬好き',
+      id: 30,
+      title: '札幌グルメ巡り！ラーメンと海鮮',
+      description: '札幌ラーメンと新鮮な海鮮を堪能するグルメ旅。',
+      image: Sapporo,
+      author: 'グルメ好き',
+      type: 'グルメ',
+      city: '札幌',
+    },
+    {
+      id: 31,
+      title: '札幌歴史散策！時計台と大学キャンパス',
+      description: '札幌の歴史と文化を感じる街歩きプラン。',
+      image: SapporoTime,
+      author: '歴史好き',
+      type: '文化',
+      city: '札幌',
+    },
+    {
+      id: 32,
+      title: '札幌夜景と温泉！リラックス旅',
+      description: '札幌テレビ塔からの夜景と近郊温泉で癒しの時間。',
+      image: SapporoTower,
+      author: '癒し派',
+      type: 'リラックス',
+      city: '札幌',
+    },
+    {
+      id: 6,
+      title: '絶景ビーチリゾート！沖縄でのんびり休暇',
+      description: 'エメラルドグリーンの海でシュノーケリングと夕日鑑賞。',
+      image: OkinawaResort,
+      author: 'ソヒョン',
       type: '二人旅',
       city: '札幌',
     },
@@ -736,11 +776,11 @@ const SpotsPage = () => {
       city: '札幌',
     },
     {
-      id: 6,
-      title: '絶景ビーチリゾート！沖縄でのんびり休暇',
-      description: 'エメラルドグリーンの海でシュノーケリングと夕日鑑賞。',
-      image: OkinawaResort,
-      author: 'ソヒョン',
+      id: 25,
+      title: '沖縄ヨットツアー！無人島クルーズとサンセット',
+      description: '珊瑚の海をクルージング、無人島上陸と夕日鑑賞を楽しむ大人の旅。',
+      image: okinawacruising,
+      author: 'マリン派',
       type: '二人旅',
       city: '沖縄',
     },
