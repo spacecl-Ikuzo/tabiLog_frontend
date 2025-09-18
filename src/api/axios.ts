@@ -1,5 +1,5 @@
 import axios from 'axios';
-import useUserStore from '@/store';
+import { useUserStore } from '@/store';
 
 // 공통 팝업(팀 공용 컴포넌트) – 실제 파일명과 맞춤
 let openPopup: ((msg: string) => void) | null = null;
