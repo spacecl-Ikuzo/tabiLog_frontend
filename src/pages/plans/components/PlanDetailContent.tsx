@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../../../components/ui/button';
 import { Avatar, AvatarFallback } from '../../../components/ui/avatar';
@@ -9,6 +9,7 @@ import InviteMemberPopup from './InviteMemberPopup';
 import WarikanPopup from './WarikanPopup';
 import TravelCalendar from './TravelCalendar';
 import { toast } from 'sonner';
+import { axiosInstance } from '../../../api/axios';
 import { Plan } from '../../../lib/type';
 import dayjs from 'dayjs';
 import { MapPin, Calendar as CalendarIcon } from 'lucide-react';
@@ -76,6 +77,34 @@ export default function PlanDetailContent({
     });
     return me?.role === 'VIEWER';
   }, [plan.members, email, userId]);
+
+  const handleMemberEdit = async (userId: number, role: string) => {
+    try {
+      const memberName = travelMembers.find((m) => m.userId === userId)?.userNickname || 'メンバー';
+      const memberPK = travelMembers.find((m) => m.userId === userId)?.id || 0;
+
+      await axiosInstance.put(`/api/plans/${plan.id}/members/${memberPK}/role`, { role: role });
+
+      const roleDisplayMap: { [key: string]: string } = {
+        OWNER: '管理者',
+        EDITOR: '編集者',
+        VIEWER: 'ビューア',
+      };
+      const displayRole = roleDisplayMap[role] || role;
+
+      toast.success(`${memberName}の役割を${displayRole}に変更しました。`, { position: 'top-center' });
+
+      // 팝업 닫기
+      if (setIsMemberEditPopupOpen) setIsMemberEditPopupOpen(false);
+    } catch (error) {
+      console.error(error);
+      toast.error('役割の変更に失敗しました。', { position: 'top-center' });
+    }
+  };
+
+  useEffect(() => {
+    console.log('travelMembers', travelMembers);
+  }, [travelMembers]);
 
   return (
     <>
@@ -211,21 +240,7 @@ export default function PlanDetailContent({
           open={isMemberEditPopupOpen}
           onOpenChange={setIsMemberEditPopupOpen}
           members={travelMembers}
-          onConfirm={(memberId, role) => {
-            console.log('修正されたメンバー ID:', memberId, '役割:', role);
-            const memberName = travelMembers.find((m) => m.id === memberId)?.userNickname || 'メンバー';
-
-            const roleDisplayMap: { [key: string]: string } = {
-              OWNER: '管理者',
-              EDITOR: '編集者',
-              VIEWER: 'ビューア',
-            };
-            const displayRole = roleDisplayMap[role] || role;
-
-            toast.success(`${memberName}の役割が${displayRole}に修正されました。`, {
-              position: 'top-center',
-            });
-          }}
+          onConfirm={(userId, role) => handleMemberEdit(userId, role)}
           onCancel={() => {
             console.log('メンバー修正がキャンセルされました。');
           }}
