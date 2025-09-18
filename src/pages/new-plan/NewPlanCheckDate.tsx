@@ -4,7 +4,6 @@ import { Button } from '../../components/ui/button';
 import { Card, CardContent } from '../../components/ui/card';
 import { Input } from '../../components/ui/input';
 import { Label } from '../../components/ui/label';
-import Header from '../../components/layout/header';
 import SideNavigation from '../../components/layout/side-navigation';
 import { Calendar as CalendarIcon, ArrowRight } from 'lucide-react';
 import { format, parse, isValid, differenceInDays } from 'date-fns';
@@ -106,7 +105,6 @@ export default function NewPlanCheckDate() {
   return (
     <div className="min-h-screen">
       {/* 헤더 */}
-      <Header />
 
       <div className="flex">
         {/* 사이드바 네비게이션 (데스크톱만) */}
