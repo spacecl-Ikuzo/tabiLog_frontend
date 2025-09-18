@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 // Assets
 import TokyoHero from '../../assets/Tokyo.jpg';
@@ -12,7 +12,7 @@ import OsakaCastle2 from '../../assets/OsakaCastle2.jpg';
 import OsakaGuriko from '../../assets/OsakaGuriko.jpg';
 import OsakaGuriko2 from '../../assets/OsakaGuriko2.jpg';
 import Dotonbori from '../../assets/Dotonbori.jpg';
-import USJ from '../../assets/USJ.jpg';
+// import USJ from '../../assets/USJ.jpg';
 import UniversalStudiosJapan from '../../assets/universal_studios japan.jpg';
 import UniversalStudiosJapan2 from '../../assets/universal_studios_japan2.jpg';
 import UniversalStudiosJapan3 from '../../assets/universal_studios_japan3.jpg';
@@ -27,12 +27,13 @@ import OsakaArchitecture4 from '../../assets/OsakaArchitecture4.png';
 import KyotoHero from '../../assets/Kinkakuji.jpg';
 import KiyoMizuTera from '../../assets/KiyoMizuTera.jpg';
 import SapporoHero from '../../assets/Sapporo.jpg';
-import Sapporo from '../../assets/Sapporo.jpg';
 import SapporoTime from '../../assets/SapporoTime.jpg';
-import SapporoTower from '../../assets/SapporoTower.jpg';
+// import SapporoTower from '../../assets/SapporoTower.jpg';
 import sapporowintertokei from '../../assets/sapporowintertokei.jpg';
+import sapporotokeiexhibition from '../../assets/sapporotokeiexhibition.jpg';
 import sapporoflower from '../../assets/sapporoflower.jpg';
 import sapporofountain from '../../assets/sapporofountain.jpg';
+import sapporofountain2 from '../../assets/sapporofountain2.jpg';
 import sapporotelevi from '../../assets/sapporotelevi.jpg';
 import GenghisKhan from '../../assets/GenghisKhan.jpg';
 import GenghisKhanBeefBeer from '../../assets/GenghisKhanBeefBeer.jpg';
@@ -46,6 +47,22 @@ import HakataIlumi from '../../assets/HakataIlumi.jpg';
 import OkinawaHero from '../../assets/OkinawaResort.jpg';
 import Shurijo from '../../assets/Shurijo.jpg';
 import OkiAquarium from '../../assets/OkiAquarium.jpg';
+import manzwamo from '../../assets/manzwamo.jpg';
+import manzwamo2 from '../../assets/manzwamo2.jpg';
+import kouribridge from '../../assets/kouribridge.jpg';
+import kourirocks from '../../assets/kourirocks.jpg';
+import Kokusaidori from '../../assets/Kokusaidori.jpg';
+import Shurijokaji from '../../assets/Shurijokaji.jpg';
+import sonokoutaki from '../../assets/sonokoutaki.jpg';
+import syureinomon from '../../assets/syureinomon.jpg';
+import okinawazinbe from '../../assets/okinawazinbe.jpg';
+import okisangou from '../../assets/okisangou.jpg';
+import tsuraumiiruka from '../../assets/tsuraumiiruka.jpg';
+import tsuraumimap from '../../assets/tsuraumimap.jpg';
+import okimahoroba from '../../assets/okimahoroba.jpg';
+import okinawaliquor from '../../assets/okinawaliquor.jpg';
+import steakhouseoki from '../../assets/steakhouseoki.jpg';
+import okisteakhouse from '../../assets/okisteakhouse.jpg';
 import NagoyaCastle from '../../assets/NagoyaCastle.jpg';
 import Atsutasinkyu from '../../assets/Atsutasinkyu.jpg';
 import OsuHistory from '../../assets/OsuHistory.jpg';
@@ -86,7 +103,7 @@ import NikkoToshogu from '../../assets/nikkotoshogu.jpg';
 import KamakuraSlamdunk from '../../assets/kamakuraSlamdunk.jpg';
 import Kamakura from '../../assets/kamakura.jpg';
 import GamakuraTaiButsu from '../../assets/GamakuraTaiButsu.jpg';
-import HakoneOnsen from '../../assets/hakoneonsen.jpg';
+// import HakoneOnsen from '../../assets/hakoneonsen.jpg';
 import AdventureLand from '../../assets/AdventureLand.jpg';
 import ToonTown from '../../assets/ToonTown.jpg';
 import TokyoTowerCafe from '../../assets/tokyotowercafe.jpg';
@@ -106,21 +123,21 @@ import NagoyaKingyo from '../../assets/NagoyaKingyo.jpg';
 import NagoyaNijimaru from '../../assets/NagoyaNijimaru.jpg';
 import Nagoya from '../../assets/Nagoya.jpg';
 import FukuCastleSakura from '../../assets/FukuCastleSakura.jpg';
-import nakasumap from '../../assets/nakasumap.jpg';
+// import nakasumap from '../../assets/nakasumap.jpg';
 import nakasukawa from '../../assets/nakasukawa.jpg';
 import NakasuNight from '../../assets/NakasuNight.jpeg';
 import nakasuramen from '../../assets/nakasuramen.jpg';
 import ryuunogotoku from '../../assets/ryuunogotoku.jpg';
 import nakasuryuu from '../../assets/nakasuryuu.jpg';
 import dazaifutenmangu from '../../assets/dazaifutenmangu.jpg';
-import dazaihu from '../../assets/dazaihu.jpg';
+// import dazaihu from '../../assets/dazaihu.jpg';
 import tobiume from '../../assets/tobiume.jpg';
 import umegaemochi from '../../assets/umegaemochi.jpg';
 import goshingyu from '../../assets/goshingyu.jpg';
-import jiburimori from '../../assets/jiburimori.jpg';
-import jiburi4 from '../../assets/jiburi4.jpg';
-import LegoTaiken from '../../assets/LegoTaiken.jpg';
-import LegoBoat from '../../assets/LegoBoat.jpg';
+// import jiburimori from '../../assets/jiburimori.jpg';
+// import jiburi4 from '../../assets/jiburi4.jpg';
+// import LegoTaiken from '../../assets/LegoTaiken.jpg';
+// import LegoBoat from '../../assets/LegoBoat.jpg';
 import kushidashrine from '../../assets/kushidashrine.jpg';
 import gushidatori from '../../assets/gushidatori.jpg';
 import gushidamatsuri from '../../assets/gushidamatsuri.jpg';
@@ -148,8 +165,8 @@ type SpotDetail = {
   breadcrumb: string[];
   contentTitle: string;
   spots: string[];
-  imageLeft: string;
-  imageRight: string;
+  imageLeft?: string;
+  imageRight?: string;
   content: string;
 };
 
@@ -510,10 +527,12 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
       title: '札幌時計台',
       description: '札幌のシンボル。歴史ある時計台',
       author: 'タビログ編集部',
-      heroImage: SapporoHero,
+      heroImage: sapporowintertokei,
       breadcrumb: ['札幌', '中央区', '札幌時計台'],
       contentTitle: '札幌時計台の基本情報',
       spots: ['展示室', '鐘楼', '写真スポット'],
+      imageLeft: SapporoTime,
+      imageRight: sapporotokeiexhibition,
       content:
         '札幌時計台は北海道開拓使時代の歴史を伝える貴重な建造物。館内展示で札幌の成り立ちを学べ、外観は四季の装いとともに美しく写真映えします。大通公園やテレビ塔と合わせた市内散策の起点にも最適です。<br><br>【2.1 展示室】<br>札幌時計台の展示室では、北海道開拓使時代から現在までの札幌の発展の歴史を詳しく学ぶことができます。明治時代の開拓使の資料や、時計台の建設過程、札幌の街づくりの変遷などが展示されています。特に開拓使の初代長官・黒田清隆の功績や、時計台が建てられた背景について詳しく紹介されており、札幌の歴史を深く理解できる貴重な空間です。展示品には当時の写真や図面、関連資料などが含まれており、歴史愛好家にも人気のスポットです。<br><br>【2.2 鐘楼】<br>札幌時計台の鐘楼は、1878年に設置された歴史ある鐘が現在も時を告げています。この鐘はアメリカ製で、当時の最新技術を駆使して作られました。鐘楼の内部では、時計の機械の仕組みや鐘の音が鳴るメカニズムを間近で見学できます。毎時0分になると鐘の音が響き渡り、札幌の街に歴史の重みを感じさせてくれます。鐘楼の階段を上ると、札幌市街を一望できる絶景スポットとしても人気で、特に夕暮れ時は美しい景色を楽しめます。<br><br>【2.3 写真スポット】<br>札幌時計台は札幌を代表する写真スポットとして、年間を通じて多くの観光客が訪れます。建物の外観は明治時代の洋風建築の美しさを今に伝えており、四季折々の表情を見せてくれます。春は桜とのコントラスト、夏は青空との対比、秋は紅葉との調和、冬は雪化粧との美しいコラボレーションが楽しめます。特に人気なのは建物の正面からの撮影で、時計台の時計部分と建物全体のバランスが美しく写ります。周辺の大通公園やテレビ塔と合わせた撮影もおすすめで、札幌観光の思い出に最適な写真が撮れます。',
     },
@@ -525,6 +544,8 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
       breadcrumb: ['札幌', '中央区', '大通公園'],
       contentTitle: '大通公園の基本情報',
       spots: ['噴水', '花壇', 'テレビ塔ビュー'],
+      imageLeft: sapporoflower,
+      imageRight: sapporotelevi,
       content:
         '大通公園は札幌の中心を東西に貫く緑の帯。季節の花壇や噴水、イベントが魅力で、夏のビアガーデンや冬の雪まつりなど市民に親しまれる催しが多数開催されます。周辺にはカフェや百貨店が揃い、観光の合間の休憩にも便利です。<br><br>【2.1 噴水】<br>大通公園の噴水は、公園の美しい景観を演出する重要な要素です。特に夏の時期には、涼しげな水しぶきが訪れる人々に安らぎを与えます。噴水の周りにはベンチが設置されており、水の音を聞きながらゆっくりと過ごすことができます。夜間にはライトアップされ、幻想的な雰囲気を演出します。札幌の夏の暑さを和らげるオアシスとして、地元の人々にも観光客にも愛されています。<br><br>【2.2 花壇】<br>大通公園の花壇は、四季折々の美しい花々で彩られています。春にはチューリップやパンジー、夏にはマリーゴールドやサルビア、秋にはコスモスやキクなど、季節に応じた花々が植えられています。特に春と夏の花壇は圧巻で、多くの人が写真撮影に訪れます。花壇のデザインは毎年変わり、新しい発見があるのも魅力の一つです。花の香りと美しい色彩が、公園を訪れる人々の心を和ませてくれます。<br><br>【2.3 テレビ塔ビュー】<br>大通公園から見る札幌テレビ塔の景色は、札幌を代表する絶景スポットの一つです。公園の緑とテレビ塔の赤い塔身のコントラストが美しく、特に夕暮れ時には格別の美しさを楽しめます。テレビ塔の展望台からは大通公園を一望でき、逆に公園からはテレビ塔の威容を間近で感じることができます。夜になるとテレビ塔がライトアップされ、公園の夜景と合わせてロマンチックな雰囲気を演出します。札幌観光の定番フォトスポットとして、多くの観光客が訪れています。',
     },
@@ -536,19 +557,21 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
       breadcrumb: ['札幌', '東区', 'サッポロビール博物館'],
       contentTitle: 'サッポロビール博物館の基本情報',
       spots: ['ジンギスカン', '見学案内', '試飲コーナー'],
+      imageLeft: SapporoBeerMuseum,
+      imageRight: SapporoBeerTaste,
       content:
         'サッポロビール博物館は北海道のビール文化を学べる貴重な施設。明治時代から続くビール製造の歴史と技術を展示で紹介し、実際の製造工程も見学できます。試飲コーナーでは新鮮なビールを味わえ、北海道の食文化を深く理解できるスポットです。<br><br>【2.1 ジンギスカン】<br>サッポロビール博物館では、ビール製造の全工程を詳しく学ぶことができます。特に注目すべきは、札幌の名物「ジンギスカン」とビールの深い関係です。ジンギスカンは北海道の代表的な郷土料理で、羊肉を鉄板で焼いて食べる料理です。このジンギスカンとビールの組み合わせは、札幌の食文化の象徴的な存在となっています。博物館では、ビールの製造過程で使用される麦芽の種類や発酵の仕組み、そしてジンギスカンと相性の良いビールの特徴について詳しく解説されています。ジンギスカンの脂っこさをビールの爽やかな苦味が中和し、完璧な味のハーモニーを生み出す秘密も学べます。<br><br>■ジンギスカン料理と価格（税込）：<br>・ジンギスカン定食：1,200円～1,800円<br>・ジンギスカン単品：800円～1,200円<br>・ラム肉ジンギスカン：1,000円～1,500円<br>・ジンギスカン＋ビールセット：1,500円～2,200円<br>・野菜盛り合わせ：400円～600円<br>・ご飯・ライス：200円～300円<br>・ジンギスカン汁物：300円～500円<br><br>■ジンギスカンの食べ方とコツ：<br>・羊肉を鉄板で焼く際は、中火でじっくりと焼くのがポイント<br>・野菜は羊肉の脂で炒めることで、より美味しく仕上がります<br>・タレは甘辛い醤油ベースで、羊肉の臭みを消す効果があります<br>・ビールとの相性が抜群で、特にサッポロビールとの組み合わせが人気<br>・一人前の目安は羊肉150g～200g程度です<br><br>【2.2 見学案内】<br>サッポロビール博物館では、プレミアムツアー（有料）と自由見学（無料）の2つの見学コースをご用意しています。<br><br>■プレミアムツアー（有料・要予約）<br>・所要時間：約50分（テイスティング含む）<br>・実施日：月曜日を除く営業日（月曜日が祝日の場合は実施し、翌火曜日が休止）<br>・実施時間：初回11:30スタート（以降の実施時間・回数は日によって異なります）<br>・受付時間：各回スタート10分前まで<br>・定員：20名様<br>・参加費：大人1,000円、中学生～20歳未満500円、小学生以下無料<br>・内容：ブランドコミュニケーターによるガイド付きツアー、プレミアムシアターでの歴史物語視聴、館内展示見学、創業当時の味「復刻札幌製麦酒」と現代の生ビール「黒ラベル」の飲み比べ<br><br>■自由見学（無料）<br>・営業時間：11:00～18:30（ラストオーダー18:00）<br>・順路：3階→2階→1階の一方通行ルート<br>・多言語対応：英語・韓国語・中国語（簡体字）の翻訳版を2次元バーコードで提供<br><br>【2.3 試飲コーナー】<br>スターホール（テイスティング）では、サッポロビール北海道工場、札幌開拓使麦酒醸造所直送のできたてビールを味わえます。<br><br>■営業時間：11:00～18:30（ラストオーダー18:00）<br>■利用時間：30分まで<br>■試飲できる銘柄と価格（税込）：<br>・サッポロ生ビール黒ラベル：450円<br>・北海道限定クラシック：450円<br>・開拓使麦酒：550円<br>・3種飲み比べセット：1,200円<br>・ノンアルコールビールテイスト飲料：200円<br>・ソフトドリンク：200円<br><br>■注意事項：<br>・館内順路は一方通行のため、スターホールのみの利用はお控えください<br>・満席時はお待ちいただく場合があります<br>・ラストオーダー以降は試飲待機列にお並びいただけません<br>・12月31日は休業日です',
     },
-    '26': {
-      title: 'サッポロビール博物館',
-      description: '北海道の代表的なビール工場。歴史と製造工程を学べる',
+    '27': {
+      title: '円山動物園',
+      description: '北海道を代表する動物園。ホッキョクグマやレッサーパンダが人気',
       author: 'タビログ編集部',
       heroImage: SapporoHero,
-      breadcrumb: ['札幌', '東区', 'サッポロビール博物館'],
-      contentTitle: 'サッポロビール博物館の基本情報',
-      spots: ['ビール製造工程', '歴史展示', '試飲コーナー'],
+      breadcrumb: ['札幌', '中央区', '円山動物園'],
+      contentTitle: '円山動物園の基本情報',
+      spots: ['ホッキョクグマ館', 'レッサーパンダ', 'こども動物園'],
       content:
-        'サッポロビール博物館は北海道のビール文化を学べる貴重な施設。明治時代から続くビール製造の歴史と技術を展示で紹介し、実際の製造工程も見学できます。試飲コーナーでは新鮮なビールを味わえ、北海道の食文化を深く理解できるスポットです。',
+        '円山動物園は札幌市中心部からアクセスしやすい、家族連れに人気の動物園です。<br><br>【2.1 ホッキョクグマ館】<br>迫力あるホッキョクグマの遊泳や餌やりを間近で観察できます。ガラス越しのダイナミックな姿は必見。<br><br>【2.2 レッサーパンダ】<br>愛らしいレッサーパンダが木の上でくつろぐ姿や食事風景が人気。写真撮影スポットとしてもおすすめ。<br><br>【2.3 こども動物園】<br>ヤギやウサギなど小動物とふれあえるエリア。学びと体験を通じて動物の生態に親しめます。',
     },
   },
   福岡: {
@@ -662,14 +685,14 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
       title: '首里城',
       description: '沖縄の歴史と文化を感じられる城',
       author: 'タビログ編集部',
-      heroImage: OkinawaHero,
+      heroImage: Shurijo,
       breadcrumb: ['沖縄', '那覇市', '首里城'],
       contentTitle: '首里城の基本情報',
       spots: ['正殿', '守礼門', '園比屋武御嶽石門'],
       imageLeft: Shurijo,
-      imageRight: OkinawaHero,
+      // imageRight intentionally hidden via UI
       content:
-        '首里城は琉球王国の王宮で、朱色の正殿や城郭遺構が沖縄独自の歴史文化を物語ります。復元・保存が進む城内では琉球王国の政治や祭祀の一端に触れられます。那覇市街からのアクセスも良く、首里金城町石畳道の散策と合わせるのもおすすめです。',
+        '首里城は琉球王国の王宮で、朱色の正殿や城郭遺構が沖縄独自の歴史文化を物語ります。復元・保存が進む城内では琉球王国の政治や祭祀の一端に触れられます。那覇市街からのアクセスも良く、首里金城町石畳道の散策と合わせるのもおすすめです。<br><br>【2.1 正殿】<br>首里城の中心建築である正殿は、琉球王国の政治と儀礼の舞台でした。中国と日本の建築様式が融合した独自の美を持ち、朱漆塗りの外観と龍柱が威厳を放ちます。内部には玉座や儀式空間が再現され、王国時代の格式高い儀礼や外交の歴史を感じられます。正殿前の広場では朝拝や冊封使の儀礼が行われ、琉球が海上王国として栄えた証を今に伝えます。<br><br>【2.2 守礼門】<br>「守礼之邦」の扁額で知られる守礼門は、琉球が礼節を重んじる国であることを象徴する城門です。赤瓦と木造の柔らかな曲線美が南国の風景と調和し、首里城を代表する撮影スポットとしても人気。門をくぐると首里城内郭へ続く歴史の回廊が広がり、王国の都・首里の面影が色濃く残ります。夕暮れやライトアップの時間帯は一層趣が増し、散策に最適です。<br><br>【2.3 園比屋武御嶽石門】<br>園比屋武御嶽石門は、王府の祈願や国家の安寧を祈る祭祀が執り行われた聖地・御嶽の入口に設けられた石門です。琉球の自然崇拝と祖霊信仰を体現する場であり、王国の精神文化の中核を感じられる重要文化財。石造の素朴な造形は、豊かな自然と調和し、首里城の華やかさとは対照的に静謐な時間が流れます。王国の歴史を、建物だけでなく信仰の面からも理解できる貴重なスポットです。',
     },
     '12': {
       title: '美ら海水族館',
@@ -682,7 +705,46 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
       imageLeft: OkiAquarium,
       imageRight: OkinawaHero,
       content:
-        '美ら海水族館は世界最大級の水槽「黒潮の海」で泳ぐジンベエザメが圧巻。サンゴ礁の生態展示やイルカショー、研究バックヤードの取り組みも見応えがあります。周辺の海洋博公園やビーチと併せて一日満喫できます。',
+        '美ら海水族館は世界最大級の水槽「黒潮の海」で泳ぐジンベエザメが圧巻。サンゴ礁の生態展示やイルカショー、研究バックヤードの取り組みも見応えがあり、周辺の海洋博公園やビーチと合わせて一日中楽しめます。<br><br>【2.1 黒潮の海】<br>館の象徴である巨大水槽「黒潮の海」では、ジンベエザメやナンヨウマンタ、回遊魚の群れがダイナミックに泳ぐ姿を間近で観察できます。高さ8.2m・幅22.5mのアクリルパネル越しに見る大海の臨場感は圧倒的。時間帯によって採餌解説などのプログラムも行われ、黒潮流域の生態系について学びながら鑑賞できます。<br><br>【2.2 サンゴの海】<br>沖縄の海を象徴する多様なサンゴ群集を実環境に近い形で再現。日光を取り入れる設計により、サンゴの光合成や共生関係がわかりやすく展示されています。色とりどりの熱帯魚がサンゴの間を行き交う様子はフォトスポットとしても人気。サンゴ保全や繁殖の取り組み、白化対策などの解説も充実しており、環境教育の場としても高い評価を受けています。<br><br>【2.3 イルカショー】<br>屋外のオキちゃん劇場では、バンドウイルカやオキゴンドウによる息の合ったパフォーマンスを無料で楽しめます。ジャンプやテールウォークなどの見せ場に加え、行動学に基づくトレーニングの解説でイルカの知性や生態への理解が深まります。海を望むスタンド席は開放感抜群で、家族連れにもおすすめです。',
+    },
+    '46': {
+      title: '国際通り',
+      description: '那覇の中心街。沖縄のグルメとお土産が楽しめる',
+      author: 'タビログ編集部',
+      heroImage: Kokusaidori,
+      breadcrumb: ['沖縄', '那覇市', '国際通り'],
+      contentTitle: '国際通りの基本情報',
+      spots: ['沖縄グルメ', 'お土産ショッピング', '伝統工芸品'],
+      imageLeft: Kokusaidori,
+      imageRight: Kokusaidori,
+      content:
+        '国際通りは那覇市の中心部に位置する沖縄を代表する繁華街です。約1.6キロメートルの通りには、沖縄の伝統料理を味わえるレストラン、お土産店、伝統工芸品店などが軒を連ね、観光客に人気のスポットです。昼間はショッピングを楽しみ、夜は沖縄料理と泡盛で賑やかな雰囲気を味わえます。<br><br>【2.1 沖縄グルメ】<br>国際通りには沖縄を代表するグルメスポットが集まっています。ステーキハウス88は沖縄発祥のステーキレストランで、手頃な価格で本格的なステーキを楽しめることで人気です。沖縄牛を使ったステーキは柔らかく、ジューシーで、観光客にも地元の人々にも愛されています。また、マホロバは沖縄の伝統的な居酒屋で、泡盛と沖縄料理の組み合わせが絶品です。ゴーヤチャンプルー、ラフテー、ソーキそばなど、沖縄の郷土料理を本格的な味で楽しむことができ、沖縄の食文化を深く体験できる場所です。<br><br>【2.2 お土産ショッピング】<br>国際通りにはCalbee PLUS Okinawaという人気のお土産店があります。この店の最大の特徴は、注文と同時にポテトチップスを揚げてくれることです。沖縄限定の紫芋味やシークワーサー味など、沖縄ならではのフレーバーを楽しむことができ、できたてのサクサクとした食感は格別です。店内では揚げる工程を見学することもでき、お土産として持ち帰るだけでなく、その場で味わうこともできます。沖縄の特産品を使ったオリジナル商品も豊富で、沖縄旅行の思い出にぴったりのお土産を見つけることができます。<br><br>【2.3 伝統工芸品】<br>国際通りには琉球ショップという伝統工芸品専門店があります。琉球ガラス、紅型、琉球漆器、三線などの沖縄の伝統的な工芸品を扱っており、職人による手作りの美しい作品を実際に見て、触って、購入することができます。琉球ガラスの美しい色彩と独特の形状は、沖縄の自然と文化を表現しており、お土産としても人気です。また、工芸品の制作過程を見学できる店舗もあり、沖縄の伝統技術を学ぶ貴重な体験ができます。職人との交流を通じて、沖縄の文化と歴史をより深く理解することができます。',
+    },
+    '47': {
+      title: '万座毛',
+      description: '沖縄を代表する絶景スポット。象の鼻のような岩が有名',
+      author: 'タビログ編集部',
+      heroImage: manzwamo,
+      breadcrumb: ['沖縄', '恩納村', '万座毛'],
+      contentTitle: '万座毛の基本情報',
+      spots: ['象の鼻の岩', '韓国ドラマのロケ地'],
+      imageLeft: manzwamo,
+      imageRight: manzwamo2,
+      content:
+        '万座毛は断崖絶壁とコバルトブルーの海が織りなす沖縄屈指の景勝地。隆起サンゴ礁の上に広がる草原と、海に突き出した「象の鼻」に似た奇岩が象徴的です。遊歩道が整備され、季節や時間帯で表情を変える海と空のグラデーションを安全に楽しめます。<br><br>【2.1 象の鼻の岩】<br>波の浸食によって生まれた自然の造形美。展望台からは象の鼻越しに広がるエメラルドの海が一望でき、フォトスポットとして大人気。夕暮れ時のシルエットは特にドラマチックです。<br><br>【2.2 韓国ドラマのロケ地】<br>周辺ビーチは韓国ドラマ「괜찮아 사랑이야（大丈夫、愛だ）」のロケ地としても話題。南国の透明な海と白砂のコントラストが作品世界を引き立て、聖地巡礼スポットとしても注目を集めています。',
+    },
+    '48': {
+      title: '古宇利島',
+      description: '沖縄本島北部の美しい島。透明度の高い海が魅力',
+      author: 'タビログ編集部',
+      heroImage: kouribridge,
+      breadcrumb: ['沖縄', '今帰仁村', '古宇利島'],
+      contentTitle: '古宇利島の基本情報',
+      spots: ['古宇利大橋', 'ハートロック'],
+      imageLeft: kouribridge,
+      imageRight: kourirocks,
+      content:
+        '古宇利島は本島北部・屋我地島とを結ぶ全長約2kmの古宇利大橋で有名な離島。橋上から望むターコイズの海は圧巻で、ドライブコースとしても人気です。島内にはエメラルドの海と白砂のビーチが点在し、素潜りや海遊びも楽しめます。<br><br>【2.1 古宇利大橋】<br>一直線に海上を走る絶景ロード。橋の両側に広がる浅瀬のグラデーションは「沖縄でも屈指」と評され、晴天時は特にフォトジェニック。<br><br>【2.2 ハートロック】<br>ティーヌ浜にある二つの岩が重なってハート形に見える人気スポット。干潮時はよりくっきりとハートに見え、ロマンチックな写真が撮れると評判です。周辺は滑りやすい岩場のため、ビーチサンダルよりマリンシューズ推奨。',
     },
   },
   広島: {
@@ -745,8 +807,8 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
 
 const SpotDetailPage = () => {
   const { city, id } = useParams<{ city: string; id: string }>();
-  const navigate = useNavigate();
-  const location = useLocation();
+  // const navigate = useNavigate();
+  // const location = useLocation();
 
   const cityAliasMap: Record<string, string> = {
     // Korean -> Japanese city name normalization
@@ -772,17 +834,16 @@ const SpotDetailPage = () => {
   const safeDesc = detail?.description || 'このスポットの詳細情報です。準備中のコンテンツを表示しています。';
   const hero = detail?.heroImage || (cityKey === '東京' ? TokyoHero : OsakaHero);
 
-  // 뒤로가기 시 도시 정보 유지
-  const handleBackClick = () => {
-    const state = location.state as { from?: string } | null;
-    const fromPath = state?.from;
-
-    if (fromPath && fromPath.includes('city=')) {
-      navigate(fromPath);
-    } else {
-      navigate('/spots');
-    }
-  };
+  // 뒤로가기 시 도시 정보 유지 (현재 미사용)
+  // const handleBackClick = () => {
+  //   const state = location.state as { from?: string } | null;
+  //   const fromPath = state?.from;
+  //   if (fromPath && fromPath.includes('city=')) {
+  //     navigate(fromPath);
+  //   } else {
+  //     navigate('/spots');
+  //   }
+  // };
 
   return (
     <div className="min-h-screen">
@@ -862,21 +923,23 @@ const SpotDetailPage = () => {
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl font-bold text-gray-900 mb-8">{detail?.contentTitle || `${safeTitle} の基本情報`}</h2>
 
-          {/* Images */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-            <div className="bg-white rounded-lg overflow-hidden shadow-md">
-              <div
-                className="h-64 bg-cover bg-center bg-no-repeat"
-                style={{ backgroundImage: `url(${detail?.imageLeft || hero})` }}
-              ></div>
+          {/* Images (hidden for 沖縄/11, 沖縄/12, 沖縄/46) */}
+          {!(cityKey === '沖縄' && (idKey === '11' || idKey === '12' || idKey === '46')) && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${detail?.imageLeft || hero})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${detail?.imageRight || hero})` }}
+                ></div>
+              </div>
             </div>
-            <div className="bg-white rounded-lg overflow-hidden shadow-md">
-              <div
-                className="h-64 bg-cover bg-center bg-no-repeat"
-                style={{ backgroundImage: `url(${detail?.imageRight || hero})` }}
-              ></div>
-            </div>
-          </div>
+          )}
 
           {/* Extra Images for 中之島公会堂 */}
           {cityKey === '大阪' && idKey === '25' && (
@@ -1244,33 +1307,9 @@ const SpotDetailPage = () => {
             </div>
           )}
 
-          {/* Extra Images for Sapporo Clock Tower */}
-          {cityKey === '札幌' && idKey === '7' && (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-              <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                <div
-                  className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${SapporoTime})` }}
-                ></div>
-              </div>
-              <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                <div
-                  className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${SapporoTime})` }}
-                ></div>
-              </div>
-              <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                <div
-                  className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${sapporowintertokei})` }}
-                ></div>
-              </div>
-            </div>
-          )}
-
           {/* Extra Images for Odori Park */}
           {cityKey === '札幌' && idKey === '8' && (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <div className="bg-white rounded-lg overflow-hidden shadow-md">
                 <div
                   className="h-64 bg-cover bg-center bg-no-repeat"
@@ -1280,13 +1319,7 @@ const SpotDetailPage = () => {
               <div className="bg-white rounded-lg overflow-hidden shadow-md">
                 <div
                   className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${sapporoflower})` }}
-                ></div>
-              </div>
-              <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                <div
-                  className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${sapporotelevi})` }}
+                  style={{ backgroundImage: `url(${sapporofountain2})` }}
                 ></div>
               </div>
             </div>
@@ -1298,25 +1331,13 @@ const SpotDetailPage = () => {
               <div className="bg-white rounded-lg overflow-hidden shadow-md">
                 <div
                   className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${GenghisKhan})` }}
-                ></div>
-              </div>
-              <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                <div
-                  className="h-64 bg-cover bg-center bg-no-repeat"
                   style={{ backgroundImage: `url(${GenghisKhanBeefBeer})` }}
                 ></div>
               </div>
               <div className="bg-white rounded-lg overflow-hidden shadow-md">
                 <div
                   className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${SapporoBeerMuseum})` }}
-                ></div>
-              </div>
-              <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                <div
-                  className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${SapporoBeerTaste})` }}
+                  style={{ backgroundImage: `url(${GenghisKhan})` }}
                 ></div>
               </div>
             </div>

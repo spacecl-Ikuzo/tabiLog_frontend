@@ -15,7 +15,7 @@ import TokyoTower from '../../assets/TokyoTower.jpg';
 import boolseal from '../../assets/boolseal.jpg';
 import okinawaeisamatsuri from '../../assets/okinawaeisamatsuri.jpg';
 import okinawacruising from '../../assets/okinawacruising.jpg';
-import marineaqua from '../../assets/marineaqua.jpg';
+// import marineaqua from '../../assets/marineaqua.jpg';
 import Otaru_Canal_Winter from '../../assets/Otaru_Canal_Winter.jpg';
 import Sapporo_SusukinoNight from '../../assets/Sapporo_SusukinoNight.jpg';
 import AsaKusa from '../../assets/AsaKusa.jpg';
@@ -46,6 +46,9 @@ import NagoyaScience from '../../assets/NagoyaScience.jpg';
 import nagoyawcs2 from '../../assets/nagoyawcs2.jpg';
 import OkiAquarium from '../../assets/OkiAquarium.jpg';
 import Shurijo from '../../assets/Shurijo.jpg';
+import Kokusaidori from '../../assets/Kokusaidori.jpg';
+import manzwamo from '../../assets/manzwamo.jpg';
+import kouribridge from '../../assets/kouribridge.jpg';
 import FukuokaCastle from '../../assets/FukuokaCastle.jpg';
 import USJ from '../../assets/USJ.jpg';
 import UniversalStudiosJapan3 from '../../assets/universal_studios_japan3.jpg';
@@ -62,6 +65,9 @@ import nakasumap from '../../assets/nakasumap.jpg';
 import kushidashrine from '../../assets/kushidashrine.jpg';
 import marineworld from '../../assets/marineworld.jpg';
 import paypaydome from '../../assets/paypaydome.jpg';
+import dazaifutenmangu from '../../assets/dazaifutenmangu.jpg';
+import ohori from '../../assets/ohori.jpg';
+import shimonoseki from '../../assets/shimonoseki.jpg';
 import Kyoto_FushimiInari1 from '../../assets/Kyoto_FushimiInari1.jpg';
 import Kyoto_UjiBridge1 from '../../assets/Kyoto_UjiBridge1.jpg';
 import Miyajima_Itsukushima_Torii from '../../assets/Miyajima_Itsukushima_Torii.jpg';
@@ -381,15 +387,15 @@ const SpotsPage = () => {
       description: '北海道の代表的なビール工場。歴史と製造工程を学べる',
       tags: ['グルメ・食べ歩き', '工場見学', '北日本'],
       city: '札幌',
-      image: Sapporo,
+      image: SapporoBeerTaste,
     },
     {
       id: 27,
-      name: '札幌テレビ塔',
-      description: '大通公園のシンボル。展望台から札幌市街を一望',
-      tags: ['観光地', '展望台', '北日本'],
+      name: '円山動物園',
+      description: '北海道を代表する動物園。ホッキョクグマやレッサーパンダが人気',
+      tags: ['観光地', '家族', '北日本'],
       city: '札幌',
-      image: SapporoTower,
+      image: Sapporo,
     },
     {
       id: 28,
@@ -453,7 +459,7 @@ const SpotsPage = () => {
       description: '学問の神様を祀る神社。梅の名所としても有名',
       tags: ['文化・歴史', '神社', '南日本'],
       city: '福岡',
-      image: FukuokaCastle,
+      image: dazaifutenmangu,
     },
     {
       id: 42,
@@ -477,7 +483,7 @@ const SpotsPage = () => {
       description: '市民の憩いの場。湖畔の散策とボートが楽しめる',
       tags: ['自然', '散策', '南日本'],
       city: '福岡',
-      image: FukuokaCastle,
+      image: ohori,
     },
     {
       id: 45,
@@ -502,6 +508,30 @@ const SpotsPage = () => {
       tags: ['エンタメ', '家族', '南日本'],
       city: '沖縄',
       image: OkiAquarium,
+    },
+    {
+      id: 46,
+      name: '国際通り',
+      description: '那覇の中心街。沖縄のグルメとお土産が楽しめる',
+      tags: ['グルメ・食べ歩き', 'ショッピング', '南日本'],
+      city: '沖縄',
+      image: Kokusaidori,
+    },
+    {
+      id: 47,
+      name: '万座毛',
+      description: '沖縄を代表する絶景スポット。象の鼻のような岩が有名',
+      tags: ['自然', '絶景', '南日本'],
+      city: '沖縄',
+      image: manzwamo,
+    },
+    {
+      id: 48,
+      name: '古宇利島',
+      description: '沖縄本島北部の美しい島。透明度の高い海が魅力',
+      tags: ['ビーチ', '自然', '南日本'],
+      city: '沖縄',
+      image: kouribridge,
     },
     {
       id: 15,
@@ -764,7 +794,25 @@ const SpotsPage = () => {
       image: OkinawaResort,
       author: 'ソヒョン',
       type: '二人旅',
-      city: '札幌',
+      city: '沖縄',
+    },
+    {
+      id: 21,
+      title: '沖縄グルメ満喫！国際通りスイーツ＆冷菓めぐり',
+      description: '国際通りの人気スイーツを食べ歩く甘い旅。',
+      image: boolseal,
+      author: 'グルメ好き',
+      type: '一人旅',
+      city: '沖縄',
+    },
+    {
+      id: 24,
+      title: '那覇まつり！エイサーと大綱挽の熱気',
+      description: 'エイサー演舞と那覇大綱挽で沖縄の祭り文化を体感。',
+      image: okinawaeisamatsuri,
+      author: '祭り好き',
+      type: '祭り',
+      city: '沖縄',
     },
     {
       id: 24,
@@ -900,9 +948,9 @@ const SpotsPage = () => {
     },
     {
       id: 20,
-      title: 'ホークス観戦と屋台グルメの夜',
-      description: 'PayPayドームで野球観戦後、中洲屋台で博多グルメを満喫。',
-      image: HakataCity,
+      title: '九州から本州へ！福岡・小倉・門司・下関の歴史旅',
+      description: '福岡から小倉、門司港、下関を巡る歴史とグルメの旅。関門海峡を越えて本州と九州を結ぶ特別な体験を。',
+      image: shimonoseki,
       author: 'スポーツ好き',
       type: '二人旅',
       city: '福岡',
