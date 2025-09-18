@@ -20,7 +20,7 @@ type LoginReq = z.infer<typeof schema>;
 export default function Login() {
   const navigate = useNavigate();
   const { setUserId, setNickname, setToken, setEmail, setTokenExp } = useUserStore();
-  const { invitationInfo, invitationToken } = useInvitationStore();
+  const { invitationToken, clearInvitationData } = useInvitationStore();
 
   const form = useForm<LoginReq>({
     defaultValues: { id: '', password: '' },
@@ -49,12 +49,9 @@ export default function Login() {
 
         // redirectUrl이 있으면 해당 URL로 이동, 없으면 기본 로직
         if (data.redirectUrl) {
+          clearInvitationData();
           navigate(data.redirectUrl);
-        }
-        // else if (invitationInfo && invitationInfo.inviteeEmail === data.email) {
-        //   navigate('/plans');
-        // }
-        else {
+        } else {
           navigate('/spots');
         }
       }
