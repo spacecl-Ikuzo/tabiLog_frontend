@@ -12,6 +12,7 @@ import { toast } from 'sonner';
 import { Plan } from '../../../lib/type';
 import dayjs from 'dayjs';
 import { MapPin, Calendar as CalendarIcon } from 'lucide-react';
+import { useUserStore } from '@/store';
 
 interface PlanDetailContentProps {
   plan: Plan;
@@ -39,6 +40,7 @@ export default function PlanDetailContent({
   setIsWarikanPopupOpen,
 }: PlanDetailContentProps) {
   const navigate = useNavigate();
+  const { userId, email } = useUserStore();
 
   // 여행 멤버 컬러 옵션
   const colorOptions = useMemo(
@@ -64,6 +66,16 @@ export default function PlanDetailContent({
   }, [plan?.members, colorOptions]);
 
   const selectedViewStatus = plan.status === 'PLANNING' ? '進行中' : '完了';
+
+  // 내 역할이 뷰어인지 확인
+  const isViewer = useMemo(() => {
+    const me = plan.members?.find((m) => {
+      if (email && m.userEmail === email) return true;
+      if (userId && String(m.userId) === String(userId)) return true;
+      return false;
+    });
+    return me?.role === 'VIEWER';
+  }, [plan.members, email, userId]);
 
   return (
     <>
@@ -118,20 +130,22 @@ export default function PlanDetailContent({
       <div className="mb-8">
         <div className="flex justify-between items-center mb-4">
           <h3 className="font-bold text-gray-900">旅行メンバー</h3>
-          <div className="flex gap-2">
-            <button
-              onClick={onMemberEdit}
-              className="bg-amber-600 text-white px-4 py-2 rounded-lg text-sm font-medium cursor-pointer"
-            >
-              メンバー修正
-            </button>
-            <button
-              onClick={onInvite}
-              className="bg-brand-orange text-white px-4 py-2 rounded-lg text-sm font-medium cursor-pointer"
-            >
-              メンバー追加
-            </button>
-          </div>
+          {!isViewer && (
+            <div className="flex gap-2">
+              <button
+                onClick={onMemberEdit}
+                className="bg-amber-600 text-white px-4 py-2 rounded-lg text-sm font-medium cursor-pointer"
+              >
+                メンバー修正
+              </button>
+              <button
+                onClick={onInvite}
+                className="bg-brand-orange text-white px-4 py-2 rounded-lg text-sm font-medium cursor-pointer"
+              >
+                メンバー追加
+              </button>
+            </div>
+          )}
         </div>
         <div className="flex gap-5">
           {travelMembers.slice(0, 5).map((member) => (
@@ -155,12 +169,14 @@ export default function PlanDetailContent({
       <div className="mb-8">
         <div className="flex justify-between items-center mb-4">
           <h3 className="font-bold text-gray-900">総支払金額</h3>
-          <button
-            onClick={onWarikan}
-            className="bg-brand-orange text-white px-4 py-2 rounded-lg text-sm font-medium cursor-pointer"
-          >
-            メンバーと割り勘
-          </button>
+          {!isViewer && (
+            <button
+              onClick={onWarikan}
+              className="bg-brand-orange text-white px-4 py-2 rounded-lg text-sm font-medium cursor-pointer"
+            >
+              メンバーと割り勘
+            </button>
+          )}
         </div>
         <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
           <div className="flex items-center justify-between">

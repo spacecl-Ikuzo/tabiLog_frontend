@@ -1,63 +1,26 @@
-import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useState } from 'react';
 import { Button } from '../../components/ui/button';
 import Header from '../../components/layout/header';
 import PlanDetailContent from './components/PlanDetailContent';
-import { axiosInstance } from '../../api/axios';
-import { toast } from 'sonner';
 import { Plan } from '../../lib/type';
 import { ArrowLeft } from 'lucide-react';
 
 export default function PlanDetail() {
   const navigate = useNavigate();
+  const location = useLocation();
   const { planId } = useParams<{ planId: string }>();
-  const [plan, setPlan] = useState<Plan | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
 
-  // 멤버 수정 팝업 상태
+  // navigate할 때 넘겨준 state에서 plan 꺼내기
+  const plan = (location.state as { plan?: Plan } | undefined)?.plan || null;
+
+  // 팝업 상태들
   const [isMemberEditPopupOpen, setIsMemberEditPopupOpen] = useState(false);
-
-  // 친구 초대 팝업 상태
   const [isInvitePopupOpen, setIsInvitePopupOpen] = useState(false);
-
-  // 와리깡 팝업 상태
   const [isWarikanPopupOpen, setIsWarikanPopupOpen] = useState(false);
 
-  // 플랜 상세 정보 조회
-  useEffect(() => {
-    const fetchPlanDetail = async () => {
-      if (!planId) return;
-
-      setIsLoading(true);
-      try {
-        const response = await axiosInstance.get(`/api/plans/${planId}`);
-        setPlan(response.data.data);
-      } catch (error) {
-        toast.error('プラン情報の取得に失敗しました。', {
-          position: 'top-center',
-        });
-        console.error(error);
-        navigate('/plans');
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchPlanDetail();
-  }, [planId, navigate]);
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-[#FFF7F0] flex items-center justify-center">
-        <div className="text-center">
-          <div className="w-16 h-16 border-4 border-orange-200 border-t-orange-500 rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-gray-600">プラン情報を読み込んでいます...</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (!plan) {
+  // plan이 없으면 에러 화면
+  if (!plan || !planId) {
     return (
       <div className="min-h-screen bg-[#FFF7F0] flex items-center justify-center">
         <div className="text-center">
