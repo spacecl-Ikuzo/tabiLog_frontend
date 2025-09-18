@@ -20,7 +20,7 @@ type LoginReq = z.infer<typeof schema>;
 export default function Login() {
   const navigate = useNavigate();
   const { setUserId, setNickname, setToken, setEmail, setTokenExp } = useUserStore();
-  const { invitationInfo } = useInvitationStore();
+  const { invitationInfo, invitationToken } = useInvitationStore();
 
   const form = useForm<LoginReq>({
     defaultValues: { id: '', password: '' },
@@ -31,7 +31,11 @@ export default function Login() {
   const onSubmit = async (req: LoginReq) => {
     try {
       // 백엔드가 요구하는 키는 id/password
-      const payload = { id: req.id.trim(), password: req.password };
+      const payload = {
+        id: req.id.trim(),
+        password: req.password,
+        invitationToken: invitationToken || '',
+      };
       const response = await axiosInstance.post('/api/auth/signin', payload);
       const data = response.data;
 

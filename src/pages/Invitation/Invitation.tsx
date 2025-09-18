@@ -6,10 +6,9 @@ import { useInvitationStore, useUserStore } from '@/store';
 const InvitationPage = () => {
   const { token } = useParams();
   const navigate = useNavigate();
-  // const [invitationInfo, setInvitationInfo] = useState<InvitationInfo | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
-  const { invitationInfo, setInvitationInfo } = useInvitationStore();
+  const { setInvitationInfo, setInvitationToken } = useInvitationStore();
 
   const location = useLocation();
   console.log('location', location);
@@ -35,31 +34,21 @@ const InvitationPage = () => {
       return;
     }
 
-    // setInvitationInfo(invitationData);
-
     // 사용자 상태에 따라 자동 리다이렉트
     if (invitationData.userExists) {
+      setInvitationToken(token);
+
       if (useUserStore.getState().token) {
         navigate(`/plans`);
       } else {
         // 기존 사용자 -> 로그인 페이지로 이동
         setInvitationInfo(invitationData);
         navigate(`/login`);
-        // navigate(
-        //   `/login?invitation=${token}&email=${invitationData.inviteeEmail}&planId=${
-        //     invitationData.planId
-        //   }&planTitle=${encodeURIComponent(invitationData.planTitle)}`,
-        // );
       }
     } else {
       // 신규 사용자 -> 회원가입 페이지로 이동
       setInvitationInfo(invitationData);
       navigate(`/register`);
-      // navigate(
-      //   `/register?invitation=${token}&email=${invitationData.inviteeEmail}&planId=${
-      //     invitationData.planId
-      //   }&planTitle=${encodeURIComponent(invitationData.planTitle)}`,
-      // );
     }
   };
 
