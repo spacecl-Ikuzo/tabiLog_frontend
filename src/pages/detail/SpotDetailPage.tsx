@@ -14,8 +14,11 @@ import USJ from '../../assets/USJ.jpg';
 import KyotoHero from '../../assets/Kinkakuji.jpg';
 import KiyoMizuTera from '../../assets/KiyoMizuTera.jpg';
 import SapporoHero from '../../assets/Sapporo.jpg';
+import Sapporo from '../../assets/Sapporo.jpg';
 import SapporoTime from '../../assets/SapporoTime.jpg';
 import SapporoTower from '../../assets/SapporoTower.jpg';
+import sapporotokeiexhibition from '../../assets/sapporotokeiexhibition.jpg';
+import sapporowintertokei from '../../assets/sapporowintertokei.jpg';
 import FukuokaCastle from '../../assets/FukuokaCastle.jpg';
 import FukuokaCastle2 from '../../assets/FukuokaCastle2.jpg';
 import HakataCity from '../../assets/HakataCity.jpg';
@@ -480,10 +483,8 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
       breadcrumb: ['札幌', '中央区', '札幌時計台'],
       contentTitle: '札幌時計台の基本情報',
       spots: ['展示室', '鐘楼', '写真スポット'],
-      imageLeft: SapporoTime,
-      imageRight: SapporoTower,
       content:
-        '札幌時計台は北海道開拓使時代の歴史を伝える貴重な建造物。館内展示で札幌の成り立ちを学べ、外観は四季の装いとともに美しく写真映えします。大通公園やテレビ塔と合わせた市内散策の起点にも最適です。',
+        '札幌時計台は北海道開拓使時代の歴史を伝える貴重な建造物。館内展示で札幌の成り立ちを学べ、外観は四季の装いとともに美しく写真映えします。大通公園やテレビ塔と合わせた市内散策の起点にも最適です。<br><br>【2.1 展示室】<br>札幌時計台の展示室では、北海道開拓使時代から現在までの札幌の発展の歴史を詳しく学ぶことができます。明治時代の開拓使の資料や、時計台の建設過程、札幌の街づくりの変遷などが展示されています。特に開拓使の初代長官・黒田清隆の功績や、時計台が建てられた背景について詳しく紹介されており、札幌の歴史を深く理解できる貴重な空間です。展示品には当時の写真や図面、関連資料などが含まれており、歴史愛好家にも人気のスポットです。<br><br>【2.2 鐘楼】<br>札幌時計台の鐘楼は、1878年に設置された歴史ある鐘が現在も時を告げています。この鐘はアメリカ製で、当時の最新技術を駆使して作られました。鐘楼の内部では、時計の機械の仕組みや鐘の音が鳴るメカニズムを間近で見学できます。毎時0分になると鐘の音が響き渡り、札幌の街に歴史の重みを感じさせてくれます。鐘楼の階段を上ると、札幌市街を一望できる絶景スポットとしても人気で、特に夕暮れ時は美しい景色を楽しめます。<br><br>【2.3 写真スポット】<br>札幌時計台は札幌を代表する写真スポットとして、年間を通じて多くの観光客が訪れます。建物の外観は明治時代の洋風建築の美しさを今に伝えており、四季折々の表情を見せてくれます。春は桜とのコントラスト、夏は青空との対比、秋は紅葉との調和、冬は雪化粧との美しいコラボレーションが楽しめます。特に人気なのは建物の正面からの撮影で、時計台の時計部分と建物全体のバランスが美しく写ります。周辺の大通公園やテレビ塔と合わせた撮影もおすすめで、札幌観光の思い出に最適な写真が撮れます。',
     },
     '8': {
       title: '大通公園',
@@ -497,6 +498,17 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
       imageRight: SapporoTime,
       content:
         '大通公園は札幌の中心を東西に貫く緑の帯。季節の花壇や噴水、イベントが魅力で、夏のビアガーデンや冬の雪まつりなど市民に親しまれる催しが多数開催されます。周辺にはカフェや百貨店が揃い、観光の合間の休憩にも便利です。',
+    },
+    '26': {
+      title: 'サッポロビール博物館',
+      description: '北海道の代表的なビール工場。歴史と製造工程を学べる',
+      author: 'タビログ編集部',
+      heroImage: SapporoHero,
+      breadcrumb: ['札幌', '東区', 'サッポロビール博物館'],
+      contentTitle: 'サッポロビール博物館の基本情報',
+      spots: ['ビール製造工程', '歴史展示', '試飲コーナー'],
+      content:
+        'サッポロビール博物館は北海道のビール文化を学べる貴重な施設。明治時代から続くビール製造の歴史と技術を展示で紹介し、実際の製造工程も見学できます。試飲コーナーでは新鮮なビールを味わえ、北海道の食文化を深く理解できるスポットです。',
     },
   },
   福岡: {
@@ -1201,6 +1213,30 @@ const SpotDetailPage = () => {
                 <div
                   className="h-64 bg-cover bg-center bg-no-repeat"
                   style={{ backgroundImage: `url(${tsuraumimap})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+
+          {/* Extra Images for Sapporo Clock Tower */}
+          {cityKey === '札幌' && idKey === '7' && (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${SapporoTime})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${sapporotokeiexhibition})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${sapporowintertokei})` }}
                 ></div>
               </div>
             </div>
