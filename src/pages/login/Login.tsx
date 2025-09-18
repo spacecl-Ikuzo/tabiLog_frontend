@@ -7,7 +7,7 @@ import { Form, FormField, FormItem, FormLabel, FormMessage } from '@/components/
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { axiosInstance } from '@/api/axios';
-import useUserStore from '@/store';
+import { useUserStore } from '@/store';
 import { AxiosError } from 'axios';
 import { toast } from 'sonner';
 
