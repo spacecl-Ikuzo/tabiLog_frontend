@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import Header from '../../components/layout/Header';
+// import Header from '../../components/layout/Header';
 import Kinkakuji from '../../assets/Kinkakuji.jpg';
 import OsakaCastle from '../../assets/OsakaCastle.jpg';
 import Sapporo from '../../assets/Sapporo.jpg';
@@ -333,8 +333,6 @@ const DetailPage = () => {
 
   return (
     <div className="min-h-screen">
-      <Header />
-
       {/* Hero Section */}
       <section
         className="relative h-96 bg-cover bg-center bg-no-repeat"
