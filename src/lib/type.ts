@@ -31,8 +31,8 @@ export type PlanMember = {
 export type InvitationInfo = {
   planId: number;
   planTitle: string;
-  inviterName: string;
   role: string;
   inviteeEmail: string;
   userExists: boolean;
+  redirectType: string;
 };
