@@ -9,6 +9,12 @@ import Header from '../../components/layout/header';
 import SideNavigation from '../../components/layout/side-navigation';
 import { MoreVertical, Calendar as CalendarIcon, User, MapPin } from 'lucide-react';
 import CustomPagination from '../../Pagination';
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from '../../components/ui/dropdown-menu';
 import CategoryTabs from '../../components/common/CategoryTabs';
 import SkeletonCard from './components/SkeletonCard';
 import PlanDetailContent from './components/PlanDetailContent';
@@ -67,8 +73,8 @@ export default function Plans() {
 
       if (targetPlan) {
         if (isMobile) {
-          // 모바일에서는 detail 페이지로 이동
-          navigate(`/plans/${planIdNumber}/detail`, { replace: true });
+          // 모바일에서는 detail 페이지로 이동 (이전 화면 데이터 전달)
+          navigate(`/plans/${planIdNumber}/detail`, { replace: true, state: { plan: targetPlan } });
         } else {
           // 데스크톱에서는 플랜 선택하고 URL 정리
           setSelectedPlanId(planIdNumber);
@@ -193,6 +199,20 @@ export default function Plans() {
     updateCurrentPageList();
   }, [updateCurrentPageList]);
 
+  const handleModifyPlan = (event: React.MouseEvent<HTMLDivElement>) => {
+    //플랜 수정
+    event.stopPropagation();
+    event.preventDefault();
+    toast.error('削除はまだ実装されていません。', { position: 'top-center' });
+  };
+
+  const handleDeletePlan = (event: React.MouseEvent<HTMLDivElement>) => {
+    //플랜 삭제
+    event.stopPropagation();
+    event.preventDefault();
+    toast.error('削除はまだ実装されていません。', { position: 'top-center' });
+  };
+
   return (
     <div className="min-h-screen">
       {/* 헤더 */}
@@ -278,7 +298,7 @@ export default function Plans() {
                       onClick={() => {
                         if (isMobile) {
                           // 모바일에서는 새 페이지로 이동
-                          navigate(`/plans/${plan.id}/detail`);
+                          navigate(`/plans/${plan.id}/detail`, { state: { plan } });
                         } else {
                           // 데스크톱에서는 사이드바 표시
                           setSelectedPlanId(plan.id);
@@ -316,9 +336,26 @@ export default function Plans() {
                                   </Badge>
                                 </div>
                               </div>
-                              <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
-                                <MoreVertical className="h-4 w-4" />
-                              </Button>
+                              <DropdownMenu>
+                                <DropdownMenuTrigger asChild>
+                                  <Button
+                                    type="button"
+                                    onClick={(event) => {
+                                      event.stopPropagation();
+                                      event.preventDefault();
+                                    }}
+                                    variant="ghost"
+                                    size="sm"
+                                    className="h-8 w-8 p-0"
+                                  >
+                                    <MoreVertical className="h-4 w-4" />
+                                  </Button>
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent align="end" className="w-40">
+                                  <DropdownMenuItem onClick={(event) => handleModifyPlan(event)}>編集</DropdownMenuItem>
+                                  <DropdownMenuItem onClick={(event) => handleDeletePlan(event)}>削除</DropdownMenuItem>
+                                </DropdownMenuContent>
+                              </DropdownMenu>
                             </div>
                           </div>
                         </div>
