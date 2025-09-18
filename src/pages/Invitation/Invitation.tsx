@@ -81,8 +81,8 @@ const InvitationPage = () => {
               <div className="w-8 h-8 bg-orange-500 rounded-full animate-pulse"></div>
             </div>
           </div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-3">초대 정보를 확인하고 있습니다...</h2>
-          <p className="text-gray-600 text-lg">잠시만 기다려주세요.</p>
+          <h2 className="text-2xl font-bold text-gray-900 mb-3">招待情報を確認しています...</h2>
+          <p className="text-gray-600 text-lg">しばらくお待ちください。</p>
         </div>
       </div>
     );
@@ -96,14 +96,14 @@ const InvitationPage = () => {
             <div className="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <span className="text-4xl">⚠️</span>
             </div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-3">초대 링크 오류</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-3">招待リンク エラー</h2>
             <p className="text-gray-600 text-lg mb-6">{error}</p>
           </div>
           <button
             className="cursor-pointer bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-xl font-medium text-lg transition-colors duration-200 shadow-lg hover:shadow-xl"
             onClick={() => navigate('/')}
           >
-            홈으로 이동
+            ホームに移動
           </button>
         </div>
       </div>

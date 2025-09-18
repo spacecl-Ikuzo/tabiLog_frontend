@@ -33,7 +33,7 @@ export default function PlanDetail() {
         const response = await axiosInstance.get(`/api/plans/${planId}`);
         setPlan(response.data.data);
       } catch (error) {
-        toast.error('플랜 정보를 불러오는데 실패했습니다.', {
+        toast.error('プラン情報の取得に失敗しました。', {
           position: 'top-center',
         });
         console.error(error);
@@ -51,7 +51,7 @@ export default function PlanDetail() {
       <div className="min-h-screen bg-[#FFF7F0] flex items-center justify-center">
         <div className="text-center">
           <div className="w-16 h-16 border-4 border-orange-200 border-t-orange-500 rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-gray-600">플랜 정보를 불러오는 중...</p>
+          <p className="text-gray-600">プラン情報を読み込んでいます...</p>
         </div>
       </div>
     );
@@ -61,9 +61,9 @@ export default function PlanDetail() {
     return (
       <div className="min-h-screen bg-[#FFF7F0] flex items-center justify-center">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">플랜을 찾을 수 없습니다</h2>
-          <Button onClick={() => navigate('/plans')} className="bg-orange-500 hover:bg-orange-600">
-            플랜 목록으로 돌아가기
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">プランが見つかりません</h2>
+          <Button onClick={() => navigate(-1)} className="bg-orange-500 hover:bg-orange-600">
+            プラン一覧に戻る
           </Button>
         </div>
       </div>
@@ -83,12 +83,12 @@ export default function PlanDetail() {
           className="flex items-center gap-2 text-gray-600 hover:text-gray-900"
         >
           <ArrowLeft className="w-4 h-4" />
-          플랜 목록으로 돌아가기
+          プラン一覧に戻る
         </Button>
       </div>
 
       {/* 메인 컨텐츠 */}
-      <div className="p-4 max-w-4xl mx-auto">
+      <div className="py-4 px-8 max-w-4xl mx-auto">
         <PlanDetailContent
           plan={plan}
           onMemberEdit={() => setIsMemberEditPopupOpen(true)}
