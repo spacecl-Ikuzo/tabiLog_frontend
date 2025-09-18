@@ -28,6 +28,11 @@ import fukuokahutami from '../../assets/fukuokahutami.jpg';
 import fukuanimate from '../../assets/fukuanimate.jpg';
 import fukuanimatemap from '../../assets/fukuanimatemap.jpg';
 import fukumandafigure from '../../assets/fukumandafigure.jpg';
+import HakataCity from '../../assets/HakataCity.jpg';
+import boolseal from '../../assets/boolseal.jpg';
+import okinawaeisamatsuri from '../../assets/okinawaeisamatsuri.jpg';
+import okinawasailing from '../../assets/okinawasailing.jpg';
+import okinawasnokling from '../../assets/okinawasnokling.jpg';
 import fukumandarake from '../../assets/fukumandarake.jpg';
 import fukutenshin from '../../assets/fukutenshin.jpg';
 import fukubungomori from '../../assets/fukubungomori.jpg';
@@ -281,7 +286,7 @@ const DetailPage = () => {
       >
         {/* Custom gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60"></div>
-
+        
         {/* Breadcrumb Navigation - positioned absolutely */}
         <nav className="absolute top-4 left-6 z-10">
           <div className="flex items-center space-x-2 text-sm">
@@ -340,7 +345,7 @@ const DetailPage = () => {
       <section className="py-12 px-6 bg-gray-50">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl font-bold text-gray-900 mb-8">{plan.contentTitle}</h2>
-
+          
           {/* Images */}
           {planId !== 4 && planId !== 19 && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
@@ -515,8 +520,8 @@ const DetailPage = () => {
 
           {/* Extra Images for Fukuoka Gourmet Tour */}
           {planId === 4 && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div className="bg-white rounded-lg overflow-hidden shadow-md">
                 <div
                   className="h-64 bg-cover bg-center bg-no-repeat"
                   style={{ backgroundImage: `url(${fukuichiran})` }}
@@ -551,8 +556,8 @@ const DetailPage = () => {
                   className="h-64 bg-cover bg-center bg-no-repeat"
                   style={{ backgroundImage: `url(${fukuanimatemap})` }}
                 ></div>
-              </div>
-              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+            </div>
+            <div className="bg-white rounded-lg overflow-hidden shadow-md">
                 <div
                   className="h-64 bg-cover bg-center bg-no-repeat"
                   style={{ backgroundImage: `url(${fukumandafigure})` }}
@@ -587,8 +592,8 @@ const DetailPage = () => {
                   className="h-64 bg-cover bg-center bg-no-repeat"
                   style={{ backgroundImage: `url(${suzumegoods})` }}
                 ></div>
-              </div>
             </div>
+          </div>
           )}
 
           {/* Text Content */}
