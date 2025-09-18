@@ -66,15 +66,20 @@ export default function Plans() {
       const targetPlan = allPlanList.find((plan) => plan.id === planIdNumber);
 
       if (targetPlan) {
-        setSelectedPlanId(planIdNumber);
-        // URL에서 planId 제거 (리다이렉트)
-        navigate('/plans', { replace: true });
+        if (isMobile) {
+          // 모바일에서는 detail 페이지로 이동
+          navigate(`/plans/${planIdNumber}/detail`, { replace: true });
+        } else {
+          // 데스크톱에서는 플랜 선택하고 URL 정리
+          setSelectedPlanId(planIdNumber);
+          navigate('/plans', { replace: true });
+        }
       } else {
         // 해당 플랜이 없으면 URL만 정리
         navigate('/plans', { replace: true });
       }
     }
-  }, [planId, allPlanList, navigate]);
+  }, [planId, allPlanList, navigate, isMobile]);
 
   // 현재 페이지에 표시할 리스트 업데이트
   const updateCurrentPageList = useCallback(() => {
@@ -130,7 +135,7 @@ export default function Plans() {
         setAllPlanList(response.data.data);
         setPage(1); // 새로운 데이터 로드 시 첫 페이지로 이동
       } catch (error) {
-        toast.error('여행 계획 조회에 실패하셨습니다.', {
+        toast.error('旅行計画の取得に失敗しました。', {
           position: 'top-center',
         });
         console.error(error);
@@ -160,7 +165,7 @@ export default function Plans() {
       isChangingCategoryRef.current = false;
     } catch (error) {
       console.error(error);
-      toast.error('카테고리 변경에 실패하셨습니다.', { position: 'top-center' });
+      toast.error('カテゴリの変更に失敗しました。', { position: 'top-center' });
       isChangingCategoryRef.current = false;
     }
   }, [selectedCategory, fetchPlanList]);
@@ -262,8 +267,8 @@ export default function Plans() {
                 Array.from({ length: itemsPerPage }).map((_, index) => <SkeletonCard key={index} />)
               ) : allPlanList.length === 0 ? (
                 <div className="text-center py-8">
-                  <p className="text-gray-500 text-lg mb-2">여행 계획이 없습니다.</p>
-                  <p className="text-gray-400 text-sm">새로운 여행 계획을 만들어보세요!</p>
+                  <p className="text-gray-500 text-lg mb-2">旅行計画がありません。</p>
+                  <p className="text-gray-400 text-sm">新しい旅行計画を作成してください！</p>
                 </div>
               ) : (
                 planList.map((plan) => {
