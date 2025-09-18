@@ -83,12 +83,14 @@ export default function PlanDetailContent({
 
         {/* 진행상태 탭 */}
         <div className="flex justify-between items-center mb-6">
-          <CategoryTabs
-            categories={['進行中', '完了']}
-            selectedCategory={selectedViewStatus}
-            onCategoryChange={() => {}} // 클릭 비활성화
-            onCategorySelect={() => {}} // 클릭 비활성화
-          />
+          <div className="pointer-events-none cursor-default select-none">
+            <CategoryTabs
+              categories={['進行中', '完了']}
+              selectedCategory={selectedViewStatus}
+              onCategoryChange={() => {}} // 클릭 비활성화
+              onCategorySelect={() => {}} // 클릭 비활성화
+            />
+          </div>
           <Button
             className="bg-brand-orange text-white px-4 py-2 rounded-lg text-sm font-medium"
             onClick={() => navigate(`/trip-planner?planId=${plan.id}`)}

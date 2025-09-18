@@ -36,7 +36,7 @@ const InvitationPage = () => {
       return;
     }
 
-    if (invitationData.inviteeEmail !== email) {
+    if (invitationData.inviteeEmail !== email && email !== '') {
       setError('다른 사용자에게 발송된 초대 링크입니다.');
       return;
     }
