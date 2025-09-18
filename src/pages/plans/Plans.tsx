@@ -1,5 +1,6 @@
 import { useEffect, useState, useCallback, useMemo, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useIsMobile } from '../../hooks/useIsMobile';
 import { Button } from '../../components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../components/ui/select';
 import { Card, CardContent, CardTitle } from '../../components/ui/card';
@@ -22,6 +23,8 @@ import dayjs from 'dayjs';
 
 export default function Plans() {
   const navigate = useNavigate();
+  const { planId } = useParams<{ planId?: string }>();
+  const isMobile = useIsMobile();
 
   //페이징 프론트 단에서 처리
   const [page, setPage] = useState(1);
@@ -62,6 +65,23 @@ export default function Plans() {
   const [regionsByCategory, setRegionsByCategory] = useState<string[]>([]);
   const regionsByCategoryRef = useRef<string[]>([]);
   const isChangingCategoryRef = useRef(false);
+
+  // URL에서 planId가 있을 때 해당 플랜을 자동 선택하고 URL 정리
+  useEffect(() => {
+    if (planId && allPlanList.length > 0) {
+      const planIdNumber = parseInt(planId, 10);
+      const targetPlan = allPlanList.find((plan) => plan.id === planIdNumber);
+
+      if (targetPlan) {
+        setSelectedPlanId(planIdNumber);
+        // URL에서 planId 제거 (리다이렉트)
+        navigate('/plans', { replace: true });
+      } else {
+        // 해당 플랜이 없으면 URL만 정리
+        navigate('/plans', { replace: true });
+      }
+    }
+  }, [planId, allPlanList, navigate]);
 
   // 현재 페이지에 표시할 리스트 업데이트
   const updateCurrentPageList = useCallback(() => {
@@ -298,7 +318,15 @@ export default function Plans() {
                   return (
                     <Card
                       key={plan.id}
-                      onClick={() => setSelectedPlanId(plan.id)}
+                      onClick={() => {
+                        if (isMobile) {
+                          // 모바일에서는 새 페이지로 이동
+                          navigate(`/plans/${plan.id}/detail`);
+                        } else {
+                          // 데스크톱에서는 사이드바 표시
+                          setSelectedPlanId(plan.id);
+                        }
+                      }}
                       className={`bg-[#FFF7F0] hover:shadow-lg transition-al cursor-pointer border-2 ${
                         selectedPlanId === plan.id
                           ? 'ring-2 ring-orange-500 ring-offset-2 border-orange-200 bg-orange-200'
