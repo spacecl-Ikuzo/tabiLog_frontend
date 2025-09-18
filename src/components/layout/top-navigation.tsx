@@ -6,7 +6,7 @@ import {
   DropdownMenuTrigger,
 } from '../../components/ui/dropdown-menu';
 import { useNavigate } from 'react-router-dom';
-import useUserStore from '../../store';
+import { useUserStore } from '@/store';
 import { toast } from 'sonner';
 export default function TopNavigation() {
   const { userId } = useUserStore();
