@@ -1,15 +1,17 @@
 // src/components/layout/header.tsx
 import { Button } from '../ui/button';
 import { useNavigate } from 'react-router-dom';
-import { useUserStore } from '@/store';
+import { useInvitationStore, useUserStore } from '@/store';
 
 const Header = () => {
   const navigate = useNavigate();
   const { token, nickname, removeUserData } = useUserStore();
+  const { clearInvitationData } = useInvitationStore();
 
   const handleLogout = () => {
     // 토큰/ 사용자 정보 삭제 + 로그인 화면으로
     removeUserData();
+    clearInvitationData();
     navigate('/login');
   };
 
