@@ -26,7 +26,6 @@ import OsakaArchitecture3 from '../../assets/OsakaArchitecture3.png';
 import OsakaArchitecture4 from '../../assets/OsakaArchitecture4.png';
 import KyotoHero from '../../assets/Kinkakuji.jpg';
 import KiyoMizuTera from '../../assets/KiyoMizuTera.jpg';
-import SapporoHero from '../../assets/Sapporo.jpg';
 import SapporoTime from '../../assets/SapporoTime.jpg';
 // import SapporoTower from '../../assets/SapporoTower.jpg';
 import sapporowintertokei from '../../assets/sapporowintertokei.jpg';
@@ -35,6 +34,10 @@ import sapporoflower from '../../assets/sapporoflower.jpg';
 import sapporofountain from '../../assets/sapporofountain.jpg';
 import sapporofountain2 from '../../assets/sapporofountain2.jpg';
 import sapporotelevi from '../../assets/sapporotelevi.jpg';
+import maruyamapolarbear from '../../assets/maruyamapolarbear.jpg';
+import maruyamakodomo from '../../assets/maruyamakodomo.jpg';
+import maruyamamap from '../../assets/maruyamamap.jpg';
+import maruyamatiger from '../../assets/maruyamatiger.jpeg';
 import GenghisKhan from '../../assets/GenghisKhan.jpg';
 import GenghisKhanBeefBeer from '../../assets/GenghisKhanBeefBeer.jpg';
 import SapporoBeerMuseum from '../../assets/SapporoBeerMuseum.jpg';
@@ -156,6 +159,21 @@ import ohori from '../../assets/ohori.jpg';
 import ohoriboat from '../../assets/ohoriboat.jpg';
 import ohorigarden from '../../assets/ohorigarden.jpg';
 import ohoriori from '../../assets/ohoriori.jpg';
+import hokudaimuseum from '../../assets/hokudaimuseum.jpg';
+import hokudaimilkcookie from '../../assets/hokudaimilkcookie.jpg';
+import hokudai from '../../assets/hokudai.jpg';
+import hokudaipopula from '../../assets/hokudaipopula.jpg';
+import sapporoagribuilding from '../../assets/sapporoagribuilding.jpg';
+import tanukikoji from '../../assets/tanukikoji.jpg';
+import tanukiya from '../../assets/tanukiya.jpg';
+import tanukikojimap from '../../assets/tanukikojimap.jpg';
+import tanukisoupcurry from '../../assets/tanukisoupcurry.jpg';
+import tanukikitaichiramen from '../../assets/tanukikitaichiramen.jpg';
+import Otaru_Canal_Winter from '../../assets/Otaru_Canal_Winter.jpg';
+import otaruwintermatsuri from '../../assets/otaruwintermatsuri.jpg';
+import otarucruise from '../../assets/otarucruise.jpg';
+import otaruletao from '../../assets/otaruletao.jpg';
+import otaruletaocake from '../../assets/otaruletaocake.jpg';
 
 type SpotDetail = {
   title: string;
@@ -566,12 +584,51 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
       title: '円山動物園',
       description: '北海道を代表する動物園。ホッキョクグマやレッサーパンダが人気',
       author: 'タビログ編集部',
-      heroImage: SapporoHero,
+      heroImage: maruyamapolarbear,
       breadcrumb: ['札幌', '中央区', '円山動物園'],
       contentTitle: '円山動物園の基本情報',
-      spots: ['ホッキョクグマ館', 'レッサーパンダ', 'こども動物園'],
+      spots: ['ホッキョクグマ館', 'レッサーパンダ', 'こども動物園', '入園案内・料金・団体見学'],
       content:
-        '円山動物園は札幌市中心部からアクセスしやすい、家族連れに人気の動物園です。<br><br>【2.1 ホッキョクグマ館】<br>迫力あるホッキョクグマの遊泳や餌やりを間近で観察できます。ガラス越しのダイナミックな姿は必見。<br><br>【2.2 レッサーパンダ】<br>愛らしいレッサーパンダが木の上でくつろぐ姿や食事風景が人気。写真撮影スポットとしてもおすすめ。<br><br>【2.3 こども動物園】<br>ヤギやウサギなど小動物とふれあえるエリア。学びと体験を通じて動物の生態に親しめます。',
+        '円山動物園は、極地・高山・熱帯・アフリカなど多彩な生態環境を模したエリアを備え、動物福祉に配慮した行動展示や環境教育プログラムを重視している札幌を代表する総合動物園です。園内には休憩施設やショップ、学習拠点（動物科学館）も充実しており、季節ごとのイベントや冬季の観察テーマも人気です。<br><br>【2.1 ホッキョクグマ館】<br>大水槽と水中観察窓から、ホッキョクグマのダイブや遊泳、採餌行動を間近で体感できます。季節や時間帯に応じた行動の違いを学べる解説パネルや、寒帯環境の再現展示もわかりやすく、親子の学びに最適。個体ごとの性格・行動差に注目すると、観察がより楽しくなります。混雑時は観覧ルートの一方通行に従い、フラッシュ撮影は避けましょう。<br><br>【2.2 レッサーパンダ】<br>樹上生活に適応したレッサーパンダのために、高低差のある遊具・丸太・通路を配した立体的な飼育環境が整備されています。活発に動く時間帯（朝・夕）には、枝渡りや採食行動が観察しやすく、換毛期の毛並みの変化にも注目。展示前のマナー（ガラス面の叩打禁止・音量配慮）を守り、動物へのストレス軽減に協力しましょう。<br><br>【2.3 こども動物園】<br>ウサギ・ヤギなど小動物とのふれあいを通じて、命の大切さや正しい飼育知識を学べるエリアです。職員による簡単なレクチャーや、手洗い・消毒の導線が整備されており、初めての方でも安心して体験できます。混雑時には人数制限や滞在時間の調整が行われる場合がありますので、案内表示に従ってください。<br><br>【2.4 入園案内・料金・団体見学】<br>令和7年6月12日から、総合案内窓口は改修工事に伴い「動物園センター」から「次世代エネルギーパーク動物科学館」へ一時移転しています。工事期間中、一部トイレ・休憩スペースが利用できない場合があります。最新のご案内・園内マップ・冷房スポット・各種コースマップは公式サイトの総合案内をご確認ください。<br>入園料や開園時間、団体見学（学校団体・旅行会社等）の受付・割引条件についても、最新情報が公式ページに掲載されています。計画前に必ず最新情報をご確認ください。<br>お問い合わせ：札幌市円山動物園（TEL：011-621-1426）<br>公式サイト：<a href="https://www.city.sapporo.jp/zoo/b_f/index.html" target="_blank" rel="noreferrer">総合案内（札幌市円山動物園）</a><br>参考：<a href="https://namu.wiki/w/%EB%A7%88%EB%A3%A8%EC%95%BC%EB%A7%88%EB%8F%99%EB%AC%BC%EC%9B%90" target="_blank" rel="noreferrer">나무위키 - 마루야마동물원</a>',
+    },
+    '28': {
+      title: '北海道大学',
+      description: '札幌の学術と自然が調和するキャンパス。四季の並木道が名所',
+      author: 'タビログ編集部',
+      heroImage: hokudai,
+      breadcrumb: ['札幌', '北区', '北海道大学'],
+      contentTitle: '北海道大学の基本情報',
+      spots: ['ポプラ並木', '旧札幌農学校', '総合博物館', '札幌農学校ミルククッキー'],
+      imageLeft: hokudaipopula,
+      imageRight: sapporoagribuilding,
+      content:
+        '北海道大学（札幌キャンパス）は、札幌駅北側に広がる国内有数の広大な都市型キャンパスで、開拓使時代の歴史資産と豊かな樹林が共存します。エルム（ニレ）やポプラの高木がつくる並木、秋の黄葉で有名なイチョウ並木、旧札幌農学校ゆかりの建物や第2農場（モデルバーン）など、学術と景観が一体となった散策路が充実。一般にも開放され、四季の変化を楽しみながら学術文化に触れられます。<br><br>【2.1 ポプラ並木】<br>北大の象徴的風景の一つ。風に揺れる高木の並木道は雄大で、夕暮れの逆光シルエットがフォトジェニック。一部は台風被害後に再整備され、現在は保全と景観の両立が図られています。見学時は案内サインに従い、立入禁止区域への進入はご遠慮ください。<br><br>【2.2 旧札幌農学校】<br>開拓使時代に創立した札幌農学校（現・北海道大学）の歴史を物語る建築・施設群。西洋式木造建築の意匠を色濃く残す建物や、牧畜・酪農教育の拠点だった第2農場（モデルバーン）など、北海道の農学発展を象徴する見どころが点在します。保存・修復により当時の姿が伝わり、屋外解説で学びながら見学できます。<br><br>【2.3 北海道大学総合博物館】<br>理学・農学・医学ほか多分野の研究史と標本を横断展示。恐竜・化石、鉱物、動植物標本から最先端研究まで幅広く紹介し、子ども向け体験や企画展も充実。入館は原則無料（最新情報は公式を要確認）で、雨天時の観光にも適しています。館内カフェも併設。<br><br>【2.4 札幌農学校ミルククッキー】<br>学内ゆかりの人気土産。北海道産ミルクのコクをいかした素朴なテイストで、軽やかな食感が特長。学内売店・札幌駅周辺・空港などで幅広く入手でき、配布用小箱からギフト缶までパッケージが多彩。常温で持ち運びしやすく、旅の締めのまとめ買いにも便利です。',
+    },
+    '29': {
+      title: '狸小路商店街',
+      description: '全長約900m、1丁目〜7丁目が連なる札幌を代表するアーケード商店街',
+      author: 'タビログ編集部',
+      heroImage: tanukikoji,
+      breadcrumb: ['札幌', '中央区', '狸小路商店街'],
+      contentTitle: '狸小路商店街の基本情報',
+      spots: ['グルメ（スープカレー・ラーメン）', 'たぬきや（狸グッズ・土産）', 'アクセスと営業時間'],
+      imageLeft: tanukiya,
+      imageRight: tanukikojimap,
+      content:
+        '狸小路商店街は、明治時代から続く札幌の中心繁華街の一つ。アーケードで全天候型の快適な歩行空間が確保され、1丁目から7丁目まで多彩な飲食・物販・娯楽が揃います。大通公園とすすきのの間に位置し、観光の合間の食事や買い物に最適な導線。国内外の旅行者が一日中行き交う札幌の定番スポットです。<br><br>【2.1 グルメ（スープカレー・ラーメン）】<br>札幌グルメを気軽に楽しめるのも狸小路の魅力。スープカレーは人気店『GARAKU』の濃厚スパイス系が代表格で、野菜の旨味とコク深いスープが寒い季節にぴったり。ラーメンは『北一（きたいち）』の味噌・醤油など札幌スタイルを堪能できます。<br>・目安待ち時間：ランチ/ディナーのピーク（12:00〜13:30、18:30〜20:00）は20〜40分前後。混雑回避には開店直後またはアイドルタイム（15:00前後）が狙い目。<br>・支払い/予約：一部店舗は現金メイン・券売機制。予約可否やラストオーダーは店舗により異なるため事前確認推奨。<br>・場所感：GARAKUは狸小路・すすきの寄りの路地裏エリア、北一は狸小路周辺から徒歩圏。商店街から徒歩5〜10分内で回遊しやすい。<br><br>【2.2 たぬきや（狸グッズ・土産）】<br>創業大正5年、狸小路4丁目の老舗みやげ店『たぬきや』は、札幌中心部最大級の品揃え（5,000点超）が魅力。北海道銘菓や限定キャラクターグッズ、地酒・焼酎・ワイン、木彫りなど北海道らしい商品がズラリ。店頭の大きな狸が目印で、2階は北海道ならではの木彫りグッズやオリジナル「狸」グッズ（ぬいぐるみ、置物、キーホルダー、招き狸など）も充実。営業時間は9:30〜21:30、年中無休（臨時休業あり）。住所：札幌市中央区南3条西4丁目18（狸小路4丁目）、TEL：011-221-0567。詳細は公式をご確認ください（参考: <a href="https://www.gutabi.jp/event/detail/3548" target="_blank" rel="noreferrer">ぐうたび北海道</a> / <a href="https://www.tanukiya.co.jp/" target="_blank" rel="noreferrer">たぬきや 公式</a>）。<br><br>【2.3 アクセスと営業時間】<br>地下鉄東西線『大通駅』、南北線『すすきの駅』から各徒歩約3分、JR『札幌駅』から徒歩約15分。大通〜すすきの間のアーケードのため、雪や雨の日も快適に移動できます。駐車は提携駐車場（カモンチケット対象など）の利用や近隣コインパーキングが便利。各店の営業時間は店舗により異なるため、最新情報は公式サイトをご確認ください（参考: <a href="https://tanukikoji.or.jp/access/" target="_blank" rel="noreferrer">狸小路商店街 アクセス</a>）。',
+    },
+    '38': {
+      title: '小樽運河',
+      description: '石造倉庫群とガス灯が並ぶロマンチックな運河。冬のイルミネーションも必見',
+      author: 'タビログ編集部',
+      heroImage: Otaru_Canal_Winter,
+      breadcrumb: ['札幌', '小樽市', '小樽運河'],
+      contentTitle: '小樽運河の基本情報',
+      spots: ['小樽雪あかりの路', 'クルーズ（デイクルーズ/ナイト）', '倉庫群カフェ＆ショップ'],
+      imageLeft: otarucruise,
+      imageRight: otaruwintermatsuri,
+      content:
+        '北海道・小樽の象徴「小樽運河」は、石造倉庫群と歴史的街並みが連なる情緒あふれる景観が魅力。夕暮れから夜にかけてはガス灯が点灯し、運河と倉庫のシルエットが水面に映る幻想的な光景に。冬は雪景色とイルミネーションが重なり、よりロマンチックな雰囲気を楽しめます。札幌から電車で約35〜45分とアクセスも良く、日帰り観光の定番です。<br><br>【2.1 小樽雪あかりの路】<br>毎年2月に開催される冬の風物詩。市民と国内外ボランティアの手で、スノーキャンドルやワックスボウルの柔らかな灯りが運河沿いと市内各会場を彩ります。浅草橋〜中央橋一帯の運河会場、手宮線跡地や都通りなど複数会場で展開。ガス灯とキャンドルの明かりが重なり、雪と光のコントラストが作り出す静謐で温かな景観は唯一無二です。<br>・開催時期の目安：2月上旬（例：第27回は2/8〜2/15）。<br>・点灯時間の目安：17:00頃〜21:00頃。悪天候等により一部会場中止あり。<br>・見どころ：運河会場のキャンドル群像、手宮線会場のオブジェ、芸術村会場のプロジェクションマッピングやYOSAKOIなど日替わり企画。<br>・体験：ワックスボウル製作体験、バックヤードツアー、スノー滑り台（年により実施内容変動）。<br>・ボランティア：キャンドル設置や点灯・補修を担う「あかり人」を随時募集。<br>・環境配慮：使用済みキャンドルの再活用に取り組み、資源を無駄にしない運営を継続。<br>・最新情報：公式サイトのNEWSやフォトブログで当日の実施/中止、会場変更を確認推奨。参考：[小樽雪あかりの路 公式](http://yukiakarinomichi.org/)。<br><br>【2.2 クルーズ（デイクルーズ/ナイト）】<br>「小樽運河クルーズ」は約40分で運河〜港を巡る水上ツアー。<br>・運航時間（目安）：10:00〜日没後まで、デイクルーズは概ね30分間隔、ナイトは日没後に運航（季節により変動）。<br>・集合/発券：中央橋の発券所に出航の15分前集合。JR小樽駅から徒歩約10分。<br>・料金（目安）：デイクルーズ 大人¥1,500／小学生¥500、ナイトクルーズ 大人¥2,000／小学生¥500（未就学は大人1名につき1名無料・席なし）。<br>・ガイド：多言語オーディオガイドで運河の歴史、北運河の見どころを解説。<br>・混雑対策：繁忙期は満席になるため事前予約推奨、防寒具・耐水対策を用意すると快適。<br>参考：[小樽運河クルーズ 公式](https://otaru.cc/ko/)。<br><br>【2.3 倉庫群カフェ＆ショップ】<br>石造倉庫を活用したショップやカフェが点在。スイーツは小樽を代表する人気ジャンル。<br>・LeTAO（ルタオ）本店：名物「ドゥーブルフロマージュ」ホール¥2,000前後、カット＋ドリンクのカフェセット¥1,000〜¥1,500前後、季節限定ケーキ各種（時価）。<br>・その他：小樽ガラス工芸、オルゴール堂、土産店が集中し回遊しやすい。<br>・滞在のコツ：運河散策の合間に甘味休憩、冬季は足元が滑りやすいため歩きやすい靴で。<br>参考：[LeTAO紹介（例）](https://triple.guide/restaurants/a4ec07e4-fbfe-49c0-b2d5-604a4389bf83)。',
     },
   },
   福岡: {
@@ -923,8 +980,11 @@ const SpotDetailPage = () => {
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl font-bold text-gray-900 mb-8">{detail?.contentTitle || `${safeTitle} の基本情報`}</h2>
 
-          {/* Images (hidden for 沖縄/11, 沖縄/12, 沖縄/46) */}
-          {!(cityKey === '沖縄' && (idKey === '11' || idKey === '12' || idKey === '46')) && (
+          {/* Images (hidden for 沖縄/11, 沖縄/12, 沖縄/46, 札幌/27) */}
+          {!(
+            (cityKey === '沖縄' && (idKey === '11' || idKey === '12' || idKey === '46')) ||
+            (cityKey === '札幌' && idKey === '27')
+          ) && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <div className="bg-white rounded-lg overflow-hidden shadow-md">
                 <div
@@ -936,6 +996,57 @@ const SpotDetailPage = () => {
                 <div
                   className="h-64 bg-cover bg-center bg-no-repeat"
                   style={{ backgroundImage: `url(${detail?.imageRight || hero})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+          {/* Extra Images for Otaru Canal (Sapporo 38) */}
+          {cityKey === '札幌' && idKey === '38' && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${otaruletao})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${otaruletaocake})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+          {/* Extra Images for Tanukikoji Shopping Street (Sapporo 29) */}
+          {cityKey === '札幌' && idKey === '29' && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${tanukisoupcurry})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${tanukikitaichiramen})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+          {/* Extra Images for Hokkaido University (Sapporo 28) */}
+          {cityKey === '札幌' && idKey === '28' && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${hokudaimilkcookie})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${hokudaimuseum})` }}
                 ></div>
               </div>
             </div>
@@ -1368,6 +1479,36 @@ const SpotDetailPage = () => {
                 <div
                   className="h-64 bg-cover bg-center bg-no-repeat"
                   style={{ backgroundImage: `url(${okisteakhouse})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+
+          {/* Extra Images for Maruyama Zoo (Sapporo 27) - 2x2 grid */}
+          {cityKey === '札幌' && idKey === '27' && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${maruyamakodomo})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${maruyamamap})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${maruyamapolarbear})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${maruyamatiger})` }}
                 ></div>
               </div>
             </div>
