@@ -1,15 +1,8 @@
 import { axiosInstance } from '@/api/axios';
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
-
-interface InvitationInfo {
-  planId: number;
-  planTitle: string;
-  inviterName: string;
-  role: string;
-  inviteeEmail: string;
-  userExists: boolean;
-}
+import { useUserStore } from '@/store';
+import { InvitationInfo } from '@/lib/type';
 
 const InvitationPage = () => {
   const { token } = useParams();
@@ -46,12 +39,16 @@ const InvitationPage = () => {
 
     // 사용자 상태에 따라 자동 리다이렉트
     if (invitationData.userExists) {
-      // 기존 사용자 -> 로그인 페이지로 이동
-      navigate(
-        `/login?invitation=${token}&email=${invitationData.inviteeEmail}&planId=${
-          invitationData.planId
-        }&planTitle=${encodeURIComponent(invitationData.planTitle)}`,
-      );
+      if (useUserStore.getState().token) {
+        navigate(`/plans`);
+      } else {
+        // 기존 사용자 -> 로그인 페이지로 이동
+        navigate(
+          `/login?invitation=${token}&email=${invitationData.inviteeEmail}&planId=${
+            invitationData.planId
+          }&planTitle=${encodeURIComponent(invitationData.planTitle)}`,
+        );
+      }
     } else {
       // 신규 사용자 -> 회원가입 페이지로 이동
       navigate(

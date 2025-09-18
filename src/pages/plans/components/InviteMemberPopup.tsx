@@ -33,7 +33,7 @@ export default function InviteMemberPopup({ open, onOpenChange, onConfirm, onCan
   };
   useEffect(() => {
     console.log('planId', planId);
-  }, [open]);
+  }, [open, planId]);
 
   const handleConfirm = async () => {
     if (email.trim()) {
@@ -57,11 +57,14 @@ export default function InviteMemberPopup({ open, onOpenChange, onConfirm, onCan
 
   //* 멤버 초대하기
   const inviteMember = async (planId: number, email: string, role: string) => {
+    console.log('planId', planId);
+    console.log('email', email);
     ///api/plans/{planId}/invitations
     const response = await axiosInstance.post(`/api/plans/${planId}/invitations`, {
       inviteeEmail: email,
       role: role,
     });
+    console.log('response', response);
     return response.data;
   };
 
