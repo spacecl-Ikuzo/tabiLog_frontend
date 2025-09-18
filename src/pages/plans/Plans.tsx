@@ -410,6 +410,11 @@ export default function Plans() {
                       setIsInvitePopupOpen(true);
                     }}
                     onWarikan={() => setIsWarikanPopupOpen(true)}
+                    onAfterMemberChange={() => {
+                      // 데스크탑: 선택 해제 후 목록 새로고침
+                      setSelectedPlanId(null);
+                      fetchPlanList(selectedPrefecture, selectedStatus);
+                    }}
                     isMemberEditPopupOpen={isMemberEditPopupOpen}
                     setIsMemberEditPopupOpen={setIsMemberEditPopupOpen}
                     isInvitePopupOpen={isInvitePopupOpen}

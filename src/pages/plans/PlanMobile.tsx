@@ -57,6 +57,7 @@ export default function PlanDetail() {
           onMemberEdit={() => setIsMemberEditPopupOpen(true)}
           onInvite={() => setIsInvitePopupOpen(true)}
           onWarikan={() => setIsWarikanPopupOpen(true)}
+          onAfterMemberChange={() => navigate(-1)}
           isMemberEditPopupOpen={isMemberEditPopupOpen}
           setIsMemberEditPopupOpen={setIsMemberEditPopupOpen}
           isInvitePopupOpen={isInvitePopupOpen}

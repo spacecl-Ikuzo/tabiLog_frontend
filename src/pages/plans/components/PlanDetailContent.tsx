@@ -20,6 +20,7 @@ interface PlanDetailContentProps {
   onMemberEdit?: () => void;
   onInvite?: () => void;
   onWarikan?: () => void;
+  onAfterMemberChange?: () => void; // 성공 후 상위에서 후처리
   isMemberEditPopupOpen?: boolean;
   setIsMemberEditPopupOpen?: (open: boolean) => void;
   isInvitePopupOpen?: boolean;
@@ -33,6 +34,7 @@ export default function PlanDetailContent({
   onMemberEdit,
   onInvite,
   onWarikan,
+  onAfterMemberChange,
   isMemberEditPopupOpen = false,
   setIsMemberEditPopupOpen,
   isInvitePopupOpen = false,
@@ -124,6 +126,8 @@ export default function PlanDetailContent({
 
       // 팝업 닫기
       if (setIsMemberEditPopupOpen) setIsMemberEditPopupOpen(false);
+      // 상위 후처리 호출 (모바일: 뒤로가기, 데스크탑: 선택해제+목록새로고침 등)
+      if (onAfterMemberChange) onAfterMemberChange();
     } catch (error) {
       console.error(error);
       toast.error('役割の変更に失敗しました。', { position: 'top-center' });
