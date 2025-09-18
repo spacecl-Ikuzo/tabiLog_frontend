@@ -138,7 +138,7 @@ export default function MemberDetailPopup({
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="編集者">編集者</SelectItem>
-            <SelectItem value="管理者">管理者</SelectItem>
+            {/* <SelectItem value="管理者">管理者</SelectItem> */}
             <SelectItem value="ビューア">ビューア</SelectItem>
           </SelectContent>
         </Select>
