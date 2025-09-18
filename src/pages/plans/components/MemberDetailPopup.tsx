@@ -31,6 +31,8 @@ export default function MemberDetailPopup({
         return '編集者';
       case 'VIEWER':
         return 'ビューア';
+      case 'DELETE':
+        return '除外';
       default:
         return '編集者';
     }
@@ -45,6 +47,8 @@ export default function MemberDetailPopup({
         return 'EDITOR';
       case 'ビューア':
         return 'VIEWER';
+      case '除外':
+        return 'DELETE';
       default:
         return 'EDITOR';
     }
@@ -149,6 +153,7 @@ export default function MemberDetailPopup({
             <SelectItem value="編集者">編集者</SelectItem>
             <SelectItem value="管理者">管理者</SelectItem>
             <SelectItem value="ビューア">ビューア</SelectItem>
+            <SelectItem value="除外">除外</SelectItem>
           </SelectContent>
         </Select>
       </div>

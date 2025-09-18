@@ -78,21 +78,49 @@ export default function PlanDetailContent({
     return me?.role === 'VIEWER';
   }, [plan.members, email, userId]);
 
+  //멤버 역할 수정 혹은 제외
   const handleMemberEdit = async (userId: number, role: string) => {
     try {
-      const memberName = travelMembers.find((m) => m.userId === userId)?.userNickname || 'メンバー';
-      const memberPK = travelMembers.find((m) => m.userId === userId)?.id || 0;
+      const selectedMember = travelMembers.find((m) => m.userId === userId);
+      const memberName = selectedMember?.userNickname || 'メンバー';
+      const memberPK = selectedMember?.id || 0;
 
-      await axiosInstance.put(`/api/plans/${plan.id}/members/${memberPK}/role`, { role: role });
+      if (role === 'DELETE') {
+        //플랜 작성자는 제외 X
+        if (userId === plan.userId) {
+          toast.error('自分自身除外できません。', { position: 'top-center' });
+          return;
+        }
 
-      const roleDisplayMap: { [key: string]: string } = {
-        OWNER: '管理者',
-        EDITOR: '編集者',
-        VIEWER: 'ビューア',
-      };
-      const displayRole = roleDisplayMap[role] || role;
+        const storeUserId = useUserStore.getState().userId;
+        //멤버가 자기 자신이면 안된다.
+        if (storeUserId === selectedMember?.userIdString) {
+          toast.error('自分自身を除外できません。', { position: 'top-center' });
+          return;
+        }
 
-      toast.success(`${memberName}の役割を${displayRole}に変更しました。`, { position: 'top-center' });
+        //진짜 제외하시겠습니까?
+        if (!confirm(`${memberName}をプランから除外しますか？`)) {
+          return;
+        }
+
+        //멤버 제외하기
+        await axiosInstance.delete(`/api/plans/${plan.id}/members/${memberPK}`);
+        toast.success(`${memberName}をプランから除外しました。`, { position: 'top-center' });
+      } else {
+        //멤버 역할 수정
+        await axiosInstance.put(`/api/plans/${plan.id}/members/${memberPK}/role`, { role: role });
+
+        const roleDisplayMap: { [key: string]: string } = {
+          OWNER: '管理者',
+          EDITOR: '編集者',
+          VIEWER: 'ビューア',
+          DELETE: '除外',
+        };
+        const displayRole = roleDisplayMap[role] || role;
+
+        toast.success(`${memberName}の役割を${displayRole}に変更しました。`, { position: 'top-center' });
+      }
 
       // 팝업 닫기
       if (setIsMemberEditPopupOpen) setIsMemberEditPopupOpen(false);
@@ -102,7 +130,9 @@ export default function PlanDetailContent({
     }
   };
 
+  //TODO: 지울 예정
   useEffect(() => {
+    console.log('plan', plan);
     console.log('travelMembers', travelMembers);
   }, [travelMembers]);
 
