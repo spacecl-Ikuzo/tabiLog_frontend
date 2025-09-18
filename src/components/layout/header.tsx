@@ -1,7 +1,7 @@
 // src/components/layout/header.tsx
 import { Button } from '../ui/button';
 import { useNavigate } from 'react-router-dom';
-import useUserStore from '@/store';
+import { useUserStore } from '@/store';
 
 const Header = () => {
   const navigate = useNavigate();

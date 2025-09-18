@@ -1,8 +1,7 @@
 import { axiosInstance } from '@/api/axios';
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
-import { useUserStore } from '@/store';
-import { InvitationInfo } from '@/lib/type';
+import { useInvitationStore, useUserStore } from '@/store';
 
 const InvitationPage = () => {
   const { token } = useParams();
@@ -10,6 +9,7 @@ const InvitationPage = () => {
   // const [invitationInfo, setInvitationInfo] = useState<InvitationInfo | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
+  const { invitationInfo, setInvitationInfo } = useInvitationStore();
 
   const location = useLocation();
   console.log('location', location);
@@ -43,19 +43,23 @@ const InvitationPage = () => {
         navigate(`/plans`);
       } else {
         // 기존 사용자 -> 로그인 페이지로 이동
-        navigate(
-          `/login?invitation=${token}&email=${invitationData.inviteeEmail}&planId=${
-            invitationData.planId
-          }&planTitle=${encodeURIComponent(invitationData.planTitle)}`,
-        );
+        setInvitationInfo(invitationData);
+        navigate(`/login`);
+        // navigate(
+        //   `/login?invitation=${token}&email=${invitationData.inviteeEmail}&planId=${
+        //     invitationData.planId
+        //   }&planTitle=${encodeURIComponent(invitationData.planTitle)}`,
+        // );
       }
     } else {
       // 신규 사용자 -> 회원가입 페이지로 이동
-      navigate(
-        `/register?invitation=${token}&email=${invitationData.inviteeEmail}&planId=${
-          invitationData.planId
-        }&planTitle=${encodeURIComponent(invitationData.planTitle)}`,
-      );
+      setInvitationInfo(invitationData);
+      navigate(`/register`);
+      // navigate(
+      //   `/register?invitation=${token}&email=${invitationData.inviteeEmail}&planId=${
+      //     invitationData.planId
+      //   }&planTitle=${encodeURIComponent(invitationData.planTitle)}`,
+      // );
     }
   };
 
