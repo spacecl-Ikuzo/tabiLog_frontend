@@ -1,4 +1,6 @@
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
+import { InvitationInfo } from '@/lib/type';
 
 interface UserStore {
   userId: string; // 사용자 ID
@@ -16,47 +18,77 @@ interface UserStore {
   removeUserData: () => void; // 로그아웃/만료 시 호출
 }
 
-// 최초 로드 시 localStorage 복원
-const initialToken = typeof window !== 'undefined' ? localStorage.getItem('token') || '' : '';
-const initialNickname = typeof window !== 'undefined' ? localStorage.getItem('nickname') || '' : '';
-const initialTokenExp = typeof window !== 'undefined' ? Number(localStorage.getItem('tokenExp') || 0) : 0;
+interface InvitationStore {
+  invitationInfo: InvitationInfo | null; // 초대 정보
+  // invitationToken: string; // 초대 토큰
+  setInvitationInfo: (info: InvitationInfo | null) => void;
+  // setInvitationToken: (token: string) => void;
+  clearInvitationData: () => void; // 초대 데이터 초기화
+}
 
-const useUserStore = create<UserStore>((set) => ({
-  userId: '',
-  nickname: initialNickname,
-  email: '',
-  token: initialToken,
-  tokenExp: initialTokenExp,
-
-  setUserId: (userId) => set({ userId }),
-  setNickname: (nickname) => {
-    if (typeof window !== 'undefined') localStorage.setItem('nickname', nickname || '');
-    set({ nickname });
-  },
-  setEmail: (email) => set({ email }),
-  setToken: (token) => {
-    if (typeof window !== 'undefined') localStorage.setItem('token', token || '');
-    set({ token });
-  },
-  setTokenExp: (tokenExp) => {
-    if (typeof window !== 'undefined') localStorage.setItem('tokenExp', String(tokenExp || 0));
-    set({ tokenExp });
-  },
-
-  removeUserData: () => {
-    if (typeof window !== 'undefined') {
-      localStorage.removeItem('token');
-      localStorage.removeItem('nickname');
-      localStorage.removeItem('tokenExp');
-    }
-    set({
+const useUserStore = create<UserStore>()(
+  persist(
+    (set) => ({
       userId: '',
       nickname: '',
       email: '',
       token: '',
       tokenExp: 0,
-    });
-  },
-}));
 
-export default useUserStore;
+      setUserId: (userId) => set({ userId }),
+      setNickname: (nickname) => set({ nickname }),
+      setEmail: (email) => set({ email }),
+      setToken: (token) => set({ token }),
+      setTokenExp: (tokenExp) => set({ tokenExp }),
+
+      removeUserData: () => {
+        set({
+          userId: '',
+          nickname: '',
+          email: '',
+          token: '',
+          tokenExp: 0,
+        });
+      },
+    }),
+    {
+      name: 'user-storage', // localStorage 키 이름
+      partialize: (state) => ({
+        userId: state.userId,
+        nickname: state.nickname,
+        email: state.email,
+        token: state.token,
+        tokenExp: state.tokenExp,
+      }),
+    },
+  ),
+);
+
+const useInvitationStore = create<InvitationStore>()(
+  persist(
+    (set) => ({
+      invitationInfo: null,
+      invitationToken: '',
+      isLoading: false,
+      error: '',
+
+      setInvitationInfo: (info) => set({ invitationInfo: info }),
+      // setInvitationToken: (token) => set({ invitationToken: token }),
+      clearInvitationData: () => {
+        set({
+          invitationInfo: null,
+          // invitationToken: '',
+        });
+      },
+    }),
+    {
+      name: 'invitation-storage', // localStorage 키 이름
+      partialize: (state) => ({
+        invitationInfo: state.invitationInfo,
+        // invitationToken: state.invitationToken,
+      }),
+    },
+  ),
+);
+
+export { useUserStore, useInvitationStore };

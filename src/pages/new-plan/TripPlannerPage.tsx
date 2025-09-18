@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { useSearchParams, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
 import SpotSearchDialog from '@/components/SpotSearchDialog';
 import GoogleMapView from '@/components/GoogleMapView';
-import { axiosInstance } from '@/api/axios';
 import {
   Plus,
   MapPin,
@@ -14,11 +12,8 @@ import {
   ChevronDown,
   GripVertical,
   Calculator,
-  Save,
-  X,
 } from 'lucide-react';
 import { createExpense } from '@/api/api';
-import Header from '@/components/layout/header';
 import SvgIcon from '@/components/ui/SvgIcon';
 import {
   DndContext,
@@ -256,14 +251,8 @@ interface DepartureTime {
 }
 
 const TripPlannerPage = () => {
-  const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
-  const planId = searchParams.get('planId');
-  
   const [activeDay, setActiveDay] = useState(2);
   const [isSearchDialogOpen, setIsSearchDialogOpen] = useState(false);
-  const [planData, setPlanData] = useState<any>(null);
-  const [isLoadingPlan, setIsLoadingPlan] = useState(false);
   const [isDepartureTimeDialogOpen, setIsDepartureTimeDialogOpen] = useState(false);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const [editingSpot, setEditingSpot] = useState<Spot | null>(null);
@@ -282,48 +271,11 @@ const TripPlannerPage = () => {
   const [departureTime, setDepartureTime] = useState<DepartureTime>({ hour: 11, minute: 0 });
   const [leftPanelWidth, setLeftPanelWidth] = useState(40); // 40% (4:6 비율)
   const [isDragging, setIsDragging] = useState(false);
-  const [spots, setSpots] = useState<Record<number, Spot[]>>({});
-  const [isSaveConfirmationOpen, setIsSaveConfirmationOpen] = useState(false);
-  const [isSaving, setIsSaving] = useState(false);
-  const [isInitialLoad, setIsInitialLoad] = useState(true);
-
-  // localStorage에서 spots 데이터 복원 (초기 로드 시에만)
-  useEffect(() => {
-    if (!planId || !isInitialLoad) return;
-    
-    const savedSpots = localStorage.getItem(`trip_spots_${planId}`);
-    if (savedSpots) {
-      try {
-        const parsedSpots = JSON.parse(savedSpots);
-        console.log('=== localStorage에서 spots 데이터 복원 ===', parsedSpots);
-        setSpots(parsedSpots);
-      } catch (error) {
-        console.error('저장된 spots 데이터 파싱 실패:', error);
-      }
-    }
-  }, [planId, isInitialLoad]);
-
-  // spots가 변경될 때마다 localStorage에 저장 (초기 로드 제외)
-  useEffect(() => {
-    if (Object.keys(spots).length > 0 && planId && !isInitialLoad) {
-      localStorage.setItem(`trip_spots_${planId}`, JSON.stringify(spots));
-      // 관광지가 변경되면 저장 상태 초기화 (새로운 임시 데이터가 됨)
-      localStorage.removeItem(`trip_saved_${planId}`);
-      console.log('=== localStorage에 spots 데이터 저장 (임시 상태) ===', spots);
-    }
-  }, [spots, planId, isInitialLoad]);
-
-  // activeDay가 변경될 때 해당 날짜의 spots와 travelSegments가 없으면 빈 배열로 초기화
-  useEffect(() => {
-    setSpots((prev) => ({
-      ...prev,
-      [activeDay]: prev[activeDay] || []
-    }));
-    setTravelSegments((prev) => ({
-      ...prev,
-      [activeDay]: prev[activeDay] || []
-    }));
-  }, [activeDay]);
+  const [spots, setSpots] = useState<Record<number, Spot[]>>({
+    1: [], // 5월 13일
+    2: [], // 5월 14일
+    3: [], // 5월 15일
+  });
 
   // TRANSIT 모드를 WALKING 모드로 변경하는 함수
   const convertTransitToWalking = (spots: Record<number, Spot[]>) => {
@@ -338,7 +290,11 @@ const TripPlannerPage = () => {
     return convertedSpots;
   };
 
-  const [travelSegments, setTravelSegments] = useState<Record<number, TravelSegment[]>>({});
+  const [travelSegments, setTravelSegments] = useState<Record<number, TravelSegment[]>>({
+    1: [],
+    2: [],
+    3: [],
+  });
 
   // 드래그 앤 드롭을 위한 센서 설정
   const sensors = useSensors(
@@ -347,170 +303,6 @@ const TripPlannerPage = () => {
       coordinateGetter: sortableKeyboardCoordinates,
     }),
   );
-
-  // 계획 데이터 로드
-  useEffect(() => {
-    const loadPlanData = async () => {
-      if (!planId) return;
-      
-      setIsLoadingPlan(true);
-      try {
-        console.log('=== 계획 데이터 로드 시작 ===');
-        console.log('Plan ID:', planId);
-        
-        const response = await axiosInstance.get(`/api/plans/${planId}`);
-        console.log('=== 계획 데이터 응답 ===', response.data);
-        
-        // 백엔드 응답 구조: { success: true, data: { ... } }
-        const planData = response.data.data;
-        console.log('=== 실제 계획 데이터 ===', planData);
-        console.log('=== 데이터 구조 분석 ===', {
-          title: planData?.title,
-          startDate: planData?.startDate,
-          endDate: planData?.endDate,
-          dailyPlans: planData?.dailyPlans,
-          members: planData?.members
-        });
-        
-        setPlanData(planData);
-        
-        // localStorage에 저장된 데이터가 있는지 확인
-        const savedSpots = localStorage.getItem(`trip_spots_${planId}`);
-        const isSaved = localStorage.getItem(`trip_saved_${planId}`) === 'true';
-        let hasLocalStorageData = false;
-        
-        if (savedSpots) {
-          try {
-            const parsedSpots = JSON.parse(savedSpots);
-            hasLocalStorageData = Object.keys(parsedSpots).length > 0;
-          } catch (error) {
-            console.error('localStorage 데이터 파싱 실패:', error);
-            hasLocalStorageData = false;
-          }
-        }
-        
-        console.log('=== localStorage 데이터 확인 ===', { 
-          hasLocalStorageData, 
-          savedSpots, 
-          isSaved 
-        });
-        
-        // localStorage에 임시 데이터가 없거나 저장된 상태일 때 백엔드에서 데이터 로드
-        if (!hasLocalStorageData || isSaved) {
-          console.log('=== 백엔드에서 spots 데이터 로드 시작 ===');
-          
-          // 계획 데이터를 기반으로 spots 초기화
-          if (planData && planData.dailyPlans) {
-            const newSpots: Record<number, Spot[]> = {};
-            
-            // 각 일별 계획의 스팟 데이터 로드
-            for (let i = 0; i < planData.dailyPlans.length; i++) {
-              const dailyPlan = planData.dailyPlans[i];
-              const dayNumber = i + 1;
-              
-              try {
-                // 해당 일별 계획의 스팟 데이터 가져오기
-                const spotsResponse = await axiosInstance.get(`/api/spots/daily-plans/${dailyPlan.id}`);
-                console.log(`=== ${dayNumber}일차 스팟 데이터 ===`, spotsResponse.data);
-                
-                if (spotsResponse.data && spotsResponse.data.data) {
-                  // 백엔드 SpotResponse를 프론트엔드 Spot 형식으로 변환
-                  const convertedSpots: Spot[] = spotsResponse.data.data.map((spot: any) => ({
-                    id: spot.id,
-                    time: '09:00', // 기본값 (백엔드에 visitTime 필드가 없음)
-                    duration: spot.duration || '1時間', // 기본값
-                    icon: <MapPin className="w-4 h-4" />,
-                    location: spot.name,
-                    address: spot.address,
-                    cost: spot.cost ? `${spot.cost}円` : '0円',
-                    latitude: spot.latitude,
-                    longitude: spot.longitude,
-                    rating: 0, // 기본값 (백엔드에 rating 필드가 없음)
-                    userRatingsTotal: 0, // 기본값 (백엔드에 userRatingsTotal 필드가 없음)
-                    transportMode: 'walking', // 기본값 (백엔드에 transportMode 필드가 없음)
-                    expenses: []
-                  }));
-                  
-                  newSpots[dayNumber] = convertedSpots;
-                } else {
-                  newSpots[dayNumber] = [];
-                }
-              } catch (error) {
-                console.error(`${dayNumber}일차 스팟 데이터 로드 실패:`, error);
-                newSpots[dayNumber] = [];
-              }
-            }
-            
-            setSpots(newSpots);
-          } else if (planData?.startDate && planData?.endDate) {
-            // dailyPlans가 없으면 startDate와 endDate로 빈 spots 생성
-            const startDate = new Date(planData.startDate);
-            const endDate = new Date(planData.endDate);
-            const newSpots: Record<number, Spot[]> = {};
-            
-            let dayNumber = 1;
-            for (let d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
-              newSpots[dayNumber] = [];
-              dayNumber++;
-            }
-            
-            setSpots(newSpots);
-            
-            // 백엔드에서 데이터를 성공적으로 로드했으면 저장 상태 초기화
-            if (isSaved) {
-              localStorage.removeItem(`trip_saved_${planId}`);
-              console.log('=== 백엔드 데이터 로드 완료, 저장 상태 초기화 ===');
-            }
-          }
-        } else {
-          console.log('=== localStorage 데이터가 있어서 백엔드 데이터 로드 건너뜀 ===');
-        }
-        
-        // travelSegments 초기화 (localStorage 데이터 여부와 관계없이)
-        if (planData && planData.dailyPlans) {
-          const newTravelSegments: Record<number, TravelSegment[]> = {};
-          for (let i = 0; i < planData.dailyPlans.length; i++) {
-            newTravelSegments[i + 1] = [];
-          }
-          setTravelSegments(newTravelSegments);
-        } else if (planData?.startDate && planData?.endDate) {
-          // dailyPlans가 없으면 startDate와 endDate로 빈 travelSegments 생성
-          const startDate = new Date(planData.startDate);
-          const endDate = new Date(planData.endDate);
-          const newTravelSegments: Record<number, TravelSegment[]> = {};
-          
-          let dayNumber = 1;
-          for (let d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
-            newTravelSegments[dayNumber] = [];
-            dayNumber++;
-          }
-          
-          setTravelSegments(newTravelSegments);
-        }
-        
-      } catch (error) {
-        console.error('계획 데이터 로드 실패:', error);
-        console.error('에러 상세 정보:', {
-          message: error instanceof Error ? error.message : 'Unknown error',
-          status: error && typeof error === 'object' && 'response' in error ? (error as any).response?.status : 'No status',
-          data: error && typeof error === 'object' && 'response' in error ? (error as any).response?.data : 'No data'
-        });
-        
-        // 에러 발생 시 기본 데이터 설정
-        setPlanData({
-          title: '東京2泊3日旅',
-          startDate: '2026.05.13',
-          endDate: '2026.05.15',
-          dailyPlans: []
-        });
-      } finally {
-        setIsLoadingPlan(false);
-        setIsInitialLoad(false); // 초기 로드 완료
-      }
-    };
-    
-    loadPlanData();
-  }, [planId]);
 
   // 컴포넌트 마운트 시 TRANSIT 모드를 WALKING 모드로 변경
   React.useEffect(() => {
@@ -530,7 +322,7 @@ const TripPlannerPage = () => {
     duration: string = '1時間',
     transportMode: 'walking' | 'driving' | 'transit' = 'walking',
   ) => {
-    const currentSpots = spots[activeDay] || [];
+    const currentSpots = spots[activeDay];
     let arrivalTime = departureTime;
 
     // 이전 관광지가 있으면 이동 시간 계산 (첫 번째 스팟은 호텔이므로 이동 시간 계산 안함)
@@ -563,7 +355,7 @@ const TripPlannerPage = () => {
 
     setSpots((prev) => ({
       ...prev,
-      [activeDay]: [...(prev[activeDay] || []), spotWithDuration],
+      [activeDay]: [...prev[activeDay], spotWithDuration],
     }));
 
     // 이동 시간 세그먼트 추가 (2개 이상일 때만, 첫 번째 스팟은 제외)
@@ -767,7 +559,7 @@ const TripPlannerPage = () => {
 
     setTravelSegments((prev) => ({
       ...prev,
-      [activeDay]: [...(prev[activeDay] || []), newSegment],
+      [activeDay]: [...prev[activeDay], newSegment],
     }));
 
     return travelTime; // 이동 시간을 반환
@@ -775,7 +567,7 @@ const TripPlannerPage = () => {
 
   // 교통수단 변경 시 이동 시간 재계산 및 도착시간 업데이트 (첫 번째 스팟 제외)
   const recalculateTravelTimes = async (updatedSpots?: Spot[]) => {
-    const currentSpots = updatedSpots || spots[activeDay] || [];
+    const currentSpots = updatedSpots || spots[activeDay];
     if (currentSpots.length < 2) return;
 
     const newSegments: TravelSegment[] = [];
@@ -842,7 +634,7 @@ const TripPlannerPage = () => {
     const { active, over } = event;
 
     if (over && active.id !== over.id) {
-      const currentSpots = spots[activeDay] || [];
+      const currentSpots = spots[activeDay];
       const oldIndex = currentSpots.findIndex((spot) => spot.id === active.id);
       const newIndex = currentSpots.findIndex((spot) => spot.id === over.id);
 
@@ -859,7 +651,7 @@ const TripPlannerPage = () => {
   const moveSpotUp = async (day: number, spotIndex: number) => {
     if (spotIndex === 0) return;
 
-    const currentSpots = spots[day] || [];
+    const currentSpots = spots[day];
     const reorderedSpots = arrayMove(currentSpots, spotIndex, spotIndex - 1);
 
     // 순서 변경 후 이동시간 재계산
@@ -868,7 +660,7 @@ const TripPlannerPage = () => {
 
   // 아래로 이동 함수
   const moveSpotDown = async (day: number, spotIndex: number) => {
-    const currentSpots = spots[day] || [];
+    const currentSpots = spots[day];
     if (spotIndex === currentSpots.length - 1) return;
 
     const reorderedSpots = arrayMove(currentSpots, spotIndex, spotIndex + 1);
@@ -974,9 +766,15 @@ const TripPlannerPage = () => {
       }
 
       // 401 오류인 경우 특별 처리
-      if (error && typeof error === 'object' && 'response' in error && 
-          error.response && typeof error.response === 'object' && 'status' in error.response &&
-          error.response.status === 401) {
+      if (
+        error &&
+        typeof error === 'object' &&
+        'response' in error &&
+        error.response &&
+        typeof error.response === 'object' &&
+        'status' in error.response &&
+        error.response.status === 401
+      ) {
         console.error('401 인증 오류 발생 - SecurityConfig 설정 확인 필요');
         alert('인증 오류가 발생했습니다. 백엔드 서버를 재시작해주세요.');
         return;
@@ -992,7 +790,7 @@ const TripPlannerPage = () => {
   // 관광지 이동 수단 업데이트 함수
   const updateSpotTransportMode = async (spotId: number, newTransportMode: 'walking' | 'driving' | 'transit') => {
     // 먼저 spots 상태를 업데이트하고 업데이트된 spots를 받아옴
-    const updatedSpots = (spots[activeDay] || []).map((spot) =>
+    const updatedSpots = spots[activeDay].map((spot) =>
       spot.id === spotId ? { ...spot, transportMode: newTransportMode } : spot,
     );
 
@@ -1011,7 +809,7 @@ const TripPlannerPage = () => {
   ) => {
     if (!editingSpot) return;
 
-    const currentSpots = spots[activeDay] || [];
+    const currentSpots = spots[activeDay];
     const spotIndex = currentSpots.findIndex((spot) => spot.id === editingSpot.id);
 
     if (spotIndex === -1) return;
@@ -1027,7 +825,7 @@ const TripPlannerPage = () => {
 
     setSpots((prev) => ({
       ...prev,
-      [activeDay]: (prev[activeDay] || []).map((spot) => (spot.id === editingSpot.id ? updatedSpot : spot)),
+      [activeDay]: prev[activeDay].map((spot) => (spot.id === editingSpot.id ? updatedSpot : spot)),
     }));
 
     // 이동 시간 재계산
@@ -1039,7 +837,7 @@ const TripPlannerPage = () => {
 
   // 관광지 삭제 함수
   const deleteSpot = (day: number, spotId: number) => {
-    const currentSpots = spots[day] || [];
+    const currentSpots = spots[day];
     const spotIndex = currentSpots.findIndex((spot) => spot.id === spotId);
 
     if (spotIndex === -1) return;
@@ -1047,7 +845,7 @@ const TripPlannerPage = () => {
     // 관광지 삭제
     setSpots((prev) => ({
       ...prev,
-      [day]: (prev[day] || []).filter((spot) => spot.id !== spotId),
+      [day]: prev[day].filter((spot) => spot.id !== spotId),
     }));
 
     // 이동 시간 세그먼트 재구성 (첫 번째 스팟 제외)
@@ -1062,7 +860,7 @@ const TripPlannerPage = () => {
         const toSpot = remainingSpots[i]; // 현재 스팟
 
         // 기존 세그먼트에서 찾기
-        const existingSegment = (prev[day] || []).find(
+        const existingSegment = prev[day].find(
           (segment) => segment.fromSpot?.id === fromSpot.id && segment.toSpot?.id === toSpot.id,
         );
 
@@ -1167,27 +965,8 @@ const TripPlannerPage = () => {
         <div className="px-3 py-2 bg-pink-500 text-white rounded-lg mb-3">
           <div className="flex items-center justify-between">
             <span className="text-sm font-medium">
-              {(() => {
-                const dayNames = ['一日目', '二日目', '三日目', '四日目', '五日目', '六日目', '七日目', '八日目', '九日目', '十日目'];
-                const weekDays = ['日曜日', '月曜日', '火曜日', '水曜日', '木曜日', '金曜日', '土曜日'];
-                
-                if (planData?.dailyPlans && planData.dailyPlans[activeDay - 1]) {
-                  const visitDate = new Date(planData.dailyPlans[activeDay - 1].visitDate);
-                  const dayOfWeek = weekDays[visitDate.getDay()];
-                  return `${dayNames[activeDay - 1]}: ${dayOfWeek}`;
-                }
-                
-                // 기본값: startDate와 endDate로 요일 계산
-                if (planData?.startDate) {
-                  const startDate = new Date(planData.startDate);
-                  const targetDate = new Date(startDate);
-                  targetDate.setDate(startDate.getDate() + (activeDay - 1));
-                  const dayOfWeek = weekDays[targetDate.getDay()];
-                  return `${dayNames[activeDay - 1]}: ${dayOfWeek}`;
-                }
-                
-                return activeDay === 1 ? '一日目: 火曜日' : activeDay === 2 ? '二日目: 木曜日' : '三日目: 金曜日';
-              })()}
+              {activeDay === 1 ? '一日目' : activeDay === 2 ? '二日目' : '三日目'}:
+              {activeDay === 1 ? '火曜日' : activeDay === 2 ? '木曜日' : '金曜日'}
             </span>
             <button
               onClick={() => setIsDepartureTimeDialogOpen(true)}
@@ -1338,29 +1117,10 @@ const TripPlannerPage = () => {
         <div className="p-3 bg-white border-b">
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-2">
-              <button
-                onClick={handleBackButtonClick}
-                className="p-1 hover:bg-gray-100 rounded transition-colors"
-                title="뒤로가기"
-              >
-                <ArrowLeft className="w-4 h-4 text-gray-600" />
-              </button>
-              <h1 className="text-lg font-bold text-gray-900">
-                {isLoadingPlan ? '로딩 중...' : 
-                  (planData?.title || planData?.planTitle || planData?.name || '東京2泊3日旅')}
-              </h1>
-              <div className="flex items-center gap-1">
-                {planData?.members?.slice(0, 3).map((member: any, index: number) => (
-                  <div key={member.id || index} className="w-4 h-4 bg-orange-500 rounded-full flex items-center justify-center">
-                    <span className="text-white text-xs font-bold">
-                      {member.userNickname?.charAt(0) || 'U'}
-                    </span>
-                  </div>
-                )) || (
-                  <div className="w-4 h-4 bg-green-500 rounded-full flex items-center justify-center">
-                    <span className="text-white text-xs font-bold">W</span>
-                  </div>
-                )}
+              <ArrowLeft className="w-4 h-4 text-gray-600" />
+              <h1 className="text-lg font-bold text-gray-900">東京2泊3日旅</h1>
+              <div className="w-4 h-4 bg-green-500 rounded-full flex items-center justify-center">
+                <span className="text-white text-xs font-bold">W</span>
               </div>
             </div>
             <div className="text-right">
@@ -1370,56 +1130,22 @@ const TripPlannerPage = () => {
           </div>
 
           <div className="flex items-center justify-between">
-            <p className="text-xs text-gray-500">
-              {isLoadingPlan ? '로딩 중...' : 
-                planData ? `${planData.startDate} - ${planData.endDate}` : '날짜 정보 없음'}
-            </p>
+            <p className="text-xs text-gray-500">2026.05.13 - 2026.05.15</p>
 
             {/* 날짜 탭 */}
             <div className="flex items-center gap-1">
               <ArrowLeft className="w-3 h-3 text-gray-400" />
-              {(() => {
-                if (planData?.startDate && planData?.endDate) {
-                  // dailyPlans가 없으면 startDate와 endDate로 날짜 생성
-                  const startDate = new Date(planData.startDate);
-                  const endDate = new Date(planData.endDate);
-                  const days = [];
-                  
-                  for (let d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
-                    days.push(new Date(d));
-                  }
-                  
-                  return days.map((date, index) => {
-                    const dayNumber = index + 1;
-                    const dayOfMonth = date.getDate();
-                    
-                    return (
-                      <button
-                        key={dayNumber}
-                        onClick={() => setActiveDay(dayNumber)}
-                        className={`px-2 py-1 rounded text-xs font-medium transition-colors ${
-                          activeDay === dayNumber ? 'bg-pink-500 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                        }`}
-                      >
-                        {getDayDate(dayNumber)}
-                      </button>
-                    );
-                  });
-                } else {
-                  // 기본값
-                  return [1, 2, 3].map((day) => (
-                    <button
-                      key={day}
-                      onClick={() => setActiveDay(day)}
-                      className={`px-2 py-1 rounded text-xs font-medium transition-colors ${
-                        activeDay === day ? 'bg-pink-500 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                      }`}
-                    >
-                      {getDayDate(day)}
-                    </button>
-                  ));
-                }
-              })()}
+              {[1, 2, 3].map((day) => (
+                <button
+                  key={day}
+                  onClick={() => setActiveDay(day)}
+                  className={`px-2 py-1 rounded text-xs font-medium transition-colors ${
+                    activeDay === day ? 'bg-pink-500 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  }`}
+                >
+                  {day === 1 ? '13일' : day === 2 ? '14일' : '15일'}
+                </button>
+              ))}
               <ArrowRight className="w-3 h-3 text-gray-400" />
             </div>
           </div>
@@ -1429,27 +1155,8 @@ const TripPlannerPage = () => {
         <div className="px-3 py-2 bg-pink-500 text-white">
           <div className="flex items-center justify-between">
             <span className="text-sm font-medium">
-              {(() => {
-                const dayNames = ['一日目', '二日目', '三日目', '四日目', '五日目', '六日目', '七日目', '八日目', '九日目', '十日目'];
-                const weekDays = ['日曜日', '月曜日', '火曜日', '水曜日', '木曜日', '金曜日', '土曜日'];
-                
-                if (planData?.dailyPlans && planData.dailyPlans[activeDay - 1]) {
-                  const visitDate = new Date(planData.dailyPlans[activeDay - 1].visitDate);
-                  const dayOfWeek = weekDays[visitDate.getDay()];
-                  return `${dayNames[activeDay - 1]}: ${dayOfWeek}`;
-                }
-                
-                // 기본값: startDate와 endDate로 요일 계산
-                if (planData?.startDate) {
-                  const startDate = new Date(planData.startDate);
-                  const targetDate = new Date(startDate);
-                  targetDate.setDate(startDate.getDate() + (activeDay - 1));
-                  const dayOfWeek = weekDays[targetDate.getDay()];
-                  return `${dayNames[activeDay - 1]}: ${dayOfWeek}`;
-                }
-                
-                return activeDay === 1 ? '一日目: 火曜日' : activeDay === 2 ? '二日目: 木曜日' : '三日目: 金曜日';
-              })()}
+              {activeDay === 1 ? '一日目' : activeDay === 2 ? '二日目' : '三日目'}:
+              {activeDay === 1 ? '火曜日' : activeDay === 2 ? '木曜日' : '金曜日'}
             </span>
             <button
               onClick={() => setIsDepartureTimeDialogOpen(true)}
@@ -1532,307 +1239,18 @@ const TripPlannerPage = () => {
 
   const { dayTotal, tripTotal } = calculateTotalCosts();
 
-  // 날짜 계산 함수
-  const getDayDate = (dayNumber: number) => {
-    if (!planData?.startDate) return `${dayNumber}日`;
-    
-    const startDate = new Date(planData.startDate);
-    const targetDate = new Date(startDate);
-    targetDate.setDate(startDate.getDate() + dayNumber - 1);
-    
-    return `${targetDate.getDate()}日`;
-  };
-
-  // 뒤로가기 버튼 클릭 핸들러
-  const handleBackButtonClick = () => {
-    // 저장할 데이터가 있는지 확인
-    const hasSpotsToSave = Object.values(spots).some(daySpots => daySpots.length > 0);
-    
-    if (hasSpotsToSave) {
-      setIsSaveConfirmationOpen(true);
-    } else {
-      // 저장할 데이터가 없으면 바로 이전 페이지로 이동
-      navigate(-1);
-    }
-  };
-
-  // 저장 확인 팝업에서 저장 버튼 클릭
-  const handleSaveAndExit = async () => {
-    setIsSaving(true);
-    try {
-      // 백엔드에 spots 데이터 저장
-      await saveSpotsToBackend();
-      
-      // 성공 메시지 표시
-      alert('관광지가 성공적으로 저장되었습니다!');
-      
-      // localStorage에서 임시 데이터 삭제하고 저장 완료 상태 표시
-      localStorage.removeItem(`trip_spots_${planId}`);
-      localStorage.setItem(`trip_saved_${planId}`, 'true');
-      
-      // 이전 페이지로 이동
-      navigate(-1);
-    } catch (error) {
-      console.error('저장 실패:', error);
-      alert('저장에 실패했습니다. 다시 시도해주세요.');
-    } finally {
-      setIsSaving(false);
-      setIsSaveConfirmationOpen(false);
-    }
-  };
-
-  // 저장 확인 팝업에서 취소 버튼 클릭
-  const handleCancelAndExit = () => {
-    // localStorage에서 데이터 삭제
-    localStorage.removeItem(`trip_spots_${planId}`);
-    localStorage.removeItem(`trip_saved_${planId}`);
-    // spots 상태 초기화
-    setSpots({});
-    // 이전 페이지로 이동
-    navigate(-1);
-  };
-
-  // 백엔드에 spots 데이터 저장하는 함수
-  const saveSpotsToBackend = async () => {
-    if (!planId) {
-      console.error('planId가 없습니다.');
-      return;
-    }
-
-    try {
-      console.log('=== 백엔드 저장 시작 ===');
-      console.log('저장할 spots 데이터:', spots);
-      console.log('planData:', planData);
-      console.log('planId:', planId);
-
-      // spots 데이터가 있는지 확인
-      const hasSpotsToSave = Object.values(spots).some(daySpots => daySpots.length > 0);
-      if (!hasSpotsToSave) {
-        console.log('저장할 spots 데이터가 없습니다.');
-        return;
-      }
-
-      // 각 날짜별로 spots 데이터를 백엔드에 저장
-      for (const [day, daySpots] of Object.entries(spots)) {
-        console.log(`=== ${day}일차 처리 시작 ===`);
-        console.log(`daySpots.length: ${daySpots.length}`);
-        
-        if (daySpots.length > 0) {
-          // 해당 일차의 dailyPlan 찾기 (날짜로 매칭)
-          const startDate = new Date(planData.startDate);
-          const targetDate = new Date(startDate);
-          targetDate.setDate(startDate.getDate() + parseInt(day) - 1);
-          const targetDateString = targetDate.toISOString().split('T')[0];
-          
-          console.log(`=== ${day}일차 저장 시작 ===`);
-          console.log(`targetDate: ${targetDateString}`);
-          console.log('현재 planData.dailyPlans:', planData.dailyPlans);
-          
-          const dailyPlan = planData.dailyPlans?.find((dp: any) => {
-            const dpDateString = new Date(dp.visitDate).toISOString().split('T')[0];
-            console.log(`비교: ${dpDateString} === ${targetDateString}`);
-            return dpDateString === targetDateString;
-          });
-          
-          console.log('찾은 dailyPlan:', dailyPlan);
-          console.log('dailyPlan.id:', dailyPlan?.id);
-          
-          if (dailyPlan && dailyPlan.id) {
-            // 기존 spots를 가져와서 삭제
-            try {
-              console.log(`기존 spots 조회 시작: /api/spots/daily-plans/${dailyPlan.id}`);
-              const existingSpotsResponse = await axiosInstance.get(`/api/spots/daily-plans/${dailyPlan.id}`);
-              console.log('기존 spots 응답:', existingSpotsResponse.data);
-              
-              if (existingSpotsResponse.data && existingSpotsResponse.data.data) {
-                console.log(`기존 spots 개수: ${existingSpotsResponse.data.data.length}`);
-                // 기존 spots 삭제
-                for (const existingSpot of existingSpotsResponse.data.data) {
-                  console.log(`기존 spot 삭제 시작: /api/spots/${existingSpot.id}`);
-                  await axiosInstance.delete(`/api/spots/${existingSpot.id}`);
-                  console.log(`기존 spot 삭제 완료: ${existingSpot.id}`);
-                }
-              } else {
-                console.log('기존 spots가 없습니다.');
-              }
-            } catch (error) {
-              console.warn('기존 spots 조회/삭제 실패 (무시하고 계속):', error);
-            }
-            
-            // 새로운 spots 저장
-            for (let i = 0; i < daySpots.length; i++) {
-              const spot = daySpots[i];
-              const spotRequest = {
-                name: spot.location,
-                address: spot.address,
-                category: 'LANDMARK', // 기본 카테고리 (백엔드 SpotCategory enum 값)
-                visitOrder: i, // 방문 순서
-                duration: spot.duration,
-                cost: parseInt(spot.cost.replace(/[^\d]/g, '') || '0'), // 숫자로 변환
-                latitude: spot.latitude,
-                longitude: spot.longitude
-              };
-              
-              console.log(`새 spot ${i + 1}/${daySpots.length} 저장 요청:`, spotRequest);
-              console.log(`API URL: /api/spots/daily-plans/${dailyPlan.id}`);
-              
-              try {
-                const response = await axiosInstance.post(`/api/spots/daily-plans/${dailyPlan.id}`, spotRequest);
-                console.log(`새 spot ${i + 1} 저장 완료:`, response.data);
-              } catch (error) {
-                console.error(`새 spot ${i + 1} 저장 실패:`, error);
-                throw error;
-              }
-            }
-          } else {
-            console.warn(`${day}일차에 해당하는 dailyPlan을 찾을 수 없습니다.`);
-            console.warn('planData.dailyPlans:', planData?.dailyPlans);
-            
-            // DailyPlan이 없는 경우 먼저 생성
-            try {
-              console.log(`${day}일차 DailyPlan 생성 시작`);
-              const startDate = new Date(planData.startDate);
-              const visitDate = new Date(startDate);
-              visitDate.setDate(startDate.getDate() + parseInt(day) - 1);
-              
-              const visitDateString = visitDate.toISOString().split('T')[0];
-              
-              const dailyPlanRequest = {
-                visitDate: visitDateString,
-                departureTime: '09:00'
-              };
-              
-              console.log('DailyPlan 생성 요청:', dailyPlanRequest);
-              console.log('계산된 visitDate:', visitDateString);
-              console.log('현재 planData.dailyPlans:', planData.dailyPlans);
-              
-              let newDailyPlan;
-              try {
-                const dailyPlanResponse = await axiosInstance.post(`/api/daily-plans/plans/${planId}`, dailyPlanRequest);
-                console.log('DailyPlan 생성 완료:', dailyPlanResponse.data);
-                newDailyPlan = dailyPlanResponse.data.data;
-                
-                // planData.dailyPlans에 새로 생성된 DailyPlan 추가
-                if (!planData.dailyPlans) {
-                  planData.dailyPlans = [];
-                }
-                planData.dailyPlans.push(newDailyPlan);
-                console.log('planData.dailyPlans 업데이트됨:', planData.dailyPlans);
-                
-              } catch (createError: any) {
-                console.log('DailyPlan 생성 오류:', createError.response?.status, createError.response?.data);
-                
-                // 409 오류가 아닌 경우에도 기존 DailyPlan을 찾아보기
-                const existingDailyPlan = planData.dailyPlans?.find((dp: any) => {
-                  const dpDateString = new Date(dp.visitDate).toISOString().split('T')[0];
-                  console.log(`비교: ${dpDateString} === ${visitDateString}`);
-                  return dpDateString === visitDateString;
-                });
-                
-                if (existingDailyPlan) {
-                  newDailyPlan = existingDailyPlan;
-                  console.log('기존 DailyPlan 사용:', newDailyPlan);
-                } else {
-                  console.error('DailyPlan을 찾을 수 없음:', createError);
-                  throw createError;
-                }
-              }
-              
-              // 생성된 DailyPlan으로 spots 저장
-              for (let i = 0; i < daySpots.length; i++) {
-                const spot = daySpots[i];
-                const spotRequest = {
-                  name: spot.location,
-                  address: spot.address,
-                  category: 'LANDMARK',
-                  visitOrder: i,
-                  duration: spot.duration,
-                  cost: parseInt(spot.cost.replace(/[^\d]/g, '') || '0'),
-                  latitude: spot.latitude,
-                  longitude: spot.longitude
-                };
-                
-                console.log(`새 spot ${i + 1}/${daySpots.length} 저장 요청:`, spotRequest);
-                console.log(`API URL: /api/spots/daily-plans/${newDailyPlan.id}`);
-                
-                try {
-                  const response = await axiosInstance.post(`/api/spots/daily-plans/${newDailyPlan.id}`, spotRequest);
-                  console.log(`새 spot ${i + 1} 저장 완료:`, response.data);
-                } catch (error) {
-                  console.error(`새 spot ${i + 1} 저장 실패:`, error);
-                  throw error;
-                }
-              }
-            } catch (error) {
-              console.error(`${day}일차 DailyPlan 생성 실패:`, error);
-              throw error;
-            }
-          }
-        } else {
-          console.log(`${day}일차에는 저장할 spots가 없습니다.`);
-        }
-      }
-      
-      console.log('=== 백엔드 저장 완료 ===');
-    } catch (error) {
-      console.error('백엔드 저장 실패:', error);
-      console.error('에러 상세 정보:', {
-        message: error instanceof Error ? error.message : 'Unknown error',
-        status: error && typeof error === 'object' && 'response' in error ? (error as any).response?.status : 'No status',
-        data: error && typeof error === 'object' && 'response' in error ? (error as any).response?.data : 'No data'
-      });
-      throw error;
-    }
-  };
-
-  // 로딩 중일 때 표시할 컴포넌트
-  if (isLoadingPlan) {
-    return (
-      <div className="h-screen bg-gray-50 flex flex-col">
-        <Header />
-        <div className="flex-1 flex items-center justify-center">
-          <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500 mx-auto mb-4"></div>
-            <p className="text-gray-600">여행 계획을 불러오는 중...</p>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="h-screen bg-gray-50 flex flex-col">
-      <Header />
-
       {/* 모바일: 세로 배치 */}
       <div className="flex flex-col lg:hidden flex-1 overflow-hidden">
         {/* 모바일 여행 정보 헤더 */}
         <div className="p-3 bg-white border-b">
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-2">
-              <button
-                onClick={handleBackButtonClick}
-                className="p-1 hover:bg-gray-100 rounded transition-colors"
-                title="뒤로가기"
-              >
-                <ArrowLeft className="w-4 h-4 text-gray-600" />
-              </button>
-              <h1 className="text-lg font-bold text-gray-900">
-                {isLoadingPlan ? '로딩 중...' : 
-                  (planData?.title || planData?.planTitle || planData?.name || '東京2泊3日旅')}
-              </h1>
-              <div className="flex items-center gap-1">
-                {planData?.members?.slice(0, 3).map((member: any, index: number) => (
-                  <div key={member.id || index} className="w-4 h-4 bg-orange-500 rounded-full flex items-center justify-center">
-                    <span className="text-white text-xs font-bold">
-                      {member.userNickname?.charAt(0) || 'U'}
-                    </span>
-                  </div>
-                )) || (
-                  <div className="w-4 h-4 bg-green-500 rounded-full flex items-center justify-center">
-                    <span className="text-white text-xs font-bold">W</span>
-                  </div>
-                )}
+              <ArrowLeft className="w-4 h-4 text-gray-600" />
+              <h1 className="text-lg font-bold text-gray-900">東京2泊3日旅</h1>
+              <div className="w-4 h-4 bg-green-500 rounded-full flex items-center justify-center">
+                <span className="text-white text-xs font-bold">W</span>
               </div>
             </div>
             <div className="text-right">
@@ -1840,10 +1258,7 @@ const TripPlannerPage = () => {
               <p className="text-xs text-gray-600">今日の合計: {dayTotal.toLocaleString()} ¥</p>
             </div>
           </div>
-          <p className="text-xs text-gray-500">
-            {isLoadingPlan ? '로딩 중...' : 
-              planData ? `${planData.startDate} - ${planData.endDate}` : '날짜 정보 없음'}
-          </p>
+          <p className="text-xs text-gray-500">2026.05.13 - 2026.05.15</p>
         </div>
 
         {/* 모바일 지도 */}
@@ -1859,66 +1274,17 @@ const TripPlannerPage = () => {
         <div className="p-3 bg-white border-b">
           <div className="flex items-center justify-center gap-2">
             <ArrowLeft className="w-3 h-3 text-gray-400" />
-            {(() => {
-              if (planData?.dailyPlans && planData.dailyPlans.length > 0) {
-                return planData.dailyPlans.map((dailyPlan: any, index: number) => {
-                  const dayNumber = index + 1;
-                  const visitDate = new Date(dailyPlan.visitDate);
-                  const dayOfMonth = visitDate.getDate();
-                  
-                  return (
-                    <button
-                      key={dayNumber}
-                      onClick={() => setActiveDay(dayNumber)}
-                      className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                        activeDay === dayNumber ? 'bg-pink-500 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                      }`}
-                    >
-                      {getDayDate(dayNumber)}
-                    </button>
-                  );
-                });
-              } else if (planData?.startDate && planData?.endDate) {
-                // dailyPlans가 없으면 startDate와 endDate로 날짜 생성
-                const startDate = new Date(planData.startDate);
-                const endDate = new Date(planData.endDate);
-                const days = [];
-                
-                for (let d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
-                  days.push(new Date(d));
-                }
-                
-                return days.map((date, index) => {
-                  const dayNumber = index + 1;
-                  const dayOfMonth = date.getDate();
-                  
-                  return (
-                    <button
-                      key={dayNumber}
-                      onClick={() => setActiveDay(dayNumber)}
-                      className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                        activeDay === dayNumber ? 'bg-pink-500 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                      }`}
-                    >
-                      {getDayDate(dayNumber)}
-                    </button>
-                  );
-                });
-              } else {
-                // 기본값
-                return [1, 2, 3].map((day) => (
-                  <button
-                    key={day}
-                    onClick={() => setActiveDay(day)}
-                    className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                      activeDay === day ? 'bg-pink-500 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                    }`}
-                  >
-                    {getDayDate(day)}
-                  </button>
-                ));
-              }
-            })()}
+            {[1, 2, 3].map((day) => (
+              <button
+                key={day}
+                onClick={() => setActiveDay(day)}
+                className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  activeDay === day ? 'bg-pink-500 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
+              >
+                {day === 1 ? '13일' : day === 2 ? '14일' : '15일'}
+              </button>
+            ))}
             <ArrowRight className="w-3 h-3 text-gray-400" />
           </div>
         </div>
@@ -2091,7 +1457,7 @@ const TripPlannerPage = () => {
                         onChange={async (e) => {
                           const newDuration = e.target.value;
                           // 먼저 spots 상태를 업데이트하고 업데이트된 spots를 받아옴
-                          const updatedSpots = (spots[activeDay] || []).map((spot) =>
+                          const updatedSpots = spots[activeDay].map((spot) =>
                             spot.id === editingSpot.id ? { ...spot, duration: newDuration } : spot,
                           );
 
@@ -2241,54 +1607,6 @@ const TripPlannerPage = () => {
                 disabled={isLoading}
               >
                 {isLoading ? '登録中...' : '登録'}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* 저장 확인 팝업 */}
-      {isSaveConfirmationOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-2xl p-6 w-[400px] shadow-2xl">
-            {/* 제목 */}
-            <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">저장 확인</h3>
-            
-            {/* 메시지 */}
-            <div className="text-center mb-6">
-              <p className="text-gray-600 mb-2">설정한 관광지 스팟을 저장하시겠습니까?</p>
-              <p className="text-sm text-gray-500">
-                저장하면 백엔드 서버에 영구적으로 저장되고,<br/>
-                저장하지 않으면 설정한 관광지가 삭제됩니다.
-              </p>
-            </div>
-
-            {/* 버튼 */}
-            <div className="flex gap-3">
-              <button
-                onClick={handleCancelAndExit}
-                className="flex-1 px-4 py-3 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors font-medium flex items-center justify-center gap-2"
-                disabled={isSaving}
-              >
-                <X className="w-4 h-4" />
-                취소 (삭제)
-              </button>
-              <button
-                onClick={handleSaveAndExit}
-                className="flex-1 px-4 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-                disabled={isSaving}
-              >
-                {isSaving ? (
-                  <>
-                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
-                    저장 중...
-                  </>
-                ) : (
-                  <>
-                    <Save className="w-4 h-4" />
-                    저장
-                  </>
-                )}
               </button>
             </div>
           </div>

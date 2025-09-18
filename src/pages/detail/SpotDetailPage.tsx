@@ -1,6 +1,5 @@
 import React from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
-import Header from '../../components/layout/header';
 
 // Assets
 import TokyoHero from '../../assets/Tokyo.jpg';
@@ -9,8 +8,22 @@ import TokyoDome from '../../assets/TokyoDome.jpg';
 import TokyoDome2 from '../../assets/TokyoDome2.jpg';
 import DomeSpa from '../../assets/DomeSpa.jpg';
 import OsakaHero from '../../assets/OsakaCastle.jpg';
+import OsakaCastle2 from '../../assets/OsakaCastle2.jpg';
 import OsakaGuriko from '../../assets/OsakaGuriko.jpg';
+import OsakaGuriko2 from '../../assets/OsakaGuriko2.jpg';
+import Dotonbori from '../../assets/Dotonbori.jpg';
 import USJ from '../../assets/USJ.jpg';
+import UniversalStudiosJapan from '../../assets/universal_studios japan.jpg';
+import UniversalStudiosJapan2 from '../../assets/universal_studios_japan2.jpg';
+import UniversalStudiosJapan3 from '../../assets/universal_studios_japan3.jpg';
+import OsakaAquarium1 from '../../assets/Osaka_aquarium1.jpg';
+import OsakaAquarium2 from '../../assets/Osaka_aquarium2.j.jpg';
+import OsakaAquarium3 from '../../assets/Osaka_aquarium3.jpeg';
+import OsakaArchitecture5 from '../../assets/OsakaArchitecture5.png';
+import OsakaArchitecture from '../../assets/OsakaArchitecture.png';
+import OsakaArchitecture2 from '../../assets/OsakaArchitecture2.png';
+import OsakaArchitecture3 from '../../assets/OsakaArchitecture3.png';
+import OsakaArchitecture4 from '../../assets/OsakaArchitecture4.png';
 import KyotoHero from '../../assets/Kinkakuji.jpg';
 import KiyoMizuTera from '../../assets/KiyoMizuTera.jpg';
 import SapporoHero from '../../assets/Sapporo.jpg';
@@ -22,30 +35,11 @@ import sapporowintertokei from '../../assets/sapporowintertokei.jpg';
 import FukuokaCastle from '../../assets/FukuokaCastle.jpg';
 import FukuokaCastle2 from '../../assets/FukuokaCastle2.jpg';
 import HakataCity from '../../assets/HakataCity.jpg';
-import hakatadepartbelow from '../../assets/hakatadepartbelow.jpg';
-import hakataIlumi from '../../assets/hakataIlumi.jpg';
+import HakataDepartBelow from '../../assets/HakataDepartBelow.jpg';
+import HakataIlumi from '../../assets/HakataIlumi.jpg';
 import OkinawaHero from '../../assets/OkinawaResort.jpg';
 import Shurijo from '../../assets/Shurijo.jpg';
-import seidenrekisi from '../../assets/seidenrekisi.jpg';
-import Shurijokaji from '../../assets/Shurijokaji.jpg';
-import sonokoutaki from '../../assets/sonokoutaki.jpg';
-import syureinomon from '../../assets/syureinomon.jpg';
 import OkiAquarium from '../../assets/OkiAquarium.jpg';
-import okinawazinbe from '../../assets/okinawazinbe.jpg';
-import okisangou from '../../assets/okisangou.jpg';
-import tsuraumiiruka from '../../assets/tsuraumiiruka.jpg';
-import tsuraumimap from '../../assets/tsuraumimap.jpg';
-import tsuraumisuizokukan from '../../assets/tsuraumisuizokukan.jpg';
-import Kokusaidori from '../../assets/Kokusaidori.jpg';
-import okimahoroba from '../../assets/okimahoroba.jpg';
-import okinawaliquor from '../../assets/okinawaliquor.jpg';
-import steakhouseoki from '../../assets/steakhouseoki.jpg';
-import okisteakhouse from '../../assets/okisteakhouse.jpg';
-import manzwamo from '../../assets/manzwamo.jpg';
-import manzwamo2 from '../../assets/manzwamo2.jpg';
-import kouribridge from '../../assets/kouribridge.jpg';
-import kourirocks from '../../assets/kourirocks.jpg';
-import OkinawaResort from '../../assets/OkinawaResort.jpg';
 import NagoyaCastle from '../../assets/NagoyaCastle.jpg';
 import Atsutasinkyu from '../../assets/Atsutasinkyu.jpg';
 import OsuHistory from '../../assets/OsuHistory.jpg';
@@ -407,43 +401,74 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
   },
   大阪: {
     '3': {
-      title: '大阪城',
-      description: '豊臣秀吉が築いた名城。歴史と美しさを兼ね備えた城',
+      title: '🏯 大阪城',
+      description: '日本を代表する名城。歴史と美しさを兼ね備えた観光スポット。',
       author: 'タビログ編集部',
       heroImage: OsakaHero,
       breadcrumb: ['大阪', '中央区', '大阪城'],
       contentTitle: '大阪城の基本情報',
-      spots: ['天守閣', '西の丸庭園', '大阪城公園'],
+      spots: ['天守閣', '西の丸庭園', '大阪城公園', '大阪城ホール'],
       imageLeft: OsakaHero,
-      imageRight: OsakaGuriko,
+      imageRight: OsakaCastle2,
       content:
-        '大阪城は豊臣秀吉の栄華を今に伝える名城。壮麗な天守と高石垣、広大な堀が見どころです。天守閣の展示では戦国史と城郭建築を学べ、上層の展望台からは大阪の街並みを一望可能。春は桜、秋は紅葉と四季の彩りも美しく、公園はジョギングやピクニックで賑わいます。夜間ライトアップは写真映え抜群です。',
+        '大阪城は日本を代表する歴史的な城の一つで、戦国時代の名将・豊臣秀吉によって築かれました。現在の天守閣は昭和に再建されたもので、内部は博物館として公開されています。春は桜の名所として知られ、多くの観光客で賑わいます。壮大な石垣や堀、美しい庭園も見どころです。<br><br>【2.1 天守閣】<br>大阪城のシンボルである天守閣は、地上8階建ての建物で、最上階からは大阪市街を360度一望できます。内部は歴史博物館となっており、豊臣秀吉や戦国時代に関する展示が充実しています。特に甲冑や武具の展示は人気があります。<br><br>【2.2 西の丸庭園】<br>西の丸庭園は、大阪城の外郭に位置する広大な庭園で、約600本の桜が植えられています。春には「大阪城と桜」の美しいコントラストが楽しめ、写真スポットとしても有名です。四季折々の自然が楽しめる憩いの場です。<br><br>【2.3 大阪城公園】<br>大阪城を囲む広大な公園で、ランニングや散歩を楽しむ市民の憩いの場です。イベントやコンサートも開催され、歴史と現代文化が融合する空間となっています。秋には紅葉も見事で、季節ごとに違う魅力を味わえます。<br><br>【2.4 大阪城ホール】<br>大阪城公園内にある多目的アリーナで、音楽ライブやスポーツイベントが行われます。国内外の有名アーティストがコンサートを開催することで知られ、大阪の文化発信拠点の一つとなっています。',
     },
     '4': {
-      title: '道頓堀',
-      description: '大阪の食文化を体験できる繁華街',
+      title: '🌃 道頓堀',
+      description: '大阪の文化と食を体験できる繁華街。',
       author: 'タビログ編集部',
-      heroImage: OsakaHero,
+      heroImage: OsakaGuriko2,
       breadcrumb: ['大阪', '中央区', '道頓堀'],
       contentTitle: '道頓堀の基本情報',
-      spots: ['グリコサイン', '戎橋', 'くいだおれ太郎'],
+      spots: ['グリコサイン', 'かに道楽本店', 'ドン・キホーテ観覧車', '道頓堀川遊覧船'],
       imageLeft: OsakaGuriko,
-      imageRight: OsakaHero,
+      imageRight: Dotonbori,
       content:
-        '道頓堀は大阪ミナミの中心地。グリコサインや戎橋での記念撮影は定番で、たこ焼き・お好み焼き・串カツなど粉もんの名店が揃います。川沿いの遊歩道散策やクルーズも人気。夜はネオンが水面に反射するフォトジェニックな景色が広がり、心斎橋・アメリカ村と合わせた周遊も便利です。',
+        '道頓堀は大阪ミナミを代表する繁華街で、「食い倒れの街」として知られています。たこ焼きやお好み焼きなどの大阪グルメを楽しめるほか、夜にはネオン輝く街並みが観光客を魅了します。エリア中央には有名な「グリコの看板」があり、記念撮影スポットとしても人気です。道頓堀川沿いでは遊覧船に乗って街並みを水上から楽しむこともできます。<br><br>【2.1 グリコサイン】<br>道頓堀のシンボル的存在で、大阪を代表するフォトスポット。夜には鮮やかなネオンが輝き、観光客で賑わいます。<br><br>【2.2 かに道楽本店】<br>巨大な動くカニの看板で有名な老舗料理店。新鮮なカニ料理を味わえる人気店です。<br><br>【2.3 ドン・キホーテ観覧車】<br>道頓堀のランドマークの一つ。建物の外側を囲むように設置された楕円形の観覧車からは、大阪市街を一望できます。<br><br>【2.4 道頓堀川遊覧船】<br>道頓堀川をクルーズしながら、ネオンきらめく街並みを楽しめる人気アクティビティ。夜景は特におすすめです。',
     },
     '20': {
-      title: 'ユニバーサル・スタジオ・ジャパン',
-      description: '大阪の大人気テーマパーク。映画の世界を体験',
+      title: '🎢 ユニバーサル・スタジオ・ジャパン',
+      description: '大阪の人気テーマパーク。映画の世界を体験できる場所。',
       author: 'タビログ編集部',
-      heroImage: OsakaHero,
+      heroImage: UniversalStudiosJapan3,
       breadcrumb: ['大阪', '此花区', 'USJ'],
-      contentTitle: 'USJの基本情報',
-      spots: ['ハリウッド・ドリーム', 'ザ・フライング・ダイナソー', 'マリオエリア'],
-      imageLeft: USJ,
-      imageRight: OsakaGuriko,
+      contentTitle: 'ユニバーサル・スタジオ・ジャパンの基本情報',
+      spots: [
+        'ウィザーディング・ワールド・オブ・ハリー・ポッター',
+        'スーパー・ニンテンドー・ワールド',
+        'ジュラシック・パーク',
+        'ミニオン・パーク',
+      ],
+      imageLeft: UniversalStudiosJapan,
+      imageRight: UniversalStudiosJapan2,
       content:
-        'ユニバーサル・スタジオ・ジャパンは映画の世界観を五感で体験できるテーマパーク。ダイナミックなライド、キャラクター・グリーティング、ショーに加え、スーパー・ニンテンドー・ワールドなど話題エリアも充実しています。季節ごとのナイトパレードやホラーナイトも人気で、一年を通して新鮮な驚きに出会えます。USJ公式ホテルやユニバーサル・シティウォークとの連携で、食事やショッピングもスムーズです。',
+        'USJは大阪を代表する大型テーマパークで、映画やアニメの世界を忠実に再現したアトラクションが楽しめます。ハリーポッターやスーパーマリオ、ジュラシックパークなど、子供から大人まで夢中になれるエリアが充実。四季折々のイベントやショーも人気で、一日中遊べるエンターテイメント施設です。<br><br>【2.1 ウィザーディング・ワールド・オブ・ハリー・ポッター】<br>映画『ハリー・ポッター』の世界を完全再現したエリア。ホグワーツ城やホグズミード村を歩きながら、魔法の世界を体験できます。人気アトラクション「ハリー・ポッター・アンド・ザ・フォービドゥン・ジャーニー」は必見です。<br><br>【2.2 スーパー・ニンテンドー・ワールド】<br>マリオの世界を舞台にした最新エリア。ゲームの中に入り込んだような体験ができ、「マリオカート」や「ヨッシー・アドベンチャー」などのアトラクションが楽しめます。<br><br>【2.3 ジュラシック・パーク】<br>恐竜の世界を再現したスリル満点のエリア。人気ライド「ジュラシック・パーク・ザ・ライド」では巨大な恐竜や水しぶきを体感できます。<br><br>【2.4 ミニオン・パーク】<br>映画『怪盗グルー』シリーズでおなじみのミニオンたちと遊べるエリア。カラフルでユーモラスな雰囲気が家族連れに人気です。',
+    },
+    '21': {
+      title: '🐠 海遊館',
+      description: '世界最大級の水族館。ジンベエザメに会える人気スポット。',
+      author: 'タビログ編集部',
+      heroImage: OsakaAquarium1,
+      breadcrumb: ['大阪', '港区', '海遊館'],
+      contentTitle: '海遊館の基本情報',
+      spots: ['ジンベエザメの大水槽', '南極ゾーン（ペンギン）', '熱帯雨林ゾーン', '夜の海エリア'],
+      imageLeft: OsakaAquarium2,
+      imageRight: OsakaAquarium3,
+      content:
+        '海遊館は大阪港に位置する世界最大級の水族館の一つです。館内は14の展示ゾーンに分かれており、太平洋を中心に世界各地の海や川の生き物を展示しています。特にジンベエザメが泳ぐ巨大水槽は迫力満点で、国内外から多くの観光客が訪れる人気スポットです。昼と夜で照明が変わる演出も魅力の一つで、違った雰囲気を楽しめます。<br><br>【2.1 ジンベエザメの大水槽】<br>海遊館のシンボル的存在。巨大なジンベエザメが悠々と泳ぐ姿は必見です。<br><br>【2.2 南極ゾーン（ペンギン）】<br>かわいいペンギンたちの暮らしを間近で観察できる人気エリアです。<br><br>【2.3 熱帯雨林ゾーン】<br>アマゾン川流域を再現。ピラニアやカピバラなどユニークな生物が見られます。<br><br>【2.4 夜の海エリア】<br>照明演出で昼とは違う幻想的な海の世界を体感できるコーナーです。',
+    },
+    '24': {
+      title: '🏛 中之島公会堂 × 黒執事 聖地巡礼',
+      description: '中之島公会堂 聖地巡礼！黒執事の世界を体感',
+      author: 'アニメ巡礼編集部',
+      heroImage: OsakaArchitecture5,
+      breadcrumb: ['大阪', '北区', '中之島公会堂'],
+      contentTitle: '中之島公会堂と黒執事の関係',
+      spots: ['外観（ヴィクトリア建築）', '大ホール', 'ステンドグラス'],
+      imageLeft: OsakaArchitecture2,
+      imageRight: OsakaArchitecture3,
+      content:
+        '中之島公会堂は1918年に建てられた大阪を代表するネオ・ルネッサンス様式の建築物です。アニメ『黒執事』の舞台となるヴィクトリア時代のロンドンを彷彿とさせる重厚な外観から、ファンの間では聖地の一つとして親しまれています。作品の公式ロケ地ではありませんが、その雰囲気が「黒執事」の世界観と重なるため、多くのファンが訪れています。<br><br>【2.1 外観（ヴィクトリア建築）】<br>赤レンガと白い石材を組み合わせた外観は、ヴィクトリア時代のロンドンを思わせます。ファンにとっては写真撮影の定番スポットです。<br><br>【2.2 大ホール】<br>公会堂の中心に位置する大ホールは、豪華な装飾とクラシックな雰囲気が特徴。『黒執事』の舞踏会シーンを連想させます。<br><br>【2.3 ステンドグラス】<br>天井や窓に施されたステンドグラスは必見。色鮮やかな光が差し込み、まるでアニメのワンシーンのような幻想的な空間を作り出します。',
     },
   },
   京都: {
@@ -533,10 +558,10 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
       breadcrumb: ['福岡', '博多区', '博多駅'],
       contentTitle: '博多駅の基本情報',
       spots: ['駅ビル', 'デパ地下', 'イルミネーション'],
-      imageLeft: hakatadepartbelow,
-      imageRight: hakataIlumi,
+      imageLeft: HakataDepartBelow,
+      imageRight: HakataIlumi,
       content:
-        '博多駅は九州の玄関口。駅ビルには名物の明太子や豚骨ラーメン、銘菓など福岡グルメが集結し、ショッピングも充実。イルミネーションやイベントも多く、旅行初日・最終日の滞在でも満足度の高い時間を過ごせます。空港や地下鉄とのアクセスも至便です。',
+        '博多駅は九州の玄関口。駅ビルには名物の明太子や豚骨ラーメン、銘菓など福岡グルメが集結し、ショッピングも充実。イルミネーションやイベントも多く、旅行初日・最終日の滞在でも満足度の高い時間を過ごせます。空港や地下鉄とのアクセスも至便です。<br><br>【2.1 駅ビル】<br>博多駅ビル「JR博多シティ」は、地上11階・地下2階の大型商業施設です。1階には博多の名物グルメが集結し、明太子専門店「ふくや」や博多ラーメン「一風堂」、老舗和菓子店「如水庵」などが軒を連ねています。9階・10階の「博多一番街」では、博多の伝統工芸品や地元特産品を購入できます。駅ビル内には約200店舗が入居し、九州最大級の商業施設として観光客に人気です。特に地下1階の「博多地下街」は、雨の日でも快適にショッピングが楽しめる空間となっています。<br><br>【2.2 デパ地下】<br>博多駅のデパ地下は、福岡の食文化を体感できる最高のスポットです。博多阪急の地下1階には、明太子、もつ鍋、水炊き、博多ラーメンなど、福岡の名物料理を提供する店舗が集結しています。特に「博多もつ鍋 やまや」や「博多水炊き 水月」など、老舗店の味を駅で手軽に楽しめるのが魅力です。デパ地下では、お土産用の明太子や博多の銘菓も豊富に取り揃えており、旅行の最後にまとめて購入するのに便利です。また、季節限定の商品や期間限定の催しも多く、何度訪れても新しい発見があります。<br><br>【2.3 イルミネーション】<br>博多駅周辺は、冬のイルミネーションが特に美しく、毎年12月から2月にかけて「博多イルミネーション」が開催されます。駅前広場には約10万球のLEDが使用され、幻想的な光の世界を演出します。特に「博多駅前イルミネーション」では、音楽と光のコラボレーションによるショーが人気で、多くの観光客が足を止めて見入ります。また、駅ビル内でも各階で異なるテーマのイルミネーションが展開され、ショッピングをしながら美しい光の演出を楽しめます。イルミネーション期間中は、駅周辺のカフェやレストランも特別メニューを提供し、より一層ロマンチックな雰囲気を演出します。',
     },
     '40': {
       title: '中洲屋台',
@@ -622,66 +647,27 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
       title: '首里城',
       description: '沖縄の歴史と文化を感じられる城',
       author: 'タビログ編集部',
-      heroImage: Shurijo,
+      heroImage: OkinawaHero,
       breadcrumb: ['沖縄', '那覇市', '首里城'],
       contentTitle: '首里城の基本情報',
-      spots: ['正殿', '守礼門', '園比屋武御嶽石門', '首里城火災と復旧'],
+      spots: ['正殿', '守礼門', '園比屋武御嶽石門'],
       imageLeft: Shurijo,
       imageRight: OkinawaHero,
       content:
-        '首里城は琉球王国の王宮で、朱色の正殿や城郭遺構が沖縄独自の歴史文化を物語ります。復元・保存が進む城内では琉球王国の政治や祭祀の一端に触れられます。那覇市街からのアクセスも良く、首里金城町石畳道の散策と合わせるのもおすすめです。<br><br>【2.1 正殿】<br>首里城の中心となる正殿は、琉球王国の政治の中心地として機能していました。朱色の美しい建物は沖縄独自の建築様式を表しており、中国と日本の建築文化が融合した独特の造形美を見せています。内部には王座や儀式の間が復元されており、琉球王国の栄華を偲ぶことができます。<br><br>【2.2 守礼門】<br>首里城の正門である守礼門は、琉球王国の威厳を象徴する美しい門です。「守礼之邦」の扁額が掲げられ、琉球王国が礼節を重んじる国であることを示しています。この門は首里城のシンボルとして多くの観光客に愛され、沖縄の歴史を象徴する重要な建造物です。<br><br>【2.3 園比屋武御嶽石門】<br>園比屋武御嶽石門は、琉球王国の宗教的聖地として重要な役割を果たしていた石門です。琉球の古い信仰である御嶽信仰の中心地として、王族や神女たちが祭祀を行った神聖な場所です。石造りの門は沖縄の自然と調和した美しい造形で、琉球の精神文化を今に伝えています。<br><br>【2.4 首里城火災と復旧】<br>2019年10月31日未明、首里城で大規模火災が発生し、正殿をはじめとする主要建物が焼失しました。この火災は沖縄県民のみならず、日本全国に大きな衝撃を与えました。火災後、沖縄県や那覇市、そして全国からの支援により復旧作業が進められています。2026年の復元完成を目指し、伝統的な工法と現代技術を組み合わせた復元が進んでいます。焼失した建物の詳細な記録や写真、図面を基に、琉球王国時代の姿を忠実に再現する作業が続けられており、首里城の完全復活への期待が高まっています。',
+        '首里城は琉球王国の王宮で、朱色の正殿や城郭遺構が沖縄独自の歴史文化を物語ります。復元・保存が進む城内では琉球王国の政治や祭祀の一端に触れられます。那覇市街からのアクセスも良く、首里金城町石畳道の散策と合わせるのもおすすめです。',
     },
     '12': {
       title: '美ら海水族館',
       description: '世界最大級の水族館。ジンベエザメが人気',
       author: 'タビログ編集部',
-      heroImage: OkiAquarium,
+      heroImage: OkinawaHero,
       breadcrumb: ['沖縄', '本部町', '美ら海水族館'],
       contentTitle: '美ら海水族館の基本情報',
-      spots: ['黒潮の海', 'サンゴの海', 'イルカショー', '那覇から本部町への交通手段'],
+      spots: ['黒潮の海', 'サンゴの海', 'イルカショー'],
       imageLeft: OkiAquarium,
       imageRight: OkinawaHero,
       content:
-        '美ら海水族館は世界最大級の水槽「黒潮の海」で泳ぐジンベエザメが圧巻。サンゴ礁の生態展示やイルカショー、研究バックヤードの取り組みも見応えがあります。周辺の海洋博公園やビーチと併せて一日満喫できます。<br><br>【2.1 黒潮の海】<br>美ら海水族館の最大の見どころである「黒潮の海」は、世界最大級の水槽として知られています。幅35メートル、奥行き27メートル、深さ10メートルの巨大水槽で、ジンベエザメやマンタをはじめとする大型海洋生物が悠々と泳ぐ姿を観察できます。特にジンベエザメの優雅な泳ぎは圧巻で、多くの観光客を魅了しています。<br><br>【2.2 サンゴの海】<br>「サンゴの海」では、沖縄の美しいサンゴ礁の生態系を再現した展示を見ることができます。色とりどりのサンゴとそこに住む熱帯魚たちの共生関係を観察でき、沖縄の海の豊かさを実感できます。サンゴの成長過程や保護活動についても学ぶことができ、環境教育の場としても重要な役割を果たしています。<br><br>【2.3 イルカショー】<br>美ら海水族館では、オキゴンドウやバンドウイルカによる迫力満点のイルカショーを楽しむことができます。イルカたちの知能の高さと美しい演技は、家族連れに大人気です。ショーではイルカの生態や行動についても解説され、楽しく学べるエデュテインメントとしても評価されています。<br><br>【2.4 那覇から本部町への交通手段】<br>那覇から美ら海水族館がある本部町までは、車で約1時間30分、高速バスで約2時間の距離です。最も便利なのはレンタカーでのアクセスで、沖縄自動車道を利用すれば快適に移動できます。公共交通機関では、那覇バスターミナルから本部循環線（111番）に乗り、海洋博記念公園前で下車する方法があります。バスは約2時間で、料金は片道1,500円程度です。また、高速バス「やんばる急行バス」を利用すれば、那覇空港から直接美ら海水族館まで行くことができ、観光客には特に便利です。',
-    },
-    '46': {
-      title: '国際通り',
-      description: '那覇の中心街。沖縄のグルメとお土産が楽しめる',
-      author: 'タビログ編集部',
-      heroImage: Kokusaidori,
-      breadcrumb: ['沖縄', '那覇市', '国際通り'],
-      contentTitle: '国際通りの基本情報',
-      spots: ['沖縄グルメ', 'お土産ショッピング', '伝統工芸品'],
-      imageLeft: Kokusaidori,
-      imageRight: Kokusaidori,
-      content:
-        '国際通りは那覇市の中心部に位置する沖縄を代表する繁華街です。約1.6キロメートルの通りには、沖縄の伝統料理を味わえるレストラン、お土産店、伝統工芸品店などが軒を連ね、観光客に人気のスポットです。昼間はショッピングを楽しみ、夜は沖縄料理と泡盛で賑やかな雰囲気を味わえます。<br><br>【2.1 沖縄グルメ】<br>国際通りには沖縄を代表するグルメスポットが集まっています。ステーキハウス88は沖縄発祥のステーキレストランで、手頃な価格で本格的なステーキを楽しめることで人気です。沖縄牛を使ったステーキは柔らかく、ジューシーで、観光客にも地元の人々にも愛されています。また、マホロバは沖縄の伝統的な居酒屋で、泡盛と沖縄料理の組み合わせが絶品です。ゴーヤチャンプルー、ラフテー、ソーキそばなど、沖縄の郷土料理を本格的な味で楽しむことができ、沖縄の食文化を深く体験できる場所です。<br><br>【2.2 お土産ショッピング】<br>国際通りにはCalbee PLUS Okinawaという人気のお土産店があります。この店の最大の特徴は、注文と同時にポテトチップスを揚げてくれることです。沖縄限定の紫芋味やシークワーサー味など、沖縄ならではのフレーバーを楽しむことができ、できたてのサクサクとした食感は格別です。店内では揚げる工程を見学することもでき、お土産として持ち帰るだけでなく、その場で味わうこともできます。沖縄の特産品を使ったオリジナル商品も豊富で、沖縄旅行の思い出にぴったりのお土産を見つけることができます。<br><br>【2.3 伝統工芸品】<br>国際通りには琉球ショップという伝統工芸品専門店があります。琉球ガラス、紅型、琉球漆器、三線などの沖縄の伝統的な工芸品を扱っており、職人による手作りの美しい作品を実際に見て、触って、購入することができます。琉球ガラスの美しい色彩と独特の形状は、沖縄の自然と文化を表現しており、お土産としても人気です。また、工芸品の制作過程を見学できる店舗もあり、沖縄の伝統技術を学ぶ貴重な体験ができます。職人との交流を通じて、沖縄の文化と歴史をより深く理解することができます。',
-    },
-    '47': {
-      title: '万座毛',
-      description: '沖縄を代表する絶景スポット。象の鼻のような岩が有名',
-      author: 'タビログ編集部',
-      heroImage: manzwamo,
-      breadcrumb: ['沖縄', '恩納村', '万座毛'],
-      contentTitle: '万座毛の基本情報',
-      spots: ['象の鼻の岩', '韓国ドラマのロケ地'],
-      imageLeft: manzwamo,
-      imageRight: manzwamo2,
-      content:
-        '万座毛は沖縄本島中部の恩納村にある絶景スポットです。琉球石灰岩の断崖絶壁が続く海岸で、特に「象の鼻」と呼ばれる岩の形状が有名です。青い海と白い岩のコントラストが美しく、沖縄を代表する観光地として多くの観光客が訪れます。<br><br>【2.1 象の鼻の岩】<br>万座毛の最大の見どころは、琉球石灰岩が長年の風化と浸食によって形成された「象の鼻」と呼ばれる岩です。この岩はまさに象の鼻のような形状をしており、沖縄の自然が作り出した芸術作品とも言える美しさです。岩の上から見下ろす青い海の景色は圧巻で、沖縄の自然の雄大さを実感できます。特に夕日の時間帯は、岩と海が夕日に照らされて幻想的な雰囲気を演出します。展望台からは恩納村の美しい海岸線も一望でき、沖縄の自然の豊かさを感じることができます。<br><br>【2.2 韓国ドラマのロケ地】<br>万座毛は韓国ドラマ「괜찮아 사랑이야（大丈夫、愛だよ）」のロケ地としても有名です。このドラマは2014年に放送され、趙寅成と孔孝真が主演した人気ロマンスドラマです。万座毛の美しい絶景がドラマの重要なシーンで使用され、特に象の鼻の岩を背景にしたロマンチックなシーンは多くの視聴者に印象を残しました。このドラマの影響で、韓国からの観光客が大幅に増加し、万座毛は韓国でも有名な沖縄の観光スポットとなりました。ドラマファンにとっては、実際にドラマで見た美しい景色を自分の目で確認できる特別な場所となっています。',
-    },
-    '48': {
-      title: '古宇利島',
-      description: '沖縄本島北部の美しい島。透明度の高い海が魅力',
-      author: 'タビログ編集部',
-      heroImage: kouribridge,
-      breadcrumb: ['沖縄', '古宇利島', '古宇利島'],
-      contentTitle: '古宇利島の基本情報',
-      spots: ['古宇利大橋', 'ハートロック'],
-      imageLeft: kouribridge,
-      imageRight: kourirocks,
-      content:
-        '古宇利島は沖縄本島北部に位置する小さな島で、古宇利大橋で本島とつながっています。島の周囲は約8キロメートルで、透明度の高い美しい海と白い砂浜が魅力です。琉球神話の舞台としても知られ、沖縄の原風景を感じられる人気の観光スポットです。<br><br>【2.1 古宇利大橋】<br>古宇利大橋は沖縄本島と古宇利島を結ぶ全長1,960メートルの美しい橋です。橋の上から見る景色は絶景で、青い海と空が一体となった美しいパノラマを楽しむことができます。特に晴れた日には、海の透明度が高く、橋の下を泳ぐ魚の姿も見ることができます。橋の上は歩行者も通行可能で、ゆっくりと景色を楽しみながら島へ向かうことができます。また、橋の途中には展望台もあり、より高い位置から美しい景色を眺めることができます。<br><br>【2.2 ハートロック】<br>ハートロックは古宇利島の海岸にあるハート型の岩で、恋人同士に人気のスポットです。この岩は自然の力によって形成されたもので、まさにハートの形をしています。特に夕日の時間帯は、ハートロックが夕日に照らされてロマンチックな雰囲気を演出します。カップルで訪れる観光客が多く、記念写真を撮る人々で賑わいます。また、ハートロックの周辺には美しい海岸線が続いており、沖縄の自然の美しさを満喫できます。',
+        '美ら海水族館は世界最大級の水槽「黒潮の海」で泳ぐジンベエザメが圧巻。サンゴ礁の生態展示やイルカショー、研究バックヤードの取り組みも見応えがあります。周辺の海洋博公園やビーチと併せて一日満喫できます。',
     },
   },
   広島: {
@@ -785,8 +771,6 @@ const SpotDetailPage = () => {
 
   return (
     <div className="min-h-screen">
-      <Header />
-
       {/* Hero Section */}
       <section className="relative h-96 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${hero})` }}>
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60"></div>
@@ -808,9 +792,22 @@ const SpotDetailPage = () => {
         {/* Hero Content */}
         <div className="absolute bottom-0 left-0 right-0 z-10 px-6 pb-8">
           <div className="max-w-7xl mx-auto">
-            <h1 className="text-white text-4xl md:text-5xl font-bold mb-4 drop-shadow-lg">{safeTitle}</h1>
-            <p className="text-white text-lg mb-4 drop-shadow-md">{safeDesc}</p>
-            <div className="flex items-center space-x-4 text-white text-sm drop-shadow-md">
+            <h1
+              className="text-white text-4xl md:text-5xl font-bold mb-4 drop-shadow-2xl"
+              style={{ textShadow: '2px 2px 8px rgba(0, 0, 0, 0.8)' }}
+            >
+              {safeTitle}
+            </h1>
+            <p
+              className="text-white text-lg mb-4 drop-shadow-xl"
+              style={{ textShadow: '1px 1px 4px rgba(0, 0, 0, 0.7)' }}
+            >
+              {safeDesc}
+            </p>
+            <div
+              className="flex items-center space-x-4 text-white text-sm drop-shadow-lg"
+              style={{ textShadow: '1px 1px 3px rgba(0, 0, 0, 0.6)' }}
+            >
               <span>PLAN | SHARE | LOG</span>
               <span>8.2K views</span>
               <span>by {detail?.author || 'タビログ編集部'}</span>
@@ -851,24 +848,38 @@ const SpotDetailPage = () => {
           <h2 className="text-3xl font-bold text-gray-900 mb-8">{detail?.contentTitle || `${safeTitle} の基本情報`}</h2>
 
           {/* Images */}
-          {!(cityKey === '沖縄' && idKey === '11') &&
-            !(cityKey === '沖縄' && idKey === '12') &&
-            !(cityKey === '沖縄' && idKey === '46') && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                  <div
-                    className="h-64 bg-cover bg-center bg-no-repeat"
-                    style={{ backgroundImage: `url(${detail?.imageLeft || hero})` }}
-                  ></div>
-                </div>
-                <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                  <div
-                    className="h-64 bg-cover bg-center bg-no-repeat"
-                    style={{ backgroundImage: `url(${detail?.imageRight || hero})` }}
-                  ></div>
-                </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div className="bg-white rounded-lg overflow-hidden shadow-md">
+              <div
+                className="h-64 bg-cover bg-center bg-no-repeat"
+                style={{ backgroundImage: `url(${detail?.imageLeft || hero})` }}
+              ></div>
+            </div>
+            <div className="bg-white rounded-lg overflow-hidden shadow-md">
+              <div
+                className="h-64 bg-cover bg-center bg-no-repeat"
+                style={{ backgroundImage: `url(${detail?.imageRight || hero})` }}
+              ></div>
+            </div>
+          </div>
+
+          {/* Extra Images for 中之島公会堂 */}
+          {cityKey === '大阪' && idKey === '24' && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${OsakaArchitecture})` }}
+                ></div>
               </div>
-            )}
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${OsakaArchitecture4})` }}
+                ></div>
+              </div>
+            </div>
+          )}
 
           {/* Extra Images for Tokyo Dome */}
           {cityKey === '東京' && idKey === '19' && (
@@ -1153,120 +1164,6 @@ const SpotDetailPage = () => {
                 <div
                   className="h-64 bg-cover bg-center bg-no-repeat"
                   style={{ backgroundImage: `url(${ohori})` }}
-                ></div>
-              </div>
-            </div>
-          )}
-
-          {/* Extra Images for Shuri Castle */}
-          {cityKey === '沖縄' && idKey === '11' && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-              <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                <div
-                  className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${Shurijo})` }}
-                ></div>
-              </div>
-              <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                <div
-                  className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${Shurijokaji})` }}
-                ></div>
-              </div>
-              <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                <div
-                  className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${sonokoutaki})` }}
-                ></div>
-              </div>
-              <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                <div
-                  className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${syureinomon})` }}
-                ></div>
-              </div>
-            </div>
-          )}
-
-          {/* Extra Images for Okinawa Churaumi Aquarium */}
-          {cityKey === '沖縄' && idKey === '12' && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-              <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                <div
-                  className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${okinawazinbe})` }}
-                ></div>
-              </div>
-              <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                <div
-                  className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${okisangou})` }}
-                ></div>
-              </div>
-              <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                <div
-                  className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${tsuraumiiruka})` }}
-                ></div>
-              </div>
-              <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                <div
-                  className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${tsuraumimap})` }}
-                ></div>
-              </div>
-            </div>
-          )}
-
-          {/* Extra Images for Sapporo Clock Tower */}
-          {cityKey === '札幌' && idKey === '7' && (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-              <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                <div
-                  className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${SapporoTime})` }}
-                ></div>
-              </div>
-              <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                <div
-                  className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${sapporotokeiexhibition})` }}
-                ></div>
-              </div>
-              <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                <div
-                  className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${sapporowintertokei})` }}
-                ></div>
-              </div>
-            </div>
-          )}
-
-          {/* Extra Images for Kokusai Street */}
-          {cityKey === '沖縄' && idKey === '46' && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-              <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                <div
-                  className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${okimahoroba})` }}
-                ></div>
-              </div>
-              <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                <div
-                  className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${okinawaliquor})` }}
-                ></div>
-              </div>
-              <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                <div
-                  className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${steakhouseoki})` }}
-                ></div>
-              </div>
-              <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                <div
-                  className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${okisteakhouse})` }}
                 ></div>
               </div>
             </div>
