@@ -9,6 +9,7 @@ import SideNavigation from '../../components/layout/side-navigation';
 import { ArrowLeft, ArrowRight, Upload, Image as ImageIcon, MapPin } from 'lucide-react';
 import { axiosInstance } from '../../api/axios';
 import { uploadImage } from '../../api/api';
+import Header from '@/components/layout/header';
 
 interface RegionData {
   [key: string]: string[];
@@ -253,6 +254,7 @@ export default function NewPlanDetail() {
   return (
     <div className="min-h-screen">
       {/* 헤더 */}
+      <Header />
 
       <div className="flex">
         {/* 사이드바 네비게이션 (데스크톱만) */}
