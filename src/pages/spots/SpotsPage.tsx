@@ -86,6 +86,11 @@ import GenghisKhan from '../../assets/GenghisKhan.jpg';
 import SapporoBeerTaste from '../../assets/SapporoBeerTaste.jpg';
 import hokudaipopula from '../../assets/hokudaipopula.jpg';
 import tanukiya from '../../assets/tanukiya.jpg';
+import zyouzankei from '../../assets/zyouzankei.jpg';
+import nisekounited from '../../assets/nisekounited.jpg';
+import rusutsuresort from '../../assets/rusutsuresort.jpg';
+import sapporoabasiri from '../../assets/sapporoabasiri.jpg';
+import ramenyokocho from '../../assets/ramenyokocho.jpg';
 
 const SpotsPage = () => {
   const [selectedCity, setSelectedCity] = useState<string | null>(null);
@@ -751,17 +756,17 @@ const SpotsPage = () => {
       id: 30,
       title: '札幌グルメ巡り！ラーメンと海鮮',
       description: '札幌ラーメンと新鮮な海鮮を堪能するグルメ旅。',
-      image: Sapporo,
+      image: ramenyokocho,
       author: 'グルメ好き',
       type: 'グルメ',
       city: '札幌',
     },
     {
       id: 32,
-      title: '札幌夜景と温泉！リラックス旅',
-      description: '札幌テレビ塔からの夜景と近郊温泉で癒しの時間。',
-      image: SapporoTower,
-      author: '癒し派',
+      title: '札幌近郊温泉巡り！癒しの名湯旅',
+      description: '札幌からアクセスしやすい人気温泉地を巡る贅沢な温泉旅。',
+      image: zyouzankei,
+      author: '温泉好き',
       type: 'リラックス',
       city: '札幌',
     },
@@ -787,7 +792,7 @@ const SpotsPage = () => {
       id: 33,
       title: '北海道スキー場TOP3！ニセコ・ルスツ・富良野',
       description: '世界が惚れ込むパウダースノー。札幌から行ける人気スキー3大エリアを1枚で理解。',
-      image: Sapporo,
+      image: rusutsuresort,
       author: 'スノー派',
       type: 'ウィンター',
       city: '札幌',
@@ -797,7 +802,7 @@ const SpotsPage = () => {
       title: 'オホーツク流氷体験！札幌→網走 1〜2日旅',
       description:
         '札幌から特急で網走へ。流氷砕氷船クルーズ、季節列車で北浜駅へ、オホーツク海の絶景を楽しむ冬のモデルコース。',
-      image: Otaru_Canal_Winter,
+      image: sapporoabasiri,
       author: '旅ログ編集部',
       type: '一人旅',
       city: '札幌',
