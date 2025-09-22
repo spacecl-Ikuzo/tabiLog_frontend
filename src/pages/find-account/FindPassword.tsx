@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Card } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import SecurityNotice from './components/SecurityNotice';
+import { toast } from 'sonner';
 
 export default function FindPassword() {
   const navigate = useNavigate();
@@ -26,6 +27,9 @@ export default function FindPassword() {
     // 이메일 전송 로직
     setIsEmailSent(true);
     setEmailError('');
+    
+    // 성공 팝업 메시지 표시
+    toast.success('入力いただいたメールアドレスに認証コードを送信いたしました');
   };
 
   const handleConfirmAuthCode = () => {
