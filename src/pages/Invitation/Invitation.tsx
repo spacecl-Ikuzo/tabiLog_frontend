@@ -46,7 +46,7 @@ const InvitationPage = () => {
     // 사용자 상태에 따라 자동 리다이렉트
     if (invitationData.userExists) {
       if (useUserStore.getState().token) {
-        navigate(`/plans`);
+        navigate(`/plans/${invitationData.planId}`);
       } else {
         // 기존 사용자 -> 로그인 페이지로 이동
         setInvitationInfo(invitationData);
