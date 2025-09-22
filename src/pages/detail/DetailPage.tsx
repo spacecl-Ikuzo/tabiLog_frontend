@@ -66,6 +66,7 @@ import sennichi from '../../assets/sennichi.jpg';
 import okinawacruising from '../../assets/okinawacruising.jpg';
 import okinawanohumanisland from '../../assets/okinawanohumanisland.jpg';
 import okinawasailing from '../../assets/okinawasailing.jpg';
+import okinawasnokling from '../../assets/okinawasnokling.jpg';
 import ramenyokocho from '../../assets/ramenyokocho.jpg';
 import yokochoramen from '../../assets/yokochoramen.jpeg';
 import nijoichiba from '../../assets/nijoichiba.jpg';
@@ -337,8 +338,8 @@ const DetailPage = () => {
       title: '沖縄ヨットツアー！無人島クルーズとサンセット',
       description: 'ヨットで珊瑚の海をクルーズし、無人島に上陸。最後はサンセットで締める海時間のご褒美旅。',
       author: 'マリン派',
-      image: okinawasailing,
-      heroImage: okinawasailing,
+      image: okinawacruising,
+      heroImage: okinawacruising,
       breadcrumb: ['沖縄', '那覇', 'ヨットツアー'],
       contentTitle: 'ヨットツアーの基本情報',
       spots: ['クルージング', '無人島上陸', 'スノーケリング', 'サンセットセーリング'],
@@ -828,7 +829,7 @@ const DetailPage = () => {
               <div className="bg-white rounded-lg overflow-hidden shadow-md">
                 <div
                   className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${okinawasailing})` }}
+                  style={{ backgroundImage: `url(${okinawasnokling})` }}
                 ></div>
               </div>
             </div>
