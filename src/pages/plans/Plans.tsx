@@ -199,11 +199,11 @@ export default function Plans() {
     updateCurrentPageList();
   }, [updateCurrentPageList]);
 
-  const handleModifyPlan = (event: React.MouseEvent<HTMLDivElement>) => {
+  const handleModifyPlan = (event: React.MouseEvent<HTMLDivElement>, plan: Plan) => {
     //플랜 수정
     event.stopPropagation();
     event.preventDefault();
-    toast.error('削除はまだ実装されていません。', { position: 'top-center' });
+    navigate(`/newPlan`, { state: { plan: plan } });
   };
 
   //플랜 삭제
@@ -364,7 +364,7 @@ export default function Plans() {
                                   </Button>
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent align="end" className="w-40">
-                                  <DropdownMenuItem onClick={(event) => handleModifyPlan(event, plan.id)}>
+                                  <DropdownMenuItem onClick={(event) => handleModifyPlan(event, plan)}>
                                     編集
                                   </DropdownMenuItem>
                                   <DropdownMenuItem onClick={(event) => handleDeletePlan(event, plan.id)}>
