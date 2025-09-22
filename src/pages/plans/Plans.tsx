@@ -206,11 +206,23 @@ export default function Plans() {
     toast.error('削除はまだ実装されていません。', { position: 'top-center' });
   };
 
-  const handleDeletePlan = (event: React.MouseEvent<HTMLDivElement>) => {
-    //플랜 삭제
+  //플랜 삭제
+  const handleDeletePlan = async (event: React.MouseEvent<HTMLDivElement>, planId: number) => {
     event.stopPropagation();
     event.preventDefault();
-    toast.error('削除はまだ実装されていません。', { position: 'top-center' });
+    setIsLoading(true);
+
+    try {
+      await axiosInstance.delete(`/api/plans/${planId}`);
+      toast.success('該当のプランが削除されました。', { position: 'top-center' });
+    } catch (error) {
+      console.error('プランの削除に失敗しました。', error);
+      toast.error('プランの削除に失敗しました。', { position: 'top-center' });
+    } finally {
+      setIsLoading(false);
+      setSelectedPlanId(null);
+      fetchPlanList(selectedPrefecture, selectedStatus);
+    }
   };
 
   return (
@@ -352,8 +364,12 @@ export default function Plans() {
                                   </Button>
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent align="end" className="w-40">
-                                  <DropdownMenuItem onClick={(event) => handleModifyPlan(event)}>編集</DropdownMenuItem>
-                                  <DropdownMenuItem onClick={(event) => handleDeletePlan(event)}>削除</DropdownMenuItem>
+                                  <DropdownMenuItem onClick={(event) => handleModifyPlan(event, plan.id)}>
+                                    編集
+                                  </DropdownMenuItem>
+                                  <DropdownMenuItem onClick={(event) => handleDeletePlan(event, plan.id)}>
+                                    削除
+                                  </DropdownMenuItem>
                                 </DropdownMenuContent>
                               </DropdownMenu>
                             </div>
