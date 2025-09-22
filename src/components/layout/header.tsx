@@ -32,11 +32,6 @@ const Header = () => {
             観光スポット紹介
           </button>
 
-          {/* ✅ 네 전용 페이지 링크 추가 */}
-          <button className="cursor-pointer hover:text-orange-200" onClick={() => navigate('/spots2')}>
-            関西・北海道
-          </button>
-
           <button className="cursor-pointer hover:text-orange-200" onClick={() => navigate('/plans')}>
             マイトリップ
           </button>
