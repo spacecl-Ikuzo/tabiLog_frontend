@@ -11,6 +11,7 @@ import { axiosInstance } from '../../api/axios';
 import { uploadImage } from '../../api/api';
 import Header from '@/components/layout/header';
 import { Plan } from '@/lib/type';
+import { toast } from 'sonner';
 
 interface RegionData {
   [key: string]: string[];
@@ -245,10 +246,15 @@ export default function NewPlanDetail() {
 
       console.log('플랜 생성 데이터:', requestData);
 
-      const response = await axiosInstance.post('/api/plans', requestData);
-      console.log('플랜 생성 성공:', response.data);
-
-      alert('旅行計画が作成されました！');
+      // 수정 모드에서 플랜 업데이트
+      if (plan) {
+        await axiosInstance.put(`/api/plans/${plan.id}`, requestData);
+        toast.success('旅行計画が更新されました！');
+      } else {
+        // 새 플랜 생성
+        await axiosInstance.post('/api/plans', requestData);
+        toast.success('旅行計画が作成されました！');
+      }
       navigate('/plans');
     } catch (error: any) {
       console.error('플랜 생성 실패:', error);
