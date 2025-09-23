@@ -14,11 +14,9 @@ import SapporoTower from '../../assets/SapporoTower.jpg';
 import OkinawaResort from '../../assets/OkinawaResort.jpg';
 import TokyoTower from '../../assets/TokyoTower.jpg';
 import boolseal from '../../assets/boolseal.jpg';
-import okinawaeisamatsuri from '../../assets/okinawaeisamatsuri.jpg';
 import okinawacruising from '../../assets/okinawacruising.jpg';
 // import marineaqua from '../../assets/marineaqua.jpg';
 import Otaru_Canal_Winter from '../../assets/Otaru_Canal_Winter.jpg';
-import Sapporo_SusukinoNight from '../../assets/Sapporo_SusukinoNight.jpg';
 import AsaKusa from '../../assets/AsaKusa.jpg';
 import OsakaGuriko from '../../assets/OsakaGuriko.jpg';
 import KiyoMizuTera from '../../assets/KiyoMizuTera.jpg';
@@ -38,7 +36,6 @@ import akihabara from '../../assets/akihabara.jpg';
 import fujiq1 from '../../assets/fujiq1.jpg';
 import KiminoNamaewa from '../../assets/KiminoNamaewa.jpg';
 import tenkinoko from '../../assets/tenkinoko.jpg';
-import Digimon4 from '../../assets/Digimon4.jpg';
 import hakoneonsen from '../../assets/hakoneonsen.jpg';
 import jiburiPost from '../../assets/jiburiPost.jpg';
 import NagoyaLego from '../../assets/NagoyaLego.jpg';
@@ -51,7 +48,6 @@ import Kokusaidori from '../../assets/Kokusaidori.jpg';
 import manzwamo from '../../assets/manzwamo.jpg';
 import kouribridge from '../../assets/kouribridge.jpg';
 import FukuokaCastle from '../../assets/FukuokaCastle.jpg';
-import USJ from '../../assets/USJ.jpg';
 import UniversalStudiosJapan3 from '../../assets/universal_studios_japan3.jpg';
 import OsakaAquarium1 from '../../assets/Osaka_aquarium1.jpg';
 import OsakaArchitecture5 from '../../assets/OsakaArchitecture5.png';
@@ -73,21 +69,13 @@ import Kyoto_FushimiInari1 from '../../assets/Kyoto_FushimiInari1.jpg';
 import Kyoto_UjiBridge1 from '../../assets/Kyoto_UjiBridge1.jpg';
 import Miyajima_Itsukushima_Torii from '../../assets/Miyajima_Itsukushima_Torii.jpg';
 import Tomonoura_Harbor from '../../assets/Tomonoura_Harbor.jpg';
-import KobeFerris from '../../assets/KobeFerris.jpg';
-import KobeSkyline from '../../assets/KobeSkyline.jpg';
-import KobeBeKobe from '../../assets/KobeBeKobe.jpg';
-import KobeHarborland from '../../assets/KobeHarborland.jpg';
-import KobePortTowerNight from '../../assets/KobePortTowerNight.jpg';
-import KobePortTower from '../../assets/KobePortTower.jpg';
 import Kanazawa_HigashiChaya from '../../assets/Kanazawa_HigashiChaya.jpg';
 import Kanazawa_YuwakuOnsen from '../../assets/Kanazawa_YuwakuOnsen.jpg';
 import Kyoto_Byodoin from '../../assets/Kyoto_Byodoin.jpg';
-import GenghisKhan from '../../assets/GenghisKhan.jpg';
 import SapporoBeerTaste from '../../assets/SapporoBeerTaste.jpg';
 import hokudaipopula from '../../assets/hokudaipopula.jpg';
 import tanukiya from '../../assets/tanukiya.jpg';
 import zyouzankei from '../../assets/zyouzankei.jpg';
-import nisekounited from '../../assets/nisekounited.jpg';
 import rusutsuresort from '../../assets/rusutsuresort.jpg';
 import sapporoabasiri from '../../assets/sapporoabasiri.jpg';
 import ramenyokocho from '../../assets/ramenyokocho.jpg';
@@ -106,6 +94,34 @@ const SpotsPage = () => {
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
+
+  // --------- 스무스 스크롤 유틸 ---------
+  const smoothScrollTo = (targetY: number, duration = 600, container: HTMLElement | Window = window) => {
+    const startY = container instanceof Window ? window.scrollY : (container as HTMLElement).scrollTop;
+    const changeY = targetY - startY;
+    const startTime = performance.now();
+
+    const easeInOutQuad = (t: number) => (t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t);
+
+    const animateScroll = (currentTime: number) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = easeInOutQuad(progress);
+      const newY = startY + changeY * eased;
+
+      if (container instanceof Window) {
+        window.scrollTo(0, newY);
+      } else {
+        (container as HTMLElement).scrollTop = newY;
+      }
+
+      if (elapsed < duration) {
+        requestAnimationFrame(animateScroll);
+      }
+    };
+
+    requestAnimationFrame(animateScroll);
+  };
 
   const scrollDestLeft = () => {
     if (destScrollRef.current) {
@@ -135,15 +151,6 @@ const SpotsPage = () => {
 
     if (cityFromUrl) {
       setSelectedCity(cityFromUrl);
-      // 도시가 선택되었을 때 "旅行先選択" 섹션으로 스크롤
-      setTimeout(() => {
-        if (destinationSectionRef.current) {
-          destinationSectionRef.current.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start',
-          });
-        }
-      }, 100);
     } else {
       // URL에 도시 정보가 없으면 선택된 도시 초기화
       setSelectedCity(null);
@@ -159,15 +166,6 @@ const SpotsPage = () => {
 
       if (matchingCity) {
         setSelectedCity(matchingCity.name);
-        // 도시가 자동 선택되었을 때 검색 섹션으로 스크롤
-        setTimeout(() => {
-          if (searchSectionRef.current) {
-            searchSectionRef.current.scrollIntoView({
-              behavior: 'smooth',
-              block: 'start',
-            });
-          }
-        }, 100);
       }
     }
   }, [searchParams]);
@@ -188,15 +186,6 @@ const SpotsPage = () => {
       };
     }
   }, []);
-
-  // 선택된 도시가 변경되면 해당 카드가 보이도록 자동 스크롤
-  useEffect(() => {
-    if (!selectedCity) return;
-    const el = destItemRefs.current[selectedCity];
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-    }
-  }, [selectedCity]);
 
   const destinations = [
     {
@@ -991,13 +980,6 @@ const SpotsPage = () => {
     setSpotPage(1);
   }, [selectedCity]);
 
-  // 페이지 이동 시 관광 스팟 섹션 상단으로 스크롤 포커싱
-  useEffect(() => {
-    if (spotsSectionRef.current) {
-      spotsSectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  }, [spotPage]);
-
   // 검색어 변경 시 페이지 초기화
   useEffect(() => {
     setSpotPage(1);
@@ -1248,7 +1230,7 @@ const SpotsPage = () => {
                       navigate(`/spot/${spot.city}/${spot.id}`, {
                         state: { from: currentUrl },
                       });
-                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                      smoothScrollTo(0);
                     }}
                   >
                     <div
@@ -1391,7 +1373,7 @@ const SpotsPage = () => {
                     navigate(`/detail/${plan.id}`, {
                       state: { from: currentUrl },
                     });
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    smoothScrollTo(0);
                   }}
                 >
                   <div
