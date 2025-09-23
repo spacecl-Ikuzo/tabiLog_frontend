@@ -85,7 +85,7 @@ import abasirikosohotel from '../../assets/abasirikosohotel.jpg';
 import norokogo from '../../assets/norokogo.jpg';
 import ohotsukuicebreak from '../../assets/ohotsukuicebreak.jpg';
 import sapporoabasiri from '../../assets/sapporoabasiri.jpg';
-// import Museum21thCentury1 from '../../assets/21thcenturyimage1--8-.png'; // 임시 주석
+import Museum21thCentury1 from '../../assets/21thcenturyimage1--8-.png';
 import Kanazawa from '../../assets/Kanazawa.jpg';
 import Kanazawa_YuwakuOnsen from '../../assets/Kanazawa_YuwakuOnsen.jpg';
 
@@ -391,8 +391,8 @@ const DetailPage = () => {
       title: '🏛️ 金沢21世紀美術館 × グラスリップ 聖地巡礼',
       description: 'アニメ「グラスリップ」の舞台となった金沢21世紀美術館。現代アートと聖地巡礼を同時に楽しめるスポット。',
       author: 'アニメ巡礼編集部',
-      image: Kanazawa, // 임시로 가나자와 기본 이미지 사용
-      heroImage: Kanazawa, // 임시로 가나자와 기본 이미지 사용
+      image: Museum21thCentury1,
+      heroImage: Museum21thCentury1,
       breadcrumb: ['石川', '金沢', '21世紀美術館', 'グラスリップ聖地巡礼'],
       contentTitle: '金沢21世紀美術館の基本情報',
       spots: ['21世紀美術館の基本情報', 'グラスリップの聖地', '現代アート展示', '周辺スポット'],
