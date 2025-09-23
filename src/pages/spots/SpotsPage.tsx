@@ -69,6 +69,13 @@ import Tomonoura_Harbor from '../../assets/Tomonoura_Harbor.jpg';
 import Kanazawa_HigashiChaya from '../../assets/Kanazawa_HigashiChaya.jpg';
 import Kanazawa_YuwakuOnsen from '../../assets/Kanazawa_YuwakuOnsen.jpg';
 import Museum21thCentury1 from '../../assets/21thcenturyimage1--8-.png';
+import ramenyokocho from '../../assets/ramenyokocho.jpg';
+import zyouzankei from '../../assets/zyouzankei.jpg';
+import nisekounited from '../../assets/nisekounited.jpg';
+import rusutsuresort from '../../assets/rusutsuresort.jpg';
+import hokudaipopula from '../../assets/hokudaipopula.jpg';
+import tanukiya from '../../assets/tanukiya.jpg';
+import sapporoabasiri from '../../assets/sapporoabasiri.jpg';
 import Kyoto_Byodoin from '../../assets/Kyoto_Byodoin.jpg';
 
 const SpotsPage = () => {
@@ -706,6 +713,33 @@ const SpotsPage = () => {
       image: Sapporo_SusukinoNight,
       author: 'グルメ好き',
       type: '一人旅',
+      city: '札幌',
+    },
+    {
+      id: 30,
+      title: '札幌グルメ巡り！ラーメンと海鮮',
+      description: '札幌ラーメンと新鮮な海鮮を堪能するグルメ旅。',
+      image: ramenyokocho,
+      author: 'グルメ好き',
+      type: 'グルメ',
+      city: '札幌',
+    },
+    {
+      id: 32,
+      title: '札幌近郊温泉巡り！癒しの名湯旅',
+      description: '札幌からアクセスしやすい人気温泉地を巡る贅沢な温泉旅。',
+      image: zyouzankei,
+      author: '温泉好き',
+      type: 'リラックス',
+      city: '札幌',
+    },
+    {
+      id: 33,
+      title: '北海道スキー場TOP3！ニセコ・ルスツ・富良野',
+      description: '世界が惚れ込むパウダースノー。札幌から行ける人気スキー3大エリアを1枚で理解。',
+      image: rusutsuresort,
+      author: 'スノー派',
+      type: 'ウィンター',
       city: '札幌',
     },
     {
