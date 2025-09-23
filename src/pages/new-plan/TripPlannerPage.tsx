@@ -636,6 +636,15 @@ const TripPlannerPage = () => {
     }
   }, [spots]); // spots를 의존성 배열에 추가
 
+  // spots가 변경될 때마다 이동 시간 재계산
+  useEffect(() => {
+    // 초기 로드가 완료되고, 현재 활성 날짜에 스팟이 2개 이상 있을 때만 재계산
+    if (!isInitialLoad && spots[activeDay] && spots[activeDay].length >= 2) {
+      console.log('=== spots 변경 감지, 이동 시간 재계산 시작 ===');
+      recalculateTravelTimes();
+    }
+  }, [activeDay, isInitialLoad]);
+
   // 관광지 추가 함수
   const addSpot = async (
     newSpot: Spot,
