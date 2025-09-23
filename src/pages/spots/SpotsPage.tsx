@@ -81,6 +81,7 @@ import KobePortTowerNight from '../../assets/KobePortTowerNight.jpg';
 import KobePortTower from '../../assets/KobePortTower.jpg';
 import Kanazawa_HigashiChaya from '../../assets/Kanazawa_HigashiChaya.jpg';
 import Kanazawa_YuwakuOnsen from '../../assets/Kanazawa_YuwakuOnsen.jpg';
+import Museum21thCentury1 from '../../assets/21thcenturyimage1--8-.png';
 import Kyoto_Byodoin from '../../assets/Kyoto_Byodoin.jpg';
 import GenghisKhan from '../../assets/GenghisKhan.jpg';
 import SapporoBeerTaste from '../../assets/SapporoBeerTaste.jpg';
@@ -955,6 +956,24 @@ const SpotsPage = () => {
       author: 'アニメ巡礼編集部',
       type: '一人旅',
       city: '大阪',
+    },
+    {
+      id: 36,
+      title: '🏛️ 金沢21世紀美術館 × グラスリップ 聖地巡礼',
+      description: 'アニメ「グラスリップ」の舞台となった金沢21世紀美術館。現代アートと聖地巡礼を同時に楽しめるスポット。',
+      image: Museum21thCentury1,
+      author: 'アニメ巡礼編集部',
+      type: '一人旅',
+      city: '金沢',
+    },
+    {
+      id: 37,
+      title: '♨️ 湯涌温泉 × 花咲くいろは 聖地巡礼',
+      description: 'アニメ「花咲くいろは」の舞台となった湯涌温泉。温泉街の風情と聖地巡礼を楽しむ癒やしの旅。',
+      image: Kanazawa_YuwakuOnsen,
+      author: 'アニメ巡礼編集部',
+      type: '一人旅',
+      city: '金沢',
     },
   ];
 
