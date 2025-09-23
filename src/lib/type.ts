@@ -1,3 +1,18 @@
+/** 프로필 정보  */
+export type ProfileData = {
+  id: number;
+  userId: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  nickname: string;
+  phoneNumber: string;
+  gender: string;
+  profileImageUrl: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
 /** 여행 계획 리스트 */
 export type Plan = {
   id: number;
