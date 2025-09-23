@@ -1,15 +1,17 @@
 // src/components/layout/header.tsx
 import { Button } from '../ui/button';
 import { useNavigate } from 'react-router-dom';
-import { useUserStore } from '@/store';
+import { useInvitationStore, useUserStore } from '@/store';
 
 const Header = () => {
   const navigate = useNavigate();
   const { token, nickname, removeUserData } = useUserStore();
+  const { clearInvitationData } = useInvitationStore();
 
   const handleLogout = () => {
     // 토큰/ 사용자 정보 삭제 + 로그인 화면으로
     removeUserData();
+    clearInvitationData();
     navigate('/login');
   };
 
@@ -28,11 +30,6 @@ const Header = () => {
         <nav className="hidden items-center space-x-8 lg:flex">
           <button className="cursor-pointer hover:text-orange-200" onClick={() => navigate('/spots')}>
             観光スポット紹介
-          </button>
-
-          {/* ✅ 네 전용 페이지 링크 추가 */}
-          <button className="cursor-pointer hover:text-orange-200" onClick={() => navigate('/spots2')}>
-            関西・北海道
           </button>
 
           <button className="cursor-pointer hover:text-orange-200" onClick={() => navigate('/plans')}>

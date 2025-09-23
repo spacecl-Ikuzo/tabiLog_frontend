@@ -73,6 +73,7 @@ import zyouzankei from '../../assets/zyouzankei.jpg';
 import rusutsuresort from '../../assets/rusutsuresort.jpg';
 import boolseal from '../../assets/boolseal.jpg';
 import Kyoto_Byodoin from '../../assets/Kyoto_Byodoin.jpg';
+import Header from '@/components/layout/header';
 
 const SpotsPage = () => {
   const [selectedCity, setSelectedCity] = useState<string | null>(null);
@@ -974,6 +975,7 @@ const SpotsPage = () => {
 
   return (
     <div className="min-h-screen">
+      <Header />
       {/* Hero Section */}
       <section
         className="relative h-96 bg-cover bg-center bg-no-repeat flex items-center justify-center"
