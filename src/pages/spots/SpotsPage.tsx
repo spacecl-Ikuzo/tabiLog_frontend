@@ -356,6 +356,22 @@ const SpotsPage = () => {
       image: Kyoto_Byodoin,
     },
     {
+      id: 38,
+      name: '伏見稲荷大社',
+      description: '千本鳥居で有名な稲荷神社。朱色の鳥居が山頂まで続く',
+      tags: ['文化・歴史', '神社', '西日本', '京都'],
+      city: '京都',
+      image: Kinkakuji,
+    },
+    {
+      id: 39,
+      name: '嵐山・竹林の小径',
+      description: '幻想的な竹林が続く散策路。風に揺れる竹の音が心を癒す',
+      tags: ['自然', '散策', '西日本', '京都'],
+      city: '京都',
+      image: TogetsukyoBridge5,
+    },
+    {
       id: 7,
       name: '札幌時計台',
       description: '札幌のシンボル。歴史ある時計台',
