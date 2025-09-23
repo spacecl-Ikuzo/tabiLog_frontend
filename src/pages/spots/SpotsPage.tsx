@@ -24,7 +24,6 @@ import Atsutasinkyu from '../../assets/Atsutasinkyu.jpg';
 import GenbakuDome from '../../assets/GenbakuDome.jpg';
 import KanazawaCastle from '../../assets/KanazawaCastle.jpg';
 import Kenrokuen from '../../assets/Kenrokuen.jpg';
-import Hanabi1 from '../../assets/hanabi1.jpeg';
 import Tsukiji from '../../assets/Tsukiji.jpg';
 import miyajima from '../../assets/miyajima.jpg';
 import NagoyaCastle from '../../assets/NagoyaCastle.jpg';
@@ -71,11 +70,8 @@ import Kanazawa_YuwakuOnsen from '../../assets/Kanazawa_YuwakuOnsen.jpg';
 import Museum21thCentury1 from '../../assets/21thcenturyimage1--8-.png';
 import ramenyokocho from '../../assets/ramenyokocho.jpg';
 import zyouzankei from '../../assets/zyouzankei.jpg';
-import nisekounited from '../../assets/nisekounited.jpg';
 import rusutsuresort from '../../assets/rusutsuresort.jpg';
-import hokudaipopula from '../../assets/hokudaipopula.jpg';
-import tanukiya from '../../assets/tanukiya.jpg';
-import sapporoabasiri from '../../assets/sapporoabasiri.jpg';
+import boolseal from '../../assets/boolseal.jpg';
 import Kyoto_Byodoin from '../../assets/Kyoto_Byodoin.jpg';
 
 const SpotsPage = () => {
@@ -689,6 +685,33 @@ const SpotsPage = () => {
       city: '福岡',
     },
     {
+      id: 18,
+      title: '天神で楽しむ福岡のオタク文化とショッピング',
+      description: '天神の地下街から地上まで、オタク文化とショッピングを満喫する旅。',
+      image: fukuanimate,
+      author: 'オタク好き',
+      type: '一人旅',
+      city: '福岡',
+    },
+    {
+      id: 19,
+      title: 'すずめの戸締まり聖地巡礼！福岡の神秘的な旅',
+      description: 'アニメ「すずめの戸締まり」の舞台となった福岡の聖地を巡る旅。',
+      image: suzume,
+      author: 'アニメファン',
+      type: '一人旅',
+      city: '福岡',
+    },
+    {
+      id: 20,
+      title: 'ホークス観戦と屋台グルメの夜',
+      description: 'PayPayドームで野球観戦後、中洲屋台で博多グルメを満喫。',
+      image: HakataCity,
+      author: 'スポーツ好き',
+      type: '二人旅',
+      city: '福岡',
+    },
+    {
       id: 5,
       title: '大自然を満喫！夏の北海道・札幌ドライブ',
       description: '富良野のラベンダー畑と海鮮を味わう旅。',
@@ -749,6 +772,15 @@ const SpotsPage = () => {
       image: OkinawaResort,
       author: 'ソヒョン',
       type: '二人旅',
+      city: '沖縄',
+    },
+    {
+      id: 21,
+      title: '沖縄グルメ満喫！国際通りスイーツ＆冷菓めぐり',
+      description: '国際通りの人気スイーツを食べ歩く甘い旅。',
+      image: boolseal,
+      author: 'グルメ好き',
+      type: '一人旅',
       city: '沖縄',
     },
     {
