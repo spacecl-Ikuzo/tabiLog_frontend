@@ -49,7 +49,8 @@ function App() {
           <Route path="/delete-account" element={<DeleteAccount />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/plans" element={<Plans />} />
-          <Route path="/plans/:id" element={<PlanMobile />} />
+          <Route path="/plans/:planId" element={<Plans />} />
+          <Route path="/plans/:planId/detail" element={<PlanMobile />} />
           <Route path="/newPlan" element={<NewPlanCheckDate />} />
           <Route path="/newPlan/detail" element={<NewPlanDetail />} />
           <Route path="/dashboard" element={<DashBoard />}>

@@ -7,7 +7,7 @@ import { Form, FormField, FormItem, FormLabel, FormMessage } from '@/components/
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { axiosInstance } from '@/api/axios';
-import { useUserStore } from '@/store';
+import { useUserStore, useInvitationStore } from '@/store';
 import { AxiosError } from 'axios';
 import { toast } from 'sonner';
 
@@ -20,6 +20,7 @@ type LoginReq = z.infer<typeof schema>;
 export default function Login() {
   const navigate = useNavigate();
   const { setUserId, setNickname, setToken, setEmail, setTokenExp } = useUserStore();
+  const { invitationToken, clearInvitationData } = useInvitationStore();
 
   const form = useForm<LoginReq>({
     defaultValues: { id: '', password: '' },
@@ -30,11 +31,15 @@ export default function Login() {
   const onSubmit = async (req: LoginReq) => {
     try {
       // 백엔드가 요구하는 키는 id/password
-      const payload = { id: req.id.trim(), password: req.password };
+      const payload = {
+        id: req.id.trim(),
+        password: req.password,
+        invitationToken: invitationToken || '',
+      };
       const response = await axiosInstance.post('/api/auth/signin', payload);
       const data = response.data;
 
-      // 서버 응답(JwtResponse): accessToken, email, userId, nickname, expiresAt
+      // 서버 응답(JwtResponse): accessToken, email, userId, nickname, expiresAt, redirectUrl
       if (data) {
         setUserId(data.userId || '');
         setEmail(data.email || '');
@@ -42,7 +47,13 @@ export default function Login() {
         setToken(data.accessToken || '');
         if (data.expiresAt) setTokenExp(data.expiresAt);
 
-        navigate('/spots'); // 성공 시 이동
+        // redirectUrl이 있으면 해당 URL로 이동, 없으면 기본 로직
+        if (data.redirectUrl) {
+          clearInvitationData();
+          navigate(data.redirectUrl);
+        } else {
+          navigate('/spots');
+        }
       }
     } catch (error) {
       // 팝업은 고정 문구
@@ -50,8 +61,8 @@ export default function Login() {
 
       if (error instanceof AxiosError) {
         const status = error.response?.status;
-        const code = (error.response?.data as any)?.error;
-        const details = (error.response?.data as any)?.details;
+        const code = (error.response?.data as { error?: string })?.error;
+        const details = (error.response?.data as { details?: Record<string, string> })?.details;
 
         // 401 → 비밀번호 밑에 에러 표시 (AUTH_ERROR/INVALID_CREDENTIALS 모두 대응)
         if (status === 401 && (code === 'AUTH_ERROR' || code === 'INVALID_CREDENTIALS')) {
