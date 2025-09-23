@@ -1,6 +1,6 @@
 // src/App.tsx
 import { Route, Routes, useLocation } from 'react-router-dom';
-import Header from './components/layout/Header';
+import Header from './components/layout/header';
 import Login from './pages/login/Login';
 import PrivateRoute from './PrivateRoute';
 import Home from './pages/home/Home';

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import MainBackGround from '../../assets/MainBackGround.jpg';
@@ -10,12 +11,12 @@ import fukugourmet from '../../assets/fukugourmet.jpg';
 import fukuanimate from '../../assets/fukuanimate.jpg';
 import suzume from '../../assets/suzume.jpg';
 import SapporoTower from '../../assets/SapporoTower.jpg';
+import SapporoBeerTaste from '../../assets/SapporoBeerTaste.jpg';
+import maruyamapolarbear from '../../assets/maruyamapolarbear.jpg';
+import hokudaipopula from '../../assets/hokudaipopula.jpg';
+import tanukiya from '../../assets/tanukiya.jpg';
 import OkinawaResort from '../../assets/OkinawaResort.jpg';
 import TokyoTower from '../../assets/TokyoTower.jpg';
-import boolseal from '../../assets/boolseal.jpg';
-import okinawacruising from '../../assets/okinawacruising.jpg';
-// import marineaqua from '../../assets/marineaqua.jpg';
-import Otaru_Canal_Winter from '../../assets/Otaru_Canal_Winter.jpg';
 import AsaKusa from '../../assets/AsaKusa.jpg';
 import OsakaGuriko from '../../assets/OsakaGuriko.jpg';
 import KiyoMizuTera from '../../assets/KiyoMizuTera.jpg';
@@ -36,6 +37,7 @@ import akihabara from '../../assets/akihabara.jpg';
 import fujiq1 from '../../assets/fujiq1.jpg';
 import KiminoNamaewa from '../../assets/KiminoNamaewa.jpg';
 import tenkinoko from '../../assets/tenkinoko.jpg';
+import Digimon4 from '../../assets/Digimon4.jpg';
 import hakoneonsen from '../../assets/hakoneonsen.jpg';
 import jiburiPost from '../../assets/jiburiPost.jpg';
 import NagoyaLego from '../../assets/NagoyaLego.jpg';
@@ -44,6 +46,10 @@ import NagoyaScience from '../../assets/NagoyaScience.jpg';
 import nagoyawcs2 from '../../assets/nagoyawcs2.jpg';
 import OkiAquarium from '../../assets/OkiAquarium.jpg';
 import Shurijo from '../../assets/Shurijo.jpg';
+import Kokusaidori from '../../assets/Kokusaidori.jpg';
+import manzwamo from '../../assets/manzwamo.jpg';
+import kouribridge from '../../assets/kouribridge.jpg';
+import okinawacruising from '../../assets/okinawacruising.jpg';
 import FukuokaCastle from '../../assets/FukuokaCastle.jpg';
 import UniversalStudiosJapan3 from '../../assets/universal_studios_japan3.jpg';
 import OsakaAquarium1 from '../../assets/Osaka_aquarium1.jpg';
@@ -61,24 +67,23 @@ import nakasumap from '../../assets/nakasumap.jpg';
 import kushidashrine from '../../assets/kushidashrine.jpg';
 import marineworld from '../../assets/marineworld.jpg';
 import paypaydome from '../../assets/paypaydome.jpg';
+import dazaifutenmangu from '../../assets/dazaifutenmangu.jpg';
 import Hirosima15 from '../../assets/Hirosima15.png';
 import Ponyo1 from '../../assets/포뇨1.png';
-import Kyoto_UjiBridge1 from '../../assets/Kyoto_UjiBridge1.jpg';
+// import Kyoto_UjiBridge1 from '../../assets/Kyoto_UjiBridge1.jpg';
 import Miyajima_Itsukushima_Torii from '../../assets/Miyajima_Itsukushima_Torii.jpg';
-import Sapporo_SusukinoNight from '../../assets/Sapporo_SusukinoNight.jpg';
+import Otaru_Canal_Winter from '../../assets/Otaru_Canal_Winter.jpg';
+// import Sapporo_SusukinoNight from '../../assets/Sapporo_SusukinoNight.jpg';
 import Tomonoura_Harbor from '../../assets/Tomonoura_Harbor.jpg';
 import Kanazawa_HigashiChaya from '../../assets/Kanazawa_HigashiChaya.jpg';
 import Kanazawa_YuwakuOnsen from '../../assets/Kanazawa_YuwakuOnsen.jpg';
-import SapporoBeerTaste from '../../assets/SapporoBeerTaste.jpg';
-import hokudaipopula from '../../assets/hokudaipopula.jpg';
-import tanukiya from '../../assets/tanukiya.jpg';
-import sapporoabasiri from '../../assets/sapporoabasiri.jpg';
 import Museum21thCentury1 from '../../assets/21thcenturyimage1--8-.png';
 import ramenyokocho from '../../assets/ramenyokocho.jpg';
 import zyouzankei from '../../assets/zyouzankei.jpg';
 import rusutsuresort from '../../assets/rusutsuresort.jpg';
-import Kyoto_Byodoin from '../../assets/Kyoto_Byodoin.jpg';
-import Header from '@/components/layout/header';
+import boolseal from '../../assets/boolseal.jpg';
+import sapporoabasiri from '../../assets/sapporoabasiri.jpg';
+// import Kyoto_Byodoin from '../../assets/Kyoto_Byodoin.jpg';
 
 const SpotsPage = () => {
   const [selectedCity, setSelectedCity] = useState<string | null>(null);
@@ -93,34 +98,6 @@ const SpotsPage = () => {
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
-
-  // --------- 스무스 스크롤 유틸 ---------
-  const smoothScrollTo = (targetY: number, duration = 600, container: HTMLElement | Window = window) => {
-    const startY = container instanceof Window ? window.scrollY : (container as HTMLElement).scrollTop;
-    const changeY = targetY - startY;
-    const startTime = performance.now();
-
-    const easeInOutQuad = (t: number) => (t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t);
-
-    const animateScroll = (currentTime: number) => {
-      const elapsed = currentTime - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const eased = easeInOutQuad(progress);
-      const newY = startY + changeY * eased;
-
-      if (container instanceof Window) {
-        window.scrollTo(0, newY);
-      } else {
-        (container as HTMLElement).scrollTop = newY;
-      }
-
-      if (elapsed < duration) {
-        requestAnimationFrame(animateScroll);
-      }
-    };
-
-    requestAnimationFrame(animateScroll);
-  };
 
   const scrollDestLeft = () => {
     if (destScrollRef.current) {
@@ -150,6 +127,15 @@ const SpotsPage = () => {
 
     if (cityFromUrl) {
       setSelectedCity(cityFromUrl);
+      // 도시가 선택되었을 때 "旅行先選択" 섹션으로 스크롤
+      setTimeout(() => {
+        if (destinationSectionRef.current) {
+          destinationSectionRef.current.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start',
+          });
+        }
+      }, 100);
     } else {
       // URL에 도시 정보가 없으면 선택된 도시 초기화
       setSelectedCity(null);
@@ -165,6 +151,15 @@ const SpotsPage = () => {
 
       if (matchingCity) {
         setSelectedCity(matchingCity.name);
+        // 도시가 자동 선택되었을 때 검색 섹션으로 스크롤
+        setTimeout(() => {
+          if (searchSectionRef.current) {
+            searchSectionRef.current.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start',
+            });
+          }
+        }, 100);
       }
     }
   }, [searchParams]);
@@ -185,6 +180,15 @@ const SpotsPage = () => {
       };
     }
   }, []);
+
+  // 선택된 도시가 변경되면 해당 카드가 보이도록 자동 스크롤
+  useEffect(() => {
+    if (!selectedCity) return;
+    const el = destItemRefs.current[selectedCity];
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    }
+  }, [selectedCity]);
 
   const destinations = [
     {
@@ -363,20 +367,44 @@ const SpotsPage = () => {
       image: SapporoTower,
     },
     {
+      id: 26,
+      name: 'サッポロビール博物館',
+      description: '北海道の代表的なビール工場。歴史と製造工程を学べる',
+      tags: ['グルメ・食べ歩き', '工場見学', '北日本'],
+      city: '札幌',
+      image: SapporoBeerTaste,
+    },
+    {
+      id: 27,
+      name: '円山動物園',
+      description: '北海道を代表する動物園。ホッキョクグマやレッサーパンダが人気',
+      tags: ['観光地', '家族', '北日本'],
+      city: '札幌',
+      image: maruyamapolarbear,
+    },
+    {
+      id: 28,
+      name: '北海道大学',
+      description: '日本最北の国立大学。美しいキャンパスが人気',
+      tags: ['文化・歴史', '教育', '北日本'],
+      city: '札幌',
+      image: hokudaipopula,
+    },
+    {
+      id: 29,
+      name: '狸小路商店街',
+      description: '札幌最大の商店街。グルメとショッピングが楽しめる',
+      tags: ['グルメ・食べ歩き', 'ショッピング', '北日本'],
+      city: '札幌',
+      image: tanukiya,
+    },
+    {
       id: 38,
       name: '小樽運河',
       description: '冬のイルミネーションが美しい運河。ロマンチックな街並み',
       tags: ['文化・歴史', '夜景', '北日本', '北海道'],
       city: '札幌',
       image: Otaru_Canal_Winter,
-    },
-    {
-      id: 39,
-      name: 'すすきの',
-      description: '札幌の繁華街。夜のネオンが美しい',
-      tags: ['エンタメ', '夜景', '北日本', '北海道'],
-      city: '札幌',
-      image: Sapporo_SusukinoNight,
     },
     {
       id: 9,
@@ -408,7 +436,7 @@ const SpotsPage = () => {
       description: '学問の神様を祀る神社。梅の名所としても有名',
       tags: ['文化・歴史', '神社', '南日本'],
       city: '福岡',
-      image: FukuokaCastle,
+      image: dazaifutenmangu,
     },
     {
       id: 42,
@@ -457,6 +485,30 @@ const SpotsPage = () => {
       tags: ['エンタメ', '家族', '南日本'],
       city: '沖縄',
       image: OkiAquarium,
+    },
+    {
+      id: 46,
+      name: '国際通り',
+      description: '那覇の中心街。沖縄のグルメとお土産が楽しめる',
+      tags: ['グルメ・食べ歩き', 'ショッピング', '南日本'],
+      city: '沖縄',
+      image: Kokusaidori,
+    },
+    {
+      id: 47,
+      name: '万座毛',
+      description: '沖縄を代表する絶景スポット。象の鼻のような岩が有名',
+      tags: ['自然', '絶景', '南日本'],
+      city: '沖縄',
+      image: manzwamo,
+    },
+    {
+      id: 48,
+      name: '古宇利島',
+      description: '沖縄本島北部の美しい島。透明度の高い海が魅力',
+      tags: ['ビーチ', '自然', '南日本'],
+      city: '沖縄',
+      image: kouribridge,
     },
     {
       id: 15,
@@ -675,33 +727,7 @@ const SpotsPage = () => {
       type: '二人旅',
       city: '福岡',
     },
-    {
-      id: 18,
-      title: '天神で楽しむ福岡のオタク文化とショッピング',
-      description: '天神の地下街から地上まで、オタク文化とショッピングを満喫する旅。',
-      image: fukuanimate,
-      author: 'オタク好き',
-      type: '一人旅',
-      city: '福岡',
-    },
-    {
-      id: 19,
-      title: 'すずめの戸締まり聖地巡礼！福岡の神秘的な旅',
-      description: 'アニメ「すずめの戸締まり」の舞台となった福岡の聖地を巡る旅。',
-      image: suzume,
-      author: 'アニメファン',
-      type: '一人旅',
-      city: '福岡',
-    },
-    {
-      id: 20,
-      title: 'ホークス観戦と屋台グルメの夜',
-      description: 'PayPayドームで野球観戦後、中洲屋台で博多グルメを満喫。',
-      image: HakataCity,
-      author: 'スポーツ好き',
-      type: '二人旅',
-      city: '福岡',
-    },
+
     {
       id: 5,
       title: '大自然を満喫！夏の北海道・札幌ドライブ',
@@ -712,20 +738,12 @@ const SpotsPage = () => {
       city: '札幌',
     },
     {
-      id: 23,
-      title: '小樽運河の冬物語！雪景色とイルミネーション',
-      description: '小樽運河の美しい冬景色とイルミネーションを楽しむ。ロマンチックな雪の街を散策する旅。',
-      image: Otaru_Canal_Winter,
-      author: '冬好き',
-      type: '二人旅',
-      city: '札幌',
-    },
-    {
       id: 24,
-      title: '札幌の夜を楽しむ！すすきのグルメツアー',
-      description: '札幌の繁華街・すすきので地元グルメを堪能。ラーメン横丁から居酒屋まで、札幌の夜を満喫。',
-      image: Sapporo_SusukinoNight,
-      author: 'グルメ好き',
+      title: 'オホーツク流氷体験！札幌→網走 1〜2日旅',
+      description:
+        '札幌から特急で網走へ。流氷砕氷船クルーズ、季節列車で北浜駅へ向かい、オホーツク海の絶景を満喫する冬のモデルコース。',
+      image: sapporoabasiri,
+      author: '旅ログ編集部',
       type: '一人旅',
       city: '札幌',
     },
@@ -772,6 +790,15 @@ const SpotsPage = () => {
       image: boolseal,
       author: 'グルメ好き',
       type: '一人旅',
+      city: '沖縄',
+    },
+    {
+      id: 25,
+      title: '沖縄ヨットツアー！無人島クルーズとサンセット',
+      description: '珊瑚の海をクルージング、無人島上陸と夕日鑑賞を楽しむ大人の旅。',
+      image: okinawacruising,
+      author: 'マリン派',
+      type: '二人旅',
       city: '沖縄',
     },
     {
@@ -861,15 +888,7 @@ const SpotsPage = () => {
       type: '一人旅',
       city: '福岡',
     },
-    {
-      id: 20,
-      title: 'ホークス観戦と屋台グルメの夜',
-      description: 'PayPayドームで野球観戦後、中洲屋台で博多グルメを満喫。',
-      image: HakataCity,
-      author: 'スポーツ好き',
-      type: '二人旅',
-      city: '福岡',
-    },
+
     {
       id: 24,
       title: '🏛 中之島公会堂 × 黒執事 聖地巡礼',
@@ -982,7 +1001,6 @@ const SpotsPage = () => {
 
   return (
     <div className="min-h-screen">
-      <Header />
       {/* Hero Section */}
       <section
         className="relative h-96 bg-cover bg-center bg-no-repeat flex items-center justify-center"
@@ -1193,7 +1211,7 @@ const SpotsPage = () => {
                       navigate(`/spot/${spot.city}/${spot.id}`, {
                         state: { from: currentUrl },
                       });
-                      smoothScrollTo(0);
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
                     }}
                   >
                     <div
@@ -1285,44 +1303,7 @@ const SpotsPage = () => {
             </p>
           </div>
 
-          {/* Plans pagination numbers placed between sections */}
-          {selectedCity && totalPlanPages > 1 && (
-            <div className="flex justify-center items-center gap-2 mb-6">
-              <button
-                className={`px-3 py-2 rounded ${
-                  safePlanPage === 1
-                    ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                    : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
-                }`}
-                onClick={() => safePlanPage > 1 && setPlanPage(safePlanPage - 1)}
-                disabled={safePlanPage === 1}
-              >
-                &lt;
-              </button>
-              {Array.from({ length: totalPlanPages }, (_, i) => i + 1).map((p) => (
-                <button
-                  key={p}
-                  className={`px-3 py-2 rounded ${
-                    safePlanPage === p ? 'bg-orange-500 text-white' : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
-                  }`}
-                  onClick={() => setPlanPage(p)}
-                >
-                  {p}
-                </button>
-              ))}
-              <button
-                className={`px-3 py-2 rounded ${
-                  safePlanPage === totalPlanPages
-                    ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                    : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
-                }`}
-                onClick={() => safePlanPage < totalPlanPages && setPlanPage(safePlanPage + 1)}
-                disabled={safePlanPage === totalPlanPages}
-              >
-                &gt;
-              </button>
-            </div>
-          )}
+          {/* Plans pagination numbers placed between sections - removed to avoid duplicate controls */}
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
             {displayedPlans.length > 0 ? (
@@ -1336,7 +1317,7 @@ const SpotsPage = () => {
                     navigate(`/detail/${plan.id}`, {
                       state: { from: currentUrl },
                     });
-                    smoothScrollTo(0);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
                 >
                   <div
