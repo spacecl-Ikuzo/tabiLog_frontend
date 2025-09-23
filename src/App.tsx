@@ -1,6 +1,4 @@
-// src/App.tsx
-import { Route, Routes, useLocation } from 'react-router-dom';
-import Header from './components/layout/Header';
+import { Route, Routes } from 'react-router-dom';
 import Login from './pages/login/Login';
 import PrivateRoute from './PrivateRoute';
 import Home from './pages/home/Home';
@@ -22,15 +20,8 @@ import FindID from './pages/find-account/FindID';
 import FindPassword from './pages/find-account/FindPassword';
 
 function App() {
-  const { pathname } = useLocation();
-
-  // ✅ 로그인/회원가입에서만 전역 헤더 숨김
-  const hideHeader = pathname === '/login' || pathname === '/register';
-
   return (
     <>
-      {!hideHeader && <Header />}
-
       <Routes>
         {/* 비로그인 접근 가능 */}
         <Route path="/login" element={<Login />} />
