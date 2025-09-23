@@ -21,18 +21,19 @@ export type Plan = {
 /** 같은 여행 멤버  */
 export type PlanMember = {
   id: number;
-  userId: number;
+  userId: number; //userPK
   userNickname: string;
   userEmail: string;
   role: string;
+  userIdString: string; //유저 실제 ID  (test123)
 };
 
 /* 여행 초대 정보 (메일로 초대 받은 후 링크를 통해 접속시) */
 export type InvitationInfo = {
   planId: number;
   planTitle: string;
-  inviterName: string;
   role: string;
   inviteeEmail: string;
   userExists: boolean;
+  redirectType: string;
 };

@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Button } from '../../components/ui/button';
 import { Card, CardContent } from '../../components/ui/card';
 import { Input } from '../../components/ui/input';
@@ -8,12 +8,24 @@ import SideNavigation from '../../components/layout/side-navigation';
 import { Calendar as CalendarIcon, ArrowRight } from 'lucide-react';
 import { format, parse, isValid, differenceInDays } from 'date-fns';
 import { ja } from 'date-fns/locale';
+import Header from '@/components/layout/header';
+import { Plan } from '@/lib/type';
 
 export default function NewPlanCheckDate() {
   const navigate = useNavigate();
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [errors, setErrors] = useState({ startDate: '', endDate: '' });
+
+  //수정으로 진입 시 기존 날짜 설정
+  const location = useLocation();
+  const { plan } = (location?.state as { plan?: Plan }) || {};
+  useEffect(() => {
+    if (plan) {
+      setStartDate(plan.startDate);
+      setEndDate(plan.endDate);
+    }
+  }, [plan]);
 
   const validateDate = (dateString: string) => {
     if (!dateString) return false;
@@ -71,7 +83,8 @@ export default function NewPlanCheckDate() {
   const handleNextStep = () => {
     if (validateDateRange() && isDateSelected) {
       // 다음 단계로 이동 (상세 설정 페이지)
-      navigate(`/newPlan/detail?startDate=${startDate}&endDate=${endDate}`);
+      const nextState = plan ? { state: { plan } } : undefined;
+      navigate(`/newPlan/detail?startDate=${startDate}&endDate=${endDate}`, nextState);
     }
   };
 
@@ -105,6 +118,7 @@ export default function NewPlanCheckDate() {
   return (
     <div className="min-h-screen">
       {/* 헤더 */}
+      <Header />
 
       <div className="flex">
         {/* 사이드바 네비게이션 (데스크톱만) */}

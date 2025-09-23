@@ -22,6 +22,9 @@ export default function MemberDetailPopup({
   const [selectedMemberId, setSelectedMemberId] = React.useState<number | null>(null);
   const [selectedRole, setSelectedRole] = React.useState<string>('編集者');
 
+  // OWNER(作成者) は除外対象にしない → 選択リストから隠す
+  const eligibleMembers = React.useMemo(() => members.filter((m) => m.role !== 'OWNER'), [members]);
+
   // DB role을 UI role로 변환하는 함수
   const mapDbRoleToUiRole = (dbRole: string): string => {
     switch (dbRole) {
@@ -31,6 +34,8 @@ export default function MemberDetailPopup({
         return '編集者';
       case 'VIEWER':
         return 'ビューア';
+      case 'DELETE':
+        return '除外';
       default:
         return '編集者';
     }
@@ -45,6 +50,8 @@ export default function MemberDetailPopup({
         return 'EDITOR';
       case 'ビューア':
         return 'VIEWER';
+      case '除外':
+        return 'DELETE';
       default:
         return 'EDITOR';
     }
@@ -55,11 +62,11 @@ export default function MemberDetailPopup({
 
   // 첫 번째 멤버를 기본 선택으로 설정 (팝업이 열릴 때)
   React.useEffect(() => {
-    if (open && members.length > 0 && selectedMemberId === null) {
-      setSelectedMemberId(members[0].id);
-      setSelectedRole(mapDbRoleToUiRole(members[0].role || 'EDITOR'));
+    if (open && eligibleMembers.length > 0 && selectedMemberId === null) {
+      setSelectedMemberId(eligibleMembers[0].userId);
+      setSelectedRole(mapDbRoleToUiRole(eligibleMembers[0].role || 'EDITOR'));
     }
-  }, [open, members, selectedMemberId]);
+  }, [open, eligibleMembers, selectedMemberId]);
 
   // 멤버 선택이 변경될 때 역할도 업데이트
   React.useEffect(() => {
@@ -129,7 +136,7 @@ export default function MemberDetailPopup({
             <SelectValue placeholder="メンバーを選択してください" />
           </SelectTrigger>
           <SelectContent>
-            {members.map((member) => (
+            {eligibleMembers.map((member) => (
               <SelectItem key={member.userId} value={member.userId.toString()}>
                 {member.userNickname}
               </SelectItem>
@@ -147,8 +154,9 @@ export default function MemberDetailPopup({
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="編集者">編集者</SelectItem>
-            <SelectItem value="管理者">管理者</SelectItem>
+            {/* <SelectItem value="管理者">管理者</SelectItem> */}
             <SelectItem value="ビューア">ビューア</SelectItem>
+            <SelectItem value="除外">除外</SelectItem>
           </SelectContent>
         </Select>
       </div>
