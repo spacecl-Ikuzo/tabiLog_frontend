@@ -660,15 +660,6 @@ const SpotsPage = () => {
       city: '京都',
     },
     {
-      id: 28,
-      title: '🌉 宇治橋 × 響け！ユーフォニアム',
-      description: 'アニメ「響け！ユーフォニアム」の舞台となった宇治橋。青春の聖地を巡る旅。',
-      image: Kyoto_UjiBridge1,
-      author: 'アニメファン',
-      type: '一人旅',
-      city: '京都',
-    },
-    {
       id: 4,
       title: '福岡屋台めぐり！博多グルメ紀行',
       description: 'とんこつラーメンと福岡の名所を巡る旅。',
@@ -889,15 +880,6 @@ const SpotsPage = () => {
       author: 'アニメ巡礼編集部',
       type: '一人旅',
       city: '大阪',
-    },
-    {
-      id: 35,
-      title: '🌸 哲学の道',
-      description: '桜と紅葉が美しい散策路。心静かに歩きながら四季の京都を感じよう。',
-      image: KyotoPass5,
-      author: 'タビログ編集部',
-      type: '一人旅',
-      city: '京都',
     },
     {
       id: 36,
