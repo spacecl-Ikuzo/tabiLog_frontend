@@ -20,6 +20,7 @@ import DeleteAccount from './pages/delete-account/DeleteAccount';
 import FindAccount from './pages/find-account/FindAccount';
 import FindID from './pages/find-account/FindID';
 import FindPassword from './pages/find-account/FindPassword';
+import ResetPassword from './pages/find-account/ResetPassword';
 
 function App() {
   const { pathname } = useLocation();
@@ -38,6 +39,7 @@ function App() {
         <Route path="/find-account" element={<FindAccount />} />
         <Route path="/find-account/find-id" element={<FindID />} />
         <Route path="/find-account/find-password" element={<FindPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/" element={<Home />} />
         {/* 관광지 페이지들 */}
         <Route path="/spots" element={<SpotsPage />} />
