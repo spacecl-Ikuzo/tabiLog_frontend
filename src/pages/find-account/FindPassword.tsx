@@ -6,6 +6,7 @@ import { Card } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import SecurityNotice from './components/SecurityNotice';
 import { toast } from 'sonner';
+import { sendResetCode, verifyResetCode } from '@/api/api';
 
 export default function FindPassword() {
   const navigate = useNavigate();
@@ -19,27 +20,35 @@ export default function FindPassword() {
   const [isAuthCodeConfirmed, setIsAuthCodeConfirmed] = useState(false);
   const [showSecurityNotice, setShowSecurityNotice] = useState(false);
 
-  const handleSendEmail = () => {
+  const handleSendEmail = async () => {
     if (!email) {
       setEmailError('メールアドレスを入力してください。');
       return;
     }
-    // 이메일 전송 로직
-    setIsEmailSent(true);
-    setEmailError('');
-    
-    // 성공 팝업 메시지 표시
-    toast.success('入力いただいたメールアドレスに認証コードを送信いたしました');
+    try {
+      await sendResetCode(email);
+      setIsEmailSent(true);
+      setEmailError('');
+      toast.success('入力いただいたメールアドレスに認証コードを送信いたしました');
+    } catch (e: any) {
+      toast.error(e?.response?.data?.message || 'メール送信に失敗しました');
+    }
   };
 
-  const handleConfirmAuthCode = () => {
+  const handleConfirmAuthCode = async () => {
     if (!authCode) {
       setAuthCodeError('認証コードを入力してください。');
       return;
     }
-    // 인증코드 확인 로직
-    setIsAuthCodeConfirmed(true);
-    setAuthCodeError('');
+    try {
+      const { resetToken } = await verifyResetCode(email, authCode);
+      setIsAuthCodeConfirmed(true);
+      setAuthCodeError('');
+      // 토큰을 쿼리로 붙여 비밀번호 변경 페이지로 이동
+      navigate(`/reset-password?token=${encodeURIComponent(resetToken)}`);
+    } catch (e: any) {
+      toast.error(e?.response?.data?.message || '認証コードの確認に失敗しました');
+    }
   };
 
   const handleSendTemporaryPassword = () => {
