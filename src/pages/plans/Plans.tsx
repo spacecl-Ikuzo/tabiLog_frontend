@@ -189,7 +189,6 @@ export default function Plans() {
 
   useEffect(() => {
     //카테고리 변경 시 지역, 상태 초기화
-    console.log('카테고리 변경 시 지역, 상태 초기화');
     setSelectedPrefecture('');
     setSelectedStatus('');
   }, [selectedCategory]);
