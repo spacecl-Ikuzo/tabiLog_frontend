@@ -5,6 +5,7 @@ import Tokyo from '../../assets/Tokyo.jpg';
 import OsakaCastle from '../../assets/OsakaCastle.jpg';
 import Kinkakuji from '../../assets/Kinkakuji.jpg';
 import Sapporo from '../../assets/Sapporo.jpg';
+import maruyamapolarbear from '../../assets/maruyamapolarbear.jpg';
 import fukuokahutami from '../../assets/fukuokahutami.jpg';
 import fukugourmet from '../../assets/fukugourmet.jpg';
 import fukuanimate from '../../assets/fukuanimate.jpg';
@@ -12,6 +13,12 @@ import suzume from '../../assets/suzume.jpg';
 import SapporoTower from '../../assets/SapporoTower.jpg';
 import OkinawaResort from '../../assets/OkinawaResort.jpg';
 import TokyoTower from '../../assets/TokyoTower.jpg';
+import boolseal from '../../assets/boolseal.jpg';
+import okinawaeisamatsuri from '../../assets/okinawaeisamatsuri.jpg';
+import okinawacruising from '../../assets/okinawacruising.jpg';
+// import marineaqua from '../../assets/marineaqua.jpg';
+import Otaru_Canal_Winter from '../../assets/Otaru_Canal_Winter.jpg';
+import Sapporo_SusukinoNight from '../../assets/Sapporo_SusukinoNight.jpg';
 import AsaKusa from '../../assets/AsaKusa.jpg';
 import OsakaGuriko from '../../assets/OsakaGuriko.jpg';
 import KiyoMizuTera from '../../assets/KiyoMizuTera.jpg';
@@ -40,6 +47,9 @@ import NagoyaScience from '../../assets/NagoyaScience.jpg';
 import nagoyawcs2 from '../../assets/nagoyawcs2.jpg';
 import OkiAquarium from '../../assets/OkiAquarium.jpg';
 import Shurijo from '../../assets/Shurijo.jpg';
+import Kokusaidori from '../../assets/Kokusaidori.jpg';
+import manzwamo from '../../assets/manzwamo.jpg';
+import kouribridge from '../../assets/kouribridge.jpg';
 import FukuokaCastle from '../../assets/FukuokaCastle.jpg';
 import USJ from '../../assets/USJ.jpg';
 import UniversalStudiosJapan3 from '../../assets/universal_studios_japan3.jpg';
@@ -56,11 +66,12 @@ import nakasumap from '../../assets/nakasumap.jpg';
 import kushidashrine from '../../assets/kushidashrine.jpg';
 import marineworld from '../../assets/marineworld.jpg';
 import paypaydome from '../../assets/paypaydome.jpg';
+import dazaifutenmangu from '../../assets/dazaifutenmangu.jpg';
+import ohori from '../../assets/ohori.jpg';
+import shimonoseki from '../../assets/shimonoseki.jpg';
 import Kyoto_FushimiInari1 from '../../assets/Kyoto_FushimiInari1.jpg';
 import Kyoto_UjiBridge1 from '../../assets/Kyoto_UjiBridge1.jpg';
 import Miyajima_Itsukushima_Torii from '../../assets/Miyajima_Itsukushima_Torii.jpg';
-import Otaru_Canal_Winter from '../../assets/Otaru_Canal_Winter.jpg';
-import Sapporo_SusukinoNight from '../../assets/Sapporo_SusukinoNight.jpg';
 import Tomonoura_Harbor from '../../assets/Tomonoura_Harbor.jpg';
 import KobeFerris from '../../assets/KobeFerris.jpg';
 import KobeSkyline from '../../assets/KobeSkyline.jpg';
@@ -71,6 +82,15 @@ import KobePortTower from '../../assets/KobePortTower.jpg';
 import Kanazawa_HigashiChaya from '../../assets/Kanazawa_HigashiChaya.jpg';
 import Kanazawa_YuwakuOnsen from '../../assets/Kanazawa_YuwakuOnsen.jpg';
 import Kyoto_Byodoin from '../../assets/Kyoto_Byodoin.jpg';
+import GenghisKhan from '../../assets/GenghisKhan.jpg';
+import SapporoBeerTaste from '../../assets/SapporoBeerTaste.jpg';
+import hokudaipopula from '../../assets/hokudaipopula.jpg';
+import tanukiya from '../../assets/tanukiya.jpg';
+import zyouzankei from '../../assets/zyouzankei.jpg';
+import nisekounited from '../../assets/nisekounited.jpg';
+import rusutsuresort from '../../assets/rusutsuresort.jpg';
+import sapporoabasiri from '../../assets/sapporoabasiri.jpg';
+import ramenyokocho from '../../assets/ramenyokocho.jpg';
 
 const SpotsPage = () => {
   const [selectedCity, setSelectedCity] = useState<string | null>(null);
@@ -81,6 +101,7 @@ const SpotsPage = () => {
   const destItemRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const destinationSectionRef = useRef<HTMLDivElement>(null);
   const searchSectionRef = useRef<HTMLDivElement>(null);
+  const spotsSectionRef = useRef<HTMLDivElement>(null);
   const [spotPage, setSpotPage] = useState(1);
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(true);
@@ -370,20 +391,44 @@ const SpotsPage = () => {
       image: SapporoTower,
     },
     {
+      id: 26,
+      name: 'サッポロビール博物館',
+      description: '北海道の代表的なビール工場。歴史と製造工程を学べる',
+      tags: ['グルメ・食べ歩き', '工場見学', '北日本'],
+      city: '札幌',
+      image: SapporoBeerTaste,
+    },
+    {
+      id: 27,
+      name: '円山動物園',
+      description: '北海道を代表する動物園。ホッキョクグマやレッサーパンダが人気',
+      tags: ['観光地', '家族', '北日本'],
+      city: '札幌',
+      image: maruyamapolarbear,
+    },
+    {
+      id: 28,
+      name: '北海道大学',
+      description: '日本最北の国立大学。美しいキャンパスが人気',
+      tags: ['文化・歴史', '教育', '北日本'],
+      city: '札幌',
+      image: hokudaipopula,
+    },
+    {
+      id: 29,
+      name: '狸小路商店街',
+      description: '札幌最大の商店街。グルメとショッピングが楽しめる',
+      tags: ['グルメ・食べ歩き', 'ショッピング', '北日本'],
+      city: '札幌',
+      image: tanukiya,
+    },
+    {
       id: 38,
       name: '小樽運河',
       description: '冬のイルミネーションが美しい運河。ロマンチックな街並み',
       tags: ['文化・歴史', '夜景', '北日本', '北海道'],
       city: '札幌',
       image: Otaru_Canal_Winter,
-    },
-    {
-      id: 39,
-      name: 'すすきの',
-      description: '札幌の繁華街。夜のネオンが美しい',
-      tags: ['エンタメ', '夜景', '北日本', '北海道'],
-      city: '札幌',
-      image: Sapporo_SusukinoNight,
     },
     {
       id: 9,
@@ -415,7 +460,7 @@ const SpotsPage = () => {
       description: '学問の神様を祀る神社。梅の名所としても有名',
       tags: ['文化・歴史', '神社', '南日本'],
       city: '福岡',
-      image: FukuokaCastle,
+      image: dazaifutenmangu,
     },
     {
       id: 42,
@@ -439,7 +484,7 @@ const SpotsPage = () => {
       description: '市民の憩いの場。湖畔の散策とボートが楽しめる',
       tags: ['自然', '散策', '南日本'],
       city: '福岡',
-      image: FukuokaCastle,
+      image: ohori,
     },
     {
       id: 45,
@@ -464,6 +509,30 @@ const SpotsPage = () => {
       tags: ['エンタメ', '家族', '南日本'],
       city: '沖縄',
       image: OkiAquarium,
+    },
+    {
+      id: 46,
+      name: '国際通り',
+      description: '那覇の中心街。沖縄のグルメとお土産が楽しめる',
+      tags: ['グルメ・食べ歩き', 'ショッピング', '南日本'],
+      city: '沖縄',
+      image: Kokusaidori,
+    },
+    {
+      id: 47,
+      name: '万座毛',
+      description: '沖縄を代表する絶景スポット。象の鼻のような岩が有名',
+      tags: ['自然', '絶景', '南日本'],
+      city: '沖縄',
+      image: manzwamo,
+    },
+    {
+      id: 48,
+      name: '古宇利島',
+      description: '沖縄本島北部の美しい島。透明度の高い海が魅力',
+      tags: ['ビーチ', '自然', '南日本'],
+      city: '沖縄',
+      image: kouribridge,
     },
     {
       id: 15,
@@ -684,30 +753,21 @@ const SpotsPage = () => {
       city: '福岡',
     },
     {
-      id: 5,
-      title: '大自然を満喫！夏の北海道・札幌ドライブ',
-      description: '富良野のラベンダー畑と海鮮を味わう旅。',
-      image: SapporoTower,
-      author: 'ドアン',
-      type: '二人旅',
-      city: '札幌',
-    },
-    {
-      id: 23,
-      title: '小樽運河の冬物語！雪景色とイルミネーション',
-      description: '小樽運河の美しい冬景色とイルミネーションを楽しむ。ロマンチックな雪の街を散策する旅。',
-      image: Otaru_Canal_Winter,
-      author: '冬好き',
-      type: '二人旅',
-      city: '札幌',
-    },
-    {
-      id: 24,
-      title: '札幌の夜を楽しむ！すすきのグルメツアー',
-      description: '札幌の繁華街・すすきので地元グルメを堪能。ラーメン横丁から居酒屋まで、札幌の夜を満喫。',
-      image: Sapporo_SusukinoNight,
+      id: 30,
+      title: '札幌グルメ巡り！ラーメンと海鮮',
+      description: '札幌ラーメンと新鮮な海鮮を堪能するグルメ旅。',
+      image: ramenyokocho,
       author: 'グルメ好き',
-      type: '一人旅',
+      type: 'グルメ',
+      city: '札幌',
+    },
+    {
+      id: 32,
+      title: '札幌近郊温泉巡り！癒しの名湯旅',
+      description: '札幌からアクセスしやすい人気温泉地を巡る贅沢な温泉旅。',
+      image: zyouzankei,
+      author: '温泉好き',
+      type: 'リラックス',
       city: '札幌',
     },
     {
@@ -716,6 +776,43 @@ const SpotsPage = () => {
       description: 'エメラルドグリーンの海でシュノーケリングと夕日鑑賞。',
       image: OkinawaResort,
       author: 'ソヒョン',
+      type: '二人旅',
+      city: '沖縄',
+    },
+    {
+      id: 21,
+      title: '沖縄グルメ満喫！国際通りスイーツ＆冷菓めぐり',
+      description: '国際通りの人気スイーツを食べ歩く甘い旅。',
+      image: boolseal,
+      author: 'グルメ好き',
+      type: '一人旅',
+      city: '沖縄',
+    },
+    {
+      id: 33,
+      title: '北海道スキー場TOP3！ニセコ・ルスツ・富良野',
+      description: '世界が惚れ込むパウダースノー。札幌から行ける人気スキー3大エリアを1枚で理解。',
+      image: rusutsuresort,
+      author: 'スノー派',
+      type: 'ウィンター',
+      city: '札幌',
+    },
+    {
+      id: 24,
+      title: 'オホーツク流氷体験！札幌→網走 1〜2日旅',
+      description:
+        '札幌から特急で網走へ。流氷砕氷船クルーズ、季節列車で北浜駅へ、オホーツク海の絶景を楽しむ冬のモデルコース。',
+      image: sapporoabasiri,
+      author: '旅ログ編集部',
+      type: '一人旅',
+      city: '札幌',
+    },
+    {
+      id: 25,
+      title: '沖縄ヨットツアー！無人島クルーズとサンセット',
+      description: '珊瑚の海をクルージング、無人島上陸と夕日鑑賞を楽しむ大人の旅。',
+      image: okinawacruising,
+      author: 'マリン派',
       type: '二人旅',
       city: '沖縄',
     },
@@ -763,16 +860,6 @@ const SpotsPage = () => {
       image: tenkinoko,
       author: '映画好き',
       type: '二人旅',
-      city: '東京',
-    },
-    {
-      id: 12,
-      title: 'デジモンアドベンチャー聖地巡礼！お台場と光が丘',
-      description:
-        'デジモンアドベンチャーの聖地を巡る旅。お台場のフジテレビ、光が丘公園、新宿駅など、アニメファンなら一度は訪れたい場所をめぐろう。',
-      image: Digimon4,
-      author: 'デジモンファン',
-      type: '一人旅',
       city: '東京',
     },
     {
@@ -835,9 +922,9 @@ const SpotsPage = () => {
     },
     {
       id: 20,
-      title: 'ホークス観戦と屋台グルメの夜',
-      description: 'PayPayドームで野球観戦後、中洲屋台で博多グルメを満喫。',
-      image: HakataCity,
+      title: '九州から本州へ！福岡・小倉・門司・下関の歴史旅',
+      description: '福岡から小倉、門司港、下関を巡る歴史とグルメの旅。関門海峡を越えて本州と九州を結ぶ特別な体験を。',
+      image: shimonoseki,
       author: 'スポーツ好き',
       type: '二人旅',
       city: '福岡',
@@ -903,6 +990,13 @@ const SpotsPage = () => {
   useEffect(() => {
     setSpotPage(1);
   }, [selectedCity]);
+
+  // 페이지 이동 시 관광 스팟 섹션 상단으로 스크롤 포커싱
+  useEffect(() => {
+    if (spotsSectionRef.current) {
+      spotsSectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [spotPage]);
 
   // 검색어 변경 시 페이지 초기화
   useEffect(() => {
@@ -1093,7 +1187,7 @@ const SpotsPage = () => {
 
       {/* Tourist Spots Grid */}
       {(selectedCity || searchQuery) && (
-        <section className="py-16 px-6 bg-gray-50">
+        <section ref={spotsSectionRef} className="py-16 px-6 bg-gray-50">
           <div className="max-w-7xl mx-auto">
             <h2 className="text-3xl font-bold text-gray-900 text-center mb-4">
               {selectedCity === '東京'
