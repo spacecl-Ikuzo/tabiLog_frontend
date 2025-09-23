@@ -20,9 +20,9 @@ interface UserStore {
 
 interface InvitationStore {
   invitationInfo: InvitationInfo | null; // 초대 정보
-  // invitationToken: string; // 초대 토큰
+  invitationToken: string; // 초대 토큰
   setInvitationInfo: (info: InvitationInfo | null) => void;
-  // setInvitationToken: (token: string) => void;
+  setInvitationToken: (token: string) => void;
   clearInvitationData: () => void; // 초대 데이터 초기화
 }
 
@@ -69,15 +69,13 @@ const useInvitationStore = create<InvitationStore>()(
     (set) => ({
       invitationInfo: null,
       invitationToken: '',
-      isLoading: false,
-      error: '',
 
       setInvitationInfo: (info) => set({ invitationInfo: info }),
-      // setInvitationToken: (token) => set({ invitationToken: token }),
+      setInvitationToken: (token) => set({ invitationToken: token }),
       clearInvitationData: () => {
         set({
           invitationInfo: null,
-          // invitationToken: '',
+          invitationToken: '',
         });
       },
     }),
@@ -85,7 +83,7 @@ const useInvitationStore = create<InvitationStore>()(
       name: 'invitation-storage', // localStorage 키 이름
       partialize: (state) => ({
         invitationInfo: state.invitationInfo,
-        // invitationToken: state.invitationToken,
+        invitationToken: state.invitationToken,
       }),
     },
   ),

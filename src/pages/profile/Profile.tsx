@@ -8,6 +8,7 @@ import { Form, FormField, FormItem, FormLabel, FormMessage } from '@/components/
 import { User, Mail, Phone, Key, Eye, EyeOff, Edit3 } from 'lucide-react';
 import SideNavigation from '@/components/layout/side-navigation';
 import { useNavigate } from 'react-router-dom';
+import Header from '@/components/layout/header';
 
 // Zod 스키마 정의
 const profileSchema = z
@@ -71,6 +72,9 @@ export default function Profile() {
 
   return (
     <div className="min-h-screen">
+      {/* 헤더 */}
+      <Header />
+
       <div className="flex">
         {/* 사이드 네비게이션 (데스크톱만) */}
         <SideNavigation selectedNav="profile" />

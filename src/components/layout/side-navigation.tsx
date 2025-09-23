@@ -31,9 +31,7 @@ export default function SideNavigation({ selectedNav }: { selectedNav: string })
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
-        console.log('=== SideNavigation: 마이페이지 정보 요청 시작 ===');
         const data = await getMyPageInfo();
-        console.log('=== SideNavigation: 마이페이지 정보 응답 ===', data);
         setUserInfo(data);
       } catch (error) {
         console.error('사용자 정보를 가져오는데 실패했습니다:', error);

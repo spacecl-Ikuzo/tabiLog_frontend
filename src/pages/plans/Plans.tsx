@@ -1,24 +1,32 @@
-import { useEffect, useState, useCallback, useMemo, useRef } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useIsMobile } from '../../hooks/useIsMobile';
 import { Button } from '../../components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../components/ui/select';
 import { Card, CardContent, CardTitle } from '../../components/ui/card';
-import { Avatar, AvatarFallback } from '../../components/ui/avatar';
 import { Badge } from '../../components/ui/badge';
 import SideNavigation from '../../components/layout/side-navigation';
 import { MoreVertical, Calendar as CalendarIcon, User, MapPin } from 'lucide-react';
 import CustomPagination from '../../Pagination';
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from '../../components/ui/dropdown-menu';
 import CategoryTabs from '../../components/common/CategoryTabs';
-import MemberDetailPopup from './components/MemberDetailPopup';
-import InviteMemberPopup from './components/InviteMemberPopup';
-import WarikanPopup from './components/WarikanPopup';
 import SkeletonCard from './components/SkeletonCard';
-import TravelCalendar from './components/TravelCalendar';
+import PlanDetailContent from './components/PlanDetailContent';
 import { axiosInstance } from '../../api/axios';
 import { toast } from 'sonner';
 import { Plan } from '../../lib/type';
 import dayjs from 'dayjs';
 
 export default function Plans() {
+  const navigate = useNavigate();
+  const { planId } = useParams<{ planId?: string }>();
+  const isMobile = useIsMobile();
+
   //페이징 프론트 단에서 처리
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -39,9 +47,6 @@ export default function Plans() {
   // 선택된 여행 계획 ID (오른쪽 사이드바 표시용)
   const [selectedPlanId, setSelectedPlanId] = useState<number | null>(null);
 
-  //선택된 여행 리스트의 계획 상태 조회 용도 (진행중, 완료)
-  const [selectedViewStatus, setSelectedViewStatus] = useState('');
-
   // 멤버 수정 팝업 상태
   const [isMemberEditPopupOpen, setIsMemberEditPopupOpen] = useState(false);
 
@@ -58,6 +63,28 @@ export default function Plans() {
   const [regionsByCategory, setRegionsByCategory] = useState<string[]>([]);
   const regionsByCategoryRef = useRef<string[]>([]);
   const isChangingCategoryRef = useRef(false);
+
+  // URL에서 planId가 있을 때 해당 플랜을 자동 선택하고 URL 정리
+  useEffect(() => {
+    if (planId && allPlanList.length > 0) {
+      const planIdNumber = parseInt(planId, 10);
+      const targetPlan = allPlanList.find((plan) => plan.id === planIdNumber);
+
+      if (targetPlan) {
+        if (isMobile) {
+          // 모바일에서는 detail 페이지로 이동 (이전 화면 데이터 전달)
+          navigate(`/plans/${planIdNumber}/detail`, { replace: true, state: { plan: targetPlan } });
+        } else {
+          // 데스크톱에서는 플랜 선택하고 URL 정리
+          setSelectedPlanId(planIdNumber);
+          navigate('/plans', { replace: true });
+        }
+      } else {
+        // 해당 플랜이 없으면 URL만 정리
+        navigate('/plans', { replace: true });
+      }
+    }
+  }, [planId, allPlanList, navigate, isMobile]);
 
   // 현재 페이지에 표시할 리스트 업데이트
   const updateCurrentPageList = useCallback(() => {
@@ -113,7 +140,7 @@ export default function Plans() {
         setAllPlanList(response.data.data);
         setPage(1); // 새로운 데이터 로드 시 첫 페이지로 이동
       } catch (error) {
-        toast.error('여행 계획 조회에 실패하셨습니다.', {
+        toast.error('旅行計画の取得に失敗しました。', {
           position: 'top-center',
         });
         console.error(error);
@@ -143,7 +170,7 @@ export default function Plans() {
       isChangingCategoryRef.current = false;
     } catch (error) {
       console.error(error);
-      toast.error('카테고리 변경에 실패하셨습니다.', { position: 'top-center' });
+      toast.error('カテゴリの変更に失敗しました。', { position: 'top-center' });
       isChangingCategoryRef.current = false;
     }
   }, [selectedCategory, fetchPlanList]);
@@ -161,7 +188,6 @@ export default function Plans() {
 
   useEffect(() => {
     //카테고리 변경 시 지역, 상태 초기화
-    console.log('카테고리 변경 시 지역, 상태 초기화');
     setSelectedPrefecture('');
     setSelectedStatus('');
   }, [selectedCategory]);
@@ -171,46 +197,31 @@ export default function Plans() {
     updateCurrentPageList();
   }, [updateCurrentPageList]);
 
-  // 여행 멤버 컬러 옵션 (임시)
-  const colorOptions = useMemo(
-    () => [
-      'bg-green-400',
-      'bg-orange-400',
-      'bg-purple-400',
-      'bg-red-400',
-      'bg-yellow-400',
-      'bg-blue-400',
-      'bg-pink-400',
-    ],
-    [],
-  );
+  const handleModifyPlan = (event: React.MouseEvent<HTMLDivElement>, plan: Plan) => {
+    //플랜 수정
+    event.stopPropagation();
+    event.preventDefault();
+    navigate(`/newPlan`, { state: { plan: plan } });
+  };
 
-  // 랜덤 컬러를 가진 멤버 데이터 생성
-  const travelMembers = useMemo(() => {
-    const members = planList.find((plan) => plan.id === selectedPlanId)?.members;
-    if (!members) return [];
+  //플랜 삭제
+  const handleDeletePlan = async (event: React.MouseEvent<HTMLDivElement>, planId: number) => {
+    event.stopPropagation();
+    event.preventDefault();
+    setIsLoading(true);
 
-    return members.map((member, index) => ({
-      ...member,
-      color: colorOptions[index % colorOptions.length],
-    }));
-  }, [selectedPlanId, planList, colorOptions]);
-
-  // 선택된 plan의 status에 따라 viewStatus 설정
-  useEffect(() => {
-    if (selectedPlanId) {
-      const selectedPlan = allPlanList.find((plan) => plan.id === selectedPlanId);
-      if (selectedPlan) {
-        if (selectedPlan.status === 'PLANNING') {
-          setSelectedViewStatus('進行中');
-        } else if (selectedPlan.status === 'COMPLETED') {
-          setSelectedViewStatus('完了');
-        }
-      }
-    } else {
-      setSelectedViewStatus(''); // 선택된 plan이 없으면 빈 문자열
+    try {
+      await axiosInstance.delete(`/api/plans/${planId}`);
+      toast.success('該当のプランが削除されました。', { position: 'top-center' });
+    } catch (error) {
+      console.error('プランの削除に失敗しました。', error);
+      toast.error('プランの削除に失敗しました。', { position: 'top-center' });
+    } finally {
+      setIsLoading(false);
+      setSelectedPlanId(null);
+      fetchPlanList(selectedPrefecture, selectedStatus);
     }
-  }, [selectedPlanId, allPlanList]);
+  };
 
   return (
     <div className="min-h-screen">
@@ -283,15 +294,23 @@ export default function Plans() {
                 Array.from({ length: itemsPerPage }).map((_, index) => <SkeletonCard key={index} />)
               ) : allPlanList.length === 0 ? (
                 <div className="text-center py-8">
-                  <p className="text-gray-500 text-lg mb-2">여행 계획이 없습니다.</p>
-                  <p className="text-gray-400 text-sm">새로운 여행 계획을 만들어보세요!</p>
+                  <p className="text-gray-500 text-lg mb-2">旅行計画がありません。</p>
+                  <p className="text-gray-400 text-sm">新しい旅行計画を作成してください！</p>
                 </div>
               ) : (
                 planList.map((plan) => {
                   return (
                     <Card
                       key={plan.id}
-                      onClick={() => setSelectedPlanId(plan.id)}
+                      onClick={() => {
+                        if (isMobile) {
+                          // 모바일에서는 새 페이지로 이동
+                          navigate(`/plans/${plan.id}/detail`, { state: { plan } });
+                        } else {
+                          // 데스크톱에서는 사이드바 표시
+                          setSelectedPlanId(plan.id);
+                        }
+                      }}
                       className={`bg-[#FFF7F0] hover:shadow-lg transition-al cursor-pointer border-2 ${
                         selectedPlanId === plan.id
                           ? 'ring-2 ring-orange-500 ring-offset-2 border-orange-200 bg-orange-200'
@@ -324,9 +343,30 @@ export default function Plans() {
                                   </Badge>
                                 </div>
                               </div>
-                              <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
-                                <MoreVertical className="h-4 w-4" />
-                              </Button>
+                              <DropdownMenu>
+                                <DropdownMenuTrigger asChild>
+                                  <Button
+                                    type="button"
+                                    onClick={(event) => {
+                                      event.stopPropagation();
+                                      event.preventDefault();
+                                    }}
+                                    variant="ghost"
+                                    size="sm"
+                                    className="h-8 w-8 p-0"
+                                  >
+                                    <MoreVertical className="h-4 w-4" />
+                                  </Button>
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent align="end" className="w-40">
+                                  <DropdownMenuItem onClick={(event) => handleModifyPlan(event, plan)}>
+                                    編集
+                                  </DropdownMenuItem>
+                                  <DropdownMenuItem onClick={(event) => handleDeletePlan(event, plan.id)}>
+                                    削除
+                                  </DropdownMenuItem>
+                                </DropdownMenuContent>
+                              </DropdownMenu>
                             </div>
                           </div>
                         </div>
@@ -370,189 +410,34 @@ export default function Plans() {
                     </button>
                   </div>
 
-                  {/* 진행상태 탭 */}
-                  <div className="flex justify-between">
-                    <div className="pointer-events-none">
-                      <CategoryTabs
-                        categories={['進行中', '完了']}
-                        selectedCategory={selectedViewStatus}
-                        onCategoryChange={() => {}} // 클릭 비활성화
-                        onCategorySelect={() => {}} // 클릭 비활성화
-                      />
-                    </div>
-                    <Button className="bg-brand-orange text-white px-4 py-2 rounded-lg text-sm font-medium">
-                      詳細を見る
-                    </Button>
-                  </div>
-
-                  {/* 여행 이미지 카드 */}
-                  <div className="relative mb-8 rounded-2xl overflow-hidden">
-                    <div
-                      className="w-full h-60 bg-cover bg-center bg-no-repeat flex items-center justify-center text-white relative"
-                      style={{
-                        backgroundImage:
-                          'url("' + import.meta.env.VITE_API_URL + selectedPlan.prefectureImageUrl + '")',
-                      }}
-                    >
-                      <div className="text-center z-10 bg-black/60">
-                        <h3 className="text-3xl font-bold mb-2">{selectedPlan.title}</h3>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* 여행 멤버 */}
-                  <div className="mb-8">
-                    <div className="flex justify-between items-center mb-4">
-                      <h3 className="font-bold text-gray-900">旅行メンバー</h3>
-                      <div className="flex gap-2">
-                        <button
-                          onClick={() => setIsMemberEditPopupOpen(true)}
-                          className="bg-amber-600 text-white px-4 py-2 rounded-lg text-sm font-medium cursor-pointer"
-                        >
-                          メンバー修正
-                        </button>
-                        <button
-                          onClick={() => setIsInvitePopupOpen(true)}
-                          className="bg-brand-orange text-white px-4 py-2 rounded-lg text-sm font-medium cursor-pointer"
-                        >
-                          メンバー追加
-                        </button>
-                      </div>
-                    </div>
-                    <div className="flex gap-5">
-                      {travelMembers.slice(0, 5).map((member) => (
-                        <Avatar key={member.userId} className="w-18 h-18">
-                          <AvatarFallback className={`${member.color} text-white text-sm font-medium`}>
-                            {member.userNickname?.slice(0, 2) || '??'}
-                          </AvatarFallback>
-                        </Avatar>
-                      ))}
-                      {travelMembers.length > 5 && (
-                        <Avatar className="w-18 h-18">
-                          <AvatarFallback className="bg-gray-700 text-white text-sm font-bold">
-                            {travelMembers.length - 5}+
-                          </AvatarFallback>
-                        </Avatar>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* 총 지불 금액 */}
-                  <div className="mb-8">
-                    <div className="flex justify-between items-center mb-4">
-                      <h3 className="font-bold text-gray-900">総支払金額</h3>
-                      <div className="flex gap-2">
-                        <button
-                          onClick={() => setIsWarikanPopupOpen(true)}
-                          className="bg-brand-orange text-white px-4 py-2 rounded-lg text-sm font-medium cursor-pointer"
-                        >
-                          メンバーと割り勘
-                        </button>
-                      </div>
-                    </div>
-                    <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-3">
-                          <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-                            <span className="text-green-600 font-bold text-lg">¥</span>
-                          </div>
-                          <div>
-                            <p className="text-sm text-gray-600">現在の総額</p>
-                            <p className="text-2xl font-bold text-gray-900">¥{(0).toLocaleString('ja-JP')}</p>
-                          </div>
-                        </div>
-                        <div className="text-right">
-                          <p className="text-xs text-gray-500">メンバー当たり</p>
-                          <p className="text-lg font-semibold text-gray-700">
-                            ¥
-                            {travelMembers.length > 0
-                              ? Math.ceil(0 / travelMembers.length).toLocaleString('ja-JP')
-                              : '0'}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* 여행 기간 캘린더 */}
-                  <div className="mb-8">
-                    <h3 className="font-bold text-gray-900 mb-4">旅行期間</h3>
-                    <TravelCalendar startDate={selectedPlan.startDate} endDate={selectedPlan.endDate} />
-                  </div>
+                  <PlanDetailContent
+                    plan={selectedPlan}
+                    onMemberEdit={() => setIsMemberEditPopupOpen(true)}
+                    onInvite={() => {
+                      if (!selectedPlanId) {
+                        toast.error('先に旅行計画を選択してください。', { position: 'top-center' });
+                        return;
+                      }
+                      setIsInvitePopupOpen(true);
+                    }}
+                    onWarikan={() => setIsWarikanPopupOpen(true)}
+                    onAfterMemberChange={() => {
+                      // 데스크탑: 선택 해제 후 목록 새로고침
+                      setSelectedPlanId(null);
+                      fetchPlanList(selectedPrefecture, selectedStatus);
+                    }}
+                    isMemberEditPopupOpen={isMemberEditPopupOpen}
+                    setIsMemberEditPopupOpen={setIsMemberEditPopupOpen}
+                    isInvitePopupOpen={isInvitePopupOpen}
+                    setIsInvitePopupOpen={setIsInvitePopupOpen}
+                    isWarikanPopupOpen={isWarikanPopupOpen}
+                    setIsWarikanPopupOpen={setIsWarikanPopupOpen}
+                  />
                 </div>
               );
             })()}
         </div>
       </div>
-
-      {/* 멤버 수정 팝업 */}
-      <MemberDetailPopup
-        open={isMemberEditPopupOpen}
-        onOpenChange={setIsMemberEditPopupOpen}
-        members={travelMembers}
-        onConfirm={(memberId, role) => {
-          console.log('修正されたメンバー ID:', memberId, '役割:', role);
-          const memberName = travelMembers.find((m) => m.id === memberId)?.userNickname || 'メンバー';
-
-          // DB role을 UI role로 변환해서 토스트에 표시
-          const roleDisplayMap: { [key: string]: string } = {
-            OWNER: '管理者',
-            EDITOR: '編集者',
-            VIEWER: 'ビューア',
-          };
-          const displayRole = roleDisplayMap[role] || role;
-
-          toast.success(`${memberName}の役割が${displayRole}に修正されました。`, {
-            position: 'top-center',
-          });
-        }}
-        onCancel={() => {
-          console.log('メンバー修正がキャンセルされました。');
-        }}
-      />
-
-      {/* 멤버 초대 팝업 */}
-      <InviteMemberPopup
-        open={isInvitePopupOpen}
-        onOpenChange={setIsInvitePopupOpen}
-        planId={selectedPlanId || 0}
-        onConfirm={(email, role) => {
-          console.log('招待メール:', email, '役割:', role);
-
-          // DB role을 UI role로 변환해서 토스트에 표시
-          const roleDisplayMap: { [key: string]: string } = {
-            OWNER: '管理者',
-            EDITOR: '編集者',
-            VIEWER: 'ビューア',
-          };
-          const displayRole = roleDisplayMap[role] || role;
-
-          toast.success(`${email}に${displayRole}として招待を送信しました。`, {
-            position: 'top-center',
-          });
-        }}
-        onCancel={() => {
-          console.log('招待がキャンセルされました。');
-        }}
-      />
-
-      {/* 와리깡 팝업 */}
-      <WarikanPopup
-        open={isWarikanPopupOpen}
-        onOpenChange={setIsWarikanPopupOpen}
-        members={travelMembers}
-        totalAmount={20500} // 임시 금액
-        onConfirm={(amounts) => {
-          console.log('割り勘 結果:', amounts);
-          const totalCalculated = Object.values(amounts).reduce((sum, amount) => sum + amount, 0);
-          toast.success(`割り勘が完了しました。総額: ¥${totalCalculated.toLocaleString('ja-JP')}`, {
-            position: 'top-center',
-          });
-        }}
-        onCancel={() => {
-          console.log('割り勘がキャンセルされました。');
-        }}
-      />
     </div>
   );
 }

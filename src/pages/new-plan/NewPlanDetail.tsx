@@ -9,6 +9,9 @@ import SideNavigation from '../../components/layout/side-navigation';
 import { ArrowLeft, ArrowRight, Upload, Image as ImageIcon, MapPin } from 'lucide-react';
 import { axiosInstance } from '../../api/axios';
 import { uploadImage } from '../../api/api';
+import Header from '@/components/layout/header';
+import { Plan } from '@/lib/type';
+import { toast } from 'sonner';
 
 interface RegionData {
   [key: string]: string[];
@@ -30,6 +33,9 @@ export default function NewPlanDetail() {
   const searchParams = new URLSearchParams(location.search);
   const startDate = searchParams.get('startDate') || '';
   const endDate = searchParams.get('endDate') || '';
+
+  // 수정 모드로 진입 시 state로 받은 플랜
+  const { plan } = (location.state as { plan?: Plan }) || {};
 
   const [planData, setPlanData] = useState<PlanDetailData>({
     title: '',
@@ -129,16 +135,34 @@ export default function NewPlanDetail() {
     fetchRegionsFromAPI();
   }, []);
 
-  // 지역 선택 시 현 목록 업데이트
+  // 지역 선택 시 현 목록 업데이트 (기존 값이 유효하면 유지)
   useEffect(() => {
     if (planData.region && regions[planData.region]) {
-      setPrefectures(regions[planData.region]);
-      // 지역이 변경되면 현 선택 초기화
-      setPlanData((prev) => ({ ...prev, prefecture: '' }));
+      const nextPrefectures = regions[planData.region];
+      setPrefectures(nextPrefectures);
+      setPlanData((prev) => {
+        // 이미 선택된 현이 목록에 없을 때만 초기화
+        if (!prev.prefecture || nextPrefectures.includes(prev.prefecture)) return prev;
+        return { ...prev, prefecture: '' };
+      });
     } else {
       setPrefectures([]);
     }
   }, [planData.region, regions]);
+
+  // 수정 모드로 진입시, 이전 데이터를 가져옴
+  useEffect(() => {
+    if (plan) {
+      setPlanData((prev) => ({
+        ...prev,
+        title: plan.title || '',
+        region: plan.region || '',
+        prefecture: plan.prefecture || '',
+        image: null,
+        imagePreview: plan.prefectureImageUrl ? `${import.meta.env.VITE_API_URL}${plan.prefectureImageUrl}` : null,
+      }));
+    }
+  }, [plan]);
 
   const validateForm = () => {
     const newErrors = {
@@ -195,7 +219,8 @@ export default function NewPlanDetail() {
 
     setIsLoading(true);
     try {
-      let imageUrl = null;
+      // 수정 모드에서 새 이미지를 선택하지 않았다면 기존 URL 유지
+      let imageUrl = plan?.prefectureImageUrl ?? null;
 
       // 이미지가 있으면 먼저 업로드
       if (planData.image) {
@@ -221,10 +246,15 @@ export default function NewPlanDetail() {
 
       console.log('플랜 생성 데이터:', requestData);
 
-      const response = await axiosInstance.post('/api/plans', requestData);
-      console.log('플랜 생성 성공:', response.data);
-
-      alert('旅行計画が作成されました！');
+      // 수정 모드에서 플랜 업데이트
+      if (plan) {
+        await axiosInstance.put(`/api/plans/${plan.id}`, requestData);
+        toast.success('旅行計画が更新されました！');
+      } else {
+        // 새 플랜 생성
+        await axiosInstance.post('/api/plans', requestData);
+        toast.success('旅行計画が作成されました！');
+      }
       navigate('/plans');
     } catch (error: any) {
       console.error('플랜 생성 실패:', error);
@@ -253,6 +283,7 @@ export default function NewPlanDetail() {
   return (
     <div className="min-h-screen">
       {/* 헤더 */}
+      <Header />
 
       <div className="flex">
         {/* 사이드바 네비게이션 (데스크톱만) */}
