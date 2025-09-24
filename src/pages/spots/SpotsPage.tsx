@@ -975,14 +975,19 @@ const SpotsPage = () => {
   // 검색어와 선택된 도시, 선택된 태그들에 따라 스팟 필터링 (useMemo로 메모이제이션)
   const filteredSpots = useMemo(() => {
     return spots.filter((spot) => {
-      // 태그가 선택된 경우 선택된 태그 중 하나라도 있는 아이템만 표시
-      if (selectedTags.length > 0) {
-        return selectedTags.some((tag) => spot.tags.includes(tag));
-      }
-
       // 도시가 선택된 경우 해당 도시의 아이템만 표시
       if (selectedCity) {
+        // 도시가 선택된 상태에서 태그도 선택된 경우: 해당 도시 + 태그 필터링
+        if (selectedTags.length > 0) {
+          return spot.city === selectedCity && selectedTags.some((tag) => spot.tags.includes(tag));
+        }
+        // 도시만 선택된 경우: 해당 도시의 모든 아이템 표시
         return spot.city === selectedCity;
+      }
+
+      // 도시가 선택되지 않은 경우 태그 필터링
+      if (selectedTags.length > 0) {
+        return selectedTags.some((tag) => spot.tags.includes(tag));
       }
 
       // 도시가 선택되지 않은 경우 검색어로 필터링
@@ -996,7 +1001,7 @@ const SpotsPage = () => {
         );
       }
 
-      // 도시도 선택되지 않고 검색어도 없는 경우 모든 아이템 표시
+      // 도시도 선택되지 않고 검색어도 태그도 없는 경우 모든 아이템 표시
       return true;
     });
   }, [spots, selectedTags, selectedCity, searchQuery]);
@@ -1225,48 +1230,86 @@ const SpotsPage = () => {
           <div className="max-w-7xl mx-auto">
             <h2 className="text-3xl font-bold text-gray-900 text-center mb-4">
               {selectedCity === '東京'
-                ? '🗼 観光スポット'
+                ? selectedTags.length > 0
+                  ? '🗼 観光スポット'
+                  : '🗼 観光スポット'
                 : selectedCity === '大阪'
-                ? '🏯 観光スポット'
+                ? selectedTags.length > 0
+                  ? '🏯 観光スポット'
+                  : '🏯 観光スポット'
                 : selectedCity === '京都'
-                ? '🎎 観光スポット'
+                ? selectedTags.length > 0
+                  ? '🎎 観光スポット'
+                  : '🎎 観光スポット'
                 : selectedCity === '札幌'
-                ? '❄️ 観光スポット'
+                ? selectedTags.length > 0
+                  ? '❄️ 観光スポット'
+                  : '❄️ 観光スポット'
                 : selectedCity === '福岡'
-                ? '🌸 観光スポット'
+                ? selectedTags.length > 0
+                  ? '🌸 観光スポット'
+                  : '🌸 観光スポット'
                 : selectedCity === '沖縄'
-                ? '🌴 観光スポット'
+                ? selectedTags.length > 0
+                  ? '🌴 観光スポット'
+                  : '🌴 観光スポット'
                 : selectedCity === '名古屋'
-                ? '🏙 観光スポット'
+                ? selectedTags.length > 0
+                  ? '🏙 観光スポット'
+                  : '🏙 観光スポット'
                 : selectedCity === '広島'
-                ? '⚓ 観光スポット'
+                ? selectedTags.length > 0
+                  ? '⚓ 観光スポット'
+                  : '⚓ 観光スポット'
                 : selectedCity === '金沢'
-                ? '🖼 観光スポット'
+                ? selectedTags.length > 0
+                  ? '🖼 観光スポット'
+                  : '🖼 観光スポット'
                 : selectedTags.length > 0
                 ? '🏷️ 観光スポット'
                 : '観光スポット'}
             </h2>
             <p className="text-gray-600 text-center mb-12">
               {selectedCity === '東京'
-                ? '世界が憧れる大都市・東京で特別な体験を。'
+                ? selectedTags.length > 0
+                  ? `東京の${selectedTags.join('・')}に関連する観光スポットをご紹介します`
+                  : '世界が憧れる大都市・東京で特別な体験を。'
                 : selectedCity === '大阪'
-                ? '伝統から最新スポットまで、大阪の魅力を体感しよう。'
+                ? selectedTags.length > 0
+                  ? `大阪の${selectedTags.join('・')}に関連する観光スポットをご紹介します`
+                  : '伝統から最新スポットまで、大阪の魅力を体感しよう。'
                 : selectedCity === '京都'
-                ? '千年の都・京都で歴史と文化に触れる旅へ。'
+                ? selectedTags.length > 0
+                  ? `京都の${selectedTags.join('・')}に関連する観光スポットをご紹介します`
+                  : '千年の都・京都で歴史と文化に触れる旅へ。'
                 : selectedCity === '札幌'
-                ? '雪と光が彩る街・札幌の魅力を体感しよう。'
+                ? selectedTags.length > 0
+                  ? `札幌の${selectedTags.join('・')}に関連する観光スポットをご紹介します`
+                  : '雪と光が彩る街・札幌の魅力を体感しよう。'
                 : selectedCity === '福岡'
-                ? '九州の玄関口・福岡で味わう食と文化。'
+                ? selectedTags.length > 0
+                  ? `福岡の${selectedTags.join('・')}に関連する観光スポットをご紹介します`
+                  : '九州の玄関口・福岡で味わう食と文化。'
                 : selectedCity === '沖縄'
-                ? '青い海と豊かな文化、沖縄の魅力を巡る旅。'
+                ? selectedTags.length > 0
+                  ? `沖縄の${selectedTags.join('・')}に関連する観光スポットをご紹介します`
+                  : '青い海と豊かな文化、沖縄の魅力を巡る旅。'
                 : selectedCity === '名古屋'
-                ? '歴史とモダンが融合する名古屋を散策。'
+                ? selectedTags.length > 0
+                  ? `名古屋の${selectedTags.join('・')}に関連する観光スポットをご紹介します`
+                  : '歴史とモダンが融合する名古屋を散策。'
                 : selectedCity === '広島'
-                ? '世界遺産と美しい景観を楽しむ広島スポット。'
+                ? selectedTags.length > 0
+                  ? `広島の${selectedTags.join('・')}に関連する観光スポットをご紹介します`
+                  : '世界遺産と美しい景観を楽しむ広島スポット。'
                 : selectedCity === '金沢'
-                ? '伝統工芸と美しい街並み、金沢の魅力を発見。'
+                ? selectedTags.length > 0
+                  ? `金沢の${selectedTags.join('・')}に関連する観光スポットをご紹介します`
+                  : '伝統工芸と美しい街並み、金沢の魅力を発見。'
                 : selectedCity
-                ? `${selectedCity}で人気の観光スポットをご紹介します`
+                ? selectedTags.length > 0
+                  ? `${selectedCity}の${selectedTags.join('・')}に関連する観光スポットをご紹介します`
+                  : `${selectedCity}で人気の観光スポットをご紹介します`
                 : searchQuery
                 ? `「${searchQuery}」の検索結果`
                 : selectedTags.length > 0
