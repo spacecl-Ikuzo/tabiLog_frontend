@@ -25,14 +25,23 @@ import OsakaArchitecture3 from '../../assets/OsakaArchitecture3.png';
 import OsakaArchitecture4 from '../../assets/OsakaArchitecture4.png';
 import KyotoHero from '../../assets/Kinkakuji.jpg';
 import KiyoMizuTera from '../../assets/KiyoMizuTera.jpg';
+import KyotoKinkakuji1 from '../../assets/KyotoKinkakuji1.jpg';
+import KyotoKinkakuji2 from '../../assets/KyotoKinkakuji2.jpg';
+import KyotoKinkakuji3 from '../../assets/KyotoKinkakuji3.jpg';
+import KyotoKinkakuji14 from '../../assets/KyotoKinkakuji14.jpg';
+import KyotoPass4 from '../../assets/KyotoPass4.jpg';
+import KyotoPass5 from '../../assets/KyotoPass5.jpg';
+import KyotoPass1 from '../../assets/KyotoPass1.png';
+import KyotoPass2 from '../../assets/KyotoPass2.png';
+import KyotoPass3 from '../../assets/KyotoPass3.png';
 import SapporoHero from '../../assets/Sapporo.jpg';
 import SapporoTime from '../../assets/SapporoTime.jpg';
 import SapporoTower from '../../assets/SapporoTower.jpg';
 import FukuokaCastle from '../../assets/FukuokaCastle.jpg';
 import FukuokaCastle2 from '../../assets/FukuokaCastle2.jpg';
 import HakataCity from '../../assets/HakataCity.jpg';
-import HakataDepartBelow from '../../assets/HakataDepartBelow.jpg';
-import HakataIlumi from '../../assets/HakataIlumi.jpg';
+import hakatadepartbelow from '../../assets/hakatadepartbelow.jpg';
+import hakataIlumi from '../../assets/hakataIlumi.jpg';
 import OkinawaHero from '../../assets/OkinawaResort.jpg';
 import Shurijo from '../../assets/Shurijo.jpg';
 import OkiAquarium from '../../assets/OkiAquarium.jpg';
@@ -68,6 +77,24 @@ import Miyajima from '../../assets/miyajima.jpg';
 import KanazawaHero from '../../assets/Kanazawa.jpg';
 import Kenrokuen from '../../assets/Kenrokuen.jpg';
 import KanazawaCastle from '../../assets/KanazawaCastle.jpg';
+import kamajawaa1 from '../../assets/kamajawaa1.jpg';
+import kenrokuenSpring1 from '../../assets/kenrokuen-spring-1.jpg';
+import KenrokuenScreenshot from '../../assets/스크린샷 2025-09-21 오후 5.43.45.png';
+import Image123 from '../../assets/123.jpg';
+import Image1233 from '../../assets/1233.jpg';
+import Image12333 from '../../assets/12333.jpg';
+import Image22 from '../../assets/22.jpg';
+import Image223 from '../../assets/223.jpg';
+import HigashiChayaScreenshot from '../../assets/스크린샷 2025-09-21 오후 6.19.47.png';
+import KanazawaYuwakuOnsen from '../../assets/Kanazawa_YuwakuOnsen.jpg';
+import Kanazawa2 from '../../assets/Kanazawa2.jpg';
+import Kanazawa3 from '../../assets/Kanazawa3.jpg';
+import Kanazawa4 from '../../assets/Kanazawa4.jpg';
+import Hanabi1 from '../../assets/hanabi1.jpeg';
+import Screenshot1 from '../../assets/스크린샷 2025-09-23 오전 2.43.52.png';
+import Screenshot2 from '../../assets/스크린샷 2025-09-23 오전 2.43.59.png';
+import Screenshot3 from '../../assets/스크린샷 2025-09-23 오전 2.44.17.png';
+import Screenshot4 from '../../assets/스크린샷 2025-09-23 오전 2.44.23.png';
 // New images
 import TokyoDisneyland from '../../assets/tokyodisneyland.jpg';
 import DisneyResort from '../../assets/DisneyResort.jpg';
@@ -218,17 +245,17 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
         '鎌倉は1192年に源頼朝が開いた鎌倉幕府の古都として知られる歴史ある街です。現在は大仏や鶴岡八幡宮などの歴史的建造物と、スラムダンクなどのアニメの聖地としても人気を集めています。海と山に囲まれた自然豊かな環境で、四季折々の美しい景色を楽しめます。<br><br>【2.1 スラムダンクの聖地】<br>鎌倉高校前駅の踏切は、人気アニメ「スラムダンク」のオープニングで登場する有名な聖地です。青い海と空、そして江ノ島電鉄の電車が走る風景は、アニメファンにとって憧れの場所となっています。特に夕日の時間帯は、アニメの世界そのままの美しい光景を楽しむことができます。多くの観光客が写真撮影に訪れる人気スポットです。<br><br>【2.2 鎌倉大仏】<br>高徳院にある高さ約11.3mの青銅製の大仏像は、鎌倉のシンボルとして親しまれています。鎌倉時代の代表的な仏像彫刻として知られ、国の重要文化財に指定されています。大仏殿は台風で倒壊したため、現在は露座の姿で拝観できます。大仏の内部に入ることもでき、当時の鋳造技術の高さを間近で感じることができます。',
     },
     '24': {
-      title: '箱根温泉',
-      description: '富士山を望む名湯。リラックスできる温泉地',
-      author: 'タビログ編集部',
-      heroImage: HakoneOnsen,
-      breadcrumb: ['神奈川', '箱根町', '箱根温泉'],
-      contentTitle: '箱根温泉の基本情報',
-      spots: ['強羅温泉', '芦ノ湖', '箱根神社'],
-      imageLeft: HakoneOnsen,
-      imageRight: HakoneOnsen,
+      title: '🏛 中之島公会堂 × 黒執事 聖地巡礼',
+      description: '中之島公会堂 聖地巡礼！黒執事の世界を体感',
+      author: 'アニメ巡礼編集部',
+      heroImage: OsakaArchitecture5,
+      breadcrumb: ['大阪', '北区', '中之島公会堂'],
+      contentTitle: '中之島公会堂と黒執事の関係',
+      spots: ['外観（ヴィクトリア建築）', '大ホール', 'ステンドグラス'],
+      imageLeft: OsakaArchitecture2,
+      imageRight: OsakaArchitecture3,
       content:
-        '箱根温泉は富士山を望む人気の温泉地。豊富な泉質の温泉と美しい自然景観が魅力で、日帰り温泉から高級旅館まで様々な宿泊施設があります。芦ノ湖でのクルーズや箱根神社の参拝、美術館巡りなど、温泉以外の楽しみも豊富です。<br><br>【2.1 強羅温泉】<br>箱根の中心部にある強羅温泉は、箱根登山鉄道の終点として知られています。標高500mの高地に位置し、夏でも涼しく過ごせる避暑地として人気です。多くの旅館やホテルが立ち並び、様々な泉質の温泉を楽しむことができます。<br><br>【2.2 芦ノ湖】<br>箱根のシンボルである芦ノ湖は、約3000年前の火山活動によって形成されたカルデラ湖です。湖上を走る箱根海賊船でのクルーズや、富士山を背景にした美しい景色を楽しめます。湖畔には箱根神社の平和の鳥居もあり、パワースポットとしても人気です。<br><br>【2.3 箱根神社】<br>箱根神社は箱根の総鎮守として崇敬される神社です。芦ノ湖に浮かぶ平和の鳥居は、湖上から見る富士山と合わせて絶景として知られています。交通安全や開運のご利益があるとされ、多くの参拝客が訪れます。',
+        '中之島公会堂は1918年に建てられた大阪を代表するネオ・ルネッサンス様式の建築物です。アニメ『黒執事』の舞台となるヴィクトリア時代のロンドンを彷彿とさせる重厚な外観から、ファンの間では聖地の一つとして親しまれています。作品の公式ロケ地ではありませんが、その雰囲気が「黒執事」の世界観と重なるため、多くのファンが訪れています。<br><br>【2.1 外観（ヴィクトリア建築）】<br>赤レンガと白い石材を組み合わせた外観は、ヴィクトリア時代のロンドンを思わせます。ファンにとっては写真撮影の定番スポットです。<br><br>【2.2 大ホール】<br>公会堂の中心に位置する大ホールは、豪華な装飾とクラシックな雰囲気が特徴。『黒執事』の舞踏会シーンを連想させます。<br><br>【2.3 ステンドグラス】<br>天井や窓に施されたステンドグラスは必見。色鮮やかな光が差し込み、まるでアニメのワンシーンのような幻想的な空間を作り出します。',
     },
     '25': {
       title: '渋谷',
@@ -362,19 +389,6 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
       content:
         '太宰府天満宮は学問の神様として知られる菅原道真公を祀る神社。境内には心字池や太鼓橋、楼門、本殿など見どころが点在し、四季折々の美しさが楽しめます。受験合格祈願や厄除けに訪れる参拝客で年間を通じて賑わいます。<br><br>【2.1 本殿・御神牛】<br>荘厳な本殿は参拝の中心。境内に点在する「御神牛」の像は頭を撫でると知恵が授かるといわれ、受験生をはじめ多くの参拝者に親しまれています。楼門から本殿へ続く参道は写真スポットとしても人気です。<br><br>【2.2 梅苑・飛梅】<br>境内は梅の名所として有名で、早春には約200種・6,000本ともいわれる梅が咲き誇ります。道真公の伝説にまつわる「飛梅」は天満宮の象徴的存在。梅の香りとともに太宰府らしい風景を楽しめます。<br><br>【2.3 参道と御朱印】<br>表参道には梅ヶ枝餅の老舗が並び、食べ歩きも醍醐味。授与所では御朱印をいただくことができ、旅の記念として人気です。土日や受験シーズンは混雑するため、朝の時間帯の参拝がおすすめです。',
     },
-    '42': {
-      title: '櫛田神社',
-      description: '博多祇園山笠で知られる博多総鎮守。商売繁盛・不老長寿の御利益で有名',
-      author: 'タビログ編集部',
-      heroImage: gushidazinza,
-      breadcrumb: ['福岡', '博多区', '櫛田神社'],
-      contentTitle: '櫛田神社の基本情報',
-      spots: ['楼門と飾り山', '霊泉鶴の井戸', '博多べいと御朱印'],
-      imageLeft: gushidamatsuri,
-      imageRight: gushidatori,
-      content:
-        '櫛田神社は博多の総鎮守として「お櫛田さん」の愛称で親しまれる古社。毎年7月の博多祇園山笠で有名で、境内や楼門には祭りの飾り山が常設展示され、博多文化の象徴的な存在です。商売繁盛・不老長寿の御利益があるとされ、地元の人々や観光客で一年中賑わいます。<br><br>【2.1 楼門と飾り山】<br>豪壮な楼門をくぐると迫力ある「飾り山」が出迎えます。山笠の歴史や見送り・表の意匠を間近で鑑賞でき、祭り期間外でも博多の祭文化に触れられるのが魅力。写真スポットとしても人気です。<br><br>【2.2 霊泉鶴の井戸】<br>境内の「霊泉鶴の井戸」は不老長寿の霊泉として知られ、口をすすぐと健康長寿の御利益があると伝えられています。清冽な湧水と静謐な空気に心が洗われるスポットです。<br><br>【2.3 博多べいと御朱印】<br>櫛田神社周辺には「博多べい（博多塀）」と呼ばれる歴史的な土塀が残り、古き良き街並みの情緒を感じられます。授与所では季節限定デザインの御朱印をいただけることもあり、参拝の記念に人気です。参道の飴屋・菓子店を巡る食べ歩きもおすすめ。',
-    },
     '45': {
       title: '福岡PayPayドーム（ソフトバンクホークス）',
       description: 'ホークス本拠地の多目的ドーム。野球観戦とエンタメが集約',
@@ -447,7 +461,7 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
       content:
         '海遊館は大阪港に位置する世界最大級の水族館の一つです。館内は14の展示ゾーンに分かれており、太平洋を中心に世界各地の海や川の生き物を展示しています。特にジンベエザメが泳ぐ巨大水槽は迫力満点で、国内外から多くの観光客が訪れる人気スポットです。昼と夜で照明が変わる演出も魅力の一つで、違った雰囲気を楽しめます。<br><br>【2.1 ジンベエザメの大水槽】<br>海遊館のシンボル的存在。巨大なジンベエザメが悠々と泳ぐ姿は必見です。<br><br>【2.2 南極ゾーン（ペンギン）】<br>かわいいペンギンたちの暮らしを間近で観察できる人気エリアです。<br><br>【2.3 熱帯雨林ゾーン】<br>アマゾン川流域を再現。ピラニアやカピバラなどユニークな生物が見られます。<br><br>【2.4 夜の海エリア】<br>照明演出で昼とは違う幻想的な海の世界を体感できるコーナーです。',
     },
-    '24': {
+    '25': {
       title: '🏛 中之島公会堂 × 黒執事 聖地巡礼',
       description: '中之島公会堂 聖地巡礼！黒執事の世界を体感',
       author: 'アニメ巡礼編集部',
@@ -463,30 +477,43 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
   },
   京都: {
     '5': {
-      title: '金閣寺',
-      description: '京都の代表的な寺院。金色に輝く美しい建物',
+      title: '🏯 金閣寺',
+      description: '黄金に輝く京都の象徴。池に映る姿は四季折々の絶景。',
       author: 'タビログ編集部',
       heroImage: KyotoHero,
       breadcrumb: ['京都', '北区', '金閣寺'],
       contentTitle: '金閣寺の基本情報',
-      spots: ['鏡湖池', '舎利殿', '庭園'],
+      spots: ['舎利殿（金閣）', '鏡湖池の景観', '茶室と庭園'],
       imageLeft: KyotoHero,
       imageRight: KiyoMizuTera,
       content:
-        '金閣寺は金箔に覆われた舎利殿が有名で、鏡湖池に映り込む金色の建物は四季ごとに表情を変えます。雪化粧の冬景色や新緑、紅葉といった自然の移ろいと調和する風景は必見。参道には茶室や庭園の見どころが点在し、拝観後は周辺の和菓子店や茶屋で一服も楽しめます。',
+        '金閣寺は正式名称を「鹿苑寺」といい、世界文化遺産に登録されている京都を代表する寺院です。舎利殿（通称・金閣）は金箔で覆われ、その姿が鏡湖池に映る光景は京都観光のハイライト。室町時代の将軍・足利義満の別荘として建立され、後に禅寺となりました。四季折々の景観が楽しめ、特に雪化粧の金閣は絶景として知られています。<br><br>【2.1 舎利殿（金閣）】<br>黄金の外観が特徴の舎利殿。建物全体が金箔で覆われ、京都随一の美しさを誇ります。<br><br>【2.2 鏡湖池の景観】<br>舎利殿が水面に映る鏡湖池は、四季を通じて異なる絶景を見せてくれます。<br><br>【2.3 茶室と庭園】<br>境内には趣のある茶室や庭園があり、禅の静寂を体感できます。',
     },
     '6': {
-      title: '清水寺',
-      description: '京都で最も有名な寺院。舞台からの景色が絶景',
+      title: '🏯 清水寺',
+      description: '世界遺産に登録された京都の名刹。清水の舞台から望む絶景は必見。',
       author: 'タビログ編集部',
-      heroImage: KyotoHero,
+      heroImage: KiyoMizuTera,
       breadcrumb: ['京都', '東山区', '清水寺'],
       contentTitle: '清水寺の基本情報',
       spots: ['清水の舞台', '音羽の滝', '三重塔'],
       imageLeft: KiyoMizuTera,
-      imageRight: KyotoHero,
+      imageRight: KyotoKinkakuji3,
       content:
-        '清水寺は断崖に張り出した「清水の舞台」で知られ、京都市街を一望できる絶景スポット。音羽の滝での参拝や、三重塔・地主神社など境内の見どころも豊富です。桜・紅葉シーズンの夜間特別拝観は幻想的な光景が広がり、写真好きにも人気です。',
+        '清水寺は778年に創建された歴史ある寺院で、京都を代表する観光名所の一つです。境内は世界文化遺産に登録されており、特に本堂の「清水の舞台」は高さ13mの木造舞台から京都市街を一望できるスポットとして有名です。春は桜、秋は紅葉の名所としても人気で、一年を通じて観光客で賑わいます。<br><br>【2.1 清水の舞台】<br>本堂から突き出した木造舞台。京都市街を一望できるビュースポットとして人気です。<br><br>【2.2 音羽の滝】<br>境内にある湧水で、長寿・学業・縁結びの御利益があるとされ、多くの参拝者が訪れます<br><br>【2.3 三重塔】<br>鮮やかな朱色の三重塔は清水寺のシンボルの一つ。写真映えスポットとして人気です。',
+    },
+    '35': {
+      title: '🌸 哲学の道',
+      description: '桜と紅葉が美しい散策路。心静かに歩きながら四季の京都を感じよう。',
+      author: 'タビログ編集部',
+      heroImage: KyotoPass5,
+      breadcrumb: ['京都', '左京区', '哲学の道'],
+      contentTitle: '哲学の道の基本情報',
+      spots: ['銀閣寺からのスタート地点', '四季折々の自然景観', '小さなカフェやギャラリー'],
+      imageLeft: KyotoPass1,
+      imageRight: KyotoPass2,
+      content:
+        '哲学の道は京都市左京区に位置し、銀閣寺から南禅寺まで約2km続く散策路です。大正時代の哲学者・西田幾多郎が日課として歩いたことからその名がつきました。春には桜並木が満開となり、秋には紅葉が彩る景観が広がり、京都でも特に人気の散策コースの一つです。<br><br>【2.1 銀閣寺からのスタート地点】<br>哲学の道の北側は銀閣寺に隣接しており、観光と合わせて訪れる人が多いです。<br><br>【2.2 四季折々の自然景観】<br>春の桜、夏の緑、秋の紅葉、冬の静寂と、四季を通して異なる表情を楽しめます。<br><br>【2.3 小さなカフェやギャラリー】<br>道沿いにはカフェや工芸ギャラリーが点在し、休憩やショッピングも楽しめます。',
     },
   },
   札幌: {
@@ -498,10 +525,10 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
       breadcrumb: ['札幌', '中央区', '札幌時計台'],
       contentTitle: '札幌時計台の基本情報',
       spots: ['展示室', '鐘楼', '写真スポット'],
-      imageLeft: SapporoTower,
-      imageRight: SapporoTime,
+      imageLeft: SapporoTime,
+      imageRight: SapporoTower,
       content:
-        '札幌時計台は北海道開拓使時代の歴史を伝える貴重な建造物。館内展示で札幌の成り立ちを学べ、外観は四季の装いとともに美しく写真映えします。大通公園やテレビ塔と合わせた市内散策の起点にも最適です。<br><br>【2.1 展示室】<br>札幌時計台の展示室では、北海道開拓使時代から現在までの札幌の発展の歴史を詳しく学ぶことができます。明治時代の開拓使の資料や、時計台の建設過程、札幌の街づくりの変遷などが展示されています。特に開拓使の初代長官・黒田清隆の功績や、時計台が建てられた背景について詳しく紹介されており、札幌の歴史を深く理解できる貴重な空間です。展示品には当時の写真や図面、関連資料などが含まれており、歴史愛好家にも人気のスポットです。<br><br>【2.2 鐘楼】<br>札幌時計台の鐘楼は、1878年に設置された歴史ある鐘が現在も時を告げています。この鐘はアメリカ製で、当時の最新技術を駆使して作られました。鐘楼の内部では、時計の機械の仕組みや鐘の音が鳴るメカニズムを間近で見学できます。毎時0分になると鐘の音が響き渡り、札幌の街に歴史の重みを感じさせてくれます。鐘楼の階段を上ると、札幌市街を一望できる絶景スポットとしても人気で、特に夕暮れ時は美しい景色を楽しめます。<br><br>【2.3 写真スポット】<br>札幌時計台は札幌を代表する写真スポットとして、年間を通じて多くの観光客が訪れます。建物の外観は明治時代の洋風建築の美しさを今に伝えており、四季折々の表情を見せてくれます。春は桜とのコントラスト、夏は青空との対比、秋は紅葉との調和、冬は雪化粧との美しいコラボレーションが楽しめます。特に人気なのは建物の正面からの撮影で、時計台の時計部分と建物全体のバランスが美しく写ります。周辺の大通公園やテレビ塔と合わせた撮影もおすすめで、札幌観光の思い出に最適な写真が撮れます。',
+        '札幌時計台は北海道開拓使時代の歴史を伝える貴重な建造物。館内展示で札幌の成り立ちを学べ、外観は四季の装いとともに美しく写真映えします。大通公園やテレビ塔と合わせた市内散策の起点にも最適です。',
     },
     '8': {
       title: '大通公園',
@@ -515,19 +542,6 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
       imageRight: SapporoTime,
       content:
         '大通公園は札幌の中心を東西に貫く緑の帯。季節の花壇や噴水、イベントが魅力で、夏のビアガーデンや冬の雪まつりなど市民に親しまれる催しが多数開催されます。周辺にはカフェや百貨店が揃い、観光の合間の休憩にも便利です。',
-    },
-    '26': {
-      title: 'サッポロビール博物館',
-      description: '北海道の代表的なビール工場。歴史と製造工程を学べる',
-      author: 'タビログ編集部',
-      heroImage: SapporoHero,
-      breadcrumb: ['札幌', '東区', 'サッポロビール博物館'],
-      contentTitle: 'サッポロビール博物館の基本情報',
-      spots: ['ビール製造工程', '歴史展示', '試飲コーナー'],
-      imageLeft: SapporoTower,
-      imageRight: SapporoTime,
-      content:
-        'サッポロビール博物館は北海道のビール文化を学べる貴重な施設。明治時代から続くビール製造の歴史と技術を展示で紹介し、実際の製造工程も見学できます。試飲コーナーでは新鮮なビールを味わえ、北海道の食文化を深く理解できるスポットです。',
     },
   },
   福岡: {
@@ -552,10 +566,10 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
       breadcrumb: ['福岡', '博多区', '博多駅'],
       contentTitle: '博多駅の基本情報',
       spots: ['駅ビル', 'デパ地下', 'イルミネーション'],
-      imageLeft: HakataDepartBelow,
-      imageRight: HakataIlumi,
+      imageLeft: hakatadepartbelow,
+      imageRight: hakataIlumi,
       content:
-        '博多駅は九州の玄関口。駅ビルには名物の明太子や豚骨ラーメン、銘菓など福岡グルメが集結し、ショッピングも充実。イルミネーションやイベントも多く、旅行初日・最終日の滞在でも満足度の高い時間を過ごせます。空港や地下鉄とのアクセスも至便です。<br><br>【2.1 駅ビル】<br>博多駅ビル「JR博多シティ」は、地上11階・地下2階の大型商業施設です。1階には博多の名物グルメが集結し、明太子専門店「ふくや」や博多ラーメン「一風堂」、老舗和菓子店「如水庵」などが軒を連ねています。9階・10階の「博多一番街」では、博多の伝統工芸品や地元特産品を購入できます。駅ビル内には約200店舗が入居し、九州最大級の商業施設として観光客に人気です。特に地下1階の「博多地下街」は、雨の日でも快適にショッピングが楽しめる空間となっています。<br><br>【2.2 デパ地下】<br>博多駅のデパ地下は、福岡の食文化を体感できる最高のスポットです。博多阪急の地下1階には、明太子、もつ鍋、水炊き、博多ラーメンなど、福岡の名物料理を提供する店舗が集結しています。特に「博多もつ鍋 やまや」や「博多水炊き 水月」など、老舗店の味を駅で手軽に楽しめるのが魅力です。デパ地下では、お土産用の明太子や博多の銘菓も豊富に取り揃えており、旅行の最後にまとめて購入するのに便利です。また、季節限定の商品や期間限定の催しも多く、何度訪れても新しい発見があります。<br><br>【2.3 イルミネーション】<br>博多駅周辺は、冬のイルミネーションが特に美しく、毎年12月から2月にかけて「博多イルミネーション」が開催されます。駅前広場には約10万球のLEDが使用され、幻想的な光の世界を演出します。特に「博多駅前イルミネーション」では、音楽と光のコラボレーションによるショーが人気で、多くの観光客が足を止めて見入ります。また、駅ビル内でも各階で異なるテーマのイルミネーションが展開され、ショッピングをしながら美しい光の演出を楽しめます。イルミネーション期間中は、駅周辺のカフェやレストランも特別メニューを提供し、より一層ロマンチックな雰囲気を演出します。',
+        '博多駅は九州の玄関口。駅ビルには名物の明太子や豚骨ラーメン、銘菓など福岡グルメが集結し、ショッピングも充実。イルミネーションやイベントも多く、旅行初日・最終日の滞在でも満足度の高い時間を過ごせます。空港や地下鉄とのアクセスも至便です。',
     },
     '40': {
       title: '中洲屋台',
@@ -582,32 +596,6 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
       imageRight: dazaifutenmangu,
       content:
         '太宰府天満宮は学問の神様として知られる菅原道真公を祀る神社。境内には心字池や太鼓橋、楼門、本殿など見どころが点在し、四季折々の美しさが楽しめます。受験合格祈願や厄除けに訪れる参拝客で年間を通じて賑わいます。<br><br>【2.1 本殿・御神牛】<br>荘厳な本殿は参拝の中心。境内に点在する「御神牛」の像は頭を撫でると知恵が授かるといわれ、受験生をはじめ多くの参拝者に親しまれています。楼門から本殿へ続く参道は写真スポットとしても人気です。<br><br>【2.2 梅苑・飛梅】<br>境内は梅の名所として有名で、早春には約200種・6,000本ともいわれる梅が咲き誇ります。道真公の伝説にまつわる「飛梅」は天満宮の象徴的存在。梅の香りとともに太宰府らしい風景を楽しめます。<br><br>【2.3 参道と御朱印】<br>表参道には梅ヶ枝餅の老舗が並び、食べ歩きも醍醐味。授与所では御朱印をいただくことができ、旅の記念として人気です。土日や受験シーズンは混雑するため、朝の時間帯の参拝がおすすめです。',
-    },
-    '42': {
-      title: '櫛田神社',
-      description: '博多祇園山笠で知られる博多総鎮守。商売繁盛・不老長寿の御利益で有名',
-      author: 'タビログ編集部',
-      heroImage: gushidazinza,
-      breadcrumb: ['福岡', '博多区', '櫛田神社'],
-      contentTitle: '櫛田神社の基本情報',
-      spots: ['楼門と飾り山', '霊泉鶴の井戸', '博多べいと御朱印'],
-      imageLeft: gushidamatsuri,
-      imageRight: gushidatori,
-      content:
-        '櫛田神社は博多の総鎮守として「お櫛田さん」の愛称で親しまれる古社。毎年7月の博多祇園山笠で有名で、境内や楼門には祭りの飾り山が常設展示され、博多文化の象徴的な存在です。商売繁盛・不老長寿の御利益があるとされ、地元の人々や観光客で一年中賑わいます。<br><br>【2.1 楼門と飾り山】<br>豪壮な楼門をくぐると迫力ある「飾り山」が出迎えます。山笠の歴史や見送り・表の意匠を間近で鑑賞でき、祭り期間外でも博多の祭文化に触れられるのが魅力。写真スポットとしても人気です。<br><br>【2.2 霊泉鶴の井戸】<br>境内の「霊泉鶴の井戸」は不老長寿の霊泉として知られ、口をすすぐと健康長寿の御利益があると伝えられています。清冽な湧水と静謐な空気に心が洗われるスポットです。<br><br>【2.3 博多べいと御朱印】<br>櫛田神社周辺には「博多べい（博多塀）」と呼ばれる歴史的な土塀が残り、古き良き街並みの情緒を感じられます。授与所では季節限定デザインの御朱印をいただけることもあり、参拝の記念に人気です。参道の飴屋・菓子店を巡る食べ歩きもおすすめ。',
-    },
-    '43': {
-      title: 'マリンワールド海の中道',
-      description: '九州の海をテーマにした水族館。大水槽とイルカショーが人気',
-      author: 'タビログ編集部',
-      heroImage: marineworld,
-      breadcrumb: ['福岡', '東区', 'マリンワールド海の中道'],
-      contentTitle: 'マリンワールド海の中道の基本情報',
-      spots: ['九州の海 大水槽', 'イルカ・アシカショー', '展望デッキと海辺散策'],
-      imageLeft: marineworld,
-      imageRight: marineaqua,
-      content:
-        'マリンワールド海の中道は「九州の海」をテーマにした水族館。玄界灘や有明海など地域の海を再現した展示が特徴で、家族連れやカップルに人気です。館内の動線は海辺散策のように心地よく、屋外エリアから望む博多湾の景色も見どころ。<br><br>【2.1 九州の海 大水槽】<br>高さ・幅ともに迫力のある大水槽では、イワシの群泳やサメ、エイが織りなすダイナミックな世界を体感できます。時間帯によっては解説付きの給餌タイムが実施され、海の生態について楽しく学べます。<br><br>【2.2 イルカ・アシカショー】<br>屋外スタジアムでは、イルカとアシカのパフォーマンスを上演。ジャンプや連携技が繰り出されるショーは臨場感たっぷりで、海風を感じながら観覧できるのも魅力です。季節限定のナイトショーや演出も要チェック。<br><br>【2.3 展望デッキと海辺散策】<br>館外の展望デッキからは博多湾や志賀島方面の眺望が広がります。帰り道は海の中道の遊歩道を散策し、海辺の風景や芝生広場でのんびり過ごすのもおすすめ。館内外で一日ゆっくり楽しめるスポットです。',
     },
     '44': {
       title: '大濠公園',
@@ -666,58 +654,133 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
   },
   広島: {
     '15': {
-      title: '原爆ドーム',
+      title: '⚓ 原爆ドーム',
       description: '広島の平和の象徴。世界遺産',
       author: 'タビログ編集部',
       heroImage: HiroshimaHero,
       breadcrumb: ['広島', '中区', '原爆ドーム'],
       contentTitle: '原爆ドームの基本情報',
-      spots: ['平和記念公園', '資料館', '元安川'],
+      spots: ['原爆ドームの基本情報', '平和記念公園', '資料館', '元安川'],
       imageLeft: GenbakuDome,
       imageRight: HiroshimaHero,
       content:
-        '原爆ドームは世界遺産に登録された平和の象徴。隣接する平和記念公園や資料館とともに、戦争の悲惨さと平和の尊さを学ぶ場です。川沿いの散策路は慰霊と鎮魂の空気に包まれ、静かな時間が流れます。',
+        '原爆ドームは世界遺産に登録された平和の象徴。隣接する平和記念公園や資料館とともに、戦争の悲惨さと平和の尊さを学ぶ場です。川沿いの散策路は穏やかな空気に包まれ、静かな時間が流れます。<br><br>【2.1 平和記念公園】<br>広島市中心部に位置する大規模な公園で、原爆の犠牲者を追悼する慰霊碑やモニュメントが点在。<br><br>【2.2 資料館】<br>原爆の被害と歴史を伝える施設。写真や遺品の展示を通じて、平和の大切さを学ぶことができます。<br><br>【2.3 元安川】<br>原爆ドーム横を流れる川で、春には桜が咲き誇り、美しい景観が楽しめます。',
     },
     '16': {
-      title: '宮島',
+      title: '🏝 宮島',
       description: '厳島神社で有名な美しい島',
       author: 'タビログ編集部',
       heroImage: HiroshimaHero,
       breadcrumb: ['広島', '廿日市市', '宮島'],
       contentTitle: '宮島の基本情報',
-      spots: ['厳島神社', '大鳥居', '弥山'],
+      spots: ['宮島の基本情報', '厳島神社', '大鳥居', '弥山'],
       imageLeft: Miyajima,
       imageRight: HiroshimaHero,
       content:
-        '宮島は干満により姿を変える海上の大鳥居で知られ、厳島神社の社殿群は海と山に抱かれた幽玄の美をたたえます。弥山の原始林や鹿とのふれあい、紅葉谷公園など見どころも多く、四季を通じて楽しめます。',
+        '宮島は干満により姿を変える海上の大鳥居で知られ、厳島神社の社殿群は海と山に抱かれた幽玄の美をたたえます。弥山の原始林や鹿とのふれあい、紅葉谷公園など見どころも多く、四季を通じて楽しめます。<br><br>【2.1 厳島神社】<br>世界遺産に登録された神社で、海に浮かぶように建てられた独特の構造が特徴。朱塗りの回廊と背後の緑が美しいコントラストを生みます。<br><br>【2.2 大鳥居】<br>海上にそびえ立つ巨大な鳥居は宮島のシンボル。満潮時には海に浮かぶ姿、干潮時には歩いて近づけるのが魅力です。<br><br>【2.3 弥山】<br>宮島最高峰の山で、古くから信仰の対象とされてきました。山頂からは瀬戸内海を一望でき、絶景スポットとして人気です。',
+    },
+    '40': {
+      title: '⛩️ 厳島神社',
+      description: '海に浮かぶ朱色の大鳥居で有名な世界遺産',
+      author: 'タビログ編集部',
+      heroImage: HiroshimaHero,
+      breadcrumb: ['広島', '廿日市市', '厳島神社'],
+      contentTitle: '厳島神社の基本情報',
+      spots: ['厳島神社の基本情報', '大鳥居', '回廊', '宝物館'],
+      imageLeft: Miyajima,
+      imageRight: HiroshimaHero,
+      content:
+        '厳島神社は広島県宮島に位置する世界遺産の神社で、海に浮かぶように建てられた独特の構造が特徴です。朱色の社殿と背後の緑豊かな山々が織りなす風景はまさに絶景。平安時代に建立され、海上交通や航海の守護神として信仰を集めてきました。潮の満ち引きにより姿を変える神秘的な景観が、多くの観光客を魅了しています。<br><br>【2.1 大鳥居】<br>宮島の象徴ともいえる巨大な鳥居。満潮時には海に浮かぶ姿、干潮時には歩いて近づけるのが魅力です。<br><br>【2.2 回廊】<br>朱塗りの回廊が海上に延びる光景は幻想的。季節や時間帯によって異なる美しさを楽しめます。<br><br>【2.3 宝物館】<br>歴史的な美術品や神宝を展示する施設。厳島神社の文化と歴史を学ぶことができます。',
+    },
+    '41': {
+      title: '🌊 鞆の浦',
+      description: '江戸時代の港町の面影を残す美しい港',
+      author: 'タビログ編集部',
+      heroImage: HiroshimaHero,
+      breadcrumb: ['広島', '福山市', '鞆の浦'],
+      contentTitle: '鞆の浦の基本情報',
+      spots: ['鞆の浦の基本情報', '常夜燈', '鞆城跡', '太田家住宅'],
+      imageLeft: Miyajima,
+      imageRight: HiroshimaHero,
+      content:
+        '鞆の浦は広島県福山市に位置する港町で、古くから瀬戸内海航路の要衝として栄えてきました。江戸時代の町並みや石畳の路地が今も残り、情緒あふれる景観を楽しめます。宮崎駿監督が映画『崖の上のポニョ』の構想を練った場所としても知られ、アニメファンにも人気のスポットです。新鮮な海の幸を味わえる食事処や、歴史的建造物も数多く点在しています。<br><br>【2.1 常夜燈】<br>港を見守る灯台として江戸時代に建てられた石造りの常夜燈。鞆の浦のシンボル的存在です。<br><br>【2.2 鞆城跡】<br>戦国時代に築かれた城の跡。現在は石垣や遺構が残り、歴史を感じられるスポットです。<br><br>【2.3 太田家住宅】<br>江戸時代の豪商の邸宅。伝統的な建築様式が保存され、往時の暮らしを垣間見ることができます。',
     },
   },
   金沢: {
     '17': {
-      title: '兼六園',
+      title: '🪷 兼六園',
       description: '金沢の代表的な庭園。日本三名園の一つ',
       author: 'タビログ編集部',
-      heroImage: KanazawaHero,
+      heroImage: Kenrokuen,
       breadcrumb: ['金沢', '兼六町', '兼六園'],
       contentTitle: '兼六園の基本情報',
-      spots: ['徽軫灯籠', '雪吊り', '霞ヶ池'],
-      imageLeft: Kenrokuen,
-      imageRight: KanazawaHero,
+      spots: ['兼六園の基本情報', '雪吊り', '池泉回遊式庭園', '四季の花々'],
       content:
-        '兼六園は日本三名園のひとつ。広大な園内には池泉回遊式庭園の趣向が凝らされ、雪吊りや灯籠、曲水など見どころが点在します。冬の雪化粧、春の桜、初夏の新緑、秋の紅葉と、四季の風雅を堪能できます。',
+        '兼六園は、加賀藩前田家が築いた日本を代表する大名庭園で、日本三名園の一つに数えられます。広さ約11.7ヘクタールに及ぶ園内には池や小川、茶屋、石灯籠などが巧みに配置され、四季折々の風景が楽しめます。春の桜、夏の新緑、秋の紅葉、冬の雪吊りと、一年を通じて多彩な魅力を見せてくれる庭園です。<br><br>【2.1 雪吊り】<br>冬の兼六園といえば「雪吊り」。松の枝が雪の重みで折れないように縄で支える技法で、冬の風物詩として有名です。幻想的な雪景色と調和し、訪れる人々を魅了します。<br><br>【2.2 池泉回遊式庭園】<br>園内は池を中心に歩きながら景色を楽しむ「池泉回遊式庭園」の形式を採用。霞ヶ池や唐崎松など見どころが多く、散策するたびに違う景色を堪能できます。<br><br>【2.3 四季の花々】<br>梅、桜、カキツバタ、紅葉、雪景色と、四季ごとに異なる自然美を楽しめるのも兼六園の魅力。どの季節に訪れても新しい表情を見せてくれます。',
     },
     '18': {
-      title: '金沢城公園',
+      title: '🏯 金沢城公園',
       description: '金沢の歴史を感じられる城跡公園',
       author: 'タビログ編集部',
-      heroImage: KanazawaHero,
+      heroImage: KanazawaCastle,
       breadcrumb: ['金沢', '丸の内', '金沢城公園'],
       contentTitle: '金沢城公園の基本情報',
-      spots: ['石川門', '五十間長屋', '玉泉院丸庭園'],
-      imageLeft: KanazawaCastle,
-      imageRight: KanazawaHero,
+      spots: ['金沢城公園の基本情報', '石川門', '菱櫓', '桜並木'],
       content:
-        '金沢城公園は石川門や五十間長屋など復元された建造物と広い芝生が魅力。加賀百万石の歴史を感じる空間で、兼六園との回遊も楽しめます。夜間ライトアップ時は城郭の白壁が幻想的に浮かび上がります。',
+        '金沢城公園は、加賀百万石を誇った前田家の居城・金沢城の跡地を整備した歴史公園です。石川門や菱櫓などの建物が復元され、江戸時代の城郭建築を今に伝えています。広大な園内は四季折々の景観を楽しめ、春には桜の名所としても知られています。<br><br>【2.1 石川門】<br>白壁と石垣が美しい城門で、国の重要文化財に指定されています。金沢城の正門として威厳を誇ります。<br><br>【2.2 菱櫓】<br>独特の菱形の屋根を持つ櫓で、復元された内部を見学することができます。戦国時代の防御構造や建築技術を知る貴重なスポットです。<br><br>【2.3 桜並木】<br>園内には約400本の桜が植えられており、春には花見客で賑わいます。城跡と桜のコントラストは必見です。',
+    },
+    '19': {
+      title: '🏘 東茶屋街',
+      description: '江戸時代の茶屋街。金沢の伝統文化を感じられる',
+      author: 'タビログ編集部',
+      heroImage: Image22,
+      breadcrumb: ['金沢', 'ひがし茶屋街', '東茶屋街'],
+      contentTitle: '東茶屋街の基本情報',
+      spots: ['東茶屋街の基本情報', '町家建築', '和菓子店', '工芸品ショップ'],
+      content:
+        '東茶屋街は、江戸時代の雰囲気を今に伝える茶屋街で、石畳の通りに町家が並んでいます。伝統的な町家建築は国の重要伝統的建造物群保存地区に指定されており、歴史的景観を楽しむことができます。現在はカフェや和菓子店、工芸品店が並び、観光とショッピングが同時に楽しめる人気スポットです。<br><br>【2.1 町家建築】<br>木造の町家が立ち並び、格子窓や土壁が特徴的。伝統建築の美しさを間近で感じられます。<br><br>【2.2 和菓子店】<br>金沢は和菓子の町としても有名。茶屋街には老舗の和菓子店が点在し、抹茶と一緒に楽しむのがおすすめです。<br><br>【2.3 工芸品ショップ】<br>加賀友禅や金箔工芸など、金沢ならではの伝統工芸品を扱う店が多数。お土産探しにも最適です。',
+    },
+    '42': {
+      title: '🏘 東茶屋街',
+      description: '江戸時代の茶屋街。金沢の伝統文化を感じられる',
+      author: 'タビログ編集部',
+      heroImage: Image22,
+      breadcrumb: ['金沢', 'ひがし茶屋街', '東茶屋街'],
+      contentTitle: '東茶屋街の基本情報',
+      spots: ['東茶屋街の基本情報', '町家建築', '和菓子店', '工芸品ショップ'],
+      content:
+        '東茶屋街は、江戸時代の雰囲気を今に伝える茶屋街で、石畳の通りに町家が並んでいます。伝統的な町家建築は国の重要伝統的建造物群保存地区に指定されており、歴史的景観を楽しむことができます。現在はカフェや和菓子店、工芸品店が並び、観光とショッピングが同時に楽しめる人気スポットです。<br><br>【2.1 町家建築】<br>木造の町家が立ち並び、格子窓や土壁が特徴的。伝統建築の美しさを間近で感じられます。<br><br>【2.2 和菓子店】<br>金沢は和菓子の町としても有名。茶屋街には老舗の和菓子店が点在し、抹茶と一緒に楽しむのがおすすめです。<br><br>【2.3 工芸品ショップ】<br>加賀友禅や金箔工芸など、金沢ならではの伝統工芸品を扱う店が多数。お土産探しにも最適です。',
+      imageLeft: Image22,
+      imageRight: Image223,
+      imageBottom: HigashiChayaScreenshot,
+    },
+    '20': {
+      title: '♨️ 湯涌温泉',
+      description: '金沢の奥座敷。自然に囲まれた静かな温泉地',
+      author: 'タビログ編集部',
+      heroImage: HakoneOnsen,
+      breadcrumb: ['金沢', '湯涌温泉', '湯涌温泉'],
+      contentTitle: '湯涌温泉の基本情報',
+      spots: ['湯涌温泉の基本情報', '露天風呂', '歴史ある旅館', '足湯'],
+      imageLeft: HakoneOnsen,
+      imageRight: HakoneOnsen,
+      imageBottom: HakoneOnsen,
+      content:
+        '湯涌温泉は、金沢の奥座敷と呼ばれる温泉地で、自然に囲まれた落ち着いた雰囲気が特徴です。開湯は平安時代に遡るとされ、加賀藩の歴代藩主にも愛されました。現在も情緒ある温泉旅館が並び、訪れる人に癒しと安らぎを与えています。<br><br>【2.1 露天風呂】<br>四季折々の自然を眺めながら湯浴みを楽しめる露天風呂が人気。特に冬の雪見風呂は格別です。<br><br>【2.2 歴史ある旅館】<br>江戸時代から続く老舗旅館もあり、伝統的なおもてなしと落ち着いた和の空間を体験できます。<br><br>【2.3 足湯】<br>気軽に楽しめる足湯スポットも整備されており、散策の途中に立ち寄って温泉気分を味わえます。',
+    },
+    '43': {
+      title: '♨️ 湯涌温泉',
+      description: '金沢の奥座敷。自然に囲まれた静かな温泉地',
+      author: 'タビログ編集部',
+      heroImage: KanazawaYuwakuOnsen,
+      breadcrumb: ['金沢', '湯涌温泉', '湯涌温泉'],
+      contentTitle: '湯涌温泉の基本情報',
+      spots: ['湯涌温泉の基本情報', '露天風呂', '歴史ある旅館', '足湯'],
+      imageLeft: Kanazawa2,
+      imageRight: Kanazawa3,
+      imageBottom: Kanazawa4,
+      content:
+        '湯涌温泉は、金沢の奥座敷と呼ばれる温泉地で、自然に囲まれた落ち着いた雰囲気が特徴です。開湯は平安時代に遡るとされ、加賀藩の歴代藩主にも愛されました。現在も情緒ある温泉旅館が並び、訪れる人に癒しと安らぎを与えています。<br><br>【2.1 露天風呂】<br>四季折々の自然を眺めながら湯浴みを楽しめる露天風呂が人気。特に冬の雪見風呂は格別です。<br><br>【2.2 歴史ある旅館】<br>江戸時代から続く老舗旅館もあり、伝統的なおもてなしと落ち着いた和の空間を体験できます。<br><br>【2.3 足湯】<br>気軽に楽しめる足湯スポットも整備されており、散策の途中に立ち寄って温泉気分を味わえます。',
     },
   },
 };
@@ -753,7 +816,13 @@ const SpotDetailPage = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative h-96 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${hero})` }}>
+      <section 
+        className="relative h-96 bg-cover bg-center bg-no-repeat" 
+        style={{ 
+          backgroundImage: `url(${hero})`,
+          backgroundPosition: cityKey === '京都' && idKey === '35' ? 'center 5%' : 'center'
+        }}
+      >
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60"></div>
 
         {/* Breadcrumb */}
@@ -829,23 +898,25 @@ const SpotDetailPage = () => {
           <h2 className="text-3xl font-bold text-gray-900 mb-8">{detail?.contentTitle || `${safeTitle} の基本情報`}</h2>
 
           {/* Images */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-            <div className="bg-white rounded-lg overflow-hidden shadow-md">
-              <div
-                className="h-64 bg-cover bg-center bg-no-repeat"
-                style={{ backgroundImage: `url(${detail?.imageLeft || hero})` }}
-              ></div>
+          {!(cityKey === '京都' && (idKey === '6' || idKey === '35')) && !(cityKey === '金沢' && (idKey === '17' || idKey === '18' || idKey === '19' || idKey === '42')) && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${detail?.imageLeft || hero})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${detail?.imageRight || hero})` }}
+                ></div>
+              </div>
             </div>
-            <div className="bg-white rounded-lg overflow-hidden shadow-md">
-              <div
-                className="h-64 bg-cover bg-center bg-no-repeat"
-                style={{ backgroundImage: `url(${detail?.imageRight || hero})` }}
-              ></div>
-            </div>
-          </div>
+          )}
 
           {/* Extra Images for 中之島公会堂 */}
-          {cityKey === '大阪' && idKey === '24' && (
+          {cityKey === '大阪' && idKey === '25' && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <div className="bg-white rounded-lg overflow-hidden shadow-md">
                 <div
@@ -929,6 +1000,102 @@ const SpotDetailPage = () => {
                 <div
                   className="h-64 bg-cover bg-center bg-no-repeat"
                   style={{ backgroundImage: `url(${ToonTown})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+
+          {/* Extra Images for Kenrokuen */}
+          {cityKey === '金沢' && idKey === '17' && (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${kamajawaa1})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${kenrokuenSpring1})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${KenrokuenScreenshot})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+
+          {/* Extra Images for Kanazawa Castle Park */}
+          {cityKey === '金沢' && idKey === '18' && (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${Image123})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${Image1233})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${Image12333})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+
+          {/* Extra Images for Higashi Chaya District */}
+          {cityKey === '金沢' && idKey === '19' && (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${Image22})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${Image223})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${HigashiChayaScreenshot})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+
+          {/* Extra Images for Higashi Chaya District (ID 42) */}
+          {cityKey === '金沢' && idKey === '42' && (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${Image22})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${Image223})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${HigashiChayaScreenshot})` }}
                 ></div>
               </div>
             </div>
@@ -1145,6 +1312,60 @@ const SpotDetailPage = () => {
                 <div
                   className="h-64 bg-cover bg-center bg-no-repeat"
                   style={{ backgroundImage: `url(${ohori})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+
+          {/* Extra Images for Kiyomizu-dera */}
+          {cityKey === '京都' && idKey === '6' && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${KyotoKinkakuji1})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${KyotoKinkakuji3})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${KyotoKinkakuji14})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+
+          {/* Extra Images for Philosopher's Path */}
+          {cityKey === '京都' && idKey === '35' && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${KyotoPass1})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${KyotoPass2})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${KyotoPass3})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${KyotoPass4})` }}
                 ></div>
               </div>
             </div>
