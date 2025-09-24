@@ -83,7 +83,7 @@ export default function DeleteAccount() {
       // 성공 메시지
       toast.success('アカウントが正常に削除されました');
 
-      // 사용자 데이터 제거
+      // 사용자 데이터 제거 (localStorage 포함)
       removeUserData();
 
       // 탈퇴 완료 화면으로 이동
