@@ -1223,7 +1223,7 @@ const TripPlannerPage = () => {
   // 코스트 수정 함수
   const saveExpenses = async () => {
     if (!costCalculatingSpot || expenseInputs.amount <= 0) {
-      alert('금액을 입력해주세요.');
+      alert('金額を入力してください。');
       return;
     }
 
@@ -1324,7 +1324,7 @@ const TripPlannerPage = () => {
       console.log('savedExpense:', savedExpense);
 
       // 성공 메시지 표시
-      alert('코스트가 성공적으로 수정되었습니다!');
+      alert('コストが正常に修正されました！');
 
       // 다이얼로그 닫기
       setIsCostDialogOpen(false);
@@ -1336,7 +1336,7 @@ const TripPlannerPage = () => {
       console.error('오류 메시지:', error instanceof Error ? error.message : 'Unknown error');
       console.error('오류 스택:', error instanceof Error ? error.stack : 'No stack trace');
 
-      alert('코스트 수정에 실패했습니다. 다시 시도해주세요.');
+      alert('原価修正に失敗しました。もう一度お試しください。');
       if (
         error &&
         typeof error === 'object' &&
@@ -1347,11 +1347,11 @@ const TripPlannerPage = () => {
         error.response.status === 401
       ) {
         console.error('401 인증 오류 발생 - SecurityConfig 설정 확인 필요');
-        alert('인증 오류가 발생했습니다. 백엔드 서버를 재시작해주세요.');
+        alert('認証エラーが発生しました。');
         return;
       }
 
-      alert(`지출 저장에 실패했습니다.\n오류: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      alert(`支出の保存に失敗しました。\n오류: ${error instanceof Error ? error.message : 'Unknown error'}`);
     } finally {
       setIsLoading(false);
       console.log('=== 지출 저장 완료 ===');
@@ -2076,7 +2076,7 @@ const TripPlannerPage = () => {
       await saveSpotsToBackend();
 
       // 성공 메시지 표시
-      alert('관광지가 성공적으로 저장되었습니다!');
+      alert('観光地が正常に保存されました！');
 
       // localStorage에서 임시 데이터 삭제하고 저장 완료 상태 표시
       localStorage.removeItem(`trip_spots_${planId}`);
@@ -2086,7 +2086,7 @@ const TripPlannerPage = () => {
       navigate(-1);
     } catch (error) {
       console.error('저장 실패:', error);
-      alert('저장에 실패했습니다. 다시 시도해주세요.');
+      alert('保存に失敗しました。もう一度お試しください。');
     } finally {
       setIsSaving(false);
       setIsSaveConfirmationOpen(false);
