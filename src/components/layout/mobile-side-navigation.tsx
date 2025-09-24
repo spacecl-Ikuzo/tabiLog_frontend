@@ -1,25 +1,19 @@
 // src/components/layout/mobile-side-navigation.tsx
-import { useNavigate } from 'react-router-dom';
-import { useInvitationStore, useUserStore } from '@/store';
-import { useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useUserStore } from '@/store';
+import { useState, useEffect } from 'react';
 
 interface MobileSideNavigationProps {
   isOpen: boolean;
   onClose: () => void;
+  handleLogout: () => void;
 }
 
-const MobileSideNavigation = ({ isOpen, onClose }: MobileSideNavigationProps) => {
+const MobileSideNavigation = ({ isOpen, onClose, handleLogout }: MobileSideNavigationProps) => {
   const navigate = useNavigate();
-  const { token, nickname, removeUserData } = useUserStore();
-  const { clearInvitationData } = useInvitationStore();
+  const location = useLocation();
+  const { token, nickname } = useUserStore();
   const [isMyTripOpen, setIsMyTripOpen] = useState(false);
-
-  const handleLogout = () => {
-    // 토큰/ 사용자 정보 삭제 + 로그인 화면으로
-    removeUserData();
-    clearInvitationData();
-    navigate('/login');
-  };
 
   const handleNavigation = (path: string) => {
     navigate(path);
@@ -29,6 +23,15 @@ const MobileSideNavigation = ({ isOpen, onClose }: MobileSideNavigationProps) =>
   const toggleMyTrip = () => {
     setIsMyTripOpen(!isMyTripOpen);
   };
+
+  // 현재 경로가 마이트립 관련이면 자동으로 펼침 상태 유지
+  useEffect(() => {
+    const isMyTripPath =
+      location.pathname.startsWith('/plans') ||
+      location.pathname.startsWith('/newPlan') ||
+      location.pathname.startsWith('/profile');
+    setIsMyTripOpen(isMyTripPath);
+  }, [location.pathname]);
 
   return (
     <div className="lg:hidden">
@@ -80,7 +83,9 @@ const MobileSideNavigation = ({ isOpen, onClose }: MobileSideNavigationProps) =>
         <nav className="flex flex-col p-4 space-y-1">
           {/* 홈 메뉴 */}
           <button
-            className="flex items-center px-4 py-3 text-left text-gray-700 bg-orange-50 rounded-lg transition-colors"
+            className={`flex items-center px-4 py-3 text-left rounded-lg transition-colors ${
+              location.pathname === '/' ? 'bg-orange-50 text-gray-900' : 'text-gray-700 hover:bg-gray-100'
+            }`}
             onClick={() => handleNavigation('/')}
           >
             <svg className="w-5 h-5 mr-3 text-brand-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -96,7 +101,9 @@ const MobileSideNavigation = ({ isOpen, onClose }: MobileSideNavigationProps) =>
 
           {/* 관광스팟 소개 */}
           <button
-            className="flex items-center px-4 py-3 text-left text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
+            className={`flex items-center px-4 py-3 text-left rounded-lg transition-colors ${
+              location.pathname.startsWith('/spots') ? 'bg-orange-50 text-gray-900' : 'text-gray-700 hover:bg-gray-100'
+            }`}
             onClick={() => handleNavigation('/spots')}
           >
             <svg className="w-5 h-5 mr-3 text-brand-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -113,7 +120,13 @@ const MobileSideNavigation = ({ isOpen, onClose }: MobileSideNavigationProps) =>
           {/* 마이트립 메뉴 (계층적 구조) */}
           <div className="space-y-1">
             <button
-              className="flex items-center justify-between w-full px-4 py-3 text-left text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
+              className={`flex items-center justify-between w-full px-4 py-3 text-left rounded-lg transition-colors ${
+                location.pathname.startsWith('/plans') ||
+                location.pathname.startsWith('/newPlan') ||
+                location.pathname.startsWith('/profile')
+                  ? 'bg-orange-50 text-gray-900'
+                  : 'text-gray-700 hover:bg-gray-100'
+              }`}
               onClick={toggleMyTrip}
             >
               <div className="flex items-center">
@@ -143,19 +156,31 @@ const MobileSideNavigation = ({ isOpen, onClose }: MobileSideNavigationProps) =>
             {isMyTripOpen && (
               <div className="ml-8 space-y-1">
                 <button
-                  className="flex items-center px-4 py-2 text-left text-sm text-gray-600 hover:bg-gray-50 rounded-lg transition-colors"
+                  className={`flex items-center px-4 py-2 text-left text-sm rounded-lg transition-colors ${
+                    location.pathname.startsWith('/profile')
+                      ? 'bg-orange-50 text-gray-900'
+                      : 'text-gray-600 hover:bg-gray-50'
+                  }`}
                   onClick={() => handleNavigation('/profile')}
                 >
                   プロフィール管理
                 </button>
                 <button
-                  className="flex items-center px-4 py-2 text-left text-sm text-gray-600 hover:bg-gray-50 rounded-lg transition-colors"
+                  className={`flex items-center px-4 py-2 text-left text-sm rounded-lg transition-colors ${
+                    location.pathname.startsWith('/newPlan')
+                      ? 'bg-orange-50 text-gray-900'
+                      : 'text-gray-600 hover:bg-gray-50'
+                  }`}
                   onClick={() => handleNavigation('/newPlan')}
                 >
                   旅行計画を立てる
                 </button>
                 <button
-                  className="flex items-center px-4 py-2 text-left text-sm text-gray-600 hover:bg-gray-50 rounded-lg transition-colors"
+                  className={`flex items-center px-4 py-2 text-left text-sm rounded-lg transition-colors ${
+                    location.pathname.startsWith('/plans')
+                      ? 'bg-orange-50 text-gray-900'
+                      : 'text-gray-600 hover:bg-gray-50'
+                  }`}
                   onClick={() => handleNavigation('/plans')}
                 >
                   旅行計画管理
