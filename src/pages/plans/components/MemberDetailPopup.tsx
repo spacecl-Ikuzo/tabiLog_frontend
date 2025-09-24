@@ -109,7 +109,7 @@ export default function MemberDetailPopup({
       {/* プロフィール画像 */}
       <div className="relative">
         <Avatar className="w-16 h-16">
-          <AvatarImage src={selectedMember?.avatar} alt={selectedMember?.userNickname || 'メンバー'} />
+          <AvatarImage src="" alt={selectedMember?.userNickname || 'メンバー'} />
           <AvatarFallback className="bg-green-400 text-white text-xl">
             {selectedMember?.userNickname?.charAt(0) || '👤'}
           </AvatarFallback>
