@@ -2,11 +2,14 @@
 import { Button } from '../ui/button';
 import { useNavigate } from 'react-router-dom';
 import { useInvitationStore, useUserStore } from '@/store';
+import { useState, useEffect } from 'react';
+import MobileSideNavigation from './mobile-side-navigation';
 
 const Header = () => {
   const navigate = useNavigate();
   const { token, nickname, removeUserData } = useUserStore();
   const { clearInvitationData } = useInvitationStore();
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const handleLogout = () => {
     // 토큰/ 사용자 정보 삭제 + 로그인 화면으로
@@ -14,6 +17,27 @@ const Header = () => {
     clearInvitationData();
     navigate('/login');
   };
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  const closeSidebar = () => {
+    setIsSidebarOpen(false);
+  };
+
+  // 사이드바가 열려있을 때 body 스크롤 방지
+  useEffect(() => {
+    if (isSidebarOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isSidebarOpen]);
 
   return (
     <header className="px-4 py-3 bg-white text-brand-orange lg:bg-brand-orange lg:text-white lg:px-6 lg:py-4">
@@ -75,13 +99,16 @@ const Header = () => {
 
         {/* 모바일 메뉴(간단 표시) */}
         <div className="lg:hidden">
-          <button className="p-2" aria-label="메뉴 열기">
+          <button className="p-2" aria-label="메뉴 열기" onClick={toggleSidebar}>
             <svg className="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           </button>
         </div>
       </div>
+
+      {/* 모바일 사이드바 */}
+      <MobileSideNavigation isOpen={isSidebarOpen} onClose={closeSidebar} />
     </header>
   );
 };
