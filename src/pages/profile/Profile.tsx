@@ -13,6 +13,7 @@ import { axiosInstance } from '@/api/axios';
 import { uploadImage } from '@/api/api';
 import { toast } from 'sonner';
 import { ProfileData } from '@/lib/type';
+import { useUserStore } from '@/store';
 
 // Zod 스키마 정의
 const profileSchema = z.object({
@@ -28,6 +29,7 @@ type ProfileFormData = z.infer<typeof profileSchema>;
 export default function Profile() {
   const navigate = useNavigate();
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const { setNickname } = useUserStore();
 
   const [profileData, setProfileData] = useState<ProfileData | null>(null);
   const [profileImage, setProfileImage] = useState<string | null>(null);
@@ -153,6 +155,7 @@ export default function Profile() {
 
       // 프로필 데이터 다시 가져오기
       await fetchProfileImage();
+      setNickname(data.nickname);
 
       // 사이드 네비게이션의 사용자 정보도 갱신하도록 이벤트 발생
       window.dispatchEvent(new CustomEvent('profileUpdated'));
