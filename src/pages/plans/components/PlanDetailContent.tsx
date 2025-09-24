@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../../../components/ui/button';
-import { Avatar, AvatarFallback } from '../../../components/ui/avatar';
+import { Avatar, AvatarFallback, AvatarImage } from '../../../components/ui/avatar';
 import { Badge } from '../../../components/ui/badge';
 import CategoryTabs from '../../../components/common/CategoryTabs';
 import MemberDetailPopup from './MemberDetailPopup';
@@ -290,9 +290,17 @@ export default function PlanDetailContent({
         <div className="flex gap-5">
           {travelMembers.slice(0, 5).map((member) => (
             <Avatar key={member.id} className="w-18 h-18">
-              <AvatarFallback className={`${member.color} text-white text-sm font-medium`}>
-                {member.userNickname?.slice(0, 2) || '??'}
-              </AvatarFallback>
+              {member.profileImageUrl ? (
+                <AvatarImage
+                  src={import.meta.env.VITE_API_URL + member.profileImageUrl}
+                  alt={member.userNickname}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <AvatarFallback className={`${member.color} text-white text-sm font-medium`}>
+                  {member.userNickname?.slice(0, 2) || '??'}
+                </AvatarFallback>
+              )}
             </Avatar>
           ))}
           {travelMembers.length > 5 && (
