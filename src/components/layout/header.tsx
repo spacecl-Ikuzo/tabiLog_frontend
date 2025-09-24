@@ -108,7 +108,7 @@ const Header = () => {
       </div>
 
       {/* 모바일 사이드바 */}
-      <MobileSideNavigation isOpen={isSidebarOpen} onClose={closeSidebar} />
+      <MobileSideNavigation isOpen={isSidebarOpen} onClose={closeSidebar} handleLogout={handleLogout} />
     </header>
   );
 };
