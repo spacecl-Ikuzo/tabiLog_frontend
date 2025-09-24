@@ -41,6 +41,7 @@ export type PlanMember = {
   userEmail: string;
   role: string;
   userIdString: string; //유저 실제 ID  (test123)
+  profileImageUrl?: string; // 프로필 이미지 URL
 };
 
 /* 여행 초대 정보 (메일로 초대 받은 후 링크를 통해 접속시) */
