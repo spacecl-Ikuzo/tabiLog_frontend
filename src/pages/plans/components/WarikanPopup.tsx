@@ -53,6 +53,15 @@ export default function WarikanPopup({
     setMemberAmounts({});
   };
 
+  // 멤버들의 금액 합계 계산
+  const totalMemberAmounts = Object.values(memberAmounts).reduce((sum, amount) => sum + amount, 0);
+
+  // 금액이 맞는지 확인
+  const isAmountValid = totalMemberAmounts === totalAmount;
+
+  // 버튼 비활성화 조건
+  const isDisabled = !isAmountValid || totalMemberAmounts === 0;
+
   return (
     <CommonPopup
       open={open}
@@ -63,6 +72,7 @@ export default function WarikanPopup({
       confirmText="友達に送る"
       cancelText="キャンセル"
       maxWidth="max-w-sm"
+      isDisabled={isDisabled}
     >
       {/* 총액 표시 */}
       <div className="text-center mb-4">
@@ -103,6 +113,16 @@ export default function WarikanPopup({
             </div>
           ))}
         </div>
+
+        {/* 에러 문구 */}
+        {!isAmountValid && totalMemberAmounts > 0 && (
+          <div className="mt-4 text-center">
+            <p className="text-sm text-red-500">
+              金額が合いません。合計: ¥{totalMemberAmounts.toLocaleString('ja-JP')} / 必要: ¥
+              {totalAmount.toLocaleString('ja-JP')}
+            </p>
+          </div>
+        )}
       </div>
     </CommonPopup>
   );
