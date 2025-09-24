@@ -17,6 +17,7 @@ import MyPage from './pages/MyPage';
 import DashBoard from './components/layout/DashBoard';
 import Profile from './pages/profile/Profile';
 import DeleteAccount from './pages/delete-account/DeleteAccount';
+import DeleteAccountComplete from './pages/delete-account/DeleteAccountComplete';
 import FindAccount from './pages/find-account/FindAccount';
 import FindID from './pages/find-account/FindID';
 import FindPassword from './pages/find-account/FindPassword';
@@ -40,6 +41,7 @@ function App() {
         <Route path="/find-account/find-id" element={<FindID />} />
         <Route path="/find-account/find-password" element={<FindPassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="/delete-account/complete" element={<DeleteAccountComplete />} />
         <Route path="/" element={<Home />} />
         {/* 관광지 페이지들 */}
         <Route path="/spots" element={<SpotsPage />} />

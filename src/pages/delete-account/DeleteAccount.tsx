@@ -85,8 +85,8 @@ export default function DeleteAccount() {
       // 사용자 데이터 제거
       removeUserData();
 
-      // 로그인 페이지로 리다이렉트
-      // navigate('/login', { replace: true });
+      // 탈퇴 완료 화면으로 이동
+      navigate('/delete-account/complete', { replace: true });
     } catch (error) {
       console.error('Account deletion failed:', error);
       form.setError('password', {

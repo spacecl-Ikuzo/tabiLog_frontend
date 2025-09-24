@@ -1,7 +1,6 @@
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
 import { Button } from '../../components/ui/button';
-import Header from '../../components/layout/header';
 import PlanDetailContent from './components/PlanDetailContent';
 import { Plan } from '../../lib/type';
 import { ArrowLeft } from 'lucide-react';
@@ -35,9 +34,6 @@ export default function PlanDetail() {
 
   return (
     <div className="min-h-screen bg-[#FFF7F0]">
-      {/* 헤더 */}
-      <Header />
-
       {/* 뒤로가기 버튼 */}
       <div className="p-4">
         <Button
