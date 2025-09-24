@@ -22,9 +22,6 @@ export default function MemberDetailPopup({
   const [selectedMemberId, setSelectedMemberId] = React.useState<number | null>(null);
   const [selectedRole, setSelectedRole] = React.useState<string>('編集者');
 
-  // OWNER(作成者) は除外対象にしない → 選択リストから隠す
-  const eligibleMembers = React.useMemo(() => members.filter((m) => m.role !== 'OWNER'), [members]);
-
   // DB role을 UI role로 변환하는 함수
   const mapDbRoleToUiRole = (dbRole: string): string => {
     switch (dbRole) {
@@ -60,20 +57,15 @@ export default function MemberDetailPopup({
   // 선택된 멤버 정보 가져오기
   const selectedMember = members.find((member) => member.userId === selectedMemberId);
 
-  // 첫 번째 멤버를 기본 선택으로 설정 (팝업이 열릴 때)
-  React.useEffect(() => {
-    if (open && eligibleMembers.length > 0 && selectedMemberId === null) {
-      setSelectedMemberId(eligibleMembers[0].userId);
-      setSelectedRole(mapDbRoleToUiRole(eligibleMembers[0].role || 'EDITOR'));
-    }
-  }, [open, eligibleMembers, selectedMemberId]);
-
   // 멤버 선택이 변경될 때 역할도 업데이트
   React.useEffect(() => {
     if (selectedMember) {
       setSelectedRole(mapDbRoleToUiRole(selectedMember.role || 'EDITOR'));
     }
   }, [selectedMember]);
+
+  // OWNER 역할일 때는 역할을 고정
+  const isOwner = selectedMember?.role === 'OWNER';
 
   const handleConfirm = () => {
     if (selectedMemberId !== null) {
@@ -105,19 +97,23 @@ export default function MemberDetailPopup({
       onCancel={handleCancel}
       confirmText="修正"
       cancelText="キャンセル"
+      isDisabled={isOwner}
     >
       {/* プロフィール画像 */}
       <div className="relative">
         <Avatar className="w-16 h-16">
-          <AvatarImage src="" alt={selectedMember?.userNickname || 'メンバー'} />
-          <AvatarFallback className="bg-green-400 text-white text-xl">
-            {selectedMember?.userNickname?.charAt(0) || '👤'}
-          </AvatarFallback>
+          {selectedMember?.profileImageUrl ? (
+            <AvatarImage
+              src={import.meta.env.VITE_API_URL + selectedMember.profileImageUrl}
+              alt={selectedMember?.userNickname || 'メンバー'}
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <AvatarFallback className={`${selectedMember?.color} text-white text-xl font-bold`}>
+              {selectedMember?.userNickname?.slice(0, 2) || '😎'}
+            </AvatarFallback>
+          )}
         </Avatar>
-        {/* サングラス絵文字オーバーレイ */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          <span className="text-2xl">😎</span>
-        </div>
       </div>
 
       {/* ユーザー名 */}
@@ -136,7 +132,7 @@ export default function MemberDetailPopup({
             <SelectValue placeholder="メンバーを選択してください" />
           </SelectTrigger>
           <SelectContent>
-            {eligibleMembers.map((member) => (
+            {members.map((member) => (
               <SelectItem key={member.userId} value={member.userId.toString()}>
                 {member.userNickname}
               </SelectItem>
@@ -148,8 +144,12 @@ export default function MemberDetailPopup({
       {/* 役割選択 */}
       <div className="w-full space-y-2">
         <label className="text-sm font-medium text-gray-700">役割</label>
-        <Select value={selectedRole} onValueChange={setSelectedRole}>
-          <SelectTrigger className="w-full bg-gray-100 border-none rounded-lg px-4 py-3 text-gray-700">
+        <Select value={selectedRole} onValueChange={setSelectedRole} disabled={isOwner}>
+          <SelectTrigger
+            className={`w-full border-none rounded-lg px-4 py-3 text-gray-700 ${
+              isOwner ? 'bg-gray-200 cursor-not-allowed' : 'bg-gray-100'
+            }`}
+          >
             <SelectValue placeholder="役割を選択してください" />
           </SelectTrigger>
           <SelectContent>
@@ -159,6 +159,7 @@ export default function MemberDetailPopup({
             <SelectItem value="除外">除外</SelectItem>
           </SelectContent>
         </Select>
+        {isOwner && <p className="text-xs text-gray-500">管理者の役割は変更できません</p>}
       </div>
     </CommonPopup>
   );
