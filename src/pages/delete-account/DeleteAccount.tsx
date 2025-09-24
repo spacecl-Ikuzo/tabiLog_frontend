@@ -9,6 +9,7 @@ import { Input } from '@/components/ui/input';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Trash2, ArrowLeft, Eye, EyeOff, Key } from 'lucide-react';
 import { useUserStore } from '@/store';
+import { deleteAccount } from '@/api/api';
 
 // Zod 스키마 정의
 const deleteAccountSchema = z
@@ -64,20 +65,20 @@ export default function DeleteAccount() {
     setIsLoading(true);
 
     try {
-      // TODO: 실제 API 호출로 계정 삭제 처리
       console.log('Deleting account with data:', {
         reason: data.reason,
         otherReason: data.otherReason,
         password: '***',
       });
-      // const response = await deleteAccountAPI({
-      //   reason: data.reason,
-      //   otherReason: data.otherReason,
-      //   password: data.password,
-      // });
 
-      // 임시로 2초 대기 (실제 API 호출 시뮬레이션)
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      // 실제 API 호출로 계정 삭제 처리
+      const response = await deleteAccount({
+        reason: data.reason,
+        otherReason: data.otherReason,
+        password: data.password,
+      });
+
+      console.log('Account deletion response:', response);
 
       // 성공 메시지
       toast.success('アカウントが正常に削除されました');

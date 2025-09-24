@@ -325,6 +325,23 @@ export const confirmResetPassword = async (token: string, newPassword: string, c
 
 // ===== MyPage API Functions =====
 
+// 회원탈퇴
+export const deleteAccount = async (data: { reason: string; otherReason?: string; password: string }) => {
+  try {
+    const response = await axiosInstance.delete('/api/mypage/account', {
+      data: {
+        reason: data.reason,
+        otherReason: data.otherReason,
+        password: data.password,
+      },
+    });
+    return response.data;
+  } catch (error: any) {
+    console.error('회원탈퇴에 실패했습니다:', error);
+    throw error;
+  }
+};
+
 // 마이페이지 정보 조회
 export const getMyPageInfo = async () => {
   try {
