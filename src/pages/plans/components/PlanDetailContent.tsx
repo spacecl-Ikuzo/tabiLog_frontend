@@ -232,12 +232,6 @@ export default function PlanDetailContent({
     });
   };
 
-  //TODO: 지울 예정
-  useEffect(() => {
-    console.log('plan', plan);
-    console.log('travelMembers', travelMembers);
-  }, [travelMembers]);
-
   return (
     <>
       {/* 플랜 헤더 */}
