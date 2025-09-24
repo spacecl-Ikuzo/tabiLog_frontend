@@ -28,6 +28,7 @@ export type Plan = {
   userId: number;
   dailyPlans: [];
   members: PlanMember[];
+  totalExpenseAmount?: number; // 총 지출 금액
   createdAt: string;
   updatedAt: string;
   public: boolean;
