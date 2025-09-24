@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import MainBackGround from '../../assets/MainBackGround.jpg';
 import Tokyo from '../../assets/Tokyo.jpg';
@@ -98,6 +98,15 @@ const SpotsPage = () => {
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+
+  // URL 파라미터에서 검색어 초기화
+  useEffect(() => {
+    const searchParam = searchParams.get('search');
+    if (searchParam) {
+      setSearchQuery(searchParam);
+    }
+  }, [searchParams]);
 
   const scrollDestLeft = () => {
     if (destScrollRef.current) {
@@ -109,6 +118,18 @@ const SpotsPage = () => {
     if (destScrollRef.current) {
       destScrollRef.current.scrollBy({ left: 300, behavior: 'smooth' });
     }
+  };
+
+  // 태그 클릭 핸들러 (복수 선택)
+  const handleTagClick = (tag: string) => {
+    setSelectedTags((prev) => {
+      const newTags = prev.includes(tag)
+        ? prev.filter((t) => t !== tag) // 이미 선택된 태그면 제거
+        : [...prev, tag]; // 선택되지 않은 태그면 추가
+
+      console.log('태그 클릭:', tag, '새로운 선택된 태그들:', newTags);
+      return newTags;
+    });
   };
 
   // 스크롤 위치에 따라 화살표 표시/숨김 처리
@@ -269,416 +290,439 @@ const SpotsPage = () => {
     return true;
   });
 
-  const spots = [
-    {
-      id: 1,
-      name: '東京タワー',
-      description: '東京のシンボルタワー。夜景が美しい観光スポット',
-      tags: ['文化・歴史', '夜景・展望', '東日本', '港区'],
-      city: '東京',
-      image: TokyoTower,
-    },
-    {
-      id: 2,
-      name: '浅草寺',
-      description: '東京で最も古い寺院。雷門で有名な観光地',
-      tags: ['文化・歴史', '祭り', '東日本', '台東区'],
-      city: '東京',
-      image: AsaKusa,
-    },
-    {
-      id: 19,
-      name: '東京ドーム',
-      description: '東京を代表する多目的ドーム。イベントや野球観戦で人気',
-      tags: ['文化・歴史', 'エンタメ', '東日本', '文京区'],
-      city: '東京',
-      image: TokyoDome,
-    },
-    {
-      id: 3,
-      name: '大阪城',
-      description: '豊臣秀吉が築いた名城。歴史と美しさを兼ね備えた城',
-      tags: ['文化・歴史', '祭り', '西日本'],
-      city: '大阪',
-      image: OsakaCastle,
-    },
-    {
-      id: 4,
-      name: '道頓堀',
-      description: '大阪の食文化を体験できる繁華街',
-      tags: ['グルメ・食べ歩き', '文化・歴史', '西日本'],
-      city: '大阪',
-      image: OsakaGuriko,
-    },
-    {
-      id: 20,
-      name: 'ユニバーサル・スタジオ・ジャパン',
-      description: '大阪の大人気テーマパーク。映画の世界を体験',
-      tags: ['エンタメ', '家族', '西日本'],
-      city: '大阪',
-      image: UniversalStudiosJapan3,
-    },
-    {
-      id: 21,
-      name: '海遊館',
-      description: '世界最大級の水族館。ジンベエザメに会える人気スポット。',
-      tags: ['エンタメ', '家族', '西日本'],
-      city: '大阪',
-      image: OsakaAquarium1,
-    },
-    {
-      id: 5,
-      name: '🏯 金閣寺',
-      description: '京都の代表的な寺院。金色に輝く美しい建物',
-      tags: ['文化・歴史', '祭り', '西日本'],
-      city: '京都',
-      image: Kinkakuji,
-    },
-    {
-      id: 6,
-      name: '🏯 清水寺',
-      description: '京都で最も有名な寺院。舞台からの景色が絶景',
-      tags: ['文化・歴史', '祭り', '西日本'],
-      city: '京都',
-      image: KiyoMizuTera,
-    },
-    {
-      id: 35,
-      name: '🌸 哲学の道',
-      description: '桜と紅葉が美しい散策路。心静かに歩きながら四季の京都を感じよう。',
-      tags: ['文化・歴史', '散策', '西日本', '京都'],
-      city: '京都',
-      image: KyotoPass5,
-    },
-    {
-      id: 7,
-      name: '札幌時計台',
-      description: '札幌のシンボル。歴史ある時計台',
-      tags: ['文化・歴史', '祭り', '北日本'],
-      city: '札幌',
-      image: SapporoTime,
-    },
-    {
-      id: 8,
-      name: '大通公園',
-      description: '札幌の中心にある美しい公園',
-      tags: ['文化・歴史', '祭り', '北日本'],
-      city: '札幌',
-      image: SapporoTower,
-    },
-    {
-      id: 26,
-      name: 'サッポロビール博物館',
-      description: '北海道の代表的なビール工場。歴史と製造工程を学べる',
-      tags: ['グルメ・食べ歩き', '工場見学', '北日本'],
-      city: '札幌',
-      image: SapporoBeerTaste,
-    },
-    {
-      id: 27,
-      name: '円山動物園',
-      description: '北海道を代表する動物園。ホッキョクグマやレッサーパンダが人気',
-      tags: ['観光地', '家族', '北日本'],
-      city: '札幌',
-      image: maruyamapolarbear,
-    },
-    {
-      id: 28,
-      name: '北海道大学',
-      description: '日本最北の国立大学。美しいキャンパスが人気',
-      tags: ['文化・歴史', '教育', '北日本'],
-      city: '札幌',
-      image: hokudaipopula,
-    },
-    {
-      id: 29,
-      name: '狸小路商店街',
-      description: '札幌最大の商店街。グルメとショッピングが楽しめる',
-      tags: ['グルメ・食べ歩き', 'ショッピング', '北日本'],
-      city: '札幌',
-      image: tanukiya,
-    },
-    {
-      id: 38,
-      name: '小樽運河',
-      description: '冬のイルミネーションが美しい運河。ロマンチックな街並み',
-      tags: ['文化・歴史', '夜景', '北日本', '北海道'],
-      city: '札幌',
-      image: Otaru_Canal_Winter,
-    },
-    {
-      id: 9,
-      name: '福岡城跡',
-      description: '福岡の歴史を感じられる城跡',
-      tags: ['文化・歴史', '祭り', '南日本'],
-      city: '福岡',
-      image: FukuokaCastle,
-    },
-    {
-      id: 10,
-      name: '博多駅',
-      description: '福岡の玄関口。グルメとショッピングの中心地',
-      tags: ['グルメ・食べ歩き', 'ショッピング', '南日本'],
-      city: '福岡',
-      image: HakataCity,
-    },
-    {
-      id: 40,
-      name: '中洲屋台',
-      description: '福岡の夜を彩る屋台街。博多グルメを堪能できる名所',
-      tags: ['グルメ・食べ歩き', '夜景', '南日本'],
-      city: '福岡',
-      image: nakasumap,
-    },
-    {
-      id: 41,
-      name: '太宰府天満宮',
-      description: '学問の神様を祀る神社。梅の名所としても有名',
-      tags: ['文化・歴史', '神社', '南日本'],
-      city: '福岡',
-      image: dazaifutenmangu,
-    },
-    {
-      id: 42,
-      name: '櫛田神社',
-      description: '博多祇園山笠で知られる博多総鎮守',
-      tags: ['文化・歴史', '神社', '南日本'],
-      city: '福岡',
-      image: kushidashrine,
-    },
-    {
-      id: 43,
-      name: 'マリンワールド海の中道',
-      description: '九州の海をテーマにした水族館。家族連れに人気',
-      tags: ['エンタメ', '家族', '南日本'],
-      city: '福岡',
-      image: marineworld,
-    },
-    {
-      id: 44,
-      name: '大濠公園',
-      description: '市民の憩いの場。湖畔の散策とボートが楽しめる',
-      tags: ['自然', '散策', '南日本'],
-      city: '福岡',
-      image: FukuokaCastle,
-    },
-    {
-      id: 45,
-      name: '福岡PayPayドーム（ソフトバンクホークス）',
-      description: '福岡ソフトバンクホークスの本拠地。試合観戦が人気',
-      tags: ['スポーツ', '野球', '南日本'],
-      city: '福岡',
-      image: paypaydome,
-    },
-    {
-      id: 11,
-      name: '首里城',
-      description: '沖縄の歴史と文化を感じられる城',
-      tags: ['文化・歴史', '祭り', '南日本'],
-      city: '沖縄',
-      image: Shurijo,
-    },
-    {
-      id: 12,
-      name: '美ら海水族館',
-      description: '世界最大級の水族館。ジンベエザメが人気',
-      tags: ['エンタメ', '家族', '南日本'],
-      city: '沖縄',
-      image: OkiAquarium,
-    },
-    {
-      id: 46,
-      name: '国際通り',
-      description: '那覇の中心街。沖縄のグルメとお土産が楽しめる',
-      tags: ['グルメ・食べ歩き', 'ショッピング', '南日本'],
-      city: '沖縄',
-      image: Kokusaidori,
-    },
-    {
-      id: 47,
-      name: '万座毛',
-      description: '沖縄を代表する絶景スポット。象の鼻のような岩が有名',
-      tags: ['自然', '絶景', '南日本'],
-      city: '沖縄',
-      image: manzwamo,
-    },
-    {
-      id: 48,
-      name: '古宇利島',
-      description: '沖縄本島北部の美しい島。透明度の高い海が魅力',
-      tags: ['ビーチ', '自然', '南日本'],
-      city: '沖縄',
-      image: kouribridge,
-    },
-    {
-      id: 15,
-      name: '⚓ 原爆ドーム',
-      description: '広島の平和の象徴。世界遺産',
-      tags: ['文化・歴史', '祭り', '西日本'],
-      city: '広島',
-      image: GenbakuDome,
-    },
-    {
-      id: 16,
-      name: '🏝 宮島',
-      description: '厳島神社で有名な美しい島',
-      tags: ['文化・歴史', '祭り', '西日本'],
-      city: '広島',
-      image: miyajima,
-    },
-    {
-      id: 40,
-      name: '⛩️ 厳島神社',
-      description: '海に浮かぶ朱色の大鳥居で有名な世界遺産',
-      tags: ['文化・歴史', '世界遺産', '西日本', '広島'],
-      city: '広島',
-      image: Miyajima_Itsukushima_Torii,
-    },
-    {
-      id: 41,
-      name: '🌊 鞆の浦',
-      description: '江戸時代の港町の面影を残す美しい港',
-      tags: ['文化・歴史', '西日本', '広島'],
-      city: '広島',
-      image: Tomonoura_Harbor,
-    },
-    {
-      id: 17,
-      name: '🪷 兼六園',
-      description: '金沢の代表的な庭園。日本三名園の一つ',
-      tags: ['文化・歴史', '祭り', '西日本'],
-      city: '金沢',
-      image: Kenrokuen,
-    },
-    {
-      id: 18,
-      name: '🏯 金沢城公園',
-      description: '金沢の歴史を感じられる城跡公園',
-      tags: ['文化・歴史', '祭り', '西日本'],
-      city: '金沢',
-      image: KanazawaCastle,
-    },
-    {
-      id: 42,
-      name: '🏘 東茶屋街',
-      description: '江戸時代の茶屋街。金沢の伝統文化を感じられる',
-      tags: ['文化・歴史', '西日本', '金沢'],
-      city: '金沢',
-      image: Kanazawa_HigashiChaya,
-    },
-    {
-      id: 43,
-      name: '♨️湯涌温泉',
-      description: '金沢の奥座敷。自然に囲まれた静かな温泉地',
-      tags: ['温泉', '西日本', '金沢'],
-      city: '金沢',
-      image: Kanazawa_YuwakuOnsen,
-    },
-    {
-      id: 21,
-      name: '東京ディズニーランド',
-      description: '世界で最も人気のテーマパーク。夢の国で楽しい時間を過ごそう',
-      tags: ['エンタメ', '家族', '東日本', '観光地', '浦安市'],
-      city: '東京',
-      image: TokyoDisneyland,
-    },
-    {
-      id: 22,
-      name: '日光東照宮',
-      description: '徳川家康を祀る世界遺産の神社。豪華絢爛な建築が美しい',
-      tags: ['文化・歴史', '世界遺産', '東日本', '観光地', '日光市'],
-      city: '東京',
-      image: NikkoToshogu,
-    },
-    {
-      id: 23,
-      name: '鎌倉',
-      description: '歴史と文化が息づく古都。大仏とアニメの聖地',
-      tags: ['文化・歴史', '東日本', '観光地', '鎌倉市'],
-      city: '神奈川',
-      image: Kamakura,
-    },
-    {
-      id: 24,
-      name: '箱根温泉',
-      description: '富士山を望む名湯。リラックスできる温泉地',
-      tags: ['温泉', 'リゾート', '東日本', '観光地', '箱根町'],
-      city: '神奈川',
-      image: HakoneOnsen,
-    },
-    {
-      id: 25,
-      name: '渋谷',
-      description: '若者の街として有名。スクランブル交差点とハチ公がシンボル',
-      tags: ['ショッピング', 'エンタメ', '東日本', '観光地', '渋谷区'],
-      city: '東京',
-      image: ShibuyaScramble,
-    },
-    {
-      id: 27,
-      name: '名古屋城',
-      description: '徳川家康が築いた城。金色のシャチホコが有名',
-      tags: ['文化・歴史', '城', '中部日本', '観光地', '名古屋市'],
-      city: '名古屋',
-      image: NagoyaCastle,
-    },
-    {
-      id: 28,
-      name: '大須商店街',
-      description: '漫画・アニメグッズ、電子機器、食べ物まで揃う商店街',
-      tags: ['ショッピング', 'エンタメ', '中部日本', '観光地', '名古屋市'],
-      city: '名古屋',
-      image: osushotenkai,
-    },
-    {
-      id: 29,
-      name: '熱田神宮',
-      description: '日本三大神剣の一つ、草薙剣を祀る神宮',
-      tags: ['文化・歴史', '神社', '中部日本', '観光地', '名古屋市'],
-      city: '名古屋',
-      image: Atsutasinkyu,
-    },
-    {
-      id: 30,
-      name: 'SCMAGLEV and Railway Park',
-      description: 'JR東海運営。新幹線、リニア展示。鉄道ファンの聖地',
-      tags: ['文化・歴史', '科学・技術', '中部日本', '観光地', '名古屋市'],
-      city: '名古屋',
-      image: Nagoyalinear,
-    },
-    {
-      id: 31,
-      name: '名古屋市科学館',
-      description: '世界最大級のプラネタリウム。科学愛好家に人気',
-      tags: ['科学・技術', '教育', '中部日本', '観光地', '名古屋市'],
-      city: '名古屋',
-      image: NagoyaScience,
-    },
-    {
-      id: 32,
-      name: '名古屋港水族館',
-      description: 'シャチ、ベルーガ、イルカショーで有名。家族連れに人気',
-      tags: ['エンタメ', '家族', '中部日本', '観光地', '名古屋市'],
-      city: '名古屋',
-      image: OkiAquarium,
-    },
-    {
-      id: 33,
-      name: '秋葉原',
-      description: 'アニメ・ゲーム・電子機器の聖地。オタク文化の中心地',
-      tags: ['エンタメ', 'ショッピング', '東日本', '観光地', '千代田区'],
-      city: '東京',
-      image: akihabara,
-    },
-    {
-      id: 34,
-      name: '富士急ハイランド',
-      description: '絶叫マシンで有名なテーマパーク。富士山を背景にした絶景アトラクション',
-      tags: ['エンタメ', 'アトラクション', '東日本', '観光地', '富士吉田市'],
-      city: '東京',
-      image: fujiq1,
-    },
-  ];
+  // 필터링된 목적지가 변경되면 스크롤 상태 업데이트
+  useEffect(() => {
+    // 약간의 지연을 두어 DOM이 업데이트된 후 스크롤 상태 확인
+    const timer = setTimeout(() => {
+      checkScrollPosition();
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, [filteredDestinations]);
+
+  // 컴포넌트 마운트 후 스크롤 상태 확인
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      checkScrollPosition();
+    }, 500); // 컴포넌트가 완전히 로드된 후 확인
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  // 관광지 데이터를 useMemo로 메모이제이션하여 중복 생성 방지
+  const spots = useMemo(
+    () => [
+      {
+        id: 1,
+        name: '東京タワー',
+        description: '東京のシンボルタワー。夜景が美しい観光スポット',
+        tags: ['文化・歴史', '夜景・展望', '東日本', '港区'],
+        city: '東京',
+        image: TokyoTower,
+      },
+      {
+        id: 2,
+        name: '浅草寺',
+        description: '東京で最も古い寺院。雷門で有名な観光地',
+        tags: ['文化・歴史', '祭り', '東日本', '台東区'],
+        city: '東京',
+        image: AsaKusa,
+      },
+      {
+        id: 19,
+        name: '東京ドーム',
+        description: '東京を代表する多目的ドーム。イベントや野球観戦で人気',
+        tags: ['文化・歴史', 'エンタメ', '東日本', '文京区'],
+        city: '東京',
+        image: TokyoDome,
+      },
+      {
+        id: 3,
+        name: '大阪城',
+        description: '豊臣秀吉が築いた名城。歴史と美しさを兼ね備えた城',
+        tags: ['文化・歴史', '祭り', '西日本'],
+        city: '大阪',
+        image: OsakaCastle,
+      },
+      {
+        id: 4,
+        name: '道頓堀',
+        description: '大阪の食文化を体験できる繁華街',
+        tags: ['グルメ・食べ歩き', '文化・歴史', '西日本'],
+        city: '大阪',
+        image: OsakaGuriko,
+      },
+      {
+        id: 20,
+        name: 'ユニバーサル・スタジオ・ジャパン',
+        description: '大阪の大人気テーマパーク。映画の世界を体験',
+        tags: ['エンタメ', '家族', '西日本'],
+        city: '大阪',
+        image: UniversalStudiosJapan3,
+      },
+      {
+        id: 21,
+        name: '海遊館',
+        description: '世界最大級の水族館。ジンベエザメに会える人気スポット。',
+        tags: ['エンタメ', '家族', '西日本'],
+        city: '大阪',
+        image: OsakaAquarium1,
+      },
+      {
+        id: 5,
+        name: '🏯 金閣寺',
+        description: '京都の代表的な寺院。金色に輝く美しい建物',
+        tags: ['文化・歴史', '祭り', '西日本'],
+        city: '京都',
+        image: Kinkakuji,
+      },
+      {
+        id: 6,
+        name: '🏯 清水寺',
+        description: '京都で最も有名な寺院。舞台からの景色が絶景',
+        tags: ['文化・歴史', '祭り', '西日本'],
+        city: '京都',
+        image: KiyoMizuTera,
+      },
+      {
+        id: 35,
+        name: '🌸 哲学の道',
+        description: '桜と紅葉が美しい散策路。心静かに歩きながら四季の京都を感じよう。',
+        tags: ['文化・歴史', '散策', '西日本', '京都'],
+        city: '京都',
+        image: KyotoPass5,
+      },
+      {
+        id: 7,
+        name: '札幌時計台',
+        description: '札幌のシンボル。歴史ある時計台',
+        tags: ['文化・歴史', '祭り', '北日本'],
+        city: '札幌',
+        image: SapporoTime,
+      },
+      {
+        id: 8,
+        name: '大通公園',
+        description: '札幌の中心にある美しい公園',
+        tags: ['文化・歴史', '祭り', '北日本'],
+        city: '札幌',
+        image: SapporoTower,
+      },
+      {
+        id: 26,
+        name: 'サッポロビール博物館',
+        description: '北海道の代表的なビール工場。歴史と製造工程を学べる',
+        tags: ['グルメ・食べ歩き', '工場見学', '北日本'],
+        city: '札幌',
+        image: SapporoBeerTaste,
+      },
+      {
+        id: 27,
+        name: '円山動物園',
+        description: '北海道を代表する動物園。ホッキョクグマやレッサーパンダが人気',
+        tags: ['観光地', '家族', '北日本'],
+        city: '札幌',
+        image: maruyamapolarbear,
+      },
+      {
+        id: 28,
+        name: '北海道大学',
+        description: '日本最北の国立大学。美しいキャンパスが人気',
+        tags: ['文化・歴史', '教育', '北日本'],
+        city: '札幌',
+        image: hokudaipopula,
+      },
+      {
+        id: 29,
+        name: '狸小路商店街',
+        description: '札幌最大の商店街。グルメとショッピングが楽しめる',
+        tags: ['グルメ・食べ歩き', 'ショッピング', '北日本'],
+        city: '札幌',
+        image: tanukiya,
+      },
+      {
+        id: 38,
+        name: '小樽運河',
+        description: '冬のイルミネーションが美しい運河。ロマンチックな街並み',
+        tags: ['文化・歴史', '夜景', '北日本', '北海道'],
+        city: '札幌',
+        image: Otaru_Canal_Winter,
+      },
+      {
+        id: 9,
+        name: '福岡城跡',
+        description: '福岡の歴史を感じられる城跡',
+        tags: ['文化・歴史', '祭り', '南日本'],
+        city: '福岡',
+        image: FukuokaCastle,
+      },
+      {
+        id: 10,
+        name: '博多駅',
+        description: '福岡の玄関口。グルメとショッピングの中心地',
+        tags: ['グルメ・食べ歩き', 'ショッピング', '南日本'],
+        city: '福岡',
+        image: HakataCity,
+      },
+      {
+        id: 40,
+        name: '中洲屋台',
+        description: '福岡の夜を彩る屋台街。博多グルメを堪能できる名所',
+        tags: ['グルメ・食べ歩き', '夜景', '南日本'],
+        city: '福岡',
+        image: nakasumap,
+      },
+      {
+        id: 41,
+        name: '太宰府天満宮',
+        description: '学問の神様を祀る神社。梅の名所としても有名',
+        tags: ['文化・歴史', '神社', '南日本'],
+        city: '福岡',
+        image: dazaifutenmangu,
+      },
+      {
+        id: 42,
+        name: '櫛田神社',
+        description: '博多祇園山笠で知られる博多総鎮守',
+        tags: ['文化・歴史', '神社', '南日本'],
+        city: '福岡',
+        image: kushidashrine,
+      },
+      {
+        id: 43,
+        name: 'マリンワールド海の中道',
+        description: '九州の海をテーマにした水族館。家族連れに人気',
+        tags: ['エンタメ', '家族', '南日本'],
+        city: '福岡',
+        image: marineworld,
+      },
+      {
+        id: 44,
+        name: '大濠公園',
+        description: '市民の憩いの場。湖畔の散策とボートが楽しめる',
+        tags: ['自然', '散策', '南日本'],
+        city: '福岡',
+        image: FukuokaCastle,
+      },
+      {
+        id: 45,
+        name: '福岡PayPayドーム（ソフトバンクホークス）',
+        description: '福岡ソフトバンクホークスの本拠地。試合観戦が人気',
+        tags: ['スポーツ', '野球', '南日本'],
+        city: '福岡',
+        image: paypaydome,
+      },
+      {
+        id: 11,
+        name: '首里城',
+        description: '沖縄の歴史と文化を感じられる城',
+        tags: ['文化・歴史', '祭り', '南日本'],
+        city: '沖縄',
+        image: Shurijo,
+      },
+      {
+        id: 12,
+        name: '美ら海水族館',
+        description: '世界最大級の水族館。ジンベエザメが人気',
+        tags: ['エンタメ', '家族', '南日本'],
+        city: '沖縄',
+        image: OkiAquarium,
+      },
+      {
+        id: 46,
+        name: '国際通り',
+        description: '那覇の中心街。沖縄のグルメとお土産が楽しめる',
+        tags: ['グルメ・食べ歩き', 'ショッピング', '南日本'],
+        city: '沖縄',
+        image: Kokusaidori,
+      },
+      {
+        id: 47,
+        name: '万座毛',
+        description: '沖縄を代表する絶景スポット。象の鼻のような岩が有名',
+        tags: ['自然', '絶景', '南日本'],
+        city: '沖縄',
+        image: manzwamo,
+      },
+      {
+        id: 48,
+        name: '古宇利島',
+        description: '沖縄本島北部の美しい島。透明度の高い海が魅力',
+        tags: ['ビーチ', '自然', '南日本'],
+        city: '沖縄',
+        image: kouribridge,
+      },
+      {
+        id: 15,
+        name: '⚓ 原爆ドーム',
+        description: '広島の平和の象徴。世界遺産',
+        tags: ['文化・歴史', '祭り', '西日本'],
+        city: '広島',
+        image: GenbakuDome,
+      },
+      {
+        id: 16,
+        name: '🏝 宮島',
+        description: '厳島神社で有名な美しい島',
+        tags: ['文化・歴史', '祭り', '西日本'],
+        city: '広島',
+        image: miyajima,
+      },
+      {
+        id: 40,
+        name: '⛩️ 厳島神社',
+        description: '海に浮かぶ朱色の大鳥居で有名な世界遺産',
+        tags: ['文化・歴史', '世界遺産', '西日本', '広島'],
+        city: '広島',
+        image: Miyajima_Itsukushima_Torii,
+      },
+      {
+        id: 41,
+        name: '🌊 鞆の浦',
+        description: '江戸時代の港町の面影を残す美しい港',
+        tags: ['文化・歴史', '西日本', '広島'],
+        city: '広島',
+        image: Tomonoura_Harbor,
+      },
+      {
+        id: 17,
+        name: '🪷 兼六園',
+        description: '金沢の代表的な庭園。日本三名園の一つ',
+        tags: ['文化・歴史', '祭り', '西日本'],
+        city: '金沢',
+        image: Kenrokuen,
+      },
+      {
+        id: 18,
+        name: '🏯 金沢城公園',
+        description: '金沢の歴史を感じられる城跡公園',
+        tags: ['文化・歴史', '祭り', '西日本'],
+        city: '金沢',
+        image: KanazawaCastle,
+      },
+      {
+        id: 42,
+        name: '🏘 東茶屋街',
+        description: '江戸時代の茶屋街。金沢の伝統文化を感じられる',
+        tags: ['文化・歴史', '西日本', '金沢'],
+        city: '金沢',
+        image: Kanazawa_HigashiChaya,
+      },
+      {
+        id: 43,
+        name: '♨️湯涌温泉',
+        description: '金沢の奥座敷。自然に囲まれた静かな温泉地',
+        tags: ['温泉', '西日本', '金沢'],
+        city: '金沢',
+        image: Kanazawa_YuwakuOnsen,
+      },
+      {
+        id: 22,
+        name: '東京ディズニーランド',
+        description: '世界で最も人気のテーマパーク。夢の国で楽しい時間を過ごそう',
+        tags: ['エンタメ', '家族', '東日本', '観光地', '浦安市'],
+        city: '東京',
+        image: TokyoDisneyland,
+      },
+      {
+        id: 23,
+        name: '日光東照宮',
+        description: '徳川家康を祀る世界遺産の神社。豪華絢爛な建築が美しい',
+        tags: ['文化・歴史', '世界遺産', '東日本', '観光地', '日光市'],
+        city: '東京',
+        image: NikkoToshogu,
+      },
+      {
+        id: 24,
+        name: '鎌倉',
+        description: '歴史と文化が息づく古都。大仏とアニメの聖地',
+        tags: ['文化・歴史', '東日本', '観光地', '鎌倉市'],
+        city: '神奈川',
+        image: Kamakura,
+      },
+      {
+        id: 25,
+        name: '箱根温泉',
+        description: '富士山を望む名湯。リラックスできる温泉地',
+        tags: ['温泉', 'リゾート', '東日本', '観光地', '箱根町'],
+        city: '神奈川',
+        image: HakoneOnsen,
+      },
+      {
+        id: 26,
+        name: '渋谷',
+        description: '若者の街として有名。スクランブル交差点とハチ公がシンボル',
+        tags: ['ショッピング', 'エンタメ', '東日本', '観光地', '渋谷区'],
+        city: '東京',
+        image: ShibuyaScramble,
+      },
+      {
+        id: 28,
+        name: '名古屋城',
+        description: '徳川家康が築いた城。金色のシャチホコが有名',
+        tags: ['文化・歴史', '城', '中部日本', '観光地', '名古屋市'],
+        city: '名古屋',
+        image: NagoyaCastle,
+      },
+      {
+        id: 29,
+        name: '大須商店街',
+        description: '漫画・アニメグッズ、電子機器、食べ物まで揃う商店街',
+        tags: ['ショッピング', 'エンタメ', '中部日本', '観光地', '名古屋市'],
+        city: '名古屋',
+        image: osushotenkai,
+      },
+      {
+        id: 30,
+        name: '熱田神宮',
+        description: '日本三大神剣の一つ、草薙剣を祀る神宮',
+        tags: ['文化・歴史', '神社', '中部日本', '観光地', '名古屋市'],
+        city: '名古屋',
+        image: Atsutasinkyu,
+      },
+      {
+        id: 31,
+        name: 'SCMAGLEV and Railway Park',
+        description: 'JR東海運営。新幹線、リニア展示。鉄道ファンの聖地',
+        tags: ['文化・歴史', '科学・技術', '中部日本', '観光地', '名古屋市'],
+        city: '名古屋',
+        image: Nagoyalinear,
+      },
+      {
+        id: 32,
+        name: '名古屋市科学館',
+        description: '世界最大級のプラネタリウム。科学愛好家に人気',
+        tags: ['科学・技術', '教育', '中部日本', '観光地', '名古屋市'],
+        city: '名古屋',
+        image: NagoyaScience,
+      },
+      {
+        id: 33,
+        name: '名古屋港水族館',
+        description: 'シャチ、ベルーガ、イルカショーで有名。家族連れに人気',
+        tags: ['エンタメ', '家族', '中部日本', '観光地', '名古屋市'],
+        city: '名古屋',
+        image: OkiAquarium,
+      },
+      {
+        id: 34,
+        name: '秋葉原',
+        description: 'アニメ・ゲーム・電子機器の聖地。オタク文化の中心地',
+        tags: ['エンタメ', 'ショッピング', '東日本', '観光地', '千代田区'],
+        city: '東京',
+        image: akihabara,
+      },
+      {
+        id: 35,
+        name: '富士急ハイランド',
+        description: '絶叫マシンで有名なテーマパーク。富士山を背景にした絶景アトラクション',
+        tags: ['エンタメ', 'アトラクション', '東日本', '観光地', '富士吉田市'],
+        city: '東京',
+        image: fujiq1,
+      },
+    ],
+    [],
+  );
 
   const travelPlans = [
     {
@@ -928,27 +972,34 @@ const SpotsPage = () => {
     },
   ];
 
-  // 검색어와 선택된 도시에 따라 스팟 필터링
-  const filteredSpots = spots.filter((spot) => {
-    // 도시가 선택된 경우 해당 도시의 아이템만 표시
-    if (selectedCity) {
-      return spot.city === selectedCity;
-    }
+  // 검색어와 선택된 도시, 선택된 태그들에 따라 스팟 필터링 (useMemo로 메모이제이션)
+  const filteredSpots = useMemo(() => {
+    return spots.filter((spot) => {
+      // 태그가 선택된 경우 선택된 태그 중 하나라도 있는 아이템만 표시
+      if (selectedTags.length > 0) {
+        return selectedTags.some((tag) => spot.tags.includes(tag));
+      }
 
-    // 도시가 선택되지 않은 경우 검색어로 필터링
-    if (searchQuery) {
-      const query = searchQuery.toLowerCase().trim();
-      return (
-        spot.name.toLowerCase().includes(query) ||
-        spot.description.toLowerCase().includes(query) ||
-        spot.tags.some((tag) => tag.toLowerCase().includes(query)) ||
-        spot.city.toLowerCase().includes(query)
-      );
-    }
+      // 도시가 선택된 경우 해당 도시의 아이템만 표시
+      if (selectedCity) {
+        return spot.city === selectedCity;
+      }
 
-    // 도시도 선택되지 않고 검색어도 없는 경우 모든 아이템 표시
-    return true;
-  });
+      // 도시가 선택되지 않은 경우 검색어로 필터링
+      if (searchQuery) {
+        const query = searchQuery.toLowerCase().trim();
+        return (
+          spot.name.toLowerCase().includes(query) ||
+          spot.description.toLowerCase().includes(query) ||
+          spot.tags.some((tag) => tag.toLowerCase().includes(query)) ||
+          spot.city.toLowerCase().includes(query)
+        );
+      }
+
+      // 도시도 선택되지 않고 검색어도 없는 경우 모든 아이템 표시
+      return true;
+    });
+  }, [spots, selectedTags, selectedCity, searchQuery]);
 
   // 스팟 페이지네이션 계산 (고정 6개씩 표시)
   const spotsPerPage = 6;
@@ -956,16 +1007,37 @@ const SpotsPage = () => {
   const safeSpotPage = Math.min(spotPage, totalSpotPages);
   const displayedSpots = filteredSpots.slice((safeSpotPage - 1) * spotsPerPage, safeSpotPage * spotsPerPage);
 
-  // 도시 변경 시 스팟 페이지 초기화
+  // 도시 변경 시 스팟 페이지 초기화 및 검색어 초기화
   useEffect(() => {
     setSpotPage(1);
-  }, [selectedCity]);
+    if (selectedCity) {
+      // 도시가 선택되면 검색어와 URL 파라미터 초기화
+      setSearchQuery('');
+      const newSearchParams = new URLSearchParams(searchParams);
+      newSearchParams.delete('search');
+      navigate(`/spots?${newSearchParams.toString()}`, { replace: true });
+    }
+  }, [selectedCity, searchParams, navigate]);
 
-  // 검색어 변경 시 페이지 초기화
+  // 검색어 변경 시 페이지 초기화 및 URL 업데이트
   useEffect(() => {
     setSpotPage(1);
     setPlanPage(1);
-  }, [searchQuery]);
+
+    // 검색어가 변경되면 URL 업데이트
+    const newSearchParams = new URLSearchParams(searchParams);
+    if (searchQuery.trim()) {
+      newSearchParams.set('search', searchQuery.trim());
+    } else {
+      newSearchParams.delete('search');
+    }
+
+    // URL이 실제로 변경된 경우에만 네비게이션
+    const newUrl = `/spots?${newSearchParams.toString()}`;
+    if (window.location.pathname + window.location.search !== newUrl) {
+      navigate(newUrl, { replace: true });
+    }
+  }, [searchQuery, searchParams, navigate]);
 
   // 검색어와 선택된 도시에 따라 여행 계획 필터링
   const filteredTravelPlans = travelPlans.filter((plan) => {
@@ -1021,14 +1093,8 @@ const SpotsPage = () => {
               onChange={(e) => setSearchQuery(e.target.value)}
               onKeyPress={(e) => {
                 if (e.key === 'Enter') {
-                  // URL 업데이트하여 검색어 반영
-                  const newSearchParams = new URLSearchParams(searchParams);
-                  if (searchQuery.trim()) {
-                    newSearchParams.set('search', searchQuery.trim());
-                  } else {
-                    newSearchParams.delete('search');
-                  }
-                  navigate(`/spots?${newSearchParams.toString()}`);
+                  // 검색어 변경으로 인해 useEffect에서 자동으로 URL 업데이트됨
+                  e.preventDefault();
                 }
               }}
               className="w-full px-4 py-3 pl-10 pr-12 text-gray-700 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
@@ -1045,14 +1111,8 @@ const SpotsPage = () => {
             </div>
             <button
               onClick={() => {
-                // URL 업데이트하여 검색어 반영
-                const newSearchParams = new URLSearchParams(searchParams);
-                if (searchQuery.trim()) {
-                  newSearchParams.set('search', searchQuery.trim());
-                } else {
-                  newSearchParams.delete('search');
-                }
-                navigate(`/spots?${newSearchParams.toString()}`);
+                // 검색어 변경으로 인해 useEffect에서 자동으로 URL 업데이트됨
+                // 추가 로직이 필요한 경우 여기에 작성
               }}
               className="absolute inset-y-0 right-0 px-4 flex items-center text-white bg-orange-500 hover:bg-orange-600 rounded-r-lg transition-colors"
             >
@@ -1130,9 +1190,20 @@ const SpotsPage = () => {
                       <p className="text-gray-600 mb-3 text-sm">{destination.description}</p>
                       <div className="flex flex-wrap gap-1">
                         {destination.tags.map((tag, index) => (
-                          <span key={index} className="px-2 py-1 bg-gray-800 text-white text-xs rounded-full">
+                          <button
+                            key={index}
+                            onClick={(e) => {
+                              e.stopPropagation(); // 카드 클릭 이벤트 방지
+                              handleTagClick(tag);
+                            }}
+                            className={`px-2 py-1 text-xs rounded-full transition-all duration-200 hover:scale-105 ${
+                              selectedTags.includes(tag)
+                                ? 'bg-orange-500 text-white'
+                                : 'bg-gray-800 text-white hover:bg-gray-700'
+                            }`}
+                          >
                             {tag}
-                          </span>
+                          </button>
                         ))}
                       </div>
                     </div>
@@ -1149,7 +1220,7 @@ const SpotsPage = () => {
       </section>
 
       {/* Tourist Spots Grid */}
-      {(selectedCity || searchQuery) && (
+      {(selectedCity || searchQuery || selectedTags.length > 0) && (
         <section className="py-16 px-6 bg-gray-50">
           <div className="max-w-7xl mx-auto">
             <h2 className="text-3xl font-bold text-gray-900 text-center mb-4">
@@ -1171,6 +1242,8 @@ const SpotsPage = () => {
                 ? '⚓ 観光スポット'
                 : selectedCity === '金沢'
                 ? '🖼 観光スポット'
+                : selectedTags.length > 0
+                ? '🏷️ 観光スポット'
                 : '観光スポット'}
             </h2>
             <p className="text-gray-600 text-center mb-12">
@@ -1196,8 +1269,59 @@ const SpotsPage = () => {
                 ? `${selectedCity}で人気の観光スポットをご紹介します`
                 : searchQuery
                 ? `「${searchQuery}」の検索結果`
+                : selectedTags.length > 0
+                ? `選択されたタグに関連する観光スポットをご紹介します`
                 : '人気の観光スポットをご紹介します'}
             </p>
+
+            {/* 필터 표시기 */}
+            {selectedTags.length > 0 && (
+              <div className="flex justify-center mb-8">
+                <div className="bg-orange-100 border border-orange-300 rounded-lg px-4 py-2 flex items-center gap-2 flex-wrap">
+                  <span className="text-orange-800 text-sm font-medium">フィルター:</span>
+                  <div className="flex items-center gap-2 flex-wrap">
+                    {selectedTags.map((tag) => (
+                      <div
+                        key={tag}
+                        className="bg-orange-200 border border-orange-400 rounded-full px-3 py-1 flex items-center gap-2"
+                      >
+                        <span className="text-orange-800 text-sm font-medium">{tag}</span>
+                        <button
+                          onClick={() => {
+                            console.log('태그 제거:', tag);
+                            setSelectedTags((prev) => prev.filter((t) => t !== tag));
+                          }}
+                          className="text-orange-600 hover:text-orange-800 transition-colors"
+                          aria-label={`${tag} 태그 제거`}
+                        >
+                          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M6 18L18 6M6 6l12 12"
+                            />
+                          </svg>
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                  <span className="text-xs text-orange-600">({selectedTags.length}개 선택됨)</span>
+                  <button
+                    onClick={() => {
+                      console.log('모든 필터 해제');
+                      setSelectedTags([]);
+                    }}
+                    className="text-orange-600 hover:text-orange-800 transition-colors ml-2"
+                    title="모든 필터 해제"
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            )}
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {displayedSpots.length > 0 ? (
@@ -1232,9 +1356,20 @@ const SpotsPage = () => {
                       <p className="text-gray-600 text-sm mb-4">{spot.description}</p>
                       <div className="flex flex-wrap gap-2">
                         {spot.tags.map((tag, index) => (
-                          <span key={index} className="px-2 py-1 bg-gray-800 text-white text-xs rounded">
+                          <button
+                            key={index}
+                            onClick={(e) => {
+                              e.stopPropagation(); // 카드 클릭 이벤트 방지
+                              handleTagClick(tag);
+                            }}
+                            className={`px-2 py-1 text-xs rounded transition-all duration-200 hover:scale-105 ${
+                              selectedTags.includes(tag)
+                                ? 'bg-orange-500 text-white'
+                                : 'bg-gray-800 text-white hover:bg-gray-700'
+                            }`}
+                          >
                             {tag}
-                          </span>
+                          </button>
                         ))}
                       </div>
                     </div>
