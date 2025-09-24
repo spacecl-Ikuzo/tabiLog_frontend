@@ -7,7 +7,7 @@ const CreatePlan = () => {
   const handleCreatePlan = () => {
     // TODO: 로그인 상태 확인 로직 추가
     // 현재는 임시로 로그인 페이지로 이동
-    navigate('/login');
+    navigate('/newPlan');
   };
 
   return (
