@@ -12,10 +12,6 @@ import suzume from '../../assets/suzume.jpg';
 import SapporoTower from '../../assets/SapporoTower.jpg';
 import OkinawaResort from '../../assets/OkinawaResort.jpg';
 import TokyoTower from '../../assets/TokyoTower.jpg';
-import boolseal from '../../assets/boolseal.jpg';
-import okinawaeisamatsuri from '../../assets/okinawaeisamatsuri.jpg';
-import okinawacruising from '../../assets/okinawacruising.jpg';
-import marineaqua from '../../assets/marineaqua.jpg';
 import AsaKusa from '../../assets/AsaKusa.jpg';
 import OsakaGuriko from '../../assets/OsakaGuriko.jpg';
 import KiyoMizuTera from '../../assets/KiyoMizuTera.jpg';
@@ -45,7 +41,6 @@ import nagoyawcs2 from '../../assets/nagoyawcs2.jpg';
 import OkiAquarium from '../../assets/OkiAquarium.jpg';
 import Shurijo from '../../assets/Shurijo.jpg';
 import FukuokaCastle from '../../assets/FukuokaCastle.jpg';
-import USJ from '../../assets/USJ.jpg';
 import UniversalStudiosJapan3 from '../../assets/universal_studios_japan3.jpg';
 import OsakaAquarium1 from '../../assets/Osaka_aquarium1.jpg';
 import OsakaArchitecture5 from '../../assets/OsakaArchitecture5.png';
@@ -63,15 +58,8 @@ import paypaydome from '../../assets/paypaydome.jpg';
 import Kyoto_FushimiInari1 from '../../assets/Kyoto_FushimiInari1.jpg';
 import Kyoto_UjiBridge1 from '../../assets/Kyoto_UjiBridge1.jpg';
 import Miyajima_Itsukushima_Torii from '../../assets/Miyajima_Itsukushima_Torii.jpg';
-import Otaru_Canal_Winter from '../../assets/Otaru_Canal_Winter.jpg';
 import Sapporo_SusukinoNight from '../../assets/Sapporo_SusukinoNight.jpg';
 import Tomonoura_Harbor from '../../assets/Tomonoura_Harbor.jpg';
-import KobeFerris from '../../assets/KobeFerris.jpg';
-import KobeSkyline from '../../assets/KobeSkyline.jpg';
-import KobeBeKobe from '../../assets/KobeBeKobe.jpg';
-import KobeHarborland from '../../assets/KobeHarborland.jpg';
-import KobePortTowerNight from '../../assets/KobePortTowerNight.jpg';
-import KobePortTower from '../../assets/KobePortTower.jpg';
 import Kanazawa_HigashiChaya from '../../assets/Kanazawa_HigashiChaya.jpg';
 import Kanazawa_YuwakuOnsen from '../../assets/Kanazawa_YuwakuOnsen.jpg';
 import Kyoto_Byodoin from '../../assets/Kyoto_Byodoin.jpg';
@@ -762,7 +750,7 @@ const SpotsPage = () => {
       id: 25,
       title: '沖縄ヨットツアー！無人島クルーズとサンセット',
       description: '珊瑚の海をクルージング、無人島上陸と夕日鑑賞を楽しむ大人の旅。',
-      image: okinawacruising,
+      image: OkinawaResort,
       author: 'マリン派',
       type: '二人旅',
       city: '沖縄',

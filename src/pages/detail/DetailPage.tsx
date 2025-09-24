@@ -1,26 +1,10 @@
 import React from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
-import MainBackGround from '../../assets/MainBackGround.jpg';
-import Tokyo from '../../assets/Tokyo.jpg';
-import OsakaCastle from '../../assets/OsakaCastle.jpg';
 import Kinkakuji from '../../assets/Kinkakuji.jpg';
-import Sapporo from '../../assets/Sapporo.jpg';
-import fukuokahutami from '../../assets/fukuokahutami.jpg';
 import OkinawaResort from '../../assets/OkinawaResort.jpg';
-import TokyoTower from '../../assets/TokyoTower.jpg';
-import AsaKusa from '../../assets/AsaKusa.jpg';
-import OsakaGuriko from '../../assets/OsakaGuriko.jpg';
-import KiyoMizuTera from '../../assets/KiyoMizuTera.jpg';
-import SapporoTime from '../../assets/SapporoTime.jpg';
 import HakataCity from '../../assets/HakataCity.jpg';
-import Shurijo from '../../assets/Shurijo.jpg';
 import OkiAquarium from '../../assets/OkiAquarium.jpg';
 import HiroShima from '../../assets/HiroShima.jpg';
-import GenbakuDome from '../../assets/GenbakuDome.jpg';
-import miyajima from '../../assets/miyajima.jpg';
-import Kenrokuen from '../../assets/Kenrokuen.jpg';
-import KanazawaCastle from '../../assets/KanazawaCastle.jpg';
-import Nagoya from '../../assets/Nagoya.jpg';
 import NagoyaCastle from '../../assets/NagoyaCastle.jpg';
 import osushotenkai from '../../assets/osushotenkai.jpg';
 import Atsutasinkyu from '../../assets/Atsutasinkyu.jpg';
@@ -40,39 +24,13 @@ import TokyoDisneyland from '../../assets/tokyodisneyland.jpg';
 import NikkoToshogu from '../../assets/nikkotoshogu.jpg';
 import Kamakura from '../../assets/kamakura.jpg';
 import Tsukiji from '../../assets/Tsukiji.jpg';
-import TokyoDome from '../../assets/TokyoDome.jpg';
-import UniversalStudiosJapan3 from '../../assets/universal_studios_japan3.jpg';
-import OsakaAquarium1 from '../../assets/Osaka_aquarium1.jpg';
-import OsakaArchitecture5 from '../../assets/OsakaArchitecture5.png';
-import OsakaArchitecture2 from '../../assets/OsakaArchitecture2.png';
-import OsakaArchitecture3 from '../../assets/OsakaArchitecture3.png';
-import OsakaArchitecture4 from '../../assets/OsakaArchitecture4.png';
-import Kyoto_FushimiInari1 from '../../assets/Kyoto_FushimiInari1.jpg';
-import Kyoto_UjiBridge1 from '../../assets/Kyoto_UjiBridge1.jpg';
-import Miyajima_Itsukushima_Torii from '../../assets/Miyajima_Itsukushima_Torii.jpg';
-import Tomonoura_Harbor from '../../assets/Tomonoura_Harbor.jpg';
-import KobeFerris from '../../assets/KobeFerris.jpg';
-import KobeSkyline from '../../assets/KobeSkyline.jpg';
-import KobeBeKobe from '../../assets/KobeBeKobe.jpg';
-import KobeHarborland from '../../assets/KobeHarborland.jpg';
-import KobePortTowerNight from '../../assets/KobePortTowerNight.jpg';
-import KobePortTower from '../../assets/KobePortTower.jpg';
 import Kanazawa_HigashiChaya from '../../assets/Kanazawa_HigashiChaya.jpg';
 import Kanazawa_YuwakuOnsen from '../../assets/Kanazawa_YuwakuOnsen.jpg';
-import Kyoto_Byodoin from '../../assets/Kyoto_Byodoin.jpg';
-import Otaru_Canal_Winter from '../../assets/Otaru_Canal_Winter.jpg';
-import Sapporo_SusukinoNight from '../../assets/Sapporo_SusukinoNight.jpg';
-import theritzcarlton from '../../assets/theritzcarlton.jpg';
-import okinawacruising from '../../assets/okinawacruising.jpg';
 import nagoyawcs2 from '../../assets/nagoyawcs2.jpg';
 import fukugourmet from '../../assets/fukugourmet.jpg';
 import fukuanimate from '../../assets/fukuanimate.jpg';
 import suzume from '../../assets/suzume.jpg';
 import SapporoTower from '../../assets/SapporoTower.jpg';
-import nakasumap from '../../assets/nakasumap.jpg';
-import kushidashrine from '../../assets/kushidashrine.jpg';
-import marineworld from '../../assets/marineworld.jpg';
-import paypaydome from '../../assets/paypaydome.jpg';
 
 const DetailPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -529,7 +487,7 @@ const DetailPage = () => {
         {/* Breadcrumb Navigation - positioned absolutely */}
         <nav className="absolute top-4 left-6 z-10">
           <div className="flex items-center space-x-2 text-sm">
-            {plan.breadcrumb.map((item, index) => (
+            {plan.breadcrumb.map((item: string, index: number) => (
               <React.Fragment key={index}>
                 <span className="px-2 py-1 bg-white/20 rounded text-gray-800 font-semibold hover:bg-white/30 transition-colors cursor-pointer">
                   {item}
@@ -575,7 +533,7 @@ const DetailPage = () => {
                 <div>
                   <span className="text-orange-500 font-medium">おすすめ観光スポット</span>
                   <ul className="ml-6 mt-2 space-y-1">
-                    {plan.spots.map((spot, index) => (
+                    {plan.spots.map((spot: string, index: number) => (
                       <li key={index} className="text-orange-500">
                         <span className="text-gray-900">2.{index + 1}</span> {spot}
                       </li>

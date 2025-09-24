@@ -1539,9 +1539,8 @@ const TripPlannerPage = () => {
                     days.push(new Date(d));
                   }
 
-                  return days.map((date, index) => {
+                  return days.map((_, index) => {
                     const dayNumber = index + 1;
-                    const dayOfMonth = date.getDate();
 
                     return (
                       <button
@@ -1559,10 +1558,8 @@ const TripPlannerPage = () => {
                   });
                 } else if (planData?.dailyPlans && planData.dailyPlans.length > 0) {
                   // dailyPlans가 있으면 그것을 사용
-                  return planData.dailyPlans.map((dailyPlan: any, index: number) => {
+                  return planData.dailyPlans.map((_: any, index: number) => {
                     const dayNumber = index + 1;
-                    const visitDate = new Date(dailyPlan.visitDate);
-                    const dayOfMonth = visitDate.getDate();
 
                     return (
                       <button
@@ -2126,9 +2123,8 @@ const TripPlannerPage = () => {
                   days.push(new Date(d));
                 }
 
-                return days.map((date, index) => {
+                return days.map((_, index) => {
                   const dayNumber = index + 1;
-                  const dayOfMonth = date.getDate();
 
                   return (
                     <button
@@ -2146,10 +2142,8 @@ const TripPlannerPage = () => {
                 });
               } else if (planData?.dailyPlans && planData.dailyPlans.length > 0) {
                 // dailyPlans가 있으면 그것을 사용
-                return planData.dailyPlans.map((dailyPlan: any, index: number) => {
+                return planData.dailyPlans.map((_: any, index: number) => {
                   const dayNumber = index + 1;
-                  const visitDate = new Date(dailyPlan.visitDate);
-                  const dayOfMonth = visitDate.getDate();
 
                   return (
                     <button
