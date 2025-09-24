@@ -61,7 +61,7 @@ export default function CommonPopup({
           <Button
             disabled={isDisabled}
             onClick={handleConfirm}
-            className={`flex-1 ${confirmButtonColor} text-white border-none rounded-lg py-3`}
+            className={`flex-1 ${confirmButtonColor} cursor-pointer text-white border-none rounded-lg py-3`}
           >
             {confirmText}
           </Button>

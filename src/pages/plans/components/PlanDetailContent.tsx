@@ -97,7 +97,7 @@ export default function PlanDetailContent({
       try {
         console.log('=== PlanDetailContent: 실제 총액 계산 시작 ===');
         console.log('planId:', plan.id);
-        
+
         // localStorage에서 spotExpenses 데이터 가져오기
         const savedSpotExpenses = localStorage.getItem('spotExpenses');
         if (savedSpotExpenses) {
@@ -105,7 +105,7 @@ export default function PlanDetailContent({
             const parsedExpenses = JSON.parse(savedSpotExpenses);
             console.log('=== localStorage에서 spotExpenses 복구 ===');
             console.log('복구된 데이터:', parsedExpenses);
-            
+
             // 모든 expense의 amount 합계 계산
             let total = 0;
             Object.values(parsedExpenses).forEach((expenses: any) => {
@@ -115,7 +115,7 @@ export default function PlanDetailContent({
                 });
               }
             });
-            
+
             console.log('=== localStorage 기반 총액 계산 ===');
             console.log('계산된 총액:', total);
             setActualTotalAmount(total);
@@ -124,7 +124,7 @@ export default function PlanDetailContent({
             console.error('localStorage 데이터 파싱 실패:', error);
           }
         }
-        
+
         // localStorage에 데이터가 없으면 서버 API에서 가져오기
         console.log('=== 서버 API에서 지출 데이터 로드 ===');
         const expensesResponse = await getExpensesByPlan(plan.id);
@@ -133,12 +133,12 @@ export default function PlanDetailContent({
         if (expensesResponse && expensesResponse.data) {
           const expenses = expensesResponse.data;
           console.log('=== 지출 데이터 ===', expenses);
-          
+
           // 모든 expense의 amount 합계 계산
           const total = expenses.reduce((sum: number, expense: any) => {
             return sum + (expense.amount || 0);
           }, 0);
-          
+
           console.log('=== 서버 API 기반 총액 계산 ===');
           console.log('계산된 총액:', total);
           setActualTotalAmount(total);
@@ -209,6 +209,27 @@ export default function PlanDetailContent({
       console.error(error);
       toast.error('役割の変更に失敗しました。', { position: 'top-center' });
     }
+  };
+
+  //와리깡 공유하기 (메일로 공유)
+  const handleConfirmWarikan = async (amounts: { [memberId: number]: number }) => {
+    console.log('plan', plan);
+    console.log('memberAmounts', amounts);
+
+    await axiosInstance.post(`/api/warikan/send`, {
+      planId: plan.id,
+      title: plan.title,
+      totalAmount: actualTotalAmount,
+      memberShares: Object.entries(amounts).map(([memberId, amount]) => ({
+        userId: parseInt(memberId),
+        amount: amount,
+      })),
+    });
+
+    const totalCalculated = Object.values(amounts).reduce((sum, amount) => sum + amount, 0);
+    toast.success(`割り勘の情報がメールで送信されました。 総額: ¥${totalCalculated.toLocaleString('ja-JP')}`, {
+      position: 'top-center',
+    });
   };
 
   //TODO: 지울 예정
@@ -340,7 +361,10 @@ export default function PlanDetailContent({
             <div className="text-right">
               <p className="text-xs text-gray-500">メンバー当たり</p>
               <p className="text-lg font-semibold text-gray-700">
-                ¥{travelMembers.length > 0 ? Math.ceil(actualTotalAmount / travelMembers.length).toLocaleString('ja-JP') : '0'}
+                ¥
+                {travelMembers.length > 0
+                  ? Math.ceil(actualTotalAmount / travelMembers.length).toLocaleString('ja-JP')
+                  : '0'}
               </p>
             </div>
           </div>
@@ -397,13 +421,7 @@ export default function PlanDetailContent({
           onOpenChange={setIsWarikanPopupOpen}
           members={travelMembers}
           totalAmount={actualTotalAmount}
-          onConfirm={(amounts) => {
-            console.log('割り勘 結果:', amounts);
-            const totalCalculated = Object.values(amounts).reduce((sum, amount) => sum + amount, 0);
-            toast.success(`割り勘が完了しました。総額: ¥${totalCalculated.toLocaleString('ja-JP')}`, {
-              position: 'top-center',
-            });
-          }}
+          onConfirm={(amounts) => handleConfirmWarikan(amounts)}
           onCancel={() => {
             console.log('割り勘がキャンセルされました。');
           }}
