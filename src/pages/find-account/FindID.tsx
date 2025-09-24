@@ -4,6 +4,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
+import { toast } from 'sonner';
+import { axiosInstance } from '@/api/axios';
 
 export default function FindID() {
   const navigate = useNavigate();
@@ -13,25 +15,88 @@ export default function FindID() {
   const [authCodeError, setAuthCodeError] = useState('');
   const [showID, setShowID] = useState(false);
   const [isEmailSent, setIsEmailSent] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [foundUserId, setFoundUserId] = useState('');
 
-  const handleSendEmail = () => {
+  const handleSendEmail = async () => {
     if (!email) {
       setEmailError('メールアドレスを入力してください。');
       return;
     }
-    // 이메일 전송 로직
-    setIsEmailSent(true);
+
+    setIsLoading(true);
     setEmailError('');
+
+    try {
+      const response = await axiosInstance.post('/api/email/send-verification', {
+        email: email,
+      });
+
+      if (response.data.success) {
+        setIsEmailSent(true);
+        toast.success('入力いただいたメールアドレスに認証コードを送信いたしました');
+      } else {
+        setEmailError('メール送信に失敗しました。もう一度お試しください。');
+      }
+    } catch (error: unknown) {
+      console.error('이메일 전송 오류:', error);
+      setEmailError('メール送信に失敗しました。もう一度お試しください。');
+      toast.error('メール送信に失敗しました');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const handleConfirmAuthCode = () => {
+  const handleConfirmAuthCode = async () => {
     if (!authCode) {
       setAuthCodeError('認証コードを入力してください。');
       return;
     }
-    // 인증코드 확인 로직
-    setShowID(true);
+
+    setIsLoading(true);
     setAuthCodeError('');
+
+    try {
+      const response = await axiosInstance.post('/api/email/verify', {
+        email: email,
+        code: authCode,
+      });
+
+      if (response.data.success) {
+        // 인증 성공 후 실제 사용자 ID 찾기
+        try {
+          const findIdResponse = await axiosInstance.post('/api/auth/find-id', {
+            email: email,
+          });
+
+          // API가 userId / user_id / username / nickname 중 하나로 반환할 수 있으므로 안전하게 처리
+          const userIdFromApi =
+            findIdResponse.data?.userId ??
+            findIdResponse.data?.user_id ??
+            findIdResponse.data?.username ??
+            findIdResponse.data?.nickname;
+
+          if (userIdFromApi) {
+            setFoundUserId(String(userIdFromApi));
+            setShowID(true);
+            toast.success('認証が完了しました');
+          } else {
+            setAuthCodeError('ユーザー情報を取得できませんでした。');
+          }
+        } catch (findIdError: unknown) {
+          console.error('사용자 ID 찾기 오류:', findIdError);
+          setAuthCodeError('ユーザー情報を取得できませんでした。');
+        }
+      } else {
+        setAuthCodeError('認証コードが正しくありません。');
+      }
+    } catch (error: unknown) {
+      console.error('인증코드 확인 오류:', error);
+      setAuthCodeError('認証コードが正しくありません。');
+      toast.error('認証に失敗しました');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   // const handleResend = () => {
@@ -78,9 +143,10 @@ export default function FindID() {
                 />
                 <Button
                   onClick={handleSendEmail}
-                  className="bg-gray-600 hover:bg-gray-700 text-white px-4 h-10 text-sm lg:h-12 lg:text-base"
+                  disabled={isLoading}
+                  className="bg-gray-600 hover:bg-gray-700 text-white px-4 h-10 text-sm lg:h-12 lg:text-base disabled:opacity-50"
                 >
-                  送信
+                  {isLoading ? '送信中...' : '送信'}
                 </Button>
               </div>
               {emailError && <p className="text-orange-500 text-xs lg:text-sm">{emailError}</p>}
@@ -103,9 +169,10 @@ export default function FindID() {
                   />
                   <Button
                     onClick={handleConfirmAuthCode}
-                    className="bg-gray-600 hover:bg-gray-700 text-white px-4 h-10 text-sm lg:h-12 lg:text-base"
+                    disabled={isLoading}
+                    className="bg-gray-600 hover:bg-gray-700 text-white px-4 h-10 text-sm lg:h-12 lg:text-base disabled:opacity-50"
                   >
-                    確認
+                    {isLoading ? '確認中...' : '確認'}
                   </Button>
                 </div>
                 {authCodeError && <p className="text-orange-500 text-xs lg:text-sm">{authCodeError}</p>}
@@ -116,7 +183,7 @@ export default function FindID() {
             {showID && (
               <div className="space-y-4">
                 <div className="border border-gray-300 rounded-lg p-4 bg-gray-50">
-                  <p className="text-sm lg:text-base text-gray-700 mb-2">ご登録のIDは「tabi****123」です</p>
+                  <p className="text-sm lg:text-base text-gray-700 mb-2">ご登録のIDは「{foundUserId}」です</p>
                   <p className="text-xs lg:text-sm text-gray-500">セキュリティ保護のため、IDは一部のみ表示されます。</p>
                 </div>
 

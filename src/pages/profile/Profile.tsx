@@ -1,14 +1,18 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Form, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { User, Mail, Phone, Key, Eye, EyeOff, Edit3 } from 'lucide-react';
+import { User, Mail, Phone, Key, Eye, EyeOff, Upload, Loader2 } from 'lucide-react';
 import SideNavigation from '@/components/layout/side-navigation';
 import { useNavigate } from 'react-router-dom';
 import Header from '@/components/layout/header';
+import { axiosInstance } from '@/api/axios';
+import { uploadImage } from '@/api/api';
+import { toast } from 'sonner';
+import { ProfileData } from '@/lib/type';
 
 // Zod 스키마 정의
 const profileSchema = z
@@ -39,10 +43,16 @@ type ProfileFormData = z.infer<typeof profileSchema>;
 
 export default function Profile() {
   const navigate = useNavigate();
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const [profileData, setProfileData] = useState<ProfileData | null>(null);
+  const [profileImage, setProfileImage] = useState<string | null>(null);
+  const [isUploading, setIsUploading] = useState(false);
+  const [uploadError, setUploadError] = useState<string | null>(null);
 
   const form = useForm<ProfileFormData>({
     resolver: zodResolver(profileSchema),
@@ -59,6 +69,83 @@ export default function Profile() {
     mode: 'onChange', // 입력할 때마다 검사
     reValidateMode: 'onChange', // 값이 바뀔 때마다 다시 검사
   });
+
+  useEffect(() => {
+    fetchProfileImage();
+  }, []);
+
+  const fetchProfileImage = async () => {
+    const response = await axiosInstance.get('/api/profile');
+    setProfileData((prev: ProfileData | null) => ({
+      ...prev,
+      id: response.data.data.id,
+      userId: response.data.data.userId,
+      email: response.data.data.email,
+      firstName: response.data.data.firstName,
+      lastName: response.data.data.lastName,
+      nickname: response.data.data.nickname,
+      phoneNumber: response.data.data.phoneNumber,
+      gender: response.data.data.gender,
+      profileImageUrl: response.data.data.profileImageUrl,
+      createdAt: response.data.data.createdAt,
+      updatedAt: response.data.data.updatedAt,
+    }));
+  };
+
+  // 이미지 업로드 핸들러
+  const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    // 파일 타입 검증
+    if (!file.type.startsWith('image/')) {
+      setUploadError('이미지 파일만 업로드 가능합니다.');
+      return;
+    }
+
+    // 파일 크기 검증 (5MB 제한)
+    if (file.size > 5 * 1024 * 1024) {
+      setUploadError('파일 크기는 5MB 이하여야 합니다.');
+      return;
+    }
+
+    setIsUploading(true);
+    setUploadError(null);
+
+    let imageUrl = profileImage ?? null;
+
+    if (file) {
+      const uploadResponse = await uploadImage(file);
+      if (uploadResponse.success) {
+        imageUrl = uploadResponse.url;
+        toast.success('画像のアップロードに成功しました。', { position: 'top-center' });
+      } else {
+        toast.error('画像のアップロードに失敗しました。', { position: 'top-center' });
+        setUploadError(uploadResponse.message || '이미지 업로드 실패');
+        return;
+      }
+    }
+
+    try {
+      const requestBody = {
+        profileImageUrl: imageUrl, // 이미지 URL
+      };
+
+      // 프로필 이미지 업데이트 API
+      await axiosInstance.put('/api/profile/image', requestBody);
+      setProfileImage(imageUrl);
+    } catch (error) {
+      console.error('프로필 이미지 업데이트 실패:', error);
+      setUploadError('이미지 업로드에 실패했습니다. 다시 시도해주세요.');
+    } finally {
+      setIsUploading(false);
+    }
+  };
+
+  // 이미지 업로드 버튼 클릭 핸들러
+  const handleImageClick = () => {
+    fileInputRef.current?.click();
+  };
 
   const onSubmit = async (data: ProfileFormData) => {
     try {
@@ -91,17 +178,39 @@ export default function Profile() {
                 {/* 프로필 이미지 섹션 */}
                 <div className="flex flex-col items-center mb-8">
                   <div className="relative">
-                    <div className="w-24 h-24 bg-gray-200 rounded-full flex items-center justify-center mb-4">
-                      <User className="w-12 h-12 text-gray-400" />
+                    <div className="w-24 h-24 bg-gray-200 rounded-full flex items-center justify-center mb-4 overflow-hidden">
+                      {profileImage ? (
+                        <img
+                          src={import.meta.env.VITE_API_URL + profileImage}
+                          alt="프로필 이미지"
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <User className="w-12 h-12 text-gray-400" />
+                      )}
                     </div>
-                    <button className="absolute bottom-0 right-0 bg-brand-orange text-white p-2 rounded-full hover:bg-orange-600 transition-colors">
-                      <Edit3 className="w-4 h-4" />
+                    <button
+                      type="button"
+                      onClick={handleImageClick}
+                      disabled={isUploading}
+                      className="absolute bottom-0 right-0 bg-brand-orange text-white p-2 rounded-full hover:bg-orange-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      {isUploading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Upload className="w-4 h-4" />}
                     </button>
                   </div>
                   <div className="text-center">
                     <p className="text-sm text-gray-600 mb-1">名前(姓名)</p>
                     <p className="text-sm text-gray-400">たびっこ123</p>
+                    {uploadError && <p className="text-sm text-red-500 mt-2">{uploadError}</p>}
                   </div>
+                  {/* 숨겨진 파일 입력 */}
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageUpload}
+                    className="hidden"
+                  />
                 </div>
 
                 {/* 폼 필드들 */}

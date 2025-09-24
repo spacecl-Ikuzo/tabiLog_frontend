@@ -5,7 +5,6 @@ import { Button } from '../../components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../components/ui/select';
 import { Card, CardContent, CardTitle } from '../../components/ui/card';
 import { Badge } from '../../components/ui/badge';
-import Header from '../../components/layout/header';
 import SideNavigation from '../../components/layout/side-navigation';
 import { MoreVertical, Calendar as CalendarIcon, User, MapPin } from 'lucide-react';
 import CustomPagination from '../../Pagination';
@@ -226,9 +225,6 @@ export default function Plans() {
 
   return (
     <div className="min-h-screen">
-      {/* 헤더 */}
-      <Header />
-
       <div className="flex">
         {/* 사이드바 네비게이션 (데스크톱만) */}
         <SideNavigation selectedNav="plans" />
@@ -236,7 +232,7 @@ export default function Plans() {
         {/* 메인 컨텐츠 */}
         <div className="flex-1 lg:flex">
           {/* 왼쪽 메인 영역 */}
-          <div className="flex-1 p-6 lg:py-10 lg:px-30">
+          <div className="p-6 lg:py-10 lg:px-30 flex-[5]">
             <h1 className="text-3xl font-bold text-gray-900 mb-8">私の旅行計画</h1>
 
             {/* 카테고리 탭 */}
@@ -403,7 +399,7 @@ export default function Plans() {
               if (!selectedPlan) return null;
 
               return (
-                <div className="hidden lg:block w-180 p-20 bg-white border-l border-gray-200">
+                <div className="hidden lg:block p-20 bg-white border-l border-gray-200 flex-[4]">
                   <div className="flex items-center justify-between mb-8">
                     <h2 className="text-2xl font-bold text-gray-900">旅行プラン概要</h2>
                     <button
