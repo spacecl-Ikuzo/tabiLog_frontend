@@ -1094,12 +1094,12 @@ const SpotsPage = () => {
               </button>
             )}
 
-            <div ref={destScrollRef} className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide px-16 py-4">
+            <div ref={destScrollRef} className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide px-14 py-4">
               {filteredDestinations.length > 0 ? (
                 filteredDestinations.map((destination) => (
                   <div
                     key={destination.id}
-                    className={`flex-shrink-0 w-80 bg-white rounded-lg shadow-md overflow-hidden cursor-pointer transition-all duration-200 hover:scale-105 ${
+                    className={`flex-shrink-0 w-64 bg-white rounded-lg shadow-md overflow-hidden cursor-pointer transition-all duration-200 hover:scale-105 ${
                       selectedCity === destination.name ? 'ring-4 ring-orange-500 ring-offset-4' : ''
                     }`}
                     ref={(el) => {
@@ -1125,12 +1125,12 @@ const SpotsPage = () => {
                       className="h-48 bg-cover bg-center bg-no-repeat"
                       style={{ backgroundImage: `url(${destination.image})` }}
                     ></div>
-                    <div className="p-6">
-                      <h3 className="text-xl font-bold text-gray-900 mb-2">{destination.name}</h3>
-                      <p className="text-gray-600 mb-4">{destination.description}</p>
-                      <div className="flex flex-wrap gap-2">
+                    <div className="p-4">
+                      <h3 className="text-lg font-bold text-gray-900 mb-2">{destination.name}</h3>
+                      <p className="text-gray-600 mb-3 text-sm">{destination.description}</p>
+                      <div className="flex flex-wrap gap-1">
                         {destination.tags.map((tag, index) => (
-                          <span key={index} className="px-3 py-1 bg-gray-800 text-white text-sm rounded-full">
+                          <span key={index} className="px-2 py-1 bg-gray-800 text-white text-xs rounded-full">
                             {tag}
                           </span>
                         ))}
