@@ -5,7 +5,7 @@ import { z } from 'zod';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Form, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { User, Mail, Phone, Upload, Loader2 } from 'lucide-react';
+import { Mail, Phone, Upload, Loader2 } from 'lucide-react';
 import SideNavigation from '@/components/layout/side-navigation';
 import { useNavigate } from 'react-router-dom';
 import Header from '@/components/layout/header';
@@ -150,9 +150,15 @@ export default function Profile() {
       };
       await axiosInstance.put('/api/profile', requestBody);
       toast.success('プロフィールが更新されました。', { position: 'top-center' });
-      navigate('/profile', { replace: true });
+
+      // 프로필 데이터 다시 가져오기
+      await fetchProfileImage();
+
+      // 사이드 네비게이션의 사용자 정보도 갱신하도록 이벤트 발생
+      window.dispatchEvent(new CustomEvent('profileUpdated'));
     } catch (error) {
       console.error('Profile update failed:', error);
+      toast.error('プロフィールの更新に失敗しました。', { position: 'top-center' });
     }
   };
 
@@ -193,7 +199,9 @@ export default function Profile() {
                               className="w-full h-full object-cover"
                             />
                           ) : (
-                            <User className="w-12 h-12 text-gray-400" />
+                            <div className="w-full h-full bg-gradient-to-br from-gray-400 to-gray-600 rounded-full flex items-center justify-center text-white font-bold">
+                              {profileData?.nickname?.slice(0, 2)}
+                            </div>
                           )}
                         </>
                       )}
