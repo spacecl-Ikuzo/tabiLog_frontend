@@ -17,7 +17,7 @@ import {
   Save,
   X,
 } from 'lucide-react';
-import { createExpense, getExpensesByPlan } from '@/api/api';
+import { getExpensesByPlan } from '@/api/api';
 import Header from '@/components/layout/header';
 import SvgIcon from '@/components/ui/SvgIcon';
 import {
@@ -1025,14 +1025,15 @@ const TripPlannerPage = () => {
     setCostCalculatingSpot(spot);
     setIsCostDialogOpen(true);
 
-    // 입력 필드 초기화
+    // 현재 spot의 기존 코스트 값을 입력 필드에 설정
+    const currentCost = parseInt(spot.cost.replace(/[^\d]/g, '') || '0');
     setExpenseInputs({
-      amount: 0,
+      amount: currentCost,
       category: 'LODGING',
     });
   };
 
-  // 지출 저장 함수
+  // 코스트 수정 함수
   const saveExpenses = async () => {
     if (!costCalculatingSpot || expenseInputs.amount <= 0) {
       alert('금액을 입력해주세요.');
@@ -1043,74 +1044,66 @@ const TripPlannerPage = () => {
       setIsLoading(true);
 
       // 상세한 디버깅 정보 출력
-      console.log('=== 지출 저장 시작 ===');
+      console.log('=== 코스트 수정 시작 ===');
       console.log('현재 시간:', new Date().toISOString());
       console.log('spotId:', costCalculatingSpot.id);
       console.log('spot 정보:', costCalculatingSpot);
       console.log('입력 데이터:', expenseInputs);
 
-      const expenseData = {
-        planId: parseInt(planId || '1'), // 동적 플랜 ID 사용
-        spotId: costCalculatingSpot.id,
-        item: `${costCalculatingSpot.location} - ${expenseInputs.category}`,
-        amount: expenseInputs.amount,
-        category: expenseInputs.category,
-        expenseDate: new Date().toISOString().split('T')[0],
-      };
+      // 기존 spot의 코스트를 새로운 값으로 교체
+      setSpots((prev) => ({
+        ...prev,
+        [activeDay]: (prev[activeDay] || []).map((spot) => 
+          spot.id === costCalculatingSpot.id 
+            ? { ...spot, cost: `¥${expenseInputs.amount}` }
+            : spot
+        ),
+      }));
 
-      console.log('=== API 요청 데이터 ===');
-      console.log('요청 URL:', 'http://localhost:8080/api/expenses');
-      console.log('요청 데이터:', JSON.stringify(expenseData, null, 2));
-
-      const result = await createExpense(expenseData);
-
-      console.log('=== API 응답 성공 ===');
-      console.log('응답 데이터:', JSON.stringify(result, null, 2));
-
-      // 저장된 지출 데이터를 상태에 추가
-      if (result && result.data) {
-        const newExpense: ExpenseData = {
-          id: result.data.id,
-          amount: result.data.amount,
-          category: result.data.category,
-          item: result.data.item,
-          expenseDate: result.data.expenseDate,
+      // 기존 지출 데이터를 새로운 값으로 교체 (기존 지출이 있다면)
+      if (spotExpenses[costCalculatingSpot.id] && spotExpenses[costCalculatingSpot.id].length > 0) {
+        const existingExpense = spotExpenses[costCalculatingSpot.id][0];
+        const updatedExpense: ExpenseData = {
+          ...existingExpense,
+          amount: expenseInputs.amount,
+          item: `${costCalculatingSpot.location} - ${expenseInputs.category}`,
+          category: expenseInputs.category,
         };
 
         setSpotExpenses((prev) => ({
           ...prev,
-          [costCalculatingSpot.id]: [...(prev[costCalculatingSpot.id] || []), newExpense],
+          [costCalculatingSpot.id]: [updatedExpense], // 기존 배열을 새로운 값으로 교체
+        }));
+      } else {
+        // 기존 지출이 없다면 새로 생성
+        const newExpense: ExpenseData = {
+          id: Date.now(), // 임시 ID
+          amount: expenseInputs.amount,
+          category: expenseInputs.category,
+          item: `${costCalculatingSpot.location} - ${expenseInputs.category}`,
+          expenseDate: new Date().toISOString().split('T')[0],
+        };
+
+        setSpotExpenses((prev) => ({
+          ...prev,
+          [costCalculatingSpot.id]: [newExpense],
         }));
       }
 
       // 성공 메시지 표시
-      alert('지출이 성공적으로 저장되었습니다!');
+      alert('코스트가 성공적으로 수정되었습니다!');
 
       // 다이얼로그 닫기
       setIsCostDialogOpen(false);
       setCostCalculatingSpot(null);
     } catch (error: unknown) {
-      console.error('=== 지출 저장 실패 ===');
+      console.error('=== 코스트 수정 실패 ===');
       console.error('오류 발생 시간:', new Date().toISOString());
       console.error('오류 객체:', error);
       console.error('오류 메시지:', error instanceof Error ? error.message : 'Unknown error');
       console.error('오류 스택:', error instanceof Error ? error.stack : 'No stack trace');
 
-      if (error && typeof error === 'object' && 'response' in error && error.response) {
-        console.error('=== HTTP 응답 오류 ===');
-        console.error('상태 코드:', (error.response as any).status);
-        console.error('상태 텍스트:', (error.response as any).statusText);
-        console.error('응답 헤더:', (error.response as any).headers);
-        console.error('응답 데이터:', (error.response as any).data);
-      } else if (error && typeof error === 'object' && 'request' in error && error.request) {
-        console.error('=== 네트워크 오류 ===');
-        console.error('요청 객체:', (error as any).request);
-      } else {
-        console.error('=== 기타 오류 ===');
-        console.error('오류 설정:', (error as any).config);
-      }
-
-      // 401 오류인 경우 특별 처리
+      alert('코스트 수정에 실패했습니다. 다시 시도해주세요.');
       if (
         error &&
         typeof error === 'object' &&
@@ -2463,7 +2456,7 @@ const TripPlannerPage = () => {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-2xl p-6 w-[400px] shadow-2xl">
             {/* 제목 */}
-            <h3 className="text-xl font-bold text-orange-500 mb-6 text-center">費用追加</h3>
+            <h3 className="text-xl font-bold text-orange-500 mb-6 text-center">費用修正</h3>
 
             {/* 金額入力 */}
             <div className="mb-6">
@@ -2530,7 +2523,7 @@ const TripPlannerPage = () => {
                 className="flex-1 px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
                 disabled={isLoading}
               >
-                {isLoading ? '登録中...' : '登録'}
+                {isLoading ? '修正中...' : '修正'}
               </button>
             </div>
           </div>
