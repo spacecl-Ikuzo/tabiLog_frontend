@@ -216,7 +216,7 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
       destination: { lat: validSpots[validSpots.length - 1].latitude!, lng: validSpots[validSpots.length - 1].longitude! },
       waypoints: waypoints,
       travelMode: google.maps.TravelMode.WALKING,
-      optimizeWaypoints: true,
+      optimizeWaypoints: false, // 사용자가 설정한 순서를 유지하도록 변경
     };
 
     directionsService.route(request, (result: google.maps.DirectionsResult | null, status: google.maps.DirectionsStatus) => {
