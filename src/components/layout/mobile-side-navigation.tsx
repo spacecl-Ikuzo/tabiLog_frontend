@@ -2,6 +2,8 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useUserStore } from '@/store';
 import { useState, useEffect } from 'react';
+import { ProfileData } from '@/lib/type';
+import { getMyPageInfo } from '@/api/api';
 
 interface MobileSideNavigationProps {
   isOpen: boolean;
@@ -14,6 +16,7 @@ const MobileSideNavigation = ({ isOpen, onClose, handleLogout }: MobileSideNavig
   const location = useLocation();
   const { token, nickname } = useUserStore();
   const [isMyTripOpen, setIsMyTripOpen] = useState(false);
+  const [userInfo, setUserInfo] = useState<ProfileData | null>(null);
 
   const handleNavigation = (path: string) => {
     navigate(path);
@@ -32,6 +35,16 @@ const MobileSideNavigation = ({ isOpen, onClose, handleLogout }: MobileSideNavig
       location.pathname.startsWith('/profile');
     setIsMyTripOpen(isMyTripPath);
   }, [location.pathname]);
+
+  useEffect(() => {
+    fetchUserInfo();
+  }, [isOpen]);
+
+  //프로필 정보 가져오기
+  const fetchUserInfo = async () => {
+    const response = await getMyPageInfo();
+    setUserInfo(response.data);
+  };
 
   return (
     <div className="lg:hidden">
@@ -67,11 +80,19 @@ const MobileSideNavigation = ({ isOpen, onClose, handleLogout }: MobileSideNavig
         {token && (
           <div className="p-4 border-b border-gray-200">
             <div className="flex items-center space-x-3">
-              <div className="w-12 h-12 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center">
-                <span className="text-white font-bold text-lg">
-                  {nickname ? nickname.charAt(0).toUpperCase() : 'G'}
-                </span>
-              </div>
+              {userInfo?.profileImageUrl ? (
+                <img
+                  src={import.meta.env.VITE_API_URL + userInfo?.profileImageUrl}
+                  alt="profile"
+                  className="w-12 h-12 rounded-full"
+                />
+              ) : (
+                <div className="w-12 h-12 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center">
+                  <span className="text-white font-bold text-lg">
+                    {nickname ? nickname.charAt(0).toUpperCase() : ''}
+                  </span>
+                </div>
+              )}
               <div>
                 <p className="text-base font-semibold text-gray-800">{nickname ? `${nickname}` : 'ゲスト'}</p>
               </div>
