@@ -2109,6 +2109,12 @@ const TripPlannerPage = () => {
 
   // 뒤로가기 버튼 클릭 핸들러
   const handleBackButtonClick = () => {
+    // VIEWER는 저장 확인 없이 바로 이동
+    if (userRole === 'VIEWER') {
+      setIsSaveConfirmationOpen(false);
+      navigate(-1);
+      return;
+    }
     // 저장할 데이터가 있는지 확인
     const hasSpotsToSave = Object.values(spots).some((daySpots) => daySpots.length > 0);
 
@@ -2896,7 +2902,7 @@ const TripPlannerPage = () => {
       )}
 
       {/* 저장 확인 팝업 */}
-      {isSaveConfirmationOpen && (
+      {userRole !== 'VIEWER' && isSaveConfirmationOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-2xl p-6 w-[400px] shadow-2xl">
             {/* 제목 */}
