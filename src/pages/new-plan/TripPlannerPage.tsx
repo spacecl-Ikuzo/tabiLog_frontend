@@ -945,7 +945,9 @@ const TripPlannerPage = () => {
       // TRANSIT 모드는 제거되었으므로 추가 파라미터 불필요
       const transitParams = '';
 
-      const apiUrl = `http://localhost:8080/api/spots/directions?lat1=${fromSpot.latitude}&lng1=${fromSpot.longitude}&lat2=${toSpot.latitude}&lng2=${toSpot.longitude}&travelMode=${mode}${departureTimeParam}${transitParams}`;
+      const apiUrl = `${import.meta.env.VITE_API_URL}/api/spots/directions?lat1=${fromSpot.latitude}&lng1=${
+        fromSpot.longitude
+      }&lat2=${toSpot.latitude}&lng2=${toSpot.longitude}&travelMode=${mode}${departureTimeParam}${transitParams}`;
       console.log('API 요청 URL:', apiUrl);
       console.log('요청 파라미터:', {
         from: `${fromSpot.latitude}, ${fromSpot.longitude}`,
@@ -2800,7 +2802,11 @@ const TripPlannerPage = () => {
                     }`}
                   >
                     <img
-                      src={`/svg/${category.icon}.svg`}
+                      src={
+                        import.meta.env.PROD
+                          ? `https://storage.googleapis.com/tabilog-dev/svg/${category.icon}.svg`
+                          : `./svg/${category.icon}.svg`
+                      }
                       alt={category.label}
                       className={`w-6 h-6 mb-1 ${expenseInputs.category === category.key ? 'brightness-0 invert' : ''}`}
                     />
