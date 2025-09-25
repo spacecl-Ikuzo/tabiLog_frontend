@@ -17,7 +17,10 @@ import {
   Save,
   X,
 } from 'lucide-react';
+import { getExpensesByPlan } from '@/api/api';
+import Header from '@/components/layout/header';
 import SvgIcon from '@/components/ui/SvgIcon';
+import { useUserStore } from '@/store';
 import {
   DndContext,
   closestCenter,
@@ -85,6 +88,7 @@ interface SortableSpotItemProps {
   getEndTime: (startTime: string, duration: string) => string;
   nextSegment?: TravelSegment;
   spotExpenses: Record<number, ExpenseData[]>;
+  userRole: string;
 }
 
 const SortableSpotItem: React.FC<SortableSpotItemProps> = ({
@@ -100,6 +104,7 @@ const SortableSpotItem: React.FC<SortableSpotItemProps> = ({
   getEndTime,
   nextSegment,
   spotExpenses,
+  userRole,
 }) => {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: spot.id });
 
@@ -113,43 +118,45 @@ const SortableSpotItem: React.FC<SortableSpotItemProps> = ({
     <div ref={setNodeRef} style={style} className="relative">
       <div className="bg-white border border-gray-200 rounded-lg p-4 mb-4 shadow-sm hover:shadow-md transition-shadow">
         <div className="flex items-start justify-between">
-          {/* 드래그 핸들과 순서 변경 버튼 */}
-          <div className="flex flex-col items-center mr-3 space-y-1">
-            <button
-              {...attributes}
-              {...listeners}
-              className="p-1 text-gray-400 hover:text-gray-600 transition-colors cursor-grab active:cursor-grabbing"
-              title="드래그하여 순서 변경"
-            >
-              <GripVertical className="w-4 h-4" />
-            </button>
-            <div className="flex flex-col space-y-1">
+          {/* 드래그 핸들과 순서 변경 버튼 - VIEWER 역할이 아닐 때만 표시 */}
+          {userRole !== 'VIEWER' && (
+            <div className="flex flex-col items-center mr-3 space-y-1">
               <button
-                onClick={() => onMoveUp(day, spotIndex)}
-                disabled={spotIndex === 0}
-                className={`p-1 rounded transition-colors ${
-                  spotIndex === 0
-                    ? 'text-gray-300 cursor-not-allowed'
-                    : 'text-gray-400 hover:text-gray-600 hover:bg-gray-100'
-                }`}
-                title="위로 이동"
+                {...attributes}
+                {...listeners}
+                className="p-1 text-gray-400 hover:text-gray-600 transition-colors cursor-grab active:cursor-grabbing"
+                title="드래그하여 순서 변경"
               >
-                <ChevronUp className="w-3 h-3" />
+                <GripVertical className="w-4 h-4" />
               </button>
-              <button
-                onClick={() => onMoveDown(day, spotIndex)}
-                disabled={spotIndex === totalSpots - 1}
-                className={`p-1 rounded transition-colors ${
-                  spotIndex === totalSpots - 1
-                    ? 'text-gray-300 cursor-not-allowed'
-                    : 'text-gray-400 hover:text-gray-600 hover:bg-gray-100'
-                }`}
-                title="아래로 이동"
-              >
-                <ChevronDown className="w-3 h-3" />
-              </button>
+              <div className="flex flex-col space-y-1">
+                <button
+                  onClick={() => onMoveUp(day, spotIndex)}
+                  disabled={spotIndex === 0}
+                  className={`p-1 rounded transition-colors ${
+                    spotIndex === 0
+                      ? 'text-gray-300 cursor-not-allowed'
+                      : 'text-gray-400 hover:text-gray-600 hover:bg-gray-100'
+                  }`}
+                  title="위로 이동"
+                >
+                  <ChevronUp className="w-3 h-3" />
+                </button>
+                <button
+                  onClick={() => onMoveDown(day, spotIndex)}
+                  disabled={spotIndex === totalSpots - 1}
+                  className={`p-1 rounded transition-colors ${
+                    spotIndex === totalSpots - 1
+                      ? 'text-gray-300 cursor-not-allowed'
+                      : 'text-gray-400 hover:text-gray-600 hover:bg-gray-100'
+                  }`}
+                  title="아래로 이동"
+                >
+                  <ChevronDown className="w-3 h-3" />
+                </button>
+              </div>
             </div>
-          </div>
+          )}
 
           {/* 관광지 정보 */}
           <div className="flex-1">
@@ -158,22 +165,25 @@ const SortableSpotItem: React.FC<SortableSpotItemProps> = ({
                 <MapPin className="w-4 h-4 text-blue-500" />
                 <h3 className="font-medium text-gray-900">{spot.location}</h3>
               </div>
-              <div className="flex items-center space-x-2">
-                <button
-                  onClick={() => onEdit(spot)}
-                  className="p-1 text-gray-400 hover:text-blue-600 transition-colors"
-                  title="편집"
-                >
-                  <Edit className="w-4 h-4" />
-                </button>
-                <button
-                  onClick={() => onDelete(day, spot.id)}
-                  className="p-1 text-gray-400 hover:text-red-600 transition-colors"
-                  title="삭제"
-                >
-                  <Trash2 className="w-4 h-4" />
-                </button>
-              </div>
+              {/* 편집 및 삭제 버튼 - VIEWER 역할이 아닐 때만 표시 */}
+              {userRole !== 'VIEWER' && (
+                <div className="flex items-center space-x-2">
+                  <button
+                    onClick={() => onEdit(spot)}
+                    className="p-1 text-gray-400 hover:text-blue-600 transition-colors"
+                    title="편집"
+                  >
+                    <Edit className="w-4 h-4" />
+                  </button>
+                  <button
+                    onClick={() => onDelete(day, spot.id)}
+                    className="p-1 text-gray-400 hover:text-red-600 transition-colors"
+                    title="삭제"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </button>
+                </div>
+              )}
             </div>
 
             <p className="text-sm text-gray-600 mb-2">{spot.address}</p>
@@ -202,41 +212,39 @@ const SortableSpotItem: React.FC<SortableSpotItemProps> = ({
 
               <div className="flex flex-col items-end space-y-2">
                 {/* 지출 정보 표시 */}
-                      {(() => {
-                        const expenses = spotExpenses[spot.id];
-                        console.log(`=== 지출 정보 표시 (spotId: ${spot.id}) ===`);
-                        console.log('spotExpenses 전체:', spotExpenses);
-                        console.log('현재 spot.id:', spot.id);
-                        console.log('expenses:', expenses);
-                        console.log('expenses length:', expenses?.length);
-                        console.log('expenses type:', typeof expenses);
-                        
-                        if (expenses && expenses.length > 0) {
-                          const total = expenses.reduce((sum: number, expense: ExpenseData) => {
-                            console.log('expense:', expense, 'amount:', expense.amount);
-                            return sum + expense.amount;
-                          }, 0);
-                          console.log('total amount:', total);
-                          return (
-                  <span className="text-sm font-bold text-gray-900">
-                              {total.toLocaleString()}円
-                  </span>
-                          );
-                        } else {
-                          console.log('expenses가 없거나 비어있음');
-                        }
-                        return null;
-                      })()}
+                {(() => {
+                  const expenses = spotExpenses[spot.id];
+                  console.log(`=== 지출 정보 표시 (spotId: ${spot.id}) ===`);
+                  console.log('spotExpenses 전체:', spotExpenses);
+                  console.log('현재 spot.id:', spot.id);
+                  console.log('expenses:', expenses);
+                  console.log('expenses length:', expenses?.length);
+                  console.log('expenses type:', typeof expenses);
 
-                {/* 비용 계산 버튼 */}
-                <button
-                  onClick={() => onCalculateCost(spot)}
-                  className="flex items-center space-x-1 px-3 py-1.5 bg-orange-500 text-white text-sm font-medium rounded-lg hover:bg-orange-600 transition-colors shadow-sm"
-                  title="비용 계산"
-                >
-                  <Calculator className="w-4 h-4" />
-                  <span>コスト</span>
-                </button>
+                  if (expenses && expenses.length > 0) {
+                    const total = expenses.reduce((sum: number, expense: ExpenseData) => {
+                      console.log('expense:', expense, 'amount:', expense.amount);
+                      return sum + expense.amount;
+                    }, 0);
+                    console.log('total amount:', total);
+                    return <span className="text-sm font-bold text-gray-900">{total.toLocaleString()}円</span>;
+                  } else {
+                    console.log('expenses가 없거나 비어있음');
+                  }
+                  return null;
+                })()}
+
+                {/* 비용 계산 버튼 - VIEWER 역할이 아닐 때만 표시 */}
+                {userRole !== 'VIEWER' && (
+                  <button
+                    onClick={() => onCalculateCost(spot)}
+                    className="flex items-center space-x-1 px-3 py-1.5 bg-orange-500 text-white text-sm font-medium rounded-lg hover:bg-orange-600 transition-colors shadow-sm"
+                    title="비용 계산"
+                  >
+                    <Calculator className="w-4 h-4" />
+                    <span>コスト</span>
+                  </button>
+                )}
               </div>
             </div>
           </div>
@@ -276,6 +284,9 @@ const TripPlannerPage = () => {
   const navigate = useNavigate();
   const planId = searchParams.get('planId');
 
+  // store에서 사용자 정보 가져오기
+  const { userId } = useUserStore();
+
   const [activeDay, setActiveDay] = useState(1);
   const [isSearchDialogOpen, setIsSearchDialogOpen] = useState(false);
   const [planData, setPlanData] = useState<any>(null);
@@ -296,36 +307,39 @@ const TripPlannerPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [spotExpenses, setSpotExpenses] = useState<Record<number, ExpenseData[]>>({});
   const [departureTime, setDepartureTime] = useState<DepartureTime>({ hour: 11, minute: 0 });
-  
+
   // spotExpenses 상태 변경 감지
   useEffect(() => {
     console.log('=== spotExpenses 상태 변경 감지 ===');
     console.log('새로운 spotExpenses:', spotExpenses);
     console.log('spotExpenses 키들:', Object.keys(spotExpenses));
   }, [spotExpenses]);
-  
+
   const [leftPanelWidth, setLeftPanelWidth] = useState(40); // 40% (4:6 비율)
   const [isDragging, setIsDragging] = useState(false);
   const [spots, setSpots] = useState<Record<number, Spot[]>>({});
-  
+
   // spots 상태 변경 시 spotExpenses 매칭 재수행
   useEffect(() => {
     const currentSpots = Object.values(spots).flat();
     if (currentSpots.length > 0) {
       console.log('=== spots 상태 변경 감지, spotExpenses 매칭 재수행 ===');
-      console.log('현재 Spots:', currentSpots.map(spot => ({ id: spot.id, location: spot.location })));
-      
+      console.log(
+        '현재 Spots:',
+        currentSpots.map((spot) => ({ id: spot.id, location: spot.location })),
+      );
+
       // localStorage에서 spotExpenses 데이터 가져오기
       const savedSpotExpenses = localStorage.getItem('spotExpenses');
       if (savedSpotExpenses) {
         try {
           const parsedExpenses = JSON.parse(savedSpotExpenses);
           console.log('localStorage에서 복구된 데이터:', parsedExpenses);
-          
+
           const matchedExpenses: Record<number, ExpenseData[]> = {};
-          
+
           // 각 현재 Spot에 대해 Expense 데이터 매칭
-          currentSpots.forEach(spot => {
+          currentSpots.forEach((spot) => {
             // 1. 정확한 ID 매칭 시도
             if (parsedExpenses[spot.id]) {
               matchedExpenses[spot.id] = parsedExpenses[spot.id];
@@ -335,12 +349,13 @@ const TripPlannerPage = () => {
               const matchedByLocation = Object.entries(parsedExpenses).find(([oldSpotId, expenses]) => {
                 const expenseArray = expenses as ExpenseData[];
                 const expense = expenseArray[0];
-                return expense && (
-                  (expense.location && expense.location === spot.location) ||
-                  (expense.item && expense.item.includes(spot.location))
+                return (
+                  expense &&
+                  ((expense.location && expense.location === spot.location) ||
+                    (expense.item && expense.item.includes(spot.location)))
                 );
               });
-              
+
               if (matchedByLocation) {
                 matchedExpenses[spot.id] = matchedByLocation[1] as ExpenseData[];
                 console.log(`Spot ${spot.id} (${spot.location}): 위치 매칭 성공 (이전 ID: ${matchedByLocation[0]})`);
@@ -349,7 +364,7 @@ const TripPlannerPage = () => {
               }
             }
           });
-          
+
           console.log('=== spots 변경 후 최종 매칭된 Expense 데이터 ===');
           console.log('matchedExpenses:', matchedExpenses);
           setSpotExpenses(matchedExpenses);
@@ -362,6 +377,29 @@ const TripPlannerPage = () => {
   const [isSaveConfirmationOpen, setIsSaveConfirmationOpen] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [isInitialLoad, setIsInitialLoad] = useState(true);
+  const [userRole, setUserRole] = useState<string>('VIEWER'); // 기본값을 VIEWER로 설정
+
+  // 사용자의 플랜 내 역할 확인
+  const checkUserRole = React.useCallback(
+    (planData: {
+      members?: Array<{
+        id: number;
+        userId: number;
+        userIdString: string;
+        userNickname: string;
+        userEmail: string;
+        role: string;
+      }>;
+    }) => {
+      if (!planData?.members || !userId) {
+        return 'VIEWER';
+      }
+
+      const member = planData.members.find((m) => m.userIdString === userId);
+      return member ? member.role : 'VIEWER';
+    },
+    [userId],
+  );
 
   // localStorage에서 spots 데이터 복원 (초기 로드 시에만)
   useEffect(() => {
@@ -482,57 +520,19 @@ const TripPlannerPage = () => {
 
         setPlanData(planData);
 
-        // localStorage에 저장된 데이터가 있는지 확인
-        const savedSpots = localStorage.getItem(`trip_spots_${planId}`);
-        const isSaved = localStorage.getItem(`trip_saved_${planId}`) === 'true';
-        let hasLocalStorageData = false;
-
-        if (savedSpots) {
-          try {
-            const parsedSpots = JSON.parse(savedSpots);
-            hasLocalStorageData = Object.keys(parsedSpots).length > 0;
-          } catch (error) {
-            console.error('localStorage 데이터 파싱 실패:', error);
-            hasLocalStorageData = false;
-          }
-        }
-
-        console.log('=== localStorage 데이터 확인 ===', {
-          hasLocalStorageData,
-          savedSpots,
-          isSaved,
+        // 사용자 역할 확인
+        const role = checkUserRole(planData);
+        setUserRole(role);
+        console.log('=== 사용자 역할 확인 ===', {
+          currentUserId: userId,
+          planMembers: planData?.members,
+          userRole: role,
         });
 
-        // localStorage 데이터가 있으면 플랜 기간에 맞게 정리
-        if (hasLocalStorageData && savedSpots && planData?.startDate && planData?.endDate) {
-          try {
-            const parsedSpots = JSON.parse(savedSpots);
-            const startDate = new Date(planData.startDate);
-            const endDate = new Date(planData.endDate);
-            const totalDays = Math.ceil((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)) + 1;
-
-            // 플랜 기간을 벗어나는 날짜 데이터 제거
-            const cleanedSpots: Record<number, Spot[]> = {};
-            for (let day = 1; day <= totalDays; day++) {
-              if (parsedSpots[day]) {
-                cleanedSpots[day] = parsedSpots[day];
-              }
-            }
-
-            // 정리된 데이터를 localStorage에 다시 저장
-            localStorage.setItem(`spots_${planId}`, JSON.stringify(cleanedSpots));
-            console.log('=== localStorage 데이터 정리 완료 ===', {
-              원본_날짜_수: Object.keys(parsedSpots).length,
-              정리된_날짜_수: Object.keys(cleanedSpots).length,
-              플랜_기간: `${planData.startDate} ~ ${planData.endDate}`,
-            });
-          } catch (error) {
-            console.error('localStorage 데이터 정리 중 오류:', error);
-          }
-        }
+        const hasLocalStorageData = false;
 
         // localStorage에 임시 데이터가 없거나 저장된 상태일 때 백엔드에서 데이터 로드
-        if (!hasLocalStorageData || isSaved) {
+        if (!hasLocalStorageData) {
           console.log('=== 백엔드에서 spots 데이터 로드 시작 ===');
 
           // 계획 데이터를 기반으로 spots 초기화
@@ -567,7 +567,9 @@ const TripPlannerPage = () => {
                   // 백엔드 SpotResponse를 프론트엔드 Spot 형식으로 변환
                   const convertedSpots: Spot[] = spotsResponse.data.data.map((spot: any) => ({
                     id: spot.id,
-                    time: `${departureTime.hour.toString().padStart(2, '0')}:${departureTime.minute.toString().padStart(2, '0')}`, // 사용자 설정 출발시간
+                    time: `${departureTime.hour.toString().padStart(2, '0')}:${departureTime.minute
+                      .toString()
+                      .padStart(2, '0')}`, // 사용자 설정 출발시간
                     duration: spot.duration || '1時間', // 기본값
                     icon: <MapPin className="w-4 h-4" />,
                     location: spot.name,
@@ -640,7 +642,7 @@ const TripPlannerPage = () => {
 
         // 지출 데이터 로드 (localStorage 우선, 서버 API 백업)
         console.log('=== 지출 데이터 로드 시작 ===');
-        
+
         // 1. localStorage에서 데이터 복구 시도
         const savedSpotExpenses = localStorage.getItem('spotExpenses');
         if (savedSpotExpenses) {
@@ -649,12 +651,12 @@ const TripPlannerPage = () => {
             console.log('=== localStorage에서 spotExpenses 복구 ===');
             console.log('복구된 데이터:', parsedExpenses);
             console.log('복구된 spotId들:', Object.keys(parsedExpenses));
-            
+
             // spots 상태가 로드될 때까지 대기 후 매칭 수행
             console.log('=== spots 상태 확인 ===');
             console.log('현재 spots 상태:', spots);
             console.log('spots 키들:', Object.keys(spots));
-            
+
             // spots가 아직 로드되지 않았으면 일단 복구된 데이터를 그대로 설정
             const currentSpots = Object.values(spots).flat();
             if (currentSpots.length === 0) {
@@ -662,12 +664,15 @@ const TripPlannerPage = () => {
               setSpotExpenses(parsedExpenses);
             } else {
               console.log('=== spots 로드 완료, 매칭 수행 ===');
-              console.log('현재 Spots:', currentSpots.map(spot => ({ id: spot.id, location: spot.location })));
-              
+              console.log(
+                '현재 Spots:',
+                currentSpots.map((spot) => ({ id: spot.id, location: spot.location })),
+              );
+
               const matchedExpenses: Record<number, ExpenseData[]> = {};
-              
+
               // 각 현재 Spot에 대해 Expense 데이터 매칭
-              currentSpots.forEach(spot => {
+              currentSpots.forEach((spot) => {
                 // 1. 정확한 ID 매칭 시도
                 if (parsedExpenses[spot.id]) {
                   matchedExpenses[spot.id] = parsedExpenses[spot.id];
@@ -677,21 +682,24 @@ const TripPlannerPage = () => {
                   const matchedByLocation = Object.entries(parsedExpenses).find(([oldSpotId, expenses]) => {
                     const expenseArray = expenses as ExpenseData[];
                     const expense = expenseArray[0];
-                    return expense && (
-                      (expense.location && expense.location === spot.location) ||
-                      (expense.item && expense.item.includes(spot.location))
+                    return (
+                      expense &&
+                      ((expense.location && expense.location === spot.location) ||
+                        (expense.item && expense.item.includes(spot.location)))
                     );
                   });
-                  
+
                   if (matchedByLocation) {
                     matchedExpenses[spot.id] = matchedByLocation[1] as ExpenseData[];
-                    console.log(`Spot ${spot.id} (${spot.location}): 위치 매칭 성공 (이전 ID: ${matchedByLocation[0]})`);
+                    console.log(
+                      `Spot ${spot.id} (${spot.location}): 위치 매칭 성공 (이전 ID: ${matchedByLocation[0]})`,
+                    );
                   } else {
                     console.log(`Spot ${spot.id} (${spot.location}): 매칭 실패`);
                   }
                 }
               });
-              
+
               console.log('=== 최종 매칭된 Expense 데이터 ===');
               console.log('matchedExpenses:', matchedExpenses);
               setSpotExpenses(matchedExpenses);
@@ -702,53 +710,53 @@ const TripPlannerPage = () => {
           }
         } else {
           console.log('=== localStorage에 spotExpenses 데이터 없음 ===');
-          
-          // 2. 서버 API에서 데이터 로드 시도 (백업)
-        if (planId) {
-          try {
-              console.log('planId:', planId);
-            const expensesResponse = await getExpensesByPlan(parseInt(planId));
-            console.log('=== 지출 데이터 응답 ===', expensesResponse);
 
-            if (expensesResponse && expensesResponse.data) {
-              const expenses = expensesResponse.data;
-              console.log('=== 지출 데이터 ===', expenses);
+          // 2. 서버 API에서 데이터 로드 시도 (백업)
+          if (planId) {
+            try {
+              console.log('planId:', planId);
+              const expensesResponse = await getExpensesByPlan(parseInt(planId));
+              console.log('=== 지출 데이터 응답 ===', expensesResponse);
+
+              if (expensesResponse && expensesResponse.data) {
+                const expenses = expensesResponse.data;
+                console.log('=== 지출 데이터 ===', expenses);
                 console.log('지출 데이터 개수:', expenses.length);
 
-              // spotId별로 지출 데이터 그룹화
-              const groupedExpenses: Record<number, ExpenseData[]> = {};
-              expenses.forEach((expense: any) => {
+                // spotId별로 지출 데이터 그룹화
+                const groupedExpenses: Record<number, ExpenseData[]> = {};
+                expenses.forEach((expense: any) => {
                   console.log('처리 중인 expense:', expense);
-                if (expense.spotId) {
-                  if (!groupedExpenses[expense.spotId]) {
-                    groupedExpenses[expense.spotId] = [];
-                  }
+                  if (expense.spotId) {
+                    if (!groupedExpenses[expense.spotId]) {
+                      groupedExpenses[expense.spotId] = [];
+                    }
                     const expenseData = {
-                    id: expense.id,
-                    amount: expense.amount,
-                    category: expense.category,
-                    item: expense.item,
-                    expenseDate: expense.expenseDate,
+                      id: expense.id,
+                      amount: expense.amount,
+                      category: expense.category,
+                      item: expense.item,
+                      expenseDate: expense.expenseDate,
                     };
                     groupedExpenses[expense.spotId].push(expenseData);
                     console.log(`spotId ${expense.spotId}에 expense 추가:`, expenseData);
                   } else {
                     console.log('spotId가 없는 expense:', expense);
-                }
-              });
+                  }
+                });
 
-              console.log('=== 그룹화된 지출 데이터 ===', groupedExpenses);
+                console.log('=== 그룹화된 지출 데이터 ===', groupedExpenses);
                 console.log('그룹화된 spotId들:', Object.keys(groupedExpenses));
-              setSpotExpenses(groupedExpenses);
-                
+                setSpotExpenses(groupedExpenses);
+
                 // 서버 데이터를 localStorage에도 저장
                 localStorage.setItem('spotExpenses', JSON.stringify(groupedExpenses));
                 console.log('=== 서버 데이터를 localStorage에 저장 ===');
               } else {
                 console.log('=== 서버에 지출 데이터가 없음 ===');
                 setSpotExpenses({});
-            }
-          } catch (error) {
+              }
+            } catch (error) {
               console.error('서버 지출 데이터 로드 실패:', error);
               console.error('오류 상세:', error);
               setSpotExpenses({});
@@ -773,6 +781,7 @@ const TripPlannerPage = () => {
           startDate: '2026.05.13',
           endDate: '2026.05.15',
           dailyPlans: [],
+          members: [],
         });
       } finally {
         setIsLoadingPlan(false);
@@ -781,7 +790,7 @@ const TripPlannerPage = () => {
     };
 
     loadPlanData();
-  }, [planId]);
+  }, [planId, userId, checkUserRole]);
 
   // 컴포넌트 마운트 시 TRANSIT 모드를 WALKING 모드로 변경
   React.useEffect(() => {
@@ -808,8 +817,11 @@ const TripPlannerPage = () => {
   useEffect(() => {
     if (!isInitialLoad && spots[activeDay] && spots[activeDay].length > 0) {
       console.log('=== 출발시간 변경 감지, 일정 재계산 시작 ===');
-      console.log('새로운 출발시간:', `${departureTime.hour.toString().padStart(2, '0')}:${departureTime.minute.toString().padStart(2, '0')}`);
-      
+      console.log(
+        '새로운 출발시간:',
+        `${departureTime.hour.toString().padStart(2, '0')}:${departureTime.minute.toString().padStart(2, '0')}`,
+      );
+
       // 현재 날짜의 모든 스팟 시간 재계산
       recalculateAllSpotTimes();
     }
@@ -1198,7 +1210,7 @@ const TripPlannerPage = () => {
     const currentExpenses = spotExpenses[spot.id];
     let currentCost = 0;
     let currentCategory = 'LODGING';
-    
+
     if (currentExpenses && currentExpenses.length > 0) {
       currentCost = currentExpenses[0].amount;
       currentCategory = currentExpenses[0].category;
@@ -1213,7 +1225,7 @@ const TripPlannerPage = () => {
       console.log('spotId:', spot.id);
       console.log('currentCost:', currentCost);
     }
-    
+
     setExpenseInputs({
       amount: currentCost,
       category: currentCategory,
@@ -1240,8 +1252,8 @@ const TripPlannerPage = () => {
       // 기존 spot의 코스트는 업데이트하지 않음 (Expense 데이터만 사용하여 중복 방지)
       // setSpots((prev) => ({
       //   ...prev,
-      //   [activeDay]: (prev[activeDay] || []).map((spot) => 
-      //     spot.id === costCalculatingSpot.id 
+      //   [activeDay]: (prev[activeDay] || []).map((spot) =>
+      //     spot.id === costCalculatingSpot.id
       //       ? { ...spot, cost: `¥${expenseInputs.amount}` }
       //       : spot
       //   ),
@@ -1267,7 +1279,7 @@ const TripPlannerPage = () => {
         const existingExpense = spotExpenses[costCalculatingSpot.id][0];
         console.log('=== 기존 지출 업데이트 ===');
         console.log('existingExpense:', existingExpense);
-        
+
         savedExpense = {
           id: existingExpense.id, // 기존 ID 유지
           amount: expenseData.amount,
@@ -1276,13 +1288,13 @@ const TripPlannerPage = () => {
           expenseDate: expenseData.expenseDate,
           location: expenseData.location, // 위치 정보 추가
         };
-        
+
         console.log('=== 기존 지출 업데이트 완료 ===');
         console.log('savedExpense:', savedExpense);
       } else {
         // 기존 지출이 없으면 새로 생성
         console.log('=== 새 지출 생성 ===');
-        
+
         savedExpense = {
           id: Date.now(), // 임시 ID
           amount: expenseData.amount,
@@ -1291,7 +1303,7 @@ const TripPlannerPage = () => {
           expenseDate: expenseData.expenseDate,
           location: expenseData.location, // 위치 정보 추가
         };
-        
+
         console.log('=== 새 지출 생성 완료 ===');
         console.log('savedExpense:', savedExpense);
       }
@@ -1302,23 +1314,23 @@ const TripPlannerPage = () => {
         console.log('prev (기존 상태):', prev);
         console.log('costCalculatingSpot.id:', costCalculatingSpot.id);
         console.log('savedExpense:', savedExpense);
-        
+
         const newSpotExpenses = {
           ...prev,
           [costCalculatingSpot.id]: [savedExpense],
         };
-        
+
         console.log('=== setSpotExpenses 호출 후 ===');
         console.log('newSpotExpenses (새로운 상태):', newSpotExpenses);
-        
+
         // localStorage에 저장하여 새로고침해도 유지
         localStorage.setItem('spotExpenses', JSON.stringify(newSpotExpenses));
         console.log('=== localStorage에 spotExpenses 저장 ===');
         console.log('저장된 데이터:', newSpotExpenses);
-        
+
         return newSpotExpenses;
       });
-      
+
       console.log('=== spotExpenses 로컬 상태 업데이트 ===');
       console.log('spotId:', costCalculatingSpot.id);
       console.log('savedExpense:', savedExpense);
@@ -1454,14 +1466,17 @@ const TripPlannerPage = () => {
 
     console.log('=== 모든 스팟 시간 재계산 시작 ===');
     console.log('현재 스팟 수:', currentSpots.length);
-    console.log('새로운 출발시간:', `${departureTime.hour.toString().padStart(2, '0')}:${departureTime.minute.toString().padStart(2, '0')}`);
+    console.log(
+      '새로운 출발시간:',
+      `${departureTime.hour.toString().padStart(2, '0')}:${departureTime.minute.toString().padStart(2, '0')}`,
+    );
 
     const updatedSpots: Spot[] = [];
     let currentTime = { ...departureTime };
 
     for (let i = 0; i < currentSpots.length; i++) {
       const spot = currentSpots[i];
-      
+
       // 첫 번째 스팟은 출발시간으로 설정
       if (i === 0) {
         const updatedSpot = {
@@ -1469,7 +1484,7 @@ const TripPlannerPage = () => {
           time: `${currentTime.hour.toString().padStart(2, '0')}:${currentTime.minute.toString().padStart(2, '0')}`,
         };
         updatedSpots.push(updatedSpot);
-        
+
         // 다음 스팟의 시작시간 계산 (현재 스팟의 종료시간)
         const endTime = getEndTime(updatedSpot.time, spot.duration);
         const [endHour, endMinute] = endTime.split(':').map(Number);
@@ -1478,20 +1493,20 @@ const TripPlannerPage = () => {
         // 이전 스팟에서 현재 스팟으로의 이동시간 계산
         const previousSpot = updatedSpots[i - 1];
         const travelTime = await calculateTravelTime(previousSpot, spot);
-        
+
         // 이동시간 추가
         const totalMinutes = currentTime.hour * 60 + currentTime.minute + travelTime;
         currentTime = {
           hour: Math.floor(totalMinutes / 60) % 24,
           minute: totalMinutes % 60,
         };
-        
+
         const updatedSpot = {
           ...spot,
           time: `${currentTime.hour.toString().padStart(2, '0')}:${currentTime.minute.toString().padStart(2, '0')}`,
         };
         updatedSpots.push(updatedSpot);
-        
+
         // 다음 스팟의 시작시간 계산 (현재 스팟의 종료시간)
         const endTime = getEndTime(updatedSpot.time, spot.duration);
         const [endHour, endMinute] = endTime.split(':').map(Number);
@@ -1506,17 +1521,20 @@ const TripPlannerPage = () => {
     }));
 
     console.log('=== 모든 스팟 시간 재계산 완료 ===');
-    console.log('업데이트된 스팟들:', updatedSpots.map(spot => ({ name: spot.location, time: spot.time })));
+    console.log(
+      '업데이트된 스팟들:',
+      updatedSpots.map((spot) => ({ name: spot.location, time: spot.time })),
+    );
   };
 
   // 총 비용 계산 (Expense 데이터만 사용, Spot.cost는 무시)
   const calculateTotalCost = (daySpots: Spot[]) => {
     return daySpots.reduce((total, spot) => {
       const expenses = spotExpenses[spot.id] || [];
-      
+
       // spotExpenses에 데이터가 있으면 그것을 사용, 없으면 0
       if (expenses.length > 0) {
-      const expenseTotal = expenses.reduce((sum, expense) => sum + expense.amount, 0);
+        const expenseTotal = expenses.reduce((sum, expense) => sum + expense.amount, 0);
         console.log(`Spot ${spot.id} (${spot.location}): Expense 총액 = ${expenseTotal}`);
         return total + expenseTotal;
       } else {
@@ -1670,22 +1688,25 @@ const TripPlannerPage = () => {
                         <MapPin className="w-4 h-4 text-blue-500" />
                         <h3 className="font-medium text-gray-900 text-sm">{spot.location}</h3>
                       </div>
-                      <div className="flex items-center space-x-1">
-                        <button
-                          onClick={() => editSpot(spot)}
-                          className="p-1 text-gray-400 hover:text-blue-600 transition-colors"
-                          title="편집"
-                        >
-                          <Edit className="w-3 h-3" />
-                        </button>
-                        <button
-                          onClick={() => deleteSpot(activeDay, spot.id)}
-                          className="p-1 text-gray-400 hover:text-red-600 transition-colors"
-                          title="삭제"
-                        >
-                          <Trash2 className="w-3 h-3" />
-                        </button>
-                      </div>
+                      {/* 편집 및 삭제 버튼 - VIEWER 역할이 아닐 때만 표시 */}
+                      {userRole !== 'VIEWER' && (
+                        <div className="flex items-center space-x-1">
+                          <button
+                            onClick={() => editSpot(spot)}
+                            className="p-1 text-gray-400 hover:text-blue-600 transition-colors"
+                            title="편집"
+                          >
+                            <Edit className="w-3 h-3" />
+                          </button>
+                          <button
+                            onClick={() => deleteSpot(activeDay, spot.id)}
+                            className="p-1 text-gray-400 hover:text-red-600 transition-colors"
+                            title="삭제"
+                          >
+                            <Trash2 className="w-3 h-3" />
+                          </button>
+                        </div>
+                      )}
                     </div>
 
                     <p className="text-xs text-gray-600 mb-2">{spot.address}</p>
@@ -1706,41 +1727,39 @@ const TripPlannerPage = () => {
 
                       <div className="flex flex-col items-end space-y-1">
                         {/* 지출 정보 표시 */}
-                      {(() => {
-                        const expenses = spotExpenses[spot.id];
-                        console.log(`=== 모바일 지출 정보 표시 (spotId: ${spot.id}) ===`);
-                        console.log('spotExpenses 전체:', spotExpenses);
-                        console.log('현재 spot.id:', spot.id);
-                        console.log('expenses:', expenses);
-                        console.log('expenses length:', expenses?.length);
-                        console.log('expenses type:', typeof expenses);
-                        
-                        if (expenses && expenses.length > 0) {
-                          const total = expenses.reduce((sum: number, expense: ExpenseData) => {
-                            console.log('expense:', expense, 'amount:', expense.amount);
-                            return sum + expense.amount;
-                          }, 0);
-                          console.log('total amount:', total);
-                          return (
-                          <span className="text-xs font-bold text-gray-900">
-                              {total.toLocaleString()}円
-                          </span>
-                          );
-                        } else {
-                          console.log('모바일: expenses가 없거나 비어있음');
-                        }
-                        return null;
-                      })()}
+                        {(() => {
+                          const expenses = spotExpenses[spot.id];
+                          console.log(`=== 모바일 지출 정보 표시 (spotId: ${spot.id}) ===`);
+                          console.log('spotExpenses 전체:', spotExpenses);
+                          console.log('현재 spot.id:', spot.id);
+                          console.log('expenses:', expenses);
+                          console.log('expenses length:', expenses?.length);
+                          console.log('expenses type:', typeof expenses);
 
-                        {/* 비용 계산 버튼 */}
-                        <button
-                          onClick={() => calculateCost(spot)}
-                          className="flex items-center space-x-1 px-2 py-1 bg-orange-500 text-white text-xs font-medium rounded hover:bg-orange-600 transition-colors"
-                          title="비용 계산"
-                        >
-                          <Calculator className="w-3 h-3" />
-                          <span>コスト</span>
-                        </button>
+                          if (expenses && expenses.length > 0) {
+                            const total = expenses.reduce((sum: number, expense: ExpenseData) => {
+                              console.log('expense:', expense, 'amount:', expense.amount);
+                              return sum + expense.amount;
+                            }, 0);
+                            console.log('total amount:', total);
+                            return <span className="text-xs font-bold text-gray-900">{total.toLocaleString()}円</span>;
+                          } else {
+                            console.log('모바일: expenses가 없거나 비어있음');
+                          }
+                          return null;
+                        })()}
+
+                        {/* 비용 계산 버튼 - VIEWER 역할이 아닐 때만 표시 */}
+                        {userRole !== 'VIEWER' && (
+                          <button
+                            onClick={() => calculateCost(spot)}
+                            className="flex items-center space-x-1 px-2 py-1 bg-orange-500 text-white text-xs font-medium rounded hover:bg-orange-600 transition-colors"
+                            title="비용 계산"
+                          >
+                            <Calculator className="w-3 h-3" />
+                            <span>コスト</span>
+                          </button>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -1770,16 +1789,18 @@ const TripPlannerPage = () => {
           </div>
         )}
 
-        {/* 하단 + 버튼 */}
-        <div className="mt-4">
-          <button
-            onClick={() => setIsSearchDialogOpen(true)}
-            className="w-full flex items-center justify-center gap-2 py-3 bg-gray-200 text-gray-600 rounded-lg hover:bg-gray-300 transition-colors"
-          >
-            <Plus className="w-4 h-4" />
-            <span>観光地を追加</span>
-          </button>
-        </div>
+        {/* 하단 + 버튼 - VIEWER 역할이 아닐 때만 표시 */}
+        {userRole !== 'VIEWER' && (
+          <div className="mt-4">
+            <button
+              onClick={() => setIsSearchDialogOpen(true)}
+              className="w-full flex items-center justify-center gap-2 py-3 bg-gray-200 text-gray-600 rounded-lg hover:bg-gray-300 transition-colors"
+            >
+              <Plus className="w-4 h-4" />
+              <span>観光地を追加</span>
+            </button>
+          </div>
+        )}
       </div>
     );
   };
@@ -1793,10 +1814,10 @@ const TripPlannerPage = () => {
       .flat()
       .reduce((total, spot) => {
         const expenses = spotExpenses[spot.id] || [];
-        
+
         // spotExpenses에 데이터가 있으면 그것을 사용, 없으면 0
         if (expenses.length > 0) {
-        const expenseTotal = expenses.reduce((sum, expense) => sum + expense.amount, 0);
+          const expenseTotal = expenses.reduce((sum, expense) => sum + expense.amount, 0);
           return total + expenseTotal;
         } else {
           return total + 0; // Spot.cost는 무시하고 0으로 처리
@@ -1975,7 +1996,7 @@ const TripPlannerPage = () => {
               <h3 className="text-lg font-medium text-gray-900 mb-2">まだ観光地がありません</h3>
               <p className="text-gray-500 mb-4">観光地を追加して旅行計画を立ててみましょう</p>
             </div>
-          ) : (
+          ) : userRole !== 'VIEWER' ? (
             <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
               <SortableContext items={currentSpots.map((spot) => spot.id)} strategy={verticalListSortingStrategy}>
                 <div className="space-y-4">
@@ -2000,25 +2021,56 @@ const TripPlannerPage = () => {
                         getEndTime={getEndTime}
                         nextSegment={nextSegment}
                         spotExpenses={spotExpenses}
+                        userRole={userRole}
                       />
                     );
                   })}
                 </div>
               </SortableContext>
             </DndContext>
+          ) : (
+            // VIEWER 역할일 때는 드래그 앤 드롭 없이 일반 리스트로 표시
+            <div className="space-y-4">
+              {currentSpots.map((spot, index) => {
+                const nextSegment = currentSegments.find(
+                  (segment) => segment.fromSpot?.id === spot.id && segment.toSpot?.id === currentSpots[index + 1]?.id,
+                );
+
+                return (
+                  <SortableSpotItem
+                    key={spot.id}
+                    spot={spot}
+                    spotIndex={index}
+                    totalSpots={currentSpots.length}
+                    onEdit={editSpot}
+                    onDelete={deleteSpot}
+                    onMoveUp={moveSpotUp}
+                    onMoveDown={moveSpotDown}
+                    onCalculateCost={calculateCost}
+                    day={activeDay}
+                    getEndTime={getEndTime}
+                    nextSegment={nextSegment}
+                    spotExpenses={spotExpenses}
+                    userRole={userRole}
+                  />
+                );
+              })}
+            </div>
           )}
         </div>
 
-        {/* 하단 + 버튼 */}
-        <div className="p-4 border-t bg-gray-50">
-          <button
-            onClick={() => setIsSearchDialogOpen(true)}
-            className="w-full flex items-center justify-center gap-2 py-3 bg-gray-200 text-gray-600 rounded-lg hover:bg-gray-300 transition-colors"
-          >
-            <Plus className="w-5 h-5" />
-            <span>観光地を追加</span>
-          </button>{' '}
-        </div>
+        {/* 하단 + 버튼 - VIEWER 역할이 아닐 때만 표시 */}
+        {userRole !== 'VIEWER' && (
+          <div className="p-4 border-t bg-gray-50">
+            <button
+              onClick={() => setIsSearchDialogOpen(true)}
+              className="w-full flex items-center justify-center gap-2 py-3 bg-gray-200 text-gray-600 rounded-lg hover:bg-gray-300 transition-colors"
+            >
+              <Plus className="w-5 h-5" />
+              <span>観光地を追加</span>
+            </button>
+          </div>
+        )}
       </div>
     );
   };
@@ -2030,10 +2082,10 @@ const TripPlannerPage = () => {
       .flat()
       .reduce((total, spot) => {
         const expenses = spotExpenses[spot.id] || [];
-        
+
         // spotExpenses에 데이터가 있으면 그것을 사용, 없으면 0
         if (expenses.length > 0) {
-        const expenseTotal = expenses.reduce((sum, expense) => sum + expense.amount, 0);
+          const expenseTotal = expenses.reduce((sum, expense) => sum + expense.amount, 0);
           return total + expenseTotal;
         } else {
           return total + 0; // Spot.cost는 무시하고 0으로 처리
@@ -2259,7 +2311,9 @@ const TripPlannerPage = () => {
 
               const dailyPlanRequest = {
                 visitDate: visitDateString,
-                departureTime: `${departureTime.hour.toString().padStart(2, '0')}:${departureTime.minute.toString().padStart(2, '0')}`,
+                departureTime: `${departureTime.hour.toString().padStart(2, '0')}:${departureTime.minute
+                  .toString()
+                  .padStart(2, '0')}`,
               };
 
               console.log('DailyPlan 생성 요청:', dailyPlanRequest);
@@ -2376,6 +2430,7 @@ const TripPlannerPage = () => {
   if (isLoadingPlan) {
     return (
       <div className="h-screen bg-gray-50 flex flex-col">
+        <Header />
         <div className="flex-1 flex items-center justify-center">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500 mx-auto mb-4"></div>
@@ -2388,6 +2443,8 @@ const TripPlannerPage = () => {
 
   return (
     <div className="h-screen bg-gray-50 flex flex-col">
+      <Header />
+
       {/* 모바일: 세로 배치 */}
       <div className="flex flex-col lg:hidden flex-1 overflow-hidden">
         {/* 모바일 여행 정보 헤더 */}
@@ -2721,7 +2778,6 @@ const TripPlannerPage = () => {
                   onClick={() => {
                     setIsEditDialogOpen(false);
                     setEditingSpot(null);
-;
                   }}
                   className="px-3 py-2 text-sm text-gray-600 border border-gray-300 rounded-md hover:bg-gray-50"
                 >
@@ -2731,7 +2787,6 @@ const TripPlannerPage = () => {
                   onClick={() => {
                     setIsEditDialogOpen(false);
                     setEditingSpot(null);
-;
                   }}
                   className="px-3 py-2 text-sm bg-pink-500 text-white rounded-md hover:bg-pink-600"
                 >
