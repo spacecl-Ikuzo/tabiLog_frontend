@@ -85,6 +85,7 @@ interface SortableSpotItemProps {
   getEndTime: (startTime: string, duration: string) => string;
   nextSegment?: TravelSegment;
   spotExpenses: Record<number, ExpenseData[]>;
+  readOnly: boolean;
 }
 
 const SortableSpotItem: React.FC<SortableSpotItemProps> = ({
@@ -100,6 +101,7 @@ const SortableSpotItem: React.FC<SortableSpotItemProps> = ({
   getEndTime,
   nextSegment,
   spotExpenses,
+  readOnly,
 }) => {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: spot.id });
 
@@ -114,42 +116,44 @@ const SortableSpotItem: React.FC<SortableSpotItemProps> = ({
       <div className="bg-white border border-gray-200 rounded-lg p-4 mb-4 shadow-sm hover:shadow-md transition-shadow">
         <div className="flex items-start justify-between">
           {/* 드래그 핸들과 순서 변경 버튼 */}
-          <div className="flex flex-col items-center mr-3 space-y-1">
-            <button
-              {...attributes}
-              {...listeners}
-              className="p-1 text-gray-400 hover:text-gray-600 transition-colors cursor-grab active:cursor-grabbing"
-              title="드래그하여 순서 변경"
-            >
-              <GripVertical className="w-4 h-4" />
-            </button>
-            <div className="flex flex-col space-y-1">
+          { !readOnly && (
+            <div className="flex flex-col items-center mr-3 space-y-1">
               <button
-                onClick={() => onMoveUp(day, spotIndex)}
-                disabled={spotIndex === 0}
-                className={`p-1 rounded transition-colors ${
-                  spotIndex === 0
-                    ? 'text-gray-300 cursor-not-allowed'
-                    : 'text-gray-400 hover:text-gray-600 hover:bg-gray-100'
-                }`}
-                title="위로 이동"
+                {...attributes}
+                {...listeners}
+                className="p-1 text-gray-400 hover:text-gray-600 transition-colors cursor-grab active:cursor-grabbing"
+                title="드래그하여 순서 변경"
               >
-                <ChevronUp className="w-3 h-3" />
+                <GripVertical className="w-4 h-4" />
               </button>
-              <button
-                onClick={() => onMoveDown(day, spotIndex)}
-                disabled={spotIndex === totalSpots - 1}
-                className={`p-1 rounded transition-colors ${
-                  spotIndex === totalSpots - 1
-                    ? 'text-gray-300 cursor-not-allowed'
-                    : 'text-gray-400 hover:text-gray-600 hover:bg-gray-100'
-                }`}
-                title="아래로 이동"
-              >
-                <ChevronDown className="w-3 h-3" />
-              </button>
+              <div className="flex flex-col space-y-1">
+                <button
+                  onClick={() => onMoveUp(day, spotIndex)}
+                  disabled={spotIndex === 0}
+                  className={`p-1 rounded transition-colors ${
+                    spotIndex === 0
+                      ? 'text-gray-300 cursor-not-allowed'
+                      : 'text-gray-400 hover:text-gray-600 hover:bg-gray-100'
+                  }`}
+                  title="위로 이동"
+                >
+                  <ChevronUp className="w-3 h-3" />
+                </button>
+                <button
+                  onClick={() => onMoveDown(day, spotIndex)}
+                  disabled={spotIndex === totalSpots - 1}
+                  className={`p-1 rounded transition-colors ${
+                    spotIndex === totalSpots - 1
+                      ? 'text-gray-300 cursor-not-allowed'
+                      : 'text-gray-400 hover:text-gray-600 hover:bg-gray-100'
+                  }`}
+                  title="아래로 이동"
+                >
+                  <ChevronDown className="w-3 h-3" />
+                </button>
+              </div>
             </div>
-          </div>
+          )}
 
           {/* 관광지 정보 */}
           <div className="flex-1">
@@ -159,20 +163,24 @@ const SortableSpotItem: React.FC<SortableSpotItemProps> = ({
                 <h3 className="font-medium text-gray-900">{spot.location}</h3>
               </div>
               <div className="flex items-center space-x-2">
-                <button
-                  onClick={() => onEdit(spot)}
-                  className="p-1 text-gray-400 hover:text-blue-600 transition-colors"
-                  title="편집"
-                >
-                  <Edit className="w-4 h-4" />
-                </button>
-                <button
-                  onClick={() => onDelete(day, spot.id)}
-                  className="p-1 text-gray-400 hover:text-red-600 transition-colors"
-                  title="삭제"
-                >
-                  <Trash2 className="w-4 h-4" />
-                </button>
+                { !readOnly && (
+                  <>
+                    <button
+                      onClick={() => onEdit(spot)}
+                      className="p-1 text-gray-400 hover:text-blue-600 transition-colors"
+                      title="편집"
+                    >
+                      <Edit className="w-4 h-4" />
+                    </button>
+                    <button
+                      onClick={() => onDelete(day, spot.id)}
+                      className="p-1 text-gray-400 hover:text-red-600 transition-colors"
+                      title="삭제"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                  </>
+                )}
               </div>
             </div>
 
@@ -229,14 +237,16 @@ const SortableSpotItem: React.FC<SortableSpotItemProps> = ({
                       })()}
 
                 {/* 비용 계산 버튼 */}
-                <button
-                  onClick={() => onCalculateCost(spot)}
-                  className="flex items-center space-x-1 px-3 py-1.5 bg-orange-500 text-white text-sm font-medium rounded-lg hover:bg-orange-600 transition-colors shadow-sm"
-                  title="비용 계산"
-                >
-                  <Calculator className="w-4 h-4" />
-                  <span>コスト</span>
-                </button>
+                { !readOnly && (
+                  <button
+                    onClick={() => onCalculateCost(spot)}
+                    className="flex items-center space-x-1 px-3 py-1.5 bg-orange-500 text-white text-sm font-medium rounded-lg hover:bg-orange-600 transition-colors shadow-sm"
+                    title="비용 계산"
+                  >
+                    <Calculator className="w-4 h-4" />
+                    <span>コスト</span>
+                  </button>
+                )}
               </div>
             </div>
           </div>
@@ -271,10 +281,10 @@ interface DepartureTime {
   minute: number;
 }
 
-const TripPlannerPage = () => {
+const TripPlannerPage = ({ planId: propPlanId, readOnly = false }: { planId?: string; readOnly?: boolean }) => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const planId = searchParams.get('planId');
+  const planId = propPlanId || searchParams.get('planId');
 
   const [activeDay, setActiveDay] = useState(1);
   const [isSearchDialogOpen, setIsSearchDialogOpen] = useState(false);
@@ -2000,6 +2010,7 @@ const TripPlannerPage = () => {
                         getEndTime={getEndTime}
                         nextSegment={nextSegment}
                         spotExpenses={spotExpenses}
+                        readOnly={readOnly}
                       />
                     );
                   })}
@@ -2011,13 +2022,15 @@ const TripPlannerPage = () => {
 
         {/* 하단 + 버튼 */}
         <div className="p-4 border-t bg-gray-50">
-          <button
-            onClick={() => setIsSearchDialogOpen(true)}
-            className="w-full flex items-center justify-center gap-2 py-3 bg-gray-200 text-gray-600 rounded-lg hover:bg-gray-300 transition-colors"
-          >
-            <Plus className="w-5 h-5" />
-            <span>観光地を追加</span>
-          </button>{' '}
+          { !readOnly && (
+            <button
+              onClick={() => setIsSearchDialogOpen(true)}
+              className="w-full flex items-center justify-center gap-2 py-3 bg-gray-200 text-gray-600 rounded-lg hover:bg-gray-300 transition-colors"
+            >
+              <Plus className="w-5 h-5" />
+              <span>観光地を追加</span>
+            </button>
+          ) }
         </div>
       </div>
     );
@@ -2525,10 +2538,10 @@ const TripPlannerPage = () => {
 
         {/* Resizable Divider - 데스크톱에서만 표시 */}
         <div
-          className={`w-1 bg-gray-300 hover:bg-gray-400 cursor-col-resize transition-all duration-200 relative group ${
+          className={`w-1 bg-gray-300 ${!readOnly ? 'hover:bg-gray-400 cursor-col-resize' : ''} transition-all duration-200 relative group ${
             isDragging ? 'bg-blue-400 shadow-lg' : ''
           }`}
-          onMouseDown={handleMouseDown}
+          onMouseDown={!readOnly ? handleMouseDown : undefined}
         >
           {/* 드래그 핸들 시각적 표시 */}
           <div className="absolute inset-y-0 -left-2 -right-2 flex items-center justify-center">
