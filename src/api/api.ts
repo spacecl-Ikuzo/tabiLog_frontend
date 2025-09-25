@@ -333,7 +333,8 @@ export const getMyPageInfo = async () => {
     return response.data;
   } catch (error) {
     console.error('마이페이지 정보 조회에 실패했습니다:', error);
-    toast.error('마이페이지 정보 조회에 실패했습니다:', { position: 'top-center' });
+    // 팝업을 표시하지 않고 에러를 다시 throw
+    throw error;
   }
 };
 
