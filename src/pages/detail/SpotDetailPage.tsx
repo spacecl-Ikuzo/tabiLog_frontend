@@ -1034,7 +1034,6 @@ const SpotDetailPage = () => {
   const safeDesc = detail?.description || 'このスポットの詳細情報です。準備中のコンテンツを表示しています。';
   const hero = detail?.heroImage || (cityKey === '東京' ? TokyoHero : OsakaHero);
 
-
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
