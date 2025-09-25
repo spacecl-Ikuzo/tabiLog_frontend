@@ -17,12 +17,6 @@ import {
   Save,
   X,
 } from 'lucide-react';
-<<<<<<< HEAD
-import { createExpense, getExpensesByPlan } from '@/api/api';
-=======
-import { getExpensesByPlan } from '@/api/api';
-import Header from '@/components/layout/header';
->>>>>>> origin/main
 import SvgIcon from '@/components/ui/SvgIcon';
 import {
   DndContext,
@@ -2706,22 +2700,6 @@ const TripPlannerPage = () => {
                         <option value="5時間">5時間</option>
                       </select>
                     </div>
-<<<<<<< HEAD
-
-                    {/* 비용 입력 */}
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">基本費用 (円)</label>
-                      <input
-                        type="number"
-                        value={editingCost}
-                        onChange={(e) => setEditingCost(parseInt(e.target.value) || 0)}
-                        placeholder="0"
-                        min="0"
-                        className="w-full p-2 border border-gray-300 rounded-md"
-                      />
-                    </div>
-=======
->>>>>>> origin/main
                   </div>
                 );
               })()}
@@ -2749,18 +2727,6 @@ const TripPlannerPage = () => {
                 </button>
                 <button
                   onClick={() => {
-<<<<<<< HEAD
-                    if (editingSpot) {
-                      // cost 값 업데이트
-                      setSpots((prev) => ({
-                        ...prev,
-                        [activeDay]: (prev[activeDay] || []).map((spot) =>
-                          spot.id === editingSpot.id ? { ...spot, cost: `¥${editingCost}` } : spot,
-                        ),
-                      }));
-                    }
-=======
->>>>>>> origin/main
                     setIsEditDialogOpen(false);
                     setEditingSpot(null);
 ;
