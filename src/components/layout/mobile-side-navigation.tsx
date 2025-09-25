@@ -42,8 +42,13 @@ const MobileSideNavigation = ({ isOpen, onClose, handleLogout }: MobileSideNavig
 
   //프로필 정보 가져오기
   const fetchUserInfo = async () => {
-    const response = await getMyPageInfo();
-    setUserInfo(response.data);
+    try {
+      const response = await getMyPageInfo();
+      setUserInfo(response.data);
+    } catch (error) {
+      console.error('사용자 정보를 가져오는데 실패했습니다:', error);
+      // 에러가 발생해도 팝업을 표시하지 않고 조용히 처리
+    }
   };
 
   return (

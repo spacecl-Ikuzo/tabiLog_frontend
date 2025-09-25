@@ -52,9 +52,10 @@ axiosInstance.interceptors.response.use(
     const url: string = error.config?.url || '';
     const isLoginRequest = url.includes('/auth/signin');
     const isExpenseRequest = url.includes('/api/expenses');
+    const isProfileRequest = url.includes('/api/profile');
 
-    // Expense API는 401이어도 모킹/무시 (네 기존 로직 유지)
-    if (isExpenseRequest && status === 401) {
+    // Expense API와 Profile API는 401이어도 모킹/무시 (네 기존 로직 유지)
+    if ((isExpenseRequest || isProfileRequest) && status === 401) {
       return Promise.reject(error);
     }
 
@@ -62,7 +63,7 @@ axiosInstance.interceptors.response.use(
     const isExpired = status === 401 && (code === 'TOKEN_EXPIRED' || code === 'TokenExpired');
     const isAuthError = status === 401 && (code === 'AUTH_ERROR' || code === 'AuthError');
 
-    if ((isExpired || isAuthError) && !isHandling401 && !isLoginRequest && !isExpenseRequest) {
+    if ((isExpired || isAuthError) && !isHandling401 && !isLoginRequest && !isExpenseRequest && !isProfileRequest) {
       isHandling401 = true;
 
       const fixedMsg = '로그인에 실패하였습니다';
