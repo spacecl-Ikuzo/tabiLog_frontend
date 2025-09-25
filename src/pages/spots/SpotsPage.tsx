@@ -1361,7 +1361,7 @@ const SpotsPage = () => {
               {displayedSpots.length > 0 ? (
                 displayedSpots.map((spot) => (
                   <div
-                    key={spot.id}
+                    key={`${spot.city}-${spot.id}`}
                     className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
                     onClick={() => {
                       // 현재 URL 정보를 state로 전달하여 뒤로가기 시 도시 정보 유지
