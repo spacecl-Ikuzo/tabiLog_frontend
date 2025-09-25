@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect, useRef, useMemo } from 'react';
+import Header from '@/components/layout/header';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import MainBackGround from '../../assets/MainBackGround.jpg';
 import Tokyo from '../../assets/Tokyo.jpg';
@@ -72,7 +73,7 @@ import Ponyo1 from '../../assets/ponyo1.png';
 // import Kyoto_UjiBridge1 from '../../assets/Kyoto_UjiBridge1.jpg';
 import Miyajima_Itsukushima_Torii from '../../assets/Miyajima_Itsukushima_Torii.jpg';
 import Otaru_Canal_Winter from '../../assets/Otaru_Canal_Winter.jpg';
-import Sapporo_SusukinoNight from '../../assets/Sapporo_SusukinoNight.jpg';
+// import Sapporo_SusukinoNight from '../../assets/Sapporo_SusukinoNight.jpg';
 import Tomonoura_Harbor from '../../assets/Tomonoura_Harbor.jpg';
 import Kanazawa_HigashiChaya from '../../assets/Kanazawa_HigashiChaya.jpg';
 import Kanazawa_YuwakuOnsen from '../../assets/Kanazawa_YuwakuOnsen.jpg';
@@ -1067,6 +1068,9 @@ const SpotsPage = () => {
 
   return (
     <div className="min-h-screen">
+      <div className="sticky top-0 z-50">
+        <Header />
+      </div>
       {/* Hero Section */}
       <section
         className="relative h-96 bg-cover bg-center bg-no-repeat flex items-center justify-center"
