@@ -128,21 +128,15 @@ import NagoyaKingyo from '../../assets/NagoyaKingyo.jpg';
 import NagoyaNijimaru from '../../assets/NagoyaNijimaru.jpg';
 import Nagoya from '../../assets/Nagoya.jpg';
 import FukuCastleSakura from '../../assets/FukuCastleSakura.jpg';
-// import nakasumap from '../../assets/nakasumap.jpg';
 import nakasukawa from '../../assets/nakasukawa.jpg';
 import NakasuNight from '../../assets/NakasuNight.jpeg';
 import nakasuramen from '../../assets/nakasuramen.jpg';
 import ryuunogotoku from '../../assets/ryuunogotoku.jpg';
 import nakasuryuu from '../../assets/nakasuryuu.jpg';
 import dazaifutenmangu from '../../assets/dazaifutenmangu.jpg';
-// import dazaihu from '../../assets/dazaihu.jpg';
 import tobiume from '../../assets/tobiume.jpg';
 import umegaemochi from '../../assets/umegaemochi.jpg';
 import goshingyu from '../../assets/goshingyu.jpg';
-// import jiburimori from '../../assets/jiburimori.jpg';
-// import jiburi4 from '../../assets/jiburi4.jpg';
-// import LegoTaiken from '../../assets/LegoTaiken.jpg';
-// import LegoBoat from '../../assets/LegoBoat.jpg';
 import kushidashrine from '../../assets/kushidashrine.jpg';
 import gushidatori from '../../assets/gushidatori.jpg';
 import gushidamatsuri from '../../assets/gushidamatsuri.jpg';
@@ -866,8 +860,6 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
 
 const SpotDetailPage = () => {
   const { city, id } = useParams<{ city: string; id: string }>();
-  // const navigate = useNavigate();
-  // const location = useLocation();
 
   const cityAliasMap: Record<string, string> = {
     // Korean -> Japanese city name normalization
@@ -893,16 +885,6 @@ const SpotDetailPage = () => {
   const safeDesc = detail?.description || 'このスポットの詳細情報です。準備中のコンテンツを表示しています。';
   const hero = detail?.heroImage || (cityKey === '東京' ? TokyoHero : OsakaHero);
 
-  // 뒤로가기 시 도시 정보 유지 (현재 미사용)
-  // const handleBackClick = () => {
-  //   const state = location.state as { from?: string } | null;
-  //   const fromPath = state?.from;
-  //   if (fromPath && fromPath.includes('city=')) {
-  //     navigate(fromPath);
-  //   } else {
-  //     navigate('/spots');
-  //   }
-  // };
 
   return (
     <div className="min-h-screen">

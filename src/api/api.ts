@@ -1,3 +1,4 @@
+import { toast } from 'sonner';
 import { axiosInstance } from './axios';
 
 // 여행 계획 상세 정보를 가져오는 API 함수
@@ -325,51 +326,14 @@ export const confirmResetPassword = async (token: string, newPassword: string, c
 
 // ===== MyPage API Functions =====
 
-// 회원탈퇴
-export const deleteAccount = async (data: { reason: string; otherReason?: string; password: string }) => {
-  try {
-    const response = await axiosInstance.delete('/api/mypage/account', {
-      data: {
-        reason: data.reason,
-        otherReason: data.otherReason,
-        password: data.password,
-      },
-    });
-    return response.data;
-  } catch (error: any) {
-    console.error('회원탈퇴에 실패했습니다:', error);
-    throw error;
-  }
-};
-
-// 마이페이지 정보 조회
+// 사이드바 프로필 조회
 export const getMyPageInfo = async () => {
   try {
-    const response = await axiosInstance.get('/api/mypage');
+    const response = await axiosInstance.get('/api/profile');
     return response.data;
-  } catch (error: any) {
+  } catch (error) {
     console.error('마이페이지 정보 조회에 실패했습니다:', error);
-
-    // 백엔드 서버가 실행되지 않은 경우 모킹 데이터 반환
-    if (error.code === 'ERR_NETWORK' || error.response?.status === 404 || error.response?.status === 401) {
-      console.log('백엔드 서버 연결 실패 또는 인증 오류, 모킹 데이터 사용');
-      return {
-        id: 1,
-        email: 'user@example.com',
-        userId: 'user123',
-        firstName: '홍',
-        lastName: '길동',
-        gender: 'MALE',
-        phoneNumber: '010-1234-5678',
-        nickname: '홍길동',
-        createdAt: '2024-01-01T00:00:00',
-        updatedAt: '2024-01-01T00:00:00',
-        participatingPlanCount: 3,
-        ownedPlanCount: 1,
-      };
-    }
-
-    throw error;
+    toast.error('마이페이지 정보 조회에 실패했습니다:', { position: 'top-center' });
   }
 };
 

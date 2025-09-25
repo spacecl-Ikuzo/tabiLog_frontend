@@ -1,4 +1,3 @@
-import React from 'react';
 import MainBackGround from '../../assets/MainBackGround.jpg';
 
 const HeroSection = () => {

@@ -25,16 +25,16 @@ instance.interceptors.response.use((res) => { // ②
 });
 
 export default {
-    get(url, params) { // ③
+    get(url: string, params?: any) { // ③
         return instance.get(url, {params});
     },
-    post(url, params) { // ④
+    post(url: string, params?: any) { // ④
         return instance.post(url, params);
     },
-    put(url, params) { // ⑤
+    put(url: string, params?: any) { // ⑤
         return instance.put(url, params);
     },
-    delete(url) { // ⑥
+    delete(url: string) { // ⑥
         return instance.delete(url);
     }
 };
