@@ -1012,12 +1012,13 @@ const SpotsPage = () => {
   const safeSpotPage = Math.min(spotPage, totalSpotPages);
   const displayedSpots = filteredSpots.slice((safeSpotPage - 1) * spotsPerPage, safeSpotPage * spotsPerPage);
 
-  // 도시 변경 시 스팟 페이지 초기화 및 검색어 초기화
+  // 도시 변경 시 스팟 페이지 초기화 및 검색어, 태그 초기화
   useEffect(() => {
     setSpotPage(1);
     if (selectedCity) {
-      // 도시가 선택되면 검색어와 URL 파라미터 초기화
+      // 도시가 선택되면 검색어, 태그와 URL 파라미터 초기화
       setSearchQuery('');
+      setSelectedTags([]);
       const newSearchParams = new URLSearchParams(searchParams);
       newSearchParams.delete('search');
       navigate(`/spots?${newSearchParams.toString()}`, { replace: true });
@@ -1139,9 +1140,9 @@ const SpotsPage = () => {
             {showLeftArrow && (
               <button
                 onClick={scrollDestLeft}
-                className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white shadow-lg rounded-full w-12 h-12 flex items-center justify-center z-10 hover:bg-gray-50 transition-colors"
+                className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-orange-500 text-white rounded-full w-12 h-12 flex items-center justify-center shadow-lg hover:bg-orange-600 transition-colors z-10"
               >
-                <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                 </svg>
               </button>
@@ -1151,9 +1152,9 @@ const SpotsPage = () => {
             {showRightArrow && (
               <button
                 onClick={scrollDestRight}
-                className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white shadow-lg rounded-full w-12 h-12 flex items-center justify-center z-10 hover:bg-gray-50 transition-colors"
+                className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-orange-500 text-white rounded-full w-12 h-12 flex items-center justify-center shadow-lg hover:bg-orange-600 transition-colors z-10"
               >
-                <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
               </button>
@@ -1173,12 +1174,14 @@ const SpotsPage = () => {
                     onClick={() => {
                       if (selectedCity === destination.name) {
                         setSelectedCity(null);
+                        setSelectedTags([]); // 도시 해제 시 태그도 초기화
                         // URL에서 도시 파라미터 제거
                         const newSearchParams = new URLSearchParams(searchParams);
                         newSearchParams.delete('city');
                         navigate(`/spots?${newSearchParams.toString()}`, { replace: true });
                       } else {
                         setSelectedCity(destination.name);
+                        setSelectedTags([]); // 새로운 도시 선택 시 태그 초기화
                         // URL에 도시 파라미터 추가
                         const newSearchParams = new URLSearchParams(searchParams);
                         newSearchParams.set('city', destination.name);
