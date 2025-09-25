@@ -38,6 +38,7 @@ export default function SideNavigation({ selectedNav }: { selectedNav: string })
       setUserInfo(response.data);
     } catch (error) {
       console.error('사용자 정보를 가져오는데 실패했습니다:', error);
+      // 에러가 발생해도 팝업을 표시하지 않고 조용히 처리
     } finally {
       setLoading(false);
     }
