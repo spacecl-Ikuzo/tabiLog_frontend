@@ -73,7 +73,7 @@ const Header = () => {
                   lineHeight: '1',
                 }}
               >
-                {nickname ? ${nickname}様 : 'ゲスト'}
+                {nickname ? `${nickname}様` : 'ゲスト'}
               </span>
               <Button
                 variant="outline"
