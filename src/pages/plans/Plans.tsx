@@ -21,6 +21,7 @@ import { axiosInstance } from '../../api/axios';
 import { toast } from 'sonner';
 import { Plan } from '../../lib/type';
 import dayjs from 'dayjs';
+import Header from '../../components/layout/header';
 
 export default function Plans() {
   const navigate = useNavigate();
@@ -225,6 +226,7 @@ export default function Plans() {
 
   return (
     <div className="min-h-screen">
+      <Header />
       <div className="flex">
         {/* 사이드바 네비게이션 (데스크톱만) */}
         <SideNavigation selectedNav="plans" />
