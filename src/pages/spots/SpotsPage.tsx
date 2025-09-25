@@ -1017,11 +1017,15 @@ const SpotsPage = () => {
     setSpotPage(1);
     if (selectedCity) {
       // 도시가 선택되면 검색어, 태그와 URL 파라미터 초기화
-      setSearchQuery('');
-      setSelectedTags([]);
-      const newSearchParams = new URLSearchParams(searchParams);
-      newSearchParams.delete('search');
-      navigate(`/spots?${newSearchParams.toString()}`, { replace: true });
+      // 단, 검색어로 인한 자동 도시 선택이 아닌 경우에만
+      const currentSearchParam = searchParams.get('search');
+      if (!currentSearchParam || !destinations.some((dest) => dest.name === currentSearchParam)) {
+        setSearchQuery('');
+        setSelectedTags([]);
+        const newSearchParams = new URLSearchParams(searchParams);
+        newSearchParams.delete('search');
+        navigate(`/spots?${newSearchParams.toString()}`, { replace: true });
+      }
     }
   }, [selectedCity, searchParams, navigate]);
 
