@@ -167,8 +167,6 @@ export default function Profile() {
 
   return (
     <div className="min-h-screen">
-      {/* 헤더 */}
-      <Header />
       <div className="flex">
         {/* 사이드 네비게이션 (데스크톱만) */}
         <SideNavigation selectedNav="profile" />
