@@ -2803,7 +2803,11 @@ const TripPlannerPage = () => {
                     }`}
                   >
                     <img
-                      src={`./svg/${category.icon}.svg`}
+                      src={
+                        import.meta.env.PROD
+                          ? `https://storage.googleapis.com/tabilog-dev/svg/${category.icon}.svg`
+                          : `./svg/${category.icon}.svg`
+                      }
                       alt={category.label}
                       className={`w-6 h-6 mb-1 ${expenseInputs.category === category.key ? 'brightness-0 invert' : ''}`}
                     />
