@@ -480,3 +480,9 @@ export const getPrefecturesByRegion = async (region: string) => {
     throw error;
   }
 };
+
+// 회원탈퇴
+export const deleteAccount = async (data: { reason: string; otherReason?: string; password: string }) => {
+  const response = await axiosInstance.post('/api/auth/delete-account', data);
+  return response.data;
+};
