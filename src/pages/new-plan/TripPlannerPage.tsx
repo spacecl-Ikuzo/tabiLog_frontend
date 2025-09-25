@@ -2803,7 +2803,7 @@ const TripPlannerPage = () => {
                     }`}
                   >
                     <img
-                      src={`/svg/${category.icon}.svg`}
+                      src={`./svg/${category.icon}.svg`}
                       alt={category.label}
                       className={`w-6 h-6 mb-1 ${expenseInputs.category === category.key ? 'brightness-0 invert' : ''}`}
                     />
