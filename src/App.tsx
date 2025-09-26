@@ -25,22 +25,9 @@ import ResetPassword from './pages/find-account/ResetPassword';
 import Invitation from './pages/Invitation/Invitation';
 import DiscoverPlans from '@/pages/discover/DiscoverPlans';
 
-// ✅ 토큰이 있을 때 /api/profile을 1회 호출해 스토어에 사용자 정보 반영
-import ProfileLoader from '@/components/auth/ProfileLoader';
-
 function App() {
-  // ✅ zustand 스토어 액션 가져오기
-  const setUserId = useUserStore((state) => state.setUserId);
-  const setNickname = useUserStore((state) => state.setNickname);
-  const setEmail = useUserStore((state) => state.setEmail);
-  const setToken = useUserStore((state) => state.setToken);
-  const setTokenExp = useUserStore((state) => state.setTokenExp);
-
   return (
     <>
-      {/* 전역 사용자 정보 초기화용 로더 */}
-      <ProfileLoader />
-
       <Routes>
         {/* 비로그인 접근 가능 */}
         <Route path="/invitation/:token" element={<Invitation />} />
