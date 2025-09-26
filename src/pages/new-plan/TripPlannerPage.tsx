@@ -521,6 +521,24 @@ const TripPlannerPage = () => {
 
         setPlanData(planData);
 
+        // 출발시간 설정 (현재 활성 날짜의 dailyPlan에서 가져오기)
+        if (planData?.dailyPlans?.[activeDay - 1]?.departureTime) {
+          const currentDepartureTime = planData.dailyPlans[activeDay - 1].departureTime;
+
+          // departureTime이 문자열인 경우 파싱
+          if (typeof currentDepartureTime === 'string') {
+            const [hour, minute] = currentDepartureTime.split(':').map(Number);
+            setDepartureTime({ hour: hour || 11, minute: minute || 0 });
+          } else {
+            setDepartureTime(currentDepartureTime);
+          }
+
+          console.log('=== 출발시간 설정 ===', {
+            activeDay,
+            departureTime: currentDepartureTime,
+          });
+        }
+
         // 사용자 역할 확인
         const role = checkUserRole(planData);
         setUserRole(role);
@@ -813,6 +831,26 @@ const TripPlannerPage = () => {
       recalculateTravelTimes();
     }
   }, [activeDay, isInitialLoad]);
+
+  // 활성 날짜 변경 시 해당 날짜의 출발시간 업데이트
+  useEffect(() => {
+    if (planData?.dailyPlans?.[activeDay - 1]?.departureTime) {
+      const currentDepartureTime = planData.dailyPlans[activeDay - 1].departureTime;
+
+      // departureTime이 문자열인 경우 파싱
+      if (typeof currentDepartureTime === 'string') {
+        const [hour, minute] = currentDepartureTime.split(':').map(Number);
+        setDepartureTime({ hour: hour || 11, minute: minute || 0 });
+      } else {
+        setDepartureTime(currentDepartureTime);
+      }
+
+      console.log('=== 날짜 변경으로 인한 출발시간 업데이트 ===', {
+        activeDay,
+        departureTime: currentDepartureTime,
+      });
+    }
+  }, [activeDay, planData]);
 
   // 출발시간 변경 시 기존 일정 재계산
   useEffect(() => {
@@ -2449,14 +2487,66 @@ const TripPlannerPage = () => {
   }
 
   //출발시간 수정
-  const handleSaveDepartureTime = () => {
-    const formattedTime = `${departureTime.hour.toString().padStart(2, '0')}:${departureTime.minute
-      .toString()
-      .padStart(2, '0')}`;
-    axiosInstance.put(
-      `/api/daily-plans/${planData.dailyPlans[activeDay - 1].id}/departure-time?departureTime=${formattedTime}`,
-    );
-    setIsDepartureTimeDialogOpen(false);
+  const handleSaveDepartureTime = async () => {
+    try {
+      console.log('=== 출발시간 저장 시작 ===');
+      console.log('현재 상태:', {
+        planData: planData,
+        activeDay: activeDay,
+        departureTime: departureTime,
+        dailyPlans: planData?.dailyPlans,
+      });
+
+      const currentDayId = planData?.dailyPlans?.[activeDay - 1]?.id;
+
+      if (!currentDayId) {
+        console.error('현재 날짜의 dailyPlan ID를 찾을 수 없습니다.');
+        console.error('planData:', planData);
+        console.error('activeDay:', activeDay);
+        console.error('dailyPlans:', planData?.dailyPlans);
+        alert('保存に失敗しました。もう一度お試しください。');
+        return;
+      }
+
+      const formattedTime = `${departureTime.hour.toString().padStart(2, '0')}:${departureTime.minute
+        .toString()
+        .padStart(2, '0')}`;
+
+      console.log('출발시간 저장 요청:', {
+        dailyPlanId: currentDayId,
+        departureTime: formattedTime,
+        url: `/api/daily-plans/${currentDayId}/departure-time?departureTime=${formattedTime}`,
+      });
+
+      const response = await axiosInstance.put(
+        `/api/daily-plans/${currentDayId}/departure-time?departureTime=${formattedTime}`,
+      );
+
+      console.log('API 응답:', response);
+
+      // 저장 성공 후 planData 업데이트
+      if (planData?.dailyPlans?.[activeDay - 1]) {
+        const updatedPlanData = { ...planData };
+        updatedPlanData.dailyPlans[activeDay - 1].departureTime = {
+          hour: departureTime.hour,
+          minute: departureTime.minute,
+        };
+        setPlanData(updatedPlanData);
+        console.log('planData 업데이트 완료:', updatedPlanData);
+      }
+
+      console.log('출발시간 저장 성공');
+      setIsDepartureTimeDialogOpen(false);
+    } catch (error) {
+      console.error('출발시간 저장 실패:', error);
+      console.error('에러 상세:', {
+        message: error instanceof Error ? error.message : 'Unknown error',
+        status:
+          error && typeof error === 'object' && 'response' in error ? (error as any).response?.status : 'No status',
+        data: error && typeof error === 'object' && 'response' in error ? (error as any).response?.data : 'No data',
+      });
+      alert('保存に失敗しました。もう一度お試しください。');
+    }
   };
 
   return (

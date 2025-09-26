@@ -32,6 +32,7 @@ export type Plan = {
   createdAt: string;
   updatedAt: string;
   public: boolean;
+  expenses: [];
 };
 
 /** 같은 여행 멤버  */
