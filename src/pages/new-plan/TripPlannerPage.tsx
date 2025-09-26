@@ -39,7 +39,6 @@ import {
 } from '@dnd-kit/sortable';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { DailyPlan, DepartureTime } from '@/lib/type';
 
 interface Spot {
   id: number;
@@ -276,6 +275,11 @@ const SortableSpotItem: React.FC<SortableSpotItemProps> = ({
   );
 };
 
+interface DepartureTime {
+  hour: number;
+  minute: number;
+}
+
 const TripPlannerPage = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -303,13 +307,7 @@ const TripPlannerPage = () => {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [spotExpenses, setSpotExpenses] = useState<Record<number, ExpenseData[]>>({});
-  const [departureTime, setDepartureTime] = useState<Record<number, DepartureTime[]>>({});
-
-  // 현재 날짜의 출발시간을 가져오는 함수
-  const getCurrentDepartureTime = () => {
-    const currentDayId = planData?.dailyPlans[activeDay - 1]?.id;
-    return departureTime[currentDayId]?.[0] || { hour: 11, minute: 0 };
-  };
+  const [departureTime, setDepartureTime] = useState<DepartureTime>({ hour: 11, minute: 0 });
 
   // spotExpenses 상태 변경 감지
   useEffect(() => {
@@ -403,6 +401,22 @@ const TripPlannerPage = () => {
     },
     [userId],
   );
+
+  // localStorage에서 spots 데이터 복원 (초기 로드 시에만)
+  useEffect(() => {
+    if (!planId || !isInitialLoad) return;
+
+    const savedSpots = localStorage.getItem(`trip_spots_${planId}`);
+    if (savedSpots) {
+      try {
+        const parsedSpots = JSON.parse(savedSpots);
+        console.log('=== localStorage에서 spots 데이터 복원 ===', parsedSpots);
+        setSpots(parsedSpots);
+      } catch (error) {
+        console.error('저장된 spots 데이터 파싱 실패:', error);
+      }
+    }
+  }, [planId, isInitialLoad]);
 
   // spots가 변경될 때마다 localStorage에 저장 (초기 로드 제외)
   useEffect(() => {
@@ -505,29 +519,7 @@ const TripPlannerPage = () => {
           members: planData?.members,
         });
 
-        const dailyPlans = planData?.dailyPlans;
         setPlanData(planData);
-
-        // 출발시간 데이터 처리
-        const departureTimeData: Record<number, DepartureTime[]> = {};
-        dailyPlans?.forEach((dailyPlan: any) => {
-          console.log('=== dailyPlan.departureTime ===', dailyPlan.departureTime);
-
-          // departureTime이 문자열인 경우 파싱
-          let parsedDepartureTime: DepartureTime;
-          if (typeof dailyPlan.departureTime === 'string') {
-            const [hour, minute] = dailyPlan.departureTime.split(':').map(Number);
-            parsedDepartureTime = { hour: hour || 11, minute: minute || 0 };
-          } else {
-            parsedDepartureTime = dailyPlan.departureTime || { hour: 11, minute: 0 };
-          }
-
-          departureTimeData[dailyPlan.id] = [parsedDepartureTime];
-        });
-
-        setDepartureTime(departureTimeData);
-        console.log('=== departureTime ===');
-        console.log(departureTimeData);
 
         // 사용자 역할 확인
         const role = checkUserRole(planData);
@@ -573,13 +565,11 @@ const TripPlannerPage = () => {
                 console.log(`=== ${dayNumber}일차 스팟 데이터 ===`, spotsResponse.data);
 
                 if (spotsResponse.data && spotsResponse.data.data) {
-                  console.log('>>>>>>>>>>>>>>>>');
-                  console.log(spotsResponse.data.data);
                   // 백엔드 SpotResponse를 프론트엔드 Spot 형식으로 변환
                   const convertedSpots: Spot[] = spotsResponse.data.data.map((spot: any) => ({
                     id: spot.id,
-                    time: `${getCurrentDepartureTime().hour.toString().padStart(2, '0')}:${getCurrentDepartureTime()
-                      .minute.toString()
+                    time: `${departureTime.hour.toString().padStart(2, '0')}:${departureTime.minute
+                      .toString()
                       .padStart(2, '0')}`, // 사용자 설정 출발시간
                     duration: spot.duration || '1時間', // 기본값
                     icon: <MapPin className="w-4 h-4" />,
@@ -695,7 +685,7 @@ const TripPlannerPage = () => {
                     const expense = expenseArray[0];
                     return (
                       expense &&
-                      ((expense.location && expense.location === spot.locatiㄹon) ||
+                      ((expense.location && expense.location === spot.location) ||
                         (expense.item && expense.item.includes(spot.location)))
                     );
                   });
@@ -828,10 +818,9 @@ const TripPlannerPage = () => {
   useEffect(() => {
     if (!isInitialLoad && spots[activeDay] && spots[activeDay].length > 0) {
       console.log('=== 출발시간 변경 감지, 일정 재계산 시작 ===');
-      const currentTime = getCurrentDepartureTime();
       console.log(
         '새로운 출발시간:',
-        `${currentTime.hour.toString().padStart(2, '0')}:${currentTime.minute.toString().padStart(2, '0')}`,
+        `${departureTime.hour.toString().padStart(2, '0')}:${departureTime.minute.toString().padStart(2, '0')}`,
       );
 
       // 현재 날짜의 모든 스팟 시간 재계산
@@ -859,7 +848,7 @@ const TripPlannerPage = () => {
     }
 
     const currentSpots = spots[activeDay] || [];
-    let arrivalTime = getCurrentDepartureTime();
+    let arrivalTime = departureTime;
 
     // 이전 관광지가 있으면 이동 시간 계산 (첫 번째 스팟은 호텔이므로 이동 시간 계산 안함)
     if (currentSpots.length > 0) {
@@ -903,7 +892,7 @@ const TripPlannerPage = () => {
 
   // 마지막 관광지의 종료 시간 계산 (체류 시간 포함)
   const getLastSpotEndTime = (spots: Spot[]) => {
-    if (spots.length === 0) return getCurrentDepartureTime();
+    if (spots.length === 0) return departureTime;
 
     const lastSpot = spots[spots.length - 1];
     const [startHour, startMinute] = lastSpot.time.split(':').map(Number);
@@ -1478,14 +1467,13 @@ const TripPlannerPage = () => {
 
     console.log('=== 모든 스팟 시간 재계산 시작 ===');
     console.log('현재 스팟 수:', currentSpots.length);
-    const currentTime = getCurrentDepartureTime();
     console.log(
       '새로운 출발시간:',
-      `${currentTime.hour.toString().padStart(2, '0')}:${currentTime.minute.toString().padStart(2, '0')}`,
+      `${departureTime.hour.toString().padStart(2, '0')}:${departureTime.minute.toString().padStart(2, '0')}`,
     );
 
     const updatedSpots: Spot[] = [];
-    let currentTimeObj = { ...currentTime };
+    let currentTime = { ...departureTime };
 
     for (let i = 0; i < currentSpots.length; i++) {
       const spot = currentSpots[i];
@@ -1494,40 +1482,36 @@ const TripPlannerPage = () => {
       if (i === 0) {
         const updatedSpot = {
           ...spot,
-          time: `${currentTimeObj.hour.toString().padStart(2, '0')}:${currentTimeObj.minute
-            .toString()
-            .padStart(2, '0')}`,
+          time: `${currentTime.hour.toString().padStart(2, '0')}:${currentTime.minute.toString().padStart(2, '0')}`,
         };
         updatedSpots.push(updatedSpot);
 
         // 다음 스팟의 시작시간 계산 (현재 스팟의 종료시간)
         const endTime = getEndTime(updatedSpot.time, spot.duration);
         const [endHour, endMinute] = endTime.split(':').map(Number);
-        currentTimeObj = { hour: endHour, minute: endMinute };
+        currentTime = { hour: endHour, minute: endMinute };
       } else {
         // 이전 스팟에서 현재 스팟으로의 이동시간 계산
         const previousSpot = updatedSpots[i - 1];
         const travelTime = await calculateTravelTime(previousSpot, spot);
 
         // 이동시간 추가
-        const totalMinutes = currentTimeObj.hour * 60 + currentTimeObj.minute + travelTime;
-        currentTimeObj = {
+        const totalMinutes = currentTime.hour * 60 + currentTime.minute + travelTime;
+        currentTime = {
           hour: Math.floor(totalMinutes / 60) % 24,
           minute: totalMinutes % 60,
         };
 
         const updatedSpot = {
           ...spot,
-          time: `${currentTimeObj.hour.toString().padStart(2, '0')}:${currentTimeObj.minute
-            .toString()
-            .padStart(2, '0')}`,
+          time: `${currentTime.hour.toString().padStart(2, '0')}:${currentTime.minute.toString().padStart(2, '0')}`,
         };
         updatedSpots.push(updatedSpot);
 
         // 다음 스팟의 시작시간 계산 (현재 스팟의 종료시간)
         const endTime = getEndTime(updatedSpot.time, spot.duration);
         const [endHour, endMinute] = endTime.split(':').map(Number);
-        currentTimeObj = { hour: endHour, minute: endMinute };
+        currentTime = { hour: endHour, minute: endMinute };
       }
     }
 
@@ -1677,9 +1661,7 @@ const TripPlannerPage = () => {
               onClick={() => setIsDepartureTimeDialogOpen(true)}
               className="text-xs bg-white text-pink-600 px-3 py-1 rounded hover:bg-gray-50 transition-colors font-medium"
             >
-              ⏰{' '}
-              {departureTime[planData?.dailyPlans[activeDay - 1]?.id]?.[0]?.hour?.toString().padStart(2, '0') || '11'}:
-              {departureTime[planData?.dailyPlans[activeDay - 1]?.id]?.[0]?.minute?.toString().padStart(2, '0') || '00'}
+              ⏰ {departureTime.hour.toString().padStart(2, '0')}:{departureTime.minute.toString().padStart(2, '0')}
             </button>
           </div>
         </div>
@@ -2002,9 +1984,7 @@ const TripPlannerPage = () => {
               onClick={() => setIsDepartureTimeDialogOpen(true)}
               className="text-xs bg-white text-pink-600 px-3 py-1 rounded hover:bg-gray-50 transition-colors font-medium"
             >
-              ⏰{' '}
-              {departureTime[planData?.dailyPlans[activeDay - 1]?.id]?.[0]?.hour?.toString().padStart(2, '0') || '11'}:
-              {departureTime[planData?.dailyPlans[activeDay - 1]?.id]?.[0]?.minute?.toString().padStart(2, '0') || '00'}
+              ⏰ {departureTime.hour.toString().padStart(2, '0')}:{departureTime.minute.toString().padStart(2, '0')}
             </button>
           </div>
         </div>
@@ -2336,10 +2316,9 @@ const TripPlannerPage = () => {
 
               const visitDateString = visitDate.toISOString().split('T')[0];
 
-              const currentTime = getCurrentDepartureTime();
               const dailyPlanRequest = {
                 visitDate: visitDateString,
-                departureTime: `${currentTime.hour.toString().padStart(2, '0')}:${currentTime.minute
+                departureTime: `${departureTime.hour.toString().padStart(2, '0')}:${departureTime.minute
                   .toString()
                   .padStart(2, '0')}`,
               };
@@ -2471,15 +2450,12 @@ const TripPlannerPage = () => {
 
   //출발시간 수정
   const handleSaveDepartureTime = () => {
-    const currentDayId = planData.dailyPlans[activeDay - 1].id;
-    const currentDepartureTime = departureTime[currentDayId]?.[0];
-
-    if (currentDepartureTime) {
-      const formattedTime = `${currentDepartureTime.hour.toString().padStart(2, '0')}:${currentDepartureTime.minute
-        .toString()
-        .padStart(2, '0')}`;
-      axiosInstance.put(`/api/daily-plans/${currentDayId}/departure-time?departureTime=${formattedTime}`);
-    }
+    const formattedTime = `${departureTime.hour.toString().padStart(2, '0')}:${departureTime.minute
+      .toString()
+      .padStart(2, '0')}`;
+    axiosInstance.put(
+      `/api/daily-plans/${planData.dailyPlans[activeDay - 1].id}/departure-time?departureTime=${formattedTime}`,
+    );
     setIsDepartureTimeDialogOpen(false);
   };
 
@@ -2671,16 +2647,8 @@ const TripPlannerPage = () => {
         isOpen={isDepartureTimeDialogOpen}
         onClose={() => setIsDepartureTimeDialogOpen(false)}
         onSave={handleSaveDepartureTime}
-        departureTime={departureTime[planData?.dailyPlans[activeDay - 1]?.id]?.[0] || { hour: 11, minute: 0 }}
-        setDepartureTime={(newTime: DepartureTime) => {
-          const currentDayId = planData?.dailyPlans[activeDay - 1]?.id;
-          if (currentDayId) {
-            setDepartureTime((prev) => ({
-              ...prev,
-              [currentDayId]: [newTime],
-            }));
-          }
-        }}
+        departureTime={departureTime}
+        setDepartureTime={setDepartureTime}
       />
 
       {/* 관광지 편집 다이얼로그 */}
