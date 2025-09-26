@@ -2,14 +2,7 @@
 import axios from "axios";
 import { useUserStore } from "@/store";
 
-// 공통 팝업 (없으면 sonner 사용)
-let openPopup: ((msg: string) => void) | null = null;
-try {
-  const mod = require("@/components/common/CommonPopup");
-  openPopup = mod.openPopup as (msg: string) => void;
-} catch {}
-
-import { toast } from "sonner";
+// 더 이상 toast나 CommonPopup을 사용하지 않고 alert를 사용
 
 // 🚨 중복 로그아웃 방지 플래그
 let isHandling401 = false;
@@ -28,17 +21,25 @@ axiosInstance.interceptors.request.use((config) => {
   if (token) {
     // ⏰ 토큰 만료 여부 사전 차단
     if (tokenExp && Date.now() >= tokenExp) {
-      const msg = "ログインに失敗しました";
-      if (openPopup) openPopup(msg);
-      else toast.error(msg);
+      const msg = "세션이 만료되었습니다. 다시 로그인해 주세요.";
+      
+      // Alert 창 띄우기
+      alert(msg);
 
+      // 자동 로그아웃 처리 및 로컬스토리지 클리어
       removeUserData();
+      
+      // 홈 화면으로 이동
+      setTimeout(() => {
+        window.location.href = "/";
+      }, 300);
+      
       return Promise.reject(new axios.Cancel("Token expired"));
     }
 
     // 요청 헤더에 Authorization 추가
     config.headers = config.headers || {};
-    (config.headers as any).Authorization = `Bearer ${token}`;
+    config.headers.Authorization = `Bearer ${token}`;
   }
   return config;
 });
@@ -67,24 +68,24 @@ axiosInstance.interceptors.response.use(
     if ((isExpired || isInvalid) && !isHandling401 && !isLoginRequest && !isProfileRequest) {
       isHandling401 = true;
 
-      // 일본어 UI 문구 (만료/무효 구분)
+      // 한국어 UI 문구 (만료/무효 구분)
       const msg = isExpired
-        ? "セッションの有効期限が切れました。もう一度ログインしてください。"
-        : "認証に失敗しました。ログインし直してください。";
+        ? "세션이 만료되었습니다. 다시 로그인해 주세요."
+        : "인증에 실패했습니다. 다시 로그인해 주세요.";
 
-      if (openPopup) openPopup(msg);
-      else toast.error(msg);
+      // Alert 창 띄우기
+      alert(msg);
 
-      // 사용자 데이터 초기화
+      // 사용자 데이터 및 로컬스토리지 초기화 (자동 로그아웃 처리)
       useUserStore.getState().removeUserData();
 
-      // 잠깐 대기 후 로그인 페이지로 이동
+      // 홈 화면으로 이동
       setTimeout(() => {
-        window.location.href = "/login";
+        window.location.href = "/";
         setTimeout(() => {
           isHandling401 = false;
         }, 700);
-      }, 700);
+      }, 300);
 
       return Promise.reject(error);
     }

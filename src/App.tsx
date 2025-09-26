@@ -37,15 +37,6 @@ function App() {
   const setToken = useUserStore((state) => state.setToken);
   const setTokenExp = useUserStore((state) => state.setTokenExp);
 
-  // ✅ 앱 시작할 때 강제 토큰 세팅 (테스트용) — 항상 가짜 토큰 설정
-  useEffect(() => {
-    console.log("📌 강제 토큰 세팅 실행됨 (테스트용)");
-    setUserId("999");
-    setNickname("テストユーザー"); // 일본어 닉네임
-    setEmail("test@example.com");
-    setToken("fakeToken123");
-    setTokenExp(Date.now() + 60 * 1000); // 1분 뒤 만료
-  }, [setUserId, setNickname, setEmail, setToken, setTokenExp]);
 
   return (
     <>
