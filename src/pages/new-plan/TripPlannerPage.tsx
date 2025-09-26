@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import SpotSearchDialog from '@/components/SpotSearchDialog';
 import GoogleMapView from '@/components/GoogleMapView';
+import DepartureTimeDialog from './components/DepartureTimeDialog';
 import { axiosInstance } from '@/api/axios';
 import {
   Plus,
@@ -2447,6 +2448,17 @@ const TripPlannerPage = () => {
     );
   }
 
+  //출발시간 수정
+  const handleSaveDepartureTime = () => {
+    const formattedTime = `${departureTime.hour.toString().padStart(2, '0')}:${departureTime.minute
+      .toString()
+      .padStart(2, '0')}`;
+    axiosInstance.put(
+      `/api/daily-plans/${planData.dailyPlans[activeDay - 1].id}/departure-time?departureTime=${formattedTime}`,
+    );
+    setIsDepartureTimeDialogOpen(false);
+  };
+
   return (
     <div className="h-screen bg-gray-50 flex flex-col">
       <Header />
@@ -2631,57 +2643,13 @@ const TripPlannerPage = () => {
       />
 
       {/* 출발 시간 설정 다이얼로그 */}
-      {isDepartureTimeDialogOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-6 w-96">
-            <h3 className="text-lg font-semibold mb-4">出発時間設定</h3>
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">時間</label>
-                <select
-                  value={departureTime.hour}
-                  onChange={(e) => setDepartureTime((prev) => ({ ...prev, hour: parseInt(e.target.value) }))}
-                  className="w-full p-2 border border-gray-300 rounded-md"
-                >
-                  {Array.from({ length: 24 }, (_, i) => (
-                    <option key={i} value={i}>
-                      {i.toString().padStart(2, '0')}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">分</label>
-                <select
-                  value={departureTime.minute}
-                  onChange={(e) => setDepartureTime((prev) => ({ ...prev, minute: parseInt(e.target.value) }))}
-                  className="w-full p-2 border border-gray-300 rounded-md"
-                >
-                  {Array.from({ length: 60 }, (_, i) => (
-                    <option key={i} value={i}>
-                      {i.toString().padStart(2, '0')}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
-            <div className="flex justify-end gap-2 mt-6">
-              <button
-                onClick={() => setIsDepartureTimeDialogOpen(false)}
-                className="px-4 py-2 text-gray-600 border border-gray-300 rounded-md hover:bg-gray-50"
-              >
-                キャンセル
-              </button>
-              <button
-                onClick={() => setIsDepartureTimeDialogOpen(false)}
-                className="px-4 py-2 bg-pink-500 text-white rounded-md hover:bg-pink-600"
-              >
-                確認
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      <DepartureTimeDialog
+        isOpen={isDepartureTimeDialogOpen}
+        onClose={() => setIsDepartureTimeDialogOpen(false)}
+        onSave={handleSaveDepartureTime}
+        departureTime={departureTime}
+        setDepartureTime={setDepartureTime}
+      />
 
       {/* 관광지 편집 다이얼로그 */}
       {isEditDialogOpen && editingSpot && (
