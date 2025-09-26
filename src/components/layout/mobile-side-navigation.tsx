@@ -1,7 +1,6 @@
-// src/components/layout/mobile-side-navigation.tsx
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useUserStore } from '@/store';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { ProfileData } from '@/lib/type';
 import { getMyPageInfo } from '@/api/api';
 
@@ -14,9 +13,15 @@ interface MobileSideNavigationProps {
 const MobileSideNavigation = ({ isOpen, onClose, handleLogout }: MobileSideNavigationProps) => {
   const navigate = useNavigate();
   const location = useLocation();
+
+  // ✅ 스토어에서 토큰/닉네임만 사용 (프로필 통신은 필요할 때만)
   const { token, nickname } = useUserStore();
+
   const [isMyTripOpen, setIsMyTripOpen] = useState(false);
   const [userInfo, setUserInfo] = useState<ProfileData | null>(null);
+
+  // ✅ 중복 호출 방지용 플래그 (사이드바 열릴 때 여러 번 렌더되어도 1회만 호출)
+  const fetchedOnceRef = useRef(false);
 
   const handleNavigation = (path: string) => {
     navigate(path);
@@ -24,7 +29,7 @@ const MobileSideNavigation = ({ isOpen, onClose, handleLogout }: MobileSideNavig
   };
 
   const toggleMyTrip = () => {
-    setIsMyTripOpen(!isMyTripOpen);
+    setIsMyTripOpen((v) => !v);
   };
 
   // 현재 경로가 마이트립 관련이면 자동으로 펼침 상태 유지
@@ -36,20 +41,39 @@ const MobileSideNavigation = ({ isOpen, onClose, handleLogout }: MobileSideNavig
     setIsMyTripOpen(isMyTripPath);
   }, [location.pathname]);
 
+  // ✅ 토큰이 있고, 사이드바가 열렸을 때만 /api/profile 호출
   useEffect(() => {
-    fetchUserInfo();
-  }, [isOpen]);
+    let cancelled = false;
 
-  //프로필 정보 가져오기
-  const fetchUserInfo = async () => {
-    try {
-      const response = await getMyPageInfo();
-      setUserInfo(response.data);
-    } catch (error) {
-      console.error('사용자 정보를 가져오는데 실패했습니다:', error);
-      // 에러가 발생해도 팝업을 표시하지 않고 조용히 처리
+    // 토큰이 없으면: 프로필 정보 초기화 + 다음에 토큰 생기면 다시 시도할 수 있게 플래그 해제
+    if (!token) {
+      setUserInfo(null);
+      fetchedOnceRef.current = false;
+      return;
     }
-  };
+
+    // 사이드바가 닫혀 있으면 호출하지 않음
+    if (!isOpen) return;
+
+    // 이미 한 번 불러왔다면 또 부르지 않음 (열었다 닫았다 반복 시 과호출 방지)
+    if (fetchedOnceRef.current) return;
+    fetchedOnceRef.current = true;
+
+    (async () => {
+      try {
+        const res = await getMyPageInfo();
+        if (cancelled) return;
+        setUserInfo(res.data);
+      } catch (error) {
+        // 조용히 실패 처리 (토스트/팝업 불필요)
+        // console.error('사용자 정보를 가져오는데 실패했습니다:', error);
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [token, isOpen]); // 🔑 토큰/오픈 상태 변화에만 반응
 
   return (
     <div className="lg:hidden">
@@ -73,7 +97,7 @@ const MobileSideNavigation = ({ isOpen, onClose, handleLogout }: MobileSideNavig
           <button
             onClick={onClose}
             className="p-2 hover:bg-gray-100 rounded-full transition-colors"
-            aria-label="메뉴 닫기"
+            aria-label="メニューを閉じる"
           >
             <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -81,13 +105,13 @@ const MobileSideNavigation = ({ isOpen, onClose, handleLogout }: MobileSideNavig
           </button>
         </div>
 
-        {/* 사용자 프로필 섹션 */}
+        {/* 사용자 프로필 섹션 (로그인 상태에서만 노출) */}
         {token && (
           <div className="p-4 border-b border-gray-200">
             <div className="flex items-center space-x-3">
               {userInfo?.profileImageUrl ? (
                 <img
-                  src={import.meta.env.VITE_API_URL + userInfo?.profileImageUrl}
+                  src={`${import.meta.env.VITE_API_URL}${userInfo.profileImageUrl}`}
                   alt="profile"
                   className="w-12 h-12 rounded-full"
                 />

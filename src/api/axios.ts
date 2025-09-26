@@ -1,79 +1,86 @@
-import axios from 'axios';
-import { useUserStore } from '@/store';
+// src/api/axios.ts
+import axios from "axios";
+import { useUserStore } from "@/store";
 
-// 공통 팝업(팀 공용 컴포넌트) – 실제 파일명과 맞춤
+// 공통 팝업 (없으면 sonner 사용)
 let openPopup: ((msg: string) => void) | null = null;
 try {
-  const mod = require('@/components/common/CommonPopup'); // ← 실제 파일명
+  const mod = require("@/components/common/CommonPopup");
   openPopup = mod.openPopup as (msg: string) => void;
-} catch {
-  // fallback: 아래 sonner 사용
-}
-import { toast } from 'sonner';
+} catch {}
 
-// 토큰 만료 처리 중복 방지
+import { toast } from "sonner";
+
+// 🚨 중복 로그아웃 방지 플래그
 let isHandling401 = false;
 
+// ================== Axios 인스턴스 생성 ==================
 export const axiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+  baseURL: import.meta.env.VITE_API_URL ?? "http://localhost:8080/api", // 기본값 추가
   withCredentials: false,
-  headers: { 'Content-Type': 'application/json' },
+  headers: { "Content-Type": "application/json" },
 });
 
-// ===== 요청 인터셉터: 토큰 만료 사전 차단 + Authorization 부착 =====
+// ================== 요청 인터셉터 ==================
 axiosInstance.interceptors.request.use((config) => {
   const { token, tokenExp, removeUserData } = useUserStore.getState();
 
   if (token) {
-    // 만료(ms) 시각 존재하면 사전 차단
+    // ⏰ 토큰 만료 여부 사전 차단
     if (tokenExp && Date.now() >= tokenExp) {
-      const fixedMsg = '로그인에 실패하였습니다';
-      if (openPopup) openPopup(fixedMsg);
-      else toast.error('ログインに失敗しました');
+      const msg = "ログインに失敗しました";
+      if (openPopup) openPopup(msg);
+      else toast.error(msg);
 
       removeUserData();
-      return Promise.reject(new axios.Cancel('Token expired'));
+      return Promise.reject(new axios.Cancel("Token expired"));
     }
 
+    // 요청 헤더에 Authorization 추가
     config.headers = config.headers || {};
     (config.headers as any).Authorization = `Bearer ${token}`;
   }
   return config;
 });
 
-// ===== 응답 인터셉터: 401 공통 처리(+기존 예외 로직 유지) =====
+// ================== 응답 인터셉터 ==================
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
     const status = error?.response?.status;
-    const code = error?.response?.data?.error;
+    const data = error?.response?.data as
+      | { status?: number; error?: string; message?: string }
+      | undefined;
 
-    // 네가 기존에 두었던 예외 처리 유지
-    const url: string = error.config?.url || '';
-    const isLoginRequest = url.includes('/auth/signin');
-    const isExpenseRequest = url.includes('/api/expenses');
-    const isProfileRequest = url.includes('/api/profile');
+    const url: string = error.config?.url || "";
+    const isLoginRequest = url.includes("/auth/signin");
+    const isProfileRequest = url.includes("/profile");
 
-    // Expense API와 Profile API는 401이어도 모킹/무시 (네 기존 로직 유지)
-    if ((isExpenseRequest || isProfileRequest) && status === 401) {
-      return Promise.reject(error);
-    }
+    // ✅ 백엔드 표준 에러 바디 호환: error 필드가 없으면 기본값 TOKEN_INVALID
+    const code =
+      (typeof data?.error === "string" && data.error) ||
+      (status === 401 ? "TOKEN_INVALID" : "");
 
-    // 백엔드 표준/변형: TOKEN_EXPIRED / AUTH_ERROR / (과거) TokenExpired
-    const isExpired = status === 401 && (code === 'TOKEN_EXPIRED' || code === 'TokenExpired');
-    const isAuthError = status === 401 && (code === 'AUTH_ERROR' || code === 'AuthError');
+    const isExpired = status === 401 && code === "TOKEN_EXPIRED";
+    const isInvalid = status === 401 && code === "TOKEN_INVALID";
 
-    if ((isExpired || isAuthError) && !isHandling401 && !isLoginRequest && !isExpenseRequest && !isProfileRequest) {
+    if ((isExpired || isInvalid) && !isHandling401 && !isLoginRequest && !isProfileRequest) {
       isHandling401 = true;
 
-      const fixedMsg = '로그인에 실패하였습니다';
-      if (openPopup) openPopup(fixedMsg);
-      else toast.error('ログインに失敗しました');
+      // 일본어 UI 문구 (만료/무효 구분)
+      const msg = isExpired
+        ? "セッションの有効期限が切れました。もう一度ログインしてください。"
+        : "認証に失敗しました。ログインし直してください。";
 
+      if (openPopup) openPopup(msg);
+      else toast.error(msg);
+
+      // 사용자 데이터 초기화
       useUserStore.getState().removeUserData();
 
+      // 잠깐 대기 후 로그인 페이지로 이동
       setTimeout(() => {
-        window.location.href = '/login';
+        window.location.href = "/login";
         setTimeout(() => {
           isHandling401 = false;
         }, 700);
@@ -82,7 +89,7 @@ axiosInstance.interceptors.response.use(
       return Promise.reject(error);
     }
 
-    // 400/409 등은 각 페이지에서 details를 읽어 FormMessage로 처리
+    // ❌ 그 외 에러는 그대로 throw
     return Promise.reject(error);
-  },
+  }
 );
