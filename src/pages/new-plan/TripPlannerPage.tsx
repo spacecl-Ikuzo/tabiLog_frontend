@@ -2643,13 +2643,15 @@ const TripPlannerPage = () => {
       />
 
       {/* 출발 시간 설정 다이얼로그 */}
-      <DepartureTimeDialog
-        isOpen={isDepartureTimeDialogOpen}
-        onClose={() => setIsDepartureTimeDialogOpen(false)}
-        onSave={handleSaveDepartureTime}
-        departureTime={departureTime}
-        setDepartureTime={setDepartureTime}
-      />
+      {userRole !== 'VIEWER' && (
+        <DepartureTimeDialog
+          isOpen={isDepartureTimeDialogOpen}
+          onClose={() => setIsDepartureTimeDialogOpen(false)}
+          onSave={handleSaveDepartureTime}
+          departureTime={departureTime}
+          setDepartureTime={setDepartureTime}
+        />
+      )}
 
       {/* 관광지 편집 다이얼로그 */}
       {isEditDialogOpen && editingSpot && (
