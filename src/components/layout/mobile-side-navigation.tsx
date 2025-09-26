@@ -37,8 +37,11 @@ const MobileSideNavigation = ({ isOpen, onClose, handleLogout }: MobileSideNavig
   }, [location.pathname]);
 
   useEffect(() => {
-    fetchUserInfo();
-  }, [isOpen]);
+    if (token) {
+      //로그인한 사용자만 조회
+      fetchUserInfo();
+    }
+  }, [isOpen, token]);
 
   //프로필 정보 가져오기
   const fetchUserInfo = async () => {
