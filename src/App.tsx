@@ -1,4 +1,8 @@
+// src/App.tsx
 import { Route, Routes } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useUserStore } from '@/store';
+
 import Login from './pages/login/Login';
 import PrivateRoute from './PrivateRoute';
 import Home from './pages/home/Home';
@@ -22,9 +26,32 @@ import FindPassword from './pages/find-account/FindPassword';
 import ResetPassword from './pages/find-account/ResetPassword';
 import Invitation from './pages/Invitation/Invitation';
 
+// ✅ 토큰이 있을 때 /api/profile을 1회 호출해 스토어에 사용자 정보 반영
+import ProfileLoader from '@/components/auth/ProfileLoader';
+
 function App() {
+  // ✅ zustand 스토어 액션 가져오기
+  const setUserId = useUserStore((state) => state.setUserId);
+  const setNickname = useUserStore((state) => state.setNickname);
+  const setEmail = useUserStore((state) => state.setEmail);
+  const setToken = useUserStore((state) => state.setToken);
+  const setTokenExp = useUserStore((state) => state.setTokenExp);
+
+  // ✅ 앱 시작할 때 강제 토큰 세팅 (테스트용) — 항상 가짜 토큰 설정
+  useEffect(() => {
+    console.log("📌 강제 토큰 세팅 실행됨 (테스트용)");
+    setUserId("999");
+    setNickname("テストユーザー"); // 일본어 닉네임
+    setEmail("test@example.com");
+    setToken("fakeToken123");
+    setTokenExp(Date.now() + 60 * 1000); // 1분 뒤 만료
+  }, [setUserId, setNickname, setEmail, setToken, setTokenExp]);
+
   return (
     <>
+      {/* 전역 사용자 정보 초기화용 로더 */}
+      <ProfileLoader />
+
       <Routes>
         {/* 비로그인 접근 가능 */}
         <Route path="/invitation/:token" element={<Invitation />} />
@@ -36,11 +63,13 @@ function App() {
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/delete-account/complete" element={<DeleteAccountComplete />} />
         <Route path="/" element={<Home />} />
-        {/* 관광지 페이지들 */}
+
+        {/* 관광지 페이지 */}
         <Route path="/spots" element={<SpotsPage />} />
         <Route path="/detail/:id" element={<DetailPage />} />
         <Route path="/spot/:city/:id" element={<SpotDetailPage />} />
         <Route path="/trip-planner" element={<TripPlannerPage />} />
+
         {/* 로그인 필요 */}
         <Route element={<PrivateRoute />}>
           <Route path="/delete-account" element={<DeleteAccount />} />
