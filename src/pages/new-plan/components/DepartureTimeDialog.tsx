@@ -11,7 +11,7 @@ interface DepartureTimeDialogProps {
   onSave: () => void;
   onTimeChange?: (time: DepartureTime) => void;
   departureTime: DepartureTime;
-  setDepartureTime: React.Dispatch<React.SetStateAction<DepartureTime>>;
+  setDepartureTime: (time: DepartureTime) => void;
 }
 
 const DepartureTimeDialog: React.FC<DepartureTimeDialogProps> = ({
