@@ -9,6 +9,7 @@ import { Calendar as CalendarIcon, ArrowRight } from 'lucide-react';
 import { format, parse, isValid, differenceInDays } from 'date-fns';
 import { ja } from 'date-fns/locale';
 import { Plan } from '@/lib/type';
+import Header from '@/components/layout/header';
 
 export default function NewPlanCheckDate() {
   const navigate = useNavigate();
@@ -116,6 +117,7 @@ export default function NewPlanCheckDate() {
 
   return (
     <div className="min-h-screen">
+      <Header />
       <div className="flex">
         {/* 사이드바 네비게이션 (데스크톱만) */}
         <SideNavigation selectedNav="newPlan" />
