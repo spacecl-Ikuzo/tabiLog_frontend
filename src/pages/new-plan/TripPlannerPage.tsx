@@ -279,10 +279,10 @@ interface DepartureTime {
   minute: number;
 }
 
-const TripPlannerPage = ({ planId: propPlanId, readOnly = false }: { planId?: string; readOnly?: boolean }) => {
+const TripPlannerPage = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const planId = propPlanId || searchParams.get('planId');
+  const planId = searchParams.get('planId');
 
   // store에서 사용자 정보 가져오기
   const { userId } = useUserStore();
@@ -2588,10 +2588,10 @@ const TripPlannerPage = ({ planId: propPlanId, readOnly = false }: { planId?: st
 
         {/* Resizable Divider - 데스크톱에서만 표시 */}
         <div
-          className={`w-1 bg-gray-300 ${!readOnly ? 'hover:bg-gray-400 cursor-col-resize' : ''} transition-all duration-200 relative group ${
+          className={`w-1 bg-gray-300 hover:bg-gray-400 cursor-col-resize transition-all duration-200 relative group ${
             isDragging ? 'bg-blue-400 shadow-lg' : ''
           }`}
-          onMouseDown={!readOnly ? handleMouseDown : undefined}
+          onMouseDown={handleMouseDown}
         >
           {/* 드래그 핸들 시각적 표시 */}
           <div className="absolute inset-y-0 -left-2 -right-2 flex items-center justify-center">
