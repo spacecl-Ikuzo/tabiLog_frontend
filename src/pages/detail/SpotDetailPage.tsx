@@ -24,6 +24,14 @@ import OsakaArchitecture from '../../assets/OsakaArchitecture.png';
 import OsakaArchitecture2 from '../../assets/OsakaArchitecture2.png';
 import OsakaArchitecture3 from '../../assets/OsakaArchitecture3.png';
 import OsakaArchitecture4 from '../../assets/OsakaArchitecture4.png';
+import OsakaTempozan from '../../assets/OsakaTempozan.png';
+import TogetsukyoBridge5 from '../../assets/TogetsukyoBridge5.jpeg';
+import TogetsukyoBridge1 from '../../assets/TogetsukyoBridge1.jpg';
+import TogetsukyoBridge2 from '../../assets/TogetsukyoBridge2.jpg';
+import GionKyoto3 from '../../assets/GionKyoto3.png';
+import GionKyoto1 from '../../assets/GionKyoto1.jpeg';
+import GionKyoto4 from '../../assets/GionKyoto4.jpg';
+import KyotoPass5 from '../../assets/KyotoPass5.jpg';
 import KyotoHero from '../../assets/Kinkakuji.jpg';
 import KiyoMizuTera from '../../assets/KiyoMizuTera.jpg';
 import SapporoTime from '../../assets/SapporoTime.jpg';
@@ -45,8 +53,8 @@ import SapporoBeerTaste from '../../assets/SapporoBeerTaste.jpg';
 import FukuokaCastle from '../../assets/FukuokaCastle.jpg';
 import FukuokaCastle2 from '../../assets/FukuokaCastle2.jpg';
 import HakataCity from '../../assets/HakataCity.jpg';
-import HakataDepartBelow from '../../assets/HakataDepartBelow.jpg';
-import HakataIlumi from '../../assets/HakataIlumi.jpg';
+import hakatadepartbelow from '../../assets/hakatadepartbelow.jpg';
+import hakataIlumi from '../../assets/hakataIlumi.jpg';
 import OkinawaHero from '../../assets/OkinawaResort.jpg';
 import Shurijo from '../../assets/Shurijo.jpg';
 import OkiAquarium from '../../assets/OkiAquarium.jpg';
@@ -105,9 +113,6 @@ import TokyoDisneyland from '../../assets/tokyodisneyland.jpg';
 import DisneyResort from '../../assets/DisneyResort.jpg';
 import DisneySea from '../../assets/DIsneySea.jpg';
 import NikkoToshogu from '../../assets/nikkotoshogu.jpg';
-import KamakuraSlamdunk from '../../assets/kamakuraSlamdunk.jpg';
-import Kamakura from '../../assets/kamakura.jpg';
-import GamakuraTaiButsu from '../../assets/GamakuraTaiButsu.jpg';
 // import HakoneOnsen from '../../assets/hakoneonsen.jpg';
 import AdventureLand from '../../assets/AdventureLand.jpg';
 import ToonTown from '../../assets/ToonTown.jpg';
@@ -162,6 +167,20 @@ import hokudaipopula from '../../assets/hokudaipopula.jpg';
 import sapporoagribuilding from '../../assets/sapporoagribuilding.jpg';
 import tanukikoji from '../../assets/tanukikoji.jpg';
 import tanukiya from '../../assets/tanukiya.jpg';
+import Museum21thCentury1 from '../../assets/21thcenturyimage1--8-.png';
+import Museum21thCentury2 from '../../assets/21thcenturyimage1--8-.png';
+import Museum21thCentury3 from '../../assets/21thcenturyimage1--8-.png';
+import Kanazawa_YuwakuOnsen from '../../assets/Kanazawa_YuwakuOnsen.jpg';
+import Hirosima15 from '../../assets/Hirosima15.png';
+import Hirosima12 from '../../assets/Hirosima12.jpg';
+import Hirosima13 from '../../assets/Hirosima13.jpg';
+import Hirosima14 from '../../assets/Hirosima14.jpg';
+import Hirosima16 from '../../assets/Hirosima16.jpg';
+import Tomonoura2 from '../../assets/Tomonoura2.png';
+import Tomonura3 from '../../assets/Tomonura3.png';
+import Tomonoura_Harbor from '../../assets/Tomonoura_Harbor.jpg';
+import Ponyo1 from '../../assets/ponyo1.png';
+import Ponyo2 from '../../assets/ponyo2.png';
 import tanukikojimap from '../../assets/tanukikojimap.jpg';
 import tanukisoupcurry from '../../assets/tanukisoupcurry.jpg';
 import tanukikitaichiramen from '../../assets/tanukikitaichiramen.jpg';
@@ -225,19 +244,6 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
       content:
         '東京ドームはプロ野球・読売ジャイアンツの本拠地として知られる多目的スタジアムで、コンサート、展示会、スポーツイベントなど年間を通して多彩な催しが開催されます。隣接する「LaQua（ラクーア）」にはスパ施設やショッピングモール、飲食店が集まり、温泉・サウナ・リラクゼーションを楽しめる都市型スパとして地元民にも観光客にも人気です。<br><br><table style="border-collapse: collapse; width: 100%; margin: 10px 0;"><tr style="background-color: #f2f2f2;"><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">項目</th><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">詳細</th></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">所在地</td><td style="border: 1px solid #ddd; padding: 8px;">東京都文京区後楽1-3-61</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">アクセス</td><td style="border: 1px solid #ddd; padding: 8px;">JR総武線「水道橋駅」徒歩5分<br>東京メトロ丸ノ内線「後楽園駅」徒歩1分<br>東京メトロ南北線「後楽園駅」徒歩1分</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">営業時間</td><td style="border: 1px solid #ddd; padding: 8px;">イベントにより変動<br>野球試合: 通常18:00〜21:30<br>コンサート・展示会: 要確認</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">入場料金（野球観戦）</td><td style="border: 1px solid #ddd; padding: 8px;">内野指定席: 3,000円〜8,000円<br>外野席: 1,500円〜2,500円<br>ファミリー席: 2,000円〜4,000円</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">入場料金（コンサート）</td><td style="border: 1px solid #ddd; padding: 8px;">アーティスト・イベントにより変動<br>通常: 5,000円〜15,000円<br>VIP席: 20,000円〜</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">チケット購入</td><td style="border: 1px solid #ddd; padding: 8px;">公式サイト・コンビニ・現地窓口<br>オンライン予約推奨</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">団体割引</td><td style="border: 1px solid #ddd; padding: 8px;">20名以上で団体料金適用<br>学校団体・企業団体向け特別プランあり</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">駐車場</td><td style="border: 1px solid #ddd; padding: 8px;">有料駐車場あり（台数限定）<br>イベント日は混雑・公共交通機関推奨</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">施設内サービス</td><td style="border: 1px solid #ddd; padding: 8px;">飲食店・グッズショップ・ATM<br>ベビーカー貸出・車椅子対応</td></tr></table><br>【2.1 東京ドーム紹介】<br>東京ドームは1988年に開業した日本初のドーム型スタジアムです。読売ジャイアンツの本拠地として知られ、年間を通じて野球、コンサート、展示会、スポーツイベントなど多彩な催しが開催されます。学校行事の会場としても利用され、日本電子専門学校のスポーツフェスティバルなど、各種団体の大規模イベントが開催されることでも有名です。国際大会ではWBC（ワールド・ベースボール・クラシック）の会場にもなり、世界中のファンが集まる熱狂の舞台となりました。<br><br>【2.2 東京ドーム野球】<br>東京ドームは読売ジャイアンツの本拠地として、プロ野球ファンにとって聖地のような存在です。屋内球場のため天候に左右されず、快適な環境で野球観戦を楽しめます。球場内には様々な飲食店やグッズショップがあり、野球観戦と合わせてショッピングやグルメも楽しめる総合エンターテイメント施設です。<br><br><table style="border-collapse: collapse; width: 100%; margin: 10px 0;"><tr style="background-color: #f2f2f2;"><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">試合種別</th><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">シーズン期間</th><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">開催頻度</th><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">チケット購入</th></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">読売ジャイアンツ</td><td style="border: 1px solid #ddd; padding: 8px;">3月下旬〜10月</td><td style="border: 1px solid #ddd; padding: 8px;">平日・週末</td><td style="border: 1px solid #ddd; padding: 8px;">公式サイト・コンビニ</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">WBC国際大会</td><td style="border: 1px solid #ddd; padding: 8px;">3年ごと（不定期）</td><td style="border: 1px solid #ddd; padding: 8px;">大会期間中</td><td style="border: 1px solid #ddd; padding: 8px;">公式サイト・チケット販売</td></tr></table><br>座席は内野・外野・バックネット裏など様々な選択肢があります。野球観戦の際は、球場内の飲食店でビールやホットドッグを楽しみながら応援するのが定番です。<br><br>【2.3 ラクーア】<br>東京ドームに隣接する「LaQua（ラクーア）」は、スパ施設やショッピングモール、飲食店が集まった複合施設です。温泉・サウナ・リラクゼーションを楽しめる都市型スパとして地元民にも観光客にも人気で、野球観戦の前後や休日にリラックスできる空間を提供しています。<br><br>【2.4 ドームアトラクション】<br>東京ドームには「東京ドームシティ」という総合エンターテイメント施設があります。ドーム内の遊園地エリア「東京ドームシティアトラクションズ」では、家族連れが楽しめるアトラクションが充実しています。特に「サンダードルフィン」は日本最大級のローラーコースターで、スリル満点の体験ができます。また、「ビッグオー」は世界初のフリーフォールタワーで、地上80mからの絶景とスリルを同時に楽しめます。その他にも「スカイフラワー」や「ワンダーエッグ」など、様々な年齢層が楽しめるアトラクションが揃っています。野球観戦だけでなく一日中エンターテイメントを満喫できる総合レジャー施設です。',
     },
-    '21': {
-      title: '東京ディズニーランド',
-      description: '世界で最も人気のテーマパーク。夢の国で楽しい時間を過ごそう',
-      author: 'タビログ編集部',
-      heroImage: TokyoDisneyland,
-      breadcrumb: ['東京', '浦安市', '東京ディズニーランド'],
-      contentTitle: '東京ディズニーランドの基本情報',
-      spots: ['ディズニーリゾート', 'ディズニーシー', 'アドベンチャーランド', 'トゥーンタウン'],
-      imageLeft: DisneyResort,
-      imageRight: DisneySea,
-      content:
-        '東京ディズニーランドは世界で最も人気のテーマパークの一つ。ミッキーマウスをはじめとするディズニーキャラクターと一緒に夢の世界を体験できます。7つのテーマランドがあり、家族連れからカップルまで幅広い年齢層が楽しめます。パレードやショーも充実しており、一日中楽しめるエンターテイメント施設です。<br><br><table style="border-collapse: collapse; width: 100%; margin: 10px 0;"><tr style="background-color: #f2f2f2;"><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">項目</th><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">詳細</th></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">アクセス</td><td style="border: 1px solid #ddd; padding: 8px;">JR京葉線「舞浜駅」徒歩5分<br>東京駅から約15分、新宿駅から約40分</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">入場料金（1日券）</td><td style="border: 1px solid #ddd; padding: 8px;">大人（18歳以上）: 8,400円<br>中人（12-17歳）: 7,000円<br>小人（4-11歳）: 5,000円</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">営業時間</td><td style="border: 1px solid #ddd; padding: 8px;">9:00〜22:00（季節により変動）<br>休園日: 不定期（公式サイトで確認）</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">チケット購入</td><td style="border: 1px solid #ddd; padding: 8px;">公式サイト・コンビニ・現地窓口<br>事前購入推奨（当日完売の場合あり）</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">団体割引</td><td style="border: 1px solid #ddd; padding: 8px;">20名以上で団体料金適用<br>学校団体・企業団体向け特別プランあり</td></tr></table><br>【2.1 ディズニーリゾート】<br>東京ディズニーリゾートは、東京ディズニーランドと東京ディズニーシーを中心とした総合リゾートエリアです。ホテル、ショッピングモール、レストランが集まり、宿泊から食事、ショッピングまで全てを楽しめる完結型のリゾートです。リゾート内のホテルに宿泊すると、パークへの優先入場や特別な特典を利用できます。<br><br>【2.2 ディズニーシー】<br>東京ディズニーシーは、海をテーマにした世界唯一のディズニーパークです。7つのポート（港）で構成され、それぞれ異なる時代と地域の雰囲気を体験できます。アトラクションはよりスリリングで大人向けのものが多く、特に「タワー・オブ・テラー」や「インディ・ジョーンズ・アドベンチャー」は人気の絶叫系アトラクションです。<br><br>【2.3 アドベンチャーランド】<br>アドベンチャーランドは、ジャングルや海賊の世界をテーマにしたエリアです。「ジャングルクルーズ」では野生動物の模型や滝を楽しみ、「カリブの海賊」では海賊の冒険を体験できます。「インディ・ジョーンズ・アドベンチャー」は迫力満点のライドで、古代遺跡の探検を疑似体験できます。熱帯の雰囲気を演出する植物や建物が特徴的です。<br><br>【2.4 トゥーンタウン】<br>トゥーンタウンは、ディズニーアニメのキャラクターたちが住む街を再現したエリアです。ミッキーマウスの家「ミッキーの家とミート・ミッキー」では、実際にミッキーと会って写真を撮ることができます。「ロジャーラビットのカートゥーンスピン」は回転しながら進む楽しいライドで、子供から大人まで楽しめます。カラフルで可愛らしい建物が並び、まるでアニメの世界にいるような気分を味わえます。',
-    },
     '22': {
       title: '日光東照宮',
       description: '徳川家康を祀る世界遺産の神社。豪華絢爛な建築が美しい',
@@ -252,17 +258,17 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
         '日光東照宮は徳川家康を祀る神社で、世界遺産に登録されています。豪華絢爛な建築と精緻な彫刻が特徴で、特に「見ざる、聞かざる、言わざる」の三猿や眠り猫の彫刻は有名です。江戸時代の最高技術を集めた建築美を堪能できる貴重な文化遺産です。<br><br><table style="border-collapse: collapse; width: 100%; margin: 10px 0;"><tr style="background-color: #f2f2f2;"><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">項目</th><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">詳細</th></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">所在地</td><td style="border: 1px solid #ddd; padding: 8px;">栃木県日光市山内2301</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">アクセス</td><td style="border: 1px solid #ddd; padding: 8px;">JR日光線「日光駅」からバス10分<br>東武日光線「東武日光駅」からバス10分<br>東京から約2時間</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">参拝時間</td><td style="border: 1px solid #ddd; padding: 8px;">4月〜10月: 8:00〜17:00<br>11月〜3月: 8:00〜16:00<br>年中無休</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">入場料金</td><td style="border: 1px solid #ddd; padding: 8px;">大人（高校生以上）: 1,300円<br>小・中学生: 450円<br>幼児: 無料</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">宝物殿・美術館</td><td style="border: 1px solid #ddd; padding: 8px;">宝物殿: 大人800円、小中学生300円<br>美術館: 大人500円、小中学生200円<br>共通券: 大人2,100円、小中学生750円</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">ガイドツアー</td><td style="border: 1px solid #ddd; padding: 8px;">日本語ガイド: 1,000円〜<br>英語ガイド: 2,000円〜<br>団体ガイド: 要予約・割引あり</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">団体割引</td><td style="border: 1px solid #ddd; padding: 8px;">30名以上で団体料金適用<br>学校団体・企業団体向け特別プランあり</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">駐車場</td><td style="border: 1px solid #ddd; padding: 8px;">有料駐車場あり（台数限定）<br>バス・電車利用推奨</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">お守り・御朱印</td><td style="border: 1px solid #ddd; padding: 8px;">お守り: 500円〜2,000円<br>御朱印: 500円<br>各種祈願: 1,000円〜10,000円</td></tr></table><br>【2.1 陽明門】<br>日光東照宮の代表的な建築物で、平成の大修理を終えたばかりの艶やかな塗装と煌びやかな装飾が印象的です。豪華絢爛な彫刻の意味と秘密が込められた、まさに日光東照宮のシンボル的存在です。陽明門には508体の彫刻が施されており、その一つ一つに深い意味が込められています。特に「唐子遊び」の彫刻は、子どもたちの無邪気な遊びを表現し、平和への願いを表しています。門の上部には「昇り龍」と「降り龍」の彫刻があり、これらは水の神として火災から建物を守る意味があります。<br><br>【2.2 眠り猫】<br>驚くほど小さな彫刻で、観光客の通りが多いところに設置されています。現地ではよく見れないことがありますが、日光東照宮の有名な彫刻の一つとして知られています。眠り猫は左甚五郎の作と伝えられ、猫が眠っている姿を彫刻したものです。この彫刻には「猫が眠っている間は鼠が来ない」という意味があり、家康の墓所を守る役割を果たしています。猫の下には雀の彫刻もあり、猫が眠っているから雀も安心して遊んでいるという平和な情景を表現しています。<br><br>【2.3 三猿】<br>「見ざる、聞かざる、言わざる」で有名な三猿は、8つの面で構成された物語の一部です。諺の意味と日光東照宮の三猿が意味するところが若干違うのも面白いところで、年老いて取り返しがつかなくなる前に早めの三猿という教えが込められています。三猿は神厩舎（しんきゅうしゃ）の壁面に彫刻されており、人間の一生を8つの場面で表現した物語の一部です。三猿の教えは「若いうちは悪いことを見たり、聞いたり、言ったりしないように」という意味で、子どもの教育に関する教訓が込められています。',
     },
     '23': {
-      title: '鎌倉',
-      description: '歴史と文化が息づく古都。大仏とアニメの聖地',
+      title: '東京ディズニーランド',
+      description: '世界で最も人気のテーマパーク。夢の国で楽しい時間を過ごそう',
       author: 'タビログ編集部',
-      heroImage: Kamakura,
-      breadcrumb: ['神奈川', '鎌倉市', '鎌倉'],
-      contentTitle: '鎌倉の基本情報',
-      spots: ['スラムダンクの聖地', '鎌倉大仏'],
-      imageLeft: GamakuraTaiButsu,
-      imageRight: KamakuraSlamdunk,
+      heroImage: TokyoDisneyland,
+      breadcrumb: ['東京', '浦安市', '東京ディズニーランド'],
+      contentTitle: '東京ディズニーランドの基本情報',
+      spots: ['ディズニーリゾート', 'ディズニーシー', 'アドベンチャーランド', 'トゥーンタウン'],
+      imageLeft: DisneyResort,
+      imageRight: DisneySea,
       content:
-        '鎌倉は1192年に源頼朝が開いた鎌倉幕府の古都として知られる歴史ある街です。現在は大仏や鶴岡八幡宮などの歴史的建造物と、スラムダンクなどのアニメの聖地としても人気を集めています。海と山に囲まれた自然豊かな環境で、四季折々の美しい景色を楽しめます。<br><br>【2.1 スラムダンクの聖地】<br>鎌倉高校前駅の踏切は、人気アニメ「スラムダンク」のオープニングで登場する有名な聖地です。青い海と空、そして江ノ島電鉄の電車が走る風景は、アニメファンにとって憧れの場所となっています。特に夕日の時間帯は、アニメの世界そのままの美しい光景を楽しむことができます。多くの観光客が写真撮影に訪れる人気スポットです。<br><br>【2.2 鎌倉大仏】<br>高徳院にある高さ約11.3mの青銅製の大仏像は、鎌倉のシンボルとして親しまれています。鎌倉時代の代表的な仏像彫刻として知られ、国の重要文化財に指定されています。大仏殿は台風で倒壊したため、現在は露座の姿で拝観できます。大仏の内部に入ることもでき、当時の鋳造技術の高さを間近で感じることができます。',
+        '東京ディズニーランドは世界で最も人気のテーマパークの一つ。ミッキーマウスをはじめとするディズニーキャラクターと一緒に夢の世界を体験できます。7つのテーマランドがあり、家族連れからカップルまで幅広い年齢層が楽しめます。パレードやショーも充実しており、一日中楽しめるエンターテイメント施設です。<br><br><table style="border-collapse: collapse; width: 100%; margin: 10px 0;"><tr style="background-color: #f2f2f2;"><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">項目</th><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">詳細</th></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">アクセス</td><td style="border: 1px solid #ddd; padding: 8px;">JR京葉線「舞浜駅」徒歩5分<br>東京駅から約15分、新宿駅から約40分</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">入場料金（1日券）</td><td style="border: 1px solid #ddd; padding: 8px;">大人（18歳以上）: 8,400円<br>中人（12-17歳）: 7,000円<br>小人（4-11歳）: 5,000円</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">営業時間</td><td style="border: 1px solid #ddd; padding: 8px;">9:00〜22:00（季節により変動）<br>休園日: 不定期（公式サイトで確認）</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">チケット購入</td><td style="border: 1px solid #ddd; padding: 8px;">公式サイト・コンビニ・現地窓口<br>事前購入推奨（当日完売の場合あり）</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">団体割引</td><td style="border: 1px solid #ddd; padding: 8px;">20名以上で団体料金適用<br>学校団体・企業団体向け特別プランあり</td></tr></table><br>【2.1 ディズニーリゾート】<br>東京ディズニーリゾートは、東京ディズニーランドと東京ディズニーシーを中心とした総合リゾートエリアです。ホテル、ショッピングモール、レストランが集まり、宿泊から食事、ショッピングまで全てを楽しめる完結型のリゾートです。リゾート内のホテルに宿泊すると、パークへの優先入場や特別な特典を利用できます。<br><br>【2.2 ディズニーシー】<br>東京ディズニーシーは、海をテーマにした世界唯一のディズニーパークです。7つのポート（港）で構成され、それぞれ異なる時代と地域の雰囲気を体験できます。アトラクションはよりスリリングで大人向けのものが多く、特に「タワー・オブ・テラー」や「インディ・ジョーンズ・アドベンチャー」は人気の絶叫系アトラクションです。<br><br>【2.3 アドベンチャーランド】<br>アドベンチャーランドは、ジャングルや海賊の世界をテーマにしたエリアです。「ジャングルクルーズ」では野生動物の模型や滝を楽しみ、「カリブの海賊」では海賊の冒険を体験できます。「インディ・ジョーンズ・アドベンチャー」は迫力満点のライドで、古代遺跡の探検を疑似体験できます。熱帯の雰囲気を演出する植物や建物が特徴的です。<br><br>【2.4 トゥーンタウン】<br>トゥーンタウンは、ディズニーアニメのキャラクターたちが住む街を再現したエリアです。ミッキーマウスの家「ミッキーの家とミート・ミッキー」では、実際にミッキーと会って写真を撮ることができます。「ロジャーラビットのカートゥーンスピン」は回転しながら進む楽しいライドで、子供から大人まで楽しめます。カラフルで可愛らしい建物が並び、まるでアニメの世界にいるような気分を味わえます。',
     },
     '24': {
       title: '🏛 中之島公会堂 × 黒執事 聖地巡礼',
@@ -278,17 +284,17 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
         '中之島公会堂は1918年に建てられた大阪を代表するネオ・ルネッサンス様式の建築物です。アニメ『黒執事』の舞台となるヴィクトリア時代のロンドンを彷彿とさせる重厚な外観から、ファンの間では聖地の一つとして親しまれています。作品の公式ロケ地ではありませんが、その雰囲気が「黒執事」の世界観と重なるため、多くのファンが訪れています。<br><br>【2.1 外観（ヴィクトリア建築）】<br>赤レンガと白い石材を組み合わせた外観は、ヴィクトリア時代のロンドンを思わせます。ファンにとっては写真撮影の定番スポットです。<br><br>【2.2 大ホール】<br>公会堂の中心に位置する大ホールは、豪華な装飾とクラシックな雰囲気が特徴。『黒執事』の舞踏会シーンを連想させます。<br><br>【2.3 ステンドグラス】<br>天井や窓に施されたステンドグラスは必見。色鮮やかな光が差し込み、まるでアニメのワンシーンのような幻想的な空間を作り出します。',
     },
     '25': {
-      title: '渋谷',
-      description: '若者の街として有名。スクランブル交差点とハチ公がシンボル',
-      author: 'タビログ編集部',
-      heroImage: ShibuyaScramble,
-      breadcrumb: ['東京', '渋谷区', '渋谷'],
-      contentTitle: '渋谷の基本情報',
-      spots: ['スクランブル交差点', '原宿ファッション街', '明治神宮', '東京ヤクルトスワローズ'],
-      imageLeft: ShibuyaScramble,
-      imageRight: ShibuyaBape,
+      title: '🎡 天保山大観覧車 × 名探偵コナン 聖地巡礼',
+      description: '天保山大観覧車 聖地巡礼！コナンと大阪の夜景',
+      author: 'アニメ巡礼編集部',
+      heroImage: OsakaTempozan,
+      breadcrumb: ['大阪', '港区', '天保山大観覧車'],
+      contentTitle: '天保山大観覧車とコナンの関係',
+      spots: ['観覧車からの夜景', '海遊館とのセット巡り', '大阪港ベイエリア'],
+      imageLeft: OsakaTempozan,
+      imageRight: OsakaTempozan,
       content:
-        '渋谷は東京を代表する若者の街として世界的に知られています。スクランブル交差点の大勢の人々が交差する光景は、東京の象徴的な風景の一つです。ファッション、エンターテイメント、グルメなど、様々な文化が集まる活気あふれる街です。<br><br>【2.1 スクランブル交差点】<br>渋谷の象徴であるスクランブル交差点は、世界で最も有名な交差点の一つです。1回の青信号で約3000人が交差し、1日あたり約50万人が利用する世界最大級の交差点として知られています。5つの道路が交差する複雑な構造で、周囲には巨大なビジョンや広告看板が立ち並び、東京の活気を象徴する光景を演出しています。特に夕方のラッシュアワーには、多くの人々が一斉に交差点を渡る様子は圧巻で、観光客にとって必見のスポットとなっています。<br><br>【2.2 原宿ファッション街】<br>渋谷から徒歩圏内の原宿は、日本のファッション文化の発信地として知られています。竹下通りには若者向けのショップが並び、カワイイ文化やストリートファッションの中心地となっています。週末には多くのファッション好きの若者が集まり、独特の文化を形成しています。また、原宿にはヒューマンメイドやベイプなどの高級ストリートブランドが集まっており、ファッション愛好家たちの聖地としても知られています。これらのブランドは日本のストリートファッション文化を世界に発信する重要な役割を担っています。<br><br>【2.3 明治神宮】<br>渋谷から徒歩圏内にある明治神宮は、明治天皇と昭憲皇太后を祀る神社です。都心にありながら70万平方メートルもの広大な森に囲まれた、東京のオアシスとして親しまれています。初詣の参拝者数は日本一を誇り、年間を通じて多くの参拝者が訪れます。高さ12m、幅17mの巨大な木造鳥居や、秋の銀杏並木で有名な神宮外苑も見どころです。<br><br>【2.4 東京ヤクルトスワローズ】<br>東京ヤクルトスワローズは渋谷を本拠地とするプロ野球チームです。渋谷の街の活気と若いエネルギーを象徴するチームとして、地域ファンに愛されています。試合観戦はもちろん、チームグッズの購入や選手との交流イベントなど、野球ファンに特別な体験を提供します。また、スワローズは日本プロ野球の代表的なチームの一つとして、国内外の野球 팬들에게 널리 알려져 있습니다. 팀의 마스코트인 츠바메군과 함께 다양한 이벤트와 팬 서비스를 제공하여 가족 단위 관람객들에게도 인기가 높습니다.',
+        '天保山大観覧車は大阪港に位置する日本最大級の観覧車で、直径100mを超えるスケールを誇ります。劇場版『名探偵コナン 純黒の悪夢』では、クライマックスの舞台の一つとして登場し、緊張感あるシーンを彩りました。現在ではコナンファンの聖地として知られ、夜景を楽しみながら作品の雰囲気を味わえる人気スポットとなっています。<br><br>【2.1 観覧車からの夜景】<br>地上112.5mから眺める夜景は圧巻。コナンと同じ視点で大阪の街を見渡せます。<br><br>【2.2 海遊館とのセット巡り】<br>海遊館と一緒に巡るのもおすすめ。観覧車と合わせて大阪ベイエリアを満喫できます。<br><br>【2.3 大阪港ベイエリア】<br>ベイエリア全体が夜景の名所。観覧車と合わせて写真映えスポットとして人気です。<br><br>【2.4 東京ヤクルトスワローズ】<br>東京ヤクルトスワローズは渋谷を本拠地とするプロ野球チームです。渋谷の街の活気と若いエネルギーを象徴するチームとして、地域ファンに愛されています。試合観戦はもちろん、チームグッズの購入や選手との交流イベントなど、野球ファンに特別な体験を提供します。また、スワローズは日本プロ野球の代表的なチームの一つとして、国内外の野球 팬들에게 널리 알려져 있습니다. 팀의 마스코트인 츠바메군과 함께 다양한 이벤트와 팬 서비스를 제공하여 가족 단위 관람객들에게도 인기가 높습니다.',
     },
     '33': {
       title: '秋葉原',
@@ -316,9 +322,22 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
       content:
         '富士急ハイランドは富士山を背景にした絶叫マシンで有名なテーマパークです。世界記録を持つアトラクションや富士山の絶景を楽しめるアトラクションなど、スリルと絶景を同時に楽しめる日本屈指のテーマパークとして人気を集めています。<br><br><table style="border-collapse: collapse; width: 100%; margin: 10px 0;"><tr style="background-color: #f2f2f2;"><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">項目</th><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">詳細</th></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">アクセス</td><td style="border: 1px solid #ddd; padding: 8px;">富士急行線「富士急ハイランド駅」直結<br>新宿から約1時間30分、東京駅から約2時間</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">入場料金（1日券）</td><td style="border: 1px solid #ddd; padding: 8px;">大人（18歳以上）: 6,200円<br>中人（12-17歳）: 5,200円<br>小人（3-11歳）: 3,600円</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">営業時間</td><td style="border: 1px solid #ddd; padding: 8px;">9:00〜17:00（季節により変動）<br>休園日: 水曜日（季節により変動）</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">チケット購入</td><td style="border: 1px solid #ddd; padding: 8px;">公式サイト・コンビニ・現地窓口<br>オンライン予約で割引あり</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">団体割引</td><td style="border: 1px solid #ddd; padding: 8px;">15名以上で団体料金適用<br>学校団体・企業団体向け特別プランあり</td></tr></table><br>【2.1 絶叫マシン】<br>富士急ハイランドは世界記録を持つ絶叫マシンで有名です。「ド・ドドンパ」は世界最速のジェットコースターとして知られ、最高時速180kmで走行します。「ええじゃないか」は世界最大の振り子角度を持つアトラクションで、最大角度121度まで振り子が揺れます。これらの絶叫マシンは世界中のスリル好きな観光客を引き寄せています。<br><br>【2.2 富士山ビュー】<br>富士急ハイランドの最大の魅力は富士山を背景にした絶景です。多くのアトラクションから富士山の美しい姿を眺めることができ、特に「富士飛行社」や「大観覧車」からは富士山の全景を楽しめます。天気の良い日には富士山の雄大な姿とアトラクションのスリルを同時に体験できる特別な感動を味わえます。<br><br>【2.3 アトラクション】<br>富士急ハイランドには絶叫マシン以外にも様々なアトラクションがあります。「トーマスランド」は小さな子供向けのエリアで、トーマス・ザ・タンクエンジンの世界観を楽しめます。「ナガシマスカイ」は富士山を背景にした大観覧車で、ゆっくりと富士山の絶景を楽しめます。家族連れから絶叫マシン好きまで、幅広い年齢層が楽しめるテーマパークです。',
     },
+    '26': {
+      title: '渋谷',
+      description: '若者の街として有名。スクランブル交差点とハチ公がシンボル',
+      author: 'タビログ編集部',
+      heroImage: ShibuyaScramble,
+      breadcrumb: ['東京', '渋谷区', '渋谷'],
+      contentTitle: '渋谷の基本情報',
+      spots: ['スクランブル交差点', 'ハチ公像', '109'],
+      imageLeft: ShibuyaBape,
+      imageRight: ShibuyaScramble,
+      content:
+        '渋谷は東京を代表する若者の街として世界的に有名です。スクランブル交差点は世界最大級の歩行者横断歩道として知られ、ハチ公像は忠犬ハチ公の物語で多くの人に愛されています。ファッション、エンターテイメント、グルメなど、あらゆるジャンルで最新トレンドを発信する街です。<br><br><table style="border-collapse: collapse; width: 100%; margin: 10px 0;"><tr style="background-color: #f2f2f2;"><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">項目</th><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">詳細</th></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">アクセス</td><td style="border: 1px solid #ddd; padding: 8px;">JR山手線「渋谷駅」直結<br>東急東横線・田園都市線「渋谷駅」<br>京王井の頭線「渋谷駅」<br>東京メトロ銀座線・半蔵門線・副都心線「渋谷駅」</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">営業時間</td><td style="border: 1px solid #ddd; padding: 8px;">店舗により異なる<br>一般的に10:00〜21:00</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">駐車場</td><td style="border: 1px solid #ddd; padding: 8px;">有料駐車場多数<br>公共交通機関利用推奨</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">周辺施設</td><td style="border: 1px solid #ddd; padding: 8px;">渋谷スクランブルスクエア<br>渋谷ヒカリエ・渋谷マークシティ<br>109・パルコ・東急百貨店</td></tr></table><br>【2.1 スクランブル交差点】<br>渋谷の象徴的な存在であるスクランブル交差点は、世界最大級の歩行者横断歩道として知られています。信号が青になると、一度に約3,000人の人が交差点を渡る光景は圧巻で、多くの観光客がこの光景を写真に収めています。特に夕方のラッシュアワーには、多くの人が行き交う様子が東京の活気を象徴する光景として人気です。交差点の周辺には大型ビジョンが設置されており、最新の広告や情報が流れ続けています。<br><br>【2.2 ハチ公像】<br>渋谷駅前にあるハチ公像は、忠犬ハチ公の物語で世界中に知られています。ハチ公は主人の帰りを待ち続けた忠実な犬として、多くの人に愛されています。ハチ公像は渋谷の待ち合わせスポットとして最も有名で、多くの人がここで友人や恋人と待ち合わせをしています。像の周りには常に多くの人が集まり、写真撮影や記念撮影が行われています。ハチ公の物語は映画化もされており、その感動的なストーリーは今も多くの人の心に響いています。<br><br>【2.3 109】<br>渋谷109は日本のファッション文化を代表する商業施設として知られています。若い女性をターゲットとしたファッションショップが多数入居しており、最新のファッショントレンドを発信しています。109の建物は渋谷のランドマークの一つで、独特の外観が特徴的です。館内にはカフェやレストランもあり、ショッピングの合間に休憩することもできます。109は日本のファッション文化の中心地として、国内外のファッション愛好者に人気のスポットです。',
+    },
   },
   名古屋: {
-    '27': {
+    '28': {
       title: '名古屋城',
       description: '徳川家康が築いた城。金色のシャチホコが有名',
       author: 'タビログ編集部',
@@ -331,7 +350,7 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
       content:
         '名古屋城は徳川家康が築いた城で、金色のシャチホコが有名な観光スポットです。桜の季節には特に人気が高く、多くの観光客が訪れます。天守閣からは名古屋の街並みを一望でき、歴史と現代が交わる美しい景色を楽しめます。<br><br><table style="border-collapse: collapse; width: 100%; margin: 10px 0;"><tr style="background-color: #f2f2f2;"><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">項目</th><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">詳細</th></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">所在地</td><td style="border: 1px solid #ddd; padding: 8px;">愛知県名古屋市中区本丸1-1</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">アクセス</td><td style="border: 1px solid #ddd; padding: 8px;">地下鉄名城線「市役所駅」徒歩5分<br>地下鉄鶴舞線「浅間町駅」徒歩12分<br>名古屋駅から車で約15分</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">営業時間</td><td style="border: 1px solid #ddd; padding: 8px;">9:00～16:30（入場は16:00まで）<br>12月29日～31日は休城</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">入場料金（大人）</td><td style="border: 1px solid #ddd; padding: 8px;">500円（高校生以上）</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">入場料金（小人）</td><td style="border: 1px solid #ddd; padding: 8px;">無料（中学生以下）</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">駐車場</td><td style="border: 1px solid #ddd; padding: 8px;">有料駐車場あり（300台）<br>普通車: 300円/時間<br>大型車: 1,000円/時間</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">団体観覧</td><td style="border: 1px solid #ddd; padding: 8px;">30名以上で団体料金適用<br>学校団体・企業団体向け特別プランあり</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">施設・設備</td><td style="border: 1px solid #ddd; padding: 8px;">展示室・売店・休憩所<br>ベビーカー貸出・授乳室<br>多言語対応・案内板</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">主要イベント</td><td style="border: 1px solid #ddd; padding: 8px;">桜まつり（4月）<br>名古屋城祭（10月）<br>季節限定イベント</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">周辺施設</td><td style="border: 1px solid #ddd; padding: 8px;">名古屋市役所・愛知県庁<br>大須商店街・栄<br>カフェ・レストラン多数</td></tr></table><br>【2.1 本丸】<br>本丸は名古屋城の中心部で、天守閣と本丸御殿が建てられている最も重要な区域です。江戸時代の建築様式を再現した本丸御殿は、内部の障壁画や装飾が当時の技術の高さを物語っており、日本の伝統建築美を堪能できます。復元された部屋では、当時の大名の生活を偲ぶことができます。本丸御殿は入場料に含まれており、詳細な説明とともに観覧できます。<br><br>【2.2 二の丸】<br>二の丸は本丸を囲む第二の防御区域で、庭園や茶室などが配置されています。美しい日本庭園では四季折々の風景を楽しむことができ、特に春の桜と秋の紅葉は見事です。また、二の丸には歴史的な建物や展示施設もあり、名古屋城の歴史についてより深く学ぶことができます。二の丸庭園は入場料に含まれており、自由に散策できます。<br><br>【2.3 金魚】<br>名古屋城の庭園には美しい金魚が泳ぐ池があります。これらの金魚は城の歴史とともに大切に育てられており、訪れる人々に安らぎを与えています。特に夏の時期には、金魚と城のコラボレーションが美しい風景を作り出し、多くの観光客が写真を撮影する人気スポットとなっています。金魚池は入場料に含まれており、いつでも観覧できます。',
     },
-    '28': {
+    '29': {
       title: '大須商店街',
       description: '漫画・アニメグッズ、電子機器、食べ物まで揃う商店街',
       author: 'タビログ編集部',
@@ -344,7 +363,7 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
       content:
         '大須商店街は漫画・アニメグッズ、電子機器、食べ物まで何でも揃う商店街です。オタク文化と伝統的な商店が混在する独特な雰囲気が魅力で、一日中楽しめる観光スポットです。<br><br><table style="border-collapse: collapse; width: 100%; margin: 10px 0;"><tr style="background-color: #f2f2f2;"><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">項目</th><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">詳細</th></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">所在地</td><td style="border: 1px solid #ddd; padding: 8px;">愛知県名古屋市中区大須2-20-25</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">アクセス</td><td style="border: 1px solid #ddd; padding: 8px;">地下鉄鶴舞線「大須観音駅」徒歩2分<br>地下鉄名城線「上前津駅」徒歩5分<br>名古屋駅から車で約20分</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">営業時間</td><td style="border: 1px solid #ddd; padding: 8px;">店舗により異なる<br>一般的に10:00～20:00<br>一部店舗は深夜まで営業</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">入場料金</td><td style="border: 1px solid #ddd; padding: 8px;">無料（商店街内散策）<br>各店舗での購入は別途</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">駐車場</td><td style="border: 1px solid #ddd; padding: 8px;">有料駐車場あり（複数箇所）<br>普通車: 200円～300円/時間<br>大型車: 500円/時間</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">団体利用</td><td style="border: 1px solid #ddd; padding: 8px;">商店街組合による案内<br>要予約・無料<br>グループ向け特別プランあり</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">施設・設備</td><td style="border: 1px solid #ddd; padding: 8px;">休憩所・トイレ・案内所<br>ベビーカー貸出・授乳室<br>多言語対応・案内板</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">主要イベント</td><td style="border: 1px solid #ddd; padding: 8px;">大須夏まつり（7月）<br>にっぽんど真ん中祭り（8月）<br>大須大道町人祭（10月）</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">周辺施設</td><td style="border: 1px solid #ddd; padding: 8px;">大須観音・万松寺<br>名古屋城・栄<br>カフェ・レストラン多数</td></tr></table><br>【2.1 有名なショップ】<br>大須商店街には数多くの有名なショップが立ち並んでいます。アニメ・漫画グッズ専門店、電子機器店、ファッションショップなど、様々なジャンルの店舗が集まっています。特にサンキューマートや大須おみやげカンパニーなど、地域に根ざした人気店舗が多く、地元の人々にも愛されています。週末には多くの買い物客で賑わい、活気あふれる雰囲気を楽しめます。各店舗の営業時間と価格は店舗により異なるため、訪問前に確認することをお勧めします。<br><br>【2.2 歴史】<br>大須商店街は江戸時代から続く歴史ある商店街です。寺町大須として発展し、戦国武将ゆかりの地としても知られています。万松寺や大須演芸場など、歴史的な建物が今も残っており、名古屋の文化と歴史を感じることができます。古い建物と新しい文化が共存する独特な景観は、名古屋の歴史と現代を同時に感じられる貴重な空間です。歴史的建物は無料で観覧でき、ガイドツアーも可能です。<br><br>【2.3 夏祭り】<br>大須商店街では年間を通じて様々なイベントが開催されます。特に夏には「大須夏まつり」や「にっぽんど真ん中祭り」など、大規模な祭りが開催され、多くの観光客が訪れます。また、大須大道町人祭では江戸時代の衣装を着た行列が街を練り歩き、歴史と文化を体感できる特別なイベントです。これらの祭りは大須の魅力をより深く知ることができる貴重な機会となっています。祭り観覧は無料で、特別イベントは事前予約が必要な場合があります。',
     },
-    '29': {
+    '30': {
       title: '熱田神宮',
       description: '日本三大神剣の一つ、草薙剣を祀る神宮',
       author: 'タビログ編集部',
@@ -357,7 +376,7 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
       content:
         '熱田神宮は日本三大神剣の一つである草薙剣を祀る神宮で、三種の神器に関連する聖地として歴史ファンに必須の観光スポットです。広大な境内には歴史的価値の高い建物や宝物が多数保存されています。<br><br><table style="border-collapse: collapse; width: 100%; margin: 10px 0;"><tr style="background-color: #f2f2f2;"><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">項目</th><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">詳細</th></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">所在地</td><td style="border: 1px solid #ddd; padding: 8px;">愛知県名古屋市熱田区神宮1-1-1</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">アクセス</td><td style="border: 1px solid #ddd; padding: 8px;">名古屋鉄道「神宮前駅」徒歩3分<br>地下鉄名城線「神宮西駅」徒歩7分<br>JR東海道本線「熱田駅」徒歩8分</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">営業時間</td><td style="border: 1px solid #ddd; padding: 8px;">境内: 24時間開放<br>宝物館: 9:00～16:30（入場は16:00まで）<br>12月25日～31日は休館</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">入場料金（境内）</td><td style="border: 1px solid #ddd; padding: 8px;">無料</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">入場料金（宝物館）</td><td style="border: 1px solid #ddd; padding: 8px;">大人: 300円<br>高校生: 200円<br>小・中学生: 150円</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">駐車場</td><td style="border: 1px solid #ddd; padding: 8px;">有料駐車場あり（500台）<br>普通車: 200円/時間<br>大型車: 500円/時間</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">団体観覧</td><td style="border: 1px solid #ddd; padding: 8px;">20名以上で団体料金適用<br>学校団体・企業団体向け特別プランあり</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">施設・設備</td><td style="border: 1px solid #ddd; padding: 8px;">宝物館・売店・休憩所<br>ベビーカー貸出・授乳室<br>多言語対応・案内板</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">主要祭典</td><td style="border: 1px solid #ddd; padding: 8px;">熱田まつり（5月）<br>例祭（6月5日）<br>秋季大祭（10月）</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">周辺施設</td><td style="border: 1px solid #ddd; padding: 8px;">名古屋港水族館・名古屋市科学館<br>大須商店街・栄<br>カフェ・レストラン多数</td></tr></table><br>【2.1 本宮】<br>熱田神宮の本宮は、草薙剣を祀る最も重要な建物です。伝統的な神社建築の美しさを今に伝え、厳かな雰囲気の中で参拝することができます。本宮前の広場では、年間を通じて様々な神事や祭典が執り行われます。本宮参拝は無料で、いつでも参拝できます。<br><br>【2.2 草薙剣】<br>草薙剣は日本神話に登場する三種の神器の一つで、熱田神宮の御神体として祀られています。この剣は天照大神から授けられたとされる神聖な剣で、日本の歴史と文化の象徴として崇敬されています。草薙剣は本宮内部に奉安されており、一般参拝者は直接見ることはできませんが、その神聖さを感じることができます。<br><br>【2.3 宝物館】<br>熱田神宮の宝物館には、神宮に伝わる貴重な宝物や歴史資料が展示されています。古代から現代に至るまでの日本の歴史を物語る品々を間近で見ることができ、歴史愛好家にとっては貴重な体験となります。宝物館入場料は大人300円、高校生200円、小学生・中学生150円です。<br><br>【2.4 神宮の森】<br>熱田神宮の境内は広大な森に囲まれており、都心にありながら自然豊かな環境を楽しめます。四季折々の美しい景色と静寂な雰囲気は、心を落ち着かせる聖地として多くの参拝者に愛されています。神宮の森は無料で散策でき、24時間開放されています。',
     },
-    '30': {
+    '31': {
       title: 'SCMAGLEV and Railway Park',
       description: 'JR東海運営。新幹線、リニア展示。鉄道ファンの聖地',
       author: 'タビログ編集部',
@@ -370,7 +389,7 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
       content:
         'SCMAGLEV and Railway ParkはJR東海が運営する鉄道博物館で、新幹線やリニアの展示が充実しています。鉄道ファンの聖地として知られ、実際の車両に乗車できる体験型展示が人気です。<br><br><table style="border-collapse: collapse; width: 100%; margin: 10px 0;"><tr style="background-color: #f2f2f2;"><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">項目</th><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">詳細</th></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">所在地</td><td style="border: 1px solid #ddd; padding: 8px;">愛知県名古屋市港区金城ふ頭3-2-2</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">アクセス</td><td style="border: 1px solid #ddd; padding: 8px;">名古屋臨海高速鉄道「金城ふ頭駅」徒歩2分<br>名古屋駅から車で約30分<br>無料シャトルバス運行</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">営業時間</td><td style="border: 1px solid #ddd; padding: 8px;">10:00～17:30（入場は17:00まで）<br>火曜日休館（祝日除く）<br>年末年始休館</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">入場料金（大人）</td><td style="border: 1px solid #ddd; padding: 8px;">1,000円（高校生以上）</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">入場料金（小人）</td><td style="border: 1px solid #ddd; padding: 8px;">500円（小・中学生）<br>無料（未就学児）</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">駐車場</td><td style="border: 1px solid #ddd; padding: 8px;">有料駐車場あり（500台）<br>普通車: 300円/時間<br>大型車: 1,000円/時間</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">団体観覧</td><td style="border: 1px solid #ddd; padding: 8px;">20名以上で団体料金適用<br>学校団体・企業団体向け特別プランあり</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">施設・設備</td><td style="border: 1px solid #ddd; padding: 8px;">展示室・売店・休憩所<br>ベビーカー貸出・授乳室<br>多言語対応・案内板</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">体験施設</td><td style="border: 1px solid #ddd; padding: 8px;">運転シミュレーター<br>新幹線車両見学<br>リニア体験コーナー</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">周辺施設</td><td style="border: 1px solid #ddd; padding: 8px;">名古屋港水族館・ポートビル<br>名古屋市科学館・栄<br>カフェ・レストラン多数</td></tr></table><br>【2.1 新幹線展示】<br>博物館には歴代の新幹線車両が展示されており、0系から最新のN700Sまで、日本の高速鉄道技術の進歩を体感できます。実際の車両内部を見学でき、運転席や客室の構造を詳しく観察することができます。新幹線の技術革新の歴史を学びながら、実際の車両の迫力を間近で体験できます。新幹線車両見学は入場料に含まれており、自由に観覧できます。<br><br>【2.2 リニア展示】<br>超電導リニアの実物大模型や技術展示により、次世代高速鉄道の仕組みを学ぶことができます。リニアの浮上原理や推進システムについて、分かりやすい展示で理解を深められます。未来の交通技術を先取りできる貴重な体験ができます。リニア体験コーナーは入場料に含まれており、体験型展示を通じて学習できます。<br><br>【2.3 運転シミュレーター】<br>実際の新幹線の運転席を再現したシミュレーターでは、運転士の体験ができます。新幹線の運転操作や速度感を体感でき、鉄道ファンにとっては夢の体験となるでしょう。リアルな運転体験を通じて、新幹線の技術の高さを実感できます。運転シミュレーターは別途予約が必要で、追加料金が発生する場合があります。',
     },
-    '31': {
+    '32': {
       title: '名古屋市科学館',
       description: '世界最大級のプラネタリウム。科学愛好家に人気',
       author: 'タビログ編集部',
@@ -383,7 +402,7 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
       content:
         '名古屋市科学館は世界最大級のプラネタリウムを有する科学館で、科学愛好家に人気の観光スポットです。体験型の展示が充実しており、子供から大人まで楽しめる施設です。<br><br><table style="border-collapse: collapse; width: 100%; margin: 10px 0;"><tr style="background-color: #f2f2f2;"><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">項目</th><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">詳細</th></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">所在地</td><td style="border: 1px solid #ddd; padding: 8px;">愛知県名古屋市中区栄2-17-1</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">アクセス</td><td style="border: 1px solid #ddd; padding: 8px;">地下鉄東山線「伏見駅」徒歩5分<br>地下鉄名城線「栄駅」徒歩8分<br>名古屋駅から車で約15分</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">営業時間</td><td style="border: 1px solid #ddd; padding: 8px;">9:30～17:00（入場は16:30まで）<br>月曜日休館（祝日除く）<br>年末年始休館</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">入場料金（大人）</td><td style="border: 1px solid #ddd; padding: 8px;">800円（高校生以上）</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">入場料金（小人）</td><td style="border: 1px solid #ddd; padding: 8px;">400円（小・中学生）<br>無料（未就学児）</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">プラネタリウム料金</td><td style="border: 1px solid #ddd; padding: 8px;">大人: 400円<br>小人: 200円<br>未就学児: 無料</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">駐車場</td><td style="border: 1px solid #ddd; padding: 8px;">有料駐車場あり（200台）<br>普通車: 200円/時間<br>大型車: 500円/時間</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">団体観覧</td><td style="border: 1px solid #ddd; padding: 8px;">30名以上で団体料金適用<br>学校団体・企業団体向け特別プランあり</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">施設・設備</td><td style="border: 1px solid #ddd; padding: 8px;">展示室・売店・休憩所<br>ベビーカー貸出・授乳室<br>多言語対応・案内板</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">周辺施設</td><td style="border: 1px solid #ddd; padding: 8px;">栄・名古屋城・大須商店街<br>名古屋市美術館・白川公園<br>カフェ・レストラン多数</td></tr></table><br>【2.1 プラネタリウム】<br>世界最大級のプラネタリウムでは、美しい星空の投影とともに宇宙の神秘を体験できます。最新のデジタル技術により、リアルな星空と惑星の動きを観察でき、天文学の知識を深めることができます。プラネタリウムは別途料金があり、事前予約が推奨されます。<br><br>【2.2 科学展示】<br>館内には物理、化学、生物、地学など様々な分野の科学展示があります。実際に触れて体験できる展示が多く、科学の原理を楽しく学ぶことができます。特に子供たちの科学への興味を引き出す工夫が随所に見られます。科学展示は入場料に含まれており、自由に観覧できます。<br><br>【2.3 体験コーナー】<br>科学館には様々な体験コーナーがあり、実験や工作を通じて科学の面白さを体感できます。スタッフによる解説も充実しており、疑問に思ったことを気軽に質問できる環境が整っています。体験コーナーは入場料に含まれており、スタッフの説明を聞くことができます。<br><br>【2.4 特別展】<br>定期的に開催される特別展では、最新の科学技術や話題のテーマについて深く学ぶことができます。宇宙、ロボット、環境など、幅広い分野の特別展が開催され、常に新しい発見があります。特別展は別途料金がある場合があり、展示内容により異なります。',
     },
-    '32': {
+    '33': {
       title: '名古屋港水族館',
       description: 'シャチ、ベルーガ、イルカショーで有名。家族連れに人気',
       author: 'タビログ編集部',
@@ -563,29 +582,18 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
       content:
         '大通公園は札幌の中心を東西に貫く緑の帯。季節の花壇や噴水、イベントが魅力で、夏のビアガーデンや冬の雪まつりなど市民に親しまれる催しが多数開催されます。周辺にはカフェや百貨店が揃い、観光の合間の休憩にも便利です。<br><br><table style="border-collapse: collapse; width: 100%; margin: 10px 0;"><tr style="background-color: #f2f2f2;"><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">項目</th><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">詳細</th></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">所在地</td><td style="border: 1px solid #ddd; padding: 8px;">北海道札幌市中央区大通西1丁目〜大通西12丁目</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">アクセス</td><td style="border: 1px solid #ddd; padding: 8px;">地下鉄南北線「大通駅」直結<br>地下鉄東西線「大通駅」直結<br>地下鉄東豊線「大通駅」直結<br>JR「札幌駅」徒歩10分</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">営業時間</td><td style="border: 1px solid #ddd; padding: 8px;">24時間開放<br>イベント時は時間制限あり</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">入場料金</td><td style="border: 1px solid #ddd; padding: 8px;">無料<br>イベント時は別途料金</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">駐車場</td><td style="border: 1px solid #ddd; padding: 8px;">専用駐車場なし<br>周辺コインパーキング利用<br>公共交通機関利用推奨</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">施設・設備</td><td style="border: 1px solid #ddd; padding: 8px;">ベンチ・トイレ・噴水<br>花壇・遊具・イベント広場</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">主要イベント</td><td style="border: 1px solid #ddd; padding: 8px;">札幌雪まつり（2月）<br>ビアガーデン（7-8月）<br>ライラックまつり（5月）</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">周辺施設</td><td style="border: 1px solid #ddd; padding: 8px;">札幌テレビ塔・時計台<br>大丸・三越・パルコ<br>カフェ・レストラン多数</td></tr></table><br>【2.1 噴水】<br>大通公園の噴水は、公園の美しい景観を演出する重要な要素です。特に夏の時期には、涼しげな水しぶきが訪れる人々に安らぎを与えます。噴水の周りにはベンチが設置されており、水の音を聞きながらゆっくりと過ごすことができます。夜間にはライトアップされ、幻想的な雰囲気を演出します。札幌の夏の暑さを和らげるオアシスとして、地元の人々にも観光客にも愛されています。噴水は公園の中央部に位置し、テレビ塔からもよく見える位置にあります。<br><br>【2.2 花壇】<br>大通公園の花壇は、四季折々の美しい花々で彩られています。春にはチューリップやパンジー、夏にはマリーゴールドやサルビア、秋にはコスモスやキクなど、季節に応じた花々が植えられています。特に春と夏の花壇は圧巻で、多くの人が写真撮影に訪れます。花壇のデザインは毎年変わり、新しい発見があるのも魅力の一つです。花の香りと美しい色彩が、公園を訪れる人々の心を和ませてくれます。花壇は公園全体に配置されており、散策しながら楽しめます。<br><br>【2.3 テレビ塔ビュー】<br>大通公園から見る札幌テレビ塔の景色は、札幌を代表する絶景スポットの一つです。公園の緑とテレビ塔の赤い塔身のコントラストが美しく、特に夕暮れ時には格別の美しさを楽しめます。テレビ塔の展望台からは大通公園を一望でき、逆に公園からはテレビ塔の威容を間近で感じることができます。夜になるとテレビ塔がライトアップされ、公園の夜景と合わせてロマンチックな雰囲気を演出します。札幌観光の定番フォトスポットとして、多くの観光客が訪れています。テレビ塔は公園の東端に位置し、大通公園の全長1.5kmにわたって美しい景観を楽しめます。',
     },
-    '26': {
-      title: 'サッポロビール博物館',
-      description: '北海道の代表的なビール工場。歴史と製造工程を学べる',
-      author: 'タビログ編集部',
-      heroImage: GenghisKhan,
-      breadcrumb: ['札幌', '東区', 'サッポロビール博物館'],
-      contentTitle: 'サッポロビール博物館の基本情報',
-      spots: ['ジンギスカン', '見学案内', '試飲コーナー'],
-      imageLeft: SapporoBeerMuseum,
-      imageRight: SapporoBeerTaste,
-      content:
-        'サッポロビール博物館は北海道のビール文化を学べる貴重な施設。明治時代から続くビール製造の歴史と技術を展示で紹介し、実際の製造工程も見学できます。試飲コーナーでは新鮮なビールを味わえ、北海道の食文化を深く理解できるスポットです。<br><br><table style="border-collapse: collapse; width: 100%; margin: 10px 0;"><tr style="background-color: #f2f2f2;"><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">項目</th><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">詳細</th></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">所在地</td><td style="border: 1px solid #ddd; padding: 8px;">北海道札幌市東区北7条東9丁目1-1</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">アクセス</td><td style="border: 1px solid #ddd; padding: 8px;">地下鉄東豊線「東区役所前駅」徒歩8分<br>JR「札幌駅」徒歩25分<br>バス「サッポロビール園前」下車すぐ</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">営業時間</td><td style="border: 1px solid #ddd; padding: 8px;">11:00～18:30（ラストオーダー18:00）<br>定休日：月曜日（祝日の場合は翌日）</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">駐車場</td><td style="border: 1px solid #ddd; padding: 8px;">有料駐車場あり（台数限定）<br>公共交通機関利用推奨</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">周辺施設</td><td style="border: 1px solid #ddd; padding: 8px;">サッポロビール園・レストラン<br>札幌市東区役所・図書館<br>商業施設・コンビニ</td></tr></table><br>【2.1 ジンギスカン】<br>サッポロビール博物館では、ビール製造の全工程を詳しく学ぶことができます。特に注目すべきは、札幌の名物「ジンギスカン」とビールの深い関係です。ジンギスカンは北海道の代表的な郷土料理で、羊肉を鉄板で焼いて食べる料理です。このジンギスカンとビールの組み合わせは、札幌の食文化の象徴的な存在となっています。博物館では、ビールの製造過程で使用される麦芽の種類や発酵の仕組み、そしてジンギスカンと相性の良いビールの特徴について詳しく解説されています。ジンギスカンの脂っこさをビールの爽やかな苦味が中和し、完璧な味のハーモニーを生み出す秘密も学べます。<br><br>■ジンギスカン料理と価格（税込）：<br>・ジンギスカン定食：1,200円～1,800円<br>・ジンギスカン単品：800円～1,200円<br>・ラム肉ジンギスカン：1,000円～1,500円<br>・ジンギスカン＋ビールセット：1,500円～2,200円<br>・野菜盛り合わせ：400円～600円<br>・ご飯・ライス：200円～300円<br>・ジンギスカン汁物：300円～500円<br><br>■ジンギスカンの食べ方とコツ：<br>・羊肉を鉄板で焼く際は、中火でじっくりと焼くのがポイント<br>・野菜は羊肉の脂で炒めることで、より美味しく仕上がります<br>・タレは甘辛い醤油ベースで、羊肉の臭みを消す効果があります<br>・ビールとの相性が抜群で、特にサッポロビールとの組み合わせが人気<br>・一人前の目安は羊肉150g～200g程度です<br><br>【2.2 見学案内】<br>サッポロビール博物館では、プレミアムツアー（有料）と自由見学（無料）の2つの見学コースをご用意しています。<br><br>■プレミアムツアー（有料・要予約）<br>・所要時間：約50分（テイスティング含む）<br>・実施日：月曜日を除く営業日（月曜日が祝日の場合は実施し、翌火曜日が休止）<br>・実施時間：初回11:30スタート（以降の実施時間・回数は日によって異なります）<br>・受付時間：各回スタート10分前まで<br>・定員：20名様<br>・参加費：大人1,000円、中学生～20歳未満500円、小学生以下無料<br>・内容：ブランドコミュニケーターによるガイド付きツアー、プレミアムシアターでの歴史物語視聴、館内展示見学、創業当時の味「復刻札幌製麦酒」と現代の生ビール「黒ラベル」の飲み比べ<br><br>■自由見学（無料）<br>・営業時間：11:00～18:30（ラストオーダー18:00）<br>・順路：3階→2階→1階の一方通行ルート<br>・多言語対応：英語・韓国語・中国語（簡体字）の翻訳版を2次元バーコードで提供<br><br>【2.3 試飲コーナー】<br>スターホール（テイスティング）では、サッポロビール北海道工場、札幌開拓使麦酒醸造所直送のできたてビールを味わえます。<br><br>■営業時間：11:00～18:30（ラストオーダー18:00）<br>■利用時間：30分まで<br>■試飲できる銘柄と価格（税込）：<br>・サッポロ生ビール黒ラベル：450円<br>・北海道限定クラシック：450円<br>・開拓使麦酒：550円<br>・3種飲み比べセット：1,200円<br>・ノンアルコールビールテイスト飲料：200円<br>・ソフトドリンク：200円<br><br>■注意事項：<br>・館内順路は一方通行のため、スターホールのみの利用はお控えください<br>・満席時はお待ちいただく場合があります<br>・ラストオーダー以降は試飲待機列にお並びいただけません<br>・12月31日は休業日です',
-    },
     '27': {
-      title: '円山動物園',
-      description: '北海道を代表する動物園。ホッキョクグマやレッサーパンダが人気',
+      title: '🦁 円山動物園',
+      description: '札幌を代表する総合動物園。ホッキョクグマやアムールトラなど人気の動物に会える',
       author: 'タビログ編集部',
       heroImage: maruyamapolarbear,
       breadcrumb: ['札幌', '中央区', '円山動物園'],
       contentTitle: '円山動物園の基本情報',
-      spots: ['ホッキョクグマ館', 'レッサーパンダ', 'こども動物園', '入園案内・料金・団体見学'],
+      spots: ['ホッキョクグマ館', '園内マップ', 'アムールトラ', 'こども動物園'],
+      imageLeft: maruyamapolarbear,
+      imageRight: maruyamakodomo,
       content:
-        '円山動物園は、極地・高山・熱帯・アフリカなど多彩な生態環境を模したエリアを備え、動物福祉に配慮した行動展示や環境教育プログラムを重視している札幌を代表する総合動物園です。園内には休憩施設やショップ、学習拠点（動物科学館）も充実しており、季節ごとのイベントや冬季の観察テーマも人気です。<br><br>【2.1 ホッキョクグマ館】<br>大水槽と水中観察窓から、ホッキョクグマのダイブや遊泳、採餌行動を間近で体感できます。季節や時間帯に応じた行動の違いを学べる解説パネルや、寒帯環境の再現展示もわかりやすく、親子の学びに最適。個体ごとの性格・行動差に注目すると、観察がより楽しくなります。混雑時は観覧ルートの一方通行に従い、フラッシュ撮影は避けましょう。<br><br>【2.2 レッサーパンダ】<br>樹上生活に適応したレッサーパンダのために、高低差のある遊具・丸太・通路を配した立体的な飼育環境が整備されています。活発に動く時間帯（朝・夕）には、枝渡りや採食行動が観察しやすく、換毛期の毛並みの変化にも注目。展示前のマナー（ガラス面の叩打禁止・音量配慮）を守り、動物へのストレス軽減に協力しましょう。<br><br>【2.3 こども動物園】<br>ウサギ・ヤギなど小動物とのふれあいを通じて、命の大切さや正しい飼育知識を学べるエリアです。職員による簡単なレクチャーや、手洗い・消毒の導線が整備されており、初めての方でも安心して体験できます。混雑時には人数制限や滞在時間の調整が行われる場合がありますので、案内表示に従ってください。<br><br>【2.4 入園案内・料金・団体見学】<br>令和7年6月12日から、総合案内窓口は改修工事に伴い「動物園センター」から「次世代エネルギーパーク動物科学館」へ一時移転しています。工事期間中、一部トイレ・休憩スペースが利用できない場合があります。最新のご案内・園内マップ・冷房スポット・各種コースマップは公式サイトの総合案内をご確認ください。<br>入園料や開園時間、団体見学（学校団体・旅行会社等）の受付・割引条件についても、最新情報が公式ページに掲載されています。計画前に必ず最新情報をご確認ください。<br>お問い合わせ：札幌市円山動物園（TEL：011-621-1426）<br>公式サイト：<a href="https://www.city.sapporo.jp/zoo/b_f/index.html" target="_blank" rel="noreferrer">総合案内（札幌市円山動物園）</a><br>参考：<a href="https://namu.wiki/w/%EB%A7%88%EB%A3%A8%EC%95%BC%EB%A7%88%EB%8F%99%EB%AC%BC%EC%9B%90" target="_blank" rel="noreferrer">円山動物園</a>',
+        '円山公園に隣接する「円山動物園」は、北の大地らしい動物展示と学びのコンテンツが充実した札幌の定番スポット。ホッキョクグマ館では水槽越しにダイナミックな遊泳シーンを間近で観察でき、迫力満点。園内はベビーカーでも回りやすく、キッズ向けの体験や解説も豊富です。<br><br>【2.1 ホッキョクグマ館】<br>大水槽での遊泳やダイブは必見。時間帯によって行動が変わるので、昼と夕方で違う表情を楽しめます。<br><br>【2.2 園内マップ】<br>広い園内はエリアごとにテーマ展示。入口で配布されるマップを活用し、効率よく周遊しましょう。<br><br>【2.3 アムールトラ】<br>精悍な姿が魅力の大型ネコ科。ガラス越しに表情や歩行をじっくり観察できます。<br><br>【2.4 こども動物園】<br>小動物とのふれあいや学びの展示でファミリーに人気。季節イベントも随時開催。',
     },
     '28': {
       title: '北海道大学',
@@ -613,7 +621,7 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
       content:
         '狸小路商店街は、明治時代から続く札幌の中心繁華街の一つ。アーケードで全天候型の快適な歩行空間が確保され、1丁目から7丁目まで多彩な飲食・物販・娯楽が揃います。大通公園とすすきのの間に位置し、観光の合間の食事や買い物に最適な導線。国内外の旅行者が一日中行き交う札幌の定番スポットです。<br><br>【2.1 グルメ（スープカレー・ラーメン）】<br>札幌グルメを気軽に楽しめるのも狸小路の魅力。スープカレーは人気店『GARAKU』の濃厚スパイス系が代表格で、野菜の旨味とコク深いスープが寒い季節にぴったり。ラーメンは『北一（きたいち）』の味噌・醤油など札幌スタイルを堪能できます。<br>・目安待ち時間：ランチ/ディナーのピーク（12:00〜13:30、18:30〜20:00）は20〜40分前後。混雑回避には開店直後またはアイドルタイム（15:00前後）が狙い目。<br>・支払い/予約：一部店舗は現金メイン・券売機制。予約可否やラストオーダーは店舗により異なるため事前確認推奨。<br>・場所感：GARAKUは狸小路・すすきの寄りの路地裏エリア、北一は狸小路周辺から徒歩圏。商店街から徒歩5〜10分内で回遊しやすい。<br><br>【2.2 たぬきや（狸グッズ・土産）】<br>創業大正5年、狸小路4丁目の老舗みやげ店『たぬきや』は、札幌中心部最大級の品揃え（5,000点超）が魅力。北海道銘菓や限定キャラクターグッズ、地酒・焼酎・ワイン、木彫りなど北海道らしい商品がズラリ。店頭の大きな狸が目印で、2階は北海道ならではの木彫りグッズやオリジナル「狸」グッズ（ぬいぐるみ、置物、キーホルダー、招き狸など）も充実。<br><br>営業時間：9:30〜21:30<br>年中無休（臨時休業あり）<br>住所：札幌市中央区南3条西4丁目18（狸小路4丁目）<br>TEL：011-221-0567<br>詳細は公式をご確認ください（参考: <a href="https://www.gutabi.jp/event/detail/3548" target="_blank" rel="noreferrer">ぐうたび北海道</a> / <a href="https://www.tanukiya.co.jp/" target="_blank" rel="noreferrer">たぬきや 公式</a>）。<br><br>【2.3 アクセスと営業時間】<br>地下鉄東西線『大通駅』、南北線『すすきの駅』から各徒歩約3分、JR『札幌駅』から徒歩約15分。大通〜すすきの間のアーケードのため、雪や雨の日も快適に移動できます。駐車は提携駐車場（カモンチケット対象など）の利用や近隣コインパーキングが便利。各店の営業時間は店舗により異なるため、最新情報は公式サイトをご確認ください（参考: <a href="https://tanukikoji.or.jp/access/" target="_blank" rel="noreferrer">狸小路商店街 アクセス</a>）。',
     },
-    '38': {
+    '23': {
       title: '小樽運河',
       description: '石造倉庫群とガス灯が並ぶロマンチックな運河。冬のイルミネーションも必見',
       author: 'タビログ編集部',
@@ -626,33 +634,116 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
       content:
         '北海道・小樽の象徴「小樽運河」は、石造倉庫群と歴史的街並みが連なる情緒あふれる景観が魅力。夕暮れから夜にかけてはガス灯が点灯し、運河と倉庫のシルエットが水面に映る幻想的な光景に。冬は雪景色とイルミネーションが重なり、よりロマンチックな雰囲気を楽しめます。札幌から電車で約35〜45分とアクセスも良く、日帰り観光の定番です。<br><br>【2.1 小樽雪あかりの路】<br>毎年2月に開催される冬の風物詩。市民と国内外ボランティアの手で、スノーキャンドルやワックスボウルの柔らかな灯りが運河沿いと市内各会場を彩ります。浅草橋〜中央橋一帯の運河会場、手宮線跡地や都通りなど複数会場で展開。ガス灯とキャンドルの明かりが重なり、雪と光のコントラストが作り出す静謐で温かな景観は唯一無二です。<br>・開催時期の目安：2月上旬（例：第27回は2/8〜2/15）。<br>・点灯時間の目安：17:00頃〜21:00頃。悪天候等により一部会場中止あり。<br>・見どころ：運河会場のキャンドル群像、手宮線会場のオブジェ、芸術村会場のプロジェクションマッピングやYOSAKOIなど日替わり企画。<br>・体験：ワックスボウル製作体験、バックヤードツアー、スノー滑り台（年により実施内容変動）。<br>・ボランティア：キャンドル設置や点灯・補修を担う「あかり人」を随時募集。<br>・環境配慮：使用済みキャンドルの再活用に取り組み、資源を無駄にしない運営を継続。<br>・最新情報：公式サイトのNEWSやフォトブログで当日の実施/中止、会場変更を確認推奨。参考：[小樽雪あかりの路 公式](http://yukiakarinomichi.org/)。<br><br>【2.2 クルーズ（デイクルーズ/ナイト）】<br>「小樽運河クルーズ」は約40分で運河〜港を巡る水上ツアー。<br>・運航時間（目安）：10:00〜日没後まで、デイクルーズは概ね30分間隔、ナイトは日没後に運航（季節により変動）。<br>・集合/発券：中央橋の発券所に出航の15分前集合。JR小樽駅から徒歩約10分。<br>・料金（目安）：デイクルーズ 大人¥1,500／小学生¥500、ナイトクルーズ 大人¥2,000／小学生¥500（未就学は大人1名につき1名無料・席なし）。<br>・ガイド：多言語オーディオガイドで運河の歴史、北運河の見どころを解説。<br>・混雑対策：繁忙期は満席になるため事前予約推奨、防寒具・耐水対策を用意すると快適。<br>参考：[小樽運河クルーズ 公式](https://otaru.cc/ko/)。<br><br>【2.3 倉庫群カフェ＆ショップ】<br>石造倉庫を活用したショップやカフェが点在。スイーツは小樽を代表する人気ジャンル。<br>・LeTAO（ルタオ）本店：名物「ドゥーブルフロマージュ」ホール¥2,000前後、カット＋ドリンクのカフェセット¥1,000〜¥1,500前後、季節限定ケーキ各種（時価）。<br>・その他：小樽ガラス工芸、オルゴール堂、土産店が集中し回遊しやすい。<br>・滞在のコツ：運河散策の合間に甘味休憩、冬季は足元が滑りやすいため歩きやすい靴で。<br>参考：[LeTAO紹介（例）](https://triple.guide/restaurants/a4ec07e4-fbfe-49c0-b2d5-604a4389bf83)。',
     },
+    '38': {
+      title: 'サッポロビール博物館',
+      description: '北海道の代表的なビール工場。歴史と製造工程を学べる',
+      author: 'タビログ編集部',
+      heroImage: GenghisKhan,
+      breadcrumb: ['札幌', '東区', 'サッポロビール博物館'],
+      contentTitle: 'サッポロビール博物館の基本情報',
+      spots: ['ジンギスカン', '見学案内', '試飲コーナー'],
+      imageLeft: SapporoBeerMuseum,
+      imageRight: SapporoBeerTaste,
+      content:
+        'サッポロビール博物館は北海道のビール文化を学べる貴重な施設。明治時代から続くビール製造の歴史と技術を展示で紹介し、実際の製造工程も見学できます。試飲コーナーでは新鮮なビールを味わえ、北海道の食文化を深く理解できるスポットです。<br><br><table style="border-collapse: collapse; width: 100%; margin: 10px 0;"><tr style="background-color: #f2f2f2;"><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">項目</th><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">詳細</th></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">所在地</td><td style="border: 1px solid #ddd; padding: 8px;">北海道札幌市東区北7条東9丁目1-1</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">アクセス</td><td style="border: 1px solid #ddd; padding: 8px;">地下鉄東豊線「東区役所前駅」徒歩8分<br>JR「札幌駅」徒歩25分<br>バス「サッポロビール園前」下車すぐ</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">営業時間</td><td style="border: 1px solid #ddd; padding: 8px;">11:00～18:30（ラストオーダー18:00）<br>定休日：月曜日（祝日の場合は翌日）</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">駐車場</td><td style="border: 1px solid #ddd; padding: 8px;">有料駐車場あり（台数限定）<br>公共交通機関利用推奨</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">周辺施設</td><td style="border: 1px solid #ddd; padding: 8px;">サッポロビール園・レストラン<br>札幌市東区役所・図書館<br>商業施設・コンビニ</td></tr></table><br>【2.1 ジンギスカン】<br>サッポロビール博物館では、ビール製造の全工程を詳しく学ぶことができます。特に注目すべきは、札幌の名物「ジンギスカン」とビールの深い関係です。ジンギスカンは北海道の代表的な郷土料理で、羊肉を鉄板で焼いて食べる料理です。このジンギスカンとビールの組み合わせは、札幌の食文化の象徴的な存在となっています。博物館では、ビールの製造過程で使用される麦芽の種類や発酵の仕組み、そしてジンギスカンと相性の良いビールの特徴について詳しく解説されています。ジンギスカンの脂っこさをビールの爽やかな苦味が中和し、完璧な味のハーモニーを生み出す秘密も学べます。<br><br>■ジンギスカン料理と価格（税込）：<br>・ジンギスカン定食：1,200円～1,800円<br>・ジンギスカン単品：800円～1,200円<br>・ラム肉ジンギスカン：1,000円～1,500円<br>・ジンギスカン＋ビールセット：1,500円～2,200円<br>・野菜盛り合わせ：400円～600円<br>・ご飯・ライス：200円～300円<br>・ジンギスカン汁物：300円～500円<br><br>■ジンギスカンの食べ方とコツ：<br>・羊肉を鉄板で焼く際は、中火でじっくりと焼くのがポイント<br>・野菜は羊肉の脂で炒めることで、より美味しく仕上がります<br>・タレは甘辛い醤油ベースで、羊肉の臭みを消す効果があります<br>・ビールとの相性が抜群で、特にサッポロビールとの組み合わせが人気<br>・一人前の目安は羊肉150g～200g程度です<br><br>【2.2 見学案内】<br>サッポロビール博物館では、プレミアムツアー（有料）と自由見学（無料）の2つの見学コースをご用意しています。<br><br>■プレミアムツアー（有料・要予約）<br>・所要時間：約50分（テイスティング含む）<br>・実施日：月曜日を除く営業日（月曜日が祝日の場合は実施し、翌火曜日が休止）<br>・実施時間：初回11:30スタート（以降の実施時間・回数は日によって異なります）<br>・受付時間：各回スタート10分前まで<br>・定員：20名様<br>・参加費：大人1,000円、中学生～20歳未満500円、小学生以下無料<br>・内容：ブランドコミュニケーターによるガイド付きツアー、プレミアムシアターでの歴史物語視聴、館内展示見学、創業当時の味「復刻札幌製麦酒」と現代の生ビール「黒ラベル」の飲み比べ<br><br>■自由見学（無料）<br>・営業時間：11:00～18:30（ラストオーダー18:00）<br>・順路：3階→2階→1階の一方通行ルート<br>・多言語対応：英語・韓国語・中国語（簡体字）の翻訳版を2次元バーコードで提供<br><br>【2.3 試飲コーナー】<br>スターホール（テイスティング）では、サッポロビール北海道工場、札幌開拓使麦酒醸造所直送のできたてビールを味わえます。<br><br>■営業時間：11:00～18:30（ラストオーダー18:00）<br>■利用時間：30分まで<br>■試飲できる銘柄と価格（税込）：<br>・サッポロ生ビール黒ラベル：450円<br>・北海道限定クラシック：450円<br>・開拓使麦酒：550円<br>・3種飲み比べセット：1,200円<br>・ノンアルコールビールテイスト飲料：200円<br>・ソフトドリンク：200円<br><br>■注意事項：<br>・館内順路は一方通行のため、スターホールのみの利用はお控えください<br>・満席時はお待ちいただく場合があります<br>・ラストオーダー以降は試飲待機列にお並びいただけません<br>・12月31日は休業日です',
+    },
   },
   福岡: {
     '9': {
-      title: '福岡城跡',
-      description: '福岡の歴史を感じられる城跡',
+      title: '⚔️ 福岡城跡',
+      description: '福岡の歴史を感じられる城跡。舞鶴公園の桜でも有名。',
       author: 'タビログ編集部',
-      heroImage: FukuokaCastle2,
+      heroImage: FukuokaCastle,
       breadcrumb: ['福岡', '中央区', '福岡城跡'],
       contentTitle: '福岡城跡の基本情報',
-      spots: ['天守台跡', '花見スポット', '舞鶴公園'],
+      spots: ['天守台と石垣', '舞鶴公園', '歴史資料館', 'アクセス'],
       imageLeft: FukuokaCastle,
-      imageRight: FukuCastleSakura,
-      content:
-        '福岡城跡（舞鶴公園）は石垣や堀の遺構が良好に残る歴史公園。春は桜の名所として知られ、ライトアップ時は幻想的な雰囲気に包まれます。天守台跡からは市街地を一望でき、歴史散策と自然鑑賞を同時に楽しめます。<br><br><table style="border-collapse: collapse; width: 100%; margin: 10px 0;"><tr style="background-color: #f2f2f2;"><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">項目</th><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">詳細</th></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">所在地</td><td style="border: 1px solid #ddd; padding: 8px;">福岡県福岡市中央区城内1</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">アクセス</td><td style="border: 1px solid #ddd; padding: 8px;">地下鉄空港線「赤坂駅」徒歩5分<br>地下鉄七隈線「薬院大通駅」徒歩8分<br>西鉄バス「舞鶴公園前」下車すぐ</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">営業時間</td><td style="border: 1px solid #ddd; padding: 8px;">24時間開放<br>資料館: 9:00～17:00（月曜休館）</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">入場料金</td><td style="border: 1px solid #ddd; padding: 8px;">無料<br>資料館: 無料</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">駐車場</td><td style="border: 1px solid #ddd; padding: 8px;">有料駐車場あり（台数限定）<br>公共交通機関利用推奨</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">団体見学</td><td style="border: 1px solid #ddd; padding: 8px;">学校団体・企業団体向けガイドツアー<br>要予約・無料</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">施設・設備</td><td style="border: 1px solid #ddd; padding: 8px;">トイレ・休憩所・資料館<br>案内板・多言語対応</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">周辺施設</td><td style="border: 1px solid #ddd; padding: 8px;">福岡市美術館・大濠公園<br>天神・博多駅<br>カフェ・レストラン多数</td></tr></table><br>【2.1 天守台跡】<br>福岡城の中心部に位置する天守台跡は、城下町・福岡の街並みを高台から一望できる絶景スポット。当時の天守は現存しないものの、堅固な石垣が往時の威容を物語ります。夕刻には街の灯りと桜のライトアップが重なり、歴史と夜景の美しさを同時に楽しめます。天守台跡は24時間いつでも見学可能で、特に夕暮れ時は美しい景色を楽しめます。<br><br>【2.2 花見スポット】<br>舞鶴公園一帯は福岡屈指の桜名所。ソメイヨシノを中心に多様な品種が植えられ、満開の時期には園内がピンク色に染まります。お堀沿いの桜並木や石垣と桜のコントラストは写真映え抜群。屋台や期間限定のライトアップも行われ、昼夜を問わず多くの花見客で賑わいます。桜の見頃は3月下旬から4月上旬で、この時期は特に多くの観光客で賑わいます。<br><br>【2.3 舞鶴公園】<br>広大な芝生広場、池、遊歩道が整備された市民の憩いの場。四季の花々に彩られ、春は桜、初夏は新緑、秋には紅葉が楽しめます。城跡の史跡巡りと合わせて、のんびり散策やピクニックにも最適。園内の案内板や資料館では城の歴史も学べ、学びと癒やしが両立するスポットです。公園内には無料のトイレや休憩所が完備されており、長時間の散策にも対応しています。',
+      imageRight: FukuokaCastle2,
+      content: `福岡藩・黒田家の居城として慶長年間に築かれた近世城郭。現存天守は失われたものの、壮麗な高石垣と曲輪配置、櫓跡や城門跡が往時の威容を今に伝えます。城址一帯は「舞鶴公園」として整備され、四季の花木と歴史遺構が調和する市民の憩いの場です。春は桜、初夏は新緑、秋は紅葉、冬は澄んだ空気の中で石垣の表情を楽しめます。<br><br>
+<table style="border-collapse: collapse; width: 100%; margin: 10px 0;">
+  <tr style="background-color: #f2f2f2;">
+    <th style="border:1px solid #ddd; padding:8px; text-align:left;">項目</th>
+    <th style="border:1px solid #ddd; padding:8px; text-align:left;">詳細</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd; padding:8px;">所在地</td>
+    <td style="border:1px solid #ddd; padding:8px;">福岡県福岡市中央区城内（舞鶴公園内）</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd; padding:8px;">アクセス</td>
+    <td style="border:1px solid #ddd; padding:8px;">地下鉄空港線「赤坂駅」徒歩約15分／地下鉄七隈線「六本松駅」徒歩約15分／西鉄バス「福岡城・鴻臚館前」下車すぐ</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd; padding:8px;">開園時間</td>
+    <td style="border:1px solid #ddd; padding:8px;">終日（施設は一部時間制）／年中無休</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd; padding:8px;">料金</td>
+    <td style="border:1px solid #ddd; padding:8px;">公園散策無料（資料館等は別途）</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd; padding:8px;">見頃</td>
+    <td style="border:1px solid #ddd; padding:8px;">桜：3月下旬〜4月上旬／紅葉：11月中旬</td>
+  </tr>
+</table><br>
+【1】天守台と高石垣<br>
+城の中枢・本丸跡に聳える天守台は圧巻。大規模な切石の高石垣が連なり、石材の刻印や積み方（打込接・切込接）から当時の築城技術を間近に感じられます。天守台上からは福岡市街・博多湾まで一望の眺望。朝夕の光で石垣の陰影が際立ち、写真撮影にも最適です。<br><br>
+【2】舞鶴公園の桜と季節の花木<br>
+園内には約1,000本の桜が植栽され、見頃にはライトアップが実施されます。梅・ツツジ・花菖蒲・紅葉など四季折々の彩りも豊かで、散策路・芝生広場・茶屋が点在。花見時期は臨時の露店やイベントも開催され賑わいます。<br><br>
+【3】鴻臚館跡・歴史資料と学び<br>
+城域周辺には古代の外交・迎賓施設「鴻臚館」跡が残り、発掘成果の展示で国際交流の歴史を学べます。城郭解説板や模型、石垣の補修説明も整備され、子ども連れの学習にも最適。ボランティアガイドによる案内（日程限定）も人気です。<br><br>
+【4】散策のコツとモデルルート<br>
+赤坂駅方面から上りながら本丸・天守台→西広場→花菖蒲園→梅園→鴻臚館跡の順に巡ると高低差が緩やかで快適。石段や未舗装路もあるため、歩きやすい靴がおすすめ。春・夏は日差し対策、秋冬は防寒を。<br><br>
+【5】周辺グルメ・立ち寄りスポット<br>
+大濠公園・福岡市美術館・天神エリアが徒歩圏。博多名物うどん・明太子、甘味（鶴乃子など）も近隣で楽しめます。イベント開催時は混雑・駐車場満車となるため公共交通機関を推奨。`,
     },
     '10': {
-      title: '博多駅',
-      description: '福岡の玄関口。グルメとショッピングの中心地',
+      title: '🏙 博多駅',
+      description: '福岡の玄関口・博多駅。グルメとショッピングの中心地。',
       author: 'タビログ編集部',
       heroImage: HakataCity,
       breadcrumb: ['福岡', '博多区', '博多駅'],
       contentTitle: '博多駅の基本情報',
-      spots: ['駅ビル', 'デパ地下', 'イルミネーション'],
-      imageLeft: HakataDepartBelow,
-      imageRight: HakataIlumi,
-      content:
-        '博多駅は九州の玄関口。駅ビルには名物の明太子や豚骨ラーメン、銘菓など福岡グルメが集結し、ショッピングも充実。イルミネーションやイベントも多く、旅行初日・最終日の滞在でも満足度の高い時間を過ごせます。空港や地下鉄とのアクセスも至便です。<br><br>【2.1 駅ビル】<br>博多駅ビル「JR博多シティ」は、地上11階・地下2階の大型商業施設です。1階には博多の名物グルメが集結し、明太子専門店「ふくや」や博多ラーメン「一風堂」、老舗和菓子店「如水庵」などが軒を連ねています。9階・10階の「博多一番街」では、博多の伝統工芸品や地元特産品を購入できます。駅ビル内には約200店舗が入居し、九州最大級の商業施設として観光客に人気です。特に地下1階の「博多地下街」は、雨の日でも快適にショッピングが楽しめる空間となっています。<br><br>【2.2 デパ地下】<br>博多駅のデパ地下は、福岡の食文化を体感できる最高のスポットです。博多阪急の地下1階には、明太子、もつ鍋、水炊き、博多ラーメンなど、福岡の名物料理を提供する店舗が集結しています。特に「博多もつ鍋 やまや」や「博多水炊き 水月」など、老舗店の味を駅で手軽に楽しめるのが魅力です。デパ地下では、お土産用の明太子や博多の銘菓も豊富に取り揃えており、旅行の最後にまとめて購入するのに便利です。また、季節限定の商品や期間限定の催しも多く、何度訪れても新しい発見があります。<br><br>【2.3 イルミネーション】<br>博多駅周辺は、冬のイルミネーションが特に美しく、毎年12月から2月にかけて「博多イルミネーション」が開催されます。駅前広場には約10万球のLEDが使用され、幻想的な光の世界を演出します。特に「博多駅前イルミネーション」では、音楽と光のコラボレーションによるショーが人気で、多くの観光客が足を止めて見入ります。また、駅ビル内でも各階で異なるテーマのイルミネーションが展開され、ショッピングをしながら美しい光の演出を楽しめます。イルミネーション期間中は、駅周辺のカフェやレストランも特別メニューを提供し、より一層ロマンチックな雰囲気を演出します。',
+      spots: ['駅ビルと地下街', 'イルミネーション', 'デパ地下グルメ', 'アクセス'],
+      imageLeft: HakataCity,
+      imageRight: hakataIlumi,
+      content: `九州最大のターミナル。新幹線・在来線・空港アクセスが集約し、駅ビルにはショッピングモールや飲食店が充実。観光の拠点に最適です。駅ナカ・駅ソトそれぞれに名店が揃い、雨の日でも快適に過ごせます。<br><br>
+<table style="border-collapse: collapse; width: 100%; margin: 10px 0;">
+  <tr style="background-color: #f2f2f2;">
+    <th style="border:1px solid #ddd; padding:8px; text-align:left;">項目</th>
+    <th style="border:1px solid #ddd; padding:8px; text-align:left;">詳細</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd; padding:8px;">所在地</td>
+    <td style="border:1px solid #ddd; padding:8px;">福岡県福岡市博多区博多駅中央街1-1 ほか</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd; padding:8px;">アクセス</td>
+    <td style="border:1px solid #ddd; padding:8px;">地下鉄空港線「博多駅」直結／福岡空港から地下鉄で約5分／西鉄バス多数</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd; padding:8px;">主要施設</td>
+    <td style="border:1px solid #ddd; padding:8px;">JR博多シティ（アミュプラザ・シティダイニング）／デイトス／地下街（博多駅地下街）</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd; padding:8px;">営業時間</td>
+    <td style="border:1px solid #ddd; padding:8px;">ショップ 10:00〜21:00／レストラン 11:00〜22:00（施設・店舗により異なる）</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd; padding:8px;">観光案内</td>
+    <td style="border:1px solid #ddd; padding:8px;">博多駅総合案内所・観光案内所あり／多言語パンフレット・Wi-Fi</td>
+  </tr>
+</table><br>
+【1】駅ビルと地下街（ショッピング＆カフェ）<br>
+アミュプラザ／JR博多シティにはファッション・雑貨・生活グッズの大型ゾーンと、書店・カフェ・コワーキングなど滞在に便利な施設が揃います。地下街は雨天でも移動が快適で、ベーカリーやコーヒースタンドのはしごも楽しい。屋上の「つばめの杜ひろば」では季節イベントやミニ鉄道も。<br><br>
+【2】イルミネーション＆駅前広場イベント（冬の名物）<br>
+冬季は駅前広場一帯がライトアップされ、マーケットやステージイベントで賑わいます。光の回廊・フォトスポットが多数設置され、家族やカップルでの記念撮影に人気。点灯期間・時間は年により変動するため事前に公式を確認すると安心です。<br><br>
+【3】デパ地下・駅ナカグルメ（お土産＆名物）<br>
+明太子や豚骨ラーメン関連の土産、鶏皮や中華の惣菜、九州銘菓までラインナップが豊富。定番の辛子明太子は小分けパックが便利で、保冷バッグの用意があると持ち帰りが安心。ラーメンは「デイトス」のラーメン横丁系も人気で、ピーク時は行列に注意。<br><br>
+【4】モデルコース＆動線のコツ<br>
+空港到着→地下鉄で博多駅→駅ナカで昼食→屋上ひろばや展望→お土産購入→地下街経由でホテルへ、の動線がスムーズ。週末や連休はレストランの待ち時間が伸びるため、開店直後かアイドルタイムの利用がおすすめ。<br><br>
+【5】周辺スポット＆連絡性<br>
+天神・中洲・祇園・キャナルシティへはバス／地下鉄で短時間。太宰府・糸島・小倉方面へも鉄道でアクセス良好。雨天時は駅周辺だけでも一日楽しめるボリュームです。`,
     },
     '40': {
       title: '中洲屋台',
@@ -729,8 +820,39 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
       spots: ['球場ツアー', '李大浩（イ・デホ）選手の活躍', '周辺施設とグルメ'],
       imageLeft: paypaymap,
       imageRight: softbankleedaeho,
-      content:
-        '福岡PayPayドームは福岡ソフトバンクホークスの本拠地として知られる多目的ドーム。全天候型の快適な観戦環境に加え、最新演出やイベントも魅力で、野球ファンはもちろん家族連れや観光客にも人気のスポットです。隣接の商業施設や海辺の散策と合わせて一日楽しめます。<br><br>【2.1 球場ツアー】<br>普段は入れないベンチやブルペン、記者会見室などを巡るガイド付きツアーを実施。球場運営の裏側や歴史展示を見学でき、ホークスファンにはたまらない体験。優勝トロフィーや名場面のパネルも必見です。<br><br>【2.2 李大浩（イ・デホ）選手の活躍】<br>2014年から2シーズン在籍した李大浩（イ・デホ）選手は、ホークスの日本一に大きく貢献した強打者。クラッチヒッターとしてポストシーズンでも勝負強さを発揮し、福岡のファンに強烈なインパクトを残しました。豪快な本塁打と勝負所での適時打は、今もドームの名場面として語り継がれています。背番号や応援歌にまつわるエピソードも多く、球場内の展示やグッズでその功績を辿ることができます。<br><br>【2.3 周辺施設とグルメ】<br>ドーム隣接の商業施設や海沿いエリアでは、ショッピングやカフェ、展望スポットを満喫できます。試合前後には博多名物のグルメもおすすめ。家族や友人と過ごす休日のお出かけ先としても最適です。',
+      content: `福岡PayPayドームは福岡ソフトバンクホークスの本拠地。全天候型の快適な観戦環境と大型演出、グルメやショッピングが一体になった九州随一のエンタメ拠点です。試合日以外もツアーやイベントで楽しめ、一日過ごせるボリューム。<br><br>
+<table style="border-collapse: collapse; width: 100%; margin: 10px 0;">
+  <tr style="background-color: #f2f2f2;">
+    <th style="border:1px solid #ddd; padding:8px; text-align:left;">項目</th>
+    <th style="border:1px solid #ddd; padding:8px; text-align:left;">詳細</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd; padding:8px;">所在地</td>
+    <td style="border:1px solid #ddd; padding:8px;">福岡県福岡市中央区地行浜2-2-2</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd; padding:8px;">アクセス</td>
+    <td style="border:1px solid #ddd; padding:8px;">地下鉄空港線「唐人町駅」徒歩約15分／天神・博多駅からバス便多数／駐車場（試合日有料・事前予約推奨）</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd; padding:8px;">営業時間</td>
+    <td style="border:1px solid #ddd; padding:8px;">試合・イベントにより変動（公式サイトで要確認）</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd; padding:8px;">主な施設</td>
+    <td style="border:1px solid #ddd; padding:8px;">球場各ゲート／ミュージアム／公式グッズショップ／飲食売店／隣接商業施設</td>
+  </tr>
+</table><br>
+【1】球場ツアー（バックヤード見学）<br>
+普段入れないベンチやブルペン、記者会見室、フィールド周辺を巡るガイド付きツアーを開催。優勝トロフィーや名場面パネル、球団の歴史展示も見どころ。開催日・所要時間・料金は季節により変動するため事前予約が安心です。<br><br>
+【2】試合観戦の楽しみ方（演出・座席・グルメ）<br>
+迫力のビジョン演出と応援の一体感が魅力。内野指定はプレーの細部を、外野応援席は熱量を、上段席は全景の動きを楽しめます。球場グルメは明太子・鶏皮・唐揚げ・球団コラボメニューなど多彩。ピークは試合前と3回裏、7回表後。モバイルオーダーや早め購入で待ち時間を短縮。<br><br>
+【3】李大浩（イ・デホ）選手の活躍（レジェンドの記憶）<br>
+2014〜2015に在籍し、日本一へ大きく貢献。勝負所での一打や豪快な本塁打は今なお語り草。関連展示やグッズで当時の熱狂を辿れます。背番号・応援歌エピソードもファン必見。<br><br>
+【4】周辺施設と海辺散策（一日コース）<br>
+隣接の商業施設やミュージアム、海沿いの遊歩道・展望スポットで試合前後も充実。家族連れはキッズ向けエリアや体験型展示もチェック。試合後は混雑緩和のため少し時間を置いてから移動するとスムーズです。<br><br>
+【5】アクセス＆チケットのコツ<br>
+最寄りの唐人町駅から徒歩が基本。雨天でもドーム内は快適ですが、入退場時間帯は混雑するため早め行動が吉。チケットは公式販売・先行抽選を活用し、人気試合は早期確保を。駐車場は事前予約制の日が多いので要注意。`,
     },
   },
   沖縄: {
@@ -855,6 +977,33 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
       content:
         '金沢城公園は石川門や五十間長屋など復元された建造物と広い芝生が魅力。加賀百万石の歴史を感じる空間で、兼六園との回遊も楽しめます。夜間ライトアップ時は城郭の白壁が幻想的に浮かび上がります。',
     },
+    '36': {
+      title: '🏛️ 金沢21世紀美術館 × グラスリップ 聖地巡礼',
+      description:
+        'アニメ「グラスリップ」の舞台となった金沢21世紀美術館。現代アートと聖地巡礼を同時に楽しめるスポット。',
+      author: 'アニメ巡礼編集部',
+      heroImage: Museum21thCentury1,
+      breadcrumb: ['石川', '金沢', '21世紀美術館', 'グラスリップ聖地巡礼'],
+      contentTitle: '金沢21世紀美術館の基本情報',
+      spots: ['21世紀美術館の基本情報', 'グラスリップの聖地', '現代アート展示', '周辺スポット'],
+      imageLeft: Museum21thCentury2,
+      imageRight: Museum21thCentury3,
+      content:
+        '金沢21世紀美術館は石川県金沢市にある現代美術館で、アニメ「グラスリップ」の重要な舞台として登場します。円形の建物が特徴的で、「みんなの美術館」をコンセプトに親しみやすい現代アートを展示しています。アニメでは主人公たちが青春を過ごす重要なスポットとして描かれ、ファンにとって聖地巡礼の定番コースとなっています。<br><br>【2.1 グラスリップの聖地】<br>アニメ「グラスリップ」で主人公たちが訪れる美術館として登場。美術館の外観や内部の空間がアニメに忠実に再現されており、ファンなら一目でわかる聖地スポットです。<br><br>【2.2 現代アート展示】<br>世界的なアーティストの作品から地域に根ざした現代アートまで、多様な展示を楽しめます。特に「スイミング・プール」は人気の常設展示です。<br><br>【2.3 周辺スポット】<br>兼六園や金沢城公園が徒歩圏内にあり、金沢観光の拠点として最適。伝統工芸と現代アートの融合を感じられるエリアです。',
+    },
+    '37': {
+      title: '♨️ 湯涌温泉 × 花咲くいろは 聖地巡礼',
+      description: 'アニメ「花咲くいろは」の舞台となった湯涌温泉。温泉街の風情と聖地巡礼を楽しむ癒やしの旅。',
+      author: 'アニメ巡礼編集部',
+      heroImage: Kanazawa_YuwakuOnsen,
+      breadcrumb: ['石川', '金沢', '湯涌温泉', '花咲くいろは聖地巡礼'],
+      contentTitle: '湯涌温泉の基本情報',
+      spots: ['湯涌温泉の基本情報', '花咲くいろはの聖地', '温泉旅館', '湯涌稲荷神社'],
+      imageLeft: Kanazawa_YuwakuOnsen,
+      imageRight: Kanazawa_YuwakuOnsen,
+      content:
+        '湯涌温泉は金沢市の奥座敷として親しまれる温泉地で、アニメ「花咲くいろは」の舞台「湯乃鷺温泉」のモデルとなった場所です。山間の静かな温泉街には、アニメに登場する風景がそのまま残っており、ファンにとって特別な聖地となっています。温泉の癒やしと聖地巡礼を同時に楽しめる貴重なスポットです。<br><br>【2.1 花咲くいろはの聖地】<br>アニメ「花咲くいろは」で主人公・松前緒花が働く「喜翆荘」のモデルとなった旅館をはじめ、温泉街の各所がアニメに登場。実際の風景とアニメの場面を比較しながら巡ることができます。<br><br>【2.2 温泉旅館】<br>歴史ある温泉旅館では、アニメに登場するようなおもてなしの心を体験できます。山の幸を使った料理と良質な温泉で、心身ともにリフレッシュできます。<br><br>【2.3 湯涌稲荷神社】<br>温泉街を見守る神社で、アニメにも登場する重要なスポット。ファンが聖地巡礼の記念に訪れることが多く、絵馬には作品への愛が込められています。',
+    },
   },
 };
 
@@ -884,7 +1033,6 @@ const SpotDetailPage = () => {
   const safeTitle = detail?.title || `${cityKey} のスポット詳細`;
   const safeDesc = detail?.description || 'このスポットの詳細情報です。準備中のコンテンツを表示しています。';
   const hero = detail?.heroImage || (cityKey === '東京' ? TokyoHero : OsakaHero);
-
 
   return (
     <div className="min-h-screen">
