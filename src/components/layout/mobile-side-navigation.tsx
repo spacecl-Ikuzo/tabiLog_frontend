@@ -43,7 +43,11 @@ const MobileSideNavigation = ({ isOpen, onClose, handleLogout }: MobileSideNavig
 
   // ✅ 토큰이 있고, 사이드바가 열렸을 때만 /api/profile 호출
   useEffect(() => {
-    let cancelled = false;
+    if (token) {
+      //로그인한 사용자만 조회
+      fetchUserInfo();
+    }
+  }, [isOpen, token]);
 
     // 토큰이 없으면: 프로필 정보 초기화 + 다음에 토큰 생기면 다시 시도할 수 있게 플래그 해제
     if (!token) {
