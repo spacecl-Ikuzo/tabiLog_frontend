@@ -4,8 +4,8 @@ import { useUserStore } from "@/store";
 
 // 더 이상 toast나 CommonPopup을 사용하지 않고 alert를 사용
 
-// 🚨 중복 로그아웃 방지 플래그
-let isHandling401 = false;
+// 🚨 중복 로그아웃 방지 플래그 (임시 비활성화)
+// let isHandling401 = false;
 
 // ================== Axios 인스턴스 생성 ==================
 export const axiosInstance = axios.create({
@@ -16,10 +16,13 @@ export const axiosInstance = axios.create({
 
 // ================== 요청 인터셉터 ==================
 axiosInstance.interceptors.request.use((config) => {
-  const { token, tokenExp, removeUserData } = useUserStore.getState();
+  const { token } = useUserStore.getState();
+  // const { tokenExp, removeUserData } = useUserStore.getState(); // 임시 비활성화
 
   if (token) {
-    // ⏰ 토큰 만료 여부 사전 차단
+    // ⏰ 임시로 토큰 만료 사전 차단 비활성화 (디버깅용)
+    // TODO: 토큰 만료 처리 로직 안정화 후 다시 활성화
+    /*
     if (tokenExp && Date.now() >= tokenExp) {
       const msg = "세션이 만료되었습니다. 다시 로그인해 주세요.";
       
@@ -36,6 +39,7 @@ axiosInstance.interceptors.request.use((config) => {
       
       return Promise.reject(new axios.Cancel("Token expired"));
     }
+    */
 
     // 요청 헤더에 Authorization 추가
     config.headers = config.headers || {};
@@ -48,11 +52,14 @@ axiosInstance.interceptors.request.use((config) => {
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
-    const status = error?.response?.status;
-    const data = error?.response?.data as
-      | { status?: number; error?: string; message?: string }
-      | undefined;
+    // 임시로 주석 처리 (디버깅용)
+    // const status = error?.response?.status;
+    // const data = error?.response?.data as
+    //   | { status?: number; error?: string; message?: string }
+    //   | undefined;
 
+    // 임시로 토큰 관련 변수들 주석 처리 (디버깅용)
+    /*
     const url: string = error.config?.url || "";
     const isLoginRequest = url.includes("/auth/signin") || url.includes("/api/auth/signin");
     const isProfileRequest = url.includes("/profile") || url.includes("/api/profile");
@@ -66,7 +73,11 @@ axiosInstance.interceptors.response.use(
 
     const isExpired = status === 401 && code === "TOKEN_EXPIRED";
     const isInvalid = status === 401 && code === "TOKEN_INVALID";
+    */
 
+    // 🚨 임시로 자동 로그아웃 로직 비활성화 (디버깅용)
+    // TODO: 토큰 만료 처리 로직 안정화 후 다시 활성화
+    /*
     if ((isExpired || isInvalid) && !isHandling401 && !isLoginRequest && !isProfileRequest && !isSpotRequest && !isPublicAPI) {
       isHandling401 = true;
 
@@ -91,6 +102,7 @@ axiosInstance.interceptors.response.use(
 
       return Promise.reject(error);
     }
+    */
 
     // ❌ 그 외 에러는 그대로 throw
     return Promise.reject(error);
