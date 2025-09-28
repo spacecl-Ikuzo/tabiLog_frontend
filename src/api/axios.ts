@@ -56,16 +56,15 @@ axiosInstance.interceptors.response.use(
     const url: string = error.config?.url || "";
     const isLoginRequest = url.includes("/auth/signin");
     const isProfileRequest = url.includes("/profile");
+    const isSpotRequest = url.includes("/spot") || url.includes("/spots");
 
-    // ✅ 백엔드 표준 에러 바디 호환: error 필드가 없으면 기본값 TOKEN_INVALID
-    const code =
-      (typeof data?.error === "string" && data.error) ||
-      (status === 401 ? "TOKEN_INVALID" : "");
+    // ✅ 백엔드에서 명시적으로 보낸 에러 코드만 처리 (자동으로 TOKEN_INVALID 설정하지 않음)
+    const code = (typeof data?.error === "string" && data.error) || "";
 
     const isExpired = status === 401 && code === "TOKEN_EXPIRED";
     const isInvalid = status === 401 && code === "TOKEN_INVALID";
 
-    if ((isExpired || isInvalid) && !isHandling401 && !isLoginRequest && !isProfileRequest) {
+    if ((isExpired || isInvalid) && !isHandling401 && !isLoginRequest && !isProfileRequest && !isSpotRequest) {
       isHandling401 = true;
 
       // 한국어 UI 문구 (만료/무효 구분)
