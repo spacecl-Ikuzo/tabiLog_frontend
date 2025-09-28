@@ -32,6 +32,7 @@ const MobileSideNavigation = ({ isOpen, onClose, handleLogout }: MobileSideNavig
     setIsMyTripOpen((v) => !v);
   };
 
+
   // 현재 경로가 마이트립 관련이면 자동으로 펼침 상태 유지
   useEffect(() => {
     const isMyTripPath =
@@ -43,12 +44,6 @@ const MobileSideNavigation = ({ isOpen, onClose, handleLogout }: MobileSideNavig
 
   // ✅ 토큰이 있고, 사이드바가 열렸을 때만 /api/profile 호출
   useEffect(() => {
-    if (token) {
-      //로그인한 사용자만 조회
-      fetchUserInfo();
-    }
-  }, [isOpen, token]);
-
     // 토큰이 없으면: 프로필 정보 초기화 + 다음에 토큰 생기면 다시 시도할 수 있게 플래그 해제
     if (!token) {
       setUserInfo(null);
@@ -63,14 +58,15 @@ const MobileSideNavigation = ({ isOpen, onClose, handleLogout }: MobileSideNavig
     if (fetchedOnceRef.current) return;
     fetchedOnceRef.current = true;
 
+    let cancelled = false;
+
     (async () => {
       try {
         const res = await getMyPageInfo();
         if (cancelled) return;
         setUserInfo(res.data);
-      } catch (error) {
+      } catch {
         // 조용히 실패 처리 (토스트/팝업 불필요)
-        // console.error('사용자 정보를 가져오는데 실패했습니다:', error);
       }
     })();
 
