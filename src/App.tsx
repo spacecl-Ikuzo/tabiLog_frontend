@@ -15,8 +15,6 @@ import PlanMobile from './pages/plans/PlanMobile';
 import NewPlanCheckDate from './pages/new-plan/NewPlanCheckDate';
 import NewPlanDetail from './pages/new-plan/NewPlanDetail';
 import TripPlannerPage from './pages/new-plan/TripPlannerPage';
-import MyPage from './pages/MyPage';
-import DashBoard from './components/layout/DashBoard';
 import Profile from './pages/profile/Profile';
 import DeleteAccount from './pages/delete-account/DeleteAccount';
 import DeleteAccountComplete from './pages/delete-account/DeleteAccountComplete';
@@ -25,6 +23,7 @@ import FindID from './pages/find-account/FindID';
 import FindPassword from './pages/find-account/FindPassword';
 import ResetPassword from './pages/find-account/ResetPassword';
 import Invitation from './pages/Invitation/Invitation';
+import DiscoverPlans from '@/pages/discover/DiscoverPlans';
 
 // ✅ 토큰이 있을 때 /api/profile을 1회 호출해 스토어에 사용자 정보 반영
 import ProfileLoader from '@/components/auth/ProfileLoader';
@@ -36,7 +35,6 @@ function App() {
   const setEmail = useUserStore((state) => state.setEmail);
   const setToken = useUserStore((state) => state.setToken);
   const setTokenExp = useUserStore((state) => state.setTokenExp);
-
 
   return (
     <>
@@ -58,6 +56,7 @@ function App() {
         {/* 관광지 페이지 */}
         <Route path="/spots" element={<SpotsPage />} />
         <Route path="/detail/:id" element={<DetailPage />} />
+        <Route path="/discover/:planId" element={<DiscoverPlans />} />
         <Route path="/spot/:city/:id" element={<SpotDetailPage />} />
         <Route path="/trip-planner" element={<TripPlannerPage />} />
 
@@ -70,10 +69,6 @@ function App() {
           <Route path="/plans/:planId/detail" element={<PlanMobile />} />
           <Route path="/newPlan" element={<NewPlanCheckDate />} />
           <Route path="/newPlan/detail" element={<NewPlanDetail />} />
-          <Route path="/dashboard" element={<DashBoard />}>
-            <Route index element={<MyPage />} />
-            <Route path="mypage" element={<MyPage />} />
-          </Route>
         </Route>
       </Routes>
     </>
