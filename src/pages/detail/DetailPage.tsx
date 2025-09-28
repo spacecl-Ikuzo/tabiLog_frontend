@@ -87,7 +87,7 @@ import OsakaArchitecture4 from '../../assets/OsakaArchitecture4.png';
 import OsakaTempozan from '../../assets/OsakaTempozan.png';
 import OsakaTempozan3 from '../../assets/OsakaTempozan3.png';
 import OsakaTempozan4 from '../../assets/OsakaTempozan4.png';
-import OsakaTempozan5 from '../../assets/OsakaTempozan5.png';
+import OsakaTempozan5 from '../../assets/OsakaTempozan6.png';
 import OsakaTempozan6 from '../../assets/OsakaTempozan6.png';
 import OsakaTempozan7 from '../../assets/OsakaTempozan7.png';
 import TogetsukyoBridge1 from '../../assets/TogetsukyoBridge1.jpg';
