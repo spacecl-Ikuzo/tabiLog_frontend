@@ -272,7 +272,11 @@ export default function PlanDetailContent({
         <div
           className="w-full h-60 bg-cover bg-center bg-no-repeat flex items-center justify-center text-white relative"
           style={{
-            backgroundImage: `url(${plan.prefectureImageUrl?.startsWith('http') ? plan.prefectureImageUrl : import.meta.env.VITE_API_URL + plan.prefectureImageUrl})`,
+            backgroundImage: `url(${
+              plan.prefectureImageUrl?.startsWith('http')
+                ? plan.prefectureImageUrl
+                : import.meta.env.VITE_API_URL + plan.prefectureImageUrl
+            })`,
           }}
         >
           <div className="text-center z-10 bg-black/60 p-4 rounded-lg">
@@ -307,7 +311,11 @@ export default function PlanDetailContent({
             <Avatar key={member.id} className="w-18 h-18">
               {member.profileImageUrl ? (
                 <AvatarImage
-                  src={import.meta.env.VITE_API_URL + member.profileImageUrl}
+                  src={
+                    member.profileImageUrl?.startsWith('http')
+                      ? member.profileImageUrl
+                      : import.meta.env.VITE_API_URL + member.profileImageUrl
+                  }
                   alt={member.userNickname}
                   className="w-full h-full object-cover"
                 />
