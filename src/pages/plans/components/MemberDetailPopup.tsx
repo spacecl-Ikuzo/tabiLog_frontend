@@ -104,7 +104,7 @@ export default function MemberDetailPopup({
         <Avatar className="w-16 h-16">
           {selectedMember?.profileImageUrl ? (
             <AvatarImage
-              src={import.meta.env.VITE_API_URL + selectedMember.profileImageUrl}
+              src={selectedMember.profileImageUrl.startsWith('http') ? selectedMember.profileImageUrl : import.meta.env.VITE_API_URL + selectedMember.profileImageUrl}
               alt={selectedMember?.userNickname || 'メンバー'}
               className="w-full h-full object-cover"
             />

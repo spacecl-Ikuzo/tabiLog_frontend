@@ -85,7 +85,7 @@ const MobileSideNavigation = ({ isOpen, onClose, handleLogout }: MobileSideNavig
             <div className="flex items-center space-x-3">
               {userInfo?.profileImageUrl ? (
                 <img
-                  src={import.meta.env.VITE_API_URL + userInfo?.profileImageUrl}
+                  src={userInfo.profileImageUrl.startsWith('http') ? userInfo.profileImageUrl : import.meta.env.VITE_API_URL + userInfo.profileImageUrl}
                   alt="profile"
                   className="w-12 h-12 rounded-full"
                 />

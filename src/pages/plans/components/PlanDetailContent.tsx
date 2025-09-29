@@ -272,7 +272,7 @@ export default function PlanDetailContent({
         <div
           className="w-full h-60 bg-cover bg-center bg-no-repeat flex items-center justify-center text-white relative"
           style={{
-            backgroundImage: 'url("' + import.meta.env.VITE_API_URL + plan.prefectureImageUrl + '")',
+            backgroundImage: `url(${plan.prefectureImageUrl?.startsWith('http') ? plan.prefectureImageUrl : import.meta.env.VITE_API_URL + plan.prefectureImageUrl})`,
           }}
         >
           <div className="text-center z-10 bg-black/60 p-4 rounded-lg">

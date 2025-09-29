@@ -83,7 +83,7 @@ export default function SideNavigation({ selectedNav }: { selectedNav: string })
                 <>
                   {userInfo?.profileImageUrl ? (
                     <img
-                      src={import.meta.env.VITE_API_URL + userInfo.profileImageUrl}
+                      src={userInfo.profileImageUrl.startsWith('http') ? userInfo.profileImageUrl : import.meta.env.VITE_API_URL + userInfo.profileImageUrl}
                       alt="profile"
                       className="w-14 h-14 rounded-full"
                     />

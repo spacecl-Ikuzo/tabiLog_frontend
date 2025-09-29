@@ -187,7 +187,7 @@ export default function Profile() {
                     <div className="w-24 h-24 bg-gray-200 rounded-full flex items-center justify-center mb-4 overflow-hidden">
                       {profileImage ? (
                         <img
-                          src={import.meta.env.VITE_API_URL + profileImage}
+                          src={profileImage.startsWith('http') ? profileImage : import.meta.env.VITE_API_URL + profileImage}
                           alt="프로필 이미지"
                           className="w-full h-full object-cover"
                         />
@@ -195,7 +195,7 @@ export default function Profile() {
                         <>
                           {profileData?.profileImageUrl ? (
                             <img
-                              src={import.meta.env.VITE_API_URL + profileData.profileImageUrl}
+                              src={profileData.profileImageUrl.startsWith('http') ? profileData.profileImageUrl : import.meta.env.VITE_API_URL + profileData.profileImageUrl}
                               alt="프로필 이미지"
                               className="w-full h-full object-cover"
                             />

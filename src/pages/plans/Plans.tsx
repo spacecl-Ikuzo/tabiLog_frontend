@@ -322,7 +322,7 @@ export default function Plans() {
                       <CardContent className="p-5">
                         <div className="flex gap-10">
                           <img
-                            src={import.meta.env.VITE_API_URL + plan.prefectureImageUrl}
+                            src={plan.prefectureImageUrl?.startsWith('http') ? plan.prefectureImageUrl : import.meta.env.VITE_API_URL + plan.prefectureImageUrl}
                             alt={plan.prefecture}
                             className="w-30 h-30 object-cover object-center rounded-xl flex-shrink-0"
                           />
