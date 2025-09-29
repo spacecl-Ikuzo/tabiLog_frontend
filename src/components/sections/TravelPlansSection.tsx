@@ -92,17 +92,18 @@ const TravelPlansSection = () => {
         const res = await axiosInstance.get('/api/plans/public');
         const data = Array.isArray(res?.data?.data) ? res.data.data : [];
         // 최소 필드 매핑 (PlanResponse에 맞춘 title/author/prefectureImageUrl 등)
-        const apiBase: string | undefined = (import.meta as any).env?.VITE_API_URL;
-        const base = typeof apiBase === 'string' ? apiBase.replace(/\/$/, '') : '';
         const mapped: Plan[] = data.map((p: any) => {
           const raw: string = p.imageUrl || p.prefectureImageUrl || '';
+          // GCS URL은 그대로 사용, /uploads/로 시작하는 경우에만 백엔드 URL과 결합
+          const apiBase: string | undefined = (import.meta as any).env?.VITE_API_URL;
+          const base = typeof apiBase === 'string' ? apiBase.replace(/\/$/, '') : '';
           const resolved = raw && raw.startsWith('/uploads/') && base ? `${base}${raw}` : raw;
           return {
             id: p.id,
             title: p.title,
             description: p.region || p.prefecture || '',
             author: p.members?.[0]?.userNickname || p.userNickname || 'ユーザー',
-            // 유저 업로드 이미지(/uploads/...)는 백엔드 절대 URL로 치환
+            // GCS URL은 그대로 사용, 로컬 업로드 파일만 백엔드 URL과 결합
             image: resolved,
           } as Plan;
         });
