@@ -319,11 +319,28 @@ export default function Plans() {
                     >
                       <CardContent className="p-5">
                         <div className="flex gap-10">
-                          <img
-                            src={import.meta.env.VITE_API_URL + plan.prefectureImageUrl}
-                            alt={plan.prefecture}
-                            className="w-30 h-30 object-cover object-center rounded-xl flex-shrink-0"
-                          />
+                          {plan.prefectureImageUrl ? (
+                            <img
+                              src={
+                                plan.prefectureImageUrl?.startsWith('http')
+                                  ? plan.prefectureImageUrl
+                                  : import.meta.env.VITE_API_URL + plan.prefectureImageUrl
+                              }
+                              alt={plan.prefecture}
+                              className="w-30 h-30 object-cover object-center rounded-xl flex-shrink-0"
+                              onError={(e) => {
+                                e.currentTarget.style.display = 'none';
+                                e.currentTarget.nextElementSibling?.classList.remove('hidden');
+                              }}
+                            />
+                          ) : null}
+                          <div
+                            className={`w-30 h-30 bg-gray-200 rounded-xl flex-shrink-0 flex items-center justify-center ${
+                              plan.prefectureImageUrl ? 'hidden' : ''
+                            }`}
+                          >
+                            <span className="text-gray-400 text-sm font-medium">noImg</span>
+                          </div>
                           <div className="flex-1">
                             <div className="flex items-start justify-between mb-3">
                               <div className="flex-1">
