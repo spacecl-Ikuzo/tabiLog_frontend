@@ -1,3 +1,4 @@
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import KinkakujiImg from '../../assets/Kinkakuji.jpg';
 import TokyoImg from '../../assets/Tokyo.jpg';

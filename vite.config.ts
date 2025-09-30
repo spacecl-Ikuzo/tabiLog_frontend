@@ -5,7 +5,6 @@ import path from 'path';
 import svgr from 'vite-plugin-svgr';
 // https://vite.dev/config/
 export default defineConfig({
-  base: './',
   plugins: [
     react(),
     tailwindcss(),
@@ -29,6 +28,7 @@ export default defineConfig({
     }),
   ],
   server: {
+    
     host: '0.0.0.0', // 외부 접속 허용
     port: 5173, // 원하는 포트
   },

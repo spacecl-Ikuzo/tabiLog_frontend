@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect, useRef, useMemo } from 'react';
-import Header from '@/components/layout/header';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import MainBackGround from '../../assets/MainBackGround.jpg';
 import Tokyo from '../../assets/Tokyo.jpg';
@@ -61,6 +60,7 @@ import TogetsukyoBridge5 from '../../assets/TogetsukyoBridge5.jpeg';
 import TokyoDome from '../../assets/TokyoDome.jpg';
 import TokyoDisneyland from '../../assets/tokyodisneyland.jpg';
 import NikkoToshogu from '../../assets/nikkotoshogu.jpg';
+import Kamakura from '../../assets/kamakura.jpg';
 import HakoneOnsen from '../../assets/hakoneonsen.jpg';
 import ShibuyaScramble from '../../assets/ShibuyaScramble.jpg';
 import nakasumap from '../../assets/nakasumap.jpg';
@@ -69,7 +69,7 @@ import marineworld from '../../assets/marineworld.jpg';
 import paypaydome from '../../assets/paypaydome.jpg';
 import dazaifutenmangu from '../../assets/dazaifutenmangu.jpg';
 import Hirosima15 from '../../assets/Hirosima15.png';
-import Ponyo1 from '../../assets/ponyo1.png';
+import Ponyo1 from '../../assets/포뇨1.png';
 // import Kyoto_UjiBridge1 from '../../assets/Kyoto_UjiBridge1.jpg';
 import Miyajima_Itsukushima_Torii from '../../assets/Miyajima_Itsukushima_Torii.jpg';
 import Otaru_Canal_Winter from '../../assets/Otaru_Canal_Winter.jpg';
@@ -409,7 +409,7 @@ const SpotsPage = () => {
         image: SapporoTower,
       },
       {
-        id: 38,
+        id: 26,
         name: 'サッポロビール博物館',
         description: '北海道の代表的なビール工場。歴史と製造工程を学べる',
         tags: ['グルメ・食べ歩き', '工場見学', '北日本'],
@@ -441,7 +441,7 @@ const SpotsPage = () => {
         image: tanukiya,
       },
       {
-        id: 23,
+        id: 38,
         name: '小樽運河',
         description: '冬のイルミネーションが美しい運河。ロマンチックな街並み',
         tags: ['文化・歴史', '夜景', '北日本', '北海道'],
@@ -618,6 +618,14 @@ const SpotsPage = () => {
       },
       {
         id: 22,
+        name: '東京ディズニーランド',
+        description: '世界で最も人気のテーマパーク。夢の国で楽しい時間を過ごそう',
+        tags: ['エンタメ', '家族', '東日本', '観光地', '浦安市'],
+        city: '東京',
+        image: TokyoDisneyland,
+      },
+      {
+        id: 23,
         name: '日光東照宮',
         description: '徳川家康を祀る世界遺産の神社。豪華絢爛な建築が美しい',
         tags: ['文化・歴史', '世界遺産', '東日本', '観光地', '日光市'],
@@ -625,12 +633,12 @@ const SpotsPage = () => {
         image: NikkoToshogu,
       },
       {
-        id: 23,
-        name: '東京ディズニーランド',
-        description: '世界で最も人気のテーマパーク。夢の国で楽しい時間を過ごそう',
-        tags: ['エンタメ', '家族', '東日本', '観光地', '浦安市'],
-        city: '東京',
-        image: TokyoDisneyland,
+        id: 24,
+        name: '鎌倉',
+        description: '歴史と文化が息づく古都。大仏とアニメの聖地',
+        tags: ['文化・歴史', '東日本', '観光地', '鎌倉市'],
+        city: '神奈川',
+        image: Kamakura,
       },
       {
         id: 25,
@@ -697,7 +705,7 @@ const SpotsPage = () => {
         image: OkiAquarium,
       },
       {
-        id: 33,
+        id: 34,
         name: '秋葉原',
         description: 'アニメ・ゲーム・電子機器の聖地。オタク文化の中心地',
         tags: ['エンタメ', 'ショッピング', '東日本', '観光地', '千代田区'],
@@ -705,7 +713,7 @@ const SpotsPage = () => {
         image: akihabara,
       },
       {
-        id: 34,
+        id: 35,
         name: '富士急ハイランド',
         description: '絶叫マシンで有名なテーマパーク。富士山を背景にした絶景アトラクション',
         tags: ['エンタメ', 'アトラクション', '東日本', '観光地', '富士吉田市'],
@@ -765,13 +773,23 @@ const SpotsPage = () => {
     },
 
     {
+      id: 5,
+      title: '大自然を満喫！夏の北海道・札幌ドライブ',
+      description: '富良野のラベンダー畑と海鮮を味わう旅。',
+      image: SapporoTower,
+      author: 'ドアン',
+      type: '二人旅',
+      city: '札幌',
+    },
+    {
       id: 24,
-      title: '🏛 中之島公会堂 × 黒執事 聖地巡礼',
-      description: '中之島公会堂 聖地巡礼！黒執事の世界を体感',
-      image: OsakaArchitecture5,
-      author: 'アニメ巡礼編集部',
+      title: 'オホーツク流氷体験！札幌→網走 1〜2日旅',
+      description:
+        '札幌から特急で網走へ。流氷砕氷船クルーズ、季節列車で北浜駅へ向かい、オホーツク海の絶景を満喫する冬のモデルコース。',
+      image: sapporoabasiri,
+      author: '旅ログ編集部',
       type: '一人旅',
-      city: '大阪',
+      city: '札幌',
     },
     {
       id: 30,
@@ -780,17 +798,6 @@ const SpotsPage = () => {
       image: ramenyokocho,
       author: 'グルメ好き',
       type: 'グルメ',
-      city: '札幌',
-    },
-
-    {
-      id: 31,
-      title: 'オホーツク流氷体験！札幌→網走 1〜2日旅',
-      description:
-        '札幌から特急で網走へ。流氷砕氷船クルーズ、季節列車で北浜駅へ向かい、オホーツク海の絶景を満喫する冬のモデルコース。',
-      image: sapporoabasiri,
-      author: '旅ログ編集部',
-      type: '一人旅',
       city: '札幌',
     },
     {
@@ -926,9 +933,17 @@ const SpotsPage = () => {
       city: '福岡',
     },
 
-    // Duplicate removed: 中之島公会堂 is defined earlier with id 39
     {
-      id: 26,
+      id: 24,
+      title: '🏛 中之島公会堂 × 黒執事 聖地巡礼',
+      description: '中之島公会堂 聖地巡礼！黒執事の世界を体感',
+      image: OsakaArchitecture5,
+      author: 'アニメ巡礼編集部',
+      type: '一人旅',
+      city: '大阪',
+    },
+    {
+      id: 25,
       title: '🎡 天保山大観覧車 × 名探偵コナン 聖地巡礼',
       description: '天保山大観覧車 聖地巡礼！コナンと大阪の夜景',
       image: OsakaTempozan,
@@ -997,20 +1012,15 @@ const SpotsPage = () => {
   const safeSpotPage = Math.min(spotPage, totalSpotPages);
   const displayedSpots = filteredSpots.slice((safeSpotPage - 1) * spotsPerPage, safeSpotPage * spotsPerPage);
 
-  // 도시 변경 시 스팟 페이지 초기화 및 검색어, 태그 초기화
+  // 도시 변경 시 스팟 페이지 초기화 및 검색어 초기화
   useEffect(() => {
     setSpotPage(1);
     if (selectedCity) {
-      // 도시가 선택되면 검색어, 태그와 URL 파라미터 초기화
-      // 단, 검색어로 인한 자동 도시 선택이 아닌 경우에만
-      const currentSearchParam = searchParams.get('search');
-      if (!currentSearchParam || !destinations.some((dest) => dest.name === currentSearchParam)) {
-        setSearchQuery('');
-        setSelectedTags([]);
-        const newSearchParams = new URLSearchParams(searchParams);
-        newSearchParams.delete('search');
-        navigate(`/spots?${newSearchParams.toString()}`, { replace: true });
-      }
+      // 도시가 선택되면 검색어와 URL 파라미터 초기화
+      setSearchQuery('');
+      const newSearchParams = new URLSearchParams(searchParams);
+      newSearchParams.delete('search');
+      navigate(`/spots?${newSearchParams.toString()}`, { replace: true });
     }
   }, [selectedCity, searchParams, navigate]);
 
@@ -1068,9 +1078,6 @@ const SpotsPage = () => {
 
   return (
     <div className="min-h-screen">
-      <div className="sticky top-0 z-50">
-        <Header />
-      </div>
       {/* Hero Section */}
       <section
         className="relative h-96 bg-cover bg-center bg-no-repeat flex items-center justify-center"
@@ -1132,9 +1139,9 @@ const SpotsPage = () => {
             {showLeftArrow && (
               <button
                 onClick={scrollDestLeft}
-                className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-orange-500 text-white rounded-full w-12 h-12 flex items-center justify-center shadow-lg hover:bg-orange-600 transition-colors z-10"
+                className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white shadow-lg rounded-full w-12 h-12 flex items-center justify-center z-10 hover:bg-gray-50 transition-colors"
               >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                 </svg>
               </button>
@@ -1144,9 +1151,9 @@ const SpotsPage = () => {
             {showRightArrow && (
               <button
                 onClick={scrollDestRight}
-                className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-orange-500 text-white rounded-full w-12 h-12 flex items-center justify-center shadow-lg hover:bg-orange-600 transition-colors z-10"
+                className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white shadow-lg rounded-full w-12 h-12 flex items-center justify-center z-10 hover:bg-gray-50 transition-colors"
               >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
               </button>
@@ -1166,14 +1173,12 @@ const SpotsPage = () => {
                     onClick={() => {
                       if (selectedCity === destination.name) {
                         setSelectedCity(null);
-                        setSelectedTags([]); // 도시 해제 시 태그도 초기화
                         // URL에서 도시 파라미터 제거
                         const newSearchParams = new URLSearchParams(searchParams);
                         newSearchParams.delete('city');
                         navigate(`/spots?${newSearchParams.toString()}`, { replace: true });
                       } else {
                         setSelectedCity(destination.name);
-                        setSelectedTags([]); // 새로운 도시 선택 시 태그 초기화
                         // URL에 도시 파라미터 추가
                         const newSearchParams = new URLSearchParams(searchParams);
                         newSearchParams.set('city', destination.name);
@@ -1365,7 +1370,7 @@ const SpotsPage = () => {
               {displayedSpots.length > 0 ? (
                 displayedSpots.map((spot) => (
                   <div
-                    key={`${spot.city}-${spot.id}`}
+                    key={spot.id}
                     className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
                     onClick={() => {
                       // 현재 URL 정보를 state로 전달하여 뒤로가기 시 도시 정보 유지

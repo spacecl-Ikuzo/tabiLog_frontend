@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import SpotSearchDialog from '@/components/SpotSearchDialog';
 import GoogleMapView from '@/components/GoogleMapView';
-import DepartureTimeDialog from './components/DepartureTimeDialog';
 import { axiosInstance } from '@/api/axios';
 import {
   Plus,
@@ -18,10 +17,8 @@ import {
   Save,
   X,
 } from 'lucide-react';
-import { getExpensesByPlan } from '@/api/api';
-import Header from '@/components/layout/header';
+import { createExpense, getExpensesByPlan } from '@/api/api';
 import SvgIcon from '@/components/ui/SvgIcon';
-import { useUserStore } from '@/store';
 import {
   DndContext,
   closestCenter,
@@ -39,8 +36,30 @@ import {
 } from '@dnd-kit/sortable';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { Plan, Spot, Expense, PlanMember, DailyPlan } from '@/lib/type';
-import { AxiosError } from 'axios';
+
+interface Spot {
+  id: number;
+  time: string;
+  duration: string;
+  icon: React.ReactNode;
+  location: string;
+  address: string;
+  cost: string;
+  latitude?: number;
+  longitude?: number;
+  rating?: number;
+  userRatingsTotal?: number;
+  transportMode?: 'walking' | 'driving' | 'transit';
+  expenses?: ExpenseData[];
+}
+
+interface ExpenseData {
+  id: number;
+  amount: number;
+  category: string;
+  item: string;
+  expenseDate: string;
+}
 
 interface TravelSegment {
   duration: string;
@@ -65,8 +84,7 @@ interface SortableSpotItemProps {
   day: number;
   getEndTime: (startTime: string, duration: string) => string;
   nextSegment?: TravelSegment;
-  spotExpenses: Record<number, Expense[]>;
-  userRole: string;
+  spotExpenses: Record<number, ExpenseData[]>;
 }
 
 const SortableSpotItem: React.FC<SortableSpotItemProps> = ({
@@ -82,7 +100,6 @@ const SortableSpotItem: React.FC<SortableSpotItemProps> = ({
   getEndTime,
   nextSegment,
   spotExpenses,
-  userRole,
 }) => {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: spot.id });
 
@@ -96,45 +113,43 @@ const SortableSpotItem: React.FC<SortableSpotItemProps> = ({
     <div ref={setNodeRef} style={style} className="relative">
       <div className="bg-white border border-gray-200 rounded-lg p-4 mb-4 shadow-sm hover:shadow-md transition-shadow">
         <div className="flex items-start justify-between">
-          {/* 드래그 핸들과 순서 변경 버튼 - VIEWER 역할이 아닐 때만 표시 */}
-          {userRole !== 'VIEWER' && (
-            <div className="flex flex-col items-center mr-3 space-y-1">
+          {/* 드래그 핸들과 순서 변경 버튼 */}
+          <div className="flex flex-col items-center mr-3 space-y-1">
+            <button
+              {...attributes}
+              {...listeners}
+              className="p-1 text-gray-400 hover:text-gray-600 transition-colors cursor-grab active:cursor-grabbing"
+              title="드래그하여 순서 변경"
+            >
+              <GripVertical className="w-4 h-4" />
+            </button>
+            <div className="flex flex-col space-y-1">
               <button
-                {...attributes}
-                {...listeners}
-                className="p-1 text-gray-400 hover:text-gray-600 transition-colors cursor-grab active:cursor-grabbing"
-                title="드래그하여 순서 변경"
+                onClick={() => onMoveUp(day, spotIndex)}
+                disabled={spotIndex === 0}
+                className={`p-1 rounded transition-colors ${
+                  spotIndex === 0
+                    ? 'text-gray-300 cursor-not-allowed'
+                    : 'text-gray-400 hover:text-gray-600 hover:bg-gray-100'
+                }`}
+                title="위로 이동"
               >
-                <GripVertical className="w-4 h-4" />
+                <ChevronUp className="w-3 h-3" />
               </button>
-              <div className="flex flex-col space-y-1">
-                <button
-                  onClick={() => onMoveUp(day, spotIndex)}
-                  disabled={spotIndex === 0}
-                  className={`p-1 rounded transition-colors ${
-                    spotIndex === 0
-                      ? 'text-gray-300 cursor-not-allowed'
-                      : 'text-gray-400 hover:text-gray-600 hover:bg-gray-100'
-                  }`}
-                  title="위로 이동"
-                >
-                  <ChevronUp className="w-3 h-3" />
-                </button>
-                <button
-                  onClick={() => onMoveDown(day, spotIndex)}
-                  disabled={spotIndex === totalSpots - 1}
-                  className={`p-1 rounded transition-colors ${
-                    spotIndex === totalSpots - 1
-                      ? 'text-gray-300 cursor-not-allowed'
-                      : 'text-gray-400 hover:text-gray-600 hover:bg-gray-100'
-                  }`}
-                  title="아래로 이동"
-                >
-                  <ChevronDown className="w-3 h-3" />
-                </button>
-              </div>
+              <button
+                onClick={() => onMoveDown(day, spotIndex)}
+                disabled={spotIndex === totalSpots - 1}
+                className={`p-1 rounded transition-colors ${
+                  spotIndex === totalSpots - 1
+                    ? 'text-gray-300 cursor-not-allowed'
+                    : 'text-gray-400 hover:text-gray-600 hover:bg-gray-100'
+                }`}
+                title="아래로 이동"
+              >
+                <ChevronDown className="w-3 h-3" />
+              </button>
             </div>
-          )}
+          </div>
 
           {/* 관광지 정보 */}
           <div className="flex-1">
@@ -143,25 +158,22 @@ const SortableSpotItem: React.FC<SortableSpotItemProps> = ({
                 <MapPin className="w-4 h-4 text-blue-500" />
                 <h3 className="font-medium text-gray-900">{spot.location}</h3>
               </div>
-              {/* 편집 및 삭제 버튼 - VIEWER 역할이 아닐 때만 표시 */}
-              {userRole !== 'VIEWER' && (
-                <div className="flex items-center space-x-2">
-                  <button
-                    onClick={() => onEdit(spot)}
-                    className="p-1 text-gray-400 hover:text-blue-600 transition-colors"
-                    title="편집"
-                  >
-                    <Edit className="w-4 h-4" />
-                  </button>
-                  <button
-                    onClick={() => onDelete(day, spot.id)}
-                    className="p-1 text-gray-400 hover:text-red-600 transition-colors"
-                    title="삭제"
-                  >
-                    <Trash2 className="w-4 h-4" />
-                  </button>
-                </div>
-              )}
+              <div className="flex items-center space-x-2">
+                <button
+                  onClick={() => onEdit(spot)}
+                  className="p-1 text-gray-400 hover:text-blue-600 transition-colors"
+                  title="편집"
+                >
+                  <Edit className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={() => onDelete(day, spot.id)}
+                  className="p-1 text-gray-400 hover:text-red-600 transition-colors"
+                  title="삭제"
+                >
+                  <Trash2 className="w-4 h-4" />
+                </button>
+              </div>
             </div>
 
             <p className="text-sm text-gray-600 mb-2">{spot.address}</p>
@@ -190,39 +202,24 @@ const SortableSpotItem: React.FC<SortableSpotItemProps> = ({
 
               <div className="flex flex-col items-end space-y-2">
                 {/* 지출 정보 표시 */}
-                {(() => {
-                  const expenses = spotExpenses[spot.id];
-                  console.log(`=== 지출 정보 표시 (spotId: ${spot.id}) ===`);
-                  console.log('spotExpenses 전체:', spotExpenses);
-                  console.log('현재 spot.id:', spot.id);
-                  console.log('expenses:', expenses);
-                  console.log('expenses length:', expenses?.length);
-                  console.log('expenses type:', typeof expenses);
-
-                  if (expenses && expenses.length > 0) {
-                    const total = expenses.reduce((sum: number, expense: Expense) => {
-                      console.log('expense:', expense, 'amount:', expense.amount);
-                      return sum + expense.amount;
-                    }, 0);
-                    console.log('total amount:', total);
-                    return <span className="text-sm font-bold text-gray-900">{total.toLocaleString()}円</span>;
-                  } else {
-                    console.log('expenses가 없거나 비어있음');
-                  }
-                  return null;
-                })()}
-
-                {/* 비용 계산 버튼 - VIEWER 역할이 아닐 때만 표시 */}
-                {userRole !== 'VIEWER' && (
-                  <button
-                    onClick={() => onCalculateCost(spot)}
-                    className="flex items-center space-x-1 px-3 py-1.5 bg-orange-500 text-white text-sm font-medium rounded-lg hover:bg-orange-600 transition-colors shadow-sm"
-                    title="비용 계산"
-                  >
-                    <Calculator className="w-4 h-4" />
-                    <span>コスト</span>
-                  </button>
+                {spotExpenses[spot.id] && spotExpenses[spot.id].length > 0 && (
+                  <span className="text-sm font-bold text-gray-900">
+                    {spotExpenses[spot.id]
+                      .reduce((sum: number, expense: ExpenseData) => sum + expense.amount, 0)
+                      .toLocaleString()}
+                    円
+                  </span>
                 )}
+
+                {/* 비용 계산 버튼 */}
+                <button
+                  onClick={() => onCalculateCost(spot)}
+                  className="flex items-center space-x-1 px-3 py-1.5 bg-orange-500 text-white text-sm font-medium rounded-lg hover:bg-orange-600 transition-colors shadow-sm"
+                  title="비용 계산"
+                >
+                  <Calculator className="w-4 h-4" />
+                  <span>コスト</span>
+                </button>
               </div>
             </div>
           </div>
@@ -262,19 +259,17 @@ const TripPlannerPage = () => {
   const navigate = useNavigate();
   const planId = searchParams.get('planId');
 
-  // store에서 사용자 정보 가져오기
-  const { userId } = useUserStore();
-
-  const [activeDay, setActiveDay] = useState(1);
+  const [activeDay, setActiveDay] = useState(2);
   const [isSearchDialogOpen, setIsSearchDialogOpen] = useState(false);
-  const [planData, setPlanData] = useState<Plan>({} as Plan);
+  const [planData, setPlanData] = useState<any>(null);
   const [isLoadingPlan, setIsLoadingPlan] = useState(false);
   const [isDepartureTimeDialogOpen, setIsDepartureTimeDialogOpen] = useState(false);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
-  const [editingSpot, setEditingSpot] = useState<Spot>({} as Spot);
+  const [editingSpot, setEditingSpot] = useState<Spot | null>(null);
+  const [editingCost, setEditingCost] = useState(0);
   const [isSpotChangeDialogOpen, setIsSpotChangeDialogOpen] = useState(false);
   const [isCostDialogOpen, setIsCostDialogOpen] = useState(false);
-  const [costCalculatingSpot, setCostCalculatingSpot] = useState<Spot>({} as Spot);
+  const [costCalculatingSpot, setCostCalculatingSpot] = useState<Spot | null>(null);
   const [expenseInputs, setExpenseInputs] = useState<{
     amount: number;
     category: string;
@@ -283,101 +278,14 @@ const TripPlannerPage = () => {
     category: 'LODGING',
   });
   const [isLoading, setIsLoading] = useState(false);
-  const [spotExpenses, setSpotExpenses] = useState<Record<number, Expense[]>>({});
+  const [spotExpenses, setSpotExpenses] = useState<Record<number, ExpenseData[]>>({});
   const [departureTime, setDepartureTime] = useState<DepartureTime>({ hour: 11, minute: 0 });
-
-  // spotExpenses 상태 변경 감지
-  useEffect(() => {
-    console.log('=== spotExpenses 상태 변경 감지 ===');
-    console.log('새로운 spotExpenses:', spotExpenses);
-    console.log('spotExpenses 키들:', Object.keys(spotExpenses));
-  }, [spotExpenses]);
-
   const [leftPanelWidth, setLeftPanelWidth] = useState(40); // 40% (4:6 비율)
   const [isDragging, setIsDragging] = useState(false);
   const [spots, setSpots] = useState<Record<number, Spot[]>>({});
-
-  // spots 상태 변경 시 spotExpenses 매칭 재수행
-  useEffect(() => {
-    const currentSpots = Object.values(spots).flat();
-    if (currentSpots.length > 0) {
-      console.log('=== spots 상태 변경 감지, spotExpenses 매칭 재수행 ===');
-      console.log(
-        '현재 Spots:',
-        currentSpots.map((spot) => ({ id: spot.id, location: spot.location })),
-      );
-
-      // localStorage에서 spotExpenses 데이터 가져오기
-      const savedSpotExpenses = localStorage.getItem('spotExpenses');
-      if (savedSpotExpenses) {
-        try {
-          const parsedExpenses = JSON.parse(savedSpotExpenses);
-          console.log('localStorage에서 복구된 데이터:', parsedExpenses);
-
-          const matchedExpenses: Record<number, Expense[]> = {};
-
-          // 각 현재 Spot에 대해 Expense 데이터 매칭
-          currentSpots.forEach((spot) => {
-            // 1. 정확한 ID 매칭 시도
-            if (parsedExpenses[spot.id]) {
-              matchedExpenses[spot.id] = parsedExpenses[spot.id];
-              console.log(`Spot ${spot.id} (${spot.location}): ID 매칭 성공`);
-            } else {
-              // 2. 위치(location) 기준 매칭 시도
-              const matchedByLocation = Object.entries(parsedExpenses).find(([, expenses]) => {
-                const expenseArray = expenses as Expense[];
-                const expense = expenseArray[0];
-                return (
-                  expense &&
-                  ((expense.location && expense.location === spot.location) ||
-                    (expense.item && expense.item.includes(spot.location)))
-                );
-              });
-
-              if (matchedByLocation) {
-                matchedExpenses[spot.id] = matchedByLocation[1] as Expense[];
-                console.log(`Spot ${spot.id} (${spot.location}): 위치 매칭 성공 (이전 ID: ${matchedByLocation[0]})`);
-              } else {
-                console.log(`Spot ${spot.id} (${spot.location}): 매칭 실패`);
-              }
-            }
-          });
-
-          console.log('=== spots 변경 후 최종 매칭된 Expense 데이터 ===');
-          console.log('matchedExpenses:', matchedExpenses);
-          setSpotExpenses(matchedExpenses);
-        } catch (error) {
-          console.error('localStorage 데이터 파싱 실패:', error);
-        }
-      }
-    }
-  }, [spots]);
   const [isSaveConfirmationOpen, setIsSaveConfirmationOpen] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [isInitialLoad, setIsInitialLoad] = useState(true);
-  const [userRole, setUserRole] = useState<string>('VIEWER'); // 기본값을 VIEWER로 설정
-
-  // 사용자의 플랜 내 역할 확인
-  const checkUserRole = React.useCallback(
-    (planData: {
-      members?: Array<{
-        id: number;
-        userId: number;
-        userIdString: string;
-        userNickname: string;
-        userEmail: string;
-        role: string;
-      }>;
-    }) => {
-      if (!planData?.members || !userId) {
-        return 'VIEWER';
-      }
-
-      const member = planData.members.find((m) => m.userIdString === userId);
-      return member ? member.role : 'VIEWER';
-    },
-    [userId],
-  );
 
   // localStorage에서 spots 데이터 복원 (초기 로드 시에만)
   useEffect(() => {
@@ -498,37 +406,57 @@ const TripPlannerPage = () => {
 
         setPlanData(planData);
 
-        // 출발시간 설정 (현재 활성 날짜의 dailyPlan에서 가져오기)
-        if (planData?.dailyPlans?.[activeDay - 1]?.departureTime) {
-          const currentDepartureTime = planData.dailyPlans[activeDay - 1].departureTime;
+        // localStorage에 저장된 데이터가 있는지 확인
+        const savedSpots = localStorage.getItem(`trip_spots_${planId}`);
+        const isSaved = localStorage.getItem(`trip_saved_${planId}`) === 'true';
+        let hasLocalStorageData = false;
 
-          // departureTime이 문자열인 경우 파싱
-          if (typeof currentDepartureTime === 'string') {
-            const [hour, minute] = currentDepartureTime.split(':').map(Number);
-            setDepartureTime({ hour: hour || 11, minute: minute || 0 });
-          } else {
-            setDepartureTime(currentDepartureTime);
+        if (savedSpots) {
+          try {
+            const parsedSpots = JSON.parse(savedSpots);
+            hasLocalStorageData = Object.keys(parsedSpots).length > 0;
+          } catch (error) {
+            console.error('localStorage 데이터 파싱 실패:', error);
+            hasLocalStorageData = false;
           }
-
-          console.log('=== 출발시간 설정 ===', {
-            activeDay,
-            departureTime: currentDepartureTime,
-          });
         }
 
-        // 사용자 역할 확인
-        const role = checkUserRole(planData);
-        setUserRole(role);
-        console.log('=== 사용자 역할 확인 ===', {
-          currentUserId: userId,
-          planMembers: planData?.members,
-          userRole: role,
+        console.log('=== localStorage 데이터 확인 ===', {
+          hasLocalStorageData,
+          savedSpots,
+          isSaved,
         });
 
-        const hasLocalStorageData = false;
+        // localStorage 데이터가 있으면 플랜 기간에 맞게 정리
+        if (hasLocalStorageData && savedSpots && planData?.startDate && planData?.endDate) {
+          try {
+            const parsedSpots = JSON.parse(savedSpots);
+            const startDate = new Date(planData.startDate);
+            const endDate = new Date(planData.endDate);
+            const totalDays = Math.ceil((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)) + 1;
+
+            // 플랜 기간을 벗어나는 날짜 데이터 제거
+            const cleanedSpots: Record<number, Spot[]> = {};
+            for (let day = 1; day <= totalDays; day++) {
+              if (parsedSpots[day]) {
+                cleanedSpots[day] = parsedSpots[day];
+              }
+            }
+
+            // 정리된 데이터를 localStorage에 다시 저장
+            localStorage.setItem(`spots_${planId}`, JSON.stringify(cleanedSpots));
+            console.log('=== localStorage 데이터 정리 완료 ===', {
+              원본_날짜_수: Object.keys(parsedSpots).length,
+              정리된_날짜_수: Object.keys(cleanedSpots).length,
+              플랜_기간: `${planData.startDate} ~ ${planData.endDate}`,
+            });
+          } catch (error) {
+            console.error('localStorage 데이터 정리 중 오류:', error);
+          }
+        }
 
         // localStorage에 임시 데이터가 없거나 저장된 상태일 때 백엔드에서 데이터 로드
-        if (!hasLocalStorageData) {
+        if (!hasLocalStorageData || isSaved) {
           console.log('=== 백엔드에서 spots 데이터 로드 시작 ===');
 
           // 계획 데이터를 기반으로 spots 초기화
@@ -561,11 +489,9 @@ const TripPlannerPage = () => {
 
                 if (spotsResponse.data && spotsResponse.data.data) {
                   // 백엔드 SpotResponse를 프론트엔드 Spot 형식으로 변환
-                  const convertedSpots: Spot[] = spotsResponse.data.data.map((spot: Spot) => ({
+                  const convertedSpots: Spot[] = spotsResponse.data.data.map((spot: any) => ({
                     id: spot.id,
-                    time: `${departureTime.hour.toString().padStart(2, '0')}:${departureTime.minute
-                      .toString()
-                      .padStart(2, '0')}`, // 사용자 설정 출발시간
+                    time: '09:00', // 기본값 (백엔드에 visitTime 필드가 없음)
                     duration: spot.duration || '1時間', // 기본값
                     icon: <MapPin className="w-4 h-4" />,
                     location: spot.name,
@@ -583,9 +509,6 @@ const TripPlannerPage = () => {
                 } else {
                   newSpots[dayNumber] = [];
                 }
-
-                localStorage.removeItem(`trip_saved_${planId}`);
-                console.log('=== 백엔드 데이터 로드 완료, 저장 상태 초기화 ===');
               } catch (error) {
                 console.error(`${dayNumber}일차 스팟 데이터 로드 실패:`, error);
                 newSpots[dayNumber] = [];
@@ -606,7 +529,15 @@ const TripPlannerPage = () => {
             }
 
             setSpots(newSpots);
+
+            // 백엔드에서 데이터를 성공적으로 로드했으면 저장 상태 초기화
+            if (isSaved) {
+              localStorage.removeItem(`trip_saved_${planId}`);
+              console.log('=== 백엔드 데이터 로드 완료, 저장 상태 초기화 ===');
+            }
           }
+        } else {
+          console.log('=== localStorage 데이터가 있어서 백엔드 데이터 로드 건너뜀 ===');
         }
 
         // travelSegments 초기화 (localStorage 데이터 여부와 관계없이)
@@ -631,130 +562,40 @@ const TripPlannerPage = () => {
           setTravelSegments(newTravelSegments);
         }
 
-        // 지출 데이터 로드 (localStorage 우선, 서버 API 백업)
-        console.log('=== 지출 데이터 로드 시작 ===');
-
-        // 1. localStorage에서 데이터 복구 시도
-        const savedSpotExpenses = localStorage.getItem('spotExpenses');
-        if (savedSpotExpenses) {
+        // 지출 데이터 로드
+        if (planId) {
           try {
-            const parsedExpenses = JSON.parse(savedSpotExpenses);
-            console.log('=== localStorage에서 spotExpenses 복구 ===');
-            console.log('복구된 데이터:', parsedExpenses);
-            console.log('복구된 spotId들:', Object.keys(parsedExpenses));
+            console.log('=== 지출 데이터 로드 시작 ===');
+            const expensesResponse = await getExpensesByPlan(parseInt(planId));
+            console.log('=== 지출 데이터 응답 ===', expensesResponse);
 
-            // spots 상태가 로드될 때까지 대기 후 매칭 수행
-            console.log('=== spots 상태 확인 ===');
-            console.log('현재 spots 상태:', spots);
-            console.log('spots 키들:', Object.keys(spots));
+            if (expensesResponse && expensesResponse.data) {
+              const expenses = expensesResponse.data;
+              console.log('=== 지출 데이터 ===', expenses);
 
-            // spots가 아직 로드되지 않았으면 일단 복구된 데이터를 그대로 설정
-            const currentSpots = Object.values(spots).flat();
-            if (currentSpots.length === 0) {
-              console.log('=== spots가 아직 로드되지 않음, 복구된 데이터를 그대로 설정 ===');
-              setSpotExpenses(parsedExpenses);
-            } else {
-              console.log('=== spots 로드 완료, 매칭 수행 ===');
-              console.log(
-                '현재 Spots:',
-                currentSpots.map((spot) => ({ id: spot.id, location: spot.location })),
-              );
-
-              const matchedExpenses: Record<number, Expense[]> = {};
-
-              // 각 현재 Spot에 대해 Expense 데이터 매칭
-              currentSpots.forEach((spot) => {
-                // 1. 정확한 ID 매칭 시도
-                if (parsedExpenses[spot.id]) {
-                  matchedExpenses[spot.id] = parsedExpenses[spot.id];
-                  console.log(`Spot ${spot.id} (${spot.location}): ID 매칭 성공`);
-                } else {
-                  // 2. 위치(location) 기준 매칭 시도
-                  const matchedByLocation = Object.entries(parsedExpenses).find(([, expenses]) => {
-                    const expenseArray = expenses as Expense[];
-                    const expense = expenseArray[0];
-                    return (
-                      expense &&
-                      ((expense.location && expense.location === spot.location) ||
-                        (expense.item && expense.item.includes(spot.location)))
-                    );
-                  });
-
-                  if (matchedByLocation) {
-                    matchedExpenses[spot.id] = matchedByLocation[1] as Expense[];
-                    console.log(
-                      `Spot ${spot.id} (${spot.location}): 위치 매칭 성공 (이전 ID: ${matchedByLocation[0]})`,
-                    );
-                  } else {
-                    console.log(`Spot ${spot.id} (${spot.location}): 매칭 실패`);
+              // spotId별로 지출 데이터 그룹화
+              const groupedExpenses: Record<number, ExpenseData[]> = {};
+              expenses.forEach((expense: any) => {
+                if (expense.spotId) {
+                  if (!groupedExpenses[expense.spotId]) {
+                    groupedExpenses[expense.spotId] = [];
                   }
+                  groupedExpenses[expense.spotId].push({
+                    id: expense.id,
+                    amount: expense.amount,
+                    category: expense.category,
+                    item: expense.item,
+                    expenseDate: expense.expenseDate,
+                  });
                 }
               });
 
-              console.log('=== 최종 매칭된 Expense 데이터 ===');
-              console.log('matchedExpenses:', matchedExpenses);
-              setSpotExpenses(matchedExpenses);
+              console.log('=== 그룹화된 지출 데이터 ===', groupedExpenses);
+              setSpotExpenses(groupedExpenses);
             }
           } catch (error) {
-            console.error('localStorage 데이터 파싱 실패:', error);
-            setSpotExpenses({});
-          }
-        } else {
-          console.log('=== localStorage에 spotExpenses 데이터 없음 ===');
-
-          // 2. 서버 API에서 데이터 로드 시도 (백업)
-          if (planId) {
-            try {
-              console.log('planId:', planId);
-              const expensesResponse = await getExpensesByPlan(parseInt(planId));
-              console.log('=== 지출 데이터 응답 ===', expensesResponse);
-
-              if (expensesResponse && expensesResponse.data) {
-                const expenses = expensesResponse.data;
-                console.log('=== 지출 데이터 ===', expenses);
-                console.log('지출 데이터 개수:', expenses.length);
-
-                // spotId별로 지출 데이터 그룹화
-                const groupedExpenses: Record<number, Expense[]> = {};
-                expenses.forEach((expense: Expense) => {
-                  console.log('처리 중인 expense:', expense);
-                  if (expense.spotId) {
-                    if (!groupedExpenses[expense.spotId]) {
-                      groupedExpenses[expense.spotId] = [];
-                    }
-                    const expenseData = {
-                      id: expense.id,
-                      amount: expense.amount,
-                      category: expense.category,
-                      item: expense.item,
-                      expenseDate: expense.expenseDate,
-                    };
-                    groupedExpenses[expense.spotId].push(expenseData);
-                    console.log(`spotId ${expense.spotId}에 expense 추가:`, expenseData);
-                  } else {
-                    console.log('spotId가 없는 expense:', expense);
-                  }
-                });
-
-                console.log('=== 그룹화된 지출 데이터 ===', groupedExpenses);
-                console.log('그룹화된 spotId들:', Object.keys(groupedExpenses));
-                setSpotExpenses(groupedExpenses);
-
-                // 서버 데이터를 localStorage에도 저장
-                localStorage.setItem('spotExpenses', JSON.stringify(groupedExpenses));
-                console.log('=== 서버 데이터를 localStorage에 저장 ===');
-              } else {
-                console.log('=== 서버에 지출 데이터가 없음 ===');
-                setSpotExpenses({});
-              }
-            } catch (error) {
-              console.error('서버 지출 데이터 로드 실패:', error);
-              console.error('오류 상세:', error);
-              setSpotExpenses({});
-            }
-          } else {
-            console.log('=== planId가 없어서 지출 데이터 로드 건너뜀 ===');
-            setSpotExpenses({});
+            console.error('지출 데이터 로드 실패:', error);
+            // 지출 데이터 로드 실패는 치명적이지 않으므로 계속 진행
           }
         }
       } catch (error) {
@@ -762,13 +603,8 @@ const TripPlannerPage = () => {
         console.error('에러 상세 정보:', {
           message: error instanceof Error ? error.message : 'Unknown error',
           status:
-            error && typeof error === 'object' && 'response' in error
-              ? (error as { response?: { status: number } }).response?.status
-              : 'No status',
-          data:
-            error && typeof error === 'object' && 'response' in error
-              ? (error as { response?: { data: number } }).response?.data
-              : 'No data',
+            error && typeof error === 'object' && 'response' in error ? (error as any).response?.status : 'No status',
+          data: error && typeof error === 'object' && 'response' in error ? (error as any).response?.data : 'No data',
         });
 
         // 에러 발생 시 기본 데이터 설정
@@ -777,8 +613,7 @@ const TripPlannerPage = () => {
           startDate: '2026.05.13',
           endDate: '2026.05.15',
           dailyPlans: [],
-          members: [],
-        } as unknown as Plan);
+        });
       } finally {
         setIsLoadingPlan(false);
         setIsInitialLoad(false); // 초기 로드 완료
@@ -786,7 +621,7 @@ const TripPlannerPage = () => {
     };
 
     loadPlanData();
-  }, [planId, userId, checkUserRole]);
+  }, [planId]);
 
   // 컴포넌트 마운트 시 TRANSIT 모드를 WALKING 모드로 변경
   React.useEffect(() => {
@@ -799,49 +634,6 @@ const TripPlannerPage = () => {
       setSpots(convertTransitToWalking(spots));
     }
   }, [spots]); // spots를 의존성 배열에 추가
-
-  // spots가 변경될 때마다 이동 시간 재계산
-  useEffect(() => {
-    // 초기 로드가 완료되고, 현재 활성 날짜에 스팟이 2개 이상 있을 때만 재계산
-    if (!isInitialLoad && spots[activeDay] && spots[activeDay].length >= 2) {
-      console.log('=== spots 변경 감지, 이동 시간 재계산 시작 ===');
-      recalculateTravelTimes();
-    }
-  }, [activeDay, isInitialLoad]);
-
-  // 활성 날짜 변경 시 해당 날짜의 출발시간 업데이트
-  useEffect(() => {
-    if (planData?.dailyPlans?.[activeDay - 1]?.departureTime) {
-      const currentDepartureTime = planData.dailyPlans[activeDay - 1].departureTime as unknown as string;
-
-      // departureTime이 문자열인 경우 파싱
-      if (typeof currentDepartureTime === 'string') {
-        const [hour, minute] = currentDepartureTime.split(':').map(Number);
-        setDepartureTime({ hour: hour || 11, minute: minute || 0 });
-      } else {
-        setDepartureTime(currentDepartureTime);
-      }
-
-      console.log('=== 날짜 변경으로 인한 출발시간 업데이트 ===', {
-        activeDay,
-        departureTime: currentDepartureTime,
-      });
-    }
-  }, [activeDay, planData]);
-
-  // 출발시간 변경 시 기존 일정 재계산
-  useEffect(() => {
-    if (!isInitialLoad && spots[activeDay] && spots[activeDay].length > 0) {
-      console.log('=== 출발시간 변경 감지, 일정 재계산 시작 ===');
-      console.log(
-        '새로운 출발시간:',
-        `${departureTime.hour.toString().padStart(2, '0')}:${departureTime.minute.toString().padStart(2, '0')}`,
-      );
-
-      // 현재 날짜의 모든 스팟 시간 재계산
-      recalculateAllSpotTimes();
-    }
-  }, [departureTime, isInitialLoad]);
 
   // 관광지 추가 함수
   const addSpot = async (
@@ -973,9 +765,7 @@ const TripPlannerPage = () => {
       // TRANSIT 모드는 제거되었으므로 추가 파라미터 불필요
       const transitParams = '';
 
-      const apiUrl = `${import.meta.env.VITE_API_URL}/api/spots/directions?lat1=${fromSpot.latitude}&lng1=${
-        fromSpot.longitude
-      }&lat2=${toSpot.latitude}&lng2=${toSpot.longitude}&travelMode=${mode}${departureTimeParam}${transitParams}`;
+      const apiUrl = `http://localhost:8080/api/spots/directions?lat1=${fromSpot.latitude}&lng1=${fromSpot.longitude}&lat2=${toSpot.latitude}&lng2=${toSpot.longitude}&travelMode=${mode}${departureTimeParam}${transitParams}`;
       console.log('API 요청 URL:', apiUrl);
       console.log('요청 파라미터:', {
         from: `${fromSpot.latitude}, ${fromSpot.longitude}`,
@@ -1214,6 +1004,9 @@ const TripPlannerPage = () => {
   // 관광지 편집 함수
   const editSpot = (spot: Spot) => {
     setEditingSpot(spot);
+    // 현재 spot의 cost 값을 추출하여 설정
+    const currentCost = parseInt(spot.cost.replace(/[^\d]/g, '') || '0');
+    setEditingCost(currentCost);
     setIsEditDialogOpen(true);
   };
 
@@ -1222,36 +1015,17 @@ const TripPlannerPage = () => {
     setCostCalculatingSpot(spot);
     setIsCostDialogOpen(true);
 
-    // 현재 spot의 기존 코스트 값을 spotExpenses에서 가져와서 입력 필드에 설정
-    const currentExpenses = spotExpenses[spot.id];
-    let currentCost = 0;
-    let currentCategory = 'LODGING';
-
-    if (currentExpenses && currentExpenses.length > 0) {
-      currentCost = currentExpenses[0].amount;
-      currentCategory = currentExpenses[0].category;
-      console.log('=== 기존 Expense 데이터에서 코스트 로드 ===');
-      console.log('spotId:', spot.id);
-      console.log('currentCost:', currentCost);
-      console.log('currentCategory:', currentCategory);
-    } else {
-      // spotExpenses에 데이터가 없으면 spot.cost에서 가져오기 (백업)
-      currentCost = parseInt(spot.cost.toString().replace(/[^\d]/g, '') || '0');
-      console.log('=== spot.cost에서 코스트 로드 (백업) ===');
-      console.log('spotId:', spot.id);
-      console.log('currentCost:', currentCost);
-    }
-
+    // 입력 필드 초기화
     setExpenseInputs({
-      amount: currentCost,
-      category: currentCategory,
+      amount: 0,
+      category: 'LODGING',
     });
   };
 
-  // 코스트 수정 함수
+  // 지출 저장 함수
   const saveExpenses = async () => {
     if (!costCalculatingSpot || expenseInputs.amount <= 0) {
-      alert('金額を入力してください。');
+      alert('금액을 입력해주세요.');
       return;
     }
 
@@ -1259,112 +1033,74 @@ const TripPlannerPage = () => {
       setIsLoading(true);
 
       // 상세한 디버깅 정보 출력
-      console.log('=== 코스트 수정 시작 ===');
+      console.log('=== 지출 저장 시작 ===');
       console.log('현재 시간:', new Date().toISOString());
       console.log('spotId:', costCalculatingSpot.id);
       console.log('spot 정보:', costCalculatingSpot);
       console.log('입력 데이터:', expenseInputs);
 
-      // 기존 spot의 코스트는 업데이트하지 않음 (Expense 데이터만 사용하여 중복 방지)
-      // setSpots((prev) => ({
-      //   ...prev,
-      //   [activeDay]: (prev[activeDay] || []).map((spot) =>
-      //     spot.id === costCalculatingSpot.id
-      //       ? { ...spot, cost: `¥${expenseInputs.amount}` }
-      //       : spot
-      //   ),
-      // }));
-
-      // 로컬 상태로만 지출 데이터 저장 (서버 API 우회)
       const expenseData = {
-        planId: parseInt(planId || '1'),
+        planId: parseInt(planId || '1'), // 동적 플랜 ID 사용
         spotId: costCalculatingSpot.id,
         item: `${costCalculatingSpot.location} - ${expenseInputs.category}`,
         amount: expenseInputs.amount,
         category: expenseInputs.category,
         expenseDate: new Date().toISOString().split('T')[0],
-        location: costCalculatingSpot.location, // 위치 정보 추가 (매칭용)
       };
 
-      console.log('=== 로컬 상태에 지출 데이터 저장 ===');
-      console.log('저장 데이터:', expenseData);
+      console.log('=== API 요청 데이터 ===');
+      console.log('요청 URL:', 'http://localhost:8080/api/expenses');
+      console.log('요청 데이터:', JSON.stringify(expenseData, null, 2));
 
-      let savedExpense;
-      if (spotExpenses[costCalculatingSpot.id] && spotExpenses[costCalculatingSpot.id].length > 0) {
-        // 기존 지출이 있으면 업데이트
-        const existingExpense = spotExpenses[costCalculatingSpot.id][0];
-        console.log('=== 기존 지출 업데이트 ===');
-        console.log('existingExpense:', existingExpense);
+      const result = await createExpense(expenseData);
 
-        savedExpense = {
-          id: existingExpense.id, // 기존 ID 유지
-          amount: expenseData.amount,
-          category: expenseData.category,
-          item: expenseData.item,
-          expenseDate: expenseData.expenseDate,
-          location: expenseData.location, // 위치 정보 추가
+      console.log('=== API 응답 성공 ===');
+      console.log('응답 데이터:', JSON.stringify(result, null, 2));
+
+      // 저장된 지출 데이터를 상태에 추가
+      if (result && result.data) {
+        const newExpense: ExpenseData = {
+          id: result.data.id,
+          amount: result.data.amount,
+          category: result.data.category,
+          item: result.data.item,
+          expenseDate: result.data.expenseDate,
         };
 
-        console.log('=== 기존 지출 업데이트 완료 ===');
-        console.log('savedExpense:', savedExpense);
-      } else {
-        // 기존 지출이 없으면 새로 생성
-        console.log('=== 새 지출 생성 ===');
-
-        savedExpense = {
-          id: Date.now(), // 임시 ID
-          amount: expenseData.amount,
-          category: expenseData.category,
-          item: expenseData.item,
-          expenseDate: expenseData.expenseDate,
-          location: expenseData.location, // 위치 정보 추가
-        };
-
-        console.log('=== 새 지출 생성 완료 ===');
-        console.log('savedExpense:', savedExpense);
+        setSpotExpenses((prev) => ({
+          ...prev,
+          [costCalculatingSpot.id]: [...(prev[costCalculatingSpot.id] || []), newExpense],
+        }));
       }
 
-      // 로컬 상태 업데이트
-      setSpotExpenses((prev) => {
-        console.log('=== setSpotExpenses 호출 전 ===');
-        console.log('prev (기존 상태):', prev);
-        console.log('costCalculatingSpot.id:', costCalculatingSpot.id);
-        console.log('savedExpense:', savedExpense);
-
-        const newSpotExpenses = {
-          ...prev,
-          [costCalculatingSpot.id]: [savedExpense],
-        };
-
-        console.log('=== setSpotExpenses 호출 후 ===');
-        console.log('newSpotExpenses (새로운 상태):', newSpotExpenses);
-
-        // localStorage에 저장하여 새로고침해도 유지
-        localStorage.setItem('spotExpenses', JSON.stringify(newSpotExpenses));
-        console.log('=== localStorage에 spotExpenses 저장 ===');
-        console.log('저장된 데이터:', newSpotExpenses);
-
-        return newSpotExpenses;
-      });
-
-      console.log('=== spotExpenses 로컬 상태 업데이트 ===');
-      console.log('spotId:', costCalculatingSpot.id);
-      console.log('savedExpense:', savedExpense);
-
       // 성공 메시지 표시
-      alert('コストが正常に修正されました！');
+      alert('지출이 성공적으로 저장되었습니다!');
 
       // 다이얼로그 닫기
       setIsCostDialogOpen(false);
-      setCostCalculatingSpot({} as Spot);
+      setCostCalculatingSpot(null);
     } catch (error: unknown) {
-      console.error('=== 코스트 수정 실패 ===');
+      console.error('=== 지출 저장 실패 ===');
       console.error('오류 발생 시간:', new Date().toISOString());
       console.error('오류 객체:', error);
       console.error('오류 메시지:', error instanceof Error ? error.message : 'Unknown error');
       console.error('오류 스택:', error instanceof Error ? error.stack : 'No stack trace');
 
-      alert('原価修正に失敗しました。もう一度お試しください。');
+      if (error && typeof error === 'object' && 'response' in error && error.response) {
+        console.error('=== HTTP 응답 오류 ===');
+        console.error('상태 코드:', (error.response as any).status);
+        console.error('상태 텍스트:', (error.response as any).statusText);
+        console.error('응답 헤더:', (error.response as any).headers);
+        console.error('응답 데이터:', (error.response as any).data);
+      } else if (error && typeof error === 'object' && 'request' in error && error.request) {
+        console.error('=== 네트워크 오류 ===');
+        console.error('요청 객체:', (error as any).request);
+      } else {
+        console.error('=== 기타 오류 ===');
+        console.error('오류 설정:', (error as any).config);
+      }
+
+      // 401 오류인 경우 특별 처리
       if (
         error &&
         typeof error === 'object' &&
@@ -1375,11 +1111,11 @@ const TripPlannerPage = () => {
         error.response.status === 401
       ) {
         console.error('401 인증 오류 발생 - SecurityConfig 설정 확인 필요');
-        alert('認証エラーが発生しました。');
+        alert('인증 오류가 발생했습니다. 백엔드 서버를 재시작해주세요.');
         return;
       }
 
-      alert(`支出の保存に失敗しました。\n오류: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      alert(`지출 저장에 실패했습니다.\n오류: ${error instanceof Error ? error.message : 'Unknown error'}`);
     } finally {
       setIsLoading(false);
       console.log('=== 지출 저장 완료 ===');
@@ -1394,7 +1130,7 @@ const TripPlannerPage = () => {
     );
 
     // 편집 중인 관광지 정보도 업데이트 (다이얼로그가 열린 상태 유지)
-    setEditingSpot((prev) => (prev ? { ...prev, transportMode: newTransportMode } : ({} as Spot)));
+    setEditingSpot((prev) => (prev ? { ...prev, transportMode: newTransportMode } : null));
 
     // 업데이트된 spots로 이동 시간 재계산 (이 함수에서 spots 상태도 업데이트됨)
     await recalculateTravelTimes(updatedSpots);
@@ -1431,7 +1167,7 @@ const TripPlannerPage = () => {
     await recalculateTravelTimes();
     setIsSpotChangeDialogOpen(false);
     setIsEditDialogOpen(false);
-    setEditingSpot({} as Spot);
+    setEditingSpot(null);
   };
 
   // 관광지 삭제 함수
@@ -1475,88 +1211,13 @@ const TripPlannerPage = () => {
     });
   };
 
-  // 출발시간 변경 시 모든 스팟 시간 재계산
-  const recalculateAllSpotTimes = async () => {
-    const currentSpots = spots[activeDay] || [];
-    if (currentSpots.length === 0) return;
-
-    console.log('=== 모든 스팟 시간 재계산 시작 ===');
-    console.log('현재 스팟 수:', currentSpots.length);
-    console.log(
-      '새로운 출발시간:',
-      `${departureTime.hour.toString().padStart(2, '0')}:${departureTime.minute.toString().padStart(2, '0')}`,
-    );
-
-    const updatedSpots: Spot[] = [];
-    let currentTime = { ...departureTime };
-
-    for (let i = 0; i < currentSpots.length; i++) {
-      const spot = currentSpots[i];
-
-      // 첫 번째 스팟은 출발시간으로 설정
-      if (i === 0) {
-        const updatedSpot = {
-          ...spot,
-          time: `${currentTime.hour.toString().padStart(2, '0')}:${currentTime.minute.toString().padStart(2, '0')}`,
-        };
-        updatedSpots.push(updatedSpot);
-
-        // 다음 스팟의 시작시간 계산 (현재 스팟의 종료시간)
-        const endTime = getEndTime(updatedSpot.time, spot.duration);
-        const [endHour, endMinute] = endTime.split(':').map(Number);
-        currentTime = { hour: endHour, minute: endMinute };
-      } else {
-        // 이전 스팟에서 현재 스팟으로의 이동시간 계산
-        const previousSpot = updatedSpots[i - 1];
-        const travelTime = await calculateTravelTime(previousSpot, spot);
-
-        // 이동시간 추가
-        const totalMinutes = currentTime.hour * 60 + currentTime.minute + travelTime;
-        currentTime = {
-          hour: Math.floor(totalMinutes / 60) % 24,
-          minute: totalMinutes % 60,
-        };
-
-        const updatedSpot = {
-          ...spot,
-          time: `${currentTime.hour.toString().padStart(2, '0')}:${currentTime.minute.toString().padStart(2, '0')}`,
-        };
-        updatedSpots.push(updatedSpot);
-
-        // 다음 스팟의 시작시간 계산 (현재 스팟의 종료시간)
-        const endTime = getEndTime(updatedSpot.time, spot.duration);
-        const [endHour, endMinute] = endTime.split(':').map(Number);
-        currentTime = { hour: endHour, minute: endMinute };
-      }
-    }
-
-    // 업데이트된 스팟들로 상태 업데이트
-    setSpots((prev) => ({
-      ...prev,
-      [activeDay]: updatedSpots,
-    }));
-
-    console.log('=== 모든 스팟 시간 재계산 완료 ===');
-    console.log(
-      '업데이트된 스팟들:',
-      updatedSpots.map((spot) => ({ name: spot.location, time: spot.time })),
-    );
-  };
-
-  // 총 비용 계산 (Expense 데이터만 사용, Spot.cost는 무시)
+  // 총 비용 계산 (기존 cost + 지출 데이터)
   const calculateTotalCost = (daySpots: Spot[]) => {
     return daySpots.reduce((total, spot) => {
+      const cost = parseInt(spot.cost.replace(/[^\d]/g, '') || '0');
       const expenses = spotExpenses[spot.id] || [];
-
-      // spotExpenses에 데이터가 있으면 그것을 사용, 없으면 0
-      if (expenses.length > 0) {
-        const expenseTotal = expenses.reduce((sum, expense) => sum + expense.amount, 0);
-        console.log(`Spot ${spot.id} (${spot.location}): Expense 총액 = ${expenseTotal}`);
-        return total + expenseTotal;
-      } else {
-        console.log(`Spot ${spot.id} (${spot.location}): Expense 없음, 0으로 처리`);
-        return total + 0; // Spot.cost는 무시하고 0으로 처리
-      }
+      const expenseTotal = expenses.reduce((sum, expense) => sum + expense.amount, 0);
+      return total + cost + expenseTotal;
     }, 0);
   };
 
@@ -1704,25 +1365,22 @@ const TripPlannerPage = () => {
                         <MapPin className="w-4 h-4 text-blue-500" />
                         <h3 className="font-medium text-gray-900 text-sm">{spot.location}</h3>
                       </div>
-                      {/* 편집 및 삭제 버튼 - VIEWER 역할이 아닐 때만 표시 */}
-                      {userRole !== 'VIEWER' && (
-                        <div className="flex items-center space-x-1">
-                          <button
-                            onClick={() => editSpot(spot)}
-                            className="p-1 text-gray-400 hover:text-blue-600 transition-colors"
-                            title="편집"
-                          >
-                            <Edit className="w-3 h-3" />
-                          </button>
-                          <button
-                            onClick={() => deleteSpot(activeDay, spot.id)}
-                            className="p-1 text-gray-400 hover:text-red-600 transition-colors"
-                            title="삭제"
-                          >
-                            <Trash2 className="w-3 h-3" />
-                          </button>
-                        </div>
-                      )}
+                      <div className="flex items-center space-x-1">
+                        <button
+                          onClick={() => editSpot(spot)}
+                          className="p-1 text-gray-400 hover:text-blue-600 transition-colors"
+                          title="편집"
+                        >
+                          <Edit className="w-3 h-3" />
+                        </button>
+                        <button
+                          onClick={() => deleteSpot(activeDay, spot.id)}
+                          className="p-1 text-gray-400 hover:text-red-600 transition-colors"
+                          title="삭제"
+                        >
+                          <Trash2 className="w-3 h-3" />
+                        </button>
+                      </div>
                     </div>
 
                     <p className="text-xs text-gray-600 mb-2">{spot.address}</p>
@@ -1743,39 +1401,24 @@ const TripPlannerPage = () => {
 
                       <div className="flex flex-col items-end space-y-1">
                         {/* 지출 정보 표시 */}
-                        {(() => {
-                          const expenses = spotExpenses[spot.id];
-                          console.log(`=== 모바일 지출 정보 표시 (spotId: ${spot.id}) ===`);
-                          console.log('spotExpenses 전체:', spotExpenses);
-                          console.log('현재 spot.id:', spot.id);
-                          console.log('expenses:', expenses);
-                          console.log('expenses length:', expenses?.length);
-                          console.log('expenses type:', typeof expenses);
-
-                          if (expenses && expenses.length > 0) {
-                            const total = expenses.reduce((sum: number, expense: Expense) => {
-                              console.log('expense:', expense, 'amount:', expense.amount);
-                              return sum + expense.amount;
-                            }, 0);
-                            console.log('total amount:', total);
-                            return <span className="text-xs font-bold text-gray-900">{total.toLocaleString()}円</span>;
-                          } else {
-                            console.log('모바일: expenses가 없거나 비어있음');
-                          }
-                          return null;
-                        })()}
-
-                        {/* 비용 계산 버튼 - VIEWER 역할이 아닐 때만 표시 */}
-                        {userRole !== 'VIEWER' && (
-                          <button
-                            onClick={() => calculateCost(spot)}
-                            className="flex items-center space-x-1 px-2 py-1 bg-orange-500 text-white text-xs font-medium rounded hover:bg-orange-600 transition-colors"
-                            title="비용 계산"
-                          >
-                            <Calculator className="w-3 h-3" />
-                            <span>コスト</span>
-                          </button>
+                        {spotExpenses[spot.id] && spotExpenses[spot.id].length > 0 && (
+                          <span className="text-xs font-bold text-gray-900">
+                            {spotExpenses[spot.id]
+                              .reduce((sum: number, expense: ExpenseData) => sum + expense.amount, 0)
+                              .toLocaleString()}
+                            円
+                          </span>
                         )}
+
+                        {/* 비용 계산 버튼 */}
+                        <button
+                          onClick={() => calculateCost(spot)}
+                          className="flex items-center space-x-1 px-2 py-1 bg-orange-500 text-white text-xs font-medium rounded hover:bg-orange-600 transition-colors"
+                          title="비용 계산"
+                        >
+                          <Calculator className="w-3 h-3" />
+                          <span>コスト</span>
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -1805,18 +1448,16 @@ const TripPlannerPage = () => {
           </div>
         )}
 
-        {/* 하단 + 버튼 - VIEWER 역할이 아닐 때만 표시 */}
-        {userRole !== 'VIEWER' && (
-          <div className="mt-4">
-            <button
-              onClick={() => setIsSearchDialogOpen(true)}
-              className="w-full flex items-center justify-center gap-2 py-3 bg-gray-200 text-gray-600 rounded-lg hover:bg-gray-300 transition-colors"
-            >
-              <Plus className="w-4 h-4" />
-              <span>観光地を追加</span>
-            </button>
-          </div>
-        )}
+        {/* 하단 + 버튼 */}
+        <div className="mt-4">
+          <button
+            onClick={() => setIsSearchDialogOpen(true)}
+            className="w-full flex items-center justify-center gap-2 py-3 bg-gray-200 text-gray-600 rounded-lg hover:bg-gray-300 transition-colors"
+          >
+            <Plus className="w-4 h-4" />
+            <span>観光地を追加</span>
+          </button>
+        </div>
       </div>
     );
   };
@@ -1829,15 +1470,10 @@ const TripPlannerPage = () => {
     const tripTotal = Object.values(spots)
       .flat()
       .reduce((total, spot) => {
+        const cost = parseInt(spot.cost.replace(/[^\d]/g, '') || '0');
         const expenses = spotExpenses[spot.id] || [];
-
-        // spotExpenses에 데이터가 있으면 그것을 사용, 없으면 0
-        if (expenses.length > 0) {
-          const expenseTotal = expenses.reduce((sum, expense) => sum + expense.amount, 0);
-          return total + expenseTotal;
-        } else {
-          return total + 0; // Spot.cost는 무시하고 0으로 처리
-        }
+        const expenseTotal = expenses.reduce((sum, expense) => sum + expense.amount, 0);
+        return total + cost + expenseTotal;
       }, 0);
 
     return (
@@ -1854,10 +1490,12 @@ const TripPlannerPage = () => {
                 <ArrowLeft className="w-4 h-4 text-gray-600" />
               </button>
               <h1 className="text-lg font-bold text-gray-900">
-                {isLoadingPlan ? '로딩 중...' : planData?.title || '東京2泊3日旅'}
+                {isLoadingPlan
+                  ? '로딩 중...'
+                  : planData?.title || planData?.planTitle || planData?.name || '東京2泊3日旅'}
               </h1>
               <div className="flex items-center gap-1">
-                {planData?.members?.slice(0, 3).map((member: PlanMember, index: number) => (
+                {planData?.members?.slice(0, 3).map((member: any, index: number) => (
                   <div
                     key={member.id || index}
                     className="w-4 h-4 bg-orange-500 rounded-full flex items-center justify-center"
@@ -1900,8 +1538,9 @@ const TripPlannerPage = () => {
                     days.push(new Date(d));
                   }
 
-                  return days.map((_, index) => {
+                  return days.map((date, index) => {
                     const dayNumber = index + 1;
+                    const dayOfMonth = date.getDate();
 
                     return (
                       <button
@@ -1919,8 +1558,10 @@ const TripPlannerPage = () => {
                   });
                 } else if (planData?.dailyPlans && planData.dailyPlans.length > 0) {
                   // dailyPlans가 있으면 그것을 사용
-                  return planData.dailyPlans.map((_: DailyPlan, index: number) => {
+                  return planData.dailyPlans.map((dailyPlan: any, index: number) => {
                     const dayNumber = index + 1;
+                    const visitDate = new Date(dailyPlan.visitDate);
+                    const dayOfMonth = visitDate.getDate();
 
                     return (
                       <button
@@ -2010,7 +1651,7 @@ const TripPlannerPage = () => {
               <h3 className="text-lg font-medium text-gray-900 mb-2">まだ観光地がありません</h3>
               <p className="text-gray-500 mb-4">観光地を追加して旅行計画を立ててみましょう</p>
             </div>
-          ) : userRole !== 'VIEWER' ? (
+          ) : (
             <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
               <SortableContext items={currentSpots.map((spot) => spot.id)} strategy={verticalListSortingStrategy}>
                 <div className="space-y-4">
@@ -2035,56 +1676,25 @@ const TripPlannerPage = () => {
                         getEndTime={getEndTime}
                         nextSegment={nextSegment}
                         spotExpenses={spotExpenses}
-                        userRole={userRole}
                       />
                     );
                   })}
                 </div>
               </SortableContext>
             </DndContext>
-          ) : (
-            // VIEWER 역할일 때는 드래그 앤 드롭 없이 일반 리스트로 표시
-            <div className="space-y-4">
-              {currentSpots.map((spot, index) => {
-                const nextSegment = currentSegments.find(
-                  (segment) => segment.fromSpot?.id === spot.id && segment.toSpot?.id === currentSpots[index + 1]?.id,
-                );
-
-                return (
-                  <SortableSpotItem
-                    key={spot.id}
-                    spot={spot}
-                    spotIndex={index}
-                    totalSpots={currentSpots.length}
-                    onEdit={editSpot}
-                    onDelete={deleteSpot}
-                    onMoveUp={moveSpotUp}
-                    onMoveDown={moveSpotDown}
-                    onCalculateCost={calculateCost}
-                    day={activeDay}
-                    getEndTime={getEndTime}
-                    nextSegment={nextSegment}
-                    spotExpenses={spotExpenses}
-                    userRole={userRole}
-                  />
-                );
-              })}
-            </div>
           )}
         </div>
 
-        {/* 하단 + 버튼 - VIEWER 역할이 아닐 때만 표시 */}
-        {userRole !== 'VIEWER' && (
-          <div className="p-4 border-t bg-gray-50">
-            <button
-              onClick={() => setIsSearchDialogOpen(true)}
-              className="w-full flex items-center justify-center gap-2 py-3 bg-gray-200 text-gray-600 rounded-lg hover:bg-gray-300 transition-colors"
-            >
-              <Plus className="w-5 h-5" />
-              <span>観光地を追加</span>
-            </button>
-          </div>
-        )}
+        {/* 하단 + 버튼 */}
+        <div className="p-4 border-t bg-gray-50">
+          <button
+            onClick={() => setIsSearchDialogOpen(true)}
+            className="w-full flex items-center justify-center gap-2 py-3 bg-gray-200 text-gray-600 rounded-lg hover:bg-gray-300 transition-colors"
+          >
+            <Plus className="w-5 h-5" />
+            <span>観光地を追加</span>
+          </button>{' '}
+        </div>
       </div>
     );
   };
@@ -2095,15 +1705,10 @@ const TripPlannerPage = () => {
     const tripTotal = Object.values(spots)
       .flat()
       .reduce((total, spot) => {
+        const cost = parseInt(spot.cost.replace(/[^\d]/g, '') || '0');
         const expenses = spotExpenses[spot.id] || [];
-
-        // spotExpenses에 데이터가 있으면 그것을 사용, 없으면 0
-        if (expenses.length > 0) {
-          const expenseTotal = expenses.reduce((sum, expense) => sum + expense.amount, 0);
-          return total + expenseTotal;
-        } else {
-          return total + 0; // Spot.cost는 무시하고 0으로 처리
-        }
+        const expenseTotal = expenses.reduce((sum, expense) => sum + expense.amount, 0);
+        return total + cost + expenseTotal;
       }, 0);
     return { dayTotal, tripTotal };
   };
@@ -2123,12 +1728,6 @@ const TripPlannerPage = () => {
 
   // 뒤로가기 버튼 클릭 핸들러
   const handleBackButtonClick = () => {
-    // VIEWER는 저장 확인 없이 바로 이동
-    if (userRole === 'VIEWER') {
-      setIsSaveConfirmationOpen(false);
-      navigate(-1);
-      return;
-    }
     // 저장할 데이터가 있는지 확인
     const hasSpotsToSave = Object.values(spots).some((daySpots) => daySpots.length > 0);
 
@@ -2148,7 +1747,7 @@ const TripPlannerPage = () => {
       await saveSpotsToBackend();
 
       // 성공 메시지 표시
-      alert('観光地が正常に保存されました！');
+      alert('관광지가 성공적으로 저장되었습니다!');
 
       // localStorage에서 임시 데이터 삭제하고 저장 완료 상태 표시
       localStorage.removeItem(`trip_spots_${planId}`);
@@ -2158,7 +1757,7 @@ const TripPlannerPage = () => {
       navigate(-1);
     } catch (error) {
       console.error('저장 실패:', error);
-      alert('保存に失敗しました。もう一度お試しください。');
+      alert('저장에 실패했습니다. 다시 시도해주세요.');
     } finally {
       setIsSaving(false);
       setIsSaveConfirmationOpen(false);
@@ -2196,7 +1795,7 @@ const TripPlannerPage = () => {
           console.log(`spot ${index + 1}:`, {
             name: spot.location,
             cost: spot.cost,
-            costParsed: parseInt(spot.cost.toString().replace(/[^\d]/g, '') || '0'),
+            costParsed: parseInt(spot.cost.replace(/[^\d]/g, '') || '0'),
           });
         });
       });
@@ -2236,7 +1835,7 @@ const TripPlannerPage = () => {
           console.log(`targetDate: ${targetDateString}`);
           console.log('현재 planData.dailyPlans:', planData.dailyPlans);
 
-          const dailyPlan = planData.dailyPlans?.find((dp: DailyPlan) => {
+          const dailyPlan = planData.dailyPlans?.find((dp: any) => {
             const dpDateString = new Date(dp.visitDate).toISOString().split('T')[0];
             console.log(`비교: ${dpDateString} === ${targetDateString}`);
             return dpDateString === targetDateString;
@@ -2270,7 +1869,7 @@ const TripPlannerPage = () => {
             // 새로운 spots 저장
             for (let i = 0; i < daySpots.length; i++) {
               const spot = daySpots[i];
-              const costValue = parseInt(spot.cost.toString().replace(/[^\d]/g, '') || '0');
+              const costValue = parseInt(spot.cost.replace(/[^\d]/g, '') || '0');
 
               console.log(`=== ${day}일차 spot ${i + 1} cost 디버깅 ===`);
               console.log('원본 spot.cost:', spot.cost);
@@ -2331,9 +1930,7 @@ const TripPlannerPage = () => {
 
               const dailyPlanRequest = {
                 visitDate: visitDateString,
-                departureTime: `${departureTime.hour.toString().padStart(2, '0')}:${departureTime.minute
-                  .toString()
-                  .padStart(2, '0')}`,
+                departureTime: '09:00',
               };
 
               console.log('DailyPlan 생성 요청:', dailyPlanRequest);
@@ -2355,12 +1952,11 @@ const TripPlannerPage = () => {
                 }
                 planData.dailyPlans.push(newDailyPlan);
                 console.log('planData.dailyPlans 업데이트됨:', planData.dailyPlans);
-              } catch (createError: unknown) {
-                const createErrorAxios = createError as AxiosError;
-                console.log('DailyPlan 생성 오류:', createErrorAxios.response?.status, createErrorAxios.response?.data);
+              } catch (createError: any) {
+                console.log('DailyPlan 생성 오류:', createError.response?.status, createError.response?.data);
 
                 // 409 오류가 아닌 경우에도 기존 DailyPlan을 찾아보기
-                const existingDailyPlan = planData.dailyPlans?.find((dp: DailyPlan) => {
+                const existingDailyPlan = planData.dailyPlans?.find((dp: any) => {
                   const dpDateString = new Date(dp.visitDate).toISOString().split('T')[0];
                   console.log(`비교: ${dpDateString} === ${visitDateString}`);
                   return dpDateString === visitDateString;
@@ -2378,7 +1974,7 @@ const TripPlannerPage = () => {
               // 생성된 DailyPlan으로 spots 저장
               for (let i = 0; i < daySpots.length; i++) {
                 const spot = daySpots[i];
-                const costValue = parseInt(spot.cost.toString().replace(/[^\d]/g, '') || '0');
+                const costValue = parseInt(spot.cost.replace(/[^\d]/g, '') || '0');
 
                 console.log(`=== ${day}일차 spot ${i + 1} cost 디버깅 (새 DailyPlan) ===`);
                 console.log('원본 spot.cost:', spot.cost);
@@ -2440,13 +2036,8 @@ const TripPlannerPage = () => {
       console.error('에러 상세 정보:', {
         message: error instanceof Error ? error.message : 'Unknown error',
         status:
-          error && typeof error === 'object' && 'response' in error
-            ? (error as { response?: { status: number } }).response?.status
-            : 'No status',
-        data:
-          error && typeof error === 'object' && 'response' in error
-            ? (error as { response?: { data: number } }).response?.data
-            : 'No data',
+          error && typeof error === 'object' && 'response' in error ? (error as any).response?.status : 'No status',
+        data: error && typeof error === 'object' && 'response' in error ? (error as any).response?.data : 'No data',
       });
       throw error;
     }
@@ -2456,7 +2047,6 @@ const TripPlannerPage = () => {
   if (isLoadingPlan) {
     return (
       <div className="h-screen bg-gray-50 flex flex-col">
-        <Header />
         <div className="flex-1 flex items-center justify-center">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500 mx-auto mb-4"></div>
@@ -2467,78 +2057,8 @@ const TripPlannerPage = () => {
     );
   }
 
-  //출발시간 수정
-  const handleSaveDepartureTime = async () => {
-    try {
-      console.log('=== 출발시간 저장 시작 ===');
-      console.log('현재 상태:', {
-        planData: planData,
-        activeDay: activeDay,
-        departureTime: departureTime,
-        dailyPlans: planData?.dailyPlans,
-      });
-
-      const currentDayId = planData?.dailyPlans?.[activeDay - 1]?.id;
-
-      if (!currentDayId) {
-        console.error('현재 날짜의 dailyPlan ID를 찾을 수 없습니다.');
-        console.error('planData:', planData);
-        console.error('activeDay:', activeDay);
-        console.error('dailyPlans:', planData?.dailyPlans);
-        alert('保存に失敗しました。もう一度お試しください。');
-        return;
-      }
-
-      const formattedTime = `${departureTime.hour.toString().padStart(2, '0')}:${departureTime.minute
-        .toString()
-        .padStart(2, '0')}`;
-
-      console.log('출발시간 저장 요청:', {
-        dailyPlanId: currentDayId,
-        departureTime: formattedTime,
-        url: `/api/daily-plans/${currentDayId}/departure-time?departureTime=${formattedTime}`,
-      });
-
-      const response = await axiosInstance.put(
-        `/api/daily-plans/${currentDayId}/departure-time?departureTime=${formattedTime}`,
-      );
-
-      console.log('API 응답:', response);
-
-      // 저장 성공 후 planData 업데이트
-      if (planData?.dailyPlans?.[activeDay - 1]) {
-        const updatedPlanData = { ...planData };
-        updatedPlanData.dailyPlans[activeDay - 1].departureTime = {
-          hour: departureTime.hour,
-          minute: departureTime.minute,
-        };
-        setPlanData(updatedPlanData);
-        console.log('planData 업데이트 완료:', updatedPlanData);
-      }
-
-      console.log('출발시간 저장 성공');
-      setIsDepartureTimeDialogOpen(false);
-    } catch (error) {
-      console.error('출발시간 저장 실패:', error);
-      console.error('에러 상세:', {
-        message: error instanceof Error ? error.message : 'Unknown error',
-        status:
-          error && typeof error === 'object' && 'response' in error
-            ? (error as { response?: { status: number } }).response?.status
-            : 'No status',
-        data:
-          error && typeof error === 'object' && 'response' in error
-            ? (error as { response?: { data: number } }).response?.data
-            : 'No data',
-      });
-      alert('保存に失敗しました。もう一度お試しください。');
-    }
-  };
-
   return (
     <div className="h-screen bg-gray-50 flex flex-col">
-      <Header />
-
       {/* 모바일: 세로 배치 */}
       <div className="flex flex-col lg:hidden flex-1 overflow-hidden">
         {/* 모바일 여행 정보 헤더 */}
@@ -2553,10 +2073,12 @@ const TripPlannerPage = () => {
                 <ArrowLeft className="w-4 h-4 text-gray-600" />
               </button>
               <h1 className="text-lg font-bold text-gray-900">
-                {isLoadingPlan ? '로딩 중...' : planData?.title || '東京2泊3日旅'}
+                {isLoadingPlan
+                  ? '로딩 중...'
+                  : planData?.title || planData?.planTitle || planData?.name || '東京2泊3日旅'}
               </h1>
               <div className="flex items-center gap-1">
-                {planData?.members?.slice(0, 3).map((member: PlanMember, index: number) => (
+                {planData?.members?.slice(0, 3).map((member: any, index: number) => (
                   <div
                     key={member.id || index}
                     className="w-4 h-4 bg-orange-500 rounded-full flex items-center justify-center"
@@ -2604,8 +2126,9 @@ const TripPlannerPage = () => {
                   days.push(new Date(d));
                 }
 
-                return days.map((_, index) => {
+                return days.map((date, index) => {
                   const dayNumber = index + 1;
+                  const dayOfMonth = date.getDate();
 
                   return (
                     <button
@@ -2623,8 +2146,10 @@ const TripPlannerPage = () => {
                 });
               } else if (planData?.dailyPlans && planData.dailyPlans.length > 0) {
                 // dailyPlans가 있으면 그것을 사용
-                return planData.dailyPlans.map((_: DailyPlan, index: number) => {
+                return planData.dailyPlans.map((dailyPlan: any, index: number) => {
                   const dayNumber = index + 1;
+                  const visitDate = new Date(dailyPlan.visitDate);
+                  const dayOfMonth = visitDate.getDate();
 
                   return (
                     <button
@@ -2717,14 +2242,56 @@ const TripPlannerPage = () => {
       />
 
       {/* 출발 시간 설정 다이얼로그 */}
-      {userRole !== 'VIEWER' && (
-        <DepartureTimeDialog
-          isOpen={isDepartureTimeDialogOpen}
-          onClose={() => setIsDepartureTimeDialogOpen(false)}
-          onSave={handleSaveDepartureTime}
-          departureTime={departureTime}
-          setDepartureTime={setDepartureTime}
-        />
+      {isDepartureTimeDialogOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 w-96">
+            <h3 className="text-lg font-semibold mb-4">出発時間設定</h3>
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">時間</label>
+                <select
+                  value={departureTime.hour}
+                  onChange={(e) => setDepartureTime((prev) => ({ ...prev, hour: parseInt(e.target.value) }))}
+                  className="w-full p-2 border border-gray-300 rounded-md"
+                >
+                  {Array.from({ length: 24 }, (_, i) => (
+                    <option key={i} value={i}>
+                      {i.toString().padStart(2, '0')}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">分</label>
+                <select
+                  value={departureTime.minute}
+                  onChange={(e) => setDepartureTime((prev) => ({ ...prev, minute: parseInt(e.target.value) }))}
+                  className="w-full p-2 border border-gray-300 rounded-md"
+                >
+                  {Array.from({ length: 60 }, (_, i) => (
+                    <option key={i} value={i}>
+                      {i.toString().padStart(2, '0')}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+            <div className="flex justify-end gap-2 mt-6">
+              <button
+                onClick={() => setIsDepartureTimeDialogOpen(false)}
+                className="px-4 py-2 text-gray-600 border border-gray-300 rounded-md hover:bg-gray-50"
+              >
+                キャンセル
+              </button>
+              <button
+                onClick={() => setIsDepartureTimeDialogOpen(false)}
+                className="px-4 py-2 bg-pink-500 text-white rounded-md hover:bg-pink-600"
+              >
+                確認
+              </button>
+            </div>
+          </div>
+        </div>
       )}
 
       {/* 관광지 편집 다이얼로그 */}
@@ -2790,7 +2357,7 @@ const TripPlannerPage = () => {
                           );
 
                           // 편집 중인 관광지 정보도 업데이트
-                          setEditingSpot((prev) => (prev ? { ...prev, duration: newDuration } : ({} as Spot)));
+                          setEditingSpot((prev) => (prev ? { ...prev, duration: newDuration } : null));
 
                           // 업데이트된 spots로 이동시간 재계산 (이 함수에서 spots 상태도 업데이트됨)
                           await recalculateTravelTimes(updatedSpots);
@@ -2808,6 +2375,19 @@ const TripPlannerPage = () => {
                         <option value="4時間30分">4時間30分</option>
                         <option value="5時間">5時間</option>
                       </select>
+                    </div>
+
+                    {/* 비용 입력 */}
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">基本費用 (円)</label>
+                      <input
+                        type="number"
+                        value={editingCost}
+                        onChange={(e) => setEditingCost(parseInt(e.target.value) || 0)}
+                        placeholder="0"
+                        min="0"
+                        className="w-full p-2 border border-gray-300 rounded-md"
+                      />
                     </div>
                   </div>
                 );
@@ -2827,7 +2407,8 @@ const TripPlannerPage = () => {
                 <button
                   onClick={() => {
                     setIsEditDialogOpen(false);
-                    setEditingSpot({} as Spot);
+                    setEditingSpot(null);
+                    setEditingCost(0);
                   }}
                   className="px-3 py-2 text-sm text-gray-600 border border-gray-300 rounded-md hover:bg-gray-50"
                 >
@@ -2835,8 +2416,18 @@ const TripPlannerPage = () => {
                 </button>
                 <button
                   onClick={() => {
+                    if (editingSpot) {
+                      // cost 값 업데이트
+                      setSpots((prev) => ({
+                        ...prev,
+                        [activeDay]: (prev[activeDay] || []).map((spot) =>
+                          spot.id === editingSpot.id ? { ...spot, cost: `¥${editingCost}` } : spot,
+                        ),
+                      }));
+                    }
                     setIsEditDialogOpen(false);
-                    setEditingSpot({} as Spot);
+                    setEditingSpot(null);
+                    setEditingCost(0);
                   }}
                   className="px-3 py-2 text-sm bg-pink-500 text-white rounded-md hover:bg-pink-600"
                 >
@@ -2854,7 +2445,7 @@ const TripPlannerPage = () => {
           isOpen={isSpotChangeDialogOpen}
           onClose={() => {
             setIsSpotChangeDialogOpen(false);
-            setEditingSpot({} as Spot);
+            setEditingSpot(null);
           }}
           onAddSpot={changeSpot}
           day={activeDay}
@@ -2867,7 +2458,7 @@ const TripPlannerPage = () => {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-2xl p-6 w-[400px] shadow-2xl">
             {/* 제목 */}
-            <h3 className="text-xl font-bold text-orange-500 mb-6 text-center">費用修正</h3>
+            <h3 className="text-xl font-bold text-orange-500 mb-6 text-center">費用追加</h3>
 
             {/* 金額入力 */}
             <div className="mb-6">
@@ -2907,11 +2498,7 @@ const TripPlannerPage = () => {
                     }`}
                   >
                     <img
-                      src={
-                        import.meta.env.PROD
-                          ? `https://storage.googleapis.com/tabilog-dev/svg/${category.icon}.svg`
-                          : `./svg/${category.icon}.svg`
-                      }
+                      src={`/svg/${category.icon}.svg`}
                       alt={category.label}
                       className={`w-6 h-6 mb-1 ${expenseInputs.category === category.key ? 'brightness-0 invert' : ''}`}
                     />
@@ -2926,7 +2513,7 @@ const TripPlannerPage = () => {
               <button
                 onClick={() => {
                   setIsCostDialogOpen(false);
-                  setCostCalculatingSpot({} as Spot);
+                  setCostCalculatingSpot(null);
                 }}
                 className="flex-1 px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors font-medium"
                 disabled={isLoading}
@@ -2938,7 +2525,7 @@ const TripPlannerPage = () => {
                 className="flex-1 px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
                 disabled={isLoading}
               >
-                {isLoading ? '修正中...' : '修正'}
+                {isLoading ? '登録中...' : '登録'}
               </button>
             </div>
           </div>
@@ -2946,7 +2533,7 @@ const TripPlannerPage = () => {
       )}
 
       {/* 저장 확인 팝업 */}
-      {userRole !== 'VIEWER' && isSaveConfirmationOpen && (
+      {isSaveConfirmationOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-2xl p-6 w-[400px] shadow-2xl">
             {/* 제목 */}

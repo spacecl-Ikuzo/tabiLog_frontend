@@ -1,7 +1,7 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../../../components/ui/button';
-import { Avatar, AvatarFallback, AvatarImage } from '../../../components/ui/avatar';
+import { Avatar, AvatarFallback } from '../../../components/ui/avatar';
 import { Badge } from '../../../components/ui/badge';
 import CategoryTabs from '../../../components/common/CategoryTabs';
 import MemberDetailPopup from './MemberDetailPopup';
@@ -14,16 +14,6 @@ import { Plan } from '../../../lib/type';
 import dayjs from 'dayjs';
 import { MapPin, Calendar as CalendarIcon } from 'lucide-react';
 import { useUserStore } from '@/store';
-import { getExpensesByPlan } from '../../../api/api';
-
-interface ExpenseData {
-  id: number;
-  amount: number;
-  category: string;
-  item: string;
-  expenseDate: string;
-  location?: string;
-}
 
 interface PlanDetailContentProps {
   plan: Plan;
@@ -54,7 +44,6 @@ export default function PlanDetailContent({
 }: PlanDetailContentProps) {
   const navigate = useNavigate();
   const { userId, email } = useUserStore();
-  const [actualTotalAmount, setActualTotalAmount] = useState<number>(0);
 
   // 여행 멤버 컬러 옵션
   const colorOptions = useMemo(
@@ -90,72 +79,6 @@ export default function PlanDetailContent({
     });
     return me?.role === 'VIEWER';
   }, [plan.members, email, userId]);
-
-  // 실제 총액 계산 (TripPlannerPage와 동일한 방식)
-  useEffect(() => {
-    const calculateActualTotal = async () => {
-      try {
-        console.log('=== PlanDetailContent: 실제 총액 계산 시작 ===');
-        console.log('planId:', plan.id);
-
-        // localStorage에서 spotExpenses 데이터 가져오기
-        const savedSpotExpenses = localStorage.getItem('spotExpenses');
-        if (savedSpotExpenses) {
-          try {
-            const parsedExpenses = JSON.parse(savedSpotExpenses);
-            console.log('=== localStorage에서 spotExpenses 복구 ===');
-            console.log('복구된 데이터:', parsedExpenses);
-
-            // 모든 expense의 amount 합계 계산
-            let total = 0;
-            Object.values(parsedExpenses).forEach((expenses: any) => {
-              if (Array.isArray(expenses)) {
-                expenses.forEach((expense: ExpenseData) => {
-                  total += expense.amount;
-                });
-              }
-            });
-
-            console.log('=== localStorage 기반 총액 계산 ===');
-            console.log('계산된 총액:', total);
-            setActualTotalAmount(total);
-            return;
-          } catch (error) {
-            console.error('localStorage 데이터 파싱 실패:', error);
-          }
-        }
-
-        // localStorage에 데이터가 없으면 서버 API에서 가져오기
-        console.log('=== 서버 API에서 지출 데이터 로드 ===');
-        const expensesResponse = await getExpensesByPlan(plan.id);
-        console.log('=== 지출 데이터 응답 ===', expensesResponse);
-
-        if (expensesResponse && expensesResponse.data) {
-          const expenses = expensesResponse.data;
-          console.log('=== 지출 데이터 ===', expenses);
-
-          // 모든 expense의 amount 합계 계산
-          const total = expenses.reduce((sum: number, expense: any) => {
-            return sum + (expense.amount || 0);
-          }, 0);
-
-          console.log('=== 서버 API 기반 총액 계산 ===');
-          console.log('계산된 총액:', total);
-          setActualTotalAmount(total);
-        } else {
-          console.log('=== 서버에 지출 데이터가 없음 ===');
-          setActualTotalAmount(0);
-        }
-      } catch (error) {
-        console.error('총액 계산 실패:', error);
-        setActualTotalAmount(0);
-      }
-    };
-
-    if (plan.id) {
-      calculateActualTotal();
-    }
-  }, [plan.id]);
 
   //멤버 역할 수정 혹은 제외
   const handleMemberEdit = async (userId: number, role: string) => {
@@ -211,26 +134,11 @@ export default function PlanDetailContent({
     }
   };
 
-  //와리깡 공유하기 (메일로 공유)
-  const handleConfirmWarikan = async (amounts: { [memberId: number]: number }) => {
+  //TODO: 지울 예정
+  useEffect(() => {
     console.log('plan', plan);
-    console.log('memberAmounts', amounts);
-
-    await axiosInstance.post(`/api/warikan/send`, {
-      planId: plan.id,
-      title: plan.title,
-      totalAmount: actualTotalAmount,
-      memberShares: Object.entries(amounts).map(([memberId, amount]) => ({
-        userId: parseInt(memberId),
-        amount: amount,
-      })),
-    });
-
-    const totalCalculated = Object.values(amounts).reduce((sum, amount) => sum + amount, 0);
-    toast.success(`割り勘の情報がメールで送信されました。 総額: ¥${totalCalculated.toLocaleString('ja-JP')}`, {
-      position: 'top-center',
-    });
-  };
+    console.log('travelMembers', travelMembers);
+  }, [travelMembers]);
 
   return (
     <>
@@ -272,11 +180,7 @@ export default function PlanDetailContent({
         <div
           className="w-full h-60 bg-cover bg-center bg-no-repeat flex items-center justify-center text-white relative"
           style={{
-            backgroundImage: `url(${
-              plan.prefectureImageUrl?.startsWith('http')
-                ? plan.prefectureImageUrl
-                : import.meta.env.VITE_API_URL + plan.prefectureImageUrl
-            })`,
+            backgroundImage: 'url("' + import.meta.env.VITE_API_URL + plan.prefectureImageUrl + '")',
           }}
         >
           <div className="text-center z-10 bg-black/60 p-4 rounded-lg">
@@ -309,21 +213,9 @@ export default function PlanDetailContent({
         <div className="flex gap-5">
           {travelMembers.slice(0, 5).map((member) => (
             <Avatar key={member.id} className="w-18 h-18">
-              {member.profileImageUrl ? (
-                <AvatarImage
-                  src={
-                    member.profileImageUrl?.startsWith('http')
-                      ? member.profileImageUrl
-                      : import.meta.env.VITE_API_URL + member.profileImageUrl
-                  }
-                  alt={member.userNickname}
-                  className="w-full h-full object-cover"
-                />
-              ) : (
-                <AvatarFallback className={`${member.color} text-white text-sm font-medium`}>
-                  {member.userNickname?.slice(0, 2) || '??'}
-                </AvatarFallback>
-              )}
+              <AvatarFallback className={`${member.color} text-white text-sm font-medium`}>
+                {member.userNickname?.slice(0, 2) || '??'}
+              </AvatarFallback>
             </Avatar>
           ))}
           {travelMembers.length > 5 && (
@@ -357,16 +249,13 @@ export default function PlanDetailContent({
               </div>
               <div>
                 <p className="text-sm text-gray-600">現在の総額</p>
-                <p className="text-2xl font-bold text-gray-900">¥{actualTotalAmount.toLocaleString('ja-JP')}</p>
+                <p className="text-2xl font-bold text-gray-900">¥{(0).toLocaleString('ja-JP')}</p>
               </div>
             </div>
             <div className="text-right">
               <p className="text-xs text-gray-500">メンバー当たり</p>
               <p className="text-lg font-semibold text-gray-700">
-                ¥
-                {travelMembers.length > 0
-                  ? Math.ceil(actualTotalAmount / travelMembers.length).toLocaleString('ja-JP')
-                  : '0'}
+                ¥{travelMembers.length > 0 ? Math.ceil(0 / travelMembers.length).toLocaleString('ja-JP') : '0'}
               </p>
             </div>
           </div>
@@ -422,8 +311,14 @@ export default function PlanDetailContent({
           open={isWarikanPopupOpen}
           onOpenChange={setIsWarikanPopupOpen}
           members={travelMembers}
-          totalAmount={actualTotalAmount}
-          onConfirm={(amounts) => handleConfirmWarikan(amounts)}
+          totalAmount={20500} // 임시 금액
+          onConfirm={(amounts) => {
+            console.log('割り勘 結果:', amounts);
+            const totalCalculated = Object.values(amounts).reduce((sum, amount) => sum + amount, 0);
+            toast.success(`割り勘が完了しました。総額: ¥${totalCalculated.toLocaleString('ja-JP')}`, {
+              position: 'top-center',
+            });
+          }}
           onCancel={() => {
             console.log('割り勘がキャンセルされました。');
           }}

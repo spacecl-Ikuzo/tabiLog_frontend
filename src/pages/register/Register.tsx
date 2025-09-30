@@ -10,8 +10,6 @@ import { toast } from 'sonner';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useInvitationStore } from '@/store';
-import PrivacyPolicyModal from '../../components/PrivacyPolicyModal';
-import { useState } from 'react';
 
 // 유효성 검사 스키마 정의 (디자인은 유지, 규칙만 조금 보강)
 // 서버에서 비번 8자 요구가 올 수 있으니 min(8)로 맞춰둠 (서버 메세지는 그대로 매핑)
@@ -50,7 +48,6 @@ type FormData = z.infer<typeof schema>;
 const Register = () => {
   const navigate = useNavigate();
   const { invitationInfo, invitationToken } = useInvitationStore();
-  const [isPrivacyModalOpen, setIsPrivacyModalOpen] = useState(false);
 
   const form = useForm<FormData>({
     defaultValues: {
@@ -142,10 +139,6 @@ const Register = () => {
     }
   };
 
-  const handlePrivacyModalClose = () => {
-    setIsPrivacyModalOpen(false);
-  };
-
   return (
     <div className="flex flex-col min-h-screen">
       {/* 메인 콘텐츠 */}
@@ -155,10 +148,7 @@ const Register = () => {
           <div className="mb-4 text-center lg:mb-6">
             <p className="mb-1 text-xs text-gray-600 lg:text-sm">※「*」は必須項目となります。</p>
             <p className="text-xs text-gray-600 lg:text-sm">
-              ※個人情報保護方針は
-              <span className="text-blue-600 underline cursor-pointer" onClick={() => setIsPrivacyModalOpen(true)}>
-                こちら
-              </span>
+              ※個人情報保護方針は<span className="text-blue-600 underline cursor-pointer">こちら</span>
               をご確認ください。
             </p>
           </div>
@@ -361,12 +351,7 @@ const Register = () => {
                               <span className="text-red-500">*</span>プライバシーポリシーに同意します（必須）
                             </label>
                             <p className="mt-1 text-xs text-gray-500">
-                              <span
-                                className="text-blue-600 underline cursor-pointer"
-                                onClick={() => setIsPrivacyModalOpen(true)}
-                              >
-                                プライバシーポリシー
-                              </span>
+                              <span className="text-blue-600 underline cursor-pointer">プライバシーポリシー</span>
                               の内容をご確認の上、同意いただける場合はチェックしてください。
                             </p>
                           </div>
@@ -430,9 +415,6 @@ const Register = () => {
           </Form>
         </div>
       </main>
-
-      {/* 개인정보동의 모달 */}
-      <PrivacyPolicyModal isOpen={isPrivacyModalOpen} onClose={handlePrivacyModalClose} />
     </div>
   );
 };

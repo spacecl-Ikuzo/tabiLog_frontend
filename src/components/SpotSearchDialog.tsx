@@ -40,7 +40,7 @@ const SpotSearchDialog: React.FC<SpotSearchDialogProps> = ({
   const [selectedSpot, setSelectedSpot] = useState<GooglePlaceResponse | null>(null);
   const [selectedDuration, setSelectedDuration] = useState('1時間');
   const [selectedTransportMode, setSelectedTransportMode] = useState<'walking' | 'driving' | 'transit'>('walking');
-  // selectedCost 상태 변수 제거됨 - 코스트 버튼으로만 관리
+  const [selectedCost, setSelectedCost] = useState(0);
 
   const searchPlaces = async () => {
     if (!searchQuery.trim()) return;
@@ -110,7 +110,7 @@ const SpotSearchDialog: React.FC<SpotSearchDialogProps> = ({
         icon: <MapPin className="w-4 h-4" />,
         location: selectedSpot.name,
         address: selectedSpot.formattedAddress,
-        cost: "¥0", // 기본값 0으로 설정, 코스트 버튼으로 관리
+        cost: `¥${selectedCost}`,
         latitude: selectedSpot.latitude,
         longitude: selectedSpot.longitude,
         rating: selectedSpot.rating,
@@ -254,7 +254,21 @@ const SpotSearchDialog: React.FC<SpotSearchDialogProps> = ({
                 </>
               )}
               
-              {/* 비용 입력 필드 제거됨 - 코스트 버튼으로만 관리 */}
+              {/* 비용 입력 (모든 관광지에 대해) */}
+              <div className="mt-3">
+                <label className="block text-sm font-medium text-blue-900 mb-2">基本費用 (円)</label>
+                <input
+                  type="number"
+                  value={selectedCost}
+                  onChange={(e) => setSelectedCost(parseInt(e.target.value) || 0)}
+                  placeholder="0"
+                  min="0"
+                  className="w-full p-2 border border-blue-300 rounded-md bg-white"
+                />
+                <p className="text-xs text-blue-600 mt-1">
+                  {currentSpotCount === 0 ? '宿泊料金や入場料を入力してください' : '入場料や基本料金を入力してください'}
+                </p>
+              </div>
               
               {/* 첫 번째 관광지인 경우 안내 메시지 */}
               {currentSpotCount === 0 && (

@@ -1,59 +1,54 @@
+//마이페이지 사이드바
 import { User, PlaneTakeoff, BarChart3 } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { getMyPageInfo } from '../../api/api';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
-import { ProfileData } from '@/lib/type';
-import { getMyPageInfo } from '@/api/api';
-import { useUserStore } from '@/store';
+
+interface MyPageInfo {
+  id: number;
+  email: string;
+  userId: string;
+  firstName: string;
+  lastName: string;
+  gender: string;
+  phoneNumber: string;
+  nickname: string;
+  createdAt: string;
+  updatedAt: string;
+  participatingPlanCount: number;
+  ownedPlanCount: number;
+}
 
 export default function SideNavigation({ selectedNav }: { selectedNav: string }) {
   const navigate = useNavigate();
 
-  const { token } = useUserStore(); // ✅ 토큰 가져오기
   const [activeMenu, setActiveMenu] = useState(selectedNav);
-  const [userInfo, setUserInfo] = useState<ProfileData | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [userInfo, setUserInfo] = useState<MyPageInfo | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // ✅ 토큰이 있을 때만 프로필 정보 불러오기
-    if (!token) {
-      setUserInfo(null);
-      return;
-    }
+    const fetchUserInfo = async () => {
+      try {
+        const data = await getMyPageInfo();
+        setUserInfo(data);
+      } catch (error) {
+        console.error('사용자 정보를 가져오는데 실패했습니다:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
     fetchUserInfo();
-
-    // 프로필 업데이트 이벤트 리스너 추가
-    const handleProfileUpdate = () => {
-      fetchUserInfo();
-    };
-    window.addEventListener('profileUpdated', handleProfileUpdate);
-
-    // 클린업 함수
-    return () => {
-      window.removeEventListener('profileUpdated', handleProfileUpdate);
-    };
-  }, [token]); // ✅ 토큰이 바뀔 때만 실행
-
-  // 사용자 정보 조회
-  const fetchUserInfo = async () => {
-    setLoading(true);
-    try {
-      const response = await getMyPageInfo();
-      setUserInfo(response.data);
-    } catch (error) {
-      // console.error('사용자 정보를 가져오는데 실패했습니다:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  }, []);
 
   const handleMenuClick = (menu: string) => {
     setActiveMenu(menu);
 
     const pathName = location.pathname.split('/')[1];
     if (pathName !== menu) {
+      //현재 경로와 메뉴의 value가 같으면 동작 X
       if (menu === 'plans') {
         navigate(`/plans`);
       } else if (menu === 'newPlan') {
@@ -72,39 +67,21 @@ export default function SideNavigation({ selectedNav }: { selectedNav: string })
       <div className="hidden lg:block w-60 bg-white shadow-sm min-h-screen">
         <div className="px-6 py-15">
           {/* 프로필 섹션 */}
-          {token ? (
-            <div className="flex items-center gap-3 bg-gray-100 rounded-3xl p-4 mb-8">
-              {loading ? (
-                <>
-                  <Skeleton circle height={56} width={56} />
-                  <Skeleton height={20} width={100} />
-                </>
-              ) : (
-                <>
-                  {userInfo?.profileImageUrl ? (
-                    <img
-                      src={userInfo.profileImageUrl.startsWith('http') ? userInfo.profileImageUrl : import.meta.env.VITE_API_URL + userInfo.profileImageUrl}
-                      alt="profile"
-                      className="w-14 h-14 rounded-full"
-                    />
-                  ) : (
-                    <div className="w-14 h-14 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center text-white font-bold">
-                      {userInfo?.nickname?.slice(0, 2)}
-                    </div>
-                  )}
-                  <span className="font-bold text-gray-800 text-lg">{userInfo?.nickname ?? 'ゲスト'}</span>
-                </>
-              )}
-            </div>
-          ) : (
-            // ✅ 비로그인 상태 UI
-            <div className="flex items-center gap-3 bg-gray-100 rounded-3xl p-4 mb-8">
-              <div className="w-14 h-14 bg-gradient-to-br from-gray-300 to-gray-400 rounded-full flex items-center justify-center text-white font-bold">
-                ?
-              </div>
-              <span className="font-bold text-gray-800 text-lg">ゲスト</span>
-            </div>
-          )}
+          <div className="flex items-center gap-3 bg-gray-100 rounded-3xl p-4 mb-8">
+            {loading ? (
+              <>
+                <Skeleton circle height={56} width={56} />
+                <Skeleton height={20} width={100} />
+              </>
+            ) : (
+              <>
+                <div className="w-14 h-14 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center text-white font-bold">
+                  {userInfo ? userInfo.nickname.charAt(0) : 'オ'}
+                </div>
+                <span className="font-bold text-gray-800 text-lg">{userInfo ? userInfo.nickname : 'オンビャク'}</span>
+              </>
+            )}
+          </div>
 
           {/* 메뉴 */}
           <nav className="space-y-1 py-8">

@@ -1,173 +1,76 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Form, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { Mail, Phone, Upload, Loader2 } from 'lucide-react';
+import { User, Mail, Phone, Key, Eye, EyeOff, Edit3 } from 'lucide-react';
 import SideNavigation from '@/components/layout/side-navigation';
 import { useNavigate } from 'react-router-dom';
-import Header from '@/components/layout/header';
-import { axiosInstance } from '@/api/axios';
-import { uploadImage } from '@/api/api';
-import { toast } from 'sonner';
-import { ProfileData } from '@/lib/type';
-import { useUserStore } from '@/store';
 
 // Zod 스키마 정의
-const profileSchema = z.object({
-  lastName: z.string().min(1, '姓を入力してください'),
-  firstName: z.string().min(1, '名を入力してください'),
-  nickname: z.string().min(1, 'ニックネームを入力してください'),
-  email: z.string().email('有効なメールアドレスを入力してください'),
-  phoneNumber: z.string().min(1, '電話番号を入力してください'),
-});
+const profileSchema = z
+  .object({
+    lastName: z.string().min(1, '姓を入力してください'),
+    firstName: z.string().min(1, '名を入力してください'),
+    nickname: z.string().min(1, 'ニックネームを入力してください'),
+    email: z.string().email('有効なメールアドレスを入力してください'),
+    phoneNumber: z.string().min(1, '電話番号を入力してください'),
+    password: z.string().min(1, '現在のパスワードを入力してください'),
+    newPassword: z.string().min(8, '新しいパスワードは8文字以上で入力してください').optional(),
+    confirmPassword: z.string().optional(),
+  })
+  .refine(
+    (data) => {
+      if (data.newPassword && data.newPassword !== data.confirmPassword) {
+        return false;
+      }
+      return true;
+    },
+    {
+      message: '新しいパスワードと確認パスワードが一致しません',
+      path: ['confirmPassword'],
+    },
+  );
 
 type ProfileFormData = z.infer<typeof profileSchema>;
 
 export default function Profile() {
   const navigate = useNavigate();
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  const { setNickname } = useUserStore();
 
-  const [profileData, setProfileData] = useState<ProfileData | null>(null);
-  const [profileImage, setProfileImage] = useState<string | null>(null);
-  const [isUploading, setIsUploading] = useState(false);
-  const [uploadError, setUploadError] = useState<string | null>(null);
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const form = useForm<ProfileFormData>({
     resolver: zodResolver(profileSchema),
     defaultValues: {
-      lastName: profileData?.lastName || '',
-      firstName: profileData?.firstName || '',
-      nickname: profileData?.nickname || '',
-      email: profileData?.email || '',
-      phoneNumber: profileData?.phoneNumber || '',
+      lastName: '',
+      firstName: '',
+      nickname: '',
+      email: '',
+      phoneNumber: '',
+      password: '',
+      newPassword: '',
+      confirmPassword: '',
     },
     mode: 'onChange', // 입력할 때마다 검사
     reValidateMode: 'onChange', // 값이 바뀔 때마다 다시 검사
   });
 
-  useEffect(() => {
-    fetchProfileImage();
-  }, []);
-
-  // profileData가 변경될 때 폼 값을 재설정
-  useEffect(() => {
-    if (profileData) {
-      form.reset({
-        lastName: profileData.lastName || '',
-        firstName: profileData.firstName || '',
-        nickname: profileData.nickname || '',
-        email: profileData.email || '',
-        phoneNumber: profileData.phoneNumber || '',
-      });
-    }
-  }, [profileData, form]);
-
-  const fetchProfileImage = async () => {
-    const response = await axiosInstance.get('/api/profile');
-    setProfileData((prev: ProfileData | null) => ({
-      ...prev,
-      id: response.data.data.id,
-      userId: response.data.data.userId,
-      email: response.data.data.email,
-      firstName: response.data.data.firstName,
-      lastName: response.data.data.lastName,
-      nickname: response.data.data.nickname,
-      phoneNumber: response.data.data.phoneNumber,
-      gender: response.data.data.gender,
-      profileImageUrl: response.data.data.profileImageUrl,
-      createdAt: response.data.data.createdAt,
-      updatedAt: response.data.data.updatedAt,
-    }));
-    console.log(response.data.data);
-  };
-
-  // 이미지 업로드
-  const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (!file) return;
-
-    // 파일 타입 검증
-    if (!file.type.startsWith('image/')) {
-      setUploadError('이미지 파일만 업로드 가능합니다.');
-      return;
-    }
-
-    // 파일 크기 검증 (5MB 제한)
-    if (file.size > 5 * 1024 * 1024) {
-      setUploadError('파일 크기는 5MB 이하여야 합니다.');
-      return;
-    }
-
-    setIsUploading(true);
-    setUploadError(null);
-
-    let imageUrl = profileImage ?? null;
-
-    if (file) {
-      const uploadResponse = await uploadImage(file);
-      if (uploadResponse.success) {
-        imageUrl = uploadResponse.url;
-        toast.success('画像のアップロードに成功しました。', { position: 'top-center' });
-      } else {
-        toast.error('画像のアップロードに失敗しました。', { position: 'top-center' });
-        setUploadError(uploadResponse.message || '이미지 업로드 실패');
-        return;
-      }
-    }
-
-    try {
-      const requestBody = {
-        profileImageUrl: imageUrl, // 이미지 URL
-      };
-
-      // 프로필 이미지 업데이트 API
-      await axiosInstance.put('/api/profile/image', requestBody);
-      setProfileImage(imageUrl);
-    } catch (error) {
-      console.error('프로필 이미지 업데이트 실패:', error);
-      setUploadError('이미지 업로드에 실패했습니다. 다시 시도해주세요.');
-    } finally {
-      setIsUploading(false);
-    }
-  };
-
-  // 이미지 업로드 버튼 클릭 핸들러
-  const handleImageClick = () => {
-    fileInputRef.current?.click();
-  };
-
-  //프로필 업데이트
   const onSubmit = async (data: ProfileFormData) => {
     try {
-      const requestBody = {
-        lastName: data.lastName,
-        firstName: data.firstName,
-        nickname: data.nickname,
-        email: data.email,
-        phoneNumber: data.phoneNumber,
-      };
-      await axiosInstance.put('/api/profile', requestBody);
-      toast.success('プロフィールが更新されました。', { position: 'top-center' });
-
-      // 프로필 데이터 다시 가져오기
-      await fetchProfileImage();
-      setNickname(data.nickname);
-
-      // 사이드 네비게이션의 사용자 정보도 갱신하도록 이벤트 발생
-      window.dispatchEvent(new CustomEvent('profileUpdated'));
+      console.log('Form data:', data);
+      // TODO: API 호출로 프로필 업데이트
+      // await updateProfile(data);
     } catch (error) {
       console.error('Profile update failed:', error);
-      toast.error('プロフィールの更新に失敗しました。', { position: 'top-center' });
     }
   };
 
   return (
     <div className="min-h-screen">
-      <Header />
       <div className="flex">
         {/* 사이드 네비게이션 (데스크톱만) */}
         <SideNavigation selectedNav="profile" />
@@ -184,50 +87,17 @@ export default function Profile() {
                 {/* 프로필 이미지 섹션 */}
                 <div className="flex flex-col items-center mb-8">
                   <div className="relative">
-                    <div className="w-24 h-24 bg-gray-200 rounded-full flex items-center justify-center mb-4 overflow-hidden">
-                      {profileImage ? (
-                        <img
-                          src={profileImage.startsWith('http') ? profileImage : import.meta.env.VITE_API_URL + profileImage}
-                          alt="프로필 이미지"
-                          className="w-full h-full object-cover"
-                        />
-                      ) : (
-                        <>
-                          {profileData?.profileImageUrl ? (
-                            <img
-                              src={profileData.profileImageUrl.startsWith('http') ? profileData.profileImageUrl : import.meta.env.VITE_API_URL + profileData.profileImageUrl}
-                              alt="프로필 이미지"
-                              className="w-full h-full object-cover"
-                            />
-                          ) : (
-                            <div className="w-full h-full bg-gradient-to-br from-gray-400 to-gray-600 rounded-full flex items-center justify-center text-white font-bold">
-                              {profileData?.nickname?.slice(0, 2)}
-                            </div>
-                          )}
-                        </>
-                      )}
+                    <div className="w-24 h-24 bg-gray-200 rounded-full flex items-center justify-center mb-4">
+                      <User className="w-12 h-12 text-gray-400" />
                     </div>
-                    <button
-                      type="button"
-                      onClick={handleImageClick}
-                      disabled={isUploading}
-                      className="absolute bottom-0 right-0 bg-brand-orange text-white p-2 rounded-full hover:bg-orange-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      {isUploading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Upload className="w-4 h-4" />}
+                    <button className="absolute bottom-0 right-0 bg-brand-orange text-white p-2 rounded-full hover:bg-orange-600 transition-colors">
+                      <Edit3 className="w-4 h-4" />
                     </button>
                   </div>
                   <div className="text-center">
-                    <p className="text-sm text-gray-400">{profileData?.nickname}</p>
-                    {uploadError && <p className="text-sm text-red-500 mt-2">{uploadError}</p>}
+                    <p className="text-sm text-gray-600 mb-1">名前(姓名)</p>
+                    <p className="text-sm text-gray-400">たびっこ123</p>
                   </div>
-                  {/* 숨겨진 파일 입력 */}
-                  <input
-                    ref={fileInputRef}
-                    type="file"
-                    accept="image/*"
-                    onChange={handleImageUpload}
-                    className="hidden"
-                  />
                 </div>
 
                 {/* 폼 필드들 */}
@@ -325,7 +195,6 @@ export default function Profile() {
                             <Input
                               {...field}
                               type="tel"
-                              placeholder="-を入力しないでください"
                               className="pl-10 border-gray-300 focus:border-brand-orange focus:ring-brand-orange"
                             />
                           </div>
@@ -336,6 +205,96 @@ export default function Profile() {
                       )}
                     />
                   </div>
+
+                  {/* 현재 비밀번호와 새 비밀번호 - 데스크탑에서 2x2 그리드 */}
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    {/* 현재 비밀번호 */}
+                    <FormField
+                      control={form.control}
+                      name="password"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-sm font-semibold">現在のパスワード</FormLabel>
+                          <div className="relative">
+                            <Key className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                            <Input
+                              {...field}
+                              type={showCurrentPassword ? 'text' : 'password'}
+                              className="pl-10 pr-10 border-gray-300 focus:border-brand-orange focus:ring-brand-orange"
+                            />
+                            <button
+                              type="button"
+                              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                              onClick={() => setShowCurrentPassword(!showCurrentPassword)}
+                            >
+                              {showCurrentPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                            </button>
+                          </div>
+                          <div className="lg:h-5">
+                            <FormMessage />
+                          </div>
+                        </FormItem>
+                      )}
+                    />
+
+                    {/* 새 비밀번호 */}
+                    <FormField
+                      control={form.control}
+                      name="newPassword"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-sm font-semibold">新しいパスワード</FormLabel>
+                          <div className="relative">
+                            <Key className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                            <Input
+                              {...field}
+                              type={showNewPassword ? 'text' : 'password'}
+                              className="pl-10 pr-10 border-gray-300 focus:border-brand-orange focus:ring-brand-orange"
+                            />
+                            <button
+                              type="button"
+                              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                              onClick={() => setShowNewPassword(!showNewPassword)}
+                            >
+                              {showNewPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                            </button>
+                          </div>
+                          <div className="lg:h-5">
+                            <FormMessage />
+                          </div>
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
+                  {/* 새 비밀번호 확인 */}
+                  <FormField
+                    control={form.control}
+                    name="confirmPassword"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-sm font-semibold">新しいパスワード (確認)</FormLabel>
+                        <div className="relative">
+                          <Key className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                          <Input
+                            {...field}
+                            type={showConfirmPassword ? 'text' : 'password'}
+                            className="pl-10 pr-10 border-gray-300 focus:border-brand-orange focus:ring-brand-orange"
+                          />
+                          <button
+                            type="button"
+                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                          >
+                            {showConfirmPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                          </button>
+                        </div>
+                        <div className="lg:h-5">
+                          <FormMessage />
+                        </div>
+                      </FormItem>
+                    )}
+                  />
                 </div>
                 <div className="flex justify-end pt-5">
                   <button
@@ -354,13 +313,12 @@ export default function Profile() {
                       type="button"
                       variant="outline"
                       className="w-auto px-8 border-gray-300 text-gray-700 hover:bg-gray-50 cursor-pointer"
-                      onClick={() => navigate(-1)}
                     >
                       キャンセル
                     </Button>
                     <Button
                       type="submit"
-                      disabled={!form.formState.isValid}
+                      disabled={form.formState.isSubmitting}
                       className="w-auto px-8 bg-brand-orange hover:bg-orange-600 text-white disabled:opacity-50 cursor-pointer"
                     >
                       {form.formState.isSubmitting ? '保存中...' : '変更を保存'}
