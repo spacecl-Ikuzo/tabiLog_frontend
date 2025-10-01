@@ -105,6 +105,14 @@ import NagoyaShachi from '../../assets/NagoyaShachi.jpg';
 import HiroshimaHero from '../../assets/HiroShima.jpg';
 import GenbakuDome from '../../assets/GenbakuDome.jpg';
 import Miyajima from '../../assets/miyajima.jpg';
+import mesenyama from '../../assets/mesenyama.jpg';
+import miyajimaItsukushima from '../../assets/miyazimaitsukushima.jpg';
+import Itsukushimashrine from '../../assets/Itsukushimashrine.jpg';
+import MiyajimaItsukushimaTorii from '../../assets/Miyajima_Itsukushima_Torii.jpg';
+import HiroshimaMemorialPark from '../../assets/Hiroshimamemorialpark.jpg';
+import HiroshimaMemorialMuseum from '../../assets/Hiroshimamemorialmuseum.jpg';
+import HiroshimaMuseumFront from '../../assets/hiroshimamuseumfront.jpg';
+import MotoyasuRiver from '../../assets/motoyasuriver.jpg';
 import KanazawaHero from '../../assets/Kanazawa.jpg';
 import Kenrokuen from '../../assets/Kenrokuen.jpg';
 import KanazawaCastle from '../../assets/KanazawaCastle.jpg';
@@ -179,6 +187,10 @@ import Hirosima16 from '../../assets/Hirosima16.jpg';
 import Tomonoura2 from '../../assets/Tomonoura2.png';
 import Tomonura3 from '../../assets/Tomonura3.png';
 import Tomonoura_Harbor from '../../assets/Tomonoura_Harbor.jpg';
+import tomonoura from '../../assets/tomonoura.jpg';
+import tomonourajouyato from '../../assets/tomonourajouyato.jpg';
+import fukugengdaizorou from '../../assets/fukugengdaizorou.jpg';
+import sensuisima from '../../assets/sensuisima.jpg';
 import Ponyo1 from '../../assets/ponyo1.png';
 import Ponyo2 from '../../assets/ponyo2.png';
 import tanukikojimap from '../../assets/tanukikojimap.jpg';
@@ -200,6 +212,7 @@ type SpotDetail = {
   spots: string[];
   imageLeft?: string;
   imageRight?: string;
+  extraImages?: string[];
   content: string;
 };
 
@@ -927,27 +940,43 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
       title: '原爆ドーム',
       description: '広島の平和の象徴。世界遺産',
       author: 'タビログ編集部',
-      heroImage: HiroshimaHero,
+      heroImage: GenbakuDome,
       breadcrumb: ['広島', '中区', '原爆ドーム'],
       contentTitle: '原爆ドームの基本情報',
       spots: ['平和記念公園', '資料館', '元安川'],
-      imageLeft: GenbakuDome,
-      imageRight: HiroshimaHero,
+      imageLeft: HiroshimaMemorialPark,
+      imageRight: MotoyasuRiver,
+      extraImages: [HiroshimaMemorialMuseum, HiroshimaMuseumFront],
       content:
-        '原爆ドームは世界遺産に登録された平和の象徴。隣接する平和記念公園や資料館とともに、戦争の悲惨さと平和の尊さを学ぶ場です。川沿いの散策路は慰霊と鎮魂の空気に包まれ、静かな時間が流れます。',
+        '原爆ドーム（Atomic Bomb Dome）は、1996年にユネスコ世界文化遺産に登録された平和の象徴です。もともとは1915年に建設された広島県物産陳列館であり、1945年8月6日に原子爆弾が投下された際、爆心地の近くにあった建物です。爆風の衝撃にもかかわらず外壁の一部と鉄骨ドームが残り、現在では戦争の悲惨さを伝える象徴として保存されています。<br><br>【所在地】<br>〒730-0051 広島県広島市中区大手町1丁目10<br><br>【交通アクセス】<br>・JR広島駅から路面電車で約15分 → 「原爆ドーム前」下車すぐ<br>・バスや徒歩でもアクセス可能<br><br>【2.1 平和記念公園】<br>〒730-0811 広島県広島市中区中島町1<br>原爆で亡くなられた方々の霊を慰め、世界平和を祈念するために造られた公園です。原爆ドーム、平和の灯、原爆の子の像など、多くの慰霊碑や記念碑が集まっています。世界中から訪れる人々にとって、平和学習の場となっています。写真は平和記念公園の様子です。<br><br>【2.2 広島平和記念資料館】<br>〒730-0811 広島県広島市中区中島町1-2<br>原爆投下当時の状況や被爆者の遺品、写真資料などを展示し、核兵器の悲惨さと平和の大切さを伝える資料館です。本館と東館から構成され、戦争と核兵器廃絶の必要性を深く訴えています。<br><br>【2.3 元安川】<br>広島市中心部を流れる川で、太田川水系の一部<br>広島市の中心を流れ、平和記念公園や原爆ドームのそばを通る川です。原爆投下当時、多くの被爆者が水を求めてこの川に集まりました。現在は川沿いの遊歩道や桜の名所として親しまれており、毎年8月6日には灯ろう流しが行われ、犠牲者を追悼します。写真は元安川の美しい風景です。',
     },
     '16': {
       title: '宮島',
       description: '厳島神社で有名な美しい島',
       author: 'タビログ編集部',
-      heroImage: HiroshimaHero,
+      heroImage: Miyajima,
       breadcrumb: ['広島', '廿日市市', '宮島'],
       contentTitle: '宮島の基本情報',
       spots: ['厳島神社', '大鳥居', '弥山'],
-      imageLeft: Miyajima,
-      imageRight: HiroshimaHero,
+      imageLeft: miyajimaItsukushima,
+      imageRight: Itsukushimashrine,
+      extraImages: [mesenyama, MiyajimaItsukushimaTorii],
       content:
-        '宮島は干満により姿を変える海上の大鳥居で知られ、厳島神社の社殿群は海と山に抱かれた幽玄の美をたたえます。弥山の原始林や鹿とのふれあい、紅葉谷公園など見どころも多く、四季を通じて楽しめます。',
+        '宮島（Miyajima）は日本三景の一つに数えられる景勝地で、正式名称は「厳島（いつくしま）」。自然の美しさと歴史的建造物が調和した観光地であり、国内外から多くの観光客が訪れます。<br><br>【所在地】<br>広島県廿日市市宮島町<br><br>【アクセス】<br>・JR宮島口駅から徒歩5分 → 宮島口桟橋よりフェリーで約10分<br>・広島市内から電車・車で約1時間<br><br>【2.1 厳島神社】<br>〒739-0588 広島県廿日市市宮島町1-1<br>ユネスコ世界文化遺産に登録されている神社で、海上に浮かぶように建てられた朱塗りの社殿が有名です。満潮時には社殿が海に浮かんでいるように見え、幻想的な風景が広がります。写真は厳島神社の美しい社殿群です。<br><br>【2.2 大鳥居】<br>厳島神社前（海上に建つ大鳥居）<br>高さ約16mの巨大な木造鳥居で、日本三大鳥居の一つに数えられます。干潮時には歩いて近くまで行くことができ、満潮時には海に浮かぶ姿が美しく、フォトスポットとして人気です。写真は海上に浮かぶ大鳥居の雄大な姿です。<br><br>【2.3 弥山】<br>宮島中央部（標高535m）<br>宮島の最高峰で、瀬戸内海や広島市街を一望できる絶景スポットです。ロープウェーや登山道を利用して登ることができ、頂上には弥山本堂や霊火堂などの史跡もあります。「消えずの火」と呼ばれる炎は千年以上燃え続けていると伝えられています。写真は弥山からの絶景パノラマです。',
+    },
+    '41': {
+      title: '鞆の浦',
+      description: 'ジブリ映画の舞台となった美しい港町',
+      author: 'タビログ編集部',
+      heroImage: Tomonoura_Harbor,
+      breadcrumb: ['広島', '福山市', '鞆の浦'],
+      contentTitle: '鞆の浦の基本情報',
+      spots: ['常夜燈', '対潮楼', '仙酔島'],
+      imageLeft: tomonoura,
+      imageRight: tomonourajouyato,
+      extraImages: [fukugengdaizorou, sensuisima],
+      content:
+        '鞆の浦（Tomonoura）は瀬戸内海国立公園に位置する港町で、古くから潮待ち・風待ちの港として栄えました。江戸時代の街並みや港の風景が現在も残されており、「日本の夕陽百選」にも選ばれた美しい景観で知られています。ジブリ映画『崖の上のポニョ』の舞台イメージにもなったことで有名です。<br><br>【所在地】<br>〒720-0201 広島県福山市鞆町<br><br>【アクセス】<br>・JR福山駅からバスで約30分 → 「鞆の浦」下車<br>・広島市から車で約1時間30分<br><br>【2.1 常夜燈】<br>鞆港のシンボル（港の突端）<br>1859年に建てられた石造りの灯籠で、鞆の浦を代表するシンボルです。高さ約10mで、日本最大級の常夜灯として知られています。夕暮れ時の景色が特に美しいスポットです。写真は鞆の浦の美しい港町の風景です。<br><br>【2.2 福禅寺 対潮楼】<br>〒720-0201 広島県福山市鞆町鞆2<br>江戸時代に朝鮮通信使を迎え入れた歴史ある寺院。客殿「対潮楼」からは仙酔島や弁天島を望む絶景が広がり、「日東第一形勝（日本一の景勝地）」と称されました。写真は常夜燈の雄大な姿です。<br><br>【2.3 仙酔島】<br>鞆の浦から船で約5分<br>瀬戸内海に浮かぶ自然豊かな島で、ハイキングコースや海水浴場が整備されています。島内にはユニークな「五色岩」など自然景観が多く、リラックスできるスポットとして人気です。写真は福禅寺対潮楼と仙酔島の絶景です。',
     },
   },
   金沢: {
@@ -1132,6 +1161,48 @@ const SpotDetailPage = () => {
               </div>
             </div>
           )}
+          {/* Extra Images for Tomonoura (広島 41) */}
+          {cityKey === '広島' && idKey === '41' && detail?.extraImages && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              {detail.extraImages.map((image, index) => (
+                <div key={index} className="bg-white rounded-lg overflow-hidden shadow-md">
+                  <div
+                    className="h-64 bg-cover bg-center bg-no-repeat"
+                    style={{ backgroundImage: `url(${image})` }}
+                  ></div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Extra Images for Miyajima (広島 16) */}
+          {cityKey === '広島' && idKey === '16' && detail?.extraImages && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              {detail.extraImages.map((image, index) => (
+                <div key={index} className="bg-white rounded-lg overflow-hidden shadow-md">
+                  <div
+                    className="h-64 bg-cover bg-center bg-no-repeat"
+                    style={{ backgroundImage: `url(${image})` }}
+                  ></div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Extra Images for Hiroshima Atomic Bomb Dome (広島 15) */}
+          {cityKey === '広島' && idKey === '15' && detail?.extraImages && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              {detail.extraImages.map((image, index) => (
+                <div key={index} className="bg-white rounded-lg overflow-hidden shadow-md">
+                  <div
+                    className="h-64 bg-cover bg-center bg-no-repeat"
+                    style={{ backgroundImage: `url(${image})` }}
+                  ></div>
+                </div>
+              ))}
+            </div>
+          )}
+
           {/* Extra Images for Akihabara (Tokyo 33) */}
           {cityKey === '東京' && idKey === '33' && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">

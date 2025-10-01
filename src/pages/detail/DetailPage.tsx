@@ -103,6 +103,9 @@ import Hirosima15 from '../../assets/Hirosima15.png';
 import Hirosima12 from '../../assets/Hirosima12.jpg';
 import abasirikoso from '../../assets/abasirikoso.jpg';
 import abasirikosohotel from '../../assets/abasirikosohotel.jpg';
+import konosekaiguresi from '../../assets/konosekaiguresi.jpg';
+import konosekakoharubashi from '../../assets/konosekakoharubashi.jpg';
+import konosekanikoukoen from '../../assets/konosekanikoukoen.jpg';
 
 const DetailPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -201,16 +204,18 @@ const DetailPage = () => {
         '毎年夏に名古屋で開催される世界規模のコスプレイベント。大須商店街と名古屋市街が舞台となる国際的なコスプレ祭典です。<br><br><table style="border-collapse: collapse; width: 100%; margin: 10px 0;"><tr style="background-color: #f2f2f2;"><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">項目</th><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">詳細</th></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">開催時期</td><td style="border: 1px solid #ddd; padding: 8px;">毎年8月（2日間）<br>2024年: 8月3日～4日</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">メイン会場</td><td style="border: 1px solid #ddd; padding: 8px;">大須商店街・名古屋市街<br>愛知県体育館・オアシス21</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">アクセス</td><td style="border: 1px solid #ddd; padding: 8px;">地下鉄鶴舞線「大須観音駅」徒歩2分<br>地下鉄名城線「上前津駅」徒歩5分<br>名古屋駅から車で約20分</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">入場料金</td><td style="border: 1px solid #ddd; padding: 8px;">無料（街中イベント）<br>コンテスト観覧: 1,000円～3,000円<br>VIP席: 5,000円～10,000円</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">営業時間</td><td style="border: 1px solid #ddd; padding: 8px;">10:00～18:00（イベントにより変動）<br>コンテスト: 13:00～17:00</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">駐車場</td><td style="border: 1px solid #ddd; padding: 8px;">有料駐車場あり（複数箇所）<br>普通車: 200円～300円/時間<br>大型車: 500円/時間</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">参加国数</td><td style="border: 1px solid #ddd; padding: 8px;">約30カ国から参加<br>海外コスプレイヤー: 約50名<br>国内参加者: 約1,000名</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">施設・設備</td><td style="border: 1px solid #ddd; padding: 8px;">休憩所・トイレ・案内所<br>コスプレ更衣室・撮影エリア<br>多言語対応・案内板</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">周辺施設</td><td style="border: 1px solid #ddd; padding: 8px;">大須観音・万松寺<br>名古屋城・栄<br>カフェ・レストラン多数</td></tr></table><br>【2.1 大須商店街】<br>コスプレイベントのメイン会場。世界各国から集まったコスプレイヤーたちが街を練り歩き、独特な文化の交流が生まれます。大須商店街でのコスプレイベントは無料で観覧でき、写真撮影も自由に可能です。<br><br>【2.2 名古屋市街】<br>市内各所でコスプレイベントが開催され、名古屋の街全体がコスプレの祭典会場となります。観光客も参加できるイベントが多数あります。市内各所のイベントはほとんど無料で、一部特別イベントは別途料金がある場合があります。<br><br>【2.3 コスプレコンテスト】<br>世界各国の代表コスプレイヤーが参加する国際コンテスト。技術力と表現力の高さを競い合い、観客を魅了します。コンテスト観覧は別途料金があり、事前予約が推奨されます。<br><br>【2.4 国際交流】<br>コスプレを通じた国際文化交流の場。世界各国のファンが集まり、アニメ・漫画文化を共有する貴重な機会となります。国際交流イベントは無料で参加でき、多言語対応が可能です。',
     },
     9: {
-      title: '🎥 この世界の片隅に × 広島市',
-      description: '戦時中の広島と呉を舞台に、日常の尊さを描く傑作。広島市内の聖地を静かに巡る旅へ。',
+      title: 'この世界の片隅に',
+      description: '戦時中の広島・呉を舞台とした感動のアニメ映画',
       author: 'タビログ編集部',
       image: Hirosima12,
       heroImage: Hirosima15,
-      breadcrumb: ['広島', '平和記念公園', '原爆ドーム'],
-      contentTitle: 'この世界の片隅に 聖地巡礼の基本情報',
-      spots: ['平和記念公園', '原爆ドーム', '宇品港（モデル地）'],
+      imageRight: konosekaiguresi,
+      extraImages: [konosekaiguresi, Hirosima15],
+      breadcrumb: ['広島', '呉市', 'この世界の片隅に'],
+      contentTitle: 'この世界の片隅にの基本情報',
+      spots: ['三ツ蔵', '小春橋', '二河公園'],
       content:
-        '映画『この世界の片隅に』の舞台をめぐる静かな巡礼。広島の街に今も残る風景と重ねて、作品が伝える「日常の尊さ」を感じよう。<br><br>【1】平和記念公園<br>平和への祈りを込めた広島の象徴。園内を歩きながら、当時と現在の時間の重なりに思いを馳せて。<br><br>【2】原爆ドーム<br>世界遺産として保存される平和のシンボル。作中の場面と重なる川辺の静けさにも耳を澄ませたい。<br><br>【3】宇品港（モデル地）<br>物語に登場する港町のイメージ源。現在もフェリーが行き交い、瀬戸内の穏やかな時間が流れる。',
+        '「この世界の片隅に」は、こうの史代による漫画を原作とし、片渕須直監督によって2016年に映画化された感動的なアニメーション作品です。第二次世界大戦中の広島市・呉市を舞台に、主人公・浦野すずの戦時中の日常を描いた作品で、国内外で高い評価を受けています。<br><br>【基本情報】<br>原作：こうの史代（漫画）<br>映画化監督・脚本：片渕須直（2016年公開）<br>舞台：第二次世界大戦中の広島市・呉市など<br>主人公：浦野すず（戦時中を生きるごく普通の女性）<br><br>【2.1 三ツ蔵（旧澤原家住宅／澤田屋）】<br>呉市中心部近く<br>すずが嫁いでから日常を過ごす町の家並みの象徴的な建物。映画でも外観がほぼそのまま描かれています。作品ファンによる聖地巡礼の重要なスポットです。<br><br>【2.2 小春橋】<br>呉市、堺川にかかる橋<br>すずと周作が2人で語り合うシーンなど、印象的な橋の風景が描かれた場所。映画の重要なシーンの舞台となっています。<br><br>【2.3 二河公園】<br>呉市<br>桜の木の下など、すずさんが関わる場面のイメージの場所として注目。聖地巡礼のコースにも入っており、作品の雰囲気を感じられるスポットです。<br><br>【聖地巡礼・コラボ情報】<br>・ロケーションマップ：呉市などで、映画に登場する場所をマップ化して配布<br>・スタンプラリー：「待っとるよ 呉」スタンプラリーイベント実施<br>・再上映・舞台挨拶：終戦80年記念で片渕監督や声優「のん」の舞台挨拶イベント実施<br>・広島市江波（えば）周辺：映画・原作に出てくる広島市内の地区',
     },
     10: {
       title: '🎬 崖の上のポニョ × 鞆の浦',
@@ -542,6 +547,7 @@ const DetailPage = () => {
           {/* Images */}
           {planId !== 4 &&
             planId !== 6 &&
+            planId !== 9 &&
             planId !== 19 &&
             planId !== 20 &&
             planId !== 21 &&
@@ -612,6 +618,38 @@ const DetailPage = () => {
                 </div>
               </div>
             )}
+
+          {/* Custom Images for In This Corner of the World */}
+          {planId === 9 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${konosekakoharubashi})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${konosekanikoukoen})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+
+          {/* Extra Images for In This Corner of the World */}
+          {planId === 9 && plan.extraImages && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              {plan.extraImages.map((image, index) => (
+                <div key={index} className="bg-white rounded-lg overflow-hidden shadow-md">
+                  <div
+                    className="h-64 bg-cover bg-center bg-no-repeat"
+                    style={{ backgroundImage: `url(${image})` }}
+                  ></div>
+                </div>
+              ))}
+            </div>
+          )}
 
           {/* Custom Images for Ponyo × Tomonoura */}
           {planId === 10 && (
