@@ -335,14 +335,14 @@ export default function Plans() {
                                 e.currentTarget.nextElementSibling?.classList.remove('hidden');
                               }}
                             />
-                          ) : null}
-                          <div
-                            className={`w-30 h-30 bg-gray-200 rounded-xl flex-shrink-0 flex items-center justify-center ${
-                              plan.prefectureImageUrl ? 'hidden' : ''
-                            }`}
-                          >
-                            <span className="text-gray-400 text-sm font-medium">noImg</span>
-                          </div>
+                          ) : (
+                            <div
+                              className={`w-30 h-30 bg-gray-200 rounded-xl flex-shrink-0 flex items-center justify-center 
+                          }`}
+                            >
+                              <span className="text-gray-400 text-sm font-medium">noImg</span>
+                            </div>
+                          )}
                           <div className="flex-1">
                             <div className="flex items-start justify-between mb-3">
                               <div className="flex-1">
