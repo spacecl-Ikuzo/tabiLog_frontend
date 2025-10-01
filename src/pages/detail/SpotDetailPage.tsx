@@ -964,7 +964,7 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
       content:
         '宮島（Miyajima）は日本三景の一つに数えられる景勝地で、正式名称は「厳島（いつくしま）」。自然の美しさと歴史的建造物が調和した観光地であり、国内外から多くの観光客が訪れます。<br><br>【所在地】<br>広島県廿日市市宮島町<br><br>【アクセス】<br>・JR宮島口駅から徒歩5分 → 宮島口桟橋よりフェリーで約10分<br>・広島市内から電車・車で約1時間<br><br>【2.1 厳島神社】<br>〒739-0588 広島県廿日市市宮島町1-1<br>ユネスコ世界文化遺産に登録されている神社で、海上に浮かぶように建てられた朱塗りの社殿が有名です。満潮時には社殿が海に浮かんでいるように見え、幻想的な風景が広がります。写真は厳島神社の美しい社殿群です。<br><br>【2.2 大鳥居】<br>厳島神社前（海上に建つ大鳥居）<br>高さ約16mの巨大な木造鳥居で、日本三大鳥居の一つに数えられます。干潮時には歩いて近くまで行くことができ、満潮時には海に浮かぶ姿が美しく、フォトスポットとして人気です。写真は海上に浮かぶ大鳥居の雄大な姿です。<br><br>【2.3 弥山】<br>宮島中央部（標高535m）<br>宮島の最高峰で、瀬戸内海や広島市街を一望できる絶景スポットです。ロープウェーや登山道を利用して登ることができ、頂上には弥山本堂や霊火堂などの史跡もあります。「消えずの火」と呼ばれる炎は千年以上燃え続けていると伝えられています。写真は弥山からの絶景パノラマです。',
     },
-    '41': {
+    '42': {
       title: '鞆の浦',
       description: 'ジブリ映画の舞台となった美しい港町',
       author: 'タビログ編集部',
@@ -1161,8 +1161,8 @@ const SpotDetailPage = () => {
               </div>
             </div>
           )}
-          {/* Extra Images for Tomonoura (広島 41) */}
-          {cityKey === '広島' && idKey === '41' && detail?.extraImages && (
+          {/* Extra Images for Tomonoura (広島 42) */}
+          {cityKey === '広島' && idKey === '42' && detail?.extraImages && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               {detail.extraImages.map((image, index) => (
                 <div key={index} className="bg-white rounded-lg overflow-hidden shadow-md">
