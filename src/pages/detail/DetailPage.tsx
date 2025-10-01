@@ -255,13 +255,16 @@ const DetailPage = () => {
       content:
         '瀬戸内の凪いだ海と島々のシルエットに囲まれた港町・鞆の浦。監督が逗留したとされるこの地では、映画の温もりある色彩と穏やかな時間が重なります。<br><br>【1】港町の路地<br>石畳と木造家屋が続く小径。ふとした生活の匂いが作品の空気感と響き合います。<br><br>【2】海沿いの眺望<br>常夜灯や波止場からの景色は、朝夕で表情が一変。やわらかな光の時間帯が特におすすめ。<br><br>【3】アクセスのコツ<br>福山駅からバスで約30分「鞆港」下車すぐ。混雑を避けるなら午前中の訪問が快適です。',
     },
-    14: {
+    118: {
       title: '君の名は。聖地巡礼！渋谷と代々木',
       description:
         '「君の名は。」の舞台となった東京の名所を巡る。渋谷のスクランブル交差点、代々木の神社、新宿御苑など、映画に登場した場所で主人公たちの気持ちを感じてみよう。',
       author: 'アニメファン',
       image: KiminoNamaewa,
       heroImage: KiminoNamaewaSuga,
+      imageLeft: Shibakoen,
+      imageRight: ShinjukuPolice,
+      extraImages: [Shibakoen, ShinjukuPolice, Aogashima, KiminoNamaewa],
       breadcrumb: ['東京', '渋谷', '代々木', '君の名は。聖地巡礼'],
       contentTitle: '君の名は。聖地巡礼の基本情報',
       spots: ['君の名は。映画紹介', '代々木八幡宮', '新宿警察署', '青ヶ島'],
@@ -275,6 +278,9 @@ const DetailPage = () => {
       author: '映画好き',
       image: tenkinoko,
       heroImage: tenkinoko,
+      imageLeft: odaiba,
+      imageRight: denkiseibumc,
+      extraImages: [Shibakoen, tenkinoko],
       breadcrumb: ['東京', 'スカイツリー', '台場', '天気の子聖地巡礼'],
       contentTitle: '天気の子聖地巡礼の基本情報',
       spots: ['天気の子映画紹介', '東京スカイツリー', 'お台場', 'マクドナルド'],
@@ -288,6 +294,9 @@ const DetailPage = () => {
       author: 'デジモンファン',
       image: Digimon4,
       heroImage: Digimon4,
+      imageLeft: odaiba,
+      imageRight: OdaibaDigimon,
+      extraImages: [HikarigaokaDigimon, Digimon2],
       breadcrumb: ['東京', 'お台場', '光が丘', 'デジモンアドベンチャー聖地巡礼'],
       contentTitle: 'デジモンアドベンチャー聖地巡礼の基本情報',
       spots: ['デジモンアドベンチャー紹介', 'お台場フジテレビ', '光が丘公園', '新宿駅'],
@@ -301,6 +310,9 @@ const DetailPage = () => {
       author: '温泉好き',
       image: hakoneonsen,
       heroImage: hakoneonsen,
+      imageLeft: hakoneonsen,
+      imageRight: nikkoonsen,
+      extraImages: [hakoneonsen, nikkoonsen],
       breadcrumb: ['東京', '箱根', '日光', '温泉巡り'],
       contentTitle: '東京温泉巡りの基本情報',
       spots: ['温泉巡り紹介', '箱根温泉', '日光温泉', '温泉の楽しみ方'],
@@ -314,6 +326,9 @@ const DetailPage = () => {
       author: 'ファミリー',
       image: NagoyaLego,
       heroImage: NagoyaLego,
+      imageLeft: LegoAttraction,
+      imageRight: LegoBoat,
+      extraImages: [LegoAttraction, LegoBoat],
       breadcrumb: ['名古屋', 'レゴランド', 'テーマパーク', '家族旅行'],
       contentTitle: 'レゴランド・ジャパンの基本情報',
       spots: ['レゴランド紹介', 'アトラクション', 'レゴブロック体験', 'ボートライド'],
@@ -327,6 +342,9 @@ const DetailPage = () => {
       author: 'ジブリファン',
       image: jiburiPost,
       heroImage: jiburiPost,
+      imageLeft: jiburimap,
+      imageRight: jiburimori,
+      extraImages: [jiburimap, jiburimori, jiburi4],
       breadcrumb: ['愛知', '長久手', 'ジブリパーク', 'アニメの世界'],
       contentTitle: 'ジブリパークの基本情報',
       spots: ['ジブリパーク紹介', 'トトロの森', '魔女の宅急便', 'ジブリの世界観'],
@@ -414,7 +432,7 @@ const DetailPage = () => {
       content:
         '渡月橋は嵐山の象徴。『聲の形』の印象的なシーンを想いながら、桂川と山並みのコントラストを楽しもう。<br><br>【1】渡月橋の眺望<br>朝夕の光が作る陰影が美しい。橋上・河川敷の両方から構図を試してみて。<br><br>【2】桂川沿い散策<br>桜・新緑・紅葉・雪景色。四季それぞれの色で作品の余韻を感じられる。<br><br>【3】アクセスのコツ<br>阪急『嵐山駅』または嵐電『嵐山駅』が便利。混雑時は早朝訪問がおすすめ。',
     },
-    31: {
+    107: {
       title: 'オホーツク流氷体験！札幌→網走 1〜2日旅',
       description:
         '札幌から特急で網走へ。流氷砕氷船クルーズ、季節列車で北浜駅へ向かい、オホーツク海の絶景を満喫する冬のモデルコース。',
@@ -610,7 +628,19 @@ const DetailPage = () => {
             planId !== 10 &&
             planId !== 24 &&
             planId !== 25 &&
-            planId !== 30 && (
+            planId !== 30 &&
+            planId !== 31 &&
+            planId !== 105 &&
+            planId !== 111 &&
+            planId !== 112 &&
+            planId !== 113 &&
+            planId !== 115 &&
+            planId !== 116 &&
+            planId !== 117 &&
+            planId !== 118 &&
+            planId !== 107 &&
+            planId !== 121 &&
+            planId !== 122 && (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 <div className="bg-white rounded-lg overflow-hidden shadow-md">
                   <div
@@ -627,7 +657,7 @@ const DetailPage = () => {
                           ? SapporoTime
                           : planId === 6
                           ? OkinawaResort
-                          : planId === 14
+                          : planId === 118
                           ? KiminoNamaewa
                           : planId === 18
                           ? fukuanimate
@@ -651,7 +681,7 @@ const DetailPage = () => {
                           ? SapporoTower
                           : planId === 6
                           ? OkinawaResort
-                          : planId === 14
+                          : planId === 118
                           ? KiminoNamaewaSuga
                           : planId === 11
                           ? odaiba
@@ -661,8 +691,10 @@ const DetailPage = () => {
                           ? nikkoonsen
                           : planId === 17
                           ? jiburimap
-                          : planId === 16
+                          : planId === 119
                           ? LegoAttraction
+                          : planId === 120
+                          ? jiburimap
                           : planId === 18
                           ? fukumandarake
                           : plan.heroImage
@@ -706,34 +738,6 @@ const DetailPage = () => {
                   style={{ backgroundImage: `url(${konosekanikoukoen})` }}
                 ></div>
               </div>
-            </div>
-          )}
-
-          {/* Extra Images for In This Corner of the World */}
-          {planId === 9 && plan.extraImages && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-              {plan.extraImages.map((image, index) => (
-                <div key={index} className="bg-white rounded-lg overflow-hidden shadow-md">
-                  <div
-                    className="h-64 bg-cover bg-center bg-no-repeat"
-                    style={{ backgroundImage: `url(${image})` }}
-                  ></div>
-                </div>
-              ))}
-            </div>
-          )}
-
-          {/* Extra Images for In This Corner of the World × Hiroshima */}
-          {planId === 101 && plan.extraImages && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-              {plan.extraImages.map((image, index) => (
-                <div key={index} className="bg-white rounded-lg overflow-hidden shadow-md">
-                  <div
-                    className="h-64 bg-cover bg-center bg-no-repeat"
-                    style={{ backgroundImage: `url(${image})` }}
-                  ></div>
-                </div>
-              ))}
             </div>
           )}
 
@@ -809,7 +813,7 @@ const DetailPage = () => {
           )}
 
           {/* Extra Images for Okhotsk Drift Ice (Abashiri) */}
-          {planId === 31 && (
+          {planId === 107 && (
             <>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 <div className="bg-white rounded-lg overflow-hidden shadow-md">
@@ -847,8 +851,14 @@ const DetailPage = () => {
           )}
 
           {/* Extra Images for Kimi no Na wa Plan */}
-          {planId === 14 && (
+          {planId === 118 && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${Shibakoen})` }}
+                ></div>
+              </div>
               <div className="bg-white rounded-lg overflow-hidden shadow-md">
                 <div
                   className="h-64 bg-cover bg-center bg-no-repeat"
@@ -861,11 +871,17 @@ const DetailPage = () => {
                   style={{ backgroundImage: `url(${Aogashima})` }}
                 ></div>
               </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${KiminoNamaewa})` }}
+                ></div>
+              </div>
             </div>
           )}
 
           {/* Extra Images for Tenki no Ko Plan */}
-          {planId === 11 && (
+          {planId === 115 && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <div className="bg-white rounded-lg overflow-hidden shadow-md">
                 <div
@@ -883,7 +899,7 @@ const DetailPage = () => {
           )}
 
           {/* Extra Images for Digimon Adventure Plan */}
-          {planId === 12 && (
+          {planId === 116 && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <div className="bg-white rounded-lg overflow-hidden shadow-md">
                 <div
@@ -895,6 +911,24 @@ const DetailPage = () => {
                 <div
                   className="h-64 bg-cover bg-center bg-no-repeat"
                   style={{ backgroundImage: `url(${Digimon2})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+
+          {/* Extra Images for Tokyo Onsen Tour */}
+          {planId === 117 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${hakoneonsen})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${nikkoonsen})` }}
                 ></div>
               </div>
             </div>
@@ -918,8 +952,26 @@ const DetailPage = () => {
             </div>
           )}
 
+          {/* Extra Images for Ghibli Park Plan ID 120 */}
+          {planId === 120 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${jiburimori})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${jiburi4})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+
           {/* Extra Images for Legoland Japan Plan */}
-          {planId === 16 && (
+          {planId === 119 && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <div className="bg-white rounded-lg overflow-hidden shadow-md">
                 <div
@@ -966,6 +1018,36 @@ const DetailPage = () => {
             </div>
           )}
 
+          {/* Extra Images for Fukuoka Yatai Gourmet Tour (ID 105) */}
+          {planId === 105 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${fukuichiran})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${fukumizutaki})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${fukutourimon})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${fukugourmet})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+
           {/* Extra Images for Tenjin Otaku Culture */}
           {planId === 18 && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
@@ -984,8 +1066,68 @@ const DetailPage = () => {
             </div>
           )}
 
+          {/* Extra Images for Tenjin Otaku Culture and Shopping (ID 121) */}
+          {planId === 121 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${fukuanimatemap})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${fukumandafigure})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${fukumandarake})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${fukutenshin})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+
           {/* Extra Images for Suzume no Tojimari */}
           {planId === 19 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${suzume})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${suzumetobira})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${fukubungomori})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${suzumegoods})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+
+          {/* Extra Images for Suzume no Tojimari Fukuoka Pilgrimage (ID 122) */}
+          {planId === 122 && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <div className="bg-white rounded-lg overflow-hidden shadow-md">
                 <div
@@ -1074,6 +1216,36 @@ const DetailPage = () => {
             </div>
           )}
 
+          {/* Extra Images for Okinawa Beach Resort (ID 111) */}
+          {planId === 111 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${theritzcarlton})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${hotelaribia})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${anaintercontinental})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${aribiabikini})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+
           {/* Extra Images for Okinawa Gourmet (Sweets) */}
           {planId === 21 && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
@@ -1099,6 +1271,66 @@ const DetailPage = () => {
                 <div
                   className="h-64 bg-cover bg-center bg-no-repeat"
                   style={{ backgroundImage: `url(${sennichi})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+
+          {/* Extra Images for Okinawa Sweets Tour (ID 112) */}
+          {planId === 112 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${houkistar})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${hukugiya})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${boolseal})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${sennichi})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+
+          {/* Extra Images for Okinawa Yacht Tour (ID 113) */}
+          {planId === 113 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${okinawacruising})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${okinawanohumanisland})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${okinawasailing})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${okinawasnokling})` }}
                 ></div>
               </div>
             </div>

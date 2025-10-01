@@ -257,7 +257,7 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
       content:
         '東京ドームはプロ野球・読売ジャイアンツの本拠地として知られる多目的スタジアムで、コンサート、展示会、スポーツイベントなど年間を通して多彩な催しが開催されます。隣接する「LaQua（ラクーア）」にはスパ施設やショッピングモール、飲食店が集まり、温泉・サウナ・リラクゼーションを楽しめる都市型スパとして地元民にも観光客にも人気です。<br><br><table style="border-collapse: collapse; width: 100%; margin: 10px 0;"><tr style="background-color: #f2f2f2;"><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">項目</th><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">詳細</th></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">所在地</td><td style="border: 1px solid #ddd; padding: 8px;">東京都文京区後楽1-3-61</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">アクセス</td><td style="border: 1px solid #ddd; padding: 8px;">JR総武線「水道橋駅」徒歩5分<br>東京メトロ丸ノ内線「後楽園駅」徒歩1分<br>東京メトロ南北線「後楽園駅」徒歩1分</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">営業時間</td><td style="border: 1px solid #ddd; padding: 8px;">イベントにより変動<br>野球試合: 通常18:00〜21:30<br>コンサート・展示会: 要確認</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">入場料金（野球観戦）</td><td style="border: 1px solid #ddd; padding: 8px;">内野指定席: 3,000円〜8,000円<br>外野席: 1,500円〜2,500円<br>ファミリー席: 2,000円〜4,000円</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">入場料金（コンサート）</td><td style="border: 1px solid #ddd; padding: 8px;">アーティスト・イベントにより変動<br>通常: 5,000円〜15,000円<br>VIP席: 20,000円〜</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">チケット購入</td><td style="border: 1px solid #ddd; padding: 8px;">公式サイト・コンビニ・現地窓口<br>オンライン予約推奨</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">団体割引</td><td style="border: 1px solid #ddd; padding: 8px;">20名以上で団体料金適用<br>学校団体・企業団体向け特別プランあり</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">駐車場</td><td style="border: 1px solid #ddd; padding: 8px;">有料駐車場あり（台数限定）<br>イベント日は混雑・公共交通機関推奨</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">施設内サービス</td><td style="border: 1px solid #ddd; padding: 8px;">飲食店・グッズショップ・ATM<br>ベビーカー貸出・車椅子対応</td></tr></table><br>【2.1 東京ドーム紹介】<br>東京ドームは1988年に開業した日本初のドーム型スタジアムです。読売ジャイアンツの本拠地として知られ、年間を通じて野球、コンサート、展示会、スポーツイベントなど多彩な催しが開催されます。学校行事の会場としても利用され、日本電子専門学校のスポーツフェスティバルなど、各種団体の大規模イベントが開催されることでも有名です。国際大会ではWBC（ワールド・ベースボール・クラシック）の会場にもなり、世界中のファンが集まる熱狂の舞台となりました。<br><br>【2.2 東京ドーム野球】<br>東京ドームは読売ジャイアンツの本拠地として、プロ野球ファンにとって聖地のような存在です。屋内球場のため天候に左右されず、快適な環境で野球観戦を楽しめます。球場内には様々な飲食店やグッズショップがあり、野球観戦と合わせてショッピングやグルメも楽しめる総合エンターテイメント施設です。<br><br><table style="border-collapse: collapse; width: 100%; margin: 10px 0;"><tr style="background-color: #f2f2f2;"><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">試合種別</th><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">シーズン期間</th><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">開催頻度</th><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">チケット購入</th></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">読売ジャイアンツ</td><td style="border: 1px solid #ddd; padding: 8px;">3月下旬〜10月</td><td style="border: 1px solid #ddd; padding: 8px;">平日・週末</td><td style="border: 1px solid #ddd; padding: 8px;">公式サイト・コンビニ</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">WBC国際大会</td><td style="border: 1px solid #ddd; padding: 8px;">3年ごと（不定期）</td><td style="border: 1px solid #ddd; padding: 8px;">大会期間中</td><td style="border: 1px solid #ddd; padding: 8px;">公式サイト・チケット販売</td></tr></table><br>座席は内野・外野・バックネット裏など様々な選択肢があります。野球観戦の際は、球場内の飲食店でビールやホットドッグを楽しみながら応援するのが定番です。<br><br>【2.3 ラクーア】<br>東京ドームに隣接する「LaQua（ラクーア）」は、スパ施設やショッピングモール、飲食店が集まった複合施設です。温泉・サウナ・リラクゼーションを楽しめる都市型スパとして地元民にも観光客にも人気で、野球観戦の前後や休日にリラックスできる空間を提供しています。<br><br>【2.4 ドームアトラクション】<br>東京ドームには「東京ドームシティ」という総合エンターテイメント施設があります。ドーム内の遊園地エリア「東京ドームシティアトラクションズ」では、家族連れが楽しめるアトラクションが充実しています。特に「サンダードルフィン」は日本最大級のローラーコースターで、スリル満点の体験ができます。また、「ビッグオー」は世界初のフリーフォールタワーで、地上80mからの絶景とスリルを同時に楽しめます。その他にも「スカイフラワー」や「ワンダーエッグ」など、様々な年齢層が楽しめるアトラクションが揃っています。野球観戦だけでなく一日中エンターテイメントを満喫できる総合レジャー施設です。',
     },
-    '22': {
+    '23': {
       title: '日光東照宮',
       description: '徳川家康を祀る世界遺産の神社。豪華絢爛な建築が美しい',
       author: 'タビログ編集部',
@@ -270,7 +270,7 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
       content:
         '日光東照宮は徳川家康を祀る神社で、世界遺産に登録されています。豪華絢爛な建築と精緻な彫刻が特徴で、特に「見ざる、聞かざる、言わざる」の三猿や眠り猫の彫刻は有名です。江戸時代の最高技術を集めた建築美を堪能できる貴重な文化遺産です。<br><br><table style="border-collapse: collapse; width: 100%; margin: 10px 0;"><tr style="background-color: #f2f2f2;"><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">項目</th><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">詳細</th></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">所在地</td><td style="border: 1px solid #ddd; padding: 8px;">栃木県日光市山内2301</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">アクセス</td><td style="border: 1px solid #ddd; padding: 8px;">JR日光線「日光駅」からバス10分<br>東武日光線「東武日光駅」からバス10分<br>東京から約2時間</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">参拝時間</td><td style="border: 1px solid #ddd; padding: 8px;">4月〜10月: 8:00〜17:00<br>11月〜3月: 8:00〜16:00<br>年中無休</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">入場料金</td><td style="border: 1px solid #ddd; padding: 8px;">大人（高校生以上）: 1,300円<br>小・中学生: 450円<br>幼児: 無料</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">宝物殿・美術館</td><td style="border: 1px solid #ddd; padding: 8px;">宝物殿: 大人800円、小中学生300円<br>美術館: 大人500円、小中学生200円<br>共通券: 大人2,100円、小中学生750円</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">ガイドツアー</td><td style="border: 1px solid #ddd; padding: 8px;">日本語ガイド: 1,000円〜<br>英語ガイド: 2,000円〜<br>団体ガイド: 要予約・割引あり</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">団体割引</td><td style="border: 1px solid #ddd; padding: 8px;">30名以上で団体料金適用<br>学校団体・企業団体向け特別プランあり</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">駐車場</td><td style="border: 1px solid #ddd; padding: 8px;">有料駐車場あり（台数限定）<br>バス・電車利用推奨</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">お守り・御朱印</td><td style="border: 1px solid #ddd; padding: 8px;">お守り: 500円〜2,000円<br>御朱印: 500円<br>各種祈願: 1,000円〜10,000円</td></tr></table><br>【2.1 陽明門】<br>日光東照宮の代表的な建築物で、平成の大修理を終えたばかりの艶やかな塗装と煌びやかな装飾が印象的です。豪華絢爛な彫刻の意味と秘密が込められた、まさに日光東照宮のシンボル的存在です。陽明門には508体の彫刻が施されており、その一つ一つに深い意味が込められています。特に「唐子遊び」の彫刻は、子どもたちの無邪気な遊びを表現し、平和への願いを表しています。門の上部には「昇り龍」と「降り龍」の彫刻があり、これらは水の神として火災から建物を守る意味があります。<br><br>【2.2 眠り猫】<br>驚くほど小さな彫刻で、観光客の通りが多いところに設置されています。現地ではよく見れないことがありますが、日光東照宮の有名な彫刻の一つとして知られています。眠り猫は左甚五郎の作と伝えられ、猫が眠っている姿を彫刻したものです。この彫刻には「猫が眠っている間は鼠が来ない」という意味があり、家康の墓所を守る役割を果たしています。猫の下には雀の彫刻もあり、猫が眠っているから雀も安心して遊んでいるという平和な情景を表現しています。<br><br>【2.3 三猿】<br>「見ざる、聞かざる、言わざる」で有名な三猿は、8つの面で構成された物語の一部です。諺の意味と日光東照宮の三猿が意味するところが若干違うのも面白いところで、年老いて取り返しがつかなくなる前に早めの三猿という教えが込められています。三猿は神厩舎（しんきゅうしゃ）の壁面に彫刻されており、人間の一生を8つの場面で表現した物語の一部です。三猿の教えは「若いうちは悪いことを見たり、聞いたり、言ったりしないように」という意味で、子どもの教育に関する教訓が込められています。',
     },
-    '23': {
+    '22': {
       title: '東京ディズニーランド',
       description: '世界で最も人気のテーマパーク。夢の国で楽しい時間を過ごそう',
       author: 'タビログ編集部',
@@ -296,7 +296,7 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
       content:
         '天保山大観覧車は大阪港に位置する日本最大級の観覧車で、直径100mを超えるスケールを誇ります。劇場版『名探偵コナン 純黒の悪夢』では、クライマックスの舞台の一つとして登場し、緊張感あるシーンを彩りました。現在ではコナンファンの聖地として知られ、夜景を楽しみながら作品の雰囲気を味わえる人気スポットとなっています。<br><br>【2.1 観覧車からの夜景】<br>地上112.5mから眺める夜景は圧巻。コナンと同じ視点で大阪の街を見渡せます。<br><br>【2.2 海遊館とのセット巡り】<br>海遊館と一緒に巡るのもおすすめ。観覧車と合わせて大阪ベイエリアを満喫できます。<br><br>【2.3 大阪港ベイエリア】<br>ベイエリア全体が夜景の名所。観覧車と合わせて写真映えスポットとして人気です。<br><br>【2.4 東京ヤクルトスワローズ】<br>東京ヤクルトスワローズは渋谷を本拠地とするプロ野球チームです。渋谷の街の活気と若いエネルギーを象徴するチームとして、地域ファンに愛されています。試合観戦はもちろん、チームグッズの購入や選手との交流イベントなど、野球ファンに特別な体験を提供します。また、スワローズは日本プロ野球の代表的なチームの一つとして、国内外の野球 팬들에게 널리 알려져 있습니다. 팀의 마스코트인 츠바메군과 함께 다양한 이벤트와 팬 서비스를 제공하여 가족 단위 관람객들에게도 인기가 높습니다.',
     },
-    '33': {
+    '56': {
       title: '秋葉原',
       description: 'アニメ・ゲーム・電子機器の聖地。オタク文化の中心地',
       author: 'タビログ編集部',
@@ -309,7 +309,7 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
       content:
         '秋葉原はアニメ・ゲーム・電子機器の聖地として世界的に知られる街です。オタク文化の中心地として発展し、最新のテクノロジーとサブカルチャーが融合した独特な雰囲気が魅力です。一日中楽しめる観光スポットとして、国内外から多くの観光客が訪れます。<br><br>【2.1 アニメイト】<br>アニメイトは日本最大級のアニメ・漫画グッズ専門チェーン店です。秋葉原店は特に大型店舗として知られ、最新のフィギュア、コスプレ衣装、同人誌、CD、DVDなど、アニメファンにとって必要なものが全て揃っています。限定商品や新作グッズの先行販売も多く、コレクターにとっては必見のスポットです。店内にはアニメの世界観を再現したコーナーもあり、ファンにとって特別な体験を提供します。<br><br>【2.2 アキバ絶対領域（メイドカフェ）】<br>秋葉原発祥のメイドカフェは、現在では世界的に知られる日本独自の文化です。「アキバ絶対領域」は秋葉原のメイドカフェ文化を象徴する言葉で、メイド服を着たスタッフがお客様を「ご主人様」「お嬢様」と呼んでおもてなしします。独特の接客スタイルとコスプレ文化が融合したこのサービスは、秋葉原のサブカルチャーを代表する存在として人気を集めています。店内では写真撮影やゲーム、歌の披露など、様々なエンターテイメントを楽しむことができます。<br><br>【2.3 アトレ秋葉原】<br>アトレ秋葉原は秋葉原駅直結の商業施設で、ファッション、グルメ、エンターテイメントが集まる複合商業施設です。地下1階から地上7階まで、様々なジャンルのショップが入居しており、アニメ・ゲーム関連のグッズから一般のファッションアイテムまで幅広く揃っています。特に若い世代に人気のブランドショップや、秋葉原ならではの専門店が多く、観光客だけでなく地元の人々にも愛されています。フードコートやレストランも充実しており、ショッピングの合間に食事を楽しむこともできます。<br><br>【2.4 ヨドバシカメラ】<br>ヨドバシカメラは日本最大級の家電量販店チェーンで、秋葉原店はそのフラッグシップ店舗として知られています。最新のデジタルカメラ、パソコン、スマートフォン、ゲーム機、オーディオ機器など、あらゆる電子機器が揃っています。特にカメラコーナーは充実しており、初心者からプロまで対応できる豊富な商品ラインナップが魅力です。また、免税対応や多言語対応も充実しており、海外からの観光客にも人気のスポットです。店内には専門スタッフが常駐しており、商品の説明や購入相談も可能です。',
     },
-    '34': {
+    '57': {
       title: '富士急ハイランド',
       description: '絶叫マシンで有名なテーマパーク。富士山を背景にした絶景アトラクション',
       author: 'タビログ編集部',
@@ -322,7 +322,7 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
       content:
         '富士急ハイランドは富士山を背景にした絶叫マシンで有名なテーマパークです。世界記録を持つアトラクションや富士山の絶景を楽しめるアトラクションなど、スリルと絶景を同時に楽しめる日本屈指のテーマパークとして人気を集めています。<br><br><table style="border-collapse: collapse; width: 100%; margin: 10px 0;"><tr style="background-color: #f2f2f2;"><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">項目</th><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">詳細</th></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">アクセス</td><td style="border: 1px solid #ddd; padding: 8px;">富士急行線「富士急ハイランド駅」直結<br>新宿から約1時間30分、東京駅から約2時間</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">入場料金（1日券）</td><td style="border: 1px solid #ddd; padding: 8px;">大人（18歳以上）: 6,200円<br>中人（12-17歳）: 5,200円<br>小人（3-11歳）: 3,600円</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">営業時間</td><td style="border: 1px solid #ddd; padding: 8px;">9:00〜17:00（季節により変動）<br>休園日: 水曜日（季節により変動）</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">チケット購入</td><td style="border: 1px solid #ddd; padding: 8px;">公式サイト・コンビニ・現地窓口<br>オンライン予約で割引あり</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">団体割引</td><td style="border: 1px solid #ddd; padding: 8px;">15名以上で団体料金適用<br>学校団体・企業団体向け特別プランあり</td></tr></table><br>【2.1 絶叫マシン】<br>富士急ハイランドは世界記録を持つ絶叫マシンで有名です。「ド・ドドンパ」は世界最速のジェットコースターとして知られ、最高時速180kmで走行します。「ええじゃないか」は世界最大の振り子角度を持つアトラクションで、最大角度121度まで振り子が揺れます。これらの絶叫マシンは世界中のスリル好きな観光客を引き寄せています。<br><br>【2.2 富士山ビュー】<br>富士急ハイランドの最大の魅力は富士山を背景にした絶景です。多くのアトラクションから富士山の美しい姿を眺めることができ、特に「富士飛行社」や「大観覧車」からは富士山の全景を楽しめます。天気の良い日には富士山の雄大な姿とアトラクションのスリルを同時に体験できる特別な感動を味わえます。<br><br>【2.3 アトラクション】<br>富士急ハイランドには絶叫マシン以外にも様々なアトラクションがあります。「トーマスランド」は小さな子供向けのエリアで、トーマス・ザ・タンクエンジンの世界観を楽しめます。「ナガシマスカイ」は富士山を背景にした大観覧車で、ゆっくりと富士山の絶景を楽しめます。家族連れから絶叫マシン好きまで、幅広い年齢層が楽しめるテーマパークです。',
     },
-    '26': {
+    '53': {
       title: '渋谷',
       description: '若者の街として有名。スクランブル交差点とハチ公がシンボル',
       author: 'タビログ編集部',
@@ -337,7 +337,7 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
     },
   },
   名古屋: {
-    '28': {
+    '54': {
       title: '名古屋城',
       description: '徳川家康が築いた城。金色のシャチホコが有名',
       author: 'タビログ編集部',
@@ -350,7 +350,7 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
       content:
         '名古屋城は徳川家康が築いた城で、金色のシャチホコが有名な観光スポットです。桜の季節には特に人気が高く、多くの観光客が訪れます。天守閣からは名古屋の街並みを一望でき、歴史と現代が交わる美しい景色を楽しめます。<br><br><table style="border-collapse: collapse; width: 100%; margin: 10px 0;"><tr style="background-color: #f2f2f2;"><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">項目</th><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">詳細</th></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">所在地</td><td style="border: 1px solid #ddd; padding: 8px;">愛知県名古屋市中区本丸1-1</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">アクセス</td><td style="border: 1px solid #ddd; padding: 8px;">地下鉄名城線「市役所駅」徒歩5分<br>地下鉄鶴舞線「浅間町駅」徒歩12分<br>名古屋駅から車で約15分</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">営業時間</td><td style="border: 1px solid #ddd; padding: 8px;">9:00～16:30（入場は16:00まで）<br>12月29日～31日は休城</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">入場料金（大人）</td><td style="border: 1px solid #ddd; padding: 8px;">500円（高校生以上）</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">入場料金（小人）</td><td style="border: 1px solid #ddd; padding: 8px;">無料（中学生以下）</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">駐車場</td><td style="border: 1px solid #ddd; padding: 8px;">有料駐車場あり（300台）<br>普通車: 300円/時間<br>大型車: 1,000円/時間</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">団体観覧</td><td style="border: 1px solid #ddd; padding: 8px;">30名以上で団体料金適用<br>学校団体・企業団体向け特別プランあり</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">施設・設備</td><td style="border: 1px solid #ddd; padding: 8px;">展示室・売店・休憩所<br>ベビーカー貸出・授乳室<br>多言語対応・案内板</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">主要イベント</td><td style="border: 1px solid #ddd; padding: 8px;">桜まつり（4月）<br>名古屋城祭（10月）<br>季節限定イベント</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">周辺施設</td><td style="border: 1px solid #ddd; padding: 8px;">名古屋市役所・愛知県庁<br>大須商店街・栄<br>カフェ・レストラン多数</td></tr></table><br>【2.1 本丸】<br>本丸は名古屋城の中心部で、天守閣と本丸御殿が建てられている最も重要な区域です。江戸時代の建築様式を再現した本丸御殿は、内部の障壁画や装飾が当時の技術の高さを物語っており、日本の伝統建築美を堪能できます。復元された部屋では、当時の大名の生活を偲ぶことができます。本丸御殿は入場料に含まれており、詳細な説明とともに観覧できます。<br><br>【2.2 二の丸】<br>二の丸は本丸を囲む第二の防御区域で、庭園や茶室などが配置されています。美しい日本庭園では四季折々の風景を楽しむことができ、特に春の桜と秋の紅葉は見事です。また、二の丸には歴史的な建物や展示施設もあり、名古屋城の歴史についてより深く学ぶことができます。二の丸庭園は入場料に含まれており、自由に散策できます。<br><br>【2.3 金魚】<br>名古屋城の庭園には美しい金魚が泳ぐ池があります。これらの金魚は城の歴史とともに大切に育てられており、訪れる人々に安らぎを与えています。特に夏の時期には、金魚と城のコラボレーションが美しい風景を作り出し、多くの観光客が写真を撮影する人気スポットとなっています。金魚池は入場料に含まれており、いつでも観覧できます。',
     },
-    '29': {
+    '55': {
       title: '大須商店街',
       description: '漫画・アニメグッズ、電子機器、食べ物まで揃う商店街',
       author: 'タビログ編集部',
@@ -634,7 +634,7 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
       content:
         '狸小路商店街は、明治時代から続く札幌の中心繁華街の一つ。アーケードで全天候型の快適な歩行空間が確保され、1丁目から7丁目まで多彩な飲食・物販・娯楽が揃います。大通公園とすすきのの間に位置し、観光の合間の食事や買い物に最適な導線。国内外の旅行者が一日中行き交う札幌の定番スポットです。<br><br>【2.1 グルメ（スープカレー・ラーメン）】<br>札幌グルメを気軽に楽しめるのも狸小路の魅力。スープカレーは人気店『GARAKU』の濃厚スパイス系が代表格で、野菜の旨味とコク深いスープが寒い季節にぴったり。ラーメンは『北一（きたいち）』の味噌・醤油など札幌スタイルを堪能できます。<br>・目安待ち時間：ランチ/ディナーのピーク（12:00〜13:30、18:30〜20:00）は20〜40分前後。混雑回避には開店直後またはアイドルタイム（15:00前後）が狙い目。<br>・支払い/予約：一部店舗は現金メイン・券売機制。予約可否やラストオーダーは店舗により異なるため事前確認推奨。<br>・場所感：GARAKUは狸小路・すすきの寄りの路地裏エリア、北一は狸小路周辺から徒歩圏。商店街から徒歩5〜10分内で回遊しやすい。<br><br>【2.2 たぬきや（狸グッズ・土産）】<br>創業大正5年、狸小路4丁目の老舗みやげ店『たぬきや』は、札幌中心部最大級の品揃え（5,000点超）が魅力。北海道銘菓や限定キャラクターグッズ、地酒・焼酎・ワイン、木彫りなど北海道らしい商品がズラリ。店頭の大きな狸が目印で、2階は北海道ならではの木彫りグッズやオリジナル「狸」グッズ（ぬいぐるみ、置物、キーホルダー、招き狸など）も充実。<br><br>営業時間：9:30〜21:30<br>年中無休（臨時休業あり）<br>住所：札幌市中央区南3条西4丁目18（狸小路4丁目）<br>TEL：011-221-0567<br>詳細は公式をご確認ください（参考: <a href="https://www.gutabi.jp/event/detail/3548" target="_blank" rel="noreferrer">ぐうたび北海道</a> / <a href="https://www.tanukiya.co.jp/" target="_blank" rel="noreferrer">たぬきや 公式</a>）。<br><br>【2.3 アクセスと営業時間】<br>地下鉄東西線『大通駅』、南北線『すすきの駅』から各徒歩約3分、JR『札幌駅』から徒歩約15分。大通〜すすきの間のアーケードのため、雪や雨の日も快適に移動できます。駐車は提携駐車場（カモンチケット対象など）の利用や近隣コインパーキングが便利。各店の営業時間は店舗により異なるため、最新情報は公式サイトをご確認ください（参考: <a href="https://tanukikoji.or.jp/access/" target="_blank" rel="noreferrer">狸小路商店街 アクセス</a>）。',
     },
-    '23': {
+    '38': {
       title: '小樽運河',
       description: '石造倉庫群とガス灯が並ぶロマンチックな運河。冬のイルミネーションも必見',
       author: 'タビログ編集部',
@@ -647,7 +647,7 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
       content:
         '北海道・小樽の象徴「小樽運河」は、石造倉庫群と歴史的街並みが連なる情緒あふれる景観が魅力。夕暮れから夜にかけてはガス灯が点灯し、運河と倉庫のシルエットが水面に映る幻想的な光景に。冬は雪景色とイルミネーションが重なり、よりロマンチックな雰囲気を楽しめます。札幌から電車で約35〜45分とアクセスも良く、日帰り観光の定番です。<br><br>【2.1 小樽雪あかりの路】<br>毎年2月に開催される冬の風物詩。市民と国内外ボランティアの手で、スノーキャンドルやワックスボウルの柔らかな灯りが運河沿いと市内各会場を彩ります。浅草橋〜中央橋一帯の運河会場、手宮線跡地や都通りなど複数会場で展開。ガス灯とキャンドルの明かりが重なり、雪と光のコントラストが作り出す静謐で温かな景観は唯一無二です。<br>・開催時期の目安：2月上旬（例：第27回は2/8〜2/15）。<br>・点灯時間の目安：17:00頃〜21:00頃。悪天候等により一部会場中止あり。<br>・見どころ：運河会場のキャンドル群像、手宮線会場のオブジェ、芸術村会場のプロジェクションマッピングやYOSAKOIなど日替わり企画。<br>・体験：ワックスボウル製作体験、バックヤードツアー、スノー滑り台（年により実施内容変動）。<br>・ボランティア：キャンドル設置や点灯・補修を担う「あかり人」を随時募集。<br>・環境配慮：使用済みキャンドルの再活用に取り組み、資源を無駄にしない運営を継続。<br>・最新情報：公式サイトのNEWSやフォトブログで当日の実施/中止、会場変更を確認推奨。参考：[小樽雪あかりの路 公式](http://yukiakarinomichi.org/)。<br><br>【2.2 クルーズ（デイクルーズ/ナイト）】<br>「小樽運河クルーズ」は約40分で運河〜港を巡る水上ツアー。<br>・運航時間（目安）：10:00〜日没後まで、デイクルーズは概ね30分間隔、ナイトは日没後に運航（季節により変動）。<br>・集合/発券：中央橋の発券所に出航の15分前集合。JR小樽駅から徒歩約10分。<br>・料金（目安）：デイクルーズ 大人¥1,500／小学生¥500、ナイトクルーズ 大人¥2,000／小学生¥500（未就学は大人1名につき1名無料・席なし）。<br>・ガイド：多言語オーディオガイドで運河の歴史、北運河の見どころを解説。<br>・混雑対策：繁忙期は満席になるため事前予約推奨、防寒具・耐水対策を用意すると快適。<br>参考：[小樽運河クルーズ 公式](https://otaru.cc/ko/)。<br><br>【2.3 倉庫群カフェ＆ショップ】<br>石造倉庫を活用したショップやカフェが点在。スイーツは小樽を代表する人気ジャンル。<br>・LeTAO（ルタオ）本店：名物「ドゥーブルフロマージュ」ホール¥2,000前後、カット＋ドリンクのカフェセット¥1,000〜¥1,500前後、季節限定ケーキ各種（時価）。<br>・その他：小樽ガラス工芸、オルゴール堂、土産店が集中し回遊しやすい。<br>・滞在のコツ：運河散策の合間に甘味休憩、冬季は足元が滑りやすいため歩きやすい靴で。<br>参考：[LeTAO紹介（例）](https://triple.guide/restaurants/a4ec07e4-fbfe-49c0-b2d5-604a4389bf83)。',
     },
-    '38': {
+    '26': {
       title: 'サッポロビール博物館',
       description: '北海道の代表的なビール工場。歴史と製造工程を学べる',
       author: 'タビログ編集部',
@@ -1203,8 +1203,8 @@ const SpotDetailPage = () => {
             </div>
           )}
 
-          {/* Extra Images for Akihabara (Tokyo 33) */}
-          {cityKey === '東京' && idKey === '33' && (
+          {/* Extra Images for Akihabara (Tokyo 56) */}
+          {cityKey === '東京' && idKey === '56' && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <div className="bg-white rounded-lg overflow-hidden shadow-md">
                 <div
@@ -1489,8 +1489,26 @@ const SpotDetailPage = () => {
             </div>
           )}
 
-          {/* Extra Images for Nikko Toshogu */}
+          {/* Extra Images for Tokyo Disneyland */}
           {cityKey === '東京' && idKey === '22' && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${NikkoNeko})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${NikkoSaru})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+
+          {/* Extra Images for Nikko Toshogu */}
+          {cityKey === '東京' && idKey === '23' && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <div className="bg-white rounded-lg overflow-hidden shadow-md">
                 <div
@@ -1734,6 +1752,25 @@ const SpotDetailPage = () => {
               </div>
             </div>
           )}
+
+          {/* Extra Images for Shibuya */}
+          {cityKey === '東京' && idKey === '53' && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${ShibuyaBape})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${ShibuyaScramble})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+
           {/* Text */}
           <div className="bg-white rounded-lg p-8 shadow-md">
             <div className="prose prose-lg max-w-none">
