@@ -30,11 +30,7 @@ interface GoogleMapViewProps {
   activeDay: number;
 }
 
-const GoogleMapView: React.FC<GoogleMapViewProps> = ({
-  spots,
-  travelSegments,
-  activeDay
-}) => {
+const GoogleMapView: React.FC<GoogleMapViewProps> = ({ spots, travelSegments, activeDay }) => {
   const mapRef = useRef<HTMLDivElement>(null);
   const [map, setMap] = useState<google.maps.Map | null>(null);
   const [markers, setMarkers] = useState<google.maps.Marker[]>([]);
@@ -48,7 +44,7 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
     const initializeMap = () => {
       try {
         console.log('Google Maps 초기화 시작...');
-        
+
         const mapInstance = new google.maps.Map(mapRef.current!, {
           center: { lat: 35.6762, lng: 139.6503 }, // 도쿄 기본 위치
           zoom: 15, // 줌 레벨을 13에서 10으로 조정 (더 줌 아웃)
@@ -61,7 +57,7 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
         const directionsServiceInstance = new google.maps.DirectionsService();
         const directionsRendererInstance = new google.maps.DirectionsRenderer({
           draggable: false,
-          suppressMarkers: false,
+          suppressMarkers: true, // 기본 마커 숨기고 커스텀 마커만 사용
         });
 
         directionsRendererInstance.setMap(mapInstance);
@@ -69,7 +65,7 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
         setMap(mapInstance);
         setDirectionsService(directionsServiceInstance);
         setDirectionsRenderer(directionsRendererInstance);
-        
+
         console.log('Google Maps 초기화 완료');
       } catch (error) {
         console.error('Google Maps 초기화 실패:', error);
@@ -91,7 +87,7 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
           console.warn('Google Maps APIがロードされていません。モック地図を表示します。');
         }
       }, 2000);
-      
+
       return () => clearTimeout(timer);
     }
   }, []);
@@ -101,11 +97,11 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
     if (!map || !spots.length) return;
 
     // 座標がある観光地のみフィルタリング
-    const validSpots = spots.filter(spot => spot.latitude && spot.longitude);
+    const validSpots = spots.filter((spot) => spot.latitude && spot.longitude);
     if (!validSpots.length) return;
 
     // 기존 마커 제거
-    markers.forEach(marker => marker.setMap(null));
+    markers.forEach((marker) => marker.setMap(null));
     const newMarkers: google.maps.Marker[] = [];
 
     // 新しいマーカー追加
@@ -124,11 +120,14 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
             url: `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(`
               <svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="20" cy="20" r="18" fill="#3B82F6" stroke="white" stroke-width="2"/>
-                <text x="20" y="26" text-anchor="middle" fill="white" font-size="14" font-weight="bold">${index + 1}</text>
+                <text x="20" y="26" text-anchor="middle" fill="white" font-size="14" font-weight="bold">${
+                  index + 1
+                }</text>
               </svg>
             `)}`,
             scaledSize: new google.maps.Size(40, 40),
           },
+          zIndex: 1000 + index, // 마커를 가장 위에 표시 (순서대로 zIndex 증가)
         });
 
         // 마커 클릭 시 정보창 표시
@@ -158,11 +157,11 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
     // すべてのマーカーを含むように地図範囲調整
     if (newMarkers.length > 0) {
       const bounds = new google.maps.LatLngBounds();
-      newMarkers.forEach(marker => {
+      newMarkers.forEach((marker) => {
         const position = marker.getPosition();
         if (position) bounds.extend(position);
       });
-      
+
       // fitBounds 대신 setCenter와 적절한 줌 레벨 사용
       if (newMarkers.length === 1) {
         // 관광지가 1개일 때는 해당 위치로 이동하되 너무 확대하지 않음
@@ -187,55 +186,61 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
         // 빈 DirectionsResult 객체로 경로 초기화
         directionsRenderer.setDirections({
           routes: [],
-          request: {} as google.maps.DirectionsRequest
+          request: {} as google.maps.DirectionsRequest,
         });
       }
       return;
     }
 
     // 座標がある観光地のみフィルタリング
-    const validSpots = spots.filter(spot => spot.latitude && spot.longitude);
+    const validSpots = spots.filter((spot) => spot.latitude && spot.longitude);
     if (validSpots.length < 2) {
       if (directionsRenderer) {
         // 빈 DirectionsResult 객체로 경로 초기화
         directionsRenderer.setDirections({
           routes: [],
-          request: {} as google.maps.DirectionsRequest
+          request: {} as google.maps.DirectionsRequest,
         });
       }
       return;
     }
 
-    const waypoints = validSpots.slice(1, -1).map(spot => ({
+    const waypoints = validSpots.slice(1, -1).map((spot) => ({
       location: { lat: spot.latitude!, lng: spot.longitude! },
       stopover: true,
     }));
 
     const request: google.maps.DirectionsRequest = {
       origin: { lat: validSpots[0].latitude!, lng: validSpots[0].longitude! },
-      destination: { lat: validSpots[validSpots.length - 1].latitude!, lng: validSpots[validSpots.length - 1].longitude! },
+      destination: {
+        lat: validSpots[validSpots.length - 1].latitude!,
+        lng: validSpots[validSpots.length - 1].longitude!,
+      },
       waypoints: waypoints,
       travelMode: google.maps.TravelMode.WALKING,
       optimizeWaypoints: true,
     };
 
-    directionsService.route(request, (result: google.maps.DirectionsResult | null, status: google.maps.DirectionsStatus) => {
-      if (status === google.maps.DirectionsStatus.OK && result) {
-        directionsRenderer.setDirections(result);
-        
-        // 경로 표시 후 지도가 너무 확대되지 않도록 조정
-        setTimeout(() => {
-          if (map) {
-            const currentZoom = map.getZoom();
-            if (currentZoom && currentZoom > 18) {
-              map.setZoom(18);
+    directionsService.route(
+      request,
+      (result: google.maps.DirectionsResult | null, status: google.maps.DirectionsStatus) => {
+        if (status === google.maps.DirectionsStatus.OK && result) {
+          directionsRenderer.setDirections(result);
+
+          // 경로 표시 후 지도가 너무 확대되지 않도록 조정
+          setTimeout(() => {
+            if (map) {
+              const currentZoom = map.getZoom();
+              if (currentZoom && currentZoom > 18) {
+                map.setZoom(18);
+              }
             }
-          }
-        }, 500);
-      } else {
-        console.warn('경로 표시 실패:', status);
-      }
-    });
+          }, 500);
+        } else {
+          console.warn('경로 표시 실패:', status);
+        }
+      },
+    );
   }, [directionsService, directionsRenderer, spots]);
 
   // 이동 시간 계산 및 표시
@@ -270,7 +275,7 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
       {/* 地図コンテナ */}
       <div className="flex-1 relative">
         <div ref={mapRef} className="w-full h-full" />
-        
+
         {/* 地図ローディングオーバーレイ */}
         {!map && (
           <div className="absolute inset-0 bg-gray-100 flex items-center justify-center">
@@ -293,12 +298,15 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
             <div className="text-center text-gray-500">
               <MapPin className="w-16 h-16 text-gray-300 mx-auto mb-4" />
               <h3 className="text-lg font-medium mb-2">観光地を追加してみてください</h3>
-              <p className="text-sm">Google Mapsで観光地を検索して追加すると<br />地図に表示されます</p>
+              <p className="text-sm">
+                Google Mapsで観光地を検索して追加すると
+                <br />
+                地図に表示されます
+              </p>
             </div>
           </div>
         )}
       </div>
-
     </div>
   );
 };

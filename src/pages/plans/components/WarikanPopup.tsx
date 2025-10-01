@@ -1,20 +1,13 @@
 import React from 'react';
-import { Avatar, AvatarFallback } from '../../../components/ui/avatar';
+import { Avatar, AvatarFallback, AvatarImage } from '../../../components/ui/avatar';
 import { Input } from '../../../components/ui/input';
 import CommonPopup from '../../../components/common/CommonPopup';
-
-interface Member {
-  id: number;
-  userId: number;
-  userNickname: string;
-  color: string;
-  avatar?: string;
-}
+import { PlanMember } from '../../../lib/type';
 
 interface WarikanPopupProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  members?: Member[];
+  members?: PlanMember[];
   totalAmount?: number;
   onConfirm?: (amounts: { [memberId: number]: number }) => void;
   onCancel?: () => void;
@@ -60,6 +53,15 @@ export default function WarikanPopup({
     setMemberAmounts({});
   };
 
+  // 멤버들의 금액 합계 계산
+  const totalMemberAmounts = Object.values(memberAmounts).reduce((sum, amount) => sum + amount, 0);
+
+  // 금액이 맞는지 확인
+  const isAmountValid = totalMemberAmounts === totalAmount;
+
+  // 버튼 비활성화 조건
+  const isDisabled = !isAmountValid || totalMemberAmounts === 0;
+
   return (
     <CommonPopup
       open={open}
@@ -70,6 +72,7 @@ export default function WarikanPopup({
       confirmText="友達に送る"
       cancelText="キャンセル"
       maxWidth="max-w-sm"
+      isDisabled={isDisabled}
     >
       {/* 총액 표시 */}
       <div className="text-center mb-4">
@@ -85,9 +88,21 @@ export default function WarikanPopup({
           {members.map((member) => (
             <div key={member.userId} className="flex items-center gap-3">
               <Avatar className="w-14 h-14 flex-shrink-0">
-                <AvatarFallback className={`${member.color} text-white text-base font-medium`}>
-                  {member.userNickname?.slice(0, 2) || '??'}
-                </AvatarFallback>
+                {member?.profileImageUrl ? (
+                  <AvatarImage
+                    src={
+                      member.profileImageUrl.startsWith('http')
+                        ? member.profileImageUrl
+                        : import.meta.env.VITE_API_URL + member.profileImageUrl
+                    }
+                    alt={member?.userNickname || 'メンバー'}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <AvatarFallback className={`${member?.color} text-white text-xl font-bold`}>
+                    {member?.userNickname?.slice(0, 2) || '😎'}
+                  </AvatarFallback>
+                )}
               </Avatar>
 
               <div className="flex-1 pl-10">
@@ -102,6 +117,16 @@ export default function WarikanPopup({
             </div>
           ))}
         </div>
+
+        {/* 에러 문구 */}
+        {!isAmountValid && totalMemberAmounts > 0 && (
+          <div className="mt-4 text-center">
+            <p className="text-sm text-red-500">
+              金額が合いません。合計: ¥{totalMemberAmounts.toLocaleString('ja-JP')} / 必要: ¥
+              {totalAmount.toLocaleString('ja-JP')}
+            </p>
+          </div>
+        )}
       </div>
     </CommonPopup>
   );

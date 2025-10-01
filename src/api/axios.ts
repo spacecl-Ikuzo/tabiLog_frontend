@@ -1,3 +1,4 @@
+// src/api/axios.ts
 import axios from 'axios';
 import { useUserStore } from '@/store';
 
@@ -15,7 +16,7 @@ import { toast } from 'sonner';
 let isHandling401 = false;
 
 export const axiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8080',
+  baseURL: import.meta.env.VITE_API_URL,
   withCredentials: false,
   headers: { 'Content-Type': 'application/json' },
 });
@@ -27,11 +28,18 @@ axiosInstance.interceptors.request.use((config) => {
   if (token) {
     // 만료(ms) 시각 존재하면 사전 차단
     if (tokenExp && Date.now() >= tokenExp) {
-      const fixedMsg = '로그인에 실패하였습니다';
-      if (openPopup) openPopup(fixedMsg);
-      else toast.error('ログインに失敗しました');
+      const msg = '세션이 만료되었습니다. 다시 로그인해 주세요.';
+
+      // Alert 창 띄우기
+      alert(msg);
 
       removeUserData();
+
+      // 홈 화면으로 이동
+      setTimeout(() => {
+        window.location.href = '/';
+      }, 300);
+
       return Promise.reject(new axios.Cancel('Token expired'));
     }
 
@@ -46,33 +54,30 @@ axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
     const status = error?.response?.status;
-    const code = error?.response?.data?.error;
+    const data = error?.response?.data as { status?: number; error?: string; message?: string } | undefined;
 
-    // 네가 기존에 두었던 예외 처리 유지
     const url: string = error.config?.url || '';
     const isLoginRequest = url.includes('/auth/signin');
-    const isExpenseRequest = url.includes('/api/expenses');
+    const isProfileRequest = url.includes('/profile');
 
-    // Expense API는 401이어도 모킹/무시 (네 기존 로직 유지)
-    if (isExpenseRequest && status === 401) {
-      return Promise.reject(error);
-    }
+    // ✅ 백엔드 표준 에러 바디 호환: error 필드가 없으면 기본값 TOKEN_INVALID
+    const code = (typeof data?.error === 'string' && data.error) || (status === 401 ? 'TOKEN_INVALID' : '');
 
-    // 백엔드 표준/변형: TOKEN_EXPIRED / AUTH_ERROR / (과거) TokenExpired
-    const isExpired = status === 401 && (code === 'TOKEN_EXPIRED' || code === 'TokenExpired');
-    const isAuthError = status === 401 && (code === 'AUTH_ERROR' || code === 'AuthError');
+    const isExpired = status === 401 && code === 'TOKEN_EXPIRED';
+    const isInvalid = status === 401 && code === 'TOKEN_INVALID';
 
-    if ((isExpired || isAuthError) && !isHandling401 && !isLoginRequest && !isExpenseRequest) {
+    if ((isExpired || isInvalid) && !isHandling401 && !isLoginRequest && !isProfileRequest) {
       isHandling401 = true;
 
-      const fixedMsg = '로그인에 실패하였습니다';
-      if (openPopup) openPopup(fixedMsg);
-      else toast.error('ログインに失敗しました');
+      // 한국어 UI 문구 (만료/무효 구분)
+      const msg = isExpired
+        ? '세션이 만료되었습니다. 다시 로그인해 주세요.'
+        : '인증에 실패했습니다. 다시 로그인해 주세요.';
 
       useUserStore.getState().removeUserData();
 
       setTimeout(() => {
-        window.location.href = '/login';
+        window.location.href = '/';
         setTimeout(() => {
           isHandling401 = false;
         }, 700);
