@@ -950,7 +950,7 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
       content:
         '原爆ドーム（Atomic Bomb Dome）は、1996年にユネスコ世界文化遺産に登録された平和の象徴です。もともとは1915年に建設された広島県物産陳列館であり、1945年8月6日に原子爆弾が投下された際、爆心地の近くにあった建物です。爆風の衝撃にもかかわらず外壁の一部と鉄骨ドームが残り、現在では戦争の悲惨さを伝える象徴として保存されています。<br><br>【所在地】<br>〒730-0051 広島県広島市中区大手町1丁目10<br><br>【交通アクセス】<br>・JR広島駅から路面電車で約15分 → 「原爆ドーム前」下車すぐ<br>・バスや徒歩でもアクセス可能<br><br>【2.1 平和記念公園】<br>〒730-0811 広島県広島市中区中島町1<br>原爆で亡くなられた方々の霊を慰め、世界平和を祈念するために造られた公園です。原爆ドーム、平和の灯、原爆の子の像など、多くの慰霊碑や記念碑が集まっています。世界中から訪れる人々にとって、平和学習の場となっています。写真は平和記念公園の様子です。<br><br>【2.2 広島平和記念資料館】<br>〒730-0811 広島県広島市中区中島町1-2<br>原爆投下当時の状況や被爆者の遺品、写真資料などを展示し、核兵器の悲惨さと平和の大切さを伝える資料館です。本館と東館から構成され、戦争と核兵器廃絶の必要性を深く訴えています。<br><br>【2.3 元安川】<br>広島市中心部を流れる川で、太田川水系の一部<br>広島市の中心を流れ、平和記念公園や原爆ドームのそばを通る川です。原爆投下当時、多くの被爆者が水を求めてこの川に集まりました。現在は川沿いの遊歩道や桜の名所として親しまれており、毎年8月6日には灯ろう流しが行われ、犠牲者を追悼します。写真は元安川の美しい風景です。',
     },
-    '16': {
+    '49': {
       title: '宮島',
       description: '厳島神社で有名な美しい島',
       author: 'タビログ編集部',
@@ -964,7 +964,7 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
       content:
         '宮島（Miyajima）は日本三景の一つに数えられる景勝地で、正式名称は「厳島（いつくしま）」。自然の美しさと歴史的建造物が調和した観光地であり、国内外から多くの観光客が訪れます。<br><br>【所在地】<br>広島県廿日市市宮島町<br><br>【アクセス】<br>・JR宮島口駅から徒歩5分 → 宮島口桟橋よりフェリーで約10分<br>・広島市内から電車・車で約1時間<br><br>【2.1 厳島神社】<br>〒739-0588 広島県廿日市市宮島町1-1<br>ユネスコ世界文化遺産に登録されている神社で、海上に浮かぶように建てられた朱塗りの社殿が有名です。満潮時には社殿が海に浮かんでいるように見え、幻想的な風景が広がります。写真は厳島神社の美しい社殿群です。<br><br>【2.2 大鳥居】<br>厳島神社前（海上に建つ大鳥居）<br>高さ約16mの巨大な木造鳥居で、日本三大鳥居の一つに数えられます。干潮時には歩いて近くまで行くことができ、満潮時には海に浮かぶ姿が美しく、フォトスポットとして人気です。写真は海上に浮かぶ大鳥居の雄大な姿です。<br><br>【2.3 弥山】<br>宮島中央部（標高535m）<br>宮島の最高峰で、瀬戸内海や広島市街を一望できる絶景スポットです。ロープウェーや登山道を利用して登ることができ、頂上には弥山本堂や霊火堂などの史跡もあります。「消えずの火」と呼ばれる炎は千年以上燃え続けていると伝えられています。写真は弥山からの絶景パノラマです。',
     },
-    '42': {
+    '50': {
       title: '鞆の浦',
       description: 'ジブリ映画の舞台となった美しい港町',
       author: 'タビログ編集部',
@@ -1161,8 +1161,8 @@ const SpotDetailPage = () => {
               </div>
             </div>
           )}
-          {/* Extra Images for Tomonoura (広島 42) */}
-          {cityKey === '広島' && idKey === '42' && detail?.extraImages && (
+          {/* Extra Images for Tomonoura (広島 50) */}
+          {cityKey === '広島' && idKey === '50' && detail?.extraImages && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               {detail.extraImages.map((image, index) => (
                 <div key={index} className="bg-white rounded-lg overflow-hidden shadow-md">
@@ -1175,8 +1175,8 @@ const SpotDetailPage = () => {
             </div>
           )}
 
-          {/* Extra Images for Miyajima (広島 16) */}
-          {cityKey === '広島' && idKey === '16' && detail?.extraImages && (
+          {/* Extra Images for Miyajima (広島 49) */}
+          {cityKey === '広島' && idKey === '49' && detail?.extraImages && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               {detail.extraImages.map((image, index) => (
                 <div key={index} className="bg-white rounded-lg overflow-hidden shadow-md">
