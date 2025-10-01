@@ -77,6 +77,7 @@ import Otaru_Canal_Winter from '../../assets/Otaru_Canal_Winter.jpg';
 import Tomonoura_Harbor from '../../assets/Tomonoura_Harbor.jpg';
 import Kanazawa_HigashiChaya from '../../assets/Kanazawa_HigashiChaya.jpg';
 import Kanazawa_YuwakuOnsen from '../../assets/Kanazawa_YuwakuOnsen.jpg';
+import GionKyoto3 from '../../assets/GionKyoto3.png';
 import Museum21thCentury1 from '../../assets/21thcenturyimage1--8-.png';
 import ramenyokocho from '../../assets/ramenyokocho.jpg';
 import zyouzankei from '../../assets/zyouzankei.jpg';
@@ -969,6 +970,15 @@ const SpotsPage = () => {
       author: 'アニメ巡礼編集部',
       type: '一人旅',
       city: '金沢',
+    },
+    {
+      id: 130,
+      title: '🎭 祇園 × 『マイコはレディ』『花より男子』',
+      description: '京都を代表する花街。映画やドラマの舞台としても登場。',
+      image: GionKyoto3,
+      author: 'タビログ編集部',
+      type: '一人旅',
+      city: '京都',
     },
   ];
 

@@ -3,6 +3,16 @@ import { useParams } from 'react-router-dom';
 // import Header from '../../components/layout/Header';
 import Kinkakuji from '../../assets/Kinkakuji.jpg';
 import OsakaCastle from '../../assets/OsakaCastle.jpg';
+import TogetsukyoBridge5 from '../../assets/TogetsukyoBridge5.jpeg';
+import TogetsukyoBridge1 from '../../assets/TogetsukyoBridge1.jpg';
+import TogetsukyoBridge2 from '../../assets/TogetsukyoBridge2.jpg';
+import TogetsukyoBridge3 from '../../assets/TogetsukyoBridge3.jpg';
+import TogetsukyoBridge4 from '../../assets/TogetsukyoBridge4.jpg';
+import GionKyoto1 from '../../assets/GionKyoto1.jpeg';
+import GionKyoto3 from '../../assets/GionKyoto3.png';
+import GionKyoto4 from '../../assets/GionKyoto4.jpg';
+import GionKyoto5 from '../../assets/GionKyoto5.jpg';
+import GionKyoto6 from '../../assets/GionKyoto6.png';
 import OsakaArchitecture2 from '../../assets/OsakaArchitecture2.png';
 import OsakaArchitecture3 from '../../assets/OsakaArchitecture3.png';
 import OsakaArchitecture5 from '../../assets/OsakaArchitecture5.png';
@@ -122,6 +132,30 @@ const DetailPage = () => {
       spots: ['道頓堀', 'ユニバーサルスタジオジャパン', '大阪城'],
       content:
         '大阪は関西のエンターテイメントの中心地です。道頓堀のネオンサインが美しい夜景を演出し、USJでは世界レベルのアトラクションを楽しめます。大阪城では歴史を感じながら散策できます。',
+    },
+    104: {
+      title: '🌉 嵐山・渡月橋 × 『聲の形』',
+      description: '映画『聲の形』のクライマックスを彩る舞台。感動のシーンを体験しよう。',
+      author: 'タビログ編集部',
+      image: TogetsukyoBridge5,
+      heroImage: TogetsukyoBridge5,
+      breadcrumb: ['京都', '嵐山', '渡月橋'],
+      contentTitle: '渡月橋の基本情報',
+      spots: ['ラストシーンの舞台', '桜と紅葉のコントラスト', 'ファン撮影スポット'],
+      content:
+        '渡月橋（とげつきょう）は、京都・嵐山の象徴的な観光名所で、桂川にかかる全長155mの木造橋です。<br>「月が橋を渡るように見える」ことから名付けられ、平安時代から多くの人々に親しまれてきました。<br>春は桜、秋は紅葉の絶景が広がり、四季折々に異なる表情を楽しめます。周辺には竹林や天龍寺など、嵐山を代表する観光スポットも集まっています。<br><br>所在地：京都市右京区嵐山<br><br>アクセス：嵐電「嵐山駅」徒歩5分、JR「嵯峨嵐山駅」徒歩15分<br><br>営業時間：終日開放<br><br>料金：無料<br><br><strong>『聲の形』の聖地シーン</strong><br><br>映画『聲の形』のクライマックスでは、主人公・石田将也と西宮硝子が互いの心を通わせ、和解する感動的なシーンが渡月橋で描かれました。<br>橋の上から見える景色はそのまま映画の舞台となっており、多くのファンが同じアングルで写真を撮影し、キャラクターの心情に思いを馳せています。<br><br>【2.1 ラストシーンの舞台】<br><br>物語の結末を象徴する橋の風景。ファンにとって外せない撮影ポイントです。<br><br>【2.2 桜と紅葉のコントラスト】<br><br>春の桜並木、秋の紅葉シーズンには映画の雰囲気をさらに盛り上げる背景になります。<br><br>【2.3 ファン撮影スポット】<br><br>映画のカットに合わせたアングルが多数存在し、SNSで「#聲の形聖地巡礼」としてシェアするファンが多く訪れます。',
+    },
+    130: {
+      title: '🎭 祇園 × 『マイコはレディ』『花より男子』',
+      description: '京都を代表する花街。映画やドラマの舞台としても登場。',
+      author: 'タビログ編集部',
+      image: GionKyoto3,
+      heroImage: GionKyoto3,
+      breadcrumb: ['京都', '祇園', '花街'],
+      contentTitle: '祇園の基本情報',
+      spots: ['花見小路通り', '祇園白川エリア', '八坂神社'],
+      content:
+        '祇園は京都を代表する花街で、伝統的な茶屋や町家が立ち並び、舞妓や芸妓が行き交う独特の雰囲気を楽しめる地域です。夜になると石畳の通りが提灯に照らされ、幻想的な光景が広がります。観光名所としてだけでなく、映画やドラマの舞台にも数多く登場し、国内外からの観光客に人気を集めています。<br><br>特に映画『マイコはレディ』では、舞妓を目指す少女の成長物語が祇園を舞台に描かれ、実際の花街の雰囲気をリアルに体感できます。また、ドラマ『花より男子』では、主人公たちが京都を訪れるシーンで祇園の街並みが印象的に登場し、多くのファンが聖地巡礼に訪れています。<br><br>【2.1 花見小路通り】<br><br>祇園の中心にある石畳の通り。伝統的な茶屋が並び、夜には舞妓さんが行き交う姿を見られることも。作品の舞台としても頻繁に使われるスポット。<br><br>【2.2 祇園白川エリア】<br><br>白川沿いに桜並木と町家が続く情緒あふれるエリア。『花より男子』の撮影でも使われた美しい景観で、写真撮影にも最適です。<br><br>【2.3 八坂神社】<br><br>祇園のランドマーク的存在。『マイコはレディ』にも登場し、舞妓文化と深い結びつきを持つ神社。観光と合わせて訪れたい名所。',
     },
     128: {
       title: '心安らぐ京都、癒やしの週末',
@@ -489,14 +523,16 @@ const DetailPage = () => {
           <h2 className="text-3xl font-bold text-gray-900 mb-8">{plan.contentTitle}</h2>
 
           {/* Images */}
-          {planId !== 4 &&
-            planId !== 6 &&
-            planId !== 19 &&
-            planId !== 20 &&
-            planId !== 21 &&
-            planId !== 24 &&
-            planId !== 25 &&
-            planId !== 30 && (
+          {planId !== 105 &&
+            planId !== 111 &&
+            planId !== 122 &&
+            planId !== 129 &&
+            planId !== 112 &&
+            planId !== 107 &&
+            planId !== 113 &&
+            planId !== 108 &&
+            planId !== 104 &&
+            planId !== 130 && (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 <div className="bg-white rounded-lg overflow-hidden shadow-md">
                   <div
@@ -560,7 +596,7 @@ const DetailPage = () => {
             )}
 
           {/* Extra Images for Tokyo Plan */}
-          {planId === 1 && (
+          {planId === 103 && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <div className="bg-white rounded-lg overflow-hidden shadow-md">
                 <div
@@ -578,7 +614,7 @@ const DetailPage = () => {
           )}
 
           {/* Extra Images for Kimi no Na wa Plan */}
-          {planId === 14 && (
+          {planId === 118 && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <div className="bg-white rounded-lg overflow-hidden shadow-md">
                 <div
@@ -596,7 +632,7 @@ const DetailPage = () => {
           )}
 
           {/* Extra Images for Tenki no Ko Plan */}
-          {planId === 11 && (
+          {planId === 115 && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <div className="bg-white rounded-lg overflow-hidden shadow-md">
                 <div
@@ -614,7 +650,7 @@ const DetailPage = () => {
           )}
 
           {/* Extra Images for Digimon Adventure Plan */}
-          {planId === 12 && (
+          {planId === 116 && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <div className="bg-white rounded-lg overflow-hidden shadow-md">
                 <div
@@ -632,7 +668,7 @@ const DetailPage = () => {
           )}
 
           {/* Extra Images for Ghibli Park Plan */}
-          {planId === 17 && (
+          {planId === 120 && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <div className="bg-white rounded-lg overflow-hidden shadow-md">
                 <div
@@ -650,7 +686,7 @@ const DetailPage = () => {
           )}
 
           {/* Extra Images for Legoland Japan Plan */}
-          {planId === 16 && (
+          {planId === 119 && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <div className="bg-white rounded-lg overflow-hidden shadow-md">
                 <div
@@ -668,7 +704,7 @@ const DetailPage = () => {
           )}
 
           {/* Extra Images for Fukuoka Gourmet Tour */}
-          {planId === 4 && (
+          {planId === 105 && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <div className="bg-white rounded-lg overflow-hidden shadow-md">
                 <div
@@ -698,7 +734,7 @@ const DetailPage = () => {
           )}
 
           {/* Extra Images for Tenjin Otaku Culture */}
-          {planId === 18 && (
+          {planId === 121 && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <div className="bg-white rounded-lg overflow-hidden shadow-md">
                 <div
@@ -716,7 +752,7 @@ const DetailPage = () => {
           )}
 
           {/* Extra Images for Suzume no Tojimari */}
-          {planId === 19 && (
+          {planId === 122 && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <div className="bg-white rounded-lg overflow-hidden shadow-md">
                 <div
@@ -746,7 +782,7 @@ const DetailPage = () => {
           )}
 
           {/* Extra Images for Fukuoka-Kokura-Moji-Shimonoseki History Tour */}
-          {planId === 20 && (
+          {planId === 129 && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <div className="bg-white rounded-lg overflow-hidden shadow-md">
                 <div
@@ -776,7 +812,7 @@ const DetailPage = () => {
           )}
 
           {/* Extra Images for Okinawa Resort */}
-          {planId === 6 && (
+          {planId === 111 && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <div className="bg-white rounded-lg overflow-hidden shadow-md">
                 <div
@@ -806,7 +842,7 @@ const DetailPage = () => {
           )}
 
           {/* Extra Images for Okinawa Gourmet (Sweets) */}
-          {planId === 21 && (
+          {planId === 112 && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <div className="bg-white rounded-lg overflow-hidden shadow-md">
                 <div
@@ -836,7 +872,7 @@ const DetailPage = () => {
           )}
 
           {/* Extra Images for Okinawa Yacht Tour */}
-          {planId === 25 && (
+          {planId === 113 && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <div className="bg-white rounded-lg overflow-hidden shadow-md">
                 <div
@@ -884,7 +920,7 @@ const DetailPage = () => {
           )}
 
           {/* Extra Images for Sapporo Gourmet Tour */}
-          {planId === 30 && (
+          {planId === 108 && (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
               <div className="bg-white rounded-lg overflow-hidden shadow-md">
                 <div
@@ -926,7 +962,7 @@ const DetailPage = () => {
           )}
 
           {/* Extra Images for Hokkaido Ski Resorts */}
-          {planId === 33 && (
+          {planId === 110 && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <div className="bg-white rounded-lg overflow-hidden shadow-md">
                 <div
@@ -962,7 +998,7 @@ const DetailPage = () => {
           )}
 
           {/* Extra Images for Okhotsk Drift Ice Experience */}
-          {planId === 24 && (
+          {planId === 107 && (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
               <div className="bg-white rounded-lg overflow-hidden shadow-md">
                 <div
@@ -983,6 +1019,74 @@ const DetailPage = () => {
                 ></div>
               </div>
             </div>
+          )}
+
+          {/* Extra Images for Togetsukyo Bridge × Koe no Katachi */}
+          {planId === 104 && (
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                  <div
+                    className="h-64 bg-cover bg-center bg-no-repeat"
+                    style={{ backgroundImage: `url(${TogetsukyoBridge1})` }}
+                  ></div>
+                </div>
+                <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                  <div
+                    className="h-64 bg-cover bg-center bg-no-repeat"
+                    style={{ backgroundImage: `url(${TogetsukyoBridge2})` }}
+                  ></div>
+                </div>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                  <div
+                    className="h-64 bg-cover bg-center bg-no-repeat"
+                    style={{ backgroundImage: `url(${TogetsukyoBridge3})` }}
+                  ></div>
+                </div>
+                <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                  <div
+                    className="h-64 bg-cover bg-center bg-no-repeat"
+                    style={{ backgroundImage: `url(${TogetsukyoBridge4})` }}
+                  ></div>
+                </div>
+              </div>
+            </>
+          )}
+
+          {/* Extra Images for Gion × Maiko wa Lady × Hana Yori Dango */}
+          {planId === 130 && (
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                  <div
+                    className="h-64 bg-cover bg-center bg-no-repeat"
+                    style={{ backgroundImage: `url(${GionKyoto4})` }}
+                  ></div>
+                </div>
+                <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                  <div
+                    className="h-64 bg-cover bg-center bg-no-repeat"
+                    style={{ backgroundImage: `url(${GionKyoto5})` }}
+                  ></div>
+                </div>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                  <div
+                    className="h-64 bg-cover bg-center bg-no-repeat"
+                    style={{ backgroundImage: `url(${GionKyoto6})` }}
+                  ></div>
+                </div>
+                <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                  <div
+                    className="h-64 bg-cover bg-center bg-no-repeat"
+                    style={{ backgroundImage: `url(${GionKyoto1})` }}
+                  ></div>
+                </div>
+              </div>
+            </>
           )}
 
           {/* Plan Rich Content */}
