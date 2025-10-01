@@ -34,7 +34,6 @@ import GionKyoto4 from '../../assets/GionKyoto4.jpg';
 import KyotoPass5 from '../../assets/KyotoPass5.jpg';
 import KyotoHero from '../../assets/Kinkakuji.jpg';
 import KiyoMizuTera from '../../assets/KiyoMizuTera.jpg';
-import KyotoPass5 from '../../assets/KyotoPass5.jpg';
 import SapporoTime from '../../assets/SapporoTime.jpg';
 // import SapporoTower from '../../assets/SapporoTower.jpg';
 import sapporowintertokei from '../../assets/sapporowintertokei.jpg';
