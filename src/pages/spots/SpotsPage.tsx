@@ -77,6 +77,7 @@ import Otaru_Canal_Winter from '../../assets/Otaru_Canal_Winter.jpg';
 import Tomonoura_Harbor from '../../assets/Tomonoura_Harbor.jpg';
 import Kanazawa_HigashiChaya from '../../assets/Kanazawa_HigashiChaya.jpg';
 import Kanazawa_YuwakuOnsen from '../../assets/Kanazawa_YuwakuOnsen.jpg';
+import GionKyoto3 from '../../assets/GionKyoto3.png';
 import Museum21thCentury1 from '../../assets/21thcenturyimage1--8-.png';
 import ramenyokocho from '../../assets/ramenyokocho.jpg';
 import zyouzankei from '../../assets/zyouzankei.jpg';
@@ -338,8 +339,8 @@ const SpotsPage = () => {
       },
       {
         id: 3,
-        name: '大阪城',
-        description: '豊臣秀吉が築いた名城。歴史と美しさを兼ね備えた城',
+        name: '🏯 大阪城',
+        description: '豊臣秀吉が築いた名城。歴史と美しさを兼ね備えた大阪の象徴。',
         tags: ['文化・歴史', '祭り', '西日本'],
         city: '大阪',
         image: OsakaCastle,
@@ -354,15 +355,15 @@ const SpotsPage = () => {
       },
       {
         id: 20,
-        name: 'ユニバーサル・スタジオ・ジャパン',
-        description: '大阪の大人気テーマパーク。映画の世界を体験',
+        name: '🎢 ユニバーサル・スタジオ・ジャパン',
+        description: '世界的人気を誇るハリウッド映画のテーマパーク。映画の世界を体験しよう！',
         tags: ['エンタメ', '家族', '西日本'],
         city: '大阪',
         image: UniversalStudiosJapan3,
       },
       {
         id: 21,
-        name: '海遊館',
+        name: '🐠 海遊館',
         description: '世界最大級の水族館。ジンベエザメに会える人気スポット。',
         tags: ['エンタメ', '家族', '西日本'],
         city: '大阪',
@@ -371,7 +372,7 @@ const SpotsPage = () => {
       {
         id: 5,
         name: '🏯 金閣寺',
-        description: '京都の代表的な寺院。金色に輝く美しい建物',
+        description: '世界遺産。黄金の舎利殿と池泉回遊式庭園が織りなす京都の象徴。',
         tags: ['文化・歴史', '祭り', '西日本'],
         city: '京都',
         image: Kinkakuji,
@@ -379,7 +380,7 @@ const SpotsPage = () => {
       {
         id: 6,
         name: '🏯 清水寺',
-        description: '京都で最も有名な寺院。舞台からの景色が絶景',
+        description: '世界遺産に登録された京都の名刹。清水の舞台から望む絶景は必見。',
         tags: ['文化・歴史', '祭り', '西日本'],
         city: '京都',
         image: KiyoMizuTera,
@@ -387,7 +388,7 @@ const SpotsPage = () => {
       {
         id: 35,
         name: '🌸 哲学の道',
-        description: '桜と紅葉が美しい散策路。心静かに歩きながら四季の京都を感じよう。',
+        description: '四季折々の風景が美しい散策路。桜並木で有名な京都の名所。',
         tags: ['文化・歴史', '散策', '西日本', '京都'],
         city: '京都',
         image: KyotoPass5,
@@ -569,7 +570,7 @@ const SpotsPage = () => {
         image: miyajima,
       },
       {
-        id: 40,
+        id: 49,
         name: '⛩️ 厳島神社',
         description: '海に浮かぶ朱色の大鳥居で有名な世界遺産',
         tags: ['文化・歴史', '世界遺産', '西日本', '広島'],
@@ -577,7 +578,7 @@ const SpotsPage = () => {
         image: Miyajima_Itsukushima_Torii,
       },
       {
-        id: 41,
+        id: 50,
         name: '🌊 鞆の浦',
         description: '江戸時代の港町の面影を残す美しい港',
         tags: ['文化・歴史', '西日本', '広島'],
@@ -601,7 +602,7 @@ const SpotsPage = () => {
         image: KanazawaCastle,
       },
       {
-        id: 42,
+        id: 51,
         name: '🏘 東茶屋街',
         description: '江戸時代の茶屋街。金沢の伝統文化を感じられる',
         tags: ['文化・歴史', '西日本', '金沢'],
@@ -609,7 +610,7 @@ const SpotsPage = () => {
         image: Kanazawa_HigashiChaya,
       },
       {
-        id: 43,
+        id: 52,
         name: '♨️湯涌温泉',
         description: '金沢の奥座敷。自然に囲まれた静かな温泉地',
         tags: ['温泉', '西日本', '金沢'],
@@ -649,7 +650,7 @@ const SpotsPage = () => {
         image: HakoneOnsen,
       },
       {
-        id: 26,
+        id: 53,
         name: '渋谷',
         description: '若者の街として有名。スクランブル交差点とハチ公がシンボル',
         tags: ['ショッピング', 'エンタメ', '東日本', '観光地', '渋谷区'],
@@ -657,7 +658,7 @@ const SpotsPage = () => {
         image: ShibuyaScramble,
       },
       {
-        id: 28,
+        id: 54,
         name: '名古屋城',
         description: '徳川家康が築いた城。金色のシャチホコが有名',
         tags: ['文化・歴史', '城', '中部日本', '観光地', '名古屋市'],
@@ -665,7 +666,7 @@ const SpotsPage = () => {
         image: NagoyaCastle,
       },
       {
-        id: 29,
+        id: 55,
         name: '大須商店街',
         description: '漫画・アニメグッズ、電子機器、食べ物まで揃う商店街',
         tags: ['ショッピング', 'エンタメ', '中部日本', '観光地', '名古屋市'],
@@ -705,7 +706,7 @@ const SpotsPage = () => {
         image: OkiAquarium,
       },
       {
-        id: 34,
+        id: 56,
         name: '秋葉原',
         description: 'アニメ・ゲーム・電子機器の聖地。オタク文化の中心地',
         tags: ['エンタメ', 'ショッピング', '東日本', '観光地', '千代田区'],
@@ -713,7 +714,7 @@ const SpotsPage = () => {
         image: akihabara,
       },
       {
-        id: 35,
+        id: 57,
         name: '富士急ハイランド',
         description: '絶叫マシンで有名なテーマパーク。富士山を背景にした絶景アトラクション',
         tags: ['エンタメ', 'アトラクション', '東日本', '観光地', '富士吉田市'],
@@ -726,7 +727,7 @@ const SpotsPage = () => {
 
   const travelPlans = [
     {
-      id: 9,
+      id: 101,
       title: '🎥 この世界の片隅に × 広島市',
       description: 'この世界の片隅に 聖地巡礼\n戦時中の広島と呉を舞台にした感動作。平和への祈りを感じる旅へ。',
       image: Hirosima15,
@@ -735,7 +736,7 @@ const SpotsPage = () => {
       city: '広島',
     },
     {
-      id: 10,
+      id: 102,
       title: '🎬 崖の上のポニョ × 鞆の浦',
       description: '宮崎駿監督が滞在し、作品の舞台にインスピレーションを与えた港町。',
       image: Ponyo1,
@@ -744,7 +745,7 @@ const SpotsPage = () => {
       city: '広島',
     },
     {
-      id: 1,
+      id: 103,
       title: '食い倒れ東京! 2泊3日グルメ旅',
       description:
         '築地市場の新鮮な海の幸から、新宿の深夜ラーメンまで。東京の「うまい!」をすべて味わい尽くす、食いしん坊のためのプランです。',
@@ -754,7 +755,7 @@ const SpotsPage = () => {
       city: '東京',
     },
     {
-      id: 27,
+      id: 104,
       title: '🌉 嵐山・渡月橋 × 『聲の形』',
       description: '映画『聲の形』のクライマックスを彩る舞台。感動のシーンを体験しよう。',
       image: TogetsukyoBridge5,
@@ -763,7 +764,7 @@ const SpotsPage = () => {
       city: '京都',
     },
     {
-      id: 4,
+      id: 105,
       title: '福岡屋台めぐり！博多グルメ紀行',
       description: 'とんこつラーメンと福岡の名所を巡る旅。',
       image: fukugourmet,
@@ -773,7 +774,7 @@ const SpotsPage = () => {
     },
 
     {
-      id: 5,
+      id: 106,
       title: '大自然を満喫！夏の北海道・札幌ドライブ',
       description: '富良野のラベンダー畑と海鮮を味わう旅。',
       image: SapporoTower,
@@ -782,7 +783,7 @@ const SpotsPage = () => {
       city: '札幌',
     },
     {
-      id: 24,
+      id: 107,
       title: 'オホーツク流氷体験！札幌→網走 1〜2日旅',
       description:
         '札幌から特急で網走へ。流氷砕氷船クルーズ、季節列車で北浜駅へ向かい、オホーツク海の絶景を満喫する冬のモデルコース。',
@@ -792,7 +793,7 @@ const SpotsPage = () => {
       city: '札幌',
     },
     {
-      id: 30,
+      id: 108,
       title: '札幌グルメ巡り！ラーメンと海鮮',
       description: '札幌ラーメンと新鮮な海鮮を堪能するグルメ旅。',
       image: ramenyokocho,
@@ -801,7 +802,7 @@ const SpotsPage = () => {
       city: '札幌',
     },
     {
-      id: 32,
+      id: 109,
       title: '札幌近郊温泉巡り！癒しの名湯旅',
       description: '札幌からアクセスしやすい人気温泉地を巡る贅沢な温泉旅。',
       image: zyouzankei,
@@ -810,7 +811,7 @@ const SpotsPage = () => {
       city: '札幌',
     },
     {
-      id: 33,
+      id: 110,
       title: '北海道スキー場TOP3！ニセコ・ルスツ・富良野',
       description: '世界が惚れ込むパウダースノー。札幌から行ける人気スキー3大エリアを1枚で理解。',
       image: rusutsuresort,
@@ -819,7 +820,7 @@ const SpotsPage = () => {
       city: '札幌',
     },
     {
-      id: 6,
+      id: 111,
       title: '絶景ビーチリゾート！沖縄でのんびり休暇',
       description: 'エメラルドグリーンの海でシュノーケリングと夕日鑑賞。',
       image: OkinawaResort,
@@ -828,7 +829,7 @@ const SpotsPage = () => {
       city: '沖縄',
     },
     {
-      id: 21,
+      id: 112,
       title: '沖縄グルメ満喫！国際通りスイーツ＆冷菓めぐり',
       description: '国際通りの人気スイーツを食べ歩く甘い旅。',
       image: boolseal,
@@ -837,7 +838,7 @@ const SpotsPage = () => {
       city: '沖縄',
     },
     {
-      id: 25,
+      id: 113,
       title: '沖縄ヨットツアー！無人島クルーズとサンセット',
       description: '珊瑚の海をクルージング、無人島上陸と夕日鑑賞を楽しむ大人の旅。',
       image: okinawacruising,
@@ -846,7 +847,7 @@ const SpotsPage = () => {
       city: '沖縄',
     },
     {
-      id: 8,
+      id: 114,
       title: 'ワールドコスプレサミット',
       description: '毎年夏に名古屋で開催される世界規模のコスプレイベント。',
       image: nagoyawcs2,
@@ -855,7 +856,7 @@ const SpotsPage = () => {
       city: '名古屋',
     },
     {
-      id: 11,
+      id: 115,
       title: '天気の子聖地巡礼！東京スカイツリーと台場',
       description:
         '「天気の子」の舞台となった東京の名所を巡る。スカイツリー、台場、新宿など、映画に登場した場所で主人公たちの気持ちを感じてみよう。',
@@ -865,7 +866,7 @@ const SpotsPage = () => {
       city: '東京',
     },
     {
-      id: 12,
+      id: 116,
       title: 'デジモンアドベンチャー聖地巡礼！お台場と光が丘',
       description:
         'デジモンアドベンチャーの聖地を巡る旅。お台場のフジテレビ、光が丘公園、新宿駅など、アニメファンなら一度は訪れたい場所をめぐろう。',
@@ -875,7 +876,7 @@ const SpotsPage = () => {
       city: '東京',
     },
     {
-      id: 13,
+      id: 117,
       title: '東京温泉巡り！箱根と日光でリラックス',
       description:
         '東京近郊の名湯を巡る旅。箱根温泉で富士山を眺めながら、日光温泉で歴史を感じながら、心も体もリフレッシュしよう。',
@@ -885,7 +886,7 @@ const SpotsPage = () => {
       city: '東京',
     },
     {
-      id: 14,
+      id: 118,
       title: '君の名は。聖地巡礼！渋谷と代々木',
       description:
         '「君の名は。」の舞台となった東京の名所を巡る。渋谷のスクランブル交差点、代々木の神社、新宿御苑など、映画に登場した場所で主人公たちの気持ちを感じてみよう。',
@@ -895,7 +896,7 @@ const SpotsPage = () => {
       city: '東京',
     },
     {
-      id: 16,
+      id: 119,
       title: 'レゴランド・ジャパン！家族で楽しむテーマパーク',
       description:
         '名古屋のレゴランド・ジャパンで、レゴブロックの世界を体験しよう。子供から大人まで楽しめるアトラクションとレゴの魅力を満喫。',
@@ -905,7 +906,7 @@ const SpotsPage = () => {
       city: '名古屋',
     },
     {
-      id: 17,
+      id: 120,
       title: 'ジブリパーク！スタジオジブリの世界へ',
       description:
         '愛知県長久手市のジブリパークで、宮崎駿監督のアニメの世界を体験。トトロの森、魔女の宅急便の世界など、ジブリファン必見。',
@@ -915,7 +916,7 @@ const SpotsPage = () => {
       city: '名古屋',
     },
     {
-      id: 18,
+      id: 121,
       title: '天神で楽しむ福岡のオタク文化とショッピング',
       description: '天神の地下街から地上まで、オタク文化とショッピングを満喫する旅。',
       image: fukuanimate,
@@ -924,7 +925,7 @@ const SpotsPage = () => {
       city: '福岡',
     },
     {
-      id: 19,
+      id: 122,
       title: 'すずめの戸締まり聖地巡礼！福岡の神秘的な旅',
       description: 'アニメ「すずめの戸締まり」の舞台となった福岡の聖地を巡る旅。',
       image: suzume,
@@ -934,7 +935,7 @@ const SpotsPage = () => {
     },
 
     {
-      id: 24,
+      id: 123,
       title: '🏛 中之島公会堂 × 黒執事 聖地巡礼',
       description: '中之島公会堂 聖地巡礼！黒執事の世界を体感',
       image: OsakaArchitecture5,
@@ -943,16 +944,16 @@ const SpotsPage = () => {
       city: '大阪',
     },
     {
-      id: 25,
+      id: 124,
       title: '🎡 天保山大観覧車 × 名探偵コナン 聖地巡礼',
-      description: '天保山大観覧車 聖地巡礼！コナンと大阪の夜景',
+      description: '大阪の夜景とコナン映画に登場する象徴的なスポット',
       image: OsakaTempozan,
       author: 'アニメ巡礼編集部',
       type: '一人旅',
       city: '大阪',
     },
     {
-      id: 36,
+      id: 125,
       title: '🏛️ 金沢21世紀美術館 × グラスリップ 聖地巡礼',
       description:
         'アニメ「グラスリップ」の舞台となった金沢21世紀美術館。現代アートと聖地巡礼を同時に楽しめるスポット。',
@@ -962,13 +963,22 @@ const SpotsPage = () => {
       city: '金沢',
     },
     {
-      id: 37,
+      id: 126,
       title: '♨️ 湯涌温泉 × 花咲くいろは 聖地巡礼',
       description: 'アニメ「花咲くいろは」の舞台となった湯涌温泉。温泉街の風情と聖地巡礼を楽しむ癒やしの旅。',
       image: Kanazawa_YuwakuOnsen,
       author: 'アニメ巡礼編集部',
       type: '一人旅',
       city: '金沢',
+    },
+    {
+      id: 130,
+      title: '🎭 祇園 × 『マイコはレディ』『花より男子』',
+      description: '京都を代表する花街。映画やドラマの舞台としても登場。',
+      image: GionKyoto3,
+      author: 'タビログ編集部',
+      type: '一人旅',
+      city: '京都',
     },
   ];
 

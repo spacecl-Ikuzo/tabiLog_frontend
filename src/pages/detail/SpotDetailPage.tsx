@@ -26,6 +26,7 @@ import OsakaArchitecture3 from '../../assets/OsakaArchitecture3.png';
 import OsakaArchitecture4 from '../../assets/OsakaArchitecture4.png';
 import KyotoHero from '../../assets/Kinkakuji.jpg';
 import KiyoMizuTera from '../../assets/KiyoMizuTera.jpg';
+import KyotoPass5 from '../../assets/KyotoPass5.jpg';
 import SapporoTime from '../../assets/SapporoTime.jpg';
 // import SapporoTower from '../../assets/SapporoTower.jpg';
 import sapporowintertokei from '../../assets/sapporowintertokei.jpg';
@@ -270,19 +271,6 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
       content:
         '鎌倉は1192年に源頼朝が開いた鎌倉幕府の古都として知られる歴史ある街です。現在は大仏や鶴岡八幡宮などの歴史的建造物と、スラムダンクなどのアニメの聖地としても人気を集めています。海と山に囲まれた自然豊かな環境で、四季折々の美しい景色を楽しめます。<br><br>【2.1 スラムダンクの聖地】<br>鎌倉高校前駅の踏切は、人気アニメ「スラムダンク」のオープニングで登場する有名な聖地です。青い海と空、そして江ノ島電鉄の電車が走る風景は、アニメファンにとって憧れの場所となっています。特に夕日の時間帯は、アニメの世界そのままの美しい光景を楽しむことができます。多くの観光客が写真撮影に訪れる人気スポットです。<br><br>【2.2 鎌倉大仏】<br>高徳院にある高さ約11.3mの青銅製の大仏像は、鎌倉のシンボルとして親しまれています。鎌倉時代の代表的な仏像彫刻として知られ、国の重要文化財に指定されています。大仏殿は台風で倒壊したため、現在は露座の姿で拝観できます。大仏の内部に入ることもでき、当時の鋳造技術の高さを間近で感じることができます。',
     },
-    '24': {
-      title: '🏛 中之島公会堂 × 黒執事 聖地巡礼',
-      description: '中之島公会堂 聖地巡礼！黒執事の世界を体感',
-      author: 'アニメ巡礼編集部',
-      heroImage: OsakaArchitecture5,
-      breadcrumb: ['大阪', '北区', '中之島公会堂'],
-      contentTitle: '中之島公会堂と黒執事の関係',
-      spots: ['外観（ヴィクトリア建築）', '大ホール', 'ステンドグラス'],
-      imageLeft: OsakaArchitecture2,
-      imageRight: OsakaArchitecture3,
-      content:
-        '中之島公会堂は1918年に建てられた大阪を代表するネオ・ルネッサンス様式の建築物です。アニメ『黒執事』の舞台となるヴィクトリア時代のロンドンを彷彿とさせる重厚な外観から、ファンの間では聖地の一つとして親しまれています。作品の公式ロケ地ではありませんが、その雰囲気が「黒執事」の世界観と重なるため、多くのファンが訪れています。<br><br>【2.1 外観（ヴィクトリア建築）】<br>赤レンガと白い石材を組み合わせた外観は、ヴィクトリア時代のロンドンを思わせます。ファンにとっては写真撮影の定番スポットです。<br><br>【2.2 大ホール】<br>公会堂の中心に位置する大ホールは、豪華な装飾とクラシックな雰囲気が特徴。『黒執事』の舞踏会シーンを連想させます。<br><br>【2.3 ステンドグラス】<br>天井や窓に施されたステンドグラスは必見。色鮮やかな光が差し込み、まるでアニメのワンシーンのような幻想的な空間を作り出します。',
-    },
     '25': {
       title: '渋谷',
       description: '若者の街として有名。スクランブル交差点とハチ公がシンボル',
@@ -445,7 +433,7 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
   大阪: {
     '3': {
       title: '🏯 大阪城',
-      description: '日本を代表する名城。歴史と美しさを兼ね備えた観光スポット。',
+      description: '豊臣秀吉が築いた名城。歴史と美しさを兼ね備えた大阪の象徴。',
       author: 'タビログ編集部',
       heroImage: OsakaHero,
       breadcrumb: ['大阪', '中央区', '大阪城'],
@@ -454,7 +442,7 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
       imageLeft: OsakaHero,
       imageRight: OsakaCastle2,
       content:
-        '大阪城は日本を代表する歴史的な城の一つで、戦国時代の名将・豊臣秀吉によって築かれました。現在の天守閣は昭和に再建されたもので、内部は博物館として公開されています。春は桜の名所として知られ、多くの観光客で賑わいます。壮大な石垣や堀、美しい庭園も見どころです。<br><br>【2.1 天守閣】<br>大阪城のシンボルである天守閣は、地上8階建ての建物で、最上階からは大阪市街を360度一望できます。内部は歴史博物館となっており、豊臣秀吉や戦国時代に関する展示が充実しています。特に甲冑や武具の展示は人気があります。<br><br>【2.2 西の丸庭園】<br>西の丸庭園は、大阪城の外郭に位置する広大な庭園で、約600本の桜が植えられています。春には「大阪城と桜」の美しいコントラストが楽しめ、写真スポットとしても有名です。四季折々の自然が楽しめる憩いの場です。<br><br>【2.3 大阪城公園】<br>大阪城を囲む広大な公園で、ランニングや散歩を楽しむ市民の憩いの場です。イベントやコンサートも開催され、歴史と現代文化が融合する空間となっています。秋には紅葉も見事で、季節ごとに違う魅力を味わえます。<br><br>【2.4 大阪城ホール】<br>大阪城公園内にある多目的アリーナで、音楽ライブやスポーツイベントが行われます。国内外の有名アーティストがコンサートを開催することで知られ、大阪の文化発信拠点の一つとなっています。',
+        '大阪城は16世紀末に豊臣秀吉によって築かれ、日本三名城の一つに数えられる歴史的建造物です。五層八階建ての天守閣は圧巻の存在感を誇り、内部は博物館として公開され、戦国時代の資料や武具、甲冑、絵巻などが展示されています。最上階の展望台からは大阪市街を360度一望でき、特に春には桜、秋には紅葉の名所として多くの観光客で賑わいます。<br><br>また、広大な堀や高石垣は当時の築城技術を伝える貴重な遺構であり、夜にはライトアップされ、幻想的な雰囲気を楽しめます。<br><br><strong>🗂 詳細情報（チケット・利用案内）</strong><br><br><table style="border-collapse: collapse; width: 100%; margin: 10px 0;"><tr style="background-color: #f2f2f2;"><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">項目</th><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">詳細</th></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">所在地</td><td style="border: 1px solid #ddd; padding: 8px;">大阪府大阪市中央区大阪城1-1</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">アクセス</td><td style="border: 1px solid #ddd; padding: 8px;">JR大阪城公園駅 徒歩10分 / 地下鉄谷町四丁目駅 徒歩15分</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">営業時間</td><td style="border: 1px solid #ddd; padding: 8px;">天守閣：9:00〜17:00（最終入場16:30）<br>※桜まつり・秋季イベント時は延長あり</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">入場料（天守閣）</td><td style="border: 1px solid #ddd; padding: 8px;">大人600円 / 中学生以下無料</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">西の丸庭園 入場料</td><td style="border: 1px solid #ddd; padding: 8px;">大人200円 / 中学生以下無料</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">共通券</td><td style="border: 1px solid #ddd; padding: 8px;">天守閣＋庭園セット券：大人700円</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">チケット購入</td><td style="border: 1px solid #ddd; padding: 8px;">現地チケット窓口 / オンライン事前予約（公式サイト）</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">団体割引</td><td style="border: 1px solid #ddd; padding: 8px;">15名以上で1割引 / 学校団体向け割引あり</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">駐車場</td><td style="border: 1px solid #ddd; padding: 8px;">有料駐車場あり（普通車1時間350円〜）</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">施設内サービス</td><td style="border: 1px solid #ddd; padding: 8px;">ミュージアムショップ、カフェ、ベビーカー貸出、多言語音声ガイド</td></tr></table><br><br>【2.1 天守閣】<br><br>大阪城のシンボル。内部は博物館になっており、豊臣秀吉の生涯や戦国時代の歴史を学ぶことができます。最上階からは大阪市街を一望でき、特に夜景は絶景です。<br><br>【2.2 西の丸庭園】<br><br>約6万平方メートルの広さを誇る庭園。春には約300本の桜が咲き誇り、大阪随一の花見スポットとして知られています。<br><br>【2.3 大阪城公園】<br><br>ジョギングやピクニックに最適な広大な公園。四季折々の自然を楽しめ、市民の憩いの場として愛されています。<br><br>【2.4 大阪城ホール】<br><br>大阪城公園内にある多目的アリーナ。コンサートやスポーツイベントが開催され、観光とエンタメを一度に楽しめます。',
     },
     '4': {
       title: '🌃 道頓堀',
@@ -471,21 +459,21 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
     },
     '20': {
       title: '🎢 ユニバーサル・スタジオ・ジャパン',
-      description: '大阪の人気テーマパーク。映画の世界を体験できる場所。',
+      description: '世界的人気を誇るハリウッド映画のテーマパーク。映画の世界を体験しよう！',
       author: 'タビログ編集部',
       heroImage: UniversalStudiosJapan3,
       breadcrumb: ['大阪', '此花区', 'USJ'],
-      contentTitle: 'ユニバーサル・スタジオ・ジャパンの基本情報',
+      contentTitle: 'USJの基本情報',
       spots: [
         'ウィザーディング・ワールド・オブ・ハリー・ポッター',
         'スーパー・ニンテンドー・ワールド',
-        'ジュラシック・パーク',
         'ミニオン・パーク',
+        'スペース・ファンタジー・ザ・ライド',
       ],
       imageLeft: UniversalStudiosJapan,
       imageRight: UniversalStudiosJapan2,
       content:
-        'USJは大阪を代表する大型テーマパークで、映画やアニメの世界を忠実に再現したアトラクションが楽しめます。ハリーポッターやスーパーマリオ、ジュラシックパークなど、子供から大人まで夢中になれるエリアが充実。四季折々のイベントやショーも人気で、一日中遊べるエンターテイメント施設です。<br><br>【2.1 ウィザーディング・ワールド・オブ・ハリー・ポッター】<br>映画『ハリー・ポッター』の世界を完全再現したエリア。ホグワーツ城やホグズミード村を歩きながら、魔法の世界を体験できます。人気アトラクション「ハリー・ポッター・アンド・ザ・フォービドゥン・ジャーニー」は必見です。<br><br>【2.2 スーパー・ニンテンドー・ワールド】<br>マリオの世界を舞台にした最新エリア。ゲームの中に入り込んだような体験ができ、「マリオカート」や「ヨッシー・アドベンチャー」などのアトラクションが楽しめます。<br><br>【2.3 ジュラシック・パーク】<br>恐竜の世界を再現したスリル満点のエリア。人気ライド「ジュラシック・パーク・ザ・ライド」では巨大な恐竜や水しぶきを体感できます。<br><br>【2.4 ミニオン・パーク】<br>映画『怪盗グルー』シリーズでおなじみのミニオンたちと遊べるエリア。カラフルでユーモラスな雰囲気が家族連れに人気です。',
+        'ユニバーサル・スタジオ・ジャパン（USJ）は、2001年に大阪市此花区に開業した日本を代表する大型テーマパークです。ハリウッド映画の世界を再現したアトラクションやショーを楽しめるほか、世界初・日本初のオリジナルエリアも多数導入され、国内外から年間数百万人が訪れます。<br><br>代表的なエリアには「ウィザーディング・ワールド・オブ・ハリー・ポッター」「スーパー・ニンテンドー・ワールド」「ミニオン・パーク」などがあり、子どもから大人まで楽しめるアトラクションが充実しています。季節ごとのイベント（ハロウィン、クリスマス、夏祭り）も大人気です。<br><br><strong>🗂 詳細情報（チケット・利用案内）</strong><br><br><table style="border-collapse: collapse; width: 100%; margin: 10px 0;"><tr style="background-color: #f2f2f2;"><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">項目</th><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">詳細</th></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">所在地</td><td style="border: 1px solid #ddd; padding: 8px;">大阪府大阪市此花区桜島2-1-33</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">アクセス</td><td style="border: 1px solid #ddd; padding: 8px;">JRゆめ咲線「ユニバーサルシティ駅」徒歩5分</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">営業時間</td><td style="border: 1px solid #ddd; padding: 8px;">日によって変動（通常 9:00〜21:00）<br>※繁忙期は延長あり</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">1デイ・スタジオ・パス</td><td style="border: 1px solid #ddd; padding: 8px;">大人 8,600〜9,800円 / 子ども 5,600〜6,600円</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">年間パス</td><td style="border: 1px solid #ddd; padding: 8px;">大人 22,800円〜（種類によって変動）</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">エクスプレス・パス</td><td style="border: 1px solid #ddd; padding: 8px;">5,000円〜15,000円（アトラクション優先入場）</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">チケット購入</td><td style="border: 1px solid #ddd; padding: 8px;">公式サイト・コンビニ・旅行代理店</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">団体割引</td><td style="border: 1px solid #ddd; padding: 8px;">学校団体・企業向けの割引プランあり</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">駐車場</td><td style="border: 1px solid #ddd; padding: 8px;">有料（普通車 1日3,000円〜）</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">施設内サービス</td><td style="border: 1px solid #ddd; padding: 8px;">ショッピング、レストラン、コインロッカー、ベビーカー貸出、多言語ガイド</td></tr></table><br><br>【2.1 ウィザーディング・ワールド・オブ・ハリー・ポッター】<br><br>映画『ハリー・ポッター』の世界を忠実に再現した人気エリア。ホグワーツ城内の「ハリー・ポッター・アンド・ザ・フォービドゥン・ジャーニー」は大迫力の体験型ライドです。<br><br>【2.2 スーパー・ニンテンドー・ワールド】<br><br>マリオの世界をテーマにした最新エリア。パワーアップバンドを使って実際にゲーム感覚で楽しめ、人気アトラクション「マリオカート〜クッパの挑戦状〜」は必体験！<br><br>【2.3 ミニオン・パーク】<br><br>『怪盗グルー』シリーズでおなじみのミニオンたちの楽しいエリア。家族連れに大人気で、ミニオンの可愛いフードやグッズも楽しめます。<br><br>【2.4 スペース・ファンタジー・ザ・ライド】<br><br>宇宙をテーマにした屋内ローラーコースター。光と音楽に包まれながらスリル満点の冒険を体験できます。',
     },
     '21': {
       title: '🐠 海遊館',
@@ -494,11 +482,11 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
       heroImage: OsakaAquarium1,
       breadcrumb: ['大阪', '港区', '海遊館'],
       contentTitle: '海遊館の基本情報',
-      spots: ['ジンベエザメの大水槽', '南極ゾーン（ペンギン）', '熱帯雨林ゾーン', '夜の海エリア'],
+      spots: ['ジンベエザメエリア', '南極ゾーン', '熱帯魚エリア', '夜の海遊館（ナイトアクアリウム）'],
       imageLeft: OsakaAquarium2,
       imageRight: OsakaAquarium3,
       content:
-        '海遊館は大阪港に位置する世界最大級の水族館の一つです。館内は14の展示ゾーンに分かれており、太平洋を中心に世界各地の海や川の生き物を展示しています。特にジンベエザメが泳ぐ巨大水槽は迫力満点で、国内外から多くの観光客が訪れる人気スポットです。昼と夜で照明が変わる演出も魅力の一つで、違った雰囲気を楽しめます。<br><br>【2.1 ジンベエザメの大水槽】<br>海遊館のシンボル的存在。巨大なジンベエザメが悠々と泳ぐ姿は必見です。<br><br>【2.2 南極ゾーン（ペンギン）】<br>かわいいペンギンたちの暮らしを間近で観察できる人気エリアです。<br><br>【2.3 熱帯雨林ゾーン】<br>アマゾン川流域を再現。ピラニアやカピバラなどユニークな生物が見られます。<br><br>【2.4 夜の海エリア】<br>照明演出で昼とは違う幻想的な海の世界を体感できるコーナーです。',
+        '海遊館は大阪市港区天保山に位置する、世界最大級の都市型水族館です。1990年に開館し、現在も国内外から年間約250万人以上が訪れる人気スポット。<br>高さ9m・容量5,400トンの巨大水槽を中心に、約620種・3万点の海洋生物を展示しています。シンボルとなる「ジンベエザメ」をはじめ、イルカ、エイ、ペンギン、アザラシなど多彩な生き物を間近で観察できます。<br><br>また、昼と夜で異なる演出があり、夜の「ナイトアクアリウム」では幻想的な照明と音響で特別な体験を楽しめるのも魅力です。<br><br><strong>🗂 詳細情報（チケット・利用案内）</strong><br><br><table style="border-collapse: collapse; width: 100%; margin: 10px 0;"><tr style="background-color: #f2f2f2;"><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">項目</th><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">詳細</th></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">所在地</td><td style="border: 1px solid #ddd; padding: 8px;">大阪府大阪市港区海岸通1-1-10</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">アクセス</td><td style="border: 1px solid #ddd; padding: 8px;">Osaka Metro中央線「大阪港駅」徒歩5分</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">営業時間</td><td style="border: 1px solid #ddd; padding: 8px;">10:00〜20:00（最終入館 19:00）<br>※季節により変動あり</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">入館料</td><td style="border: 1px solid #ddd; padding: 8px;">大人（高校生以上）2,700円<br>小中学生 1,400円<br>幼児（3歳以上）700円<br>2歳以下 無料</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">年間パスポート</td><td style="border: 1px solid #ddd; padding: 8px;">大人 5,400円<br>小中学生 2,800円</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">チケット購入</td><td style="border: 1px solid #ddd; padding: 8px;">公式サイト・コンビニ・旅行代理店</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">団体割引</td><td style="border: 1px solid #ddd; padding: 8px;">20名以上で適用、学校団体割引あり</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">駐車場</td><td style="border: 1px solid #ddd; padding: 8px;">有料（天保山マーケットプレース駐車場 約1,000台）</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">施設内サービス</td><td style="border: 1px solid #ddd; padding: 8px;">レストラン、カフェ、ショップ、ベビーカー貸出、ロッカー、多言語パンフレット</td></tr></table><br><br>【2.1 ジンベエザメエリア】<br><br>海遊館の象徴。巨大水槽を悠々と泳ぐジンベエザメは圧巻で、訪れる人々を魅了します。<br><br>【2.2 南極ゾーン】<br><br>ペンギンたちが暮らす人気エリア。氷や雪を再現した空間で、愛らしい姿を間近で観察できます。<br><br>【2.3 熱帯魚エリア】<br><br>カラフルな熱帯魚が群泳する幻想的な水槽。サンゴ礁や熱帯の海を再現し、写真映えスポットとしても人気です。<br><br>【2.4 夜の海遊館（ナイトアクアリウム）】<br><br>夜間限定の特別演出。暗闇とライトアップの中で泳ぐ魚たちは、昼間とは違った幻想的な雰囲気を楽しませてくれます。',
     },
     '25': {
       title: '🏛 中之島公会堂 × 黒執事 聖地巡礼',
@@ -516,30 +504,43 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
   },
   京都: {
     '5': {
-      title: '金閣寺',
-      description: '京都の代表的な寺院。金色に輝く美しい建物',
+      title: '🏯 金閣寺',
+      description: '世界遺産。黄金の舎利殿と池泉回遊式庭園が織りなす京都の象徴。',
       author: 'タビログ編集部',
       heroImage: KyotoHero,
       breadcrumb: ['京都', '北区', '金閣寺'],
       contentTitle: '金閣寺の基本情報',
-      spots: ['鏡湖池', '舎利殿', '庭園'],
+      spots: ['舎利殿「金閣」', '鏡湖池と庭園', '安民沢と龍門滝（庭園奥）', '不動堂と御朱印・茶所'],
       imageLeft: KyotoHero,
       imageRight: KiyoMizuTera,
       content:
-        '金閣寺は金箔に覆われた舎利殿が有名で、鏡湖池に映り込む金色の建物は四季ごとに表情を変えます。雪化粧の冬景色や新緑、紅葉といった自然の移ろいと調和する風景は必見。参道には茶室や庭園の見どころが点在し、拝観後は周辺の和菓子店や茶屋で一服も楽しめます。',
+        '金閣寺は正式名称を鹿苑寺（ろくおんじ）といい、北山文化を象徴する禅寺です。庭園中央の鏡湖池（きょうこち）に映る黄金の舎利殿が最大の見どころ。舎利殿は三層構造で、上層二層は金箔で覆われ、頂には鳳凰が輝きます。各層は寝殿造・武家造・禅宗様と意匠が異なり、建築美の変化が楽しめます。<br>現在の舎利殿は昭和期に再建されたものですが、池泉回遊式庭園と一体となった景観は四季を通じて格別。春の新緑・桜、夏の深緑、秋の紅葉、冬の雪化粧まで、いつ訪れても写真映えします。<br><br>【2.1 舎利殿「金閣」】<br><br>金箔が朝日や夕日に反射して刻々と色味を変える主役スポット。内部拝観は不可で、外観と庭園越しの鑑賞となります。順路に沿って正面→斜め構図→背面と角度を変えながら表情の違いを楽しみましょう。<br><br>【2.2 鏡湖池と庭園】<br><br>池に浮かぶ葦原島・出島などの中島、石組・松の借景が作るミラーリフレクションが名物。風の少ない午前中が水面が安定しておすすめ。池畔の遊歩路からは低めの目線で撮ると金閣の映り込みが綺麗に入ります。<br><br>【2.3 安民沢と龍門滝（庭園奥）】<br><br>順路後半に現れる静謐な池泉「安民沢（あんみんたく）」と小滝。参拝者が少なく、苔と水音に癒やされる穴場のクールダウン。金閣の華やかさと対比的な"侘び寂び"を感じられます。<br><br>【2.4 不動堂と御朱印・茶所】<br><br>出口付近の不動堂では御朱印がいただけます（書き置き対応のことあり）。敷地内の茶所では抹茶と和菓子で一服。参拝の締めに最適です。<br><br><strong>3. 観覧のコツ（ベスト時間／撮影ポイント／混雑回避）</strong><br><br>ベスト時間：開門直後（朝一）または閉門前の遅い午後。逆光を避けるなら午前、金箔をドラマチックに撮るなら夕方の斜光。<br><br>雪化粧の金閣：降雪翌朝は年に数回の神回。公式や天気予報をチェック。<br><br>撮影マナー：三脚・ドローン不可のことが多い／順路は一方通行／立ち止まり過ぎず譲り合い。<br><br>混雑回避：連休・土日は特に混むので平日朝が鉄則。団体の流れと逆にならないよう端で待ってから撮るとスムーズ。<br><br><strong>4. 周辺モデルコース（徒歩＋バス 3〜4時間）</strong><br><br>金閣寺 → 龍安寺（石庭）→ 仁和寺（御室桜・伽藍）<br>　北嵯峨エリアを横移動する鉄板ルート。石庭のミニマリズム、門跡寺院の壮麗、金閣の絢爛を一筆書きで体験できます。時間があれば嵐電で嵐山へ延伸も◎。<br><br><strong>5. アクセス・所要時間・拝観情報（目安）</strong><br><br>所要時間：境内一周45〜70分（混雑時＋撮影多めで90分）。<br><br>アクセス：<br>　・京都駅から京都市バス（例：「金閣寺道／金閣寺前」方面行）で約35〜45分。<br>　・嵐電 北野白梅町駅からバスで約10分。<br><br>拝観：有料／拝観時間：通常 9:00–17:00（季節・行事で変動あり）<br><br>注意：料金・時間は変更の可能性があるため公式最新情報の確認推奨。',
     },
     '6': {
-      title: '清水寺',
-      description: '京都で最も有名な寺院。舞台からの景色が絶景',
+      title: '🏯 清水寺',
+      description: '世界遺産に登録された京都の名刹。清水の舞台から望む絶景は必見。',
       author: 'タビログ編集部',
       heroImage: KyotoHero,
       breadcrumb: ['京都', '東山区', '清水寺'],
       contentTitle: '清水寺の基本情報',
-      spots: ['清水の舞台', '音羽の滝', '三重塔'],
+      spots: ['清水の舞台', '音羽の滝', '三重塔', '子安塔・地主神社'],
       imageLeft: KiyoMizuTera,
       imageRight: KyotoHero,
       content:
-        '清水寺は断崖に張り出した「清水の舞台」で知られ、京都市街を一望できる絶景スポット。音羽の滝での参拝や、三重塔・地主神社など境内の見どころも豊富です。桜・紅葉シーズンの夜間特別拝観は幻想的な光景が広がり、写真好きにも人気です。',
+        '清水寺は西暦778年に創建された歴史ある寺院で、京都を代表する観光名所の一つ。境内は世界文化遺産に登録されており、特に本堂の「清水の舞台」は高さ約13mの木造舞台から京都市街を一望できることで有名です。<br>また「清水の舞台から飛び降りる」という日本語の慣用句はここから生まれたもの。境内には約1000本の桜と紅葉があり、春は桜、秋は紅葉の絶景スポットとしても人気。夜のライトアップは幻想的な雰囲気を演出します。<br><br>【2.1 清水の舞台】<br><br>本堂から突き出した木造舞台。京都市街を一望できるビューポイント。舞台は139本の欅柱で支えられ、構造自体が文化財。<br><br>【2.2 音羽の滝】<br><br>境内奥にある湧水。三筋に分かれた水は「学業成就」「恋愛成就」「延命長寿」のご利益があるとされ、多くの参拝者が行列を作ります。<br><br>【2.3 三重塔】<br><br>鮮やかな朱色の三重塔は、清水寺のシンボルの一つ。青空や紅葉を背景に写真映えするスポット。<br><br>【2.4 子安塔・地主神社】<br><br>子安塔は静かな展望スポットで、清水舞台を見渡せる隠れ撮影ポイント。隣接する地主神社は縁結びの神社として若者に人気。<br><br><strong>3. 観覧のコツ</strong><br><br>ベスト時間：早朝の開門直後（人が少なく光も柔らかい）か、夕方ライトアップ時。<br><br>混雑回避：休日午後は大混雑。平日午前がおすすめ。<br><br>ライトアップ：春・秋には特別夜間拝観が実施され、夜桜や紅葉とともに幻想的な景色が楽しめます。<br><br><strong>4. 周辺モデルコース</strong><br><br>八坂の塔 → 二年坂・三年坂 → 清水寺<br>古都らしい石畳の坂道を散策しながら、最後に清水の舞台で絶景を楽しむ黄金ルート。<br><br><strong>5. アクセス・拝観情報</strong><br><br>所要時間：拝観は1〜1.5時間ほど。混雑時は+30分見積もり。<br><br>アクセス：京都駅から市バス「五条坂」「清水道」下車、徒歩約10分。<br><br>拝観料：有料（大人400円前後）。<br><br>拝観時間：通常6:00–18:00（季節・ライトアップ時に延長あり）。',
+    },
+    '35': {
+      title: '🌸 哲学の道',
+      description: '四季折々の風景が美しい散策路。桜並木で有名な京都の名所。',
+      author: 'タビログ編集部',
+      heroImage: KyotoPass5,
+      breadcrumb: ['京都', '左京区', '哲学の道'],
+      contentTitle: '哲学の道の基本情報',
+      spots: ['桜並木', '法然院', '銀閣寺への道'],
+      imageLeft: KyotoPass5,
+      imageRight: KyotoHero,
+      content:
+        '哲学の道は、京都市左京区に位置する約2kmの石畳の散策路。銀閣寺から南禅寺近くまで続き、運河に沿って整備されています。日本の哲学者・西田幾多郎がここを歩きながら思索にふけったことから「哲学の道」と名付けられました。<br>特に春の桜並木が有名で、約400本のソメイヨシノが咲き誇り、花見スポットとして人気。秋の紅葉や初夏の新緑も美しく、年間を通して多くの観光客が訪れます。<br><br>【2.1 桜並木】<br><br>春になると散策路を覆うように桜が咲き誇り、運河に花びらが舞い落ちる光景は絶景。<br><br>【2.2 法然院】<br><br>苔むした山門と白砂壇が美しい静かな寺院。哲学の道の途中に位置し、ひっそりとした佇まいが魅力。<br><br>【2.3 銀閣寺への道】<br><br>道の北端にある銀閣寺は、哲学の道散策のハイライト。世界遺産としても有名。<br><br><strong>3. 観覧のコツ</strong><br><br>ベストシーズン：桜の春（3月下旬〜4月上旬）、紅葉の秋（11月）。<br><br>混雑回避：朝早くや夕方が比較的空いており、静かに散策できる。<br><br><strong>4. 周辺モデルコース</strong><br><br>南禅寺 → 哲学の道 → 銀閣寺<br>古都らしい寺院と自然を組み合わせた散策ルートで、観光客に人気。<br><br><strong>5. アクセス情報</strong><br><br>所要時間：散策は30分〜1時間ほど。<br><br>アクセス：市バス「銀閣寺前」または「南禅寺・永観堂道」下車すぐ。',
     },
   },
   札幌: {
@@ -837,16 +838,16 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
   金沢: {
     '17': {
       title: '兼六園',
-      description: '金沢の代表的な庭園。日本三名園の一つ',
+      description: '日本三名園の一つに数えられる大名庭園。四季折々の美しさを楽しめる。',
       author: 'タビログ編集部',
       heroImage: KanazawaHero,
       breadcrumb: ['金沢', '兼六町', '兼六園'],
       contentTitle: '兼六園の基本情報',
-      spots: ['徽軫灯籠', '雪吊り', '霞ヶ池'],
+      spots: ['雪吊り（ゆきづり）', '霞ヶ池（かすみがいけ）', '茶屋・休憩所'],
       imageLeft: Kenrokuen,
       imageRight: KanazawaHero,
       content:
-        '兼六園は日本三名園のひとつ。広大な園内には池泉回遊式庭園の趣向が凝らされ、雪吊りや灯籠、曲水など見どころが点在します。冬の雪化粧、春の桜、初夏の新緑、秋の紅葉と、四季の風雅を堪能できます。',
+        '兼六園は、加賀藩の前田家によって江戸時代に整備された庭園で、日本三名園（偕楽園・後楽園と並ぶ）の一つに数えられています。「宏大・幽邃・人力・蒼古・水泉・眺望」の六つの景観を兼ね備えることから「兼六園」と名付けられました。春は桜、夏は新緑、秋は紅葉、冬は雪景色と、一年を通して異なる美しさを楽しむことができます。特に冬の雪吊りは金沢の風物詩として有名で、多くの観光客を魅了しています。<br><br>【2.1 雪吊り（ゆきづり）】<br><br>冬の兼六園を象徴する風景。松の枝が雪の重みで折れないように縄で支える伝統技法で、雪景色と相まって幻想的な光景を作り出します。<br><br>【2.2 霞ヶ池（かすみがいけ）】<br><br>園内最大の池で、中心には「蓬莱島」が浮かび、周囲の景観を美しく映し出します。池越しに見る石灯籠や橋は写真スポットとして人気です。<br><br>【2.3 茶屋・休憩所】<br><br>園内には伝統的な茶屋や休憩所が点在し、抹茶や和菓子を味わいながら庭園の美しさをゆっくり堪能できます。',
     },
     '18': {
       title: '金沢城公園',
