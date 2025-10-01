@@ -1753,24 +1753,6 @@ const SpotDetailPage = () => {
             </div>
           )}
 
-          {/* Extra Images for Shibuya */}
-          {cityKey === '東京' && idKey === '53' && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-              <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                <div
-                  className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${ShibuyaBape})` }}
-                ></div>
-              </div>
-              <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                <div
-                  className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${ShibuyaScramble})` }}
-                ></div>
-              </div>
-            </div>
-          )}
-
           {/* Text */}
           <div className="bg-white rounded-lg p-8 shadow-md">
             <div className="prose prose-lg max-w-none">
