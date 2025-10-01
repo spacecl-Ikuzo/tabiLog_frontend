@@ -409,7 +409,7 @@ const SpotsPage = () => {
         image: SapporoTower,
       },
       {
-        id: 26,
+        id: 115,
         name: 'サッポロビール博物館',
         description: '北海道の代表的なビール工場。歴史と製造工程を学べる',
         tags: ['グルメ・食べ歩き', '工場見学', '北日本'],
@@ -417,7 +417,7 @@ const SpotsPage = () => {
         image: SapporoBeerTaste,
       },
       {
-        id: 27,
+        id: 116,
         name: '円山動物園',
         description: '北海道を代表する動物園。ホッキョクグマやレッサーパンダが人気',
         tags: ['観光地', '家族', '北日本'],
@@ -633,7 +633,7 @@ const SpotsPage = () => {
         image: NikkoToshogu,
       },
       {
-        id: 24,
+        id: 123,
         name: '鎌倉',
         description: '歴史と文化が息づく古都。大仏とアニメの聖地',
         tags: ['文化・歴史', '東日本', '観光地', '鎌倉市'],
@@ -641,7 +641,7 @@ const SpotsPage = () => {
         image: Kamakura,
       },
       {
-        id: 25,
+        id: 124,
         name: '箱根温泉',
         description: '富士山を望む名湯。リラックスできる温泉地',
         tags: ['温泉', 'リゾート', '東日本', '観光地', '箱根町'],
@@ -673,7 +673,7 @@ const SpotsPage = () => {
         image: osushotenkai,
       },
       {
-        id: 30,
+        id: 117,
         name: '熱田神宮',
         description: '日本三大神剣の一つ、草薙剣を祀る神宮',
         tags: ['文化・歴史', '神社', '中部日本', '観光地', '名古屋市'],
@@ -681,7 +681,7 @@ const SpotsPage = () => {
         image: Atsutasinkyu,
       },
       {
-        id: 31,
+        id: 118,
         name: 'SCMAGLEV and Railway Park',
         description: 'JR東海運営。新幹線、リニア展示。鉄道ファンの聖地',
         tags: ['文化・歴史', '科学・技術', '中部日本', '観光地', '名古屋市'],

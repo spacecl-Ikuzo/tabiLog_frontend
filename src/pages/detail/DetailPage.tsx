@@ -760,7 +760,7 @@ const DetailPage = () => {
           )}
 
           {/* Custom Images for Arashiyama × Koe no Katachi */}
-          {planId === 27 && (
+          {planId === 116 && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <div className="bg-white rounded-lg overflow-hidden shadow-md">
                 <div
@@ -777,7 +777,7 @@ const DetailPage = () => {
             </div>
           )}
 
-          {planId === 27 && (
+          {planId === 116 && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <div className="bg-white rounded-lg overflow-hidden shadow-md">
                 <div
@@ -795,7 +795,7 @@ const DetailPage = () => {
           )}
 
           {/* Custom Images for Tempozan × Conan (main pair) */}
-          {planId === 26 && (
+          {planId === 115 && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <div className="bg-white rounded-lg overflow-hidden shadow-md">
                 <div
@@ -1337,7 +1337,7 @@ const DetailPage = () => {
           )}
 
           {/* Extra Images for Okinawa Yacht Tour */}
-          {planId === 25 && (
+          {planId === 124 && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <div className="bg-white rounded-lg overflow-hidden shadow-md">
                 <div
@@ -1367,7 +1367,7 @@ const DetailPage = () => {
           )}
 
           {/* Images for Sapporo Gourmet Tour */}
-          {planId === 30 && (
+          {planId === 117 && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <div className="bg-white rounded-lg overflow-hidden shadow-md">
                 <div
@@ -1385,7 +1385,7 @@ const DetailPage = () => {
           )}
 
           {/* Extra Images for Sapporo Gourmet Tour */}
-          {planId === 30 && (
+          {planId === 117 && (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
               <div className="bg-white rounded-lg overflow-hidden shadow-md">
                 <div
@@ -1445,7 +1445,7 @@ const DetailPage = () => {
           )}
 
           {/* Custom Images for Nakanoshima Kokaido × Black Butler */}
-          {planId === 24 && (
+          {planId === 123 && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <div className="bg-white rounded-lg overflow-hidden shadow-md">
                 <div
@@ -1463,7 +1463,7 @@ const DetailPage = () => {
           )}
 
           {/* Extra Images for Nakanoshima - Additional */}
-          {planId === 24 && (
+          {planId === 123 && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <div className="bg-white rounded-lg overflow-hidden shadow-md">
                 <div
@@ -1481,7 +1481,7 @@ const DetailPage = () => {
           )}
 
           {/* Extra Images for Tempozan × Conan */}
-          {planId === 26 && (
+          {planId === 115 && (
             <>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                 <div className="bg-white rounded-lg overflow-hidden shadow-md">
