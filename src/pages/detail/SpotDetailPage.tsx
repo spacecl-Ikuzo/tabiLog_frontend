@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 // Assets
 import TokyoHero from '../../assets/Tokyo.jpg';
@@ -100,7 +100,21 @@ import GenbakuDome from '../../assets/GenbakuDome.jpg';
 import Miyajima from '../../assets/miyajima.jpg';
 import KanazawaHero from '../../assets/Kanazawa.jpg';
 import Kenrokuen from '../../assets/Kenrokuen.jpg';
+import KenrokuenSpring from '../../assets/kenrokuen-spring-1.jpg';
+import KenrokuenNight from '../../assets/스크린샷 2025-09-21 오후 5.43.45.png';
 import KanazawaCastle from '../../assets/KanazawaCastle.jpg';
+import KanazawaCastle123 from '../../assets/123.jpg';
+import KanazawaCastle12333 from '../../assets/12333.jpg';
+import KanazawaCastle1233 from '../../assets/1233.jpg';
+import Kanazawa_HigashiChaya from '../../assets/Kanazawa_HigashiChaya.jpg';
+import HigashiChaya223 from '../../assets/223.jpg';
+import HigashiChayaScreenshot from '../../assets/스크린샷 2025-09-21 오후 6.19.47.png';
+import Kanazawa_YuwakuOnsen from '../../assets/Kanazawa_YuwakuOnsen.jpg';
+import Oyama1 from '../../assets/Oyama1.jpg';
+import Oyama2 from '../../assets/oyama2.jpg';
+import Oyama3 from '../../assets/oyama3.jpg';
+import Oyama4 from '../../assets/oyama4.jpg';
+import Oyama5 from '../../assets/oyama5.jpg';
 // New images
 import TokyoDisneyland from '../../assets/tokyodisneyland.jpg';
 import DisneyResort from '../../assets/DisneyResort.jpg';
@@ -837,38 +851,63 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
   },
   金沢: {
     '17': {
-      title: '兼六園',
-      description: '日本三名園の一つに数えられる大名庭園。四季折々の美しさを楽しめる。',
+      title: '🪷 兼六園',
+      description: '金沢の代表的な庭園。日本三名園の一つ',
       author: 'タビログ編集部',
-      heroImage: KanazawaHero,
+      heroImage: Kenrokuen,
       breadcrumb: ['金沢', '兼六町', '兼六園'],
       contentTitle: '兼六園の基本情報',
-      spots: ['雪吊り（ゆきづり）', '霞ヶ池（かすみがいけ）', '茶屋・休憩所'],
-      imageLeft: Kenrokuen,
-      imageRight: KanazawaHero,
+      spots: ['桂坂口と噴水', '唐崎松と霞ヶ池', '雪吊りの風景'],
+      imageLeft: KenrokuenNight,
+      imageRight: KenrokuenSpring,
       content:
-        '兼六園は、加賀藩の前田家によって江戸時代に整備された庭園で、日本三名園（偕楽園・後楽園と並ぶ）の一つに数えられています。「宏大・幽邃・人力・蒼古・水泉・眺望」の六つの景観を兼ね備えることから「兼六園」と名付けられました。春は桜、夏は新緑、秋は紅葉、冬は雪景色と、一年を通して異なる美しさを楽しむことができます。特に冬の雪吊りは金沢の風物詩として有名で、多くの観光客を魅了しています。<br><br>【2.1 雪吊り（ゆきづり）】<br><br>冬の兼六園を象徴する風景。松の枝が雪の重みで折れないように縄で支える伝統技法で、雪景色と相まって幻想的な光景を作り出します。<br><br>【2.2 霞ヶ池（かすみがいけ）】<br><br>園内最大の池で、中心には「蓬莱島」が浮かび、周囲の景観を美しく映し出します。池越しに見る石灯籠や橋は写真スポットとして人気です。<br><br>【2.3 茶屋・休憩所】<br><br>園内には伝統的な茶屋や休憩所が点在し、抹茶や和菓子を味わいながら庭園の美しさをゆっくり堪能できます。',
+        '兼六園は、石川県金沢市に位置する日本三名園の一つで、加賀藩前田家が江戸時代に整備した大名庭園です。庭園は約11万平方メートルの広さを誇り、四季折々の美しい景観を楽しむことができます。<br><br>春は桜、夏は新緑、秋は紅葉、冬は雪吊りと、訪れる季節ごとに異なる魅力を見せ、国内外の観光客を惹きつけています。日本最古の噴水や歴史的な茶屋、池や築山など多彩な景観が調和し、加賀百万石の文化を今に伝える貴重なスポットです。<br><br><strong>基本情報（料金・アクセス）</strong><br><br><table style="border-collapse: collapse; width: 100%; margin: 1rem 0;"><tr style="background: #f5f5f5;"><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">項目</th><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">詳細</th></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">所在地</td><td style="border: 1px solid #ddd; padding: 8px;">石川県金沢市丸の内1番</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">アクセス</td><td style="border: 1px solid #ddd; padding: 8px;">JR金沢駅からバスで約15分、「兼六園下」または「広坂・21世紀美術館」下車すぐ</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">開園時間</td><td style="border: 1px solid #ddd; padding: 8px;">3月1日〜10月15日：7:00〜18:00<br>10月16日〜2月末：8:00〜17:00</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">休園日</td><td style="border: 1px solid #ddd; padding: 8px;">年中無休</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">入園料</td><td style="border: 1px solid #ddd; padding: 8px;">大人（18歳以上）：320円<br>子供（6〜17歳）：100円<br>65歳以上・障害者手帳所持者：無料</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">無料開放日</td><td style="border: 1px solid #ddd; padding: 8px;">正月三が日（1月1〜3日）、文化の日（11月3日）</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">駐車場</td><td style="border: 1px solid #ddd; padding: 8px;">周辺に有料駐車場あり（普通車 1時間350円〜）</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">公式サービス</td><td style="border: 1px solid #ddd; padding: 8px;">庭園ガイドツアー、音声ガイド、茶屋利用可</td></tr></table><br>【2.1 桂坂口と噴水】<br><br>庭園の正面入口「桂坂口」付近には、日本最古の自然水圧を利用した噴水があります。高さ3.5mほどの水が吹き上がり、訪れる人々を迎える人気のフォトスポット。<br><br>【2.2 唐崎松と霞ヶ池】<br><br>兼六園の中心にある霞ヶ池のほとりには、琵琶湖から移植されたと伝わる唐崎松が植えられています。池に映る松と景観の美しさは兼六園を象徴する光景。<br><br>【2.3 雪吊りの風景】<br><br>冬になると松の枝を守るために行われる「雪吊り」が庭園を彩ります。雪景色と調和する姿は幻想的で、金沢の冬の風物詩として全国的に有名です。',
     },
     '18': {
-      title: '金沢城公園',
+      title: '🏯 金沢城公園',
       description: '金沢の歴史を感じられる城跡公園',
       author: 'タビログ編集部',
-      heroImage: KanazawaHero,
+      heroImage: KanazawaCastle,
       breadcrumb: ['金沢', '丸の内', '金沢城公園'],
       contentTitle: '金沢城公園の基本情報',
-      spots: ['石川門', '五十間長屋', '玉泉院丸庭園'],
-      imageLeft: KanazawaCastle,
-      imageRight: KanazawaHero,
+      spots: ['石川門', '菱櫓・五十間長屋・橋爪門続櫓（有料エリア）', '玉泉院丸庭園'],
+      imageLeft: KanazawaCastle123,
+      imageRight: KanazawaCastle12333,
       content:
-        '金沢城公園は石川門や五十間長屋など復元された建造物と広い芝生が魅力。加賀百万石の歴史を感じる空間で、兼六園との回遊も楽しめます。夜間ライトアップ時は城郭の白壁が幻想的に浮かび上がります。',
+        '金沢城公園は、加賀藩前田家の居城・金沢城の本丸・二の丸・三の丸跡を中心に整備された城跡公園です。白漆喰（しろしっくい）と鉛瓦、海鼠壁（なまこかべ）が織りなす独特の城郭美が特徴で、石川門や長屋・櫓群など歴史的建造物が復元公開されています。春は桜、初夏は新緑、秋は紅葉、冬は雪景と、四季を通じて散策に最適。夜間ライトアップや特別公開も人気です。<br><br><strong>基本情報（料金・アクセス）</strong><br><br><table style="border-collapse: collapse; width: 100%; margin: 1rem 0;"><tr style="background: #f5f5f5;"><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">項目</th><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">詳細</th></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">所在地</td><td style="border: 1px solid #ddd; padding: 8px;">石川県金沢市丸の内1-1</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">アクセス</td><td style="border: 1px solid #ddd; padding: 8px;">JR金沢駅から路線バス約10〜15分「兼六園下・金沢城」下車すぐ / 兼六園から徒歩連絡可</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">開園時間（公園）</td><td style="border: 1px solid #ddd; padding: 8px;">3/1–10/15 7:00–18:00｜10/16–2月末 8:00–17:00（入園は無料）</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">有料エリア開館</td><td style="border: 1px solid #ddd; padding: 8px;">9:00–16:30（最終入館16:00）※季節により延長あり</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">休館日</td><td style="border: 1px solid #ddd; padding: 8px;">有料エリアは年末年始休みあり（公園は原則無休・荒天時を除く）</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">入場料</td><td style="border: 1px solid #ddd; padding: 8px;">公園：無料／有料エリア（菱櫓・五十間長屋・橋爪門続櫓）：大人320円・小人（6–17歳）100円</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">共通券</td><td style="border: 1px solid #ddd; padding: 8px;">兼六園＋金沢城（有料エリア）共通券：大人500円・小人150円（目安）</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">駐車場</td><td style="border: 1px solid #ddd; padding: 8px;">近隣に有料Pあり（石川門前P・兼六園下P など）</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">サービス</td><td style="border: 1px solid #ddd; padding: 8px;">ボランティアガイド・多言語パンフ・スタンプラリー・季節のライトアップ</td></tr></table><br>【2.1 石川門】<br><br>重要文化財にも指定される表門。白漆喰の壁面と黒い鉛瓦のコントラストが美しく、金沢城の顔とも言える撮影スポット。桜の季節は特に映えます。<br><br>【2.2 菱櫓・五十間長屋・橋爪門続櫓（有料エリア）】<br><br>城の角を守る菱櫓と、延長約90mの直線が壮観な五十間長屋、そして橋爪門続櫓を内部公開。木組み・石垣の復元技法や防御構造を間近で学べ、城好きには必見です。<br><br>【2.3 玉泉院丸庭園】<br><br>2015年に往時の姿で復元された大名庭園。滝・沢・池を立体的に配し、夜間ライトアップ時は一段と幻想的。兼六園とは異なる"城下の庭"の趣を楽しめます。',
+    },
+    '51': {
+      title: '🏮 東茶屋街',
+      description: '江戸時代の雰囲気を色濃く残す金沢の伝統的な茶屋街。紅殻格子と石畳の町並みが魅力。',
+      author: 'タビログ編集部',
+      heroImage: Kanazawa_HigashiChaya,
+      breadcrumb: ['金沢', '東山', '東茶屋街'],
+      contentTitle: '東茶屋街の基本情報',
+      spots: ['茶屋建築（志摩・懐華樓）', '甘味処と金箔スイーツ', '夕暮れの街並み', '芸妓文化とイベント'],
+      imageLeft: HigashiChaya223,
+      imageRight: HigashiChayaScreenshot,
+      content:
+        '東茶屋街は江戸時代に形成された茶屋町で、金沢を代表する観光名所の一つ。格子戸と紅殻格子（べんがらごうし）が並ぶ街並みは、当時の雰囲気をそのまま残しています。国の「重要伝統的建造物群保存地区」に指定されており、石畳の路地や木造建築の美しさは歩くだけで心を惹きつけられます。内部を一般公開している茶屋建築では、かつての芸妓遊びやお座敷文化を学ぶこともでき、金沢の伝統文化を肌で感じられるエリアです。<br><br><strong>2. おすすめスポット</strong><br><br>【2.1 茶屋建築（志摩・懐華樓）】<br><br>国指定重要文化財の「志摩」や、日本最大級の茶屋建築「懐華樓」では、実際に内部を見学でき、江戸の遊芸文化を体験できます。<br><br>【2.2 甘味処と金箔スイーツ】<br><br>金沢名物の金箔を使ったソフトクリームや抹茶スイーツは必食。町歩きと合わせて楽しめます。<br><br>【2.3 夕暮れの街並み】<br><br>昼は観光客で賑わいますが、夕方には人が減り、行灯の灯りとともに幻想的な雰囲気に。写真映えスポットとしても人気です。<br><br>【2.4 芸妓文化とイベント】<br><br>芸妓の舞を鑑賞できる特別公開やイベントもあり、伝統芸能に触れる貴重な機会を提供しています。<br><br><strong>3. 観覧のコツ</strong><br><br>ベスト時間：午前中または夕方。人が少なく落ち着いて散策可能。<br><br>混雑回避：休日午後は大変混雑。平日午前が穴場。<br><br>夜の雰囲気：日没後のライトアップや行灯がともる街並みは、昼とは違った静寂と趣を楽しめます。<br><br><strong>4. 周辺モデルコース</strong><br><br>兼六園 → 金沢城公園 → 東茶屋街<br>金沢の歴史・文化スポットを巡った後、最後に東茶屋街で和スイーツを味わいながら散策する定番コース。<br><br><strong>5. アクセス・観覧情報</strong><br><br>所要時間：1〜2時間程度<br><br>アクセス：金沢駅から北鉄バスで約10分「橋場町」下車、徒歩約5分<br><br>入場料：散策無料（志摩・懐華樓は入館料あり：500〜700円前後）<br><br>営業時間：各店舗 10:00〜17:00頃<br><br>拝観時間：夜間は外観のみ散策可能',
+    },
+    '52': {
+      title: '🏰 尾山神社',
+      description: '加賀藩前田家を祀る、ステンドグラスの神門が特徴的な神社。',
+      author: 'タビログ編集部',
+      heroImage: Oyama1,
+      breadcrumb: ['金沢', '尾山町', '尾山神社'],
+      contentTitle: '尾山神社の基本情報',
+      spots: ['神門（ステンドグラス）', '境内と本殿', '前田利家公とお松の方像'],
+      imageLeft: Oyama2,
+      imageRight: Oyama3,
+      content:
+        '尾山神社は、加賀藩を治めた前田利家公とその正室・お松の方を祀る神社です。最大の特徴は、和・漢・洋の建築様式が融合した「神門」で、明治8年（1875年）に建てられたもの。上部には色鮮やかなステンドグラスがはめ込まれ、日本国内でも珍しいデザインとして知られています。夜間にはライトアップされ幻想的な雰囲気を楽しむことができます。<br><br>境内には、静かな庭園や池、本殿、さらには前田利家公とお松の方の像があり、歴史と美しさを兼ね備えたスポットです。金沢城公園や近江町市場から徒歩圏内で、観光ルートに組み込みやすいのも魅力。<br><br><strong>2. 見どころスポット</strong><br><br>【2.1 神門（ステンドグラス）】<br><br>尾山神社のシンボルともいえる神門。3層構造で、西洋のアーチと和風の屋根を融合させた独特のデザイン。最上部のステンドグラスは日中は光を反射し、夜は内部から灯りがともり幻想的な輝きを放ちます。<br><br>【2.2 境内と本殿】<br><br>静かな境内には緑豊かな庭園や小さな池があり、落ち着いた雰囲気。参道を抜けると本殿があり、歴史を感じさせる荘厳な佇まいです。<br><br>【2.3 前田利家公とお松の方像】<br><br>境内には、加賀百万石の基礎を築いた前田利家と、その妻お松の方の銅像が並んで建っています。夫婦円満や良縁のご利益があるとされ、観光客や地元の人々に親しまれています。<br><br><strong>3. 観覧のコツ</strong><br><br>参拝時間：早朝は人が少なく静かな雰囲気を堪能できます。<br><br>ベスト季節：春は桜、秋は紅葉と神門が調和した景観が特に美しい。<br><br>ライトアップ：神門は夜間にライトアップされ、昼間とは異なる幻想的な姿を見せます。<br><br><strong>4. 周辺モデルコース</strong><br><br>金沢城公園 → 尾山神社 → 近江町市場<br>金沢の歴史と文化を一度に味わえる定番ルート。散策や食べ歩きと合わせて観光できます。<br><br><strong>5. アクセス・拝観情報</strong><br><br>所在地：石川県金沢市尾山町11-1<br><br>アクセス：<br>　・JR金沢駅から北鉄バス「南町」下車、徒歩5分<br>　・金沢城公園から徒歩約10分<br><br>拝観料：無料<br><br>拝観時間：境内自由（神門のライトアップは日没から21:00頃まで）',
     },
   },
 };
 
 const SpotDetailPage = () => {
   const { city, id } = useParams<{ city: string; id: string }>();
-  // const navigate = useNavigate();
-  // const location = useLocation();
+  const navigate = useNavigate();
 
   const cityAliasMap: Record<string, string> = {
     // Korean -> Japanese city name normalization
@@ -916,7 +955,16 @@ const SpotDetailPage = () => {
           <div className="flex items-center space-x-2 text-sm">
             {(detail?.breadcrumb || [cityKey, safeTitle]).map((item, index, arr) => (
               <React.Fragment key={index}>
-                <span className="px-2 py-1 bg-white/20 rounded text-gray-800 font-semibold hover:bg-white/30 transition-colors cursor-pointer">
+                <span
+                  className={`px-2 py-1 bg-white/20 rounded text-gray-800 font-semibold transition-colors ${
+                    index === 0 ? 'hover:bg-white/40 cursor-pointer' : ''
+                  }`}
+                  onClick={() => {
+                    if (index === 0) {
+                      navigate(`/spots?city=${encodeURIComponent(item)}`);
+                    }
+                  }}
+                >
                   {item}
                 </span>
                 {index < arr.length - 1 && <span className="text-gray-500 mx-1">&gt;</span>}
@@ -1003,6 +1051,24 @@ const SpotDetailPage = () => {
               </div>
             </div>
           )}
+          {/* Extra Images for Oyama Shrine (Kanazawa 52) */}
+          {cityKey === '金沢' && idKey === '52' && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${Oyama4})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${Oyama5})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+
           {/* Extra Images for Akihabara (Tokyo 33) */}
           {cityKey === '東京' && idKey === '33' && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">

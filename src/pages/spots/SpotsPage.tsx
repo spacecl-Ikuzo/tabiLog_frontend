@@ -77,8 +77,10 @@ import Otaru_Canal_Winter from '../../assets/Otaru_Canal_Winter.jpg';
 import Tomonoura_Harbor from '../../assets/Tomonoura_Harbor.jpg';
 import Kanazawa_HigashiChaya from '../../assets/Kanazawa_HigashiChaya.jpg';
 import Kanazawa_YuwakuOnsen from '../../assets/Kanazawa_YuwakuOnsen.jpg';
+import Oyama1 from '../../assets/Oyama1.jpg';
 import GionKyoto3 from '../../assets/GionKyoto3.png';
 import Museum21thCentury1 from '../../assets/21thcenturyimage1--8-.png';
+import Museum10066_1 from '../../assets/10066_1_l.jpg';
 import ramenyokocho from '../../assets/ramenyokocho.jpg';
 import zyouzankei from '../../assets/zyouzankei.jpg';
 import rusutsuresort from '../../assets/rusutsuresort.jpg';
@@ -611,11 +613,11 @@ const SpotsPage = () => {
       },
       {
         id: 52,
-        name: '♨️湯涌温泉',
-        description: '金沢の奥座敷。自然に囲まれた静かな温泉地',
-        tags: ['温泉', '西日本', '金沢'],
+        name: '🏰 尾山神社',
+        description: '加賀藩前田家を祀る、ステンドグラスの神門が特徴的な神社',
+        tags: ['文化・歴史', '西日本', '金沢'],
         city: '金沢',
-        image: Kanazawa_YuwakuOnsen,
+        image: Oyama1,
       },
       {
         id: 22,
@@ -954,10 +956,10 @@ const SpotsPage = () => {
     },
     {
       id: 125,
-      title: '🏛️ 金沢21世紀美術館 × グラスリップ 聖地巡礼',
+      title: '🏛 金沢21世紀美術館 × グラスリップ',
       description:
-        'アニメ「グラスリップ」の舞台となった金沢21世紀美術館。現代アートと聖地巡礼を同時に楽しめるスポット。',
-      image: Museum21thCentury1,
+        'アニメ『グラスリップ』の舞台となった金沢21世紀美術館。現代アートと聖地巡礼を同時に楽しめる人気スポット。',
+      image: Museum10066_1,
       author: 'アニメ巡礼編集部',
       type: '一人旅',
       city: '金沢',
@@ -1028,11 +1030,14 @@ const SpotsPage = () => {
     if (selectedCity) {
       // 도시가 선택되면 검색어와 URL 파라미터 초기화
       setSearchQuery('');
-      const newSearchParams = new URLSearchParams(searchParams);
+      const newSearchParams = new URLSearchParams(window.location.search);
       newSearchParams.delete('search');
-      navigate(`/spots?${newSearchParams.toString()}`, { replace: true });
+      const newUrl = `/spots?${newSearchParams.toString()}`;
+      if (window.location.pathname + window.location.search !== newUrl) {
+        navigate(newUrl);
+      }
     }
-  }, [selectedCity, searchParams, navigate]);
+  }, [selectedCity, navigate]);
 
   // 검색어 변경 시 페이지 초기화 및 URL 업데이트
   useEffect(() => {
@@ -1050,7 +1055,7 @@ const SpotsPage = () => {
     // URL이 실제로 변경된 경우에만 네비게이션
     const newUrl = `/spots?${newSearchParams.toString()}`;
     if (window.location.pathname + window.location.search !== newUrl) {
-      navigate(newUrl, { replace: true });
+      navigate(newUrl);
     }
   }, [searchQuery, searchParams, navigate]);
 
@@ -1186,13 +1191,13 @@ const SpotsPage = () => {
                         // URL에서 도시 파라미터 제거
                         const newSearchParams = new URLSearchParams(searchParams);
                         newSearchParams.delete('city');
-                        navigate(`/spots?${newSearchParams.toString()}`, { replace: true });
+                        navigate(`/spots?${newSearchParams.toString()}`);
                       } else {
                         setSelectedCity(destination.name);
                         // URL에 도시 파라미터 추가
                         const newSearchParams = new URLSearchParams(searchParams);
                         newSearchParams.set('city', destination.name);
-                        navigate(`/spots?${newSearchParams.toString()}`, { replace: true });
+                        navigate(`/spots?${newSearchParams.toString()}`);
                       }
                     }}
                   >

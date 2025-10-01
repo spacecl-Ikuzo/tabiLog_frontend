@@ -19,6 +19,9 @@ import OsakaArchitecture5 from '../../assets/OsakaArchitecture5.png';
 import OsakaTempozan from '../../assets/OsakaTempozan.png';
 import OsakaTempozan3 from '../../assets/OsakaTempozan3.png';
 import OsakaTempozan4 from '../../assets/OsakaTempozan4.png';
+import OsakaTempozan5 from '../../assets/OsakaTempozan5.png';
+import OsakaTempozan6 from '../../assets/OsakaTempozan6.png';
+import OsakaTempozan7 from '../../assets/OsakaTempozan7.png';
 import OkinawaResort from '../../assets/OkinawaResort.jpg';
 import theritzcarlton from '../../assets/theritzcarlton.jpg';
 import hotelaribia from '../../assets/hotelaribia.jpg';
@@ -101,6 +104,11 @@ import abasirikosohotel from '../../assets/abasirikosohotel.jpg';
 import norokogo from '../../assets/norokogo.jpg';
 import ohotsukuicebreak from '../../assets/ohotsukuicebreak.jpg';
 import sapporoabasiri from '../../assets/sapporoabasiri.jpg';
+import Museum21thCentury1 from '../../assets/21thcenturyimage1--8-.png';
+import Museum10066_1 from '../../assets/10066_1_l.jpg';
+import Museum10066_6 from '../../assets/10066_6_l.jpg';
+import Museum10066_7 from '../../assets/10066_7_l.jpg';
+import Museum10066_8 from '../../assets/10066_8_l.jpg';
 
 const DetailPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -448,6 +456,18 @@ const DetailPage = () => {
       content:
         '天保山大観覧車は、大阪ベイエリアにある高さ112.5mの巨大観覧車で、世界最大級の規模を誇ります。<br>観覧車からは大阪湾、海遊館、ユニバーサル・スタジオ・ジャパン、そして晴れた日には明石海峡大橋まで見渡せる大パノラマを楽しめます。<br>夜にはライトアップが行われ、季節やイベントごとに色彩豊かな光の演出があり、幻想的な雰囲気に包まれます。<br><br>所在地：大阪市港区海岸通1-1-10<br><br>アクセス：大阪メトロ「大阪港駅」徒歩5分<br><br>営業時間：10:00〜22:00（最終乗車21:30）<br><br>料金：大人 900円 / 子供 500円<br><br>特徴：透明なゴンドラ「シースルーキャビン」あり（数量限定）<br><br><strong>名探偵コナンの聖地シーン</strong><br><br>劇場版『名探偵コナン 純黒の悪夢（ナイトメア）』では、天保山大観覧車が重要なクライマックスシーンに登場。<br>観覧車の中でのアクションと大阪の夜景を背景にした演出がファンの間で語り継がれています。<br>また、花火大会と組み合わせたシーンも印象的で、現地では同じ景色を体感しようと多くのファンが訪れます。<br><br>【2.1 観覧車からの夜景】<br><br>夜のゴンドラから望む大阪湾と街の灯りは、コナン映画のワンシーンを再現できます。<br><br>【2.2 花火と観覧車の演出】<br><br>映画で印象的に描かれた花火と観覧車の組み合わせ。夏のシーズンには実際の花火大会と重なる瞬間も。<br><br>【2.3 大阪港エリア】<br><br>観覧車周辺は海遊館やショッピングモール「天保山マーケットプレース」があり、コナンファンだけでなく家族連れやカップルにも人気の観光スポットです。',
     },
+    125: {
+      title: '🏛 金沢21世紀美術館 × グラスリップ',
+      description: 'アニメ『グラスリップ』の舞台となった金沢21世紀美術館。現代アートと聖地巡礼を同時に楽しめる人気スポット。',
+      author: 'アニメ巡礼編集部',
+      image: Museum10066_1,
+      heroImage: Museum10066_1,
+      breadcrumb: ['金沢', '広坂', '金沢21世紀美術館'],
+      contentTitle: '金沢21世紀美術館の基本情報',
+      spots: ['レアンドロのプール', '円形の建築デザイン', '現代アート展示室'],
+      content:
+        '2004年に開館した金沢21世紀美術館は、ガラス張りの円形建築が特徴的な現代アートの拠点。国内外のアーティストによる企画展や常設展示が楽しめ、金沢観光の定番スポットとして知られています。建物は「市民に開かれた美術館」をコンセプトに設計されており、誰でも自由に散策できる屋外展示や無料ゾーンも多いのが魅力です。<br><br><strong>2. 『グラスリップ』との関わり</strong><br><br>アニメ『グラスリップ』は、透明感のある映像美で人気を集めた作品。その舞台の一つとして登場するのがこの金沢21世紀美術館です。キャラクターたちが集い、思いを語る場面に使用され、ファンの間では**「現実とアニメが重なる特別な場所」**として聖地巡礼スポットとなっています。<br><br><strong>3. 見どころスポット</strong><br><br>【3.1 レアンドロのプール】<br><br>館内で最も人気のある展示の一つ。水の中から外を見上げるような不思議な体験ができ、アニメにも登場したシーンを思い出すことができます。<br><br>【3.2 円形の建築デザイン】<br><br>直径113mの円形建築は、美術館そのものがアート作品。ガラスの壁越しに光が差し込み、時間帯によって全く違う表情を見せます。<br><br>【3.3 現代アート展示室】<br><br>国内外の前衛的な作品が常時展示されており、アニメファンだけでなくアート好きにもおすすめ。<br><br><strong>4. 聖地巡礼の楽しみ方</strong><br><br>アニメのシーンを意識しながら館内を巡ると、キャラクターたちの視点を追体験できます。<br><br>美術館周辺の芝生広場やガラス回廊も撮影スポットとして人気。<br><br>夜にはライトアップされ、幻想的な雰囲気が広がります。<br><br><strong>5. アクセス・観覧情報</strong><br><br>所在地：石川県金沢市広坂1-2-1<br><br>アクセス：JR金沢駅から北鉄バス「香林坊」下車、徒歩5分<br><br>開館時間：10:00–18:00（金・土は20:00まで）<br><br>休館日：月曜（祝日の場合は翌日休館）<br><br>観覧料：常設展310円、企画展は内容により変動',
+    },
   };
 
   const planId = id ? parseInt(id) : 103;
@@ -532,6 +552,8 @@ const DetailPage = () => {
             planId !== 113 &&
             planId !== 108 &&
             planId !== 104 &&
+            planId !== 124 &&
+            planId !== 125 &&
             planId !== 130 && (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 <div className="bg-white rounded-lg overflow-hidden shadow-md">
@@ -1049,6 +1071,76 @@ const DetailPage = () => {
                   <div
                     className="h-64 bg-cover bg-center bg-no-repeat"
                     style={{ backgroundImage: `url(${TogetsukyoBridge4})` }}
+                  ></div>
+                </div>
+              </div>
+            </>
+          )}
+
+          {/* Extra Images for 21st Century Museum × Glass Lip */}
+          {planId === 125 && (
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                  <div
+                    className="h-64 bg-cover bg-center bg-no-repeat"
+                    style={{ backgroundImage: `url(${Museum21thCentury1})` }}
+                  ></div>
+                </div>
+                <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                  <div
+                    className="h-64 bg-cover bg-center bg-no-repeat"
+                    style={{ backgroundImage: `url(${Museum10066_6})` }}
+                  ></div>
+                </div>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                  <div
+                    className="h-64 bg-cover bg-center bg-no-repeat"
+                    style={{ backgroundImage: `url(${Museum10066_8})` }}
+                  ></div>
+                </div>
+                <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                  <div
+                    className="h-64 bg-cover bg-center bg-no-repeat"
+                    style={{ backgroundImage: `url(${Museum10066_7})` }}
+                  ></div>
+                </div>
+              </div>
+            </>
+          )}
+
+          {/* Extra Images for Tempozan Ferris Wheel × Detective Conan */}
+          {planId === 124 && (
+            <>
+              {/* 세로 사진들 - 원본 비율 유지 */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div className="bg-black rounded-lg overflow-hidden shadow-md">
+                  <div
+                    className="h-[40rem] bg-contain bg-center bg-no-repeat"
+                    style={{ backgroundImage: `url(${OsakaTempozan4})` }}
+                  ></div>
+                </div>
+                <div className="bg-black rounded-lg overflow-hidden shadow-md">
+                  <div
+                    className="h-[40rem] bg-contain bg-center bg-no-repeat"
+                    style={{ backgroundImage: `url(${OsakaTempozan7})` }}
+                  ></div>
+                </div>
+              </div>
+              {/* 가로 사진들 - 기존 비율 */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                  <div
+                    className="h-64 bg-cover bg-center bg-no-repeat"
+                    style={{ backgroundImage: `url(${OsakaTempozan3})` }}
+                  ></div>
+                </div>
+                <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                  <div
+                    className="h-64 bg-cover bg-center bg-no-repeat"
+                    style={{ backgroundImage: `url(${OsakaTempozan6})` }}
                   ></div>
                 </div>
               </div>
