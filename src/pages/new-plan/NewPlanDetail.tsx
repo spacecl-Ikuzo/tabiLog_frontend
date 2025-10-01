@@ -159,7 +159,7 @@ export default function NewPlanDetail() {
         region: plan.region || '',
         prefecture: plan.prefecture || '',
         image: null,
-        imagePreview: plan.prefectureImageUrl ? `${import.meta.env.VITE_API_URL}${plan.prefectureImageUrl}` : null,
+        imagePreview: plan.prefectureImageUrl ? (plan.prefectureImageUrl.startsWith('http') ? plan.prefectureImageUrl : `${import.meta.env.VITE_API_URL}${plan.prefectureImageUrl}`) : null,
       }));
     }
   }, [plan]);

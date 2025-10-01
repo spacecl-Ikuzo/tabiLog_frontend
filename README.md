@@ -67,7 +67,17 @@ yarn install
 
 ### 환경 설정
 
-`.env.example` 파일을 참고하여 `.env` 파일을 생성하고 필요한 환경 변수를 설정하세요.
+프로젝트 루트에 `.env.local` 파일을 생성하고 다음 환경 변수를 설정하세요:
+
+```bash
+# API 설정
+VITE_API_URL=http://localhost:8080/api
+
+# Google Maps API 키 (Google Cloud Console에서 발급받은 키)
+VITE_GOOGLE_MAPS_API_KEY=your_google_maps_api_key_here
+```
+
+**중요**: `.env.local` 파일은 Git에 커밋되지 않으므로, 실제 API 키를 안전하게 보관할 수 있음.
 
 ### 개발 서버 실행
 
