@@ -217,6 +217,19 @@ const DetailPage = () => {
       content:
         '「この世界の片隅に」は、こうの史代による漫画を原作とし、片渕須直監督によって2016年に映画化された感動的なアニメーション作品です。第二次世界大戦中の広島市・呉市を舞台に、主人公・浦野すずの戦時中の日常を描いた作品で、国内外で高い評価を受けています。<br><br>【基本情報】<br>原作：こうの史代（漫画）<br>映画化監督・脚本：片渕須直（2016年公開）<br>舞台：第二次世界大戦中の広島市・呉市など<br>主人公：浦野すず（戦時中を生きるごく普通の女性）<br><br>【2.1 三ツ蔵（旧澤原家住宅／澤田屋）】<br>呉市中心部近く<br>すずが嫁いでから日常を過ごす町の家並みの象徴的な建物。映画でも外観がほぼそのまま描かれています。作品ファンによる聖地巡礼の重要なスポットです。<br><br>【2.2 小春橋】<br>呉市、堺川にかかる橋<br>すずと周作が2人で語り合うシーンなど、印象的な橋の風景が描かれた場所。映画の重要なシーンの舞台となっています。<br><br>【2.3 二河公園】<br>呉市<br>桜の木の下など、すずさんが関わる場面のイメージの場所として注目。聖地巡礼のコースにも入っており、作品の雰囲気を感じられるスポットです。<br><br>【聖地巡礼・コラボ情報】<br>・ロケーションマップ：呉市などで、映画に登場する場所をマップ化して配布<br>・スタンプラリー：「待っとるよ 呉」スタンプラリーイベント実施<br>・再上映・舞台挨拶：終戦80年記念で片渕監督や声優「のん」の舞台挨拶イベント実施<br>・広島市江波（えば）周辺：映画・原作に出てくる広島市内の地区',
     },
+    101: {
+      title: 'この世界の片隅に × 広島市',
+      description: '戦時中の広島市を舞台とした感動のアニメ映画聖地巡礼',
+      author: 'タビログ編集部',
+      image: Hirosima12,
+      heroImage: konosekaiguresi,
+      imageRight: konosekaiguresi,
+      breadcrumb: ['広島', '広島市', 'この世界の片隅に'],
+      contentTitle: 'この世界の片隅に × 広島市の基本情報',
+      spots: ['広島市江波地区', '平和記念公園周辺', '広島市内の聖地'],
+      content:
+        '「この世界の片隅に」は、こうの史代による漫画を原作とし、片渕須直監督によって2016年に映画化された感動的なアニメーション作品です。第二次世界大戦中の広島市・呉市を舞台に、主人公・浦野すずの戦時中の日常を描いた作品で、国内外で高い評価を受けています。<br><br>【基本情報】<br>原作：こうの史代（漫画）<br>映画化監督・脚本：片渕須直（2016年公開）<br>舞台：第二次世界大戦中の広島市・呉市など<br>主人公：浦野すず（戦時中を生きるごく普通の女性）<br><br>【2.1 広島市江波（えば）地区】<br>広島市西区江波<br>映画・原作に出てくる広島市内の地区として描かれた場所。戦前の広島の街並みや人々の生活が描かれています。現在も当時の面影を残す地域として、作品ファンによる聖地巡礼の重要なスポットです。<br><br>【2.2 平和記念公園周辺】<br>広島市中区中島町<br>戦後の広島の復興と平和への願いが込められた場所。映画では戦後のシーンで重要な役割を果たし、主人公たちの想いが込められた場所として描かれています。平和の象徴として多くの人々が訪れる場所です。<br><br>【2.3 広島市内の聖地】<br>広島市各所<br>映画に登場する広島市内の様々な場所。戦前の広島の街並み、人々の生活、そして戦後の復興の様子が描かれており、作品の世界観を感じられるスポットが点在しています。<br><br>【聖地巡礼・コラボ情報】<br>・ロケーションマップ：広島市・呉市などで、映画に登場する場所をマップ化して配布<br>・スタンプラリー：「待っとるよ 呉」スタンプラリーイベント実施<br>・再上映・舞台挨拶：終戦80年記念で片渕監督や声優「のん」の舞台挨拶イベント実施<br>・広島市江波（えば）周辺：映画・原作に出てくる広島市内の地区',
+    },
     10: {
       title: '🎬 崖の上のポニョ × 鞆の浦',
       description:
@@ -666,8 +679,40 @@ const DetailPage = () => {
             </div>
           )}
 
+          {/* Custom Images for In This Corner of the World × Hiroshima */}
+          {planId === 101 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${konosekakoharubashi})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${konosekanikoukoen})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+
           {/* Extra Images for In This Corner of the World */}
           {planId === 9 && plan.extraImages && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              {plan.extraImages.map((image, index) => (
+                <div key={index} className="bg-white rounded-lg overflow-hidden shadow-md">
+                  <div
+                    className="h-64 bg-cover bg-center bg-no-repeat"
+                    style={{ backgroundImage: `url(${image})` }}
+                  ></div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Extra Images for In This Corner of the World × Hiroshima */}
+          {planId === 101 && plan.extraImages && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               {plan.extraImages.map((image, index) => (
                 <div key={index} className="bg-white rounded-lg overflow-hidden shadow-md">
