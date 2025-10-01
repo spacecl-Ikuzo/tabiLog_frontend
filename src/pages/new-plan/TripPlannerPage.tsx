@@ -3,44 +3,28 @@ import { useSearchParams, useNavigate } from 'react-router-dom';
 import SpotSearchDialog from '@/components/SpotSearchDialog';
 import GoogleMapView from '@/components/GoogleMapView';
 import DepartureTimeDialog from './components/DepartureTimeDialog';
+import MobileSpotList from './components/MobileSpotList';
+import ItineraryPlanner from './components/ItineraryPlanner';
+import EditSpotDialog from './components/EditSpotDialog';
+import CostDialog from './components/CostDialog';
+import SaveConfirmationDialog from './components/SaveConfirmationDialog';
 import { axiosInstance } from '@/api/axios';
-import {
-  Plus,
-  MapPin,
-  Trash2,
-  Edit,
-  ArrowLeft,
-  ArrowRight,
-  ChevronUp,
-  ChevronDown,
-  GripVertical,
-  Calculator,
-  Save,
-  X,
-} from 'lucide-react';
+import { ArrowLeft, ArrowRight, MapPin } from 'lucide-react';
 import { getExpensesByPlan } from '@/api/api';
 import Header from '@/components/layout/header';
-import SvgIcon from '@/components/ui/SvgIcon';
 import { useUserStore } from '@/store';
-import {
-  DndContext,
-  closestCenter,
-  KeyboardSensor,
-  PointerSensor,
-  useSensor,
-  useSensors,
-  DragEndEvent,
-} from '@dnd-kit/core';
-import {
-  arrayMove,
-  SortableContext,
-  sortableKeyboardCoordinates,
-  verticalListSortingStrategy,
-} from '@dnd-kit/sortable';
-import { useSortable } from '@dnd-kit/sortable';
-import { CSS } from '@dnd-kit/utilities';
+import { arrayMove } from '@dnd-kit/sortable';
+import type { DragEndEvent } from '@dnd-kit/core';
 import { Plan, Spot, Expense, PlanMember, DailyPlan } from '@/lib/type';
 import { AxiosError } from 'axios';
+import {
+  getEndTime,
+  parseDurationToMinutes,
+  calculateTotalCost,
+  getDayDate,
+  getLastSpotEndTime,
+  convertTransitToWalking,
+} from './utils/tripPlannerUtils';
 
 interface TravelSegment {
   duration: string;
@@ -51,206 +35,6 @@ interface TravelSegment {
   originalMode?: 'walking' | 'driving' | 'transit';
   isZeroResults?: boolean;
 }
-
-// 드래그 앤 드롭을 위한 SortableSpotItem 컴포넌트
-interface SortableSpotItemProps {
-  spot: Spot;
-  spotIndex: number;
-  totalSpots: number;
-  onEdit: (spot: Spot) => void;
-  onDelete: (day: number, spotId: number) => void;
-  onMoveUp: (day: number, spotIndex: number) => void;
-  onMoveDown: (day: number, spotIndex: number) => void;
-  onCalculateCost: (spot: Spot) => void;
-  day: number;
-  getEndTime: (startTime: string, duration: string) => string;
-  nextSegment?: TravelSegment;
-  spotExpenses: Record<number, Expense[]>;
-  userRole: string;
-}
-
-const SortableSpotItem: React.FC<SortableSpotItemProps> = ({
-  spot,
-  spotIndex,
-  totalSpots,
-  onEdit,
-  onDelete,
-  onMoveUp,
-  onMoveDown,
-  onCalculateCost,
-  day,
-  getEndTime,
-  nextSegment,
-  spotExpenses,
-  userRole,
-}) => {
-  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: spot.id });
-
-  const style = {
-    transform: CSS.Transform.toString(transform),
-    transition,
-    opacity: isDragging ? 0.5 : 1,
-  };
-
-  return (
-    <div ref={setNodeRef} style={style} className="relative">
-      <div className="bg-white border border-gray-200 rounded-lg p-4 mb-4 shadow-sm hover:shadow-md transition-shadow">
-        <div className="flex items-start justify-between">
-          {/* 드래그 핸들과 순서 변경 버튼 - VIEWER 역할이 아닐 때만 표시 */}
-          {userRole !== 'VIEWER' && (
-            <div className="flex flex-col items-center mr-3 space-y-1">
-              <button
-                {...attributes}
-                {...listeners}
-                className="p-1 text-gray-400 hover:text-gray-600 transition-colors cursor-grab active:cursor-grabbing"
-                title="드래그하여 순서 변경"
-              >
-                <GripVertical className="w-4 h-4" />
-              </button>
-              <div className="flex flex-col space-y-1">
-                <button
-                  onClick={() => onMoveUp(day, spotIndex)}
-                  disabled={spotIndex === 0}
-                  className={`p-1 rounded transition-colors ${
-                    spotIndex === 0
-                      ? 'text-gray-300 cursor-not-allowed'
-                      : 'text-gray-400 hover:text-gray-600 hover:bg-gray-100'
-                  }`}
-                  title="위로 이동"
-                >
-                  <ChevronUp className="w-3 h-3" />
-                </button>
-                <button
-                  onClick={() => onMoveDown(day, spotIndex)}
-                  disabled={spotIndex === totalSpots - 1}
-                  className={`p-1 rounded transition-colors ${
-                    spotIndex === totalSpots - 1
-                      ? 'text-gray-300 cursor-not-allowed'
-                      : 'text-gray-400 hover:text-gray-600 hover:bg-gray-100'
-                  }`}
-                  title="아래로 이동"
-                >
-                  <ChevronDown className="w-3 h-3" />
-                </button>
-              </div>
-            </div>
-          )}
-
-          {/* 관광지 정보 */}
-          <div className="flex-1">
-            <div className="flex items-start justify-between mb-2">
-              <div className="flex items-center space-x-2">
-                <MapPin className="w-4 h-4 text-blue-500" />
-                <h3 className="font-medium text-gray-900">{spot.location}</h3>
-              </div>
-              {/* 편집 및 삭제 버튼 - VIEWER 역할이 아닐 때만 표시 */}
-              {userRole !== 'VIEWER' && (
-                <div className="flex items-center space-x-2">
-                  <button
-                    onClick={() => onEdit(spot)}
-                    className="p-1 text-gray-400 hover:text-blue-600 transition-colors"
-                    title="편집"
-                  >
-                    <Edit className="w-4 h-4" />
-                  </button>
-                  <button
-                    onClick={() => onDelete(day, spot.id)}
-                    className="p-1 text-gray-400 hover:text-red-600 transition-colors"
-                    title="삭제"
-                  >
-                    <Trash2 className="w-4 h-4" />
-                  </button>
-                </div>
-              )}
-            </div>
-
-            <p className="text-sm text-gray-600 mb-2">{spot.address}</p>
-
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-4 text-sm text-gray-500">
-                <div className="flex items-center space-x-1">
-                  <SvgIcon name="clock" size={16} className="text-gray-500" />
-                  <span>
-                    {spot.time} - {getEndTime(spot.time, spot.duration)}
-                  </span>
-                </div>
-                <div className="flex items-center space-x-1">
-                  <SvgIcon name="clock" size={16} className="text-gray-500" />
-                  <span>{spot.duration}</span>
-                </div>
-                {spot.rating && spot.rating > 0 && (
-                  <div className="flex items-center space-x-1">
-                    <span>⭐</span>
-                    <span>
-                      {spot.rating.toFixed(1)} ({spot.userRatingsTotal?.toLocaleString()}件のレビュー)
-                    </span>
-                  </div>
-                )}
-              </div>
-
-              <div className="flex flex-col items-end space-y-2">
-                {/* 지출 정보 표시 */}
-                {(() => {
-                  const expenses = spotExpenses[spot.id];
-                  console.log(`=== 지출 정보 표시 (spotId: ${spot.id}) ===`);
-                  console.log('spotExpenses 전체:', spotExpenses);
-                  console.log('현재 spot.id:', spot.id);
-                  console.log('expenses:', expenses);
-                  console.log('expenses length:', expenses?.length);
-                  console.log('expenses type:', typeof expenses);
-
-                  if (expenses && expenses.length > 0) {
-                    const total = expenses.reduce((sum: number, expense: Expense) => {
-                      console.log('expense:', expense, 'amount:', expense.amount);
-                      return sum + expense.amount;
-                    }, 0);
-                    console.log('total amount:', total);
-                    return <span className="text-sm font-bold text-gray-900">{total.toLocaleString()}円</span>;
-                  } else {
-                    console.log('expenses가 없거나 비어있음');
-                  }
-                  return null;
-                })()}
-
-                {/* 비용 계산 버튼 - VIEWER 역할이 아닐 때만 표시 */}
-                {userRole !== 'VIEWER' && (
-                  <button
-                    onClick={() => onCalculateCost(spot)}
-                    className="flex items-center space-x-1 px-3 py-1.5 bg-orange-500 text-white text-sm font-medium rounded-lg hover:bg-orange-600 transition-colors shadow-sm"
-                    title="비용 계산"
-                  >
-                    <Calculator className="w-4 h-4" />
-                    <span>コスト</span>
-                  </button>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* 이동 정보 */}
-      {nextSegment && (
-        <div className="flex items-center justify-center mb-4">
-          <div className="flex items-center space-x-2 bg-gray-50 px-3 py-2 rounded-lg">
-            <SvgIcon
-              name={nextSegment.transportMode === 'walking' ? 'walking' : 'car'}
-              size={16}
-              className="text-gray-600"
-            />
-            <span className="text-sm text-gray-600">{nextSegment.duration}</span>
-            {nextSegment.isZeroResults && (
-              <span className="text-xs text-red-600 bg-red-100 px-2 py-1 rounded">⚠️ 경로없음</span>
-            )}
-            <div className="w-4 h-4 bg-blue-500 rounded flex items-center justify-center">
-              <ArrowRight className="w-3 h-3 text-white" />
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-};
 
 interface DepartureTime {
   hour: number;
@@ -449,28 +233,7 @@ const TripPlannerPage = () => {
     }
   }, [activeDay, planData]);
 
-  // TRANSIT 모드를 WALKING 모드로 변경하는 함수
-  const convertTransitToWalking = (spots: Record<number, Spot[]>) => {
-    const convertedSpots: Record<number, Spot[]> = {};
-    Object.keys(spots).forEach((day) => {
-      const dayNum = parseInt(day);
-      convertedSpots[dayNum] = spots[dayNum].map((spot) => ({
-        ...spot,
-        transportMode: spot.transportMode === 'transit' ? 'walking' : spot.transportMode,
-      }));
-    });
-    return convertedSpots;
-  };
-
   const [travelSegments, setTravelSegments] = useState<Record<number, TravelSegment[]>>({});
-
-  // 드래그 앤 드롭을 위한 센서 설정
-  const sensors = useSensors(
-    useSensor(PointerSensor),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates,
-    }),
-  );
 
   // 계획 데이터 로드
   useEffect(() => {
@@ -871,7 +634,7 @@ const TripPlannerPage = () => {
       const travelTime = await calculateTravelTime(lastSpot, newSpot);
 
       // 이전 관광지의 종료 시간 + 이동 시간 = 도착 시간
-      const lastSpotEndTime = getLastSpotEndTime(currentSpots);
+      const lastSpotEndTime = getLastSpotEndTime(currentSpots, departureTime);
       arrivalTime = {
         hour: lastSpotEndTime.hour,
         minute: lastSpotEndTime.minute,
@@ -903,32 +666,6 @@ const TripPlannerPage = () => {
       const lastSpot = currentSpots[currentSpots.length - 1];
       await addTravelSegment(lastSpot, spotWithDuration);
     }
-  };
-
-  // 마지막 관광지의 종료 시간 계산 (체류 시간 포함)
-  const getLastSpotEndTime = (spots: Spot[]) => {
-    if (spots.length === 0) return departureTime;
-
-    const lastSpot = spots[spots.length - 1];
-    const [startHour, startMinute] = lastSpot.time.split(':').map(Number);
-
-    // 체류시간을 분으로 변환
-    let durationMinutes = 0;
-    if (lastSpot.duration.includes('時間')) {
-      const hours = parseInt(lastSpot.duration.match(/(\d+)時間/)?.[1] || '0');
-      durationMinutes += hours * 60;
-    }
-    if (lastSpot.duration.includes('分')) {
-      const minutes = parseInt(lastSpot.duration.match(/(\d+)分/)?.[1] || '0');
-      durationMinutes += minutes;
-    }
-
-    // 종료시간 계산 (시작시간 + 체류시간)
-    const totalMinutes = startHour * 60 + startMinute + durationMinutes;
-    const endHour = Math.floor(totalMinutes / 60) % 24;
-    const endMinute = totalMinutes % 60;
-
-    return { hour: endHour, minute: endMinute };
   };
 
   // 백엔드 Directions API를 사용한 실제 이동 시간 계산
@@ -1047,40 +784,6 @@ const TripPlannerPage = () => {
       console.error('백엔드 Directions API 호출 실패:', error);
       return 15; // 기본값
     }
-  };
-
-  // 시간 텍스트를 분으로 변환하는 함수
-  const parseDurationToMinutes = (durationText: string): number => {
-    console.log('파싱할 시간 텍스트:', durationText);
-
-    // 영어 형태: "56 mins", "1 hour 30 mins", "2 hours" 등
-    const hourMatchEn = durationText.match(/(\d+)\s*hour/);
-    const minuteMatchEn = durationText.match(/(\d+)\s*min/);
-
-    // 한국어/일본어 형태: "15분", "1시간 30분", "2시간" 등
-    const hourMatchKo = durationText.match(/(\d+)시간/);
-    const minuteMatchKo = durationText.match(/(\d+)분/);
-
-    let totalMinutes = 0;
-
-    // 영어 형태 처리
-    if (hourMatchEn) {
-      totalMinutes += parseInt(hourMatchEn[1]) * 60;
-    }
-    if (minuteMatchEn) {
-      totalMinutes += parseInt(minuteMatchEn[1]);
-    }
-
-    // 한국어/일본어 형태 처리
-    if (hourMatchKo) {
-      totalMinutes += parseInt(hourMatchKo[1]) * 60;
-    }
-    if (minuteMatchKo) {
-      totalMinutes += parseInt(minuteMatchKo[1]);
-    }
-
-    console.log('파싱된 총 분:', totalMinutes);
-    return totalMinutes || 15; // 기본값 15분
   };
 
   // 이동 시간 세그먼트 추가
@@ -1543,46 +1246,6 @@ const TripPlannerPage = () => {
     );
   };
 
-  // 총 비용 계산 (Expense 데이터만 사용, Spot.cost는 무시)
-  const calculateTotalCost = (daySpots: Spot[]) => {
-    return daySpots.reduce((total, spot) => {
-      const expenses = spotExpenses[spot.id] || [];
-
-      // spotExpenses에 데이터가 있으면 그것을 사용, 없으면 0
-      if (expenses.length > 0) {
-        const expenseTotal = expenses.reduce((sum, expense) => sum + expense.amount, 0);
-        console.log(`Spot ${spot.id} (${spot.location}): Expense 총액 = ${expenseTotal}`);
-        return total + expenseTotal;
-      } else {
-        console.log(`Spot ${spot.id} (${spot.location}): Expense 없음, 0으로 처리`);
-        return total + 0; // Spot.cost는 무시하고 0으로 처리
-      }
-    }, 0);
-  };
-
-  // 종료시간 계산 함수
-  const getEndTime = (startTime: string, duration: string): string => {
-    const [startHour, startMinute] = startTime.split(':').map(Number);
-
-    // 체류시간을 분으로 변환
-    let durationMinutes = 0;
-    if (duration.includes('時間')) {
-      const hours = parseInt(duration.match(/(\d+)時間/)?.[1] || '0');
-      durationMinutes += hours * 60;
-    }
-    if (duration.includes('分')) {
-      const minutes = parseInt(duration.match(/(\d+)分/)?.[1] || '0');
-      durationMinutes += minutes;
-    }
-
-    // 종료시간 계산
-    const totalMinutes = startHour * 60 + startMinute + durationMinutes;
-    const endHour = Math.floor(totalMinutes / 60) % 24;
-    const endMinute = totalMinutes % 60;
-
-    return `${endHour.toString().padStart(2, '0')}:${endMinute.toString().padStart(2, '0')}`;
-  };
-
   // 드래그 시작 핸들러
   const handleMouseDown = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -1628,470 +1291,9 @@ const TripPlannerPage = () => {
     };
   }, [isDragging, handleMouseMove]);
 
-  // 모바일용 스팟 리스트 컴포넌트
-  const MobileSpotList = () => {
-    const currentSpots = spots[activeDay] || [];
-    const currentSegments = travelSegments[activeDay] || [];
-
-    return (
-      <div className="p-3">
-        {/* 현재 날짜 정보 */}
-        <div className="px-3 py-2 bg-pink-500 text-white rounded-lg mb-3">
-          <div className="flex items-center justify-between">
-            <span className="text-sm font-medium">
-              {(() => {
-                const dayNames = [
-                  '一日目',
-                  '二日目',
-                  '三日目',
-                  '四日目',
-                  '五日目',
-                  '六日目',
-                  '七日目',
-                  '八日目',
-                  '九日目',
-                  '十日目',
-                ];
-                const weekDays = ['日曜日', '月曜日', '火曜日', '水曜日', '木曜日', '金曜日', '土曜日'];
-
-                if (planData?.dailyPlans && planData.dailyPlans[activeDay - 1]) {
-                  const visitDate = new Date(planData.dailyPlans[activeDay - 1].visitDate);
-                  const dayOfWeek = weekDays[visitDate.getDay()];
-                  return `${dayNames[activeDay - 1]}: ${dayOfWeek}`;
-                }
-
-                // 기본값: startDate와 endDate로 요일 계산
-                if (planData?.startDate) {
-                  const startDate = new Date(planData.startDate);
-                  const targetDate = new Date(startDate);
-                  targetDate.setDate(startDate.getDate() + (activeDay - 1));
-                  const dayOfWeek = weekDays[targetDate.getDay()];
-                  return `${dayNames[activeDay - 1]}: ${dayOfWeek}`;
-                }
-
-                return activeDay === 1 ? '一日目: 火曜日' : activeDay === 2 ? '二日目: 木曜日' : '三日目: 金曜日';
-              })()}
-            </span>
-            <button
-              onClick={() => setIsDepartureTimeDialogOpen(true)}
-              className="text-xs bg-white text-pink-600 px-3 py-1 rounded hover:bg-gray-50 transition-colors font-medium"
-            >
-              ⏰ {departureTime.hour.toString().padStart(2, '0')}:{departureTime.minute.toString().padStart(2, '0')}
-            </button>
-          </div>
-        </div>
-
-        {/* 스팟 리스트 */}
-        {currentSpots.length === 0 ? (
-          <div className="text-center py-8">
-            <MapPin className="w-12 h-12 text-gray-300 mx-auto mb-3" />
-            <h3 className="text-base font-medium text-gray-900 mb-2">まだ観光地がありません</h3>
-            <p className="text-sm text-gray-500 mb-4">観光地を追加して旅行計画を立ててみましょう</p>
-          </div>
-        ) : (
-          <div className="space-y-3">
-            {currentSpots.map((spot, index) => {
-              const nextSegment = currentSegments.find(
-                (segment) => segment.fromSpot?.id === spot.id && segment.toSpot?.id === currentSpots[index + 1]?.id,
-              );
-
-              return (
-                <div key={spot.id}>
-                  {/* 스팟 카드 */}
-                  <div className="bg-white border border-gray-200 rounded-lg p-3 shadow-sm">
-                    <div className="flex items-start justify-between mb-2">
-                      <div className="flex items-center space-x-2">
-                        <MapPin className="w-4 h-4 text-blue-500" />
-                        <h3 className="font-medium text-gray-900 text-sm">{spot.location}</h3>
-                      </div>
-                      {/* 편집 및 삭제 버튼 - VIEWER 역할이 아닐 때만 표시 */}
-                      {userRole !== 'VIEWER' && (
-                        <div className="flex items-center space-x-1">
-                          <button
-                            onClick={() => editSpot(spot)}
-                            className="p-1 text-gray-400 hover:text-blue-600 transition-colors"
-                            title="편집"
-                          >
-                            <Edit className="w-3 h-3" />
-                          </button>
-                          <button
-                            onClick={() => deleteSpot(activeDay, spot.id)}
-                            className="p-1 text-gray-400 hover:text-red-600 transition-colors"
-                            title="삭제"
-                          >
-                            <Trash2 className="w-3 h-3" />
-                          </button>
-                        </div>
-                      )}
-                    </div>
-
-                    <p className="text-xs text-gray-600 mb-2">{spot.address}</p>
-
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-3 text-xs text-gray-500">
-                        <div className="flex items-center space-x-1">
-                          <SvgIcon name="clock" size={12} className="text-gray-500" />
-                          <span>
-                            {spot.time} - {getEndTime(spot.time, spot.duration)}
-                          </span>
-                        </div>
-                        <div className="flex items-center space-x-1">
-                          <SvgIcon name="clock" size={12} className="text-gray-500" />
-                          <span>{spot.duration}</span>
-                        </div>
-                      </div>
-
-                      <div className="flex flex-col items-end space-y-1">
-                        {/* 지출 정보 표시 */}
-                        {(() => {
-                          const expenses = spotExpenses[spot.id];
-                          console.log(`=== 모바일 지출 정보 표시 (spotId: ${spot.id}) ===`);
-                          console.log('spotExpenses 전체:', spotExpenses);
-                          console.log('현재 spot.id:', spot.id);
-                          console.log('expenses:', expenses);
-                          console.log('expenses length:', expenses?.length);
-                          console.log('expenses type:', typeof expenses);
-
-                          if (expenses && expenses.length > 0) {
-                            const total = expenses.reduce((sum: number, expense: Expense) => {
-                              console.log('expense:', expense, 'amount:', expense.amount);
-                              return sum + expense.amount;
-                            }, 0);
-                            console.log('total amount:', total);
-                            return <span className="text-xs font-bold text-gray-900">{total.toLocaleString()}円</span>;
-                          } else {
-                            console.log('모바일: expenses가 없거나 비어있음');
-                          }
-                          return null;
-                        })()}
-
-                        {/* 비용 계산 버튼 - VIEWER 역할이 아닐 때만 표시 */}
-                        {userRole !== 'VIEWER' && (
-                          <button
-                            onClick={() => calculateCost(spot)}
-                            className="flex items-center space-x-1 px-2 py-1 bg-orange-500 text-white text-xs font-medium rounded hover:bg-orange-600 transition-colors"
-                            title="비용 계산"
-                          >
-                            <Calculator className="w-3 h-3" />
-                            <span>コスト</span>
-                          </button>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* 이동 정보 */}
-                  {nextSegment && (
-                    <div className="flex items-center justify-center my-2">
-                      <div className="flex items-center space-x-2 bg-gray-50 px-3 py-2 rounded-lg">
-                        <SvgIcon
-                          name={nextSegment.transportMode === 'walking' ? 'walking' : 'car'}
-                          size={12}
-                          className="text-gray-600"
-                        />
-                        <span className="text-xs text-gray-600">{nextSegment.duration}</span>
-                        {nextSegment.isZeroResults && (
-                          <span className="text-xs text-red-600 bg-red-100 px-2 py-1 rounded">⚠️ 경로없음</span>
-                        )}
-                        <div className="w-3 h-3 bg-blue-500 rounded flex items-center justify-center">
-                          <ArrowRight className="w-2 h-2 text-white" />
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-        )}
-
-        {/* 하단 + 버튼 - VIEWER 역할이 아닐 때만 표시 */}
-        {userRole !== 'VIEWER' && (
-          <div className="mt-4">
-            <button
-              onClick={() => setIsSearchDialogOpen(true)}
-              className="w-full flex items-center justify-center gap-2 py-3 bg-gray-200 text-gray-600 rounded-lg hover:bg-gray-300 transition-colors"
-            >
-              <Plus className="w-4 h-4" />
-              <span>観光地を追加</span>
-            </button>
-          </div>
-        )}
-      </div>
-    );
-  };
-
-  // 일정 컴포넌트
-  const ItineraryPlanner = () => {
-    const currentSpots = spots[activeDay] || [];
-    const currentSegments = travelSegments[activeDay] || [];
-    const dayTotal = calculateTotalCost(currentSpots);
-    const tripTotal = Object.values(spots)
-      .flat()
-      .reduce((total, spot) => {
-        const expenses = spotExpenses[spot.id] || [];
-
-        // spotExpenses에 데이터가 있으면 그것을 사용, 없으면 0
-        if (expenses.length > 0) {
-          const expenseTotal = expenses.reduce((sum, expense) => sum + expense.amount, 0);
-          return total + expenseTotal;
-        } else {
-          return total + 0; // Spot.cost는 무시하고 0으로 처리
-        }
-      }, 0);
-
-    return (
-      <div className="flex flex-col h-full bg-white">
-        {/* 헤더 */}
-        <div className="p-3 bg-white border-b">
-          <div className="flex items-center justify-between mb-2">
-            <div className="flex items-center gap-2">
-              <button
-                onClick={handleBackButtonClick}
-                className="p-1 hover:bg-gray-100 rounded transition-colors"
-                title="뒤로가기"
-              >
-                <ArrowLeft className="w-4 h-4 text-gray-600" />
-              </button>
-              <h1 className="text-lg font-bold text-gray-900">
-                {isLoadingPlan ? '로딩 중...' : planData?.title || '東京2泊3日旅'}
-              </h1>
-              <div className="flex items-center gap-1">
-                {planData?.members?.slice(0, 3).map((member: PlanMember, index: number) => (
-                  <div
-                    key={member.id || index}
-                    className="w-4 h-4 bg-orange-500 rounded-full flex items-center justify-center"
-                  >
-                    <span className="text-white text-xs font-bold">{member.userNickname?.charAt(0) || 'U'}</span>
-                  </div>
-                )) || (
-                  <div className="w-4 h-4 bg-green-500 rounded-full flex items-center justify-center">
-                    <span className="text-white text-xs font-bold">W</span>
-                  </div>
-                )}
-              </div>
-            </div>
-            <div className="text-right">
-              <p className="text-xs text-gray-600">旅行総額: {tripTotal.toLocaleString()} ¥</p>
-              <p className="text-xs text-gray-600">今日の合計: {dayTotal.toLocaleString()} ¥</p>
-            </div>
-          </div>
-
-          <div className="flex items-center justify-between">
-            <p className="text-xs text-gray-500">
-              {isLoadingPlan
-                ? '로딩 중...'
-                : planData
-                ? `${planData.startDate} - ${planData.endDate}`
-                : '날짜 정보 없음'}
-            </p>
-
-            {/* 날짜 탭 */}
-            <div className="flex items-center gap-1">
-              <ArrowLeft className="w-3 h-3 text-gray-400" />
-              {(() => {
-                if (planData?.startDate && planData?.endDate) {
-                  // dailyPlans가 없으면 startDate와 endDate로 날짜 생성
-                  const startDate = new Date(planData.startDate);
-                  const endDate = new Date(planData.endDate);
-                  const days = [];
-
-                  for (let d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
-                    days.push(new Date(d));
-                  }
-
-                  return days.map((_, index) => {
-                    const dayNumber = index + 1;
-
-                    return (
-                      <button
-                        key={dayNumber}
-                        onClick={() => setActiveDay(dayNumber)}
-                        className={`px-2 py-1 rounded text-xs font-medium transition-colors ${
-                          activeDay === dayNumber
-                            ? 'bg-pink-500 text-white'
-                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                        }`}
-                      >
-                        {getDayDate(dayNumber)}
-                      </button>
-                    );
-                  });
-                } else if (planData?.dailyPlans && planData.dailyPlans.length > 0) {
-                  // dailyPlans가 있으면 그것을 사용
-                  return planData.dailyPlans.map((_: DailyPlan, index: number) => {
-                    const dayNumber = index + 1;
-
-                    return (
-                      <button
-                        key={dayNumber}
-                        onClick={() => setActiveDay(dayNumber)}
-                        className={`px-2 py-1 rounded text-xs font-medium transition-colors ${
-                          activeDay === dayNumber
-                            ? 'bg-pink-500 text-white'
-                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                        }`}
-                      >
-                        {getDayDate(dayNumber)}
-                      </button>
-                    );
-                  });
-                } else {
-                  // 기본값
-                  return [1, 2, 3].map((day) => (
-                    <button
-                      key={day}
-                      onClick={() => setActiveDay(day)}
-                      className={`px-2 py-1 rounded text-xs font-medium transition-colors ${
-                        activeDay === day ? 'bg-pink-500 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                      }`}
-                    >
-                      {getDayDate(day)}
-                    </button>
-                  ));
-                }
-              })()}
-              <ArrowRight className="w-3 h-3 text-gray-400" />
-            </div>
-          </div>
-        </div>
-
-        {/* 현재 날짜 정보 */}
-        <div className="px-3 py-2 bg-pink-500 text-white">
-          <div className="flex items-center justify-between">
-            <span className="text-sm font-medium">
-              {(() => {
-                const dayNames = [
-                  '一日目',
-                  '二日目',
-                  '三日目',
-                  '四日目',
-                  '五日目',
-                  '六日目',
-                  '七日目',
-                  '八日目',
-                  '九日目',
-                  '十日目',
-                ];
-                const weekDays = ['日曜日', '月曜日', '火曜日', '水曜日', '木曜日', '金曜日', '土曜日'];
-
-                if (planData?.dailyPlans && planData.dailyPlans[activeDay - 1]) {
-                  const visitDate = new Date(planData.dailyPlans[activeDay - 1].visitDate);
-                  const dayOfWeek = weekDays[visitDate.getDay()];
-                  return `${dayNames[activeDay - 1]}: ${dayOfWeek}`;
-                }
-
-                // 기본값: startDate와 endDate로 요일 계산
-                if (planData?.startDate) {
-                  const startDate = new Date(planData.startDate);
-                  const targetDate = new Date(startDate);
-                  targetDate.setDate(startDate.getDate() + (activeDay - 1));
-                  const dayOfWeek = weekDays[targetDate.getDay()];
-                  return `${dayNames[activeDay - 1]}: ${dayOfWeek}`;
-                }
-
-                return activeDay === 1 ? '一日目: 火曜日' : activeDay === 2 ? '二日目: 木曜日' : '三日目: 金曜日';
-              })()}
-            </span>
-            <button
-              onClick={() => setIsDepartureTimeDialogOpen(true)}
-              className="text-xs bg-white text-pink-600 px-3 py-1 rounded hover:bg-gray-50 transition-colors font-medium"
-            >
-              ⏰ {departureTime.hour.toString().padStart(2, '0')}:{departureTime.minute.toString().padStart(2, '0')}
-            </button>
-          </div>
-        </div>
-
-        {/* 일정 목록 */}
-        <div className="flex-1 overflow-y-auto p-4 min-h-0">
-          {currentSpots.length === 0 ? (
-            <div className="text-center py-12">
-              <MapPin className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-              <h3 className="text-lg font-medium text-gray-900 mb-2">まだ観光地がありません</h3>
-              <p className="text-gray-500 mb-4">観光地を追加して旅行計画を立ててみましょう</p>
-            </div>
-          ) : userRole !== 'VIEWER' ? (
-            <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-              <SortableContext items={currentSpots.map((spot) => spot.id)} strategy={verticalListSortingStrategy}>
-                <div className="space-y-4">
-                  {currentSpots.map((spot, index) => {
-                    const nextSegment = currentSegments.find(
-                      (segment) =>
-                        segment.fromSpot?.id === spot.id && segment.toSpot?.id === currentSpots[index + 1]?.id,
-                    );
-
-                    return (
-                      <SortableSpotItem
-                        key={spot.id}
-                        spot={spot}
-                        spotIndex={index}
-                        totalSpots={currentSpots.length}
-                        onEdit={editSpot}
-                        onDelete={deleteSpot}
-                        onMoveUp={moveSpotUp}
-                        onMoveDown={moveSpotDown}
-                        onCalculateCost={calculateCost}
-                        day={activeDay}
-                        getEndTime={getEndTime}
-                        nextSegment={nextSegment}
-                        spotExpenses={spotExpenses}
-                        userRole={userRole}
-                      />
-                    );
-                  })}
-                </div>
-              </SortableContext>
-            </DndContext>
-          ) : (
-            // VIEWER 역할일 때는 드래그 앤 드롭 없이 일반 리스트로 표시
-            <div className="space-y-4">
-              {currentSpots.map((spot, index) => {
-                const nextSegment = currentSegments.find(
-                  (segment) => segment.fromSpot?.id === spot.id && segment.toSpot?.id === currentSpots[index + 1]?.id,
-                );
-
-                return (
-                  <SortableSpotItem
-                    key={spot.id}
-                    spot={spot}
-                    spotIndex={index}
-                    totalSpots={currentSpots.length}
-                    onEdit={editSpot}
-                    onDelete={deleteSpot}
-                    onMoveUp={moveSpotUp}
-                    onMoveDown={moveSpotDown}
-                    onCalculateCost={calculateCost}
-                    day={activeDay}
-                    getEndTime={getEndTime}
-                    nextSegment={nextSegment}
-                    spotExpenses={spotExpenses}
-                    userRole={userRole}
-                  />
-                );
-              })}
-            </div>
-          )}
-        </div>
-
-        {/* 하단 + 버튼 - VIEWER 역할이 아닐 때만 표시 */}
-        {userRole !== 'VIEWER' && (
-          <div className="p-4 border-t bg-gray-50">
-            <button
-              onClick={() => setIsSearchDialogOpen(true)}
-              className="w-full flex items-center justify-center gap-2 py-3 bg-gray-200 text-gray-600 rounded-lg hover:bg-gray-300 transition-colors"
-            >
-              <Plus className="w-5 h-5" />
-              <span>観光地を追加</span>
-            </button>
-          </div>
-        )}
-      </div>
-    );
-  };
-
   // 총 비용 계산 (모바일 헤더에서 사용)
   const calculateTotalCosts = () => {
-    const dayTotal = calculateTotalCost(spots[activeDay] || []);
+    const dayTotal = calculateTotalCost(spots[activeDay] || [], spotExpenses);
     const tripTotal = Object.values(spots)
       .flat()
       .reduce((total, spot) => {
@@ -2109,17 +1311,6 @@ const TripPlannerPage = () => {
   };
 
   const { dayTotal, tripTotal } = calculateTotalCosts();
-
-  // 날짜 계산 함수
-  const getDayDate = (dayNumber: number) => {
-    if (!planData?.startDate) return `${dayNumber}日`;
-
-    const startDate = new Date(planData.startDate);
-    const targetDate = new Date(startDate);
-    targetDate.setDate(startDate.getDate() + dayNumber - 1);
-
-    return `${targetDate.getDate()}日`;
-  };
 
   // 뒤로가기 버튼 클릭 핸들러
   const handleBackButtonClick = () => {
@@ -2661,7 +1852,21 @@ const TripPlannerPage = () => {
 
         {/* 모바일 스팟 리스트 */}
         <div className="flex-1 overflow-y-auto">
-          <MobileSpotList />
+          <MobileSpotList
+            spots={spots}
+            travelSegments={travelSegments}
+            spotExpenses={spotExpenses}
+            activeDay={activeDay}
+            departureTime={departureTime}
+            planData={planData}
+            userRole={userRole}
+            onAddSpot={() => setIsSearchDialogOpen(true)}
+            onEditSpot={editSpot}
+            onDeleteSpot={deleteSpot}
+            onCalculateCost={calculateCost}
+            onSetDepartureTime={() => setIsDepartureTimeDialogOpen(true)}
+            getEndTime={getEndTime}
+          />
         </div>
       </div>
 
@@ -2669,7 +1874,29 @@ const TripPlannerPage = () => {
       <div className="hidden lg:flex flex-1 overflow-hidden">
         {/* Left Column - Itinerary Planner */}
         <div className="flex flex-col bg-white" style={{ width: `${leftPanelWidth}%` }}>
-          <ItineraryPlanner />
+          <ItineraryPlanner
+            planData={planData}
+            isLoadingPlan={isLoadingPlan}
+            spots={spots}
+            travelSegments={travelSegments}
+            spotExpenses={spotExpenses}
+            activeDay={activeDay}
+            departureTime={departureTime}
+            tripTotal={tripTotal}
+            dayTotal={dayTotal}
+            userRole={userRole}
+            onBackClick={handleBackButtonClick}
+            onAddSpot={() => setIsSearchDialogOpen(true)}
+            onEditSpot={editSpot}
+            onDeleteSpot={deleteSpot}
+            onMoveSpotUp={moveSpotUp}
+            onMoveSpotDown={moveSpotDown}
+            onCalculateCost={calculateCost}
+            onSetActiveDay={setActiveDay}
+            onSetDepartureTime={() => setIsDepartureTimeDialogOpen(true)}
+            onDragEnd={handleDragEnd}
+            getEndTime={getEndTime}
+          />
         </div>
 
         {/* Resizable Divider - 데스크톱에서만 표시 */}
@@ -2728,125 +1955,28 @@ const TripPlannerPage = () => {
       )}
 
       {/* 관광지 편집 다이얼로그 */}
-      {isEditDialogOpen && editingSpot && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-6 w-96">
-            <h3 className="text-lg font-semibold mb-4">観光地編集</h3>
-            <div className="space-y-4">
-              <div>
-                <h4 className="font-medium text-gray-900 mb-2">{editingSpot.location}</h4>
-                <p className="text-sm text-gray-600 mb-4">{editingSpot.address}</p>
-              </div>
-              {/* 첫 번째 스팟(호텔)이 아닐 때만 이동 방법과 체류시간 선택 표시 */}
-              {(() => {
-                const currentSpots = spots[activeDay] || [];
-                const spotIndex = currentSpots.findIndex((spot) => spot.id === editingSpot.id);
-                const isFirstSpot = spotIndex === 0;
-
-                if (isFirstSpot) {
-                  return (
-                    <div className="space-y-4">
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">移動手段</label>
-                        <div className="w-full p-2 border border-gray-300 rounded-md bg-gray-100 text-gray-500">
-                          🏨 ホテル (移動手段不要)
-                        </div>
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">滞在時間</label>
-                        <div className="w-full p-2 border border-gray-300 rounded-md bg-gray-100 text-gray-500">
-                          🏨 ホテル (滞在時間自動設定)
-                        </div>
-                      </div>
-                    </div>
-                  );
-                }
-
-                return (
-                  <div className="space-y-4">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">移動手段</label>
-                      <select
-                        value={editingSpot.transportMode || 'walking'}
-                        onChange={(e) => {
-                          const newMode = e.target.value as 'walking' | 'driving' | 'transit';
-                          updateSpotTransportMode(editingSpot.id, newMode);
-                        }}
-                        className="w-full p-2 border border-gray-300 rounded-md"
-                      >
-                        <option value="walking">🚶 徒歩</option>
-                        <option value="driving">🚗 車</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">滞在時間</label>
-                      <select
-                        value={editingSpot.duration}
-                        onChange={async (e) => {
-                          const newDuration = e.target.value;
-                          // 먼저 spots 상태를 업데이트하고 업데이트된 spots를 받아옴
-                          const updatedSpots = (spots[activeDay] || []).map((spot) =>
-                            spot.id === editingSpot.id ? { ...spot, duration: newDuration } : spot,
-                          );
-
-                          // 편집 중인 관광지 정보도 업데이트
-                          setEditingSpot((prev) => (prev ? { ...prev, duration: newDuration } : ({} as Spot)));
-
-                          // 업데이트된 spots로 이동시간 재계산 (이 함수에서 spots 상태도 업데이트됨)
-                          await recalculateTravelTimes(updatedSpots);
-                        }}
-                        className="w-full p-2 border border-gray-300 rounded-md"
-                      >
-                        <option value="30分">30分</option>
-                        <option value="1時間">1時間</option>
-                        <option value="1時間30分">1時間30分</option>
-                        <option value="2時間">2時間</option>
-                        <option value="2時間30分">2時間30分</option>
-                        <option value="3時間">3時間</option>
-                        <option value="3時間30分">3時間30分</option>
-                        <option value="4時間">4時間</option>
-                        <option value="4時間30分">4時間30分</option>
-                        <option value="5時間">5時間</option>
-                      </select>
-                    </div>
-                  </div>
-                );
-              })()}
-            </div>
-            <div className="flex justify-between items-center mt-6">
-              <button
-                onClick={() => {
-                  setIsEditDialogOpen(false);
-                  setIsSpotChangeDialogOpen(true);
-                }}
-                className="px-3 py-2 text-sm text-blue-600 border border-blue-300 rounded-md hover:bg-blue-50 transition-colors"
-              >
-                📍 観光地変更
-              </button>
-              <div className="flex gap-2">
-                <button
-                  onClick={() => {
-                    setIsEditDialogOpen(false);
-                    setEditingSpot({} as Spot);
-                  }}
-                  className="px-3 py-2 text-sm text-gray-600 border border-gray-300 rounded-md hover:bg-gray-50"
-                >
-                  キャンセル
-                </button>
-                <button
-                  onClick={() => {
-                    setIsEditDialogOpen(false);
-                    setEditingSpot({} as Spot);
-                  }}
-                  className="px-3 py-2 text-sm bg-pink-500 text-white rounded-md hover:bg-pink-600"
-                >
-                  保存
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      <EditSpotDialog
+        isOpen={isEditDialogOpen}
+        spot={editingSpot}
+        spots={spots}
+        activeDay={activeDay}
+        onClose={() => {
+          setIsEditDialogOpen(false);
+          setEditingSpot({} as Spot);
+        }}
+        onChangeSpot={() => {
+          setIsEditDialogOpen(false);
+          setIsSpotChangeDialogOpen(true);
+        }}
+        onUpdateTransportMode={updateSpotTransportMode}
+        onUpdateDuration={async (newDuration) => {
+          const updatedSpots = (spots[activeDay] || []).map((spot) =>
+            spot.id === editingSpot.id ? { ...spot, duration: newDuration } : spot,
+          );
+          setEditingSpot((prev) => (prev ? { ...prev, duration: newDuration } : ({} as Spot)));
+          await recalculateTravelTimes(updatedSpots);
+        }}
+      />
 
       {/* 관광지 변경 다이얼로그 */}
       {isSpotChangeDialogOpen && editingSpot && (
@@ -2863,135 +1993,27 @@ const TripPlannerPage = () => {
       )}
 
       {/* 비용 추가 다이얼로그 */}
-      {isCostDialogOpen && costCalculatingSpot && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-2xl p-6 w-[400px] shadow-2xl">
-            {/* 제목 */}
-            <h3 className="text-xl font-bold text-orange-500 mb-6 text-center">費用修正</h3>
-
-            {/* 金額入力 */}
-            <div className="mb-6">
-              <label className="block text-sm font-medium text-gray-700 mb-2">金額入力(円)</label>
-              <input
-                type="text"
-                value={expenseInputs.amount || ''}
-                onChange={(e) => {
-                  const value = e.target.value.replace(/[^\d]/g, '');
-                  setExpenseInputs((prev) => ({ ...prev, amount: parseInt(value) || 0 }));
-                }}
-                placeholder="1,000"
-                className="w-full p-3 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
-              />
-            </div>
-
-            {/* カテゴリ選択 */}
-            <div className="mb-6">
-              <label className="block text-sm font-medium text-gray-700 mb-3">カテゴリ</label>
-              <div className="grid grid-cols-7 gap-2">
-                {[
-                  { key: 'LODGING', icon: 'lodging', label: '宿泊' },
-                  { key: 'AVIATION', icon: 'airplane', label: '航空' },
-                  { key: 'TRANSPORT', icon: 'traffic', label: '交通' },
-                  { key: 'FOOD', icon: 'restaurant', label: '食費' },
-                  { key: 'SHOPPING', icon: 'shopping', label: '買い物' },
-                  { key: 'SIGHTSEEING', icon: 'ticket', label: '観光' },
-                  { key: 'OTHER', icon: 'etc', label: 'その他' },
-                ].map((category) => (
-                  <button
-                    key={category.key}
-                    onClick={() => setExpenseInputs((prev) => ({ ...prev, category: category.key }))}
-                    className={`flex flex-col items-center p-2 rounded-lg transition-all duration-200 ${
-                      expenseInputs.category === category.key
-                        ? 'bg-orange-500 text-white'
-                        : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                    }`}
-                  >
-                    <img
-                      src={
-                        import.meta.env.PROD
-                          ? `https://storage.googleapis.com/tabilog-dev/svg/${category.icon}.svg`
-                          : `./svg/${category.icon}.svg`
-                      }
-                      alt={category.label}
-                      className={`w-6 h-6 mb-1 ${expenseInputs.category === category.key ? 'brightness-0 invert' : ''}`}
-                    />
-                    <span className="text-xs font-medium">{category.label}</span>
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* 버튼 */}
-            <div className="flex gap-3">
-              <button
-                onClick={() => {
-                  setIsCostDialogOpen(false);
-                  setCostCalculatingSpot({} as Spot);
-                }}
-                className="flex-1 px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors font-medium"
-                disabled={isLoading}
-              >
-                キャンセル
-              </button>
-              <button
-                onClick={saveExpenses}
-                className="flex-1 px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
-                disabled={isLoading}
-              >
-                {isLoading ? '修正中...' : '修正'}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      <CostDialog
+        isOpen={isCostDialogOpen}
+        spot={costCalculatingSpot}
+        expenseInputs={expenseInputs}
+        setExpenseInputs={setExpenseInputs}
+        onSave={saveExpenses}
+        onClose={() => {
+          setIsCostDialogOpen(false);
+          setCostCalculatingSpot({} as Spot);
+        }}
+        isLoading={isLoading}
+      />
 
       {/* 저장 확인 팝업 */}
-      {userRole !== 'VIEWER' && isSaveConfirmationOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-2xl p-6 w-[400px] shadow-2xl">
-            {/* 제목 */}
-            <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">保存確認</h3>
-
-            {/* 메시지 */}
-            <div className="text-center mb-6">
-              <p className="text-gray-600 mb-2">設定した観光地スポットを保存しますか？</p>
-              <p className="text-sm text-gray-500">
-                保存するとバックエンドサーバーに永続的に保存され、
-                <br />
-                保存しないと設定した観光地が削除されます。
-              </p>
-            </div>
-
-            {/* 버튼 */}
-            <div className="flex gap-3">
-              <button
-                onClick={handleCancelAndExit}
-                className="flex-1 px-3 py-3 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors font-medium flex items-center justify-center gap-2 text-sm"
-                disabled={isSaving}
-              >
-                <X className="w-4 h-4" />
-                キャンセル
-              </button>
-              <button
-                onClick={handleSaveAndExit}
-                className="flex-1 px-3 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-sm"
-                disabled={isSaving}
-              >
-                {isSaving ? (
-                  <>
-                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
-                    保存中...
-                  </>
-                ) : (
-                  <>
-                    <Save className="w-4 h-4" />
-                    保存
-                  </>
-                )}
-              </button>
-            </div>
-          </div>
-        </div>
+      {userRole !== 'VIEWER' && (
+        <SaveConfirmationDialog
+          isOpen={isSaveConfirmationOpen}
+          onSave={handleSaveAndExit}
+          onCancel={handleCancelAndExit}
+          isSaving={isSaving}
+        />
       )}
     </div>
   );
