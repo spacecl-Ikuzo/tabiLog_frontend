@@ -86,13 +86,7 @@ import nisekounited from '../../assets/nisekounited.jpg';
 import nisekounitedmap from '../../assets/nisekounitedmap.jpg';
 import rusutsuresort from '../../assets/rusutsuresort.jpg';
 import rusutsuresortmap from '../../assets/rusutsuresortmap.jpg';
-import OsakaArchitecture5 from '../../assets/OsakaArchitecture5.png';
-import OsakaArchitecture2 from '../../assets/OsakaArchitecture2.png';
-import OsakaArchitecture3 from '../../assets/OsakaArchitecture3.png';
 import OsakaArchitecture4 from '../../assets/OsakaArchitecture4.png';
-import OsakaTempozan from '../../assets/OsakaTempozan.png';
-import OsakaTempozan3 from '../../assets/OsakaTempozan3.png';
-import OsakaTempozan4 from '../../assets/OsakaTempozan4.png';
 import OsakaTempozan5 from '../../assets/OsakaTempozan6.png';
 import OsakaTempozan6 from '../../assets/OsakaTempozan6.png';
 import OsakaTempozan7 from '../../assets/OsakaTempozan7.png';
@@ -396,9 +390,6 @@ const DetailPage = () => {
         '渡月橋は嵐山の象徴。『聲の形』の印象的なシーンを想いながら、桂川と山並みのコントラストを楽しもう。<br><br>【1】渡月橋の眺望<br>朝夕の光が作る陰影が美しい。橋上・河川敷の両方から構図を試してみて。<br><br>【2】桂川沿い散策<br>桜・新緑・紅葉・雪景色。四季それぞれの色で作品の余韻を感じられる。<br><br>【3】アクセスのコツ<br>阪急『嵐山駅』または嵐電『嵐山駅』が便利。混雑時は早朝訪問がおすすめ。',
     },
     31: {
-=======
-    107: {
->>>>>>> origin/sehyeon
       title: 'オホーツク流氷体験！札幌→網走 1〜2日旅',
       description:
         '札幌から特急で網走へ。流氷砕氷船クルーズ、季節列車で北浜駅へ向かい、オホーツク海の絶景を満喫する冬のモデルコース。',
@@ -487,7 +478,12 @@ const DetailPage = () => {
       heroImage: OsakaArchitecture5,
       breadcrumb: ['大阪', '北区', '中之島公会堂'],
       contentTitle: '聖地巡礼の基本情報',
-      spots: ['中之島公会堂とは（建築・歴史）', '『黒執事』との関連（雰囲気・モチーフ）', '撮影＆鑑賞ポイント（昼／夜）', '周辺スポット＆モデルコース'],
+      spots: [
+        '中之島公会堂とは（建築・歴史）',
+        '『黒執事』との関連（雰囲気・モチーフ）',
+        '撮影＆鑑賞ポイント（昼／夜）',
+        '周辺スポット＆モデルコース',
+      ],
       content:
         '中之島公会堂（正式名称：大阪市中央公会堂）は、1918年竣工のネオ・ルネサンス様式を基調とした大阪を代表する近代建築です。赤レンガと花崗岩、銅板ドームが織りなす端正な外観は、ヴィクトリア朝の趣きがあり、『黒執事』の世界観と相性が抜群。ファンの間では**"雰囲気モデル"**として親しまれ、作品の舞台感を味わえる聖地として人気を集めています。<br>※公式なロケ地・明示的モデルと断定されてはいませんが、建築様式や佇まいが作品の空気感に非常に近いと評判です。<br><br>【2.1 中之島公会堂とは（建築・歴史）】<br><br>近代大阪の象徴的公共建築。正面の大階段、3つのドーム、アーチ窓が見どころ。<br><br>内部には大集会室や特別室があり、時期により一般公開・ガイドツアー・展覧会を実施。<br><br>中之島の水辺景観（堂島川・土佐堀川）と一体で楽しめるのも魅力。<br><br>【2.2 『黒執事』との関連（雰囲気・モチーフ）】<br><br>ヴィクトリア朝を想起させる外観、石造装飾、重厚な扉・階段は作品の貴族社会×執事の世界と好相性。<br><br>推し活ポイント：シルクハット／ステッキ／黒基調コーデでの記念撮影（※館内撮影はルール遵守）。<br><br>【2.3 撮影＆鑑賞ポイント（昼／夜）】<br><br>正面大階段の対角アングル：ドームとファサードを一枚に収めやすい定番構図。<br><br>南側・中之島公園側からの全景：花と緑越しにクラシックな外観が映える。<br><br>川沿い歩道（なにわ橋〜淀屋橋）：水鏡リフレクションで雰囲気抜群。<br><br>夜間ライトアップ：金色照明に浮かぶ赤レンガが"黒執事"らしいゴシック感を演出。魔法の時間帯はトワイライト。<br><br>【2.4 周辺スポット＆モデルコース】<br><br>中之島バラ園 → 大阪府立中之島図書館 → 中之島公会堂（外観撮影） → なにわ橋／水辺散策。<br><br>時間があれば 国立国際美術館／大阪中之島美術館 や 北浜レトロ（ティールーム）で英国風ティータイムも◎。<br><br><strong>3. 詳細情報（アクセス・開館・料金・注意事項）</strong><br><br><table style="border-collapse: collapse; width: 100%; margin: 10px 0;"><tr style="background-color: #f2f2f2;"><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">項目</th><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">詳細</th></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">施設名</td><td style="border: 1px solid #ddd; padding: 8px;">大阪市中央公会堂（通称：中之島公会堂）</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">所在地</td><td style="border: 1px solid #ddd; padding: 8px;">大阪府大阪市北区中之島1-1-27</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">アクセス</td><td style="border: 1px solid #ddd; padding: 8px;">Osaka Metro御堂筋線「淀屋橋」徒歩約5–10分／京阪本線「淀屋橋」「北浜」徒歩圏／京阪中之島線「なにわ橋」至近</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">開館・公開</td><td style="border: 1px solid #ddd; padding: 8px;">外観鑑賞は随時可／館内公開・ガイドツアー・展示は実施日・時間が変動（要公式確認）</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">料金</td><td style="border: 1px solid #ddd; padding: 8px;">外観見学無料／館内展示・ツアーは有料の場合あり</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">撮影ルール</td><td style="border: 1px solid #ddd; padding: 8px;">外観は概ね可。館内はエリアにより撮影禁止・申請必要の場合あり。商用・コスプレは事前確認必須</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">ライトアップ</td><td style="border: 1px solid #ddd; padding: 8px;">日没後に実施する日あり（時期・イベントで変動）</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">施設・サービス</td><td style="border: 1px solid #ddd; padding: 8px;">館内カフェ・レストラン（時期により営業）／トイレ／バリアフリー動線あり</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">近隣駐車場</td><td style="border: 1px solid #ddd; padding: 8px;">周辺にコインパーキング多数（公共交通おすすめ）</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">注意事項</td><td style="border: 1px solid #ddd; padding: 8px;">歩道・階段の占有・三脚の長時間設置・ドローン飛行は不可。来館者・通行の妨げにならない配慮を</td></tr></table>',
     },
