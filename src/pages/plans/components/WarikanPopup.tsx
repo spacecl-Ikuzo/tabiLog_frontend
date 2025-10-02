@@ -90,11 +90,7 @@ export default function WarikanPopup({
               <Avatar className="w-14 h-14 flex-shrink-0">
                 {member?.profileImageUrl ? (
                   <AvatarImage
-                    src={
-                      member.profileImageUrl.startsWith('http')
-                        ? member.profileImageUrl
-                        : import.meta.env.VITE_API_URL + member.profileImageUrl
-                    }
+                    src={import.meta.env.VITE_API_URL + member.profileImageUrl}
                     alt={member?.userNickname || 'メンバー'}
                     className="w-full h-full object-cover"
                   />

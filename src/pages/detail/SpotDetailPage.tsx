@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 // Assets
 import TokyoHero from '../../assets/Tokyo.jpg';
@@ -246,6 +246,20 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
         '東京ディズニーランドは世界で最も人気のテーマパークの一つ。ミッキーマウスをはじめとするディズニーキャラクターと一緒に夢の世界を体験できます。7つのテーマランドがあり、家族連れからカップルまで幅広い年齢層が楽しめます。パレードやショーも充実しており、一日中楽しめるエンターテイメント施設です。<br><br><table style="border-collapse: collapse; width: 100%; margin: 10px 0;"><tr style="background-color: #f2f2f2;"><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">項目</th><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">詳細</th></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">アクセス</td><td style="border: 1px solid #ddd; padding: 8px;">JR京葉線「舞浜駅」徒歩5分<br>東京駅から約15分、新宿駅から約40分</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">入場料金（1日券）</td><td style="border: 1px solid #ddd; padding: 8px;">大人（18歳以上）: 8,400円<br>中人（12-17歳）: 7,000円<br>小人（4-11歳）: 5,000円</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">営業時間</td><td style="border: 1px solid #ddd; padding: 8px;">9:00〜22:00（季節により変動）<br>休園日: 不定期（公式サイトで確認）</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">チケット購入</td><td style="border: 1px solid #ddd; padding: 8px;">公式サイト・コンビニ・現地窓口<br>事前購入推奨（当日完売の場合あり）</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">団体割引</td><td style="border: 1px solid #ddd; padding: 8px;">20名以上で団体料金適用<br>学校団体・企業団体向け特別プランあり</td></tr></table><br>【2.1 ディズニーリゾート】<br>東京ディズニーリゾートは、東京ディズニーランドと東京ディズニーシーを中心とした総合リゾートエリアです。ホテル、ショッピングモール、レストランが集まり、宿泊から食事、ショッピングまで全てを楽しめる完結型のリゾートです。リゾート内のホテルに宿泊すると、パークへの優先入場や特別な特典を利用できます。<br><br>【2.2 ディズニーシー】<br>東京ディズニーシーは、海をテーマにした世界唯一のディズニーパークです。7つのポート（港）で構成され、それぞれ異なる時代と地域の雰囲気を体験できます。アトラクションはよりスリリングで大人向けのものが多く、特に「タワー・オブ・テラー」や「インディ・ジョーンズ・アドベンチャー」は人気の絶叫系アトラクションです。<br><br>【2.3 アドベンチャーランド】<br>アドベンチャーランドは、ジャングルや海賊の世界をテーマにしたエリアです。「ジャングルクルーズ」では野生動物の模型や滝を楽しみ、「カリブの海賊」では海賊の冒険を体験できます。「インディ・ジョーンズ・アドベンチャー」は迫力満点のライドで、古代遺跡の探検を疑似体験できます。熱帯の雰囲気を演出する植物や建物が特徴的です。<br><br>【2.4 トゥーンタウン】<br>トゥーンタウンは、ディズニーアニメのキャラクターたちが住む街を再現したエリアです。ミッキーマウスの家「ミッキーの家とミート・ミッキー」では、実際にミッキーと会って写真を撮ることができます。「ロジャーラビットのカートゥーンスピン」は回転しながら進む楽しいライドで、子供から大人まで楽しめます。カラフルで可愛らしい建物が並び、まるでアニメの世界にいるような気分を味わえます。',
     },
     '22': {
+      title: '東京ディズニーランド',
+      description: '世界で最も人気のテーマパーク。夢の国で楽しい時間を過ごそう',
+      author: 'タビログ編集部',
+      heroImage: TokyoDisneyland,
+      breadcrumb: ['東京', '浦安市', '東京ディズニーランド'],
+      contentTitle: '東京ディズニーランドの基本情報',
+      spots: ['ディズニーリゾート', 'ディズニーシー', 'アドベンチャーランド', 'トゥーンタウン'],
+      imageLeft: DisneyResort,
+      imageRight: DisneySea,
+      extraImages: [AdventureLand, ToonTown],
+      content:
+        '東京ディズニーランドは世界で最も人気のテーマパークの一つ。ミッキーマウスをはじめとするディズニーキャラクターと一緒に夢の世界を体験できます。7つのテーマランドがあり、家族連れからカップルまで幅広い年齢層が楽しめます。パレードやショーも充実しており、一日中楽しめるエンターテイメント施設です。<br><br><table style="border-collapse: collapse; width: 100%; margin: 10px 0;"><tr style="background-color: #f2f2f2;"><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">項目</th><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">詳細</th></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">アクセス</td><td style="border: 1px solid #ddd; padding: 8px;">JR京葉線「舞浜駅」徒歩5分<br>東京駅から約15分、新宿駅から約40分</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">入場料金（1日券）</td><td style="border: 1px solid #ddd; padding: 8px;">大人（18歳以上）: 8,400円<br>中人（12-17歳）: 7,000円<br>小人（4-11歳）: 5,000円</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">営業時間</td><td style="border: 1px solid #ddd; padding: 8px;">9:00〜22:00（季節により変動）<br>休園日: 不定期（公式サイトで確認）</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">チケット購入</td><td style="border: 1px solid #ddd; padding: 8px;">公式サイト・コンビニ・現地窓口<br>事前購入推奨（当日完売の場合あり）</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">団体割引</td><td style="border: 1px solid #ddd; padding: 8px;">20名以上で団体料金適用<br>学校団体・企業団体向け特別プランあり</td></tr></table><br>【2.1 ディズニーリゾート】<br>東京ディズニーリゾートは、東京ディズニーランドと東京ディズニーシーを中心とした総合リゾートエリアです。ホテル、ショッピングモール、レストランが集まり、宿泊から食事、ショッピングまで全てを楽しめる完結型のリゾートです。リゾート内のホテルに宿泊すると、パークへの優先入場や特別な特典を利用できます。<br><br>【2.2 ディズニーシー】<br>東京ディズニーシーは、海をテーマにした世界唯一のディズニーパークです。7つのポート（港）で構成され、それぞれ異なる時代と地域の雰囲気を体験できます。アトラクションはよりスリリングで大人向けのものが多く、特に「タワー・オブ・テラー」や「インディ・ジョーンズ・アドベンチャー」は人気の絶叫系アトラクションです。<br><br>【2.3 アドベンチャーランド】<br>アドベンチャーランドは、ジャングルや海賊の世界をテーマにしたエリアです。「ジャングルクルーズ」では野生動物の模型や滝を楽しみ、「カリブの海賊」では海賊の冒険を体験できます。「インディ・ジョーンズ・アドベンチャー」は迫力満点のライドで、古代遺跡の探検を疑似体験できます。熱帯の雰囲気を演出する植物や建物が特徴的です。<br><br>【2.4 トゥーンタウン】<br>トゥーンタウンは、ディズニーアニメのキャラクターたちが住む街を再現したエリアです。ミッキーマウスの家「ミッキーの家とミート・ミッキー」では、実際にミッキーと会って写真を撮ることができます。「ロジャーラビットのカートゥーンスピン」は回転しながら進む楽しいライドで、子供から大人まで楽しめます。カラフルで可愛らしい建物が並び、まるでアニメの世界にいるような気分を味わえます。',
+    },
+    '23': {
       title: '日光東照宮',
       description: '徳川家康を祀る世界遺産の神社。豪華絢爛な建築が美しい',
       author: 'タビログ編集部',
@@ -255,10 +269,11 @@ const SPOT_DETAILS: Record<string, Record<string, SpotDetail>> = {
       spots: ['陽明門', '眠り猫', '三猿'],
       imageLeft: NikkoToshogu,
       imageRight: YangMeimon,
+      extraImages: [NikkoNeko, NikkoSaru],
       content:
         '日光東照宮は徳川家康を祀る神社で、世界遺産に登録されています。豪華絢爛な建築と精緻な彫刻が特徴で、特に「見ざる、聞かざる、言わざる」の三猿や眠り猫の彫刻は有名です。江戸時代の最高技術を集めた建築美を堪能できる貴重な文化遺産です。<br><br><table style="border-collapse: collapse; width: 100%; margin: 10px 0;"><tr style="background-color: #f2f2f2;"><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">項目</th><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">詳細</th></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">所在地</td><td style="border: 1px solid #ddd; padding: 8px;">栃木県日光市山内2301</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">アクセス</td><td style="border: 1px solid #ddd; padding: 8px;">JR日光線「日光駅」からバス10分<br>東武日光線「東武日光駅」からバス10分<br>東京から約2時間</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">参拝時間</td><td style="border: 1px solid #ddd; padding: 8px;">4月〜10月: 8:00〜17:00<br>11月〜3月: 8:00〜16:00<br>年中無休</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">入場料金</td><td style="border: 1px solid #ddd; padding: 8px;">大人（高校生以上）: 1,300円<br>小・中学生: 450円<br>幼児: 無料</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">宝物殿・美術館</td><td style="border: 1px solid #ddd; padding: 8px;">宝物殿: 大人800円、小中学生300円<br>美術館: 大人500円、小中学生200円<br>共通券: 大人2,100円、小中学生750円</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">ガイドツアー</td><td style="border: 1px solid #ddd; padding: 8px;">日本語ガイド: 1,000円〜<br>英語ガイド: 2,000円〜<br>団体ガイド: 要予約・割引あり</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">団体割引</td><td style="border: 1px solid #ddd; padding: 8px;">30名以上で団体料金適用<br>学校団体・企業団体向け特別プランあり</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">駐車場</td><td style="border: 1px solid #ddd; padding: 8px;">有料駐車場あり（台数限定）<br>バス・電車利用推奨</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">お守り・御朱印</td><td style="border: 1px solid #ddd; padding: 8px;">お守り: 500円〜2,000円<br>御朱印: 500円<br>各種祈願: 1,000円〜10,000円</td></tr></table><br>【2.1 陽明門】<br>日光東照宮の代表的な建築物で、平成の大修理を終えたばかりの艶やかな塗装と煌びやかな装飾が印象的です。豪華絢爛な彫刻の意味と秘密が込められた、まさに日光東照宮のシンボル的存在です。陽明門には508体の彫刻が施されており、その一つ一つに深い意味が込められています。特に「唐子遊び」の彫刻は、子どもたちの無邪気な遊びを表現し、平和への願いを表しています。門の上部には「昇り龍」と「降り龍」の彫刻があり、これらは水の神として火災から建物を守る意味があります。<br><br>【2.2 眠り猫】<br>驚くほど小さな彫刻で、観光客の通りが多いところに設置されています。現地ではよく見れないことがありますが、日光東照宮の有名な彫刻の一つとして知られています。眠り猫は左甚五郎の作と伝えられ、猫が眠っている姿を彫刻したものです。この彫刻には「猫が眠っている間は鼠が来ない」という意味があり、家康の墓所を守る役割を果たしています。猫の下には雀の彫刻もあり、猫が眠っているから雀も安心して遊んでいるという平和な情景を表現しています。<br><br>【2.3 三猿】<br>「見ざる、聞かざる、言わざる」で有名な三猿は、8つの面で構成された物語の一部です。諺の意味と日光東照宮の三猿が意味するところが若干違うのも面白いところで、年老いて取り返しがつかなくなる前に早めの三猿という教えが込められています。三猿は神厩舎（しんきゅうしゃ）の壁面に彫刻されており、人間の一生を8つの場面で表現した物語の一部です。三猿の教えは「若いうちは悪いことを見たり、聞いたり、言ったりしないように」という意味で、子どもの教育に関する教訓が込められています。',
     },
-    '23': {
+    '123': {
       title: '鎌倉',
       description: '歴史と文化が息づく古都。大仏とアニメの聖地',
       author: 'タビログ編集部',
@@ -1145,21 +1160,17 @@ const SpotDetailPage = () => {
             </div>
           )}
 
-          {/* Extra Images for Tokyo Disneyland */}
-          {cityKey === '東京' && idKey === '21' && (
+          {/* Extra Images for Tokyo Disneyland and Nikko Toshogu */}
+          {cityKey === '東京' && (idKey === '21' || idKey === '22' || idKey === '23') && detail?.extraImages && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-              <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                <div
-                  className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${AdventureLand})` }}
-                ></div>
-              </div>
-              <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                <div
-                  className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${ToonTown})` }}
-                ></div>
-              </div>
+              {detail.extraImages.map((image, index) => (
+                <div key={index} className="bg-white rounded-lg overflow-hidden shadow-md">
+                  <div
+                    className="h-64 bg-cover bg-center bg-no-repeat"
+                    style={{ backgroundImage: `url(${image})` }}
+                  ></div>
+                </div>
+              ))}
             </div>
           )}
 
@@ -1284,24 +1295,6 @@ const SpotDetailPage = () => {
                 <div
                   className="h-64 bg-cover bg-center bg-no-repeat"
                   style={{ backgroundImage: `url(${Tokubetsu})` }}
-                ></div>
-              </div>
-            </div>
-          )}
-
-          {/* Extra Images for Nikko Toshogu */}
-          {cityKey === '東京' && idKey === '22' && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-              <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                <div
-                  className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${NikkoNeko})` }}
-                ></div>
-              </div>
-              <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                <div
-                  className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${NikkoSaru})` }}
                 ></div>
               </div>
             </div>

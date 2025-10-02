@@ -56,6 +56,7 @@ import OsakaAquarium1 from '../../assets/Osaka_aquarium1.jpg';
 import OsakaArchitecture5 from '../../assets/OsakaArchitecture5.png';
 import OsakaTempozan from '../../assets/OsakaTempozan.png';
 import KyotoPass5 from '../../assets/KyotoPass5.jpg';
+import GionKyoto3 from '../../assets/GionKyoto3.jpg';
 import TogetsukyoBridge5 from '../../assets/TogetsukyoBridge5.jpeg';
 import TokyoDome from '../../assets/TokyoDome.jpg';
 import TokyoDisneyland from '../../assets/tokyodisneyland.jpg';
@@ -410,7 +411,7 @@ const SpotsPage = () => {
         image: SapporoTower,
       },
       {
-        id: 26,
+        id: 115,
         name: 'サッポロビール博物館',
         description: '北海道の代表的なビール工場。歴史と製造工程を学べる',
         tags: ['グルメ・食べ歩き', '工場見学', '北日本'],
@@ -418,7 +419,7 @@ const SpotsPage = () => {
         image: SapporoBeerTaste,
       },
       {
-        id: 27,
+        id: 116,
         name: '円山動物園',
         description: '北海道を代表する動物園。ホッキョクグマやレッサーパンダが人気',
         tags: ['観光地', '家族', '北日本'],
@@ -634,7 +635,7 @@ const SpotsPage = () => {
         image: NikkoToshogu,
       },
       {
-        id: 24,
+        id: 123,
         name: '鎌倉',
         description: '歴史と文化が息づく古都。大仏とアニメの聖地',
         tags: ['文化・歴史', '東日本', '観光地', '鎌倉市'],
@@ -642,7 +643,7 @@ const SpotsPage = () => {
         image: Kamakura,
       },
       {
-        id: 25,
+        id: 124,
         name: '箱根温泉',
         description: '富士山を望む名湯。リラックスできる温泉地',
         tags: ['温泉', 'リゾート', '東日本', '観光地', '箱根町'],
@@ -650,7 +651,7 @@ const SpotsPage = () => {
         image: HakoneOnsen,
       },
       {
-        id: 53,
+        id: 25,
         name: '渋谷',
         description: '若者の街として有名。スクランブル交差点とハチ公がシンボル',
         tags: ['ショッピング', 'エンタメ', '東日本', '観光地', '渋谷区'],
@@ -674,7 +675,7 @@ const SpotsPage = () => {
         image: osushotenkai,
       },
       {
-        id: 30,
+        id: 117,
         name: '熱田神宮',
         description: '日本三大神剣の一つ、草薙剣を祀る神宮',
         tags: ['文化・歴史', '神社', '中部日本', '観光地', '名古屋市'],
@@ -682,7 +683,7 @@ const SpotsPage = () => {
         image: Atsutasinkyu,
       },
       {
-        id: 31,
+        id: 118,
         name: 'SCMAGLEV and Railway Park',
         description: 'JR東海運営。新幹線、リニア展示。鉄道ファンの聖地',
         tags: ['文化・歴史', '科学・技術', '中部日本', '観光地', '名古屋市'],
@@ -706,7 +707,7 @@ const SpotsPage = () => {
         image: OkiAquarium,
       },
       {
-        id: 56,
+        id: 33,
         name: '秋葉原',
         description: 'アニメ・ゲーム・電子機器の聖地。オタク文化の中心地',
         tags: ['エンタメ', 'ショッピング', '東日本', '観光地', '千代田区'],
@@ -714,7 +715,7 @@ const SpotsPage = () => {
         image: akihabara,
       },
       {
-        id: 57,
+        id: 34,
         name: '富士急ハイランド',
         description: '絶叫マシンで有名なテーマパーク。富士山を背景にした絶景アトラクション',
         tags: ['エンタメ', 'アトラクション', '東日本', '観光地', '富士吉田市'],

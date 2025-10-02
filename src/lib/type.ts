@@ -1,3 +1,18 @@
+/** 프로필 정보  */
+export type ProfileData = {
+  id: number;
+  userId: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  nickname: string;
+  phoneNumber: string;
+  gender: string;
+  profileImageUrl: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
 /** 여행 계획 리스트 */
 export type Plan = {
   id: number;
@@ -13,6 +28,7 @@ export type Plan = {
   userId: number;
   dailyPlans: DailyPlan[];
   members: PlanMember[];
+  totalExpenseAmount?: number; // 총 지출 금액
   createdAt: string;
   updatedAt: string;
   public: boolean;
@@ -27,6 +43,8 @@ export type PlanMember = {
   userEmail: string;
   role: string;
   userIdString: string; //유저 실제 ID  (test123)
+  profileImageUrl?: string; // 프로필 이미지 URL
+  color?: string; // 프로필 없을때, 배경 컬러 (프론트에서 임의로 추가)
 };
 
 /* 일별 계획 (상세 계획에서 사용) */

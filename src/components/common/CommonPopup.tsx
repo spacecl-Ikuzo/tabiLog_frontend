@@ -14,6 +14,7 @@ interface CommonPopupProps {
   confirmButtonColor?: string;
   cancelButtonColor?: string;
   maxWidth?: string;
+  isDisabled?: boolean;
 }
 
 export default function CommonPopup({
@@ -28,6 +29,7 @@ export default function CommonPopup({
   confirmButtonColor = 'bg-[#FF5722] hover:bg-[#E64A19]',
   cancelButtonColor = 'bg-gray-400 hover:bg-gray-500',
   maxWidth = 'max-w-sm',
+  isDisabled = false,
 }: CommonPopupProps) {
   const handleConfirm = () => {
     onConfirm?.();
@@ -57,8 +59,9 @@ export default function CommonPopup({
             {cancelText}
           </Button>
           <Button
+            disabled={isDisabled}
             onClick={handleConfirm}
-            className={`flex-1 ${confirmButtonColor} text-white border-none rounded-lg py-3`}
+            className={`flex-1 ${confirmButtonColor} cursor-pointer text-white border-none rounded-lg py-3`}
           >
             {confirmText}
           </Button>

@@ -96,11 +96,26 @@ import nisekounited from '../../assets/nisekounited.jpg';
 import nisekounitedmap from '../../assets/nisekounitedmap.jpg';
 import rusutsuresort from '../../assets/rusutsuresort.jpg';
 import rusutsuresortmap from '../../assets/rusutsuresortmap.jpg';
-import abasirikoso from '../../assets/abasirikoso.jpg';
-import abasirikosohotel from '../../assets/abasirikosohotel.jpg';
-import norokogo from '../../assets/norokogo.jpg';
+import OsakaArchitecture4 from '../../assets/OsakaArchitecture4.png';
+import OsakaTempozan5 from '../../assets/OsakaTempozan6.png';
+import OsakaTempozan6 from '../../assets/OsakaTempozan6.png';
+import OsakaTempozan7 from '../../assets/OsakaTempozan7.png';
+import TogetsukyoBridge1 from '../../assets/TogetsukyoBridge1.jpg';
+import TogetsukyoBridge2 from '../../assets/TogetsukyoBridge2.jpg';
+import TogetsukyoBridge3 from '../../assets/TogetsukyoBridge3.jpg';
+import TogetsukyoBridge4 from '../../assets/TogetsukyoBridge4.jpg';
+import TogetsukyoBridge5 from '../../assets/TogetsukyoBridge5.jpeg';
+import Tomonura2 from '../../assets/Tomonoura2.png';
+import Tomonura3 from '../../assets/Tomonura3.png';
 import ohotsukuicebreak from '../../assets/ohotsukuicebreak.jpg';
 import sapporoabasiri from '../../assets/sapporoabasiri.jpg';
+import Hirosima15 from '../../assets/Hirosima15.png';
+import Hirosima12 from '../../assets/Hirosima12.jpg';
+import abasirikoso from '../../assets/abasirikoso.jpg';
+import abasirikosohotel from '../../assets/abasirikosohotel.jpg';
+import konosekaiguresi from '../../assets/konosekaiguresi.jpg';
+import konosekakoharubashi from '../../assets/konosekakoharubashi.jpg';
+import konosekanikoukoen from '../../assets/konosekanikoukoen.jpg';
 
 const DetailPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -112,11 +127,14 @@ const DetailPage = () => {
       description:
         '築地市場の新鮮な海の幸から、丸亀製麺の本格讃岐うどんまで。東京の「うまい!」をすべて味わい尽くす、食いしん坊のためのプランです。',
       author: 'ソヒョン',
-      image: Tsukiji,
+      image: Marugamejemen2,
       heroImage: Tsukiji,
       breadcrumb: ['東京', '築地市場', '丸亀製麺'],
       contentTitle: '東京グルメの基本情報',
       spots: ['築地市場', '丸亀製麺', '銀座寿司', 'ラーメン二郎'],
+      imageLeft: Tsukiji,
+      imageRight: Marugamejemen2,
+      extraImages: [JiroSushi, RamenJiro],
       content:
         '東京グルメの王道スポットを巡る2泊3日の旅。新鮮な海の幸から本格うどん、高級寿司、人気ラーメンまで、東京の「うまい！」をすべて味わい尽くします。<br><br><table style="border-collapse: collapse; width: 100%; margin: 10px 0;"><tr style="background-color: #f2f2f2;"><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">スポット</th><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">所在地</th><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">予算目安</th><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">予約</th><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">営業時間</th></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">築地市場</td><td style="border: 1px solid #ddd; padding: 8px;">中央区築地5-2-1</td><td style="border: 1px solid #ddd; padding: 8px;">1,000円〜3,000円</td><td style="border: 1px solid #ddd; padding: 8px;">不要</td><td style="border: 1px solid #ddd; padding: 8px;">5:00〜14:00</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">丸亀製麺</td><td style="border: 1px solid #ddd; padding: 8px;">全国チェーン店</td><td style="border: 1px solid #ddd; padding: 8px;">500円〜1,000円</td><td style="border: 1px solid #ddd; padding: 8px;">不要</td><td style="border: 1px solid #ddd; padding: 8px;">11:00〜22:00</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">銀座寿司</td><td style="border: 1px solid #ddd; padding: 8px;">中央区銀座</td><td style="border: 1px solid #ddd; padding: 8px;">10,000円〜30,000円</td><td style="border: 1px solid #ddd; padding: 8px;">必須</td><td style="border: 1px solid #ddd; padding: 8px;">17:00〜23:00</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">ラーメン二郎</td><td style="border: 1px solid #ddd; padding: 8px;">複数店舗</td><td style="border: 1px solid #ddd; padding: 8px;">800円〜1,200円</td><td style="border: 1px solid #ddd; padding: 8px;">不要</td><td style="border: 1px solid #ddd; padding: 8px;">11:00〜翌2:00</td></tr></table><br>【2.1 築地市場】<br>世界最大級の魚市場。早朝の競りを見学し、市場内の寿司店で朝寿司を楽しみましょう。築地市場は2018年に豊洲市場に移転しましたが、外市場エリアは現在も営業中です。朝5時から始まるマグロの競りは迫力満点で、観光客も見学可能です。市場内の寿司店では、競りで落札されたばかりの新鮮な魚を使った朝寿司を味わえます。おすすめ店舗：大和寿司、寿司大、きつねや。アクセス：都営大江戸線「築地市場駅」徒歩1分。<br><br>【2.2 丸亀製麺】<br>本格讃岐うどんのチェーン店。コシのある麺と美味しい出汁が自慢です。東京には多数の店舗があり、どこでも同じ品質のうどんを楽しめます。店内では天ぷらも豊富で、うどんと合わせて注文するのが定番です。人気メニュー：釜揚げうどん（500円）、天ぷらうどん（800円）、きつねうどん（600円）。おすすめ店舗：丸亀製麺 新宿店、丸亀製麺 渋谷店。営業時間は店舗により異なりますが、基本的に11:00〜22:00で営業しています。<br><br>【2.3 銀座寿司】<br>高級寿司店で職人が握る江戸前寿司。新鮮なネタと丁寧な仕事が光ります。銀座には老舗から新進気鋭の店まで、様々な寿司店が軒を連ねています。予約は必須で、特に人気店は数ヶ月前からの予約が必要な場合があります。おすすめ店舗：すし善（予算：15,000円〜）、久兵衛（予算：20,000円〜）、青空（予算：25,000円〜）。アクセス：東京メトロ銀座線「銀座駅」各出口から徒歩5分以内。営業時間は17:00〜23:00が一般的で、定休日は店舗により異なります。<br><br>【2.4 ラーメン二郎】<br>東京で最も有名なラーメン店。太い麺と濃厚スープ、大量の野菜が特徴です。二郎系ラーメンの元祖で、そのボリューム感と独特の味わいで多くのファンを魅了しています。店舗により味や量に若干の違いがありますが、基本的な二郎の味は共通しています。人気メニュー：ラーメン（800円）、チャーシュー麺（1,000円）、野菜増し（+100円）。おすすめ店舗：ラーメン二郎 三田本店、ラーメン二郎 目黒店。営業時間は11:00〜翌2:00で、深夜まで営業しているため、夜食にも最適です。',
     },
@@ -222,6 +240,58 @@ const DetailPage = () => {
       content:
         '毎年夏に名古屋で開催される世界規模のコスプレイベント。大須商店街と名古屋市街が舞台となる国際的なコスプレ祭典です。<br><br><table style="border-collapse: collapse; width: 100%; margin: 10px 0;"><tr style="background-color: #f2f2f2;"><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">項目</th><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">詳細</th></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">開催時期</td><td style="border: 1px solid #ddd; padding: 8px;">毎年8月（2日間）<br>2024年: 8月3日～4日</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">メイン会場</td><td style="border: 1px solid #ddd; padding: 8px;">大須商店街・名古屋市街<br>愛知県体育館・オアシス21</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">アクセス</td><td style="border: 1px solid #ddd; padding: 8px;">地下鉄鶴舞線「大須観音駅」徒歩2分<br>地下鉄名城線「上前津駅」徒歩5分<br>名古屋駅から車で約20分</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">入場料金</td><td style="border: 1px solid #ddd; padding: 8px;">無料（街中イベント）<br>コンテスト観覧: 1,000円～3,000円<br>VIP席: 5,000円～10,000円</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">営業時間</td><td style="border: 1px solid #ddd; padding: 8px;">10:00～18:00（イベントにより変動）<br>コンテスト: 13:00～17:00</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">駐車場</td><td style="border: 1px solid #ddd; padding: 8px;">有料駐車場あり（複数箇所）<br>普通車: 200円～300円/時間<br>大型車: 500円/時間</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">参加国数</td><td style="border: 1px solid #ddd; padding: 8px;">約30カ国から参加<br>海外コスプレイヤー: 約50名<br>国内参加者: 約1,000名</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">施設・設備</td><td style="border: 1px solid #ddd; padding: 8px;">休憩所・トイレ・案内所<br>コスプレ更衣室・撮影エリア<br>多言語対応・案内板</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">周辺施設</td><td style="border: 1px solid #ddd; padding: 8px;">大須観音・万松寺<br>名古屋城・栄<br>カフェ・レストラン多数</td></tr></table><br>【2.1 大須商店街】<br>コスプレイベントのメイン会場。世界各国から集まったコスプレイヤーたちが街を練り歩き、独特な文化の交流が生まれます。大須商店街でのコスプレイベントは無料で観覧でき、写真撮影も自由に可能です。<br><br>【2.2 名古屋市街】<br>市内各所でコスプレイベントが開催され、名古屋の街全体がコスプレの祭典会場となります。観光客も参加できるイベントが多数あります。市内各所のイベントはほとんど無料で、一部特別イベントは別途料金がある場合があります。<br><br>【2.3 コスプレコンテスト】<br>世界各国の代表コスプレイヤーが参加する国際コンテスト。技術力と表現力の高さを競い合い、観客を魅了します。コンテスト観覧は別途料金があり、事前予約が推奨されます。<br><br>【2.4 国際交流】<br>コスプレを通じた国際文化交流の場。世界各国のファンが集まり、アニメ・漫画文化を共有する貴重な機会となります。国際交流イベントは無料で参加でき、多言語対応が可能です。',
     },
+    9: {
+      title: 'この世界の片隅に',
+      description: '戦時中の広島・呉を舞台とした感動のアニメ映画',
+      author: 'タビログ編集部',
+      image: Hirosima12,
+      heroImage: Hirosima15,
+      imageRight: konosekaiguresi,
+      extraImages: [konosekaiguresi, Hirosima15],
+      breadcrumb: ['広島', '呉市', 'この世界の片隅に'],
+      contentTitle: 'この世界の片隅にの基本情報',
+      spots: ['三ツ蔵', '小春橋', '二河公園'],
+      content:
+        '「この世界の片隅に」は、こうの史代による漫画を原作とし、片渕須直監督によって2016年に映画化された感動的なアニメーション作品です。第二次世界大戦中の広島市・呉市を舞台に、主人公・浦野すずの戦時中の日常を描いた作品で、国内外で高い評価を受けています。<br><br>【基本情報】<br>原作：こうの史代（漫画）<br>映画化監督・脚本：片渕須直（2016年公開）<br>舞台：第二次世界大戦中の広島市・呉市など<br>主人公：浦野すず（戦時中を生きるごく普通の女性）<br><br>【2.1 三ツ蔵（旧澤原家住宅／澤田屋）】<br>呉市中心部近く<br>すずが嫁いでから日常を過ごす町の家並みの象徴的な建物。映画でも外観がほぼそのまま描かれています。作品ファンによる聖地巡礼の重要なスポットです。<br><br>【2.2 小春橋】<br>呉市、堺川にかかる橋<br>すずと周作が2人で語り合うシーンなど、印象的な橋の風景が描かれた場所。映画の重要なシーンの舞台となっています。<br><br>【2.3 二河公園】<br>呉市<br>桜の木の下など、すずさんが関わる場面のイメージの場所として注目。聖地巡礼のコースにも入っており、作品の雰囲気を感じられるスポットです。<br><br>【聖地巡礼・コラボ情報】<br>・ロケーションマップ：呉市などで、映画に登場する場所をマップ化して配布<br>・スタンプラリー：「待っとるよ 呉」スタンプラリーイベント実施<br>・再上映・舞台挨拶：終戦80年記念で片渕監督や声優「のん」の舞台挨拶イベント実施<br>・広島市江波（えば）周辺：映画・原作に出てくる広島市内の地区',
+    },
+    101: {
+      title: 'この世界の片隅に × 広島市',
+      description: '戦時中の広島市を舞台とした感動のアニメ映画聖地巡礼',
+      author: 'タビログ編集部',
+      image: Hirosima12,
+      heroImage: Hirosima15,
+      imageRight: konosekaiguresi,
+      breadcrumb: ['広島', '広島市', 'この世界の片隅に'],
+      contentTitle: 'この世界の片隅に × 広島市の基本情報',
+      spots: ['広島市江波地区', '平和記念公園周辺', '広島市内の聖地'],
+      content:
+        '「この世界の片隅に」は、こうの史代による漫画を原作とし、片渕須直監督によって2016年に映画化された感動的なアニメーション作品です。第二次世界大戦中の広島市・呉市を舞台に、主人公・浦野すずの戦時中の日常を描いた作品で、国内外で高い評価を受けています。<br><br>【基本情報】<br>原作：こうの史代（漫画）<br>映画化監督・脚本：片渕須直（2016年公開）<br>舞台：第二次世界大戦中の広島市・呉市など<br>主人公：浦野すず（戦時中を生きるごく普通の女性）<br><br>【2.1 広島市江波（えば）地区】<br>広島市西区江波<br>映画・原作に出てくる広島市内の地区として描かれた場所。戦前の広島の街並みや人々の生活が描かれています。現在も当時の面影を残す地域として、作品ファンによる聖地巡礼の重要なスポットです。<br><br>【2.2 平和記念公園周辺】<br>広島市中区中島町<br>戦後の広島の復興と平和への願いが込められた場所。映画では戦後のシーンで重要な役割を果たし、主人公たちの想いが込められた場所として描かれています。平和の象徴として多くの人々が訪れる場所です。<br><br>【2.3 広島市内の聖地】<br>広島市各所<br>映画に登場する広島市内の様々な場所。戦前の広島の街並み、人々の生活、そして戦後の復興の様子が描かれており、作品の世界観を感じられるスポットが点在しています。<br><br>【聖地巡礼・コラボ情報】<br>・ロケーションマップ：広島市・呉市などで、映画に登場する場所をマップ化して配布<br>・スタンプラリー：「待っとるよ 呉」スタンプラリーイベント実施<br>・再上映・舞台挨拶：終戦80年記念で片渕監督や声優「のん」の舞台挨拶イベント実施<br>・広島市江波（えば）周辺：映画・原作に出てくる広島市内の地区',
+    },
+    102: {
+      title: '崖の上のポニョ × 鞆の浦',
+      description: '海と町が織りなすファンタジーアニメの聖地巡礼',
+      author: 'タビログ編集部',
+      image: Tomonura2,
+      heroImage: Tomonura3,
+      breadcrumb: ['広島', '福山市', '鞆の浦', '崖の上のポニョ'],
+      contentTitle: '崖の上のポニョ × 鞆の浦の基本情報',
+      spots: ['鞆の浦港周辺', '常夜燈と海沿いの街並み', '鞆の浦内の聖地'],
+      content:
+        '「崖の上のポニョ」は、宮崎駿監督によるスタジオジブリ制作のアニメーション映画（2008年公開）です。海と自然、そして子どもたちの純粋な心を描いた物語は、日本国内外で高く評価され、公開から長く愛されています。<br><br>本作の舞台モデルの一部として、広島県福山市の鞆の浦（とものうら）が知られており、ファンによる「聖地巡礼」の重要スポットになっています。<br><br>【基本情報】<br>原作・監督：宮崎駿<br>公開：2008年<br>舞台：瀬戸内海・鞆の浦など<br>主人公：宗介（そうすけ）とポニョ<br><br>【2.1 鞆の浦港周辺】<br>鞆の浦は、瀬戸内海に面した美しい港町で、古い町並みと海の景色が「崖の上のポニョ」の舞台モデルの一つとされています。港周辺はアニメの雰囲気を感じられるスポットで、聖地巡礼ファンに人気です。<br><br>【2.2 常夜燈と海沿いの街並み】<br>鞆の浦のシンボル「常夜燈（じょうやとう）」周辺は、古き良き港町の雰囲気を残しています。海と町の景色はポニョの物語の世界観と通じるものがあり、多くの観光客が訪れます。<br><br>【2.3 鞆の浦内の聖地】<br>鞆の浦には、ポニョの世界観を感じられる歴史的建築や海沿いの景観が点在しています。細い路地や港の風景、潮の香りは、映画の情景をリアルに追体験させてくれます。<br><br>【聖地巡礼・コラボ情報】<br>・ロケーションマップ：鞆の浦の「ポニョゆかりの地」を紹介するマップ配布<br>・スタンプラリー：「ポニョ巡りスタンプラリー」イベント実施<br>・再上映・舞台挨拶：作品公開周年イベントとして舞台挨拶や特別上映を開催<br>・鞆の浦港周辺：映画の舞台モデルとされる港や街並みを散策できるスポット',
+    },
+    10: {
+      title: '🎬 崖の上のポニョ × 鞆の浦',
+      description:
+        '宮崎駿監督が滞在し、作品の舞台イメージに影響を与えた港町「鞆の浦」。路地と海、島影の重なりが美しい、やさしい時間の巡礼。',
+      author: 'タビログ編集部',
+      image: Tomonura2,
+      heroImage: Tomonura3,
+      breadcrumb: ['広島', '鞆の浦', '崖の上のポニョ'],
+      contentTitle: '鞆の浦で感じる「ポニョ」の世界',
+      spots: ['港町の路地歩き', '海沿いの眺望', '常夜灯周辺フォトスポット'],
+      content:
+        '瀬戸内の凪いだ海と島々のシルエットに囲まれた港町・鞆の浦。監督が逗留したとされるこの地では、映画の温もりある色彩と穏やかな時間が重なります。<br><br>【1】港町の路地<br>石畳と木造家屋が続く小径。ふとした生活の匂いが作品の空気感と響き合います。<br><br>【2】海沿いの眺望<br>常夜灯や波止場からの景色は、朝夕で表情が一変。やわらかな光の時間帯が特におすすめ。<br><br>【3】アクセスのコツ<br>福山駅からバスで約30分「鞆港」下車すぐ。混雑を避けるなら午前中の訪問が快適です。',
+    },
     118: {
       title: '君の名は。聖地巡礼！渋谷と代々木',
       description:
@@ -229,6 +299,9 @@ const DetailPage = () => {
       author: 'アニメファン',
       image: KiminoNamaewa,
       heroImage: KiminoNamaewaSuga,
+      imageLeft: Shibakoen,
+      imageRight: ShinjukuPolice,
+      extraImages: [Shibakoen, ShinjukuPolice, Aogashima, KiminoNamaewa],
       breadcrumb: ['東京', '渋谷', '代々木', '君の名は。聖地巡礼'],
       contentTitle: '君の名は。聖地巡礼の基本情報',
       spots: ['君の名は。映画紹介', '代々木八幡宮', '新宿警察署', '青ヶ島'],
@@ -242,6 +315,9 @@ const DetailPage = () => {
       author: '映画好き',
       image: tenkinoko,
       heroImage: tenkinoko,
+      imageLeft: odaiba,
+      imageRight: denkiseibumc,
+      extraImages: [tenkinoko, odaiba],
       breadcrumb: ['東京', 'スカイツリー', '台場', '天気の子聖地巡礼'],
       contentTitle: '天気の子聖地巡礼の基本情報',
       spots: ['天気の子映画紹介', '東京スカイツリー', 'お台場', 'マクドナルド'],
@@ -255,6 +331,9 @@ const DetailPage = () => {
       author: 'デジモンファン',
       image: Digimon4,
       heroImage: Digimon4,
+      imageLeft: odaiba,
+      imageRight: OdaibaDigimon,
+      extraImages: [HikarigaokaDigimon, Digimon2],
       breadcrumb: ['東京', 'お台場', '光が丘', 'デジモンアドベンチャー聖地巡礼'],
       contentTitle: 'デジモンアドベンチャー聖地巡礼の基本情報',
       spots: ['デジモンアドベンチャー紹介', 'お台場フジテレビ', '光が丘公園', '新宿駅'],
@@ -268,6 +347,9 @@ const DetailPage = () => {
       author: '温泉好き',
       image: hakoneonsen,
       heroImage: hakoneonsen,
+      imageLeft: hakoneonsen,
+      imageRight: nikkoonsen,
+      extraImages: [hakoneonsen, nikkoonsen],
       breadcrumb: ['東京', '箱根', '日光', '温泉巡り'],
       contentTitle: '東京温泉巡りの基本情報',
       spots: ['温泉巡り紹介', '箱根温泉', '日光温泉', '温泉の楽しみ方'],
@@ -281,6 +363,9 @@ const DetailPage = () => {
       author: 'ファミリー',
       image: NagoyaLego,
       heroImage: NagoyaLego,
+      imageLeft: LegoAttraction,
+      imageRight: LegoBoat,
+      extraImages: [LegoAttraction, LegoBoat],
       breadcrumb: ['名古屋', 'レゴランド', 'テーマパーク', '家族旅行'],
       contentTitle: 'レゴランド・ジャパンの基本情報',
       spots: ['レゴランド紹介', 'アトラクション', 'レゴブロック体験', 'ボートライド'],
@@ -294,6 +379,9 @@ const DetailPage = () => {
       author: 'ジブリファン',
       image: jiburiPost,
       heroImage: jiburiPost,
+      imageLeft: jiburimap,
+      imageRight: jiburimori,
+      extraImages: [jiburimap, jiburimori, jiburi4],
       breadcrumb: ['愛知', '長久手', 'ジブリパーク', 'アニメの世界'],
       contentTitle: 'ジブリパークの基本情報',
       spots: ['ジブリパーク紹介', 'トトロの森', '魔女の宅急便', 'ジブリの世界観'],
@@ -355,10 +443,36 @@ const DetailPage = () => {
       content:
         '沖縄には黒糖や南国フルーツを活かした絶品スイーツが数多くあります。那覇・国際通り周辺には、食べ歩きにぴったりの人気店が集まっています。<br><br>【2.1 ほうき星（黒糖カヌレ）】<br>沖縄の黒糖を使ったしっとり濃厚なカヌレが看板商品。外はカリッ、中はむっちりの理想的な食感で、コーヒーとの相性も抜群。見た目も可愛らしく、差し入れにも最適です。<br><br>【2.2 ふくぎや（バウムクーヘン）】<br>沖縄の素材にこだわったしっとり系バウム。層ごとの焼き色が美しく、カットすると広がる香りがたまりません。手土産の定番として地元でも愛されています。<br><br>【2.3 ブルーシール（アイスクリーム）】<br>1948年創業の沖縄アイスブランド。塩ちんすこう、紅いも、シークヮーサーなど沖縄らしいフレーバーが充実。散策のクールダウンにもおすすめ。<br><br>【2.4 千日（氷ぜんざい・かき氷）】<br>那覇・旭橋駅から徒歩圏、久米大通り沿いに佇む老舗の甘味処。名物は金時豆のぜんざいにふわふわの氷を山盛りにした「氷ぜんざい」。きめ細やかに削られた氷は口どけが驚くほど軽く、黒糖の自然な甘みと金時豆の風味が優しく広がります。昔ながらの涼やかな暖簾がかかる店内はどこか懐かしく、夏はもちろん通年で地元客と観光客に愛される一杯です。暑い沖縄散策のクールダウンに最適。<br>出典：<a href="https://tabelog.com/matome/25376/" target="_blank" rel="noreferrer">食べログまとめ 沖縄県の絶品スイーツ</a>',
     },
+    26: {
+      title: '🎡 天保山大観覧車 × 名探偵コナン 聖地巡礼',
+      description:
+        '大阪港のランドマーク・天保山大観覧車。劇場版「名探偵コナン」の舞台イメージと重なる夜景を満喫するミニ巡礼。',
+      author: 'アニメ巡礼編集部',
+      image: OsakaTempozan,
+      heroImage: OsakaTempozan,
+      breadcrumb: ['大阪', '大阪港', '天保山大観覧車'],
+      contentTitle: '天保山大観覧車とコナンの世界',
+      spots: ['天保山大観覧車の夜景', '海遊館エリア散策', 'ベイサイドフォトスポット'],
+      content:
+        '直径約100mのスケールを誇る天保山大観覧車。ベイエリアの夜景は劇場版「名探偵コナン」の雰囲気とマッチし、写真映え抜群です。<br><br>【1】天保山大観覧車の夜景<br>地上約112mから大阪ベイのパノラマを一望。日没後のゴンドラからは、街の光と海の反射が織りなすドラマチックな景観に。<br><br>【2】海遊館エリア散策<br>観覧車の足元は海遊館やマーケットプレイスが並ぶ人気の観光エリア。食べ歩きやショッピングも楽しめます。<br><br>【3】ベイサイドフォトスポット<br>大観覧車を背景にした夜景撮影は定番。作品を想起させるカットを探しながら歩くのもおすすめ。',
+    },
+    27: {
+      title: '🌉 嵐山・渡月橋 × 『聲の形』',
+      description:
+        '映画『聲の形』のクライマックスを彩る渡月橋。四季の景観と作品の余韻が重なる京都・嵐山のミニ巡礼コース。',
+      author: 'タビログ編集部',
+      image: TogetsukyoBridge5,
+      heroImage: TogetsukyoBridge5,
+      breadcrumb: ['京都', '嵐山', '渡月橋'],
+      contentTitle: '渡月橋と『聲の形』の舞台を歩く',
+      spots: ['渡月橋の眺望', '桂川沿い散策', '嵐山の季節風景'],
+      content:
+        '渡月橋は嵐山の象徴。『聲の形』の印象的なシーンを想いながら、桂川と山並みのコントラストを楽しもう。<br><br>【1】渡月橋の眺望<br>朝夕の光が作る陰影が美しい。橋上・河川敷の両方から構図を試してみて。<br><br>【2】桂川沿い散策<br>桜・新緑・紅葉・雪景色。四季それぞれの色で作品の余韻を感じられる。<br><br>【3】アクセスのコツ<br>阪急『嵐山駅』または嵐電『嵐山駅』が便利。混雑時は早朝訪問がおすすめ。',
+    },
     107: {
       title: 'オホーツク流氷体験！札幌→網走 1〜2日旅',
       description:
-        '札幌から特急で網走へ。流氷砕氷船クルーズや季節列車で北浜駅へ向かい、オホーツク海の絶景を満喫する冬のモデルコース。',
+        '札幌から特急で網走へ。流氷砕氷船クルーズ、季節列車で北浜駅へ向かい、オホーツク海の絶景を満喫する冬のモデルコース。',
       author: '旅ログ編集部',
       image: sapporoabasiri,
       heroImage: ohotsukuicebreak,
@@ -368,11 +482,23 @@ const DetailPage = () => {
         'Day1 札幌→網走（特急移動）',
         '流氷砕氷船クルーズ',
         '網走湖荘ホテル温泉',
-        'ノロッコ号で北浜駅へ',
+        '季節列車で北浜駅へ',
         'Day2 網走散策＆札幌へ',
       ],
       content:
-        '道東・網走の流氷を体感する冬のショートトリップ。鉄道移動と季節列車、オホーツク海のビュースポットを効率よく巡ります。<br><br>【Day1｜札幌→網走（特急）】<br>早朝に札幌駅発の特急で網走へ。例：札幌7:55発→網走13:00前後着のパターン（時刻は季節で変動）。車内では売店/ラウンジを活用しつつ、石北本線の冬景色を楽しみましょう。<br>・所要時間：約5時間5分（札幌→網走）<br>・運賃：指定席 9,390円（2025年9月時点）<br>・運行本数：1日3本（季節により変動）<br>・車内設備：売店、ラウンジ、トイレ完備<br><br>【流氷砕氷船クルーズ】<br>網走港発の砕氷船で約60分のクルーズ。運航枠は日中中心で、当日満席になりやすいので事前予約推奨。防寒具（手袋・ネックウォーマー・滑りにくい靴）必携。風向きにより流氷接岸が弱い日もあるため、最新運航情報を確認してから港へ。<br>・運航期間：1月下旬〜3月下旬（天候により変動）<br>・運航時間：9:00〜15:00（1日6便程度）<br>・料金：大人3,000円、小人1,500円<br>・予約：電話予約推奨（当日満席の可能性あり）<br>・注意：風向きにより流氷接岸が弱い日は運航中止の場合あり<br><br>【網走湖荘ホテル温泉】<br>網走湖に面した老舗ホテルで、北海道の冬を満喫できる温泉宿。このホテルは韓国の人気バラエティ番組「무한도전（無限挑戦）」のメンバーが2017年に訪れた場所としても有名です。ホテル内の温泉ではオホーツク海と網走湖を眺めながら体を温めることができます。<br>・温泉：大浴場・露天風呂完備、オホーツク海と網走湖を一望<br>・宿泊料金：1泊2食付き 15,000〜25,000円（冬季）<br>・日帰り入浴：1,500円（10:00〜21:00）<br>・アクセス：網走駅から車で10分、無料送迎バスあり<br>・特徴：韓国バラエティ番組「무한도전」ロケ地としても有名<br>・おすすめ：夕食後の温泉で流氷クルーズの疲れを癒やす<br><br>【ノロッコ号で北浜駅へ】<br>流氷シーズンに運転される季節列車（流氷物語号/ノロッコ相当）で海沿いをのんびり移動。下車観光スポットは「北浜駅」がおすすめ。駅舎内展望スペースや線路脇から、オホーツク海と流氷のコントラストを一望できます。<br>・運行期間：流氷シーズン中（1月〜3月）<br>・運行区間：網走〜知床斜里<br>・料金：乗車券＋指定席券（数百円〜）<br>・特徴：海沿いの絶景を楽しめる季節限定列車<br><br>【Day2｜網走散策→札幌へ】<br>午前は天都山・流氷展望台など市内をショート散策。午後の特急で札幌へ戻れば1泊2日行程が完結。日帰りの場合は砕氷船の便と復路特急の接続に留意を。<br>・天都山展望台：網走市内の絶景スポット<br>・流氷展望台：オホーツク海と流氷を一望<br>・復路特急：網走発15:00頃→札幌着20:00頃<br><br>【チケット/予約・予算の目安】<br>・札幌⇄網走 特急指定往復：18,780円（時期/割引で変動）<br>・砕氷船クルーズ：大人3,000円、小人1,500円<br>・季節列車指定席：数百円〜（乗車券＋指定席券）<br>・宿泊：網走駅/港周辺のビジネス/旅館で7,000〜12,000円目安（冬季）<br>・総予算：1泊2日で約30,000〜40,000円（交通費・宿泊費・食事代含む）<br><br>【持ち物/安全】<br>防寒着（−10℃想定の中間着/アウター）、滑り止め付き靴、携帯カイロ、予備手袋。天候急変/運休時は代替（市内バス/タクシー）を検討。<br><br>参考：流氷と道東鉄道旅の体験談や移動イメージ（行程着想）<a href="https://m.blog.naver.com/dbwjd6162/220320957875" target="_blank" rel="noreferrer">ブログ記事</a>、<a href="http://work.kuma-i.com/?eid=1195336" target="_blank" rel="noreferrer">札幌網走交通情報</a>。',
+        '【Day1｜札幌→網走（特急）】<br>・早朝、札幌駅から特急オホーツク/大雪で網走へ（所要：約5時間）。<br>・石北本線は層雲峡・大雪山連峰の雪景色が車窓一面に広がり、車内からも冬の北海道らしさを満喫。<br>・網走到着後、荷物は駅ロッカーまたは宿に預けて港へ移動。<br><br>【流氷砕氷船クルーズ（約60分）】<br>・網走港発の砕氷船「おーろら」などで流氷帯へ。運航は例年1月下旬〜3月下旬（天候・流氷状況で変動）。<br>・甲板は強風で体感温度が大幅低下。ダウン/フリース/手袋/ニット帽/ネックウォーマー必携。<br>・おすすめ時間帯：朝〜昼の斜光で氷面の陰影が際立つ時間、または夕方のゴールデンアワー。<br>・予約：繁忙期は事前予約推奨。当日受付も可だが満席リスクあり。<br><br>【網走湖荘ホテル温泉（夕食：オホーツク海の幸）】<br>・湖畔の温泉宿で冷えた身体を温める。カニ・ホタテ・サーモン・白身魚など地の海鮮が充実。<br>・温泉は内湯＋露天の構成が一般的。入浴後の湯冷めに注意（ウール系アウターがおすすめ）。<br><br>【季節列車で北浜駅へ（オプション）】<br>・流氷シーズンに合わせた臨時観光列車/普通列車でオホーツク海沿いの絶景区間へ。<br>・「北浜駅」は駅舎内に喫茶が併設され、駅舎の2階展望室やホームから流氷原を一望できる人気スポット。<br>・夕暮れ時は海と空のグラデーションが特に美しい。<br><br>【Day2｜網走散策→札幌へ】<br>・天都山展望台／オホーツク流氷館：流氷科学やクリオネ展示、展望台からの大パノラマが見どころ。<br>・能取岬：黒い岩肌と白い雪、碧い海のコントラストが圧巻（路面凍結に注意／タクシー手配推奨）。<br>・市内散策：監獄博物館、道の駅、海産物市場でお土産探し。<br>・午後の特急で札幌へ戻る（着後は夕食にスープカレーやラーメンも◎）。<br><br>【ベストシーズン/服装・装備】<br>・ベスト：2月中旬（流氷の安定期）。<br>・服装：ダウンコート＋中間着（フリース）＋防風パンツ、厚手靴下、滑り止め付きブーツ。<br>・装備：手袋2枚重ね・耳まで覆うニット帽・ネックウォーマー・カイロ・防水スマホケース。<br><br>【費用目安（1名）】<br>・札幌↔網走 特急往復：20,000〜28,000円（時期/割引により変動）<br>・砕氷船：4,000〜4,500円/約60分（会社により異なる）<br>・宿泊：8,000〜20,000円（1泊2食、宿/時期により変動）<br>・市内移動/観光：2,000〜6,000円（バス/タクシー/入館など）<br><br>【予約・移動のコツ】<br>・クルーズは満席対策でオンライン予約推奨。風が強い日は酔い止めも用意。<br>・鉄道ダイヤは降雪で遅延/運休の可能性あり。余裕のある行程と代替ルート（バス/タクシー）を準備。<br>・写真撮影は手袋対応のシャッターボタン/リモコンが便利。バッテリーは寒さで消耗が早いので予備必須。<br><br>【モデルタイムライン（例）】<br>・Day1 06:30 札幌発 → 11:30 網走着 → 13:00 砕氷船クルーズ → 15:00 チェックイン・温泉 → 17:30 夕食<br>・Day2 09:00 天都山・流氷館 → 12:00 市内昼食 → 13:30 北浜駅（オプション） → 16:00 網走発 → 21:00 札幌着',
+    },
+    24: {
+      title: '🏛 中之島公会堂 × 黒執事 聖地巡礼',
+      description: '中之島公会堂 聖地巡礼！黒執事の世界を体感',
+      author: 'アニメ巡礼編集部',
+      image: OsakaArchitecture5,
+      heroImage: OsakaArchitecture5,
+      breadcrumb: ['大阪', '北区', '中之島公会堂'],
+      contentTitle: '中之島公会堂と黒執事の関係',
+      spots: ['外観（ヴィクトリア建築）', '大ホール', 'ステンドグラス'],
+      content:
+        '中之島公会堂は1918年に建てられた大阪を代表するネオ・ルネッサンス様式の建築物です。アニメ『黒執事』の舞台となるヴィクトリア時代のロンドンを彷彿とさせる重厚な外観から、ファンの間では聖地の一つとして親しまれています。作品の公式ロケ地ではありませんが、その雰囲気が「黒執事」の世界観と重なるため、多くのファンが訪れています。<br><br>【2.1 外観（ヴィクトリア建築）】<br>赤レンガと白い石材を組み合わせた外観は、ヴィクトリア時代のロンドンを思わせます。ファンにとっては写真撮影の定番スポットです。<br><br>【2.2 大ホール】<br>公会堂の中心に位置する大ホールは、豪華な装飾とクラシックな雰囲気が特徴。『黒執事』の舞踏会シーンを連想させます。<br><br>【2.3 ステンドグラス】<br>天井や窓に施されたステンドグラスは必見。色鮮やかな光が差し込み、まるでアニメのワンシーンのような幻想的な空間を作り出します。',
     },
     113: {
       title: '沖縄ヨットツアー！無人島クルーズとサンセット',
@@ -432,7 +558,12 @@ const DetailPage = () => {
       heroImage: OsakaArchitecture5,
       breadcrumb: ['大阪', '北区', '中之島公会堂'],
       contentTitle: '聖地巡礼の基本情報',
-      spots: ['中之島公会堂とは（建築・歴史）', '『黒執事』との関連（雰囲気・モチーフ）', '撮影＆鑑賞ポイント（昼／夜）', '周辺スポット＆モデルコース'],
+      spots: [
+        '中之島公会堂とは（建築・歴史）',
+        '『黒執事』との関連（雰囲気・モチーフ）',
+        '撮影＆鑑賞ポイント（昼／夜）',
+        '周辺スポット＆モデルコース',
+      ],
       content:
         '中之島公会堂（正式名称：大阪市中央公会堂）は、1918年竣工のネオ・ルネサンス様式を基調とした大阪を代表する近代建築です。赤レンガと花崗岩、銅板ドームが織りなす端正な外観は、ヴィクトリア朝の趣きがあり、『黒執事』の世界観と相性が抜群。ファンの間では**"雰囲気モデル"**として親しまれ、作品の舞台感を味わえる聖地として人気を集めています。<br>※公式なロケ地・明示的モデルと断定されてはいませんが、建築様式や佇まいが作品の空気感に非常に近いと評判です。<br><br>【2.1 中之島公会堂とは（建築・歴史）】<br><br>近代大阪の象徴的公共建築。正面の大階段、3つのドーム、アーチ窓が見どころ。<br><br>内部には大集会室や特別室があり、時期により一般公開・ガイドツアー・展覧会を実施。<br><br>中之島の水辺景観（堂島川・土佐堀川）と一体で楽しめるのも魅力。<br><br>【2.2 『黒執事』との関連（雰囲気・モチーフ）】<br><br>ヴィクトリア朝を想起させる外観、石造装飾、重厚な扉・階段は作品の貴族社会×執事の世界と好相性。<br><br>推し活ポイント：シルクハット／ステッキ／黒基調コーデでの記念撮影（※館内撮影はルール遵守）。<br><br>【2.3 撮影＆鑑賞ポイント（昼／夜）】<br><br>正面大階段の対角アングル：ドームとファサードを一枚に収めやすい定番構図。<br><br>南側・中之島公園側からの全景：花と緑越しにクラシックな外観が映える。<br><br>川沿い歩道（なにわ橋〜淀屋橋）：水鏡リフレクションで雰囲気抜群。<br><br>夜間ライトアップ：金色照明に浮かぶ赤レンガが"黒執事"らしいゴシック感を演出。魔法の時間帯はトワイライト。<br><br>【2.4 周辺スポット＆モデルコース】<br><br>中之島バラ園 → 大阪府立中之島図書館 → 中之島公会堂（外観撮影） → なにわ橋／水辺散策。<br><br>時間があれば 国立国際美術館／大阪中之島美術館 や 北浜レトロ（ティールーム）で英国風ティータイムも◎。<br><br><strong>3. 詳細情報（アクセス・開館・料金・注意事項）</strong><br><br><table style="border-collapse: collapse; width: 100%; margin: 10px 0;"><tr style="background-color: #f2f2f2;"><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">項目</th><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">詳細</th></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">施設名</td><td style="border: 1px solid #ddd; padding: 8px;">大阪市中央公会堂（通称：中之島公会堂）</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">所在地</td><td style="border: 1px solid #ddd; padding: 8px;">大阪府大阪市北区中之島1-1-27</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">アクセス</td><td style="border: 1px solid #ddd; padding: 8px;">Osaka Metro御堂筋線「淀屋橋」徒歩約5–10分／京阪本線「淀屋橋」「北浜」徒歩圏／京阪中之島線「なにわ橋」至近</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">開館・公開</td><td style="border: 1px solid #ddd; padding: 8px;">外観鑑賞は随時可／館内公開・ガイドツアー・展示は実施日・時間が変動（要公式確認）</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">料金</td><td style="border: 1px solid #ddd; padding: 8px;">外観見学無料／館内展示・ツアーは有料の場合あり</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">撮影ルール</td><td style="border: 1px solid #ddd; padding: 8px;">外観は概ね可。館内はエリアにより撮影禁止・申請必要の場合あり。商用・コスプレは事前確認必須</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">ライトアップ</td><td style="border: 1px solid #ddd; padding: 8px;">日没後に実施する日あり（時期・イベントで変動）</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">施設・サービス</td><td style="border: 1px solid #ddd; padding: 8px;">館内カフェ・レストラン（時期により営業）／トイレ／バリアフリー動線あり</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">近隣駐車場</td><td style="border: 1px solid #ddd; padding: 8px;">周辺にコインパーキング多数（公共交通おすすめ）</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">注意事項</td><td style="border: 1px solid #ddd; padding: 8px;">歩道・階段の占有・三脚の長時間設置・ドローン飛行は不可。来館者・通行の妨げにならない配慮を</td></tr></table>',
     },
@@ -523,16 +654,30 @@ const DetailPage = () => {
           <h2 className="text-3xl font-bold text-gray-900 mb-8">{plan.contentTitle}</h2>
 
           {/* Images */}
-          {planId !== 105 &&
+          {planId !== 4 &&
+            planId !== 6 &&
+            planId !== 9 &&
+            planId !== 19 &&
+            planId !== 20 &&
+            planId !== 21 &&
+            planId !== 26 &&
+            planId !== 27 &&
+            planId !== 10 &&
+            planId !== 24 &&
+            planId !== 25 &&
+            planId !== 30 &&
+            planId !== 31 &&
+            planId !== 105 &&
             planId !== 111 &&
-            planId !== 122 &&
-            planId !== 129 &&
             planId !== 112 &&
-            planId !== 107 &&
             planId !== 113 &&
-            planId !== 108 &&
-            planId !== 104 &&
-            planId !== 130 && (
+            planId !== 115 &&
+            planId !== 116 &&
+            planId !== 117 &&
+            planId !== 118 &&
+            planId !== 107 &&
+            planId !== 121 &&
+            planId !== 122 && (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 <div className="bg-white rounded-lg overflow-hidden shadow-md">
                   <div
@@ -549,7 +694,7 @@ const DetailPage = () => {
                           ? SapporoTime
                           : planId === 6
                           ? OkinawaResort
-                          : planId === 14
+                          : planId === 118
                           ? KiminoNamaewa
                           : planId === 18
                           ? fukuanimate
@@ -573,7 +718,7 @@ const DetailPage = () => {
                           ? SapporoTower
                           : planId === 6
                           ? OkinawaResort
-                          : planId === 14
+                          : planId === 118
                           ? KiminoNamaewaSuga
                           : planId === 11
                           ? odaiba
@@ -583,8 +728,10 @@ const DetailPage = () => {
                           ? nikkoonsen
                           : planId === 17
                           ? jiburimap
-                          : planId === 16
+                          : planId === 119
                           ? LegoAttraction
+                          : planId === 120
+                          ? jiburimap
                           : planId === 18
                           ? fukumandarake
                           : plan.heroImage
@@ -594,6 +741,133 @@ const DetailPage = () => {
                 </div>
               </div>
             )}
+
+          {/* Custom Images for In This Corner of the World */}
+          {planId === 9 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${konosekakoharubashi})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${konosekanikoukoen})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+
+          {/* Custom Images for In This Corner of the World × Hiroshima */}
+          {planId === 101 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${konosekakoharubashi})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${konosekanikoukoen})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+
+          {/* Custom Images for Ponyo × Tomonoura */}
+          {planId === 10 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${Tomonura2})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${Tomonura3})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+
+          {/* Custom Images for Arashiyama × Koe no Katachi */}
+          {planId === 116 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${TogetsukyoBridge1})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${TogetsukyoBridge2})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+
+          {planId === 116 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${TogetsukyoBridge3})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${TogetsukyoBridge4})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+
+          {/* Custom Images for Tempozan × Conan (main pair) */}
+          {planId === 115 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${OsakaTempozan3})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${OsakaTempozan4})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+
+          {/* Extra Images for Okhotsk Drift Ice (Abashiri) */}
+          {planId === 107 && (
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                  <div
+                    className="h-64 bg-cover bg-center bg-no-repeat"
+                    style={{ backgroundImage: `url(${abasirikoso})` }}
+                  ></div>
+                </div>
+                <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                  <div
+                    className="h-64 bg-cover bg-center bg-no-repeat"
+                    style={{ backgroundImage: `url(${abasirikosohotel})` }}
+                  ></div>
+                </div>
+              </div>
+            </>
+          )}
 
           {/* Extra Images for Tokyo Plan */}
           {planId === 103 && (
@@ -619,6 +893,12 @@ const DetailPage = () => {
               <div className="bg-white rounded-lg overflow-hidden shadow-md">
                 <div
                   className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${Shibakoen})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
                   style={{ backgroundImage: `url(${ShinjukuPolice})` }}
                 ></div>
               </div>
@@ -626,6 +906,12 @@ const DetailPage = () => {
                 <div
                   className="h-64 bg-cover bg-center bg-no-repeat"
                   style={{ backgroundImage: `url(${Aogashima})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${KiminoNamaewa})` }}
                 ></div>
               </div>
             </div>
@@ -667,7 +953,43 @@ const DetailPage = () => {
             </div>
           )}
 
+          {/* Extra Images for Tokyo Onsen Tour */}
+          {planId === 117 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${hakoneonsen})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${nikkoonsen})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+
           {/* Extra Images for Ghibli Park Plan */}
+          {planId === 120 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${jiburimori})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${jiburi4})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+
+          {/* Extra Images for Ghibli Park Plan ID 120 */}
           {planId === 120 && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <div className="bg-white rounded-lg overflow-hidden shadow-md">
@@ -733,6 +1055,36 @@ const DetailPage = () => {
             </div>
           )}
 
+          {/* Extra Images for Fukuoka Yatai Gourmet Tour (ID 105) */}
+          {planId === 105 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${fukuichiran})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${fukumizutaki})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${fukutourimon})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${fukugourmet})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+
           {/* Extra Images for Tenjin Otaku Culture */}
           {planId === 121 && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
@@ -751,7 +1103,67 @@ const DetailPage = () => {
             </div>
           )}
 
+          {/* Extra Images for Tenjin Otaku Culture and Shopping (ID 121) */}
+          {planId === 121 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${fukuanimatemap})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${fukumandafigure})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${fukumandarake})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${fukutenshin})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+
           {/* Extra Images for Suzume no Tojimari */}
+          {planId === 122 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${suzume})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${suzumetobira})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${fukubungomori})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${suzumegoods})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+
+          {/* Extra Images for Suzume no Tojimari Fukuoka Pilgrimage (ID 122) */}
           {planId === 122 && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <div className="bg-white rounded-lg overflow-hidden shadow-md">
@@ -841,6 +1253,36 @@ const DetailPage = () => {
             </div>
           )}
 
+          {/* Extra Images for Okinawa Beach Resort (ID 111) */}
+          {planId === 111 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${theritzcarlton})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${hotelaribia})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${anaintercontinental})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${aribiabikini})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+
           {/* Extra Images for Okinawa Gourmet (Sweets) */}
           {planId === 112 && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
@@ -871,7 +1313,37 @@ const DetailPage = () => {
             </div>
           )}
 
-          {/* Extra Images for Okinawa Yacht Tour */}
+          {/* Extra Images for Okinawa Sweets Tour (ID 112) */}
+          {planId === 112 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${houkistar})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${hukugiya})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${boolseal})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${sennichi})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+
+          {/* Extra Images for Okinawa Yacht Tour (ID 113) */}
           {planId === 113 && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <div className="bg-white rounded-lg overflow-hidden shadow-md">
@@ -901,8 +1373,38 @@ const DetailPage = () => {
             </div>
           )}
 
+          {/* Extra Images for Okinawa Yacht Tour */}
+          {planId === 124 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${okinawacruising})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${okinawanohumanisland})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${okinawasailing})` }}
+                ></div>
+              </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div
+                  className="h-64 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${okinawasnokling})` }}
+                ></div>
+              </div>
+            </div>
+          )}
+
           {/* Images for Sapporo Gourmet Tour */}
-          {planId === 30 && (
+          {planId === 117 && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <div className="bg-white rounded-lg overflow-hidden shadow-md">
                 <div
@@ -920,7 +1422,7 @@ const DetailPage = () => {
           )}
 
           {/* Extra Images for Sapporo Gourmet Tour */}
-          {planId === 108 && (
+          {planId === 117 && (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
               <div className="bg-white rounded-lg overflow-hidden shadow-md">
                 <div
@@ -979,110 +1481,76 @@ const DetailPage = () => {
             </div>
           )}
 
-          {/* Images for Okhotsk Drift Ice Experience */}
-          {planId === 24 && (
+          {/* Extra Images for Tokyo Gourmet Tour */}
+          {planId === 103 && plan.extraImages && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              {plan.extraImages.map((image, index) => (
+                <div key={index} className="bg-white rounded-lg overflow-hidden shadow-md">
+                  <div
+                    className="h-64 bg-cover bg-center bg-no-repeat"
+                    style={{ backgroundImage: `url(${image})` }}
+                  ></div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Custom Images for Nakanoshima Kokaido × Black Butler */}
+          {planId === 123 && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <div className="bg-white rounded-lg overflow-hidden shadow-md">
                 <div
                   className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${abasirikoso})` }}
+                  style={{ backgroundImage: `url(${OsakaArchitecture2})` }}
                 ></div>
               </div>
               <div className="bg-white rounded-lg overflow-hidden shadow-md">
                 <div
                   className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${norokogo})` }}
+                  style={{ backgroundImage: `url(${OsakaArchitecture3})` }}
                 ></div>
               </div>
             </div>
           )}
 
-          {/* Extra Images for Okhotsk Drift Ice Experience */}
-          {planId === 107 && (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          {/* Extra Images for Nakanoshima - Additional */}
+          {planId === 123 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <div className="bg-white rounded-lg overflow-hidden shadow-md">
                 <div
                   className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${abasirikosohotel})` }}
+                  style={{ backgroundImage: `url(${OsakaArchitecture4})` }}
                 ></div>
               </div>
               <div className="bg-white rounded-lg overflow-hidden shadow-md">
                 <div
                   className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${ohotsukuicebreak})` }}
-                ></div>
-              </div>
-              <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                <div
-                  className="h-64 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${sapporoabasiri})` }}
+                  style={{ backgroundImage: `url(${OsakaArchitecture5})` }}
                 ></div>
               </div>
             </div>
           )}
 
-          {/* Extra Images for Togetsukyo Bridge × Koe no Katachi */}
-          {planId === 104 && (
+          {/* Extra Images for Tempozan × Conan */}
+          {planId === 115 && (
             <>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                 <div className="bg-white rounded-lg overflow-hidden shadow-md">
                   <div
                     className="h-64 bg-cover bg-center bg-no-repeat"
-                    style={{ backgroundImage: `url(${TogetsukyoBridge1})` }}
+                    style={{ backgroundImage: `url(${OsakaTempozan5})` }}
                   ></div>
                 </div>
                 <div className="bg-white rounded-lg overflow-hidden shadow-md">
                   <div
                     className="h-64 bg-cover bg-center bg-no-repeat"
-                    style={{ backgroundImage: `url(${TogetsukyoBridge2})` }}
-                  ></div>
-                </div>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                  <div
-                    className="h-64 bg-cover bg-center bg-no-repeat"
-                    style={{ backgroundImage: `url(${TogetsukyoBridge3})` }}
+                    style={{ backgroundImage: `url(${OsakaTempozan6})` }}
                   ></div>
                 </div>
                 <div className="bg-white rounded-lg overflow-hidden shadow-md">
                   <div
                     className="h-64 bg-cover bg-center bg-no-repeat"
-                    style={{ backgroundImage: `url(${TogetsukyoBridge4})` }}
-                  ></div>
-                </div>
-              </div>
-            </>
-          )}
-
-          {/* Extra Images for Gion × Maiko wa Lady × Hana Yori Dango */}
-          {planId === 130 && (
-            <>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                  <div
-                    className="h-64 bg-cover bg-center bg-no-repeat"
-                    style={{ backgroundImage: `url(${GionKyoto4})` }}
-                  ></div>
-                </div>
-                <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                  <div
-                    className="h-64 bg-cover bg-center bg-no-repeat"
-                    style={{ backgroundImage: `url(${GionKyoto5})` }}
-                  ></div>
-                </div>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                  <div
-                    className="h-64 bg-cover bg-center bg-no-repeat"
-                    style={{ backgroundImage: `url(${GionKyoto6})` }}
-                  ></div>
-                </div>
-                <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                  <div
-                    className="h-64 bg-cover bg-center bg-no-repeat"
-                    style={{ backgroundImage: `url(${GionKyoto1})` }}
+                    style={{ backgroundImage: `url(${OsakaTempozan7})` }}
                   ></div>
                 </div>
               </div>
@@ -1100,3 +1568,4 @@ const DetailPage = () => {
 };
 
 export default DetailPage;
+
