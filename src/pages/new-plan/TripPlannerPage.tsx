@@ -14,7 +14,6 @@ import Header from '@/components/layout/header';
 import SvgIcon from '@/components/ui/SvgIcon';
 import { useUserStore } from '@/store';
 import { arrayMove } from '@dnd-kit/sortable';
-import type { DragEndEvent } from '@dnd-kit/core';
 import { Plan, Spot, Expense, PlanMember, DailyPlan } from '@/lib/type';
 import { AxiosError } from 'axios';
 import {
@@ -38,7 +37,7 @@ import {
   PointerSensor,
   useSensor,
   useSensors,
-  DragEndEvent,
+  type DragEndEvent,
 } from '@dnd-kit/core';
 import {
   arrayMove,
