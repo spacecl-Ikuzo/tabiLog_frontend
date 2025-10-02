@@ -9,9 +9,9 @@ import EditSpotDialog from './components/EditSpotDialog';
 import CostDialog from './components/CostDialog';
 import SaveConfirmationDialog from './components/SaveConfirmationDialog';
 import { axiosInstance } from '@/api/axios';
-import { ArrowLeft, ArrowRight, MapPin } from 'lucide-react';
 import { getExpensesByPlan } from '@/api/api';
 import Header from '@/components/layout/header';
+import SvgIcon from '@/components/ui/SvgIcon';
 import { useUserStore } from '@/store';
 import { arrayMove } from '@dnd-kit/sortable';
 import type { DragEndEvent } from '@dnd-kit/core';
@@ -31,10 +31,6 @@ import {
   Save,
   X,
 } from 'lucide-react';
-import { getExpensesByPlan } from '@/api/api';
-import Header from '@/components/layout/header';
-import SvgIcon from '@/components/ui/SvgIcon';
-import { useUserStore } from '@/store';
 import {
   DndContext,
   closestCenter,
