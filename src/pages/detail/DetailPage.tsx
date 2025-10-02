@@ -117,11 +117,14 @@ const DetailPage = () => {
       description:
         '築地市場の新鮮な海の幸から、丸亀製麺の本格讃岐うどんまで。東京の「うまい!」をすべて味わい尽くす、食いしん坊のためのプランです。',
       author: 'ソヒョン',
-      image: Tsukiji,
+      image: Marugamejemen2,
       heroImage: Tsukiji,
       breadcrumb: ['東京', '築地市場', '丸亀製麺'],
       contentTitle: '東京グルメの基本情報',
       spots: ['築地市場', '丸亀製麺', '銀座寿司', 'ラーメン二郎'],
+      imageLeft: Tsukiji,
+      imageRight: Marugamejemen2,
+      extraImages: [JiroSushi, RamenJiro],
       content:
         '東京グルメの王道スポットを巡る2泊3日の旅。新鮮な海の幸から本格うどん、高級寿司、人気ラーメンまで、東京の「うまい！」をすべて味わい尽くします。<br><br><table style="border-collapse: collapse; width: 100%; margin: 10px 0;"><tr style="background-color: #f2f2f2;"><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">スポット</th><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">所在地</th><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">予算目安</th><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">予約</th><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">営業時間</th></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">築地市場</td><td style="border: 1px solid #ddd; padding: 8px;">中央区築地5-2-1</td><td style="border: 1px solid #ddd; padding: 8px;">1,000円〜3,000円</td><td style="border: 1px solid #ddd; padding: 8px;">不要</td><td style="border: 1px solid #ddd; padding: 8px;">5:00〜14:00</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">丸亀製麺</td><td style="border: 1px solid #ddd; padding: 8px;">全国チェーン店</td><td style="border: 1px solid #ddd; padding: 8px;">500円〜1,000円</td><td style="border: 1px solid #ddd; padding: 8px;">不要</td><td style="border: 1px solid #ddd; padding: 8px;">11:00〜22:00</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">銀座寿司</td><td style="border: 1px solid #ddd; padding: 8px;">中央区銀座</td><td style="border: 1px solid #ddd; padding: 8px;">10,000円〜30,000円</td><td style="border: 1px solid #ddd; padding: 8px;">必須</td><td style="border: 1px solid #ddd; padding: 8px;">17:00〜23:00</td></tr><tr><td style="border: 1px solid #ddd; padding: 8px;">ラーメン二郎</td><td style="border: 1px solid #ddd; padding: 8px;">複数店舗</td><td style="border: 1px solid #ddd; padding: 8px;">800円〜1,200円</td><td style="border: 1px solid #ddd; padding: 8px;">不要</td><td style="border: 1px solid #ddd; padding: 8px;">11:00〜翌2:00</td></tr></table><br>【2.1 築地市場】<br>世界最大級の魚市場。早朝の競りを見学し、市場内の寿司店で朝寿司を楽しみましょう。築地市場は2018年に豊洲市場に移転しましたが、外市場エリアは現在も営業中です。朝5時から始まるマグロの競りは迫力満点で、観光客も見学可能です。市場内の寿司店では、競りで落札されたばかりの新鮮な魚を使った朝寿司を味わえます。おすすめ店舗：大和寿司、寿司大、きつねや。アクセス：都営大江戸線「築地市場駅」徒歩1分。<br><br>【2.2 丸亀製麺】<br>本格讃岐うどんのチェーン店。コシのある麺と美味しい出汁が自慢です。東京には多数の店舗があり、どこでも同じ品質のうどんを楽しめます。店内では天ぷらも豊富で、うどんと合わせて注文するのが定番です。人気メニュー：釜揚げうどん（500円）、天ぷらうどん（800円）、きつねうどん（600円）。おすすめ店舗：丸亀製麺 新宿店、丸亀製麺 渋谷店。営業時間は店舗により異なりますが、基本的に11:00〜22:00で営業しています。<br><br>【2.3 銀座寿司】<br>高級寿司店で職人が握る江戸前寿司。新鮮なネタと丁寧な仕事が光ります。銀座には老舗から新進気鋭の店まで、様々な寿司店が軒を連ねています。予約は必須で、特に人気店は数ヶ月前からの予約が必要な場合があります。おすすめ店舗：すし善（予算：15,000円〜）、久兵衛（予算：20,000円〜）、青空（予算：25,000円〜）。アクセス：東京メトロ銀座線「銀座駅」各出口から徒歩5分以内。営業時間は17:00〜23:00が一般的で、定休日は店舗により異なります。<br><br>【2.4 ラーメン二郎】<br>東京で最も有名なラーメン店。太い麺と濃厚スープ、大量の野菜が特徴です。二郎系ラーメンの元祖で、そのボリューム感と独特の味わいで多くのファンを魅了しています。店舗により味や量に若干の違いがありますが、基本的な二郎の味は共通しています。人気メニュー：ラーメン（800円）、チャーシュー麺（1,000円）、野菜増し（+100円）。おすすめ店舗：ラーメン二郎 三田本店、ラーメン二郎 目黒店。営業時間は11:00〜翌2:00で、深夜まで営業しているため、夜食にも最適です。',
     },
@@ -280,7 +283,7 @@ const DetailPage = () => {
       heroImage: tenkinoko,
       imageLeft: odaiba,
       imageRight: denkiseibumc,
-      extraImages: [Shibakoen, tenkinoko],
+      extraImages: [tenkinoko, odaiba],
       breadcrumb: ['東京', 'スカイツリー', '台場', '天気の子聖地巡礼'],
       contentTitle: '天気の子聖地巡礼の基本情報',
       spots: ['天気の子映画紹介', '東京スカイツリー', 'お台場', 'マクドナルド'],
@@ -1441,6 +1444,20 @@ const DetailPage = () => {
                   style={{ backgroundImage: `url(${rusutsuresortmap})` }}
                 ></div>
               </div>
+            </div>
+          )}
+
+          {/* Extra Images for Tokyo Gourmet Tour */}
+          {planId === 103 && plan.extraImages && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              {plan.extraImages.map((image, index) => (
+                <div key={index} className="bg-white rounded-lg overflow-hidden shadow-md">
+                  <div
+                    className="h-64 bg-cover bg-center bg-no-repeat"
+                    style={{ backgroundImage: `url(${image})` }}
+                  ></div>
+                </div>
+              ))}
             </div>
           )}
 

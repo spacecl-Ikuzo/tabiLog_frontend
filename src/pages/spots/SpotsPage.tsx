@@ -56,6 +56,7 @@ import OsakaAquarium1 from '../../assets/Osaka_aquarium1.jpg';
 import OsakaArchitecture5 from '../../assets/OsakaArchitecture5.png';
 import OsakaTempozan from '../../assets/OsakaTempozan.png';
 import KyotoPass5 from '../../assets/KyotoPass5.jpg';
+import GionKyoto3 from '../../assets/GionKyoto3.jpg';
 import TogetsukyoBridge5 from '../../assets/TogetsukyoBridge5.jpeg';
 import TokyoDome from '../../assets/TokyoDome.jpg';
 import TokyoDisneyland from '../../assets/tokyodisneyland.jpg';
@@ -69,7 +70,7 @@ import marineworld from '../../assets/marineworld.jpg';
 import paypaydome from '../../assets/paypaydome.jpg';
 import dazaifutenmangu from '../../assets/dazaifutenmangu.jpg';
 import Hirosima15 from '../../assets/Hirosima15.png';
-import Ponyo1 from '../../assets/ponyo1.png';
+import Ponyo1 from '../../assets/포뇨1.png';
 // import Kyoto_UjiBridge1 from '../../assets/Kyoto_UjiBridge1.jpg';
 import Miyajima_Itsukushima_Torii from '../../assets/Miyajima_Itsukushima_Torii.jpg';
 import Otaru_Canal_Winter from '../../assets/Otaru_Canal_Winter.jpg';
@@ -649,7 +650,7 @@ const SpotsPage = () => {
         image: HakoneOnsen,
       },
       {
-        id: 53,
+        id: 25,
         name: '渋谷',
         description: '若者の街として有名。スクランブル交差点とハチ公がシンボル',
         tags: ['ショッピング', 'エンタメ', '東日本', '観光地', '渋谷区'],
@@ -705,7 +706,7 @@ const SpotsPage = () => {
         image: OkiAquarium,
       },
       {
-        id: 56,
+        id: 33,
         name: '秋葉原',
         description: 'アニメ・ゲーム・電子機器の聖地。オタク文化の中心地',
         tags: ['エンタメ', 'ショッピング', '東日本', '観光地', '千代田区'],
@@ -713,7 +714,7 @@ const SpotsPage = () => {
         image: akihabara,
       },
       {
-        id: 57,
+        id: 34,
         name: '富士急ハイランド',
         description: '絶叫マシンで有名なテーマパーク。富士山を背景にした絶景アトラクション',
         tags: ['エンタメ', 'アトラクション', '東日本', '観光地', '富士吉田市'],
